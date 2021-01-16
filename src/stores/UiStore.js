@@ -20,8 +20,18 @@ class UiStore {
   onAuthStateChanged = (user) => {
     if (user) {
       console.log(`de user is ingelogd ${user.email}`);
+      this.setCurrentUser(
+        new User({
+          id: user.uid,
+          name: user.displayName,
+          email: user.email,
+          store: this.rootStore.userStore,
+          avatar: user.photoURL,
+        })
+      );
     } else {
       console.log(`de user is uitgelogd`);
+      this.setCurrentUser(undefined);
     }
   };
 

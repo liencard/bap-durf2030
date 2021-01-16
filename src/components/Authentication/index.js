@@ -1,28 +1,47 @@
 import React from 'react';
-import { Switch, Route, NavLink } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { ROUTES } from '../../consts';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 import Logout from '../Logout/Logout';
 //import style from './Authentication.module.css';
 
+import { useStores } from '../../hooks/useStores';
+import { useObserver } from 'mobx-react-lite';
+
 const Authentication = () => {
-  return (
+  const { uiStore } = useStores();
+
+  console.log(uiStore.currentUser);
+
+  return useObserver(() => (
     <>
       <Switch>
         <Route exact path={ROUTES.login}>
-          <LoginForm />
+          {uiStore.currentUser ? <Redirect to={ROUTES.home} /> : <LoginForm />}
         </Route>
+
         <Route exact path={ROUTES.register}>
-          <RegisterForm />
+          {uiStore.currentUser ? (
+            <Redirect to={ROUTES.home} />
+          ) : (
+            <RegisterForm />
+          )}
         </Route>
+
         <Route path={ROUTES.home}>
-          <h1>HOME</h1>
-          <Logout />
+          {uiStore.currentUser ? (
+            <>
+              <h1>Dag, user </h1>
+              <Logout />
+            </>
+          ) : (
+            <Redirect to={ROUTES.login} />
+          )}
         </Route>
       </Switch>
     </>
-  );
+  ));
 };
 
 export default Authentication;
