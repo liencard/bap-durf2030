@@ -1,0 +1,41 @@
+@import url('https://meyerweb.com/eric/tools/css/reset/reset.css');
+
+//@import 'styles/styles.scss';
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  outline: none;
+}
+
+html {
+  box-sizing: inherit;
+  font-size: 62.5%;
+  background-color: white;
+}
+
+.hidden {
+  display: none;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: 'Helvetica';
+  background: white;
+  position: fixed;
+  overflow: hidden;
+  overscroll-behavior-y: none;
+  line-height: 2;
+  font-weight: 300;
+  color: black;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+}
+
+a {
+  text-decoration: none;
+}
