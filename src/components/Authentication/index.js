@@ -32,7 +32,7 @@ const Authentication = () => {
         <Route path={ROUTES.home}>
           {uiStore.currentUser ? (
             <>
-              <h1>Dag, user </h1>
+              <h1>Dag, {uiStore.currentUser.name} </h1>
               <Logout />
             </>
           ) : (

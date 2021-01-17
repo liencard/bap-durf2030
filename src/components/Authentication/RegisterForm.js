@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useStores } from '../../hooks/useStores';
+import { Link } from 'react-router-dom';
 import User from '../../models/User';
 import { useHistory } from 'react-router-dom';
 import { ROUTES } from '../../consts/index';
@@ -86,6 +87,12 @@ const RegisterForm = () => {
         </div>
         <input type="submit" value="Maak account" />
       </form>
+      <p>
+        Heb je al een account?{' '}
+        <Link Link to={ROUTES.login}>
+          Inloggen
+        </Link>
+      </p>
     </>
   );
 };
