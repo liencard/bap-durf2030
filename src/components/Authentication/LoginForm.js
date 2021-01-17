@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useStores } from '../../hooks/useStores';
 import User from '../../models/User';
-import Logout from '../Logout/Logout';
 
 import style from './Authentication.module.css';
 
@@ -13,7 +12,8 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const user = new User({
-      name: '',
+      firstname: '',
+      lastname: '',
       store: userStore,
       email: email,
       password: password,
@@ -51,8 +51,6 @@ const LoginForm = () => {
         </div>
         <input type="submit" value="Inloggen" />
       </form>
-
-      <Logout />
     </>
   );
 };

@@ -3,13 +3,12 @@ import { useStores } from '../../hooks/useStores';
 import User from '../../models/User';
 import { useHistory } from 'react-router-dom';
 import { ROUTES } from '../../consts/index';
-import Logout from '../Logout/Logout';
 
 ///import style from './Authentication.module.css';
 
 const RegisterForm = () => {
   const { userStore, uiStore } = useStores();
-  const [firstname, setFirstname] = useState('');
+  const [name, setName] = useState('');
   const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -18,7 +17,8 @@ const RegisterForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const user = new User({
-      name: firstname,
+      name: name,
+      lastname: lastname,
       store: userStore,
       email: email,
       password: password,
@@ -45,8 +45,8 @@ const RegisterForm = () => {
             placeholder="voornaam"
             required="required"
             autoComplete="off"
-            value={firstname}
-            onChange={(e) => setFirstname(e.currentTarget.value)}
+            value={name}
+            onChange={(e) => setName(e.currentTarget.value)}
           />
         </div>
         <div className="input__wrapper">
@@ -54,7 +54,7 @@ const RegisterForm = () => {
           <input
             type="text"
             name="lastname"
-            placeholder="lastname"
+            placeholder="achternaam"
             required="required"
             autoComplete="off"
             value={lastname}
@@ -86,8 +86,6 @@ const RegisterForm = () => {
         </div>
         <input type="submit" value="Maak account" />
       </form>
-
-      <Logout />
     </>
   );
 };

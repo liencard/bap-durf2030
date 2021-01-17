@@ -53,6 +53,17 @@ class UiStore {
       user.password,
       user.avatar
     );
+    const newRegisteredUser = new User({
+      id: result.uid,
+      name: result.displayName,
+      avatar: result.photoURL,
+      store: this.rootStore.userStore,
+      email: result.email,
+    });
+    if (result) {
+      //user toevoegen aan onze users collection
+      this.rootStore.userStore.createUser(newRegisteredUser);
+    }
     return result;
   };
 
