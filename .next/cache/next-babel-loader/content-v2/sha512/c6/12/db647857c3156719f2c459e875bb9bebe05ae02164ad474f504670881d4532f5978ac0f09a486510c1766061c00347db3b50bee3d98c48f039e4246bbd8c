@@ -1,1 +1,0 @@
-{"ast":null,"code":"import { useContext } from 'react';\nimport { storesContext } from '../contexts';\nexport const useStores = () => useContext(storesContext);","map":null,"metadata":{},"sourceType":"module"}
