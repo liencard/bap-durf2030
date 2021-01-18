@@ -3,6 +3,6 @@ import RootStore from '../stores';
 
 const store = new RootStore();
 
-window.store = store;
+//window.store = store;
 
 export const storesContext = createContext(store);
