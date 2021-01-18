@@ -1,0 +1,1 @@
+{"ast":null,"code":"const ROUTES = {\n  home: '/',\n  login: '/login',\n  register: '/register'\n};\nexport { ROUTES };","map":null,"metadata":{},"sourceType":"module"}

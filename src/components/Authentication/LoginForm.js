@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ROUTES } from '../../consts';
 import { useStores } from '../../hooks/useStores';
 import User from '../../models/User';
+import Logout from '../Logout/Logout';
 
 import style from './Authentication.module.css';
 
@@ -14,8 +13,7 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const user = new User({
-      firstname: '',
-      lastname: '',
+      name: '',
       store: userStore,
       email: email,
       password: password,
@@ -53,12 +51,8 @@ const LoginForm = () => {
         </div>
         <input type="submit" value="Inloggen" />
       </form>
-      <p>
-        Nog geen account?{' '}
-        <Link Link to={ROUTES.register}>
-          Registreer
-        </Link>
-      </p>
+
+      <Logout />
     </>
   );
 };

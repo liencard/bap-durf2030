@@ -33,6 +33,7 @@ class AuthService {
         try {
           // try catch, stell dat de update mislukt, er gebeurt een foutje bij het updaten vh profiel
           await userCredential.user.updateProfile({
+            // update via de api van firebase
             displayName: name,
             photoURL: avatar,
           });

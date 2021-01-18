@@ -1,20 +1,24 @@
-import { makeObservable, observable } from 'mobx';
-import UserService from '../services/UserService';
+import { makeObservable, observable, action } from 'mobx';
 
 class UserStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
-    this.userService = new UserService(this.rootStore.firebase);
     this.users = [];
 
     makeObservable(this, {
       users: observable,
+      empty: action,
+      addUser: action,
     });
   }
 
-  createUser = async (user) => {
-    return await this.userService.create(user);
+  addUser = (user) => {
+    this.users.push(user);
   };
+
+  empty() {
+    this.users = [];
+  }
 }
 
 export default UserStore;
