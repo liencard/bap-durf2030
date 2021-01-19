@@ -17,8 +17,7 @@ html {
 }
 
 body {
-  font-size: 1.6rem;
-  line-height: 2;
-  font-weight: 300;
-  color: $blueDark;
+  line-height: 1.5;
+  color: $blue-dark;
+  @include text-body;
 }

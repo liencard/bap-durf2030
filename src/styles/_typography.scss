@@ -1,0 +1,11 @@
+@mixin title-small {
+  font-size: 1.8rem;
+  font-weight: 600;
+  font-family: $font-title;
+}
+
+@mixin text-body {
+  font-size: 1.6rem;
+  font-weight: 300;
+  font-family: $font-body;
+}
