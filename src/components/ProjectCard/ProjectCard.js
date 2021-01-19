@@ -22,18 +22,6 @@ const ProjectCard = () => {
 
   const tags = ['Cultuur', 'Theater'];
 
-  const requests = [
-    {
-      type: 'material',
-    },
-    {
-      type: 'money',
-    },
-    {
-      type: 'service',
-    },
-  ];
-
   return (
     <div className={styles.card}>
       <div className={styles.thumbnail}>
