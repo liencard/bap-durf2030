@@ -4,7 +4,7 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Authentication from '../components/Authentication';
 import Logout from '../components/Logout/Logout';
-import ProjectList from '../components/ProjectList';
+import ProjectList from '../components/ProjectList/ProjectList';
 
 const Home = () => {
   // <Route path={ROUTES.home}>
