@@ -19,7 +19,6 @@ const ProjectCard = () => {
       img: 'pfp-temp.jpg',
     },
   ];
-
   const tags = ['Cultuur', 'Theater'];
 
   return (
