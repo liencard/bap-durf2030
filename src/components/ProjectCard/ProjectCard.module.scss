@@ -1,0 +1,132 @@
+@import '../../styles/styles.scss';
+$border-radius: 0.5rem;
+
+.card {
+  grid-column: 1 / span 4;
+  border: 0.1rem solid $blue-light;
+  border-radius: $border-radius;
+
+  .thumbnail {
+    border-radius: $border-radius $border-radius 0 0;
+    position: relative;
+
+    .image {
+      height: 22rem;
+      background: pink;
+    }
+
+    .icons {
+      position: absolute;
+      background: $green;
+      right: 1.5rem;
+      top: 1.5rem;
+      border-radius: $border-radius;
+      display: flex;
+      padding: 0.3rem 0.5rem;
+
+      img {
+        display: block;
+        padding: 0.3rem;
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  .content {
+    padding: 2rem;
+
+    .title {
+      @include title-small;
+      margin-bottom: 0.5rem;
+    }
+
+    .author__wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+
+      .author {
+        display: flex;
+        align-items: center;
+
+        .author__name {
+          font-size: 1.4rem;
+        }
+
+        .author__image {
+          @include pfp-small;
+          margin-right: 1rem;
+        }
+      }
+
+      .date {
+        @include text-detail;
+      }
+    }
+
+    .intro {
+      margin-bottom: 1.5rem;
+    }
+
+    .tags {
+      display: flex;
+      margin-bottom: 3.5rem;
+
+      .tag {
+        @include tag;
+        margin-right: 0.5rem;
+      }
+    }
+
+    .stats {
+      @include text-detail;
+      display: flex;
+      justify-content: space-between;
+
+      .likes {
+        img {
+          margin-right: 1rem;
+          transform: translateY(-0.2rem);
+        }
+
+        display: flex;
+        align-items: center;
+      }
+
+      .helpers {
+        display: flex;
+        align-items: center;
+
+        .helpers__pictures {
+          display: flex;
+          margin-right: 1rem;
+
+          div:not(:last-of-type) {
+            width: 1rem;
+          }
+
+          div:nth-of-type(1) {
+            opacity: 100%;
+            z-index: 3;
+          }
+
+          div:nth-of-type(2) {
+            opacity: 80%;
+            z-index: 2;
+          }
+
+          div:nth-of-type(3) {
+            opacity: 40%;
+            z-index: 1;
+          }
+
+          img {
+            display: block;
+            @include pfp-small;
+          }
+        }
+      }
+    }
+  }
+}

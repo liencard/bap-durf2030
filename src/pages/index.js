@@ -5,6 +5,8 @@ import Head from 'next/head';
 import Authentication from '../components/Authentication';
 import Logout from '../components/Logout/Logout';
 import ProjectList from '../components/ProjectList/ProjectList';
+import ProjectCard from '../components/ProjectCard/ProjectCard';
+import { Container } from '../components/Layout';
 
 const Home = () => {
   // <Route path={ROUTES.home}>
@@ -38,6 +40,10 @@ const Home = () => {
         <ProjectList />
       </div>
       <Logout />
+
+      <Container>
+        <ProjectCard />
+      </Container>
     </>
   );
 };
