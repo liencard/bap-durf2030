@@ -6,6 +6,7 @@ import Authentication from '../components/Authentication';
 import Logout from '../components/Logout/Logout';
 import ProjectList from '../components/ProjectList/ProjectList';
 import ProjectCard from '../components/ProjectCard/ProjectCard';
+import Header from '../components/Header/Header';
 import { Container } from '../components/Layout';
 
 const Home = () => {
@@ -34,12 +35,13 @@ const Home = () => {
   return (
     <>
       {/* <Authentication /> */}
-      <p>Dag, user</p>
+      <Header />
+      {/* <p>Dag, user</p>
       <div style={{ padding: '5px' }}>
         <h3>My Todo Items</h3>
         <ProjectList />
       </div>
-      <Logout />
+      <Logout /> */}
 
       <Container>
         <ProjectCard />
