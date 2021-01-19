@@ -12,12 +12,13 @@ $border-radius: 0.5rem;
 
     .image {
       height: 22rem;
-      background: pink;
+      width: 100%;
+      object-fit: cover;
     }
 
     .icons {
       position: absolute;
-      background: $green;
+      background: $red;
       right: 1.5rem;
       top: 1.5rem;
       border-radius: $border-radius;

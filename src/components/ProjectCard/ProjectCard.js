@@ -30,7 +30,7 @@ const ProjectCard = () => {
           <img src="/icons/money-white.svg" alt="geld" />
           <img src="/icons/service-white.svg" alt="service" />
         </div>
-        <div className={styles.image}></div>
+        <img className={styles.image} src="thumbnail-temp.jpg" alt="service" />
       </div>
 
       <div className={styles.content}>
