@@ -1,23 +1,23 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import { useStores } from '../hooks/useStores';
+import RegisterForm from '../components/Authentication/RegisterForm';
+import { ROUTES } from '../consts/index';
 
 const Register = () => {
-  //   <Route exact path={ROUTES.register}>
-  //     {uiStore.currentUser ? <Redirect to={ROUTES.home} /> : <RegisterForm />}
-  //   </Route>;
-
+  const { uiStore } = useStores();
   const router = useRouter();
   const currentUser = false;
 
   useEffect(() => {
-    if (currentUser) {
-      router.push('/');
+    if (uiStore.currentUser) {
+      router.push(ROUTES.home);
     }
   });
 
   return (
     <>
-      <p>Register</p>
+      <RegisterForm />
     </>
   );
 };

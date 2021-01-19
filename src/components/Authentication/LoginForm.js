@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { useStores } from '../../hooks/useStores';
 import User from '../../models/User';
-import Logout from '../Logout/Logout';
-
-import style from './Authentication.module.css';
 
 const LoginForm = () => {
+  const router = useRouter();
   const { userStore, uiStore } = useStores();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,6 +19,7 @@ const LoginForm = () => {
     });
     const result = await uiStore.loginUser(user);
     console.log(result);
+    router.push('/');
   };
 
   return (
@@ -51,8 +51,6 @@ const LoginForm = () => {
         </div>
         <input type="submit" value="Inloggen" />
       </form>
-
-      <Logout />
     </>
   );
 };

@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { useStores } from '../../hooks/useStores';
 import User from '../../models/User';
-import { useHistory } from 'react-router-dom';
 import { ROUTES } from '../../consts/index';
 import Logout from '../Logout/Logout';
-
-///import style from './Authentication.module.css';
 
 const RegisterForm = () => {
   const { userStore, uiStore } = useStores();
@@ -13,7 +10,7 @@ const RegisterForm = () => {
   const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const history = useHistory();
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,7 +23,7 @@ const RegisterForm = () => {
     const result = await uiStore.registerUser(user);
     if (result.uid) {
       // uid is beschikbaar en te vinden als je het result logt -> gebruiker correct geregistreerd
-      history.push(ROUTES.home);
+      router.push(ROUTES.home);
     } else {
       //registratie mislukt
       console.log(result);
