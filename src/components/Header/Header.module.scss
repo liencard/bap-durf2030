@@ -1,0 +1,42 @@
+@import '../../styles/styles.scss';
+$border-radius: 0.5rem;
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 75vw;
+  padding: 3rem 0rem;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  margin: 0 3rem;
+}
+
+.menu__item {
+  text-decoration: none;
+  color: $blue-dark;
+  margin-right: 4rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+
+  &:hover {
+    cursor: pointer;
+    color: $red;
+  }
+}
+
+.header__left {
+  display: flex;
+}
+
+.header__right {
+  display: flex;
+  align-items: center;
+
+  img {
+    margin-right: 2rem;
+  }
+}

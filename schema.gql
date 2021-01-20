@@ -1,0 +1,9 @@
+type Project {
+  title: String!
+  intro: String!
+  description: String!
+}
+
+type Query {
+  allProjects: [Project!]
+}
