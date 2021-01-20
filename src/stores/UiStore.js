@@ -6,7 +6,10 @@ class UiStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.currentUser = undefined;
-    this.authService = new AuthService(this.rootStore.firebase, this.onAuthStateChanged);
+    this.authService = new AuthService(
+      this.rootStore.firebase,
+      this.onAuthStateChanged
+    );
 
     makeObservable(this, {
       currentUser: observable,
@@ -44,7 +47,24 @@ class UiStore {
   };
 
   registerUser = async (user) => {
-    const result = await this.authService.register(user.name, user.email, user.password, user.avatar);
+    const result = await this.authService.register(
+      user.name,
+      user.email,
+      user.password,
+      user.avatar
+    );
+
+    const newRegisteredUser = new User({
+      id: result.uid,
+      name: result.displayName,
+      avatar: result.photoURL,
+      store: this.rootStore.userStore,
+      email: result.email,
+    });
+    if (result) {
+      //user toevoegen aan onze users collection
+      this.rootStore.userStore.createUser(newRegisteredUser);
+    }
     return result;
   };
 
