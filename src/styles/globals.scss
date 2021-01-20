@@ -1,0 +1,24 @@
+@import url('https://meyerweb.com/eric/tools/css/reset/reset.css');
+@import 'styles.scss';
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  outline: none;
+}
+
+html {
+  box-sizing: inherit;
+  font-size: 62.5%;
+}
+
+.hidden {
+  display: none;
+}
+
+body {
+  line-height: 1.5;
+  color: $blue-dark;
+  @include text-body;
+}

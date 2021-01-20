@@ -1,12 +1,14 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+// import styles from '../styles/Home.module.css';
 import Authentication from '../components/Authentication';
 import LoginForm from '../components/Authentication/LoginForm';
 
 import Logout from '../components/Logout/Logout';
 import ProjectList from '../components/ProjectList/ProjectList';
+import ProjectCard from '../components/ProjectCard/ProjectCard';
+import { Container } from '../components/Layout';
 import { useStores } from '../hooks/useStores';
 import { ROUTES } from '../consts/index';
 
@@ -30,6 +32,10 @@ const Home = () => {
       </div>
 
       <Logout />
+
+      <Container>
+        <ProjectCard />
+      </Container>
     </>
   );
 };
