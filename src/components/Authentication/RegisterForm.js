@@ -1,7 +1,8 @@
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useStores } from '../../hooks/useStores';
-import User from '../../models/User';
 import { ROUTES } from '../../consts/index';
+import User from '../../models/User';
 import Logout from '../Logout/Logout';
 
 const RegisterForm = () => {
@@ -83,8 +84,6 @@ const RegisterForm = () => {
         </div>
         <input type="submit" value="Maak account" />
       </form>
-
-      <Logout />
     </>
   );
 };

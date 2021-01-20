@@ -2,9 +2,11 @@ import firebase from 'firebase/app';
 // import * as firebase from 'firebase/app';
 import UiStore from './UiStore';
 import UserStore from './UserStore';
+import ProjectStore from './ProjectStore';
 
 class RootStore {
   constructor() {
+    this.firebase = this.getFirebase();
     // var firebaseConfig = {
     //   apiKey: process.env.REACT_APP_apiKey,
     //   authDomain: process.env.REACT_APP_authDomain,
@@ -14,27 +16,24 @@ class RootStore {
     //   appId: process.env.REACT_APP_appId,
     // };
 
-    var firebaseConfig = {
-      apiKey: 'AIzaSyB-b87pd9Rk1NHyzE08yJIyyR1-0W7i21o',
-      authDomain: 'durf2030-b7dd8.firebaseapp.com',
-      projectId: 'durf2030-b7dd8',
-      storageBucket: 'durf2030-b7dd8.appspot.com',
-      messagingSenderId: '757316438339',
-      appId: '1:757316438339:web:2a1f4543a7c34a381847f6',
-    };
-
-    // Initialize Firebase
-    // FirebaseError: Firebase: Firebase App named '[DEFAULT]' already exists (app/duplicate-app). -> if functie gedaan
-    if (!firebase.apps.length) {
-      this.firebase = firebase.initializeApp(firebaseConfig);
-    } else {
-      this.firebase = firebase.app();
-    }
-    // this.firebase = firebase.initializeApp(firebaseConfig);
-
     this.userStore = new UserStore(this);
+    this.projectStore = new ProjectStore(this);
     this.uiStore = new UiStore(this);
   }
+
+  getFirebase = () => {
+    const config = {
+      apiKey: process.env.DB_API_KEY,
+      authDomain: process.env.DB_AUTH_DOMAIN,
+      projectId: process.env.DB_PROJECT_ID,
+      storageBucket: process.env.DB_STORAGE_BUCKET,
+      messagingSenderId: process.env.MESSAGING_SENDER_ID,
+      appId: process.env.DB_APP_ID,
+    };
+
+    // prevent multiple app inits
+    return !firebase.apps.length ? firebase.initializeApp(config) : firebase.app();
+  };
 }
 
 export default RootStore;
