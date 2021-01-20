@@ -1,6 +1,6 @@
 import styles from './ProjectCard.module.scss';
 
-const ProjectCard = () => {
+const ProjectCard = ({ title, intro }) => {
   const durvers = [
     {
       id: 1,
@@ -33,7 +33,7 @@ const ProjectCard = () => {
       </div>
 
       <div className={styles.content}>
-        <h3 className={styles.title}>Vraagstraat</h3>
+        <h3 className={styles.title}>{title}</h3>
         <div className={styles.author__wrapper}>
           <div className={styles.author}>
             <img className={styles.author__image} src="pfp-temp.jpg" alt="profielfoto van organisator" />
@@ -42,7 +42,7 @@ const ProjectCard = () => {
           <p className={styles.date}>6 dagen geleden</p>
         </div>
 
-        <p className={styles.intro}>Leer je buren eens kennen. 5 kortrijkse straten gaan de uitdaging aan.</p>
+        <p className={styles.intro}>{intro}</p>
         <ul className={styles.tags}>
           {tags.map((tag) => (
             <li className={styles.tag}>{tag}</li>
