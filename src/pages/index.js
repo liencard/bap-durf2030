@@ -18,9 +18,9 @@ const Home = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (!uiStore.currentUser) {
-      router.push(ROUTES.login);
-    }
+    // if (!uiStore.currentUser) {
+    //   router.push(ROUTES.login);
+    // }
   }, [uiStore.currentUser]);
 
   return (

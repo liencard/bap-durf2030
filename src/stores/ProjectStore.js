@@ -31,22 +31,19 @@ class ProjectStore {
 
   loadAllProjects = async () => {
     const jsonProjects = await this.projectService.getAll();
-    // jsonProjects.forEach((json) => this.updateProjectFromServer(json));
+    console.log(jsonProjects);
+    jsonProjects.forEach((json) => this.updateProjectFromServer(json));
   };
 
-  updateProjectFromServer(json) {
+  updateProjectFromServer(data) {
     let project = this.projects.find((project) => project.id === json.id);
     if (!project) {
-      let project = new Project({
-        id: json.id,
+      project = new Project({
+        title: data.title,
+        userId: data.userId,
+        intro: data.intro,
         store: this.rootStore.projectStore,
       });
-      if (json.isDeleted) {
-        this.projects.remove(project);
-      } else {
-        // project.updateFromJson(json);
-      }
-      return group;
     }
   }
 }
