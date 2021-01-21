@@ -1,13 +1,7 @@
 import '../styles/globals.scss';
-import { ApolloProvider } from '@apollo/client';
-import { client } from '../utils/graphql-client';
 
 const App = ({ Component, pageProps }) => {
-  return (
-    <ApolloProvider client={client}>
-      <Component {...pageProps} />
-    </ApolloProvider>
-  );
+  return <Component {...pageProps} />;
 };
 
 export default App;

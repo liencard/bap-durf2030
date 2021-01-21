@@ -4,6 +4,9 @@ import { useStores } from '../../hooks/useStores';
 import { ROUTES } from '../../consts/index';
 import User from '../../models/User';
 import Logout from '../Logout/Logout';
+import Link from 'next/link';
+import styles from './Authentication.module.scss';
+import { Container } from '../Layout';
 
 const RegisterForm = () => {
   const { userStore, uiStore } = useStores();
@@ -33,57 +36,96 @@ const RegisterForm = () => {
 
   return (
     <>
-      <h1>Register</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="input__wrapper">
-          <label htmlFor="firstname">voornaam</label>
-          <input
-            type="text"
-            name="firstname"
-            placeholder="voornaam"
-            required="required"
-            autoComplete="off"
-            value={firstname}
-            onChange={(e) => setFirstname(e.currentTarget.value)}
-          />
-        </div>
-        <div className="input__wrapper">
-          <label htmlFor="lastname">naam</label>
-          <input
-            type="text"
-            name="lastname"
-            placeholder="lastname"
-            required="required"
-            autoComplete="off"
-            value={lastname}
-            onChange={(e) => setLastname(e.currentTarget.value)}
-          />
-        </div>
-        <div className="input__wrapper">
-          <label htmlFor="email">email</label>
-          <input
-            type="email"
-            name="email"
-            placeholder="email"
-            required="required"
-            autoComplete="off"
-            value={email}
-            onChange={(e) => setEmail(e.currentTarget.value)}
-          />
-        </div>
-        <div className="input__wrapper">
-          <label htmlFor="password">wachtwoord</label>
-          <input
-            type="password"
-            name="password"
-            required="required"
-            autoComplete="off"
-            value={password}
-            onChange={(e) => setPassword(e.currentTarget.value)}
-          />
-        </div>
-        <input type="submit" value="Maak account" />
-      </form>
+      <Link href="/">
+        <img
+          className={styles.logo}
+          src="/logo.svg"
+          alt="logo DURF2030"
+          width="45"
+          height="60"
+        />
+      </Link>
+      <Container>
+        <div className={styles.auth__img}></div>
+        <section className={styles.auth}>
+          <div className={styles.auth__wrapper}>
+            <h1 className={styles.title}>Registreer</h1>
+            <form className={styles.form} onSubmit={handleSubmit}>
+              <div className={styles.form__socials}>
+                <button
+                  className={`${styles.form__btn} ${styles.btn__social} ${styles.btn__google}`}
+                >
+                  Verdergaan met Google
+                </button>
+                <button
+                  className={`${styles.form__btn} ${styles.btn__social} ${styles.btn__facebook}`}
+                >
+                  Verdergaan met Facebook
+                </button>
+              </div>
+              <p>Of maak een account</p>
+              <div className={styles.input__wrapper}>
+                <label className={styles.form__label} htmlFor="firstname">
+                  Naam
+                </label>
+                <input
+                  className={styles.form__input}
+                  type="text"
+                  name="firstname"
+                  placeholder="Naam"
+                  required="required"
+                  autoComplete="off"
+                  value={firstname}
+                  onChange={(e) => setFirstname(e.currentTarget.value)}
+                />
+              </div>
+              <div className={styles.input__wrapper}>
+                <label className={styles.form__label} htmlFor="email">
+                  Email
+                </label>
+                <input
+                  className={styles.form__input}
+                  type="email"
+                  name="email"
+                  placeholder="E-mailadres"
+                  required="required"
+                  autoComplete="off"
+                  value={email}
+                  onChange={(e) => setEmail(e.currentTarget.value)}
+                />
+              </div>
+              <div className={styles.input__wrapper}>
+                <label className={styles.form__label} htmlFor="password">
+                  Wachtwoord
+                </label>
+                <input
+                  className={styles.form__input}
+                  type="password"
+                  name="password"
+                  placeholder="Wachtwoord"
+                  required="required"
+                  autoComplete="off"
+                  value={password}
+                  onChange={(e) => setPassword(e.currentTarget.value)}
+                />
+              </div>
+
+              <input
+                className={styles.form__btn}
+                type="submit"
+                value="Maak account"
+              />
+            </form>
+
+            <p className={styles.redirect}>
+              Heb je al een account?{' '}
+              <Link href="/login">
+                <span>Log in</span>
+              </Link>
+            </p>
+          </div>
+        </section>
+      </Container>
     </>
   );
 };

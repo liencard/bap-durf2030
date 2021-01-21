@@ -5,8 +5,20 @@ $border-radius: 0.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 75vw;
-  padding: 3rem 0rem;
+  width: 100%;
+  padding: 3rem 5vw 1rem;
+  position: fixed;
+  background-color: white;
+}
+
+.header__dark {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 3rem 5vw 1rem;
+  position: fixed;
+  background-color: $blue-dark;
 }
 
 .menu {
@@ -26,6 +38,10 @@ $border-radius: 0.5rem;
     cursor: pointer;
     color: $red;
   }
+}
+
+.header__dark .menu__item {
+  color: white;
 }
 
 .header__left {
