@@ -1,0 +1,13 @@
+@import '../../../styles/styles.scss';
+
+.likes {
+  @include text-detail;
+
+  img {
+    margin-right: 1rem;
+    transform: translateY(-0.2rem);
+  }
+
+  display: flex;
+  align-items: center;
+}

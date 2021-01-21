@@ -1,0 +1,119 @@
+@import '../../../styles/styles.scss';
+
+.images {
+  background: pink;
+  grid-column: span 6;
+  margin-right: 5rem;
+}
+
+.content {
+  grid-column: span 6;
+
+  .tags {
+    display: flex;
+    margin-bottom: 2rem;
+
+    .tag {
+      @include tag;
+      margin-right: 0.7rem;
+    }
+  }
+
+  .text {
+    padding-right: 6rem;
+    margin-bottom: 3rem;
+
+    .title {
+      font-size: 3.2rem;
+      line-height: 1.5;
+      font-weight: 600;
+      margin-bottom: 2rem;
+    }
+  }
+
+  .help {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: $grid-gap;
+    margin-bottom: 4rem;
+
+    .item {
+      border: 1px solid black;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      border: 0.1rem solid $blue-light;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .info {
+        font-family: $font-accent;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1rem;
+        margin-bottom: 1.2 rem;
+      }
+
+      .circle {
+        height: 6.5rem;
+        width: 6.5rem;
+        border-radius: 50%;
+        margin-bottom: 2rem;
+        position: relative;
+
+        &::before {
+          position: absolute;
+          content: '';
+          background-repeat: no-repeat;
+          background-size: 2rem;
+          height: 2rem;
+          width: 2rem;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+
+        &.service {
+          background-color: $green-light;
+          border: 0.3rem solid $green;
+
+          &::before {
+            background: url('/icons/service-green.svg');
+          }
+        }
+
+        &.material {
+          background-color: $red-light;
+          border: 0.3rem solid $red;
+
+          &::before {
+            background: url('/icons/material-red.svg');
+          }
+        }
+
+        &.money {
+          background-color: $yellow-light;
+          border: 0.3rem solid $yellow;
+
+          &::before {
+            background: url('/icons/money-yellow.svg');
+          }
+        }
+      }
+    }
+  }
+
+  .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .interact {
+      display: flex;
+      & > div {
+        margin-left: 3rem;
+      }
+    }
+  }
+}
