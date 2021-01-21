@@ -29,6 +29,8 @@
   &:focus {
     border-color: $green;
   }
+}
+
 @mixin pfp-large {
   height: 4rem;
   width: 4rem;
