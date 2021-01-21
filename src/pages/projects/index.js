@@ -1,7 +1,7 @@
 import { useStores } from '../../hooks/useStores';
 import { observer } from 'mobx-react-lite';
 import { Container } from '../../components/Layout';
-import ProjectCard from '../../components/ProjectCard/ProjectCard';
+import { ProjectCard } from '../../components/Project';
 
 const Projects = observer(() => {
   const { projectStore } = useStores();

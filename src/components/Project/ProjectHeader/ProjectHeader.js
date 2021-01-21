@@ -1,4 +1,6 @@
 import styles from './ProjectHeader.module.scss';
+import Button from '../../Button/Button';
+import { ProjectLikes, ProjectHelpers } from '../../Project';
 
 const ProjectHeader = ({ project }) => {
   return (
@@ -15,12 +17,27 @@ const ProjectHeader = ({ project }) => {
         </div>
         <div className={styles.help}>
           <div className={styles.item}>
-            <div className={styles.circle} />
-            <p>7/10 diensten</p>
+            <div className={`${styles.circle} ${styles.service}`} />
+            <p className={styles.info}>7/10 diensten</p>
             <p>Bekijk info</p>
           </div>
-          <div className={styles.item}>Materialen</div>
-          <div className={styles.item}>Geld</div>
+          <div className={styles.item}>
+            <div className={`${styles.circle} ${styles.material}`} />
+            <p className={styles.info}>7/10 materialen</p>
+            <p>Bekijk info</p>
+          </div>
+          <div className={styles.item}>
+            <div className={`${styles.circle} ${styles.money}`} />
+            <p className={styles.info}>7/10 materialen</p>
+            <p>Bekijk info</p>
+          </div>
+        </div>
+        <div className={styles.buttons}>
+          <Button className={styles.button} text={'Ik durf mee te helpen'} />
+          <div className={styles.interact}>
+            <ProjectLikes />
+            <ProjectHelpers />
+          </div>
         </div>
       </div>
     </>

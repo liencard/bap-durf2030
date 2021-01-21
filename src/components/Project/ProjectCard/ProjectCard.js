@@ -1,26 +1,9 @@
 import styles from './ProjectCard.module.scss';
 import Link from 'next/link';
-import { ROUTES } from '../../consts/index';
+import { ROUTES } from '../../../consts/index';
+import { ProjectLikes, ProjectHelpers } from '../';
 
 const ProjectCard = ({ title, intro, id }) => {
-  const durvers = [
-    {
-      id: 1,
-      img: 'pfp-temp.jpg',
-    },
-    {
-      id: 2,
-      img: 'pfp-temp.jpg',
-    },
-    {
-      id: 3,
-      img: 'pfp-temp.jpg',
-    },
-    {
-      id: 4,
-      img: 'pfp-temp.jpg',
-    },
-  ];
   const tags = ['Cultuur', 'Theater'];
 
   return (
@@ -54,20 +37,8 @@ const ProjectCard = ({ title, intro, id }) => {
             ))}
           </ul>
           <div className={styles.stats}>
-            <div className={styles.likes}>
-              <img src="/icons/like-default.svg" alt="duim omhoog" />
-              52 likes
-            </div>
-            <div className={styles.helpers}>
-              <div className={styles.helpers__pictures}>
-                {durvers.slice(0, 3).map((durver) => (
-                  <div key={durver.id}>
-                    <img src={durver.img} alt="profielfoto van mede-durver" />
-                  </div>
-                ))}
-              </div>
-              + 8 durvers
-            </div>
+            <ProjectLikes />
+            <ProjectHelpers />
           </div>
         </div>
       </a>
