@@ -14,9 +14,13 @@ const ProjectHeader = ({ project }) => {
           <p className={styles.intro}>{project.intro}</p>
         </div>
         <div className={styles.help}>
-          <div>Diensten</div>
-          <div>Materialen</div>
-          <div>Geld</div>
+          <div className={styles.item}>
+            <div className={styles.circle} />
+            <p>7/10 diensten</p>
+            <p>Bekijk info</p>
+          </div>
+          <div className={styles.item}>Materialen</div>
+          <div className={styles.item}>Geld</div>
         </div>
       </div>
     </>
