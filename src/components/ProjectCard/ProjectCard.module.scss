@@ -2,7 +2,7 @@
 $border-radius: 0.5rem;
 
 .card {
-  grid-column: 1 / span 4;
+  grid-column: span 4;
   border: 0.1rem solid $blue-light;
   border-radius: $border-radius;
 

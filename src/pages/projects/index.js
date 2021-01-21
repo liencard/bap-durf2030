@@ -10,7 +10,7 @@ const Projects = observer(() => {
     <>
       <Container>
         {projectStore.projects.map((project) => (
-          <ProjectCard key={project.userId} title={project.title} intro={project.intro} />
+          <ProjectCard key={project.id} title={project.title} intro={project.intro} id={project.id} />
         ))}
       </Container>
     </>
