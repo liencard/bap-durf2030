@@ -7,7 +7,7 @@ import LoginForm from '../components/Authentication/LoginForm';
 
 import Logout from '../components/Logout/Logout';
 import ProjectList from '../components/ProjectList/ProjectList';
-import ProjectCard from '../components/ProjectCard/ProjectCard';
+import { ProjectCard } from '../components/Project';
 import Header from '../components/Header/Header';
 import { Container } from '../components/Layout';
 import { useStores } from '../hooks/useStores';
@@ -18,9 +18,9 @@ const Home = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (!uiStore.currentUser) {
-      router.push(ROUTES.login);
-    }
+    // if (!uiStore.currentUser) {
+    //   router.push(ROUTES.login);
+    // }
   }, [uiStore.currentUser]);
 
   return (

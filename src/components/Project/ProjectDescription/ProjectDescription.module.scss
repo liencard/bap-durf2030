@@ -1,0 +1,69 @@
+@import '../../../styles/styles.scss';
+
+$spacing-top: 3rem;
+$spacing-pfp: 2rem;
+
+.text__wrapper {
+  grid-column: span 7;
+
+  .text {
+    width: 100%;
+    overflow: hidden;
+    .text__img {
+      width: 100%;
+      overflow: hidden;
+      margin: 1rem 0rem 3rem;
+    }
+
+    & > p {
+      margin-bottom: 2rem;
+    }
+  }
+
+  .buttons {
+    margin: 5rem 0 8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & > div {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+.details {
+  margin-top: $spacing-top;
+  grid-column: 9 / span 4;
+
+  .creator__wrapper {
+    margin-bottom: 2rem;
+
+    .creator {
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+      margin-bottom: 2rem;
+
+      .creator__image {
+        @include pfp-large;
+        margin-right: $spacing-pfp;
+      }
+    }
+  }
+
+  .helper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    img {
+      @include pfp-large;
+      margin-right: $spacing-pfp;
+    }
+
+    .helper__name {
+      font-weight: 600;
+    }
+  }
+}

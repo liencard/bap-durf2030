@@ -10,10 +10,12 @@ class ProjectStore {
       firebase: this.rootStore.firebase,
     });
 
+    // Enkel bij 'Projects' pagina of SSR
     this.loadAllProjects();
 
     makeObservable(this, {
       loadAllProjects: action,
+      loadProject: action,
       projects: observable,
     });
   }
@@ -21,6 +23,14 @@ class ProjectStore {
   addProject = (project) => {
     this.projects.push(project);
   };
+
+  loadProject = async (id) => {
+    const jsonProject = await this.projectService.getById(id);
+    this.updateProjectFromServer(jsonProject);
+    return this.resolveProject(id);
+  };
+
+  resolveProject = (id) => this.projects.find((project) => project.id === id);
 
   // Front-end
   // getProjectById = (id) => this.projects.find((project) => project.id === id);
@@ -31,22 +41,20 @@ class ProjectStore {
 
   loadAllProjects = async () => {
     const jsonProjects = await this.projectService.getAll();
-    // jsonProjects.forEach((json) => this.updateProjectFromServer(json));
+    jsonProjects.forEach((json) => this.updateProjectFromServer(json));
   };
 
   updateProjectFromServer(json) {
     let project = this.projects.find((project) => project.id === json.id);
     if (!project) {
-      let project = new Project({
+      project = new Project({
         id: json.id,
+        title: json.data.title,
+        userId: json.data.userId,
+        intro: json.data.intro,
+        tags: json.data.tags,
         store: this.rootStore.projectStore,
       });
-      if (json.isDeleted) {
-        this.projects.remove(project);
-      } else {
-        // project.updateFromJson(json);
-      }
-      return group;
     }
   }
 }

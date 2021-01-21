@@ -8,11 +8,15 @@ class ProjectService {
 
   getAll = async () => {
     const snapshot = await this.db.collection('projects').get();
-    return snapshot.docs.map((project) => project.data());
+    // return snapshot.docs.map((project) => project.data());
+    return snapshot.docs.map((projectFromDB) => {
+      return { id: projectFromDB.id, data: projectFromDB.data() };
+    });
   };
 
   getById = async (id) => {
-    return (await this.db.collection('projects').doc(id).get()).data();
+    const snapshot = await this.db.collection('projects').doc(id).get();
+    return { id: snapshot.id, data: snapshot.data() };
   };
 }
 

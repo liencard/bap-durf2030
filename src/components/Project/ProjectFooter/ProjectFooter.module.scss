@@ -1,0 +1,47 @@
+@import '../../../styles/styles.scss';
+
+.footer {
+  display: flex;
+  grid-column: span 12;
+  position: relative;
+  padding: 3rem 0;
+  align-items: center;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    content: '';
+    height: 0.1rem;
+    width: 100%;
+    background-color: $blue-light;
+    // left: calc(-#{$padding-one-side});
+    // left: -72rem;
+  }
+
+  &::after {
+    position: absolute;
+    content: '';
+    height: 0.1rem;
+    width: 100%;
+    background-color: $blue-light;
+    left: 0;
+    bottom: 0;
+  }
+
+  .creator {
+    display: flex;
+    align-items: center;
+    margin-right: 5rem;
+  }
+
+  & img {
+    @include pfp-large;
+    margin-right: 2rem;
+  }
+
+  .date {
+    margin-left: auto;
+    @include text-detail;
+    font-size: 1.6rem;
+  }
+}
