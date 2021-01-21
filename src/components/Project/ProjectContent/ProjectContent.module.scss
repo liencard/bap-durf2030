@@ -3,63 +3,49 @@
 $spacing-top: 10rem;
 $spacing-pfp: 2rem;
 
-.text {
-  margin-top: $spacing-top;
-  grid-column: span 7;
+// $padding-one-side: calc(100vw - #{$container} / 2);
 
-  & > img {
-    width: 100%;
-    margin: 1rem 0rem 3rem;
-  }
+.tabs {
+  grid-column: span 12;
+  margin-top: 5rem;
 
-  & > p {
-    margin-bottom: 2rem;
-  }
-
-  .buttons {
-    margin: 5rem 0 8rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    & > div {
-      display: flex;
-      align-items: center;
-    }
-  }
-}
-
-.details {
-  margin-top: $spacing-top;
-  grid-column: 9 / span 4;
-
-  .creator__wrapper {
-    margin-bottom: 2rem;
-
-    .creator {
-      display: flex;
-      align-items: center;
-      font-weight: 600;
-      margin-bottom: 2rem;
-
-      .creator__image {
-        @include pfp-large;
-        margin-right: $spacing-pfp;
-      }
-    }
-  }
-
-  .helper {
+  .tabs__list {
     display: flex;
     align-items: center;
-    margin-bottom: 2rem;
-    img {
-      @include pfp-large;
-      margin-right: $spacing-pfp;
+    position: relative;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      content: '';
+      height: 0.1rem;
+      width: 100%;
+      background-color: $blue-light;
+      // left: calc(-#{$padding-one-side});
+      // left: -72rem;
     }
 
-    .helper__name {
-      font-weight: 600;
+    &::after {
+      position: absolute;
+      content: '';
+      height: 0.1rem;
+      width: 100%;
+      background-color: $blue-light;
+      left: 0;
+      bottom: 0;
     }
+
+    .tab {
+      padding: 3rem 0;
+      margin-right: 4em;
+    }
+  }
+
+  .tabs__content {
+    margin-top: $spacing-top;
+
+    // .text__wrapper {
+    //   grid-column: span 7;
+    // }
   }
 }

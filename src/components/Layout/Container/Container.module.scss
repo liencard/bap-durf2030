@@ -1,5 +1,7 @@
+@import '../../../styles/styles.scss';
+
 .container {
-  max-width: 112rem;
+  max-width: $container;
   margin: 0 auto;
 
   display: grid;

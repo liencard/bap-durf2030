@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite';
 import { useState, useEffect } from 'react';
 import { useStores } from '../../hooks/useStores';
 import { Container } from '../../components/Layout';
-import { ProjectHeader, ProjectContent } from '../../components/Project';
+import { ProjectHeader, ProjectContent, ProjectFooter, ProjectComments } from '../../components/Project';
 
 const Project = observer(({ query }) => {
   const id = query.id;
@@ -42,6 +42,8 @@ const Project = observer(({ query }) => {
           <>
             <ProjectHeader project={project} />
             <ProjectContent />
+            <ProjectFooter />
+            <ProjectComments />
           </>
         )}
       </Container>
