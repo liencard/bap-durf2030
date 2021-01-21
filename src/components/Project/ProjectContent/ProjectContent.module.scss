@@ -1,0 +1,9 @@
+@import '../../../styles/styles.scss';
+
+.text {
+  grid-column: span 7;
+}
+
+.details {
+  grid-column: 9 / span 4;
+}
