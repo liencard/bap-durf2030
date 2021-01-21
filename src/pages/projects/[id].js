@@ -1,6 +1,8 @@
 import { observer } from 'mobx-react-lite';
 import { useState, useEffect } from 'react';
 import { useStores } from '../../hooks/useStores';
+import { Container } from '../../components/Layout';
+import { ProjectHeader } from '../../components/Project';
 
 const Project = observer(({ query }) => {
   const id = query.id;
@@ -35,7 +37,13 @@ const Project = observer(({ query }) => {
   return (
     <>
       <p>State: {state}</p>
-      {project && <p>Title: {project.title}</p>}
+      <Container>
+        {project && (
+          <>
+            <ProjectHeader project={project} />
+          </>
+        )}
+      </Container>
     </>
   );
 });
