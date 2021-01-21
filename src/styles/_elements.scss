@@ -15,6 +15,20 @@
   border-radius: 50%;
 }
 
+@mixin form__label {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+@mixin form__input {
+  border: 0.1rem solid $grey;
+  padding: 1.5rem 2rem;
+  font-weight: 300;
+  font-size: 1.4;
+
+  &:focus {
+    border-color: $green;
+  }
 @mixin pfp-large {
   height: 4rem;
   width: 4rem;
