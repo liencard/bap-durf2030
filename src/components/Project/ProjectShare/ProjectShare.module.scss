@@ -15,3 +15,41 @@
     color: black;
   }
 }
+
+.img {
+  grid-column: 1 / span 4;
+  position: relative;
+
+  & div {
+    background: blue;
+    position: absolute;
+    height: calc(100% + (#{$modal-spacing-large} * 2));
+    width: calc(100% + #{$modal-spacing-large});
+    top: -$modal-spacing-large;
+    left: -$modal-spacing-large;
+  }
+}
+
+.text {
+  grid-column: 5 / span 8;
+}
+
+.title {
+  @include title-two;
+  margin-bottom: 2rem;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: $grid-gap;
+  margin-top: 4rem;
+
+  & li {
+    background: pink;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+  }
+}

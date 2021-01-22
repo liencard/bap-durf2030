@@ -1,0 +1,14 @@
+@import '../../../styles/styles.scss';
+
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .content {
+    position: absolute;
+    width: 90rem;
+    padding: 5rem;
+    background: white;
+  }
+}

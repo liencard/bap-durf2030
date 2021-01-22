@@ -1,27 +1,8 @@
 import styles from './ProjectDescription.module.scss';
-import { useState } from 'react';
 import { ProjectLikes, ProjectCreatorImage, ProjectShare } from '../../Project';
 import Button from '../../Button/Button';
-import Modal from 'react-modal';
 
 const ProjectDescription = () => {
-  const [modal, setModal] = useState(false);
-
-  const customStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-    },
-  };
-
-  const toggleModal = () => {
-    setModal(!modal);
-  };
-
   return (
     <>
       <div className={styles.text__wrapper}>
@@ -51,10 +32,6 @@ const ProjectDescription = () => {
         <div className={styles.buttons}>
           <Button text="Ik durf mee te helpen" />
           <div>
-            <button onClick={toggleModal}>Open Modal</button>
-            <Modal isOpen={modal} onRequestClose={toggleModal} style={customStyles} contentLabel="Deel project">
-              <p>Test</p>
-            </Modal>
             <ProjectShare />
             <ProjectLikes />
           </div>
