@@ -1,5 +1,5 @@
 import styles from './ProjectDescription.module.scss';
-import { ProjectLikes, ProjectCreatorImage } from '../../Project';
+import { ProjectLikes, ProjectCreatorImage, ProjectShare } from '../../Project';
 import Button from '../../Button/Button';
 
 const ProjectDescription = () => {
@@ -32,7 +32,7 @@ const ProjectDescription = () => {
         <div className={styles.buttons}>
           <Button text="Ik durf mee te helpen" />
           <div>
-            <p>Delen</p>
+            <ProjectShare />
             <ProjectLikes />
           </div>
         </div>

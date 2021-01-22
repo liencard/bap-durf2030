@@ -1,9 +1,9 @@
 import styles from './ProjectLikes.module.scss';
 
-const ProjectLikes = () => (
-  <div className={styles.likes}>
+const ProjectLikes = ({ small }) => (
+  <div className={`${styles.likes} ${small && styles.small}`}>
     <img src="/icons/like-default.svg" alt="duim omhoog" />
-    52 likes
+    <p>52 likes</p>
   </div>
 );
 export default ProjectLikes;

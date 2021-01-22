@@ -28,6 +28,10 @@ $spacing-top: 3rem;
     & > div {
       display: flex;
       align-items: center;
+
+      & div {
+        margin-left: 3rem;
+      }
     }
   }
 }

@@ -5,6 +5,10 @@
   display: flex;
   align-items: center;
 
+  &.small {
+    font-size: 1.2rem;
+  }
+
   .helpers__pictures {
     display: flex;
     margin-right: 1rem;

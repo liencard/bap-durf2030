@@ -37,8 +37,8 @@ const ProjectCard = ({ title, intro, id }) => {
             ))}
           </ul>
           <div className={styles.stats}>
-            <ProjectLikes />
-            <ProjectHelpers />
+            <ProjectLikes small />
+            <ProjectHelpers small />
           </div>
         </div>
       </a>

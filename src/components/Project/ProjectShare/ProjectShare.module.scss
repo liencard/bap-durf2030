@@ -1,0 +1,17 @@
+@import '../../../styles/styles.scss';
+
+.share {
+  display: flex;
+  @include text-detail;
+  align-items: center;
+  transition: 0.2s;
+
+  img {
+    margin-right: 1rem;
+  }
+
+  &:hover {
+    cursor: pointer;
+    color: black;
+  }
+}

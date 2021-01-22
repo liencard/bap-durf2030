@@ -1,6 +1,6 @@
 import styles from './ProjectHelpers.module.scss';
 
-const ProjectHelpers = () => {
+const ProjectHelpers = ({ small }) => {
   const durvers = [
     {
       id: 1,
@@ -22,7 +22,7 @@ const ProjectHelpers = () => {
 
   return (
     <>
-      <div className={styles.helpers}>
+      <div className={`${styles.helpers} ${small && styles.small}`}>
         <div className={styles.helpers__pictures}>
           {durvers.slice(0, 3).map((durver) => (
             <div key={durver.id}>

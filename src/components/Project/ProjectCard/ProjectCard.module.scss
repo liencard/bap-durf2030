@@ -63,6 +63,7 @@ $border-radius: 0.5rem;
 
       .date {
         @include text-detail;
+        font-size: 1.2rem;
       }
     }
 
@@ -82,6 +83,7 @@ $border-radius: 0.5rem;
 
     .stats {
       @include text-detail;
+      font-size: 1.2rem;
       display: flex;
       justify-content: space-between;
     }
