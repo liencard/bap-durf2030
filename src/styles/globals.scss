@@ -22,3 +22,17 @@ body {
   color: $blue-dark;
   @include text-body;
 }
+
+::placeholder {
+  color: $grey;
+  font-family: $font-body;
+}
+
+input[type='text'] {
+  font-family: $font-body;
+}
+
+textarea {
+  font-family: $font-body;
+  width: 100%;
+}

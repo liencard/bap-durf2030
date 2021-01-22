@@ -1,7 +1,6 @@
 @import '../../../styles/styles.scss';
 
 $spacing-top: 3rem;
-$spacing-pfp: 2rem;
 
 .text__wrapper {
   grid-column: span 7;
@@ -46,24 +45,25 @@ $spacing-pfp: 2rem;
       font-weight: 600;
       margin-bottom: 2rem;
 
-      .creator__image {
-        @include pfp-large;
-        margin-right: $spacing-pfp;
+      .creator__title {
+        @include title-three;
       }
     }
   }
 
-  .helper {
-    display: flex;
-    align-items: center;
-    margin-bottom: 2rem;
-    img {
-      @include pfp-large;
-      margin-right: $spacing-pfp;
+  .helpers {
+    .helpers__title {
+      @include title-three;
     }
 
-    .helper__name {
-      font-weight: 600;
+    .helper {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2rem;
+
+      .helper__name {
+        font-weight: 600;
+      }
     }
   }
 }

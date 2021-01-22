@@ -1,5 +1,5 @@
 import styles from './ProjectDescription.module.scss';
-import { ProjectLikes } from '../../Project';
+import { ProjectLikes, ProjectCreatorImage } from '../../Project';
 import Button from '../../Button/Button';
 
 const ProjectDescription = () => {
@@ -40,26 +40,26 @@ const ProjectDescription = () => {
       <aside className={styles.details}>
         <div className={styles.creator__wrapper}>
           <div className={styles.creator}>
-            <img className={styles.creator__image} src="/pfp-temp.jpg" alt="profielfoto van organisator" />
+            <ProjectCreatorImage />
             <div>
-              <h3>Organisator</h3>
+              <h3 className={styles.creator__title}>Organisator</h3>
               <p>Naam Voornaam</p>
             </div>
           </div>
           <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis.</p>
         </div>
         <div className={styles.helpers}>
-          <h3>Durvers</h3>
+          <h3 className={styles.helpers__title}>Durvers</h3>
           <p>Deze mensen durfden mee op de boot te springen voor dit project.</p>
           <div className={styles.helper}>
-            <img src="/pfp-temp.jpg" alt="profielfoto van organisator" />
+            <ProjectCreatorImage />
             <div>
               <p className={styles.helper__name}>John Doe</p>
               <p>Extra info</p>
             </div>
           </div>
           <div className={styles.helper}>
-            <img src="/pfp-temp.jpg" alt="profielfoto van organisator" />
+            <ProjectCreatorImage />
             <div>
               <p className={styles.helper__name}>John Doe</p>
               <p>Extra info</p>

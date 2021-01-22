@@ -1,0 +1,6 @@
+@import '../../../styles/styles.scss';
+
+.image {
+  @include pfp-large;
+  margin-right: 2rem;
+}
