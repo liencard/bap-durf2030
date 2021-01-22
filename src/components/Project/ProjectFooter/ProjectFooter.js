@@ -1,5 +1,5 @@
 import styles from './ProjectFooter.module.scss';
-import Button from '../../Button/Button';
+import { Button } from '../../UI';
 import { ProjectCreatorImage } from '../';
 
 const ProjectFooter = () => {
