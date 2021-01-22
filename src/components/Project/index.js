@@ -5,4 +5,6 @@ export { default as ProjectContent } from './ProjectContent/ProjectContent';
 export { default as ProjectDescription } from './ProjectDescription/ProjectDescription';
 export { default as ProjectFooter } from './ProjectFooter/ProjectFooter';
 export { default as ProjectComments } from './ProjectComments/ProjectComments';
+export { default as ProjectCreatorImage } from './ProjectCreatorImage/ProjectCreatorImage';
+export { default as ProjectShare } from './ProjectShare/ProjectShare';
 export { default as ProjectCard } from './ProjectCard/ProjectCard';

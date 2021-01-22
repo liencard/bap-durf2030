@@ -27,6 +27,23 @@ const ProjectComments = () => {
           <p>Dit is zeker iets leuks om samen te doen met de familie, ik help graag mee :)</p>
         </div>
       </div>
+      <div className={styles.create}>
+        <p className={styles.title}>Laat een bericht achter</p>
+        <form>
+          <label className={styles.label}>
+            <span className={'hidden'}>Bericht</span>
+            <textarea
+              className={styles.textinput}
+              placeholder="Type een bericht..."
+              name="comment"
+              cols="50"
+              rows="5"
+              required
+            />
+          </label>
+          <input className={styles.submit} type="submit" value="Verzenden" />
+        </form>
+      </div>
     </>
   );
 };

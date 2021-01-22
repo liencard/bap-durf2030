@@ -1,5 +1,5 @@
 import styles from './ProjectHeader.module.scss';
-import Button from '../../Button/Button';
+import { Button } from '../../UI';
 import { ProjectLikes, ProjectHelpers } from '../../Project';
 
 const ProjectHeader = ({ project }) => {
