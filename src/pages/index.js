@@ -5,10 +5,10 @@ import { ROUTES } from '../consts/index';
 
 import Logout from '../components/Logout/Logout';
 import ProjectList from '../components/ProjectList/ProjectList';
-import { ProjectCard } from '../components/Project';
 import Header from '../components/Header/Header';
 import HomeHero from '../components/Home/HomeHero/HomeHero';
 import HomeSpotlight from '../components/Home/HomeSpotlight/HomeSpotlight';
+import ProjectSpotlight from '../components/Home/ProjectSpotlight/ProjectSpotlight';
 import { Container } from '../components/Layout';
 
 const Home = () => {
@@ -28,7 +28,7 @@ const Home = () => {
       <HomeSpotlight />
 
       <Container>
-        <ProjectCard />
+        <ProjectSpotlight />
       </Container>
     </>
   );

@@ -5,6 +5,7 @@ $border-radius: 0.5rem;
   grid-column: span 4;
   border: 0.1rem solid $blue-light;
   border-radius: $border-radius;
+  text-decoration: none;
 
   .thumbnail {
     border-radius: $border-radius $border-radius 0 0;

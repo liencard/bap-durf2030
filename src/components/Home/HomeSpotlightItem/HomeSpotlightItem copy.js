@@ -3,7 +3,7 @@ import styles from './HomeSpotlightItem.module.scss';
 const HomeSpotlightItem = () => {
   return (
     <>
-      <div className={styles.test}>
+      <div className={styles.spotlight__item}>
         <img
           className={styles.item__banner}
           src="/spotlight-temp.png"
