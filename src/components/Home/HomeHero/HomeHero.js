@@ -2,6 +2,8 @@ import styles from './HomeHero.module.scss';
 import BtnPrim from '../../Button/Button';
 import { Container } from '../../Layout';
 
+import { Button } from '../UI';
+
 const HomeHero = () => {
   return (
     <>
@@ -21,7 +23,7 @@ const HomeHero = () => {
                 van Kortrijk een culturele wereldstad te maken.
               </p>
               <div className="btn__wrapper">
-                <BtnPrim text="Maak project aan" link="/" />
+                <Button text="Maak project aan" link="/" />
                 <button className={styles.button} href="/">
                   Kom meer te weten
                 </button>

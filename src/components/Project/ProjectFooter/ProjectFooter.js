@@ -1,12 +1,13 @@
 import styles from './ProjectFooter.module.scss';
-import Button from '../../Button/Button';
+import { Button } from '../../UI';
+import { ProjectCreatorImage } from '../';
 
 const ProjectFooter = () => {
   return (
     <>
       <div className={styles.footer}>
         <div className={styles.creator}>
-          <img className={styles.creator__image} src="/pfp-temp.jpg" alt="profielfoto van organisator" />
+          <ProjectCreatorImage />
           <div>
             <h3>Organisator</h3>
             <p>Naam Voornaam</p>
