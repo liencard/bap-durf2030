@@ -1,8 +1,8 @@
-import styles from './HeroHome.module.scss';
-import BtnPrim from '../Button/Button';
-import { Container } from '../Layout';
+import styles from './HomeHero.module.scss';
+import BtnPrim from '../../Button/Button';
+import { Container } from '../../Layout';
 
-const HeroHome = () => {
+const HomeHero = () => {
   return (
     <>
       <section className={styles.header}>
@@ -34,4 +34,4 @@ const HeroHome = () => {
   );
 };
 
-export default HeroHome;
+export default HomeHero;
