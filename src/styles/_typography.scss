@@ -1,7 +1,7 @@
 @mixin title-one {
   font-family: $font-body;
   font-size: 3.2rem;
-  line-height: 1.7;
+  line-height: 1.5;
   font-weight: 700;
 }
 
@@ -15,7 +15,7 @@
 @mixin title-three {
   font-family: $font-body;
   font-size: 2rem;
-  font-size: 1.5; // 3rem
+  font-size: 1.5;
   font-weight: 500;
 }
 

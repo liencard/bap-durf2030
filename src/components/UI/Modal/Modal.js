@@ -17,7 +17,12 @@ const ModalWrapper = ({ children, open, handleClose }) => {
       }}
     >
       <Fade in={open}>
-        <div className={styles.content}>{children}</div>
+        <div className={styles.content}>
+          <div className={styles.close} onClick={handleClose}>
+            <p className="hidden">Sluiten</p>
+          </div>
+          {children}
+        </div>
       </Fade>
     </Modal>
   );

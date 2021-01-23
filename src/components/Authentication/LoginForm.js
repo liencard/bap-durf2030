@@ -70,13 +70,7 @@ const LoginForm = () => {
   return (
     <>
       <Link href="/">
-        <img
-          className={styles.logo}
-          src="/logo.svg"
-          alt="logo DURF2030"
-          width="45"
-          height="60"
-        />
+        <img className={styles.logo} src="/logo.svg" alt="logo DURF2030" width="45" height="60" />
       </Link>
       <Container>
         <div className={styles.auth__img}></div>
@@ -140,11 +134,7 @@ const LoginForm = () => {
                   Verdergaan met Facebook
                 </button>
               </div>
-              <input
-                className={styles.form__btn}
-                type="submit"
-                value="Inloggen"
-              />
+              <input className={styles.form__btn} type="submit" value="Inloggen" />
             </form>
             <p className={styles.redirect}>
               Nog geen account?{' '}
