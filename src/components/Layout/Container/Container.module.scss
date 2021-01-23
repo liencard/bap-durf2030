@@ -1,0 +1,11 @@
+@import '../../../styles/styles.scss';
+
+.container {
+  max-width: $container;
+  margin: 0 auto;
+  height: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-gap: 3rem;
+}

@@ -1,0 +1,91 @@
+@import '../../../styles/styles.scss';
+
+.share {
+  display: flex;
+  @include text-detail;
+  align-items: center;
+  transition: 0.2s;
+
+  img {
+    margin-right: 1rem;
+  }
+
+  &:hover {
+    cursor: pointer;
+    color: black;
+  }
+}
+
+.img {
+  grid-column: 1 / span 4;
+  position: relative;
+
+  & div {
+    background: blue;
+    position: absolute;
+    height: calc(100% + (#{$modal-spacing-large} * 2));
+    width: calc(100% + #{$modal-spacing-large});
+    top: -$modal-spacing-large;
+    left: -$modal-spacing-large;
+  }
+}
+
+.text {
+  grid-column: 5 / span 8;
+}
+
+.title {
+  @include title-two;
+  margin-bottom: 2rem;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: $grid-gap;
+  margin: 4rem 0;
+
+  & li {
+    @include text-detail;
+    border: $border;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+  }
+}
+
+.copy {
+  & > p {
+    @include title-small;
+    margin-bottom: 1rem;
+  }
+
+  div {
+    border: $border;
+    border-radius: 0 $border-radius $border-radius 0;
+    padding-left: 1rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+
+    & input {
+      @include text-detail;
+      border: none;
+      background: white;
+      width: 100%;
+    }
+
+    & button {
+      @include button;
+    }
+  }
+}

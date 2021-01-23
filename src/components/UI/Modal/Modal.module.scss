@@ -1,0 +1,58 @@
+@import '../../../styles/styles.scss';
+
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .content {
+    position: absolute;
+    width: 90rem;
+    padding: 5rem;
+    background: white;
+
+    .close {
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &::after {
+        position: absolute;
+        right: 3rem;
+        top: 3rem;
+        content: '';
+        height: 4rem;
+        width: 4rem;
+        background: $green-light;
+        transform: scale(0, 0);
+        transition: 0.2s;
+        border-radius: 50%;
+      }
+
+      &:hover {
+        cursor: pointer;
+        &::after {
+          transform: scale(1, 1);
+        }
+      }
+
+      &::before {
+        position: absolute;
+        right: 3rem;
+        top: 3rem;
+        content: '';
+        background: url('/icons/close-green.svg');
+        height: 4rem;
+        width: 4rem;
+        z-index: 10;
+
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+@mixin title-one {
+  font-family: $font-body;
+  font-size: 3.2rem;
+  line-height: 1.5;
+  font-weight: 700;
+}
+
+@mixin title-two {
+  font-family: $font-body;
+  font-size: 2.4rem;
+  line-height: 3.6rem;
+  font-weight: 600;
+}
+
+@mixin title-three {
+  font-family: $font-body;
+  font-size: 2rem;
+  font-size: 1.5;
+  font-weight: 500;
+}
+
+@mixin title-small {
+  font-family: $font-title;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+@mixin text-body {
+  font-family: $font-body;
+  font-size: 1.6rem;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+@mixin text-small {
+  font-family: $font-body;
+  font-size: 1.4rem;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+@mixin text-detail {
+  font-family: $font-body;
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: #aaaaaa;
+}

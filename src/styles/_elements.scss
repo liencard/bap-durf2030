@@ -1,0 +1,88 @@
+@mixin tag {
+  font-family: $font-body;
+  background-color: $green-light;
+  color: $green;
+  font-size: 1.2rem;
+  font-weight: 500;
+  border-radius: 0.2rem;
+  padding: 0.5rem 1rem;
+}
+
+@mixin pfp-small {
+  height: 2.5rem;
+  width: 2.5rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+@mixin form__label {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+@mixin form__input {
+  border: $border;
+  padding: 1.5rem 2rem;
+  font-weight: 300;
+  font-size: 1.4;
+
+  &:focus {
+    border-color: $green;
+  }
+}
+
+@mixin pfp-large {
+  height: 4rem;
+  width: 4rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+@mixin button {
+  background-color: $green;
+  padding: 1.5rem 2rem;
+  border: none;
+  border-radius: $border-radius;
+  color: white;
+  font-size: 1.4rem;
+  transition: 0.3s;
+  font-family: $font-body;
+  letter-spacing: 0.05rem;
+
+  &:hover {
+    background-color: $green-dark;
+    cursor: pointer;
+  }
+}
+
+@mixin textfield {
+  color: $blue-dark;
+  font-size: 1.6rem;
+  font-weight: 300;
+
+  & fieldset {
+    border-color: $blue-light !important;
+  }
+
+  &:hover fieldset {
+    border-color: $green !important;
+  }
+
+  label {
+    color: $blue-dark;
+    font-size: 1.6rem;
+    font-weight: 300;
+    letter-spacing: 0.1rem;
+  }
+
+  legend {
+    font-size: 1.2rem;
+    letter-spacing: 0.1rem;
+  }
+
+  input[type='text'] {
+    font-size: 1.6rem;
+    font-weight: 300;
+    font-family: $font-body;
+  }
+}
