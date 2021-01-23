@@ -6,6 +6,9 @@ import firebase from 'firebase/app';
 import Link from 'next/link';
 import styles from './Authentication.module.scss';
 import { Container } from '../Layout';
+import TextField from '@material-ui/core/TextField';
+
+import PasswordField from './PasswordField.js';
 
 const LoginForm = () => {
   const router = useRouter();
@@ -95,6 +98,16 @@ const LoginForm = () => {
                   value={email}
                   onChange={(e) => setEmail(e.currentTarget.value)}
                 />
+
+                {/* <TextField
+                  className={styles.textfield}
+                  fullWidth
+                  id="outlined-basic"
+                  label="Email"
+                  variant="outlined"
+                  value={email}
+                  onChange={(e) => setEmail(e.currentTarget.value)}
+                /> */}
               </div>
               <div className={styles.input__wrapper}>
                 <label className={styles.form__label} htmlFor="password">
@@ -110,6 +123,7 @@ const LoginForm = () => {
                   value={password}
                   onChange={(e) => setPassword(e.currentTarget.value)}
                 />
+                {/* <PasswordField /> */}
                 <a>Wachtwoord vergeten?</a>
               </div>
               <div className={styles.form__socials}>

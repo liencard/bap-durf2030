@@ -1,8 +1,6 @@
 import styles from './HomeHero.module.scss';
-import BtnPrim from '../../Button/Button';
 import { Container } from '../../Layout';
-
-import { Button } from '../UI';
+import { Button } from '../../UI';
 
 const HomeHero = () => {
   return (

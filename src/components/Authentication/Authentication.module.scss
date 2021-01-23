@@ -6,6 +6,7 @@ $border-radius: 0.5rem;
   cursor: pointer;
   left: 3vw;
   top: 3vh;
+  z-index: 4;
 }
 
 .auth__img {
@@ -141,4 +142,8 @@ $border-radius: 0.5rem;
       cursor: pointer;
     }
   }
+}
+
+.textfield {
+  @include textfield;
 }
