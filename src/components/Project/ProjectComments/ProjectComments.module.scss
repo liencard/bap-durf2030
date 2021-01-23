@@ -1,0 +1,59 @@
+@import '../../../styles/styles.scss';
+$spacing-top: 5rem;
+
+.comments {
+  grid-column: span 6;
+
+  .title {
+    margin: $spacing-top 0 2rem;
+    @include title-two;
+  }
+
+  .comment {
+    border: 0.1rem solid $blue-light;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+
+    .user {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .date {
+      @include text-detail;
+      font-size: 1.4rem;
+    }
+
+    .image {
+      @include pfp-large;
+      margin-right: 2rem;
+    }
+  }
+}
+
+.create {
+  grid-column: 8 / 13;
+  margin-top: $spacing-top;
+
+  .title {
+    @include title-small;
+    margin: 1.2rem 0 2rem;
+  }
+
+  .label {
+    @include form__label;
+  }
+
+  .textinput {
+    @include form__input;
+    resize: none;
+  }
+
+  .submit {
+    margin-top: 1rem;
+    @include button;
+    display: block;
+    margin-left: auto;
+  }
+}

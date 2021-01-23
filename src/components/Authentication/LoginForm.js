@@ -76,74 +76,69 @@ const LoginForm = () => {
         />
       </Link>
       <Container>
-        <img
-          className={styles.auth__img}
-          src="/login.png"
-          alt="login 3D render"
-          width="674"
-          height="971"
-        />
-        {/* <div className={styles.auth__img}></div> */}
-        <section className={styles.auth__wrapper}>
-          <h1 className={styles.title}>Inloggen</h1>
-          <form className={styles.form} onSubmit={handleSubmit}>
-            <div className={styles.input__wrapper}>
-              <label className={styles.form__label} htmlFor="email">
-                Email
-              </label>
+        <div className={styles.auth__img}></div>
+        <section className={styles.auth}>
+          <div className={styles.auth__wrapper}>
+            <h1 className={styles.title}>Inloggen</h1>
+            <form className={styles.form} onSubmit={handleSubmit}>
+              <div className={styles.input__wrapper}>
+                <label className={styles.form__label} htmlFor="email">
+                  Email
+                </label>
+                <input
+                  className={styles.form__input}
+                  type="email"
+                  name="email"
+                  placeholder="E-mailadres"
+                  required="required"
+                  autoComplete="off"
+                  value={email}
+                  onChange={(e) => setEmail(e.currentTarget.value)}
+                />
+              </div>
+              <div className={styles.input__wrapper}>
+                <label className={styles.form__label} htmlFor="password">
+                  Wachtwoord
+                </label>
+                <input
+                  className={styles.form__input}
+                  type="password"
+                  name="password"
+                  placeholder="Wachtwoord"
+                  required="required"
+                  autoComplete="off"
+                  value={password}
+                  onChange={(e) => setPassword(e.currentTarget.value)}
+                />
+                <a>Wachtwoord vergeten?</a>
+              </div>
+              <div className={styles.form__socials}>
+                <button
+                  className={`${styles.form__btn} ${styles.btn__social} ${styles.btn__google}`}
+                  onClick={googleSignIn}
+                >
+                  Verdergaan met Google
+                </button>
+                <button
+                  className={`${styles.form__btn} ${styles.btn__social} ${styles.btn__facebook}`}
+                  onClick={facebookSignIn}
+                >
+                  Verdergaan met Facebook
+                </button>
+              </div>
               <input
-                className={styles.form__input}
-                type="email"
-                name="email"
-                placeholder="E-mailadres"
-                required="required"
-                autoComplete="off"
-                value={email}
-                onChange={(e) => setEmail(e.currentTarget.value)}
+                className={styles.form__btn}
+                type="submit"
+                value="Inloggen"
               />
-            </div>
-            <div className={styles.input__wrapper}>
-              <label className={styles.form__label} htmlFor="password">
-                Wachtwoord
-              </label>
-              <input
-                className={styles.form__input}
-                type="password"
-                name="password"
-                placeholder="Wachtwoord"
-                required="required"
-                autoComplete="off"
-                value={password}
-                onChange={(e) => setPassword(e.currentTarget.value)}
-              />
-              <a>Wachtwoord vergeten?</a>
-            </div>
-            <div className={styles.form__socials}>
-              <button
-                className={`${styles.form__btn} ${styles.btn__social} ${styles.btn__google}`}
-                onClick={googleSignIn}
-              >
-                Verdergaan met Google
-              </button>
-              <button
-                className={`${styles.form__btn} ${styles.btn__social} ${styles.btn__facebook}`}
-                onClick={facebookSignIn}
-              >
-                Verdergaan met Facebook
-              </button>
-            </div>
-            <input
-              className={styles.form__btn}
-              type="submit"
-              value="Inloggen"
-            />
-          </form>
-          <p className={styles.redirect}>
-            Nog geen account?{' '}
-            <Link href="/register">
-              <span>Registreer</span>
-            </Link>
-          </p>
+            </form>
+            <p className={styles.redirect}>
+              Nog geen account?{' '}
+              <Link href="/register">
+                <span>Registreer</span>
+              </Link>
+            </p>
+          </div>
         </section>
       </Container>
     </>
