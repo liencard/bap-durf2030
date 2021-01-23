@@ -22,7 +22,7 @@ const theme = createMuiTheme({
       dark: `#e62336`,
     },
     action: {
-      active: `#ffed00`,
+      active: `#e62336`, // geel
       hover: `#ffed00`,
       selected: `#ffed00`,
     },
@@ -46,6 +46,13 @@ const theme = createMuiTheme({
       fontWeight: 300,
       textTransform: 'capitalize',
       fontSize: '1.6rem',
+    },
+  },
+  overrides: {
+    PrivateNotchedOutline: {
+      legend: {
+        width: '400px',
+      },
     },
   },
 });
