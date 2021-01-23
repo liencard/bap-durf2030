@@ -56,4 +56,17 @@ $border-radius: 0.5rem;
   img {
     margin-right: 2rem;
   }
+
+  svg {
+    margin-right: 2rem;
+  }
+
+  .menu__pfp {
+    border-radius: 50%;
+    background-color: $grey;
+  }
+}
+
+.header__dark .header__right svg path {
+  fill: white;
 }

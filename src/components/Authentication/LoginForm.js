@@ -78,8 +78,8 @@ const LoginForm = () => {
           <div className={styles.auth__wrapper}>
             <h1 className={styles.title}>Inloggen</h1>
             <form className={styles.form} onSubmit={handleSubmit}>
-              <div className={styles.input__wrapperTest}>
-                {/* <label className={styles.form__label} htmlFor="email">
+              <div className={styles.input__wrapper}>
+                <label className={styles.form__label} htmlFor="email">
                   Email
                 </label>
                 <input
@@ -91,9 +91,9 @@ const LoginForm = () => {
                   autoComplete="off"
                   value={email}
                   onChange={(e) => setEmail(e.currentTarget.value)}
-                /> */}
+                />
 
-                <TextField
+                {/* <TextField
                   className={styles.textfield}
                   fullWidth
                   id="outlined-basic"
@@ -101,10 +101,10 @@ const LoginForm = () => {
                   variant="outlined"
                   value={email}
                   onChange={(e) => setEmail(e.currentTarget.value)}
-                />
+                /> */}
               </div>
               <div className={styles.input__wrapper}>
-                {/* <label className={styles.form__label} htmlFor="password">
+                <label className={styles.form__label} htmlFor="password">
                   Wachtwoord
                 </label>
                 <input
@@ -116,8 +116,8 @@ const LoginForm = () => {
                   autoComplete="off"
                   value={password}
                   onChange={(e) => setPassword(e.currentTarget.value)}
-                /> */}
-                <PasswordField />
+                />
+                {/* <PasswordField /> */}
                 <a>Wachtwoord vergeten?</a>
               </div>
               <div className={styles.form__socials}>
