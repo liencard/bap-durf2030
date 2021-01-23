@@ -19,7 +19,7 @@ const HomeHero = () => {
                 <span className={styles.red}>durver?</span>
               </h1>
               <p className={styles.description}>
-                Heb je een xxx idee? Help ons 2.030 projecten te realiseren en
+                Heb je een gek idee? Help ons 2.030 projecten te realiseren en
                 van Kortrijk een culturele wereldstad te maken.
               </p>
               <div className="btn__wrapper">
