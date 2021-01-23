@@ -6,7 +6,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
-function TabPanel(props) {
+const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
 
   return (
@@ -20,17 +20,17 @@ function TabPanel(props) {
       {value === index && <div>{children}</div>}
     </div>
   );
-}
+};
 
 const ProjectContent = () => {
   const [value, setValue] = useState(0);
 
-  function a11yProps(index) {
+  const a11yProps = (index) => {
     return {
       id: `simple-tab-${index}`,
       'aria-controls': `simple-tabpanel-${index}`,
     };
-  }
+  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -38,7 +38,7 @@ const ProjectContent = () => {
 
   return (
     <>
-      <AppBar className={styles.appbar} position="static">
+      <AppBar color="transparent" className={styles.appbar} position="static">
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="Campagne" {...a11yProps(0)} />
           <Tab label="Updates" {...a11yProps(1)} />
