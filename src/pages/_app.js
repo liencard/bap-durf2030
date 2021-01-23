@@ -5,7 +5,6 @@ import { ThemeProvider } from '@material-ui/styles';
 // https://material-ui.com/customization/palette/
 // https://material-ui.com/customization/default-theme/
 const theme = createMuiTheme({
-  shadows: ['none'],
   palette: {
     primary: {
       light: `#d8eded`,
@@ -28,13 +27,14 @@ const theme = createMuiTheme({
       selected: `#ffed00`,
     },
   },
+  // shadows: ['none'],
   shape: {
     borderRadius: 0,
   },
   typography: {
     fontWeightRegular: 300,
     fontFamily: "'Montserrat', sans-serif",
-    fontSize: '1.6rem',
+    fontSize: 25.6,
     button: {
       fontFamily: "'Montserrat', sans-serif",
       fontWeight: 300,

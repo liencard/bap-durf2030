@@ -1,16 +1,29 @@
 import styles from './ProjectShare.module.scss';
 import { Modal } from '../../UI';
 import { Grid } from '../../Layout';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 const ProjectShare = ({}) => {
   const [open, setOpen] = useState(false);
+  const [copyStatus, setCopyStatus] = useState('Kopieer');
+  const textAreaRef = useRef(null);
+
   const handleOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
+    setCopyStatus('Kopieer');
+  };
+
+  const handleClickCopy = (e) => {
+    textAreaRef.current.select();
+    document.execCommand('copy');
+    // This is just personal preference.
+    // I prefer to not show the whole text area selected.
+    e.target.focus();
+    setCopyStatus('Gekopieerd!');
   };
 
   return (
@@ -34,6 +47,15 @@ const ProjectShare = ({}) => {
               <li>E-mail</li>
               <li>Print Flyer</li>
             </ul>
+            <div className={styles.copy}>
+              <p>Kopieer link</p>
+              <div>
+                <form>
+                  <input type="text" ref={textAreaRef} value={`${window.location.href}`} />
+                </form>
+                <button onClick={handleClickCopy}>{copyStatus}</button>
+              </div>
+            </div>
           </div>
         </Grid>
       </Modal>
