@@ -1,17 +1,12 @@
 @import '../../../styles/styles.scss';
 
-$spacing-top: 10rem;
-$spacing-pfp: 2rem;
-
-// $padding-one-side: calc(100vw - #{$container} / 2);
-
-.tabs {
+.appbar {
   grid-column: span 12;
-  margin-top: 5rem;
+  background: white !important;
+  margin: 7rem 0;
 
-  .tabs__list {
-    display: flex;
-    align-items: center;
+  div {
+    height: 10rem;
     position: relative;
 
     &::before {
@@ -21,8 +16,6 @@ $spacing-pfp: 2rem;
       height: 0.1rem;
       width: 100%;
       background-color: $blue-light;
-      // left: calc(-#{$padding-one-side});
-      // left: -72rem;
     }
 
     &::after {
@@ -35,17 +28,12 @@ $spacing-pfp: 2rem;
       bottom: 0;
     }
 
-    .tab {
-      padding: 3rem 0;
-      margin-right: 4em;
+    span {
+      padding: 0.15rem;
     }
   }
+}
 
-  .tabs__content {
-    margin-top: $spacing-top;
-
-    // .text__wrapper {
-    //   grid-column: span 7;
-    // }
-  }
+.panel {
+  grid-column: span 12;
 }
