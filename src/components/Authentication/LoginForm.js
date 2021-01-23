@@ -25,8 +25,12 @@ const LoginForm = () => {
       password: password,
     });
     const result = await uiStore.loginUser(user);
+    if (uiStore.currentUser) {
+      console.log(result);
+      console.log(user);
+      router.push('/');
+    }
     console.log(result);
-    router.push('/');
   };
 
   const googleSignIn = () => {
@@ -38,6 +42,9 @@ const LoginForm = () => {
         const credential = result.credential;
         const token = credential.accessToken;
         const user = result.user;
+        router.push('/');
+        console.log(user);
+        //registerGoogle(user);
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -45,6 +52,24 @@ const LoginForm = () => {
         const email = error.email;
         const credential = error.credential;
       });
+  };
+
+  const registerGoogle = async (user) => {
+    const userGoogle = new User({
+      name: user.displayName,
+      store: userStore,
+      email: user.email,
+      password: password,
+      //avatar: user.avatar,
+    });
+    console.log(userGoogle);
+    const resultGoogle = uiStore.registerUser(userGoogle);
+    console.log(resultGoogle);
+    // if (resultGoogle.uid) {
+    //   router.push(ROUTES.home);
+    // } else {
+    //   console.log(resultGoogle);
+    // }
   };
 
   const facebookSignIn = () => {
@@ -57,6 +82,7 @@ const LoginForm = () => {
         const user = result.user;
         // This gives you a Facebook Access Token. You can use it to access the Facebook API.
         const accessToken = credential.accessToken;
+        router.push('/');
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -70,7 +96,13 @@ const LoginForm = () => {
   return (
     <>
       <Link href="/">
-        <img className={styles.logo} src="/logo.svg" alt="logo DURF2030" width="45" height="60" />
+        <img
+          className={styles.logo}
+          src="/logo.svg"
+          alt="logo DURF2030"
+          width="45"
+          height="60"
+        />
       </Link>
       <Container>
         <div className={styles.auth__img}></div>
@@ -79,7 +111,7 @@ const LoginForm = () => {
             <h1 className={styles.title}>Inloggen</h1>
             <form className={styles.form} onSubmit={handleSubmit}>
               <div className={styles.input__wrapper}>
-                <label className={styles.form__label} htmlFor="email">
+                {/* <label className={styles.form__label} htmlFor="email">
                   Email
                 </label>
                 <input
@@ -91,9 +123,9 @@ const LoginForm = () => {
                   autoComplete="off"
                   value={email}
                   onChange={(e) => setEmail(e.currentTarget.value)}
-                />
+                /> */}
 
-                {/* <TextField
+                <TextField
                   className={styles.textfield}
                   fullWidth
                   id="outlined-basic"
@@ -101,7 +133,7 @@ const LoginForm = () => {
                   variant="outlined"
                   value={email}
                   onChange={(e) => setEmail(e.currentTarget.value)}
-                /> */}
+                />
               </div>
               <div className={styles.input__wrapper}>
                 <label className={styles.form__label} htmlFor="password">
@@ -134,7 +166,11 @@ const LoginForm = () => {
                   Verdergaan met Facebook
                 </button>
               </div>
-              <input className={styles.form__btn} type="submit" value="Inloggen" />
+              <input
+                className={styles.form__btn}
+                type="submit"
+                value="Inloggen"
+              />
             </form>
             <p className={styles.redirect}>
               Nog geen account?{' '}

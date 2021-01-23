@@ -20,8 +20,8 @@ const theme = createMuiTheme({
       dark: `#e62336`,
     },
     action: {
-      active: `#e62336`, // geel
-      hover: `#ffed00`,
+      active: `#d8d8d8`, // rood
+      hover: `#d8eded`, // geel
       selected: `#ffed00`,
     },
     background: {

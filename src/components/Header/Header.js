@@ -16,6 +16,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 const Header = observer(() => {
   const headerBanner = useRef();
   const { uiStore } = useStores();
+  const router = useRouter();
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -36,7 +37,6 @@ const Header = observer(() => {
   useEffect(() => {
     if (uiStore.currentUser) {
       console.log(uiStore.currentUser);
-      console.log(uiStore.currentUser.avatar);
     } else {
       console.log('no current user');
     }
@@ -112,6 +112,7 @@ const Header = observer(() => {
                   />
                 </ButtonUI>
                 <Menu
+                  className={styles.submenu}
                   id="simple-menu"
                   anchorEl={anchorEl}
                   keepMounted
