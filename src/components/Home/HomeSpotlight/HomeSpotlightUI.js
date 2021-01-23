@@ -1,8 +1,17 @@
 import styles from './HomeSpotlight.module.scss';
 import HomeSpotlightItem from '../HomeSpotlightItem/HomeSpotlightItem';
 import { Container } from '../../Layout';
+import Carousel from 'react-material-ui-carousel';
 
 const HomeSpotlight = () => {
+  const items = [
+    {
+      name: 'Random Name #1',
+    },
+    {
+      name: 'Random Name #2',
+    },
+  ];
   return (
     <>
       <Container>
@@ -35,7 +44,17 @@ const HomeSpotlight = () => {
                 />
               </div>
             </div>
-            <HomeSpotlightItem />
+            <div className={styles.spotlight__item}>
+              <Carousel
+                autoPlay={false}
+                navButtonsAlwaysVisible={true}
+                indicators={false}
+              >
+                {items.map((item, i) => (
+                  <HomeSpotlightItem key={i} />
+                ))}
+              </Carousel>
+            </div>
           </Container>
         </section>
       </Container>

@@ -19,6 +19,12 @@ const Home = () => {
     // if (!uiStore.currentUser) {
     //   router.push(ROUTES.login);
     // }
+
+    if (uiStore.currentUser) {
+      console.log(uiStore.currentUser);
+    } else {
+      console.log('no current user');
+    }
   }, [uiStore.currentUser]);
 
   return (

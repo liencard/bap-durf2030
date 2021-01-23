@@ -8,7 +8,13 @@ const FormOne = () => {
       <h2 className={styles.subtitle}>Laten we starten met de basis</h2>
       <p>Geef je project een titel</p>
       <form className={styles.form}>
-        <TextField className={styles.textfield} fullWidth id="outlined-basic" label="Titel" variant="outlined" />
+        <TextField
+          className={styles.textfield}
+          fullWidth
+          id="outlined-basic"
+          label="Titel"
+          variant="outlined"
+        />
       </form>
     </>
   );
