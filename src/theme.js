@@ -24,6 +24,9 @@ const theme = createMuiTheme({
       hover: `#ffed00`,
       selected: `#ffed00`,
     },
+    background: {
+      default: '#fff',
+    },
   },
   // shadows: ['none'],
   shape: {
@@ -45,6 +48,8 @@ const theme = createMuiTheme({
       textTransform: 'capitalize',
       fontSize: '1.6rem',
     },
+    body1: { lineHeight: 1.7 },
+    body2: { lineHeight: 1.7 },
   },
   // overrides: {
   //   PrivateNotchedOutline: {
