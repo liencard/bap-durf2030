@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { useEffect } from 'react';
 import styles from './Header.module.scss';
 import Link from 'next/link';
-import BtnPrim from '../Button/Button';
+import { Button } from '../UI';
 
 const Header = () => {
   const headerBanner = useRef();
@@ -59,16 +59,11 @@ const Header = () => {
               <span className={styles.menu__item}>Nieuws</span>
             </Link>
 
-            <BtnPrim text="Maak project aan" link="/" />
+            <Button text="Maak project aan" link="/" />
           </nav>
         </div>
         <div className={styles.header__right}>
-          <img
-            src="/icons/reminder-dark.svg"
-            width="18"
-            height="21.5"
-            alt="reminder bell icon"
-          />
+          <img src="/icons/reminder-dark.svg" width="18" height="21.5" alt="reminder bell icon" />
           <Link href="/register">
             <span className={styles.menu__item}>Inloggen</span>
           </Link>

@@ -1,6 +1,6 @@
 import styles from './ProjectDescription.module.scss';
 import { ProjectLikes, ProjectCreatorImage, ProjectShare } from '../../Project';
-import Button from '../../Button/Button';
+import { Button } from '../../UI';
 
 const ProjectDescription = () => {
   return (
