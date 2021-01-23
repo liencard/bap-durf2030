@@ -5,9 +5,10 @@ import { ROUTES } from '../consts/index';
 
 import Logout from '../components/Logout/Logout';
 import ProjectList from '../components/ProjectList/ProjectList';
-import { ProjectCard } from '../components/Project';
 import Header from '../components/Header/Header';
-import HeroHome from '../components/HeroHome/HeroHome';
+import HomeHero from '../components/Home/HomeHero/HomeHero';
+import HomeSpotlight from '../components/Home/HomeSpotlight/HomeSpotlight';
+import ProjectSpotlight from '../components/Home/ProjectSpotlight/ProjectSpotlight';
 import { Container } from '../components/Layout';
 
 const Home = () => {
@@ -18,15 +19,22 @@ const Home = () => {
     // if (!uiStore.currentUser) {
     //   router.push(ROUTES.login);
     // }
+
+    if (uiStore.currentUser) {
+      console.log(uiStore.currentUser);
+    } else {
+      console.log('no current user');
+    }
   }, [uiStore.currentUser]);
 
   return (
     <>
       <Header />
-      <HeroHome />
+      <HomeHero />
+      <HomeSpotlight />
 
       <Container>
-        <ProjectCard />
+        <ProjectSpotlight />
       </Container>
     </>
   );

@@ -1,0 +1,57 @@
+@import '../../../styles/styles.scss';
+$border-radius: 0.5rem;
+
+.projecten {
+  grid-column: span 12;
+  margin-top: 10rem;
+
+  .projecten__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 2rem;
+
+    .title {
+      @include title-one;
+    }
+
+    span {
+      font-weight: 600;
+      cursor: pointer;
+
+      &:hover {
+        color: red;
+      }
+    }
+  }
+}
+.card {
+  grid-column: span 4;
+  border: 0.1rem solid $blue-light;
+  border-radius: $border-radius;
+  text-decoration: none;
+
+  .thumbnail {
+    border-radius: $border-radius $border-radius 0 0;
+    height: 22rem;
+    width: 100%;
+    background-color: $grey;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .content__wrapper {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      .title {
+        @include title-small;
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+}

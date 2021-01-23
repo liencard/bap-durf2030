@@ -1,0 +1,39 @@
+@import '../../../styles/styles.scss';
+
+.test {
+  display: flex;
+  z-index: 1;
+
+  .item__banner {
+    margin-top: -7rem;
+    margin-right: 3rem;
+  }
+
+  .item__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .item__title {
+    @include title-two;
+  }
+
+  .item__person {
+    display: flex;
+    align-items: center;
+
+    img {
+      border-radius: 50%;
+    }
+
+    p {
+      font-weight: 600;
+      padding-left: 1rem;
+    }
+  }
+}
+
+.test {
+  display: flex;
+}

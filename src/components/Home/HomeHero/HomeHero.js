@@ -1,8 +1,8 @@
-import styles from './HeroHome.module.scss';
-import { Container } from '../Layout';
-import { Button } from '../UI';
+import styles from './HomeHero.module.scss';
+import { Container } from '../../Layout';
+import { Button } from '../../UI';
 
-const HeroHome = () => {
+const HomeHero = () => {
   return (
     <>
       <section className={styles.header}>
@@ -14,7 +14,7 @@ const HeroHome = () => {
                 Ben jij een <span className={styles.green}>echte</span> <span className={styles.red}>durver?</span>
               </h1>
               <p className={styles.description}>
-                Heb je een xxx idee? Help ons 2.030 projecten te realiseren en van Kortrijk een culturele wereldstad te
+                Heb je een gek idee? Help ons 2.030 projecten te realiseren en van Kortrijk een culturele wereldstad te
                 maken.
               </p>
               <div className="btn__wrapper">
@@ -31,4 +31,4 @@ const HeroHome = () => {
   );
 };
 
-export default HeroHome;
+export default HomeHero;

@@ -1,27 +1,59 @@
 import styles from './ProjectContent.module.scss';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { ProjectDescription } from '../../Project';
 import { Grid } from '../../Layout';
+import { useState } from 'react';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+
+const TabPanel = (props) => {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && <div>{children}</div>}
+    </div>
+  );
+};
 
 const ProjectContent = () => {
+  const [value, setValue] = useState(0);
+
+  const a11yProps = (index) => {
+    return {
+      id: `simple-tab-${index}`,
+      'aria-controls': `simple-tabpanel-${index}`,
+    };
+  };
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   return (
     <>
-      <Tabs className={styles.tabs}>
-        <TabList className={styles.tabs__list}>
-          <Tab className={styles.tab}>Campagne</Tab>
-          <Tab className={styles.tab}>Updates</Tab>
-        </TabList>
-        <div className={styles.tabs__content}>
-          <TabPanel className={styles.tabs__panel}>
-            <Grid>
-              <ProjectDescription />
-            </Grid>
-          </TabPanel>
-          <TabPanel>
-            <h2>Updates</h2>
-          </TabPanel>
-        </div>
-      </Tabs>
+      <AppBar color="transparent" className={styles.appbar} position="static">
+        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+          <Tab label="Campagne" {...a11yProps(0)} />
+          <Tab label="Updates" {...a11yProps(1)} />
+        </Tabs>
+      </AppBar>
+      <TabPanel className={styles.panel} value={value} index={0}>
+        <Grid>
+          <ProjectDescription />
+        </Grid>
+      </TabPanel>
+      <TabPanel className={styles.panel} value={value} index={1}>
+        <Grid>
+          <ProjectDescription />
+        </Grid>
+      </TabPanel>
     </>
   );
 };
