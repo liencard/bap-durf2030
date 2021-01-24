@@ -1,4 +1,5 @@
 import '../styles/globals.scss';
+import '../styles/styles.scss';
 import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { useEffect } from 'react';

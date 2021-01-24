@@ -36,29 +36,37 @@ const CreateProject = () => {
 
   return (
     <>
-      <Container>
-        <div className={styles.image}>Image</div>
-        <div className={styles.content}>
-          <h1 className={styles.title}>Dien jouw projectidee in, hoe zot het ook is</h1>
-          <p className={styles.intro}>
-            Momenteel loopt een oproep waarbij we projecten rond eenzaamheid stimuleren. Heb jij een ander idee? Dat is
-            perfect mogelijk!
-          </p>
-          {getStepContent(activeStep)}
-          <div className={styles.navigate}>
-            <Button onClick={handleBack} text={'Back'} />
-            {activeStep < 3 && (
-              <ul className={styles.steps}>
-                <li className={`${styles.step} ${activeStep == 0 && styles.active}`} />
-                <li className={`${styles.step} ${activeStep == 1 && styles.active}`} />
-                <li className={`${styles.step} ${activeStep == 2 && styles.active}`} />
-              </ul>
-            )}
+      <div className={styles.create}>
+        <Container>
+          <div className={styles.image}>Image</div>
+          <div className={styles.content}>
+            <div className={styles.text}>
+              {activeStep < 3 && (
+                <>
+                  <h1 className={styles.title}>Dien jouw projectidee in, hoe zot het ook is</h1>
+                  <p className={styles.intro}>
+                    Momenteel loopt een oproep waarbij we projecten rond eenzaamheid stimuleren. Heb jij een ander idee?
+                    Dat is perfect mogelijk!
+                  </p>
+                </>
+              )}
+              {getStepContent(activeStep)}
+            </div>
+            <div className={styles.navigate}>
+              <Button onClick={handleBack} text={'Back'} />
+              {activeStep < 3 && (
+                <ul className={styles.steps}>
+                  <li className={`${styles.step} ${activeStep == 0 && styles.active}`} />
+                  <li className={`${styles.step} ${activeStep == 1 && styles.active}`} />
+                  <li className={`${styles.step} ${activeStep == 2 && styles.active}`} />
+                </ul>
+              )}
 
-            <Button onClick={handleNext} text={'Next'} />
+              <Button onClick={handleNext} text={'Next'} />
+            </div>
           </div>
-        </div>
-      </Container>
+        </Container>
+      </div>
     </>
   );
 };

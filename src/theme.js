@@ -51,13 +51,56 @@ const theme = createMuiTheme({
     body1: { lineHeight: 1.7 },
     body2: { lineHeight: 1.7 },
   },
-  // overrides: {
-  //   PrivateNotchedOutline: {
-  //     legend: {
-  //       width: '400px',
-  //     },
-  //   },
-  // },
+  overrides: {
+    // FORM - Inputs & labels
+    MuiOutlinedInput: {
+      root: {
+        marginBottom: '2rem',
+        marginTop: '1rem',
+        '&:hover fieldset': {
+          borderColor: '#54bbab !important',
+        },
+      },
+      notchedOutline: {
+        borderColor: '#e1e2e7',
+      },
+    },
+    MuiInputLabel: {
+      root: {
+        marginTop: '1rem',
+        fontSize: '1.6rem',
+        color: '#0c1424',
+        letterSpacing: '0.1rem',
+        fontWeight: 300,
+      },
+    },
+    MuiInputBase: {
+      input: {
+        fontSize: '1.6rem',
+        color: '#0c1424',
+      },
+    },
+
+    // FORM - Switch
+    MuiIconButton: {
+      root: {
+        '&:hover': {
+          backgroundColor: 'rgba(84, 187, 171, 0.1)',
+        },
+      },
+    },
+    // FORM - Dropdown
+    MuiSelect: {
+      icon: {
+        color: '#d8d8d8',
+      },
+      select: {
+        '&:focus': {
+          backgroundColor: 'white',
+        },
+      },
+    },
+  },
 });
 
 export default theme;

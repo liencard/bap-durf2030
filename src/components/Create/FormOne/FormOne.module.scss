@@ -1,8 +1,15 @@
 @import '../../../styles/styles.scss';
 
+.title {
+  @include title-one;
+}
+
 .subtitle {
-  @include title-two;
-  margin-bottom: 2rem;
+  @include title-three;
+
+  // .textfield {
+  //   margin-top: 5rem !important;
+  // }
 }
 
 .items {
@@ -22,6 +29,27 @@
   }
 }
 
-.textfield {
-  @include textfield;
+.textfield__street {
+  grid-column: span 8;
+}
+
+.textfield__number {
+  grid-column: span 4;
+}
+
+.place {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & p {
+    @include title-small;
+  }
+
+  .place__label {
+    @include text-detail;
+    text-transform: uppercase;
+  }
 }
