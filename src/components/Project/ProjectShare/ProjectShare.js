@@ -38,8 +38,8 @@ const ProjectShare = ({}) => {
               Deel dit project
             </h2>
             <p id="transition-modal-description">
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam
-              rem aperiam.
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+              accusantium doloremque laudantium, totam rem aperiam.
             </p>
             <ul className={styles.options}>
               <li>Facebook</li>
@@ -51,7 +51,11 @@ const ProjectShare = ({}) => {
               <p>Kopieer link</p>
               <div>
                 <form>
-                  <input type="text" ref={textAreaRef} value={`${window.location.href}`} />
+                  <input
+                    type="text"
+                    ref={textAreaRef}
+                    value={`${window.location.href}`}
+                  />
                 </form>
                 <button onClick={handleClickCopy}>{copyStatus}</button>
               </div>

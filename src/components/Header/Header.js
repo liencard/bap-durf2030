@@ -61,7 +61,7 @@ const Header = observer(() => {
         <div className={styles.header__left}>
           <img src="/logo.svg" alt="logo DURF2030" width="45" height="60" />
           <nav className={styles.menu}>
-            <Link href="/">
+            <Link href="/projecten">
               <span className={styles.menu__item}>Alle projecten</span>
             </Link>
             <Link href="/">
@@ -119,7 +119,7 @@ const Header = observer(() => {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  <MenuItem onClick={handleClose}>Profiel</MenuItem>
+                  <MenuItem onClick={handleClose}>Mijn profiel</MenuItem>
                   <MenuItem onClick={handleClose}>Instellingen</MenuItem>
                   <MenuItem onClick={handleLogout}>Afmelden</MenuItem>
                 </Menu>

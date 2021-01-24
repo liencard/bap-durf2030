@@ -1,4 +1,4 @@
-import styles from './Authentication.module.scss';
+import styles from '../Authentication.module.scss';
 import { useState } from 'react';
 
 import FormControl from '@material-ui/core/FormControl';

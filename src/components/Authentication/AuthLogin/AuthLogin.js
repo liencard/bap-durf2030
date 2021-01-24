@@ -1,14 +1,16 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { useStores } from '../../hooks/useStores';
-import User from '../../models/User';
-import firebase from 'firebase/app';
+import { useStores } from '../../../hooks/useStores';
+import { ROUTES } from '../../../consts/index';
+import { Container } from '../../Layout';
+import User from '../../../models/User';
 import Link from 'next/link';
-import styles from './Authentication.module.scss';
-import { Container } from '../Layout';
+import styles from '../Authentication.module.scss';
 import TextField from '@material-ui/core/TextField';
+import { AuthSocial } from '../../Authentication';
+import { AuthPasswordReset } from '../../Authentication';
 
-import PasswordField from './PasswordField.js';
+import { AuthPasswordInput } from '../../Authentication';
 
 const LoginForm = () => {
   const router = useRouter();
@@ -26,71 +28,10 @@ const LoginForm = () => {
     });
     const result = await uiStore.loginUser(user);
     if (uiStore.currentUser) {
+      router.push(ROUTES.home);
+    } else {
       console.log(result);
-      console.log(user);
-      router.push('/');
     }
-    console.log(result);
-  };
-
-  const googleSignIn = () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then((result) => {
-        const credential = result.credential;
-        const token = credential.accessToken;
-        const user = result.user;
-        router.push('/');
-        console.log(user);
-        //registerGoogle(user);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        const email = error.email;
-        const credential = error.credential;
-      });
-  };
-
-  const registerGoogle = async (user) => {
-    const userGoogle = new User({
-      name: user.displayName,
-      store: userStore,
-      email: user.email,
-      password: password,
-      //avatar: user.avatar,
-    });
-    console.log(userGoogle);
-    const resultGoogle = uiStore.registerUser(userGoogle);
-    console.log(resultGoogle);
-    // if (resultGoogle.uid) {
-    //   router.push(ROUTES.home);
-    // } else {
-    //   console.log(resultGoogle);
-    // }
-  };
-
-  const facebookSignIn = () => {
-    const provider = new firebase.auth.FacebookAuthProvider();
-    firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then((result) => {
-        const credential = result.credential;
-        const user = result.user;
-        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-        const accessToken = credential.accessToken;
-        router.push('/');
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        const email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-      });
   };
 
   return (
@@ -150,22 +91,10 @@ const LoginForm = () => {
                   onChange={(e) => setPassword(e.currentTarget.value)}
                 />
                 {/* <PasswordField /> */}
-                <a>Wachtwoord vergeten?</a>
+
+                <AuthPasswordReset />
               </div>
-              <div className={styles.form__socials}>
-                <button
-                  className={`${styles.form__btn} ${styles.btn__social} ${styles.btn__google}`}
-                  onClick={googleSignIn}
-                >
-                  Verdergaan met Google
-                </button>
-                <button
-                  className={`${styles.form__btn} ${styles.btn__social} ${styles.btn__facebook}`}
-                  onClick={facebookSignIn}
-                >
-                  Verdergaan met Facebook
-                </button>
-              </div>
+              <AuthSocial />
               <input
                 className={styles.form__btn}
                 type="submit"

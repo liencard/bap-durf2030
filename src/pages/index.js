@@ -1,6 +1,3 @@
-import { useEffect } from 'react';
-import { useStores } from '../hooks/useStores';
-
 import ProjectList from '../components/ProjectList/ProjectList';
 import Header from '../components/Header/Header';
 import HomeHero from '../components/Home/HomeHero/HomeHero';
@@ -9,16 +6,6 @@ import ProjectSpotlight from '../components/Home/ProjectSpotlight/ProjectSpotlig
 import { Container } from '../components/Layout';
 
 const Home = () => {
-  const { uiStore } = useStores();
-
-  useEffect(() => {
-    if (uiStore.currentUser) {
-      console.log(uiStore.currentUser);
-    } else {
-      console.log('no current user');
-    }
-  }, [uiStore.currentUser]);
-
   return (
     <>
       <Header />
