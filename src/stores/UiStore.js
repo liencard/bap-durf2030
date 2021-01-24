@@ -53,7 +53,6 @@ class UiStore {
       user.password,
       user.avatar
     );
-
     const newRegisteredUser = new User({
       id: result.uid,
       name: result.displayName,

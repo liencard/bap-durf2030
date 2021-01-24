@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { useStores } from '../../hooks/useStores';
-import { ROUTES } from '../../consts/index';
-import User from '../../models/User';
-import Logout from '../Logout/Logout';
+import { useStores } from '../../../hooks/useStores';
+import { ROUTES } from '../../../consts/index';
 import Link from 'next/link';
-import styles from './Authentication.module.scss';
-import { Container } from '../Layout';
+import styles from '../Authentication.module.scss';
+import { Container } from '../../Layout';
+import User from '../../../models/User';
+import { AuthSocial } from '../../Authentication';
 
 const RegisterForm = () => {
   const { userStore, uiStore } = useStores();
@@ -29,7 +29,6 @@ const RegisterForm = () => {
       // uid is beschikbaar en te vinden als je het result logt -> gebruiker correct geregistreerd
       router.push(ROUTES.home);
     } else {
-      //registratie mislukt
       console.log(result);
     }
   };
@@ -51,18 +50,7 @@ const RegisterForm = () => {
           <div className={styles.auth__wrapper}>
             <h1 className={styles.title}>Registreer</h1>
             <form className={styles.form} onSubmit={handleSubmit}>
-              <div className={styles.form__socials}>
-                <button
-                  className={`${styles.form__btn} ${styles.btn__social} ${styles.btn__google}`}
-                >
-                  Verdergaan met Google
-                </button>
-                <button
-                  className={`${styles.form__btn} ${styles.btn__social} ${styles.btn__facebook}`}
-                >
-                  Verdergaan met Facebook
-                </button>
-              </div>
+              <AuthSocial />
               <p>Of maak een account</p>
               <div className={styles.input__wrapper}>
                 <label className={styles.form__label} htmlFor="firstname">

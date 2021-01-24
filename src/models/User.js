@@ -4,7 +4,7 @@ class User {
   constructor({ id = v4(), name, lastname, avatar = '', email, password }) {
     this.id = id;
     this.name = name;
-    this.lastname = lastname;
+    //this.lastname = lastname;
     this.avatar = avatar;
     if (!avatar) {
       this.avatar = `https://avatars.dicebear.com/v2/avataaars/${this.id}.svg`;
@@ -22,7 +22,7 @@ const userConverter = {
       name: user.name,
       avatar: user.avatar,
       email: user.email,
-      lastname: user.lastname,
+      //lastname: user.lastname,
     };
   },
   fromFirestore: function (snapshot, options) {
@@ -32,7 +32,7 @@ const userConverter = {
       email: data.email,
       avatar: data.avatar,
       id: data.userId, // userId naamgeving server, id naamgeving model
-      lastname: data.lastname,
+      //lastname: data.lastname,
     });
   },
 };

@@ -6,7 +6,7 @@ $border-radius: 0.5rem;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 3rem 5vw 1rem;
+  padding: 1.5rem 5vw 1rem;
   position: fixed;
   background-color: white;
   z-index: 999;
@@ -17,7 +17,7 @@ $border-radius: 0.5rem;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 3rem 5vw 1rem;
+  padding: 1.5rem 5vw 1rem;
   position: fixed;
   background-color: $blue-dark;
 }
@@ -61,6 +61,10 @@ $border-radius: 0.5rem;
     margin-right: 2rem;
   }
 
+  svg:hover path {
+    fill: $green;
+  }
+
   .menu__pfp {
     border-radius: 50%;
     background-color: $grey;
@@ -69,4 +73,12 @@ $border-radius: 0.5rem;
 
 .header__dark .header__right svg path {
   fill: white;
+}
+
+.header__dark .header__right svg:hover path {
+  fill: $green;
+}
+
+.submenu li {
+  font-size: 1.4rem;
 }

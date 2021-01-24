@@ -16,6 +16,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 const Header = observer(() => {
   const headerBanner = useRef();
   const { uiStore } = useStores();
+  const router = useRouter();
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -36,7 +37,6 @@ const Header = observer(() => {
   useEffect(() => {
     if (uiStore.currentUser) {
       console.log(uiStore.currentUser);
-      console.log(uiStore.currentUser.avatar);
     } else {
       console.log('no current user');
     }
@@ -61,7 +61,7 @@ const Header = observer(() => {
         <div className={styles.header__left}>
           <img src="/logo.svg" alt="logo DURF2030" width="45" height="60" />
           <nav className={styles.menu}>
-            <Link href="/">
+            <Link href="/projecten">
               <span className={styles.menu__item}>Alle projecten</span>
             </Link>
             <Link href="/">
@@ -112,13 +112,14 @@ const Header = observer(() => {
                   />
                 </ButtonUI>
                 <Menu
+                  className={styles.submenu}
                   id="simple-menu"
                   anchorEl={anchorEl}
                   keepMounted
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  <MenuItem onClick={handleClose}>Profiel</MenuItem>
+                  <MenuItem onClick={handleClose}>Mijn profiel</MenuItem>
                   <MenuItem onClick={handleClose}>Instellingen</MenuItem>
                   <MenuItem onClick={handleLogout}>Afmelden</MenuItem>
                 </Menu>
