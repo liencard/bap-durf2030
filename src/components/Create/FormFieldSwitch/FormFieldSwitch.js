@@ -12,6 +12,10 @@ const FormFieldSwitch = (props) => {
     setValue(defaultValue);
   }, []);
 
+  useEffect(() => {
+    setValue(defaultValue);
+  }, [defaultValue]);
+
   return (
     <Switch
       color="primary"

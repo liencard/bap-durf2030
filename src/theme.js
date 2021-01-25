@@ -48,8 +48,8 @@ const theme = createMuiTheme({
       textTransform: 'capitalize',
       fontSize: '1.6rem',
     },
-    body1: { lineHeight: 1.7 },
-    body2: { lineHeight: 1.7 },
+    body1: { lineHeight: 1.7, fontSize: '1.6rem' },
+    body2: { lineHeight: 1.7, fontSize: '1.6rem' },
   },
   overrides: {
     // FORM - Inputs & labels
@@ -98,6 +98,48 @@ const theme = createMuiTheme({
         '&:focus': {
           backgroundColor: 'white',
         },
+      },
+    },
+    // FORM - Slider
+    MuiSlider: {
+      rail: {
+        height: '0.5rem',
+      },
+      track: {
+        height: '0.5rem',
+      },
+      thumb: {
+        height: '1.8rem',
+        width: '1.8rem',
+        marginTop: '-0.2rem',
+        marginLeft: '-0.9rem',
+      },
+      valueLabel: {
+        left: 'auto',
+        fontWeight: 500,
+        circle: {
+          width: '40px',
+        },
+      },
+      MuiTooltip: {
+        toolip: {
+          backgroundColor: 'red !important',
+        },
+      },
+    },
+
+    // FORM - Checkbox
+    MuiSvgIcon: {
+      root: {
+        width: '2rem',
+        height: '2rem',
+      },
+    },
+
+    MuiFormHelperText: {
+      root: {
+        marginTop: '-1.7rem',
+        marginLeft: 0,
       },
     },
   },

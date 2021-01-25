@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import { useField } from '@formiz/core';
 import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 const FormFieldInput = (props) => {
   const { errorMessage, id, isValid, isSubmitted, setValue, value } = useField(props);
-  const { label, type, required, multiline, rows } = props;
+  const { label, type, required, multiline, rows, InputProps } = props;
   const [isTouched, setIsTouched] = useState(false);
   const showError = !isValid && (isTouched || isSubmitted);
 
   return (
-    <div className={`${showError ? 'is-error' : ''}`}>
+    <>
       <TextField
         aria-required={!!required}
         required={required ? true : false}
@@ -17,13 +18,17 @@ const FormFieldInput = (props) => {
         id={label}
         multiline={multiline ? true : false}
         rows={rows ? rows : 3}
+        type={type ? type : 'text'}
         label={label}
         variant="outlined"
         value={value ?? ''}
         onChange={(e) => setValue(e.target.value)}
+        InputProps={{ ...InputProps }}
       />
+      {/* 
+    <div className={`${showError ? 'is-error' : ''}`}>
 
-      {/* <label className="demo-label" htmlFor={id}>
+    <label className="demo-label" htmlFor={id}>
         {label}
         {!!required && ' *'}
       </label>
@@ -42,8 +47,9 @@ const FormFieldInput = (props) => {
         <div id={`${id}-error`} className="demo-form-feedback">
           {errorMessage}
         </div>
-      )} */}
-    </div>
+      )} 
+    </div>*/}
+    </>
   );
 };
 

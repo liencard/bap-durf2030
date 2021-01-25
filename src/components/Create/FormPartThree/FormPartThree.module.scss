@@ -7,14 +7,3 @@
 .subtitle {
   @include title-three;
 }
-
-.themes {
-  display: flex;
-  flex-direction: column;
-}
-
-.categories {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-column-gap: $grid-gap;
-}

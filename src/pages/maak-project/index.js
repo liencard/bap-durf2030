@@ -3,7 +3,7 @@ import { ROUTES } from '../../consts/index';
 import { Container } from '../../components/Layout';
 import styles from './CreateProject.module.scss';
 import { Button } from '../../components/UI';
-import { FormPartOne, FormPartTwo, FormPartThree } from '../../components/Create';
+import { FormPartOne, FormPartTwo, FormPartThree, FormPartFour } from '../../components/Create';
 import { useState } from 'react';
 import { Formiz, useForm, FormizStep } from '@formiz/core';
 import { useStores } from '../../hooks/useStores';
@@ -73,13 +73,16 @@ const CreateProject = () => {
             <Formiz connect={projectForm} onValidSubmit={handleSubmit}>
               <form noValidate onSubmit={projectForm.submitStep}>
                 <FormizStep name="step1">
-                  <FormPartOne />
+                  <FormPartFour />
                 </FormizStep>
                 <FormizStep name="step2">
                   <FormPartTwo />
                 </FormizStep>
                 <FormizStep name="step3">
                   <FormPartThree />
+                </FormizStep>
+                <FormizStep name="step4">
+                  <FormPartFour />
                 </FormizStep>
 
                 {/* Update the submit button to allow navigation between steps. */}
