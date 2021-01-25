@@ -1,0 +1,71 @@
+@import '../../../styles/styles.scss';
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: $green-light;
+  padding: 4rem;
+  padding-right: 0;
+
+  img {
+    margin: 0 4rem 5rem;
+  }
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+
+  .menu__item {
+    display: grid;
+    grid-template-columns: 4rem 1fr;
+    text-decoration: none;
+    color: $blue-dark;
+    cursor: pointer;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 3rem;
+
+    &:hover {
+      color: $green-dark;
+      border-right: 0.3rem solid $green-dark;
+      font-weight: 700;
+    }
+
+    span,
+    svg {
+      align-self: center;
+    }
+  }
+
+  .menu__item:hover svg path,
+  .active svg path {
+    stroke: $green-dark;
+  }
+
+  .active {
+    color: $green-dark;
+    border-right: 0.3rem solid $green-dark;
+    font-weight: 700;
+  }
+}
+
+.back__btn {
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  text-decoration: none;
+  color: $blue-dark;
+  cursor: pointer;
+  font-size: 1.4rem;
+  font-weight: 600;
+
+  &:hover {
+    color: $red;
+    font-weight: 700;
+  }
+}
+
+.back__btn:hover svg path {
+  stroke: $red;
+}
