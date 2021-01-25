@@ -1,7 +1,21 @@
 import { makeObservable, observable, action } from 'mobx';
 
 class Project {
-  constructor({ userId, id, title, store, intro, tags, isKnownPlace, city, street, number }) {
+  constructor({
+    userId,
+    id,
+    title,
+    store,
+    intro,
+    tags,
+    isKnownPlace,
+    city,
+    street,
+    number,
+    categories,
+    themes,
+    description,
+  }) {
     if (!store) {
       throw new Error('voorzie een store');
     }
@@ -10,11 +24,14 @@ class Project {
     this.userId = userId;
     this.title = title;
     this.intro = intro;
-    this.tags = [];
+    this.description = description;
     this.isKnownPlace = isKnownPlace;
-    this.city = isKnownPlace ? city : 'Unknown';
-    this.street = isKnownPlace ? street : 'Unknown';
-    this.number = isKnownPlace ? number : 'Unknown';
+    this.city = isKnownPlace ? city : 'unknown';
+    this.street = isKnownPlace ? street : 'unknown';
+    this.number = isKnownPlace ? number : 'unknown';
+    this.tags = []; // weg?
+    this.themes = themes;
+    this.categories = categories;
     this.getAssignedTags(tags);
     this.store.addProject(this);
 
@@ -33,16 +50,16 @@ class Project {
   }
 
   setParam = ({ param, value }) => {
-    switch (param) {
-      case 'title':
-        this.title = value;
-        break;
-      case 'intro':
-        this.intro = value;
-        break;
-      default:
-        return 'Unknown';
-    }
+    // switch (param) {
+    //   case 'title':
+    //     this.title = value;
+    //     break;
+    //   case 'intro':
+    //     this.intro = value;
+    //     break;
+    //   default:
+    //     return 'Unknown';
+    // }
   };
 }
 

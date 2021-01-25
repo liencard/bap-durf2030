@@ -6,27 +6,6 @@
 
 .subtitle {
   @include title-three;
-
-  // .textfield {
-  //   margin-top: 5rem !important;
-  // }
-}
-
-.items {
-  margin-left: 6rem;
-
-  .item {
-    margin-bottom: 2rem;
-    img {
-      width: 5rem;
-      margin-right: 5rem;
-    }
-
-    p {
-      max-width: 25rem;
-    }
-    display: flex;
-  }
 }
 
 .textfield__street {

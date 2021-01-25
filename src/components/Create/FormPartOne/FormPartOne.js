@@ -1,16 +1,9 @@
 import { useState } from 'react';
-import styles from './FormOne.module.scss';
-import { FormizStep } from '@formiz/core';
-import { FormFieldInput, FormFieldSelect } from '../index';
+import styles from './FormPartOne.module.scss';
+import { FormFieldInput, FormFieldSelect, FormFieldSwitch } from '../index';
 import { Grid } from '../../Layout';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import Switch from '@material-ui/core/Switch';
-import TextField from '@material-ui/core/TextField';
 
-const FormOne = () => {
+const FormPartOne = () => {
   const [isKnownPlace, setIsKnownPlace] = useState(false);
 
   return (
@@ -27,17 +20,15 @@ const FormOne = () => {
       </p>
 
       {/* Plaats */}
-
       <div className={styles.place}>
         <p>Weet je in welke stad je project doorgaat?</p>
         <div>
           <span className={styles.place__label}>Nee</span>
-          <Switch
-            color="primary"
+          <FormFieldSwitch
             name="isKnownPlace"
-            inputProps={{ 'aria-label': 'Ik ken mijn stad' }}
-            checked={isKnownPlace}
-            onChange={(e) => setIsKnownPlace(e.currentTarget.checked)}
+            label="isKnownPlace"
+            setToggleValue={setIsKnownPlace}
+            defaultValue={false}
           />
           <span className={styles.place__label}>Ja</span>
         </div>
@@ -46,7 +37,7 @@ const FormOne = () => {
       {/* Steden */}
       {isKnownPlace && (
         <>
-          <FormFieldSelect name="city" label="Stad" />
+          <FormFieldSelect name="city" label="Stad" options={['Kortrijk', 'Izegem']} defaultValue="Kortrijk" />
           <Grid>
             <div className={styles.textfield__street}>
               <FormFieldInput name="street" label="Straat (optioneel)" />
@@ -61,4 +52,4 @@ const FormOne = () => {
   );
 };
 
-export default FormOne;
+export default FormPartOne;

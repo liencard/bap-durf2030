@@ -32,7 +32,6 @@ class ProjectStore {
   };
 
   createProject = async (project) => {
-    console.log(project);
     return await this.projectService.create(project);
   };
 

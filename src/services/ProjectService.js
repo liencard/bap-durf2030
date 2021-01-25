@@ -32,6 +32,7 @@ class ProjectService {
       .set({
         title: data.title,
         intro: data.intro,
+        description: data.description,
         location: {
           isKnownPlace: data.isKnownPlace,
           city: data.city,
@@ -39,6 +40,8 @@ class ProjectService {
           number: data.number,
         },
         userId: data.userId,
+        categories: data.categories,
+        themes: data.themes,
       });
     return result;
   };

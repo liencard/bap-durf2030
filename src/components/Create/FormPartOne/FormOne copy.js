@@ -8,7 +8,7 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import { FormTextField } from '../';
+import { FormTextField } from '..';
 import { useEffect, useState } from 'react';
 import Switch from '@material-ui/core/Switch';
 import { Grid } from '../../Layout';

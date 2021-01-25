@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { useField } from '@formiz/core';
 import TextField from '@material-ui/core/TextField';
-import styles from './FormFieldInput.module.scss';
 
 const FormFieldInput = (props) => {
   const { errorMessage, id, isValid, isSubmitted, setValue, value } = useField(props);
-  const { label, type, required } = props;
+  const { label, type, required, multiline, rows } = props;
   const [isTouched, setIsTouched] = useState(false);
   const showError = !isValid && (isTouched || isSubmitted);
 
@@ -14,9 +13,10 @@ const FormFieldInput = (props) => {
       <TextField
         aria-required={!!required}
         required={required ? true : false}
-        className={styles.textfield}
         fullWidth
         id={label}
+        multiline={multiline ? true : false}
+        rows={rows ? rows : 3}
         label={label}
         variant="outlined"
         value={value ?? ''}
