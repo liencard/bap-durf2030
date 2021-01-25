@@ -12,9 +12,9 @@ const Admin = observer(() => {
     <>
       <div className={styles.admin}>
         <Sidebar />
-        <div>
+        <section className={styles.content}>
           <h1 className={styles.title}>Home</h1>
-        </div>
+        </section>
       </div>
     </>
   );

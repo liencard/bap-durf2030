@@ -5,7 +5,6 @@ import styles from './ProjectManagement.module.scss';
 import { Button } from '../../../components/UI';
 import Sidebar from '../../../components/Admin/Sidebar/Sidebar';
 import { DataGrid } from '@material-ui/data-grid';
-//import Button from '@material-ui/core/Button';
 
 const ProjectManagement = observer(() => {
   const { projectStore } = useStores();
