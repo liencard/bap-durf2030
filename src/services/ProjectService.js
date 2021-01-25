@@ -18,6 +18,30 @@ class ProjectService {
     const snapshot = await this.db.collection('projects').doc(id).get();
     return { id: snapshot.id, data: snapshot.data() };
   };
+
+  getById = async (id) => {
+    const snapshot = await this.db.collection('projects').doc(id).get();
+    return { id: snapshot.id, data: snapshot.data() };
+  };
+
+  create = async (data) => {
+    // .add(...) and .doc().set(...) are completely equivalent
+    const result = await this.db
+      .collection('projects')
+      .doc(`${data.id}`)
+      .set({
+        title: data.title,
+        intro: data.intro,
+        location: {
+          isKnownPlace: data.isKnownPlace,
+          city: data.city,
+          street: data.street,
+          number: data.number,
+        },
+        userId: data.userId,
+      });
+    return result;
+  };
 }
 
 export default ProjectService;

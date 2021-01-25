@@ -1,6 +1,7 @@
 import { makeObservable, observable, action } from 'mobx';
 import ProjectService from '../services/ProjectService';
 import Project from '../models/Project';
+import { v4 } from 'uuid';
 
 class ProjectStore {
   constructor(rootStore) {
@@ -10,7 +11,7 @@ class ProjectStore {
       firebase: this.rootStore.firebase,
     });
 
-    // Enkel bij 'Projects' pagina of SSR
+    // TO DO: Enkel bij 'Projects' pagina of SSR
     this.loadAllProjects();
 
     makeObservable(this, {
@@ -28,6 +29,11 @@ class ProjectStore {
     const jsonProject = await this.projectService.getById(id);
     this.updateProjectFromServer(jsonProject);
     return this.resolveProject(id);
+  };
+
+  createProject = async (project) => {
+    console.log(project);
+    return await this.projectService.create(project);
   };
 
   resolveProject = (id) => this.projects.find((project) => project.id === id);

@@ -22,7 +22,7 @@ const theme = createMuiTheme({
     action: {
       active: `#d8d8d8`, // rood
       hover: `#d8eded`, // geel
-      selected: `#ffed00`,
+      selected: `#d8eded`,
     },
     background: {
       default: '#fff',

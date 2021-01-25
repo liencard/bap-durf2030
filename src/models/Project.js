@@ -1,18 +1,28 @@
-import { v4 } from 'uuid';
+import { makeObservable, observable, action } from 'mobx';
 
 class Project {
-  constructor({ userId, id, title, store, intro, tags }) {
+  constructor({ userId, id, title, store, intro, tags, isKnownPlace, city, street, number }) {
     if (!store) {
       throw new Error('voorzie een store');
     }
-    this.getAssignedTags(tags);
+    this.store = store;
     this.id = id;
     this.userId = userId;
     this.title = title;
     this.intro = intro;
     this.tags = [];
-    this.store = store;
+    this.isKnownPlace = isKnownPlace;
+    this.city = isKnownPlace ? city : 'Unknown';
+    this.street = isKnownPlace ? street : 'Unknown';
+    this.number = isKnownPlace ? number : 'Unknown';
+    this.getAssignedTags(tags);
     this.store.addProject(this);
+
+    makeObservable(this, {
+      title: observable,
+      intro: observable,
+      setParam: action,
+    });
   }
 
   getAssignedTags(tags) {
@@ -21,6 +31,19 @@ class Project {
     //   console.log(tag);
     // });
   }
+
+  setParam = ({ param, value }) => {
+    switch (param) {
+      case 'title':
+        this.title = value;
+        break;
+      case 'intro':
+        this.intro = value;
+        break;
+      default:
+        return 'Unknown';
+    }
+  };
 }
 
 export default Project;
