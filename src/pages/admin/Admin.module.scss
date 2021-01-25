@@ -1,0 +1,11 @@
+@import '../../styles/styles.scss';
+
+.title {
+  grid-column: span 12;
+}
+
+.project {
+  display: flex;
+  width: 60vw;
+  justify-content: space-between;
+}

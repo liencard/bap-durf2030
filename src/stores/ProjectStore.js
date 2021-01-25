@@ -33,7 +33,7 @@ class ProjectStore {
   resolveProject = (id) => this.projects.find((project) => project.id === id);
 
   // Front-end
-  // getProjectById = (id) => this.projects.find((project) => project.id === id);
+  getProjectById = (id) => this.projects.find((project) => project.id === id);
 
   //   empty() {
   //     this.projects = [];
@@ -53,10 +53,15 @@ class ProjectStore {
         userId: json.data.userId,
         intro: json.data.intro,
         tags: json.data.tags,
+        state: json.data.state,
         store: this.rootStore.projectStore,
       });
     }
   }
+
+  updateState = async (data) => {
+    return await this.projectService.updateState(data);
+  };
 }
 
 export default ProjectStore;

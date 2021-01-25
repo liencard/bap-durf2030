@@ -64,7 +64,7 @@ const Header = observer(() => {
             <Link href="/projecten">
               <span className={styles.menu__item}>Alle projecten</span>
             </Link>
-            <Link href="/">
+            <Link href="/admin">
               <span className={styles.menu__item}>Kalender</span>
             </Link>
             <Link href="/">
