@@ -23,11 +23,13 @@ const RegisterForm = () => {
       store: userStore,
       email: email,
       password: password,
+      admin: false,
     });
     const result = await uiStore.registerUser(user);
     if (result.uid) {
       // uid is beschikbaar en te vinden als je het result logt -> gebruiker correct geregistreerd
-      router.push(ROUTES.home);
+      //router.push(ROUTES.home);
+      console.log(result);
     } else {
       console.log(result);
     }

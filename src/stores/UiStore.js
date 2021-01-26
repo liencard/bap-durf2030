@@ -47,21 +47,28 @@ class UiStore {
   };
 
   registerUser = async (user) => {
+    console.log('user');
+    console.log(user);
     const result = await this.authService.register(
       user.name,
       user.email,
       user.password,
       user.avatar
     );
+    console.log('result');
+    console.log(result);
     const newRegisteredUser = new User({
       id: result.uid,
       name: result.displayName,
       avatar: result.photoURL,
       store: this.rootStore.userStore,
       email: result.email,
+      admin: false,
     });
     if (result) {
       //user toevoegen aan onze users collection
+      console.log('new user');
+      console.log(newRegisteredUser);
       this.rootStore.userStore.createUser(newRegisteredUser);
     }
     return result;
