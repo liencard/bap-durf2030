@@ -28,8 +28,7 @@ const RegisterForm = () => {
     const result = await uiStore.registerUser(user);
     if (result.uid) {
       // uid is beschikbaar en te vinden als je het result logt -> gebruiker correct geregistreerd
-      //router.push(ROUTES.home);
-      console.log(result);
+      router.push(ROUTES.home);
     } else {
       console.log(result);
     }

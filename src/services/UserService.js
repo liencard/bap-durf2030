@@ -13,5 +13,15 @@ class UserService {
       .withConverter(userConverter)
       .set(user);
   };
+
+  getUserByEmail = async (email) => {
+    let user = await this.db
+      .collection('users')
+      .doc(email)
+      .withConverter(userConverter)
+      .get();
+    user = await user.data();
+    return user;
+  };
 }
 export default UserService;
