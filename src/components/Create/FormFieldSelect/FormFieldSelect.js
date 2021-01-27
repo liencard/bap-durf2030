@@ -15,7 +15,7 @@ const FormFieldSelect = (props) => {
   return (
     <div className={`${showError ? 'is-error' : ''}`}>
       <FormControl variant="outlined" fullWidth>
-        <InputLabel id={id}>Stad</InputLabel>
+        <InputLabel id={id}>{label}</InputLabel>
         <Select
           defaultValue={defaultValue ?? ''}
           value={value ?? ''}

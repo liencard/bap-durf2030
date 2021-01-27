@@ -1,0 +1,86 @@
+@import '../../../styles/styles.scss';
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: $grid-gap;
+}
+
+.item {
+  background: $green-light;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+
+  .text {
+    margin-left: 2rem;
+    .category {
+      @include text-detail;
+      color: $green;
+    }
+  }
+
+  .delete {
+    display: block;
+    margin-left: auto;
+  }
+
+  .amount {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-right: 2rem;
+
+    &::after {
+      height: 100%;
+      width: 0.2rem;
+      background: $green;
+      position: absolute;
+      right: 0;
+      content: '';
+    }
+
+    .number {
+      font-weight: 400;
+      padding: 0 0.5rem;
+    }
+
+    .sign {
+      font-weight: 400;
+      font-size: 2rem;
+      padding: 0 0.5rem;
+    }
+  }
+}
+
+.add__button {
+  position: absolute;
+  right: 0;
+
+  .click {
+    height: 5.6rem;
+    width: 5.6rem;
+    position: absolute;
+    margin-top: 1rem;
+    right: 0;
+  }
+  .plus {
+    z-index: -1;
+    right: 0;
+    position: absolute;
+    height: 5.6rem;
+    width: 5.6rem;
+    background: $green-light;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    color: $green;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
