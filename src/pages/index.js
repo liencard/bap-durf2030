@@ -5,6 +5,7 @@ import HomeSpotlight from '../components/Home/HomeSpotlight/HomeSpotlight';
 import ProjectSpotlight from '../components/Home/ProjectSpotlight/ProjectSpotlight';
 import { Container } from '../components/Layout';
 
+/* Test deploy */
 const Home = () => {
   return (
     <>
