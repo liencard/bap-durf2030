@@ -1,5 +1,6 @@
 import { makeObservable, observable, action } from 'mobx';
 import AuthService from '../services/AuthService';
+import UserService from '../services/UserService';
 import User from '../models/User';
 
 class UiStore {
@@ -10,6 +11,7 @@ class UiStore {
       this.rootStore.firebase,
       this.onAuthStateChanged
     );
+    this.userService = new UserService(this.rootStore.firebase);
 
     makeObservable(this, {
       currentUser: observable,
@@ -20,29 +22,30 @@ class UiStore {
   onAuthStateChanged = (user) => {
     if (user) {
       console.log(`de user is ingelogd ${user.email}`);
-      this.setCurrentUser(
-        new User({
-          id: user.uid,
-          name: user.displayName,
-          email: user.email,
-          store: this.rootStore.userStore,
-          avatar: user.photoURL,
-        })
-      );
+      console.log(user);
+
+      if (!this.currentUser) {
+        this.setCurrentUser(user.email);
+        console.log('user ophalen');
+      }
     } else {
       console.log(`de user is uitgelogd`);
       this.setCurrentUser(undefined);
     }
   };
 
+  setCurrentUser = async (email) => {
+    this.currentUser = await this.userService.getUserByEmail(email);
+  };
+
   loginUser = async (user) => {
-    //service aanspreken
     const result = await this.authService.login(user.email, user.password);
     return result;
   };
 
   logoutUser = async () => {
     const result = await this.authService.logout();
+    this.currentUser = undefined;
     return result;
   };
 
@@ -59,6 +62,7 @@ class UiStore {
       avatar: result.photoURL,
       store: this.rootStore.userStore,
       email: result.email,
+      admin: false,
     });
     if (result) {
       //user toevoegen aan onze users collection
@@ -66,10 +70,6 @@ class UiStore {
     }
     return result;
   };
-
-  setCurrentUser(user) {
-    this.currentUser = user;
-  }
 }
 
 export default UiStore;
