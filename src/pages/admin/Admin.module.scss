@@ -1,0 +1,17 @@
+@import '../../styles/styles.scss';
+
+.admin {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  height: 100vh;
+}
+
+.title {
+  grid-column: span 12;
+}
+
+.project {
+  display: flex;
+  width: 60vw;
+  justify-content: space-between;
+}

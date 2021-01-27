@@ -61,8 +61,12 @@ $border-radius: 0.5rem;
     margin-right: 2rem;
   }
 
-  svg:hover path {
+  .admin__notif:hover path {
     fill: $green;
+  }
+
+  .admin__icon:hover path {
+    stroke: $green;
   }
 
   .menu__pfp {
@@ -71,12 +75,20 @@ $border-radius: 0.5rem;
   }
 }
 
-.header__dark .header__right svg path {
+.header__dark .header__right .admin__notif path {
   fill: white;
 }
 
-.header__dark .header__right svg:hover path {
+.header__dark .header__right .admin__icon path {
+  stroke: white;
+}
+
+.header__dark .header__right .admin__notif:hover path {
   fill: $green;
+}
+
+.header__dark .header__right .admin__icon:hover path {
+  stroke: $green;
 }
 
 .submenu li {

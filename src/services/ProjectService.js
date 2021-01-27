@@ -19,11 +19,6 @@ class ProjectService {
     return { id: snapshot.id, data: snapshot.data() };
   };
 
-  getById = async (id) => {
-    const snapshot = await this.db.collection('projects').doc(id).get();
-    return { id: snapshot.id, data: snapshot.data() };
-  };
-
   create = async (data) => {
     // .add(...) and .doc().set(...) are completely equivalent
     const result = await this.db
@@ -43,6 +38,14 @@ class ProjectService {
         categories: data.categories,
         themes: data.themes,
       });
+    return result;
+  };
+
+  updateState = async (data) => {
+    const result = await this.db
+      .collection('projects')
+      .doc(`${data.id}`)
+      .update({ state: data.state });
     return result;
   };
 }
