@@ -4,7 +4,7 @@ class User {
   constructor({
     id = v4(),
     name,
-    lastname,
+    //lastname,
     avatar = '',
     email,
     password,
