@@ -36,9 +36,7 @@ const Header = observer(() => {
 
   useEffect(() => {
     if (uiStore.currentUser) {
-      console.log('test');
       console.log(uiStore.currentUser);
-      console.log(uiStore.currentUser.avatar);
     } else {
       console.log('no current user');
     }
