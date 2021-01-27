@@ -18,6 +18,14 @@ class ProjectService {
     const snapshot = await this.db.collection('projects').doc(id).get();
     return { id: snapshot.id, data: snapshot.data() };
   };
+
+  updateState = async (data) => {
+    const result = await this.db
+      .collection('projects')
+      .doc(`${data.id}`)
+      .update({ state: data.state });
+    return result;
+  };
 }
 
 export default ProjectService;

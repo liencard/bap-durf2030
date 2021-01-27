@@ -1,7 +1,15 @@
 import { v4 } from 'uuid';
 
 class User {
-  constructor({ id = v4(), name, lastname, avatar = '', email, password }) {
+  constructor({
+    id = v4(),
+    name,
+    lastname,
+    avatar = '',
+    email,
+    password,
+    admin,
+  }) {
     this.id = id;
     this.name = name;
     //this.lastname = lastname;
@@ -12,16 +20,19 @@ class User {
 
     this.email = email;
     this.password = password;
+    this.admin = admin;
   }
 }
 
 const userConverter = {
   toFirestore: function (user) {
+    console.log(user);
     return {
       userId: user.id,
       name: user.name,
       avatar: user.avatar,
       email: user.email,
+      admin: user.admin,
       //lastname: user.lastname,
     };
   },
@@ -29,10 +40,11 @@ const userConverter = {
     const data = snapshot.data(options);
     return new User({
       name: data.name,
+      //lastname: data.lastname,
       email: data.email,
       avatar: data.avatar,
       id: data.userId, // userId naamgeving server, id naamgeving model
-      //lastname: data.lastname,
+      admin: data.admin,
     });
   },
 };

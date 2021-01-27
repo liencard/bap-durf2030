@@ -33,18 +33,20 @@ class ProjectStore {
   resolveProject = (id) => this.projects.find((project) => project.id === id);
 
   // Front-end
-  // getProjectById = (id) => this.projects.find((project) => project.id === id);
+  getProjectById = (id) => this.projects.find((project) => project.id === id);
 
   //   empty() {
   //     this.projects = [];
   //   }
 
   loadAllProjects = async () => {
+    console.log('projects');
     const jsonProjects = await this.projectService.getAll();
     jsonProjects.forEach((json) => this.updateProjectFromServer(json));
   };
 
   updateProjectFromServer(json) {
+    console.log(json);
     let project = this.projects.find((project) => project.id === json.id);
     if (!project) {
       project = new Project({
@@ -53,10 +55,16 @@ class ProjectStore {
         userId: json.data.userId,
         intro: json.data.intro,
         tags: json.data.tags,
+        state: json.data.state,
         store: this.rootStore.projectStore,
       });
     }
+    console.log(project);
   }
+
+  updateState = async (data) => {
+    return await this.projectService.updateState(data);
+  };
 }
 
 export default ProjectStore;

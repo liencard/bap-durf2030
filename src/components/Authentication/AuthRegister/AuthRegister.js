@@ -23,6 +23,7 @@ const RegisterForm = () => {
       store: userStore,
       email: email,
       password: password,
+      admin: false,
     });
     const result = await uiStore.registerUser(user);
     if (result.uid) {

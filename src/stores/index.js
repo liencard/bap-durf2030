@@ -7,8 +7,8 @@ import ProjectStore from './ProjectStore';
 class RootStore {
   constructor() {
     this.firebase = this.getFirebase();
-    this.userStore = new UserStore(this);
     this.projectStore = new ProjectStore(this);
+    this.userStore = new UserStore(this);
     this.uiStore = new UiStore(this);
   }
 
@@ -23,7 +23,9 @@ class RootStore {
     };
 
     // prevent multiple app inits
-    return !firebase.apps.length ? firebase.initializeApp(config) : firebase.app();
+    return !firebase.apps.length
+      ? firebase.initializeApp(config)
+      : firebase.app();
   };
 }
 
