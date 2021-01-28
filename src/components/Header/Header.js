@@ -74,8 +74,11 @@ const Header = observer(() => {
             <Link href="/">
               <span className={styles.menu__item}>Nieuws</span>
             </Link>
-
-            <Button text="Maak project aan" href="/maak-project" />
+            {!uiStore.currentUser ? (
+              <Button text="Maak project aan" href="/login" />
+            ) : (
+              <Button text="Maak project aan" href="/maak-project" />
+            )}
           </nav>
         </div>
         <div className={styles.header__right}>
