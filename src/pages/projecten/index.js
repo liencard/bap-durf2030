@@ -3,9 +3,6 @@ import { ProjectCard } from '../../components/Project';
 import RootStore from '../../stores';
 
 const Projects = ({ projects }) => {
-  // const { projectStore } = useStores();
-  // projectStore.loadAllProjects();
-
   return (
     <>
       <p>Test SSR projecten</p>
