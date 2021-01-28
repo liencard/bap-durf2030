@@ -10,6 +10,8 @@ import {
   FormPartFour,
   FormPartFive,
   FormPartSix,
+  FormPartSeven,
+  FormPartEight,
 } from '../../components/Create';
 import { useState } from 'react';
 import { Formiz, useForm, FormizStep } from '@formiz/core';
@@ -80,7 +82,7 @@ const CreateProject = () => {
             <Formiz connect={projectForm} onValidSubmit={handleSubmit}>
               <form noValidate onSubmit={projectForm.submitStep}>
                 <FormizStep name="step1">
-                  <FormPartOne />
+                  <FormPartEight />
                 </FormizStep>
                 <FormizStep name="step2">
                   <FormPartTwo />
@@ -96,6 +98,12 @@ const CreateProject = () => {
                 </FormizStep>
                 <FormizStep name="step6">
                   <FormPartSix />
+                </FormizStep>
+                <FormizStep name="step7">
+                  <FormPartSeven />
+                </FormizStep>
+                <FormizStep name="step8">
+                  <FormPartEight />
                 </FormizStep>
 
                 {/* Update the submit button to allow navigation between steps. */}

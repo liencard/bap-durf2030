@@ -45,13 +45,13 @@ class ProjectStore {
   //   }
 
   loadAllProjects = async () => {
-    console.log('projects');
+    // console.log('projects');
     const jsonProjects = await this.projectService.getAll();
     jsonProjects.forEach((json) => this.updateProjectFromServer(json));
   };
 
   updateProjectFromServer(json) {
-    console.log(json);
+    // console.log(json);
     let project = this.projects.find((project) => project.id === json.id);
     if (!project) {
       project = new Project({
@@ -64,7 +64,7 @@ class ProjectStore {
         store: this.rootStore.projectStore,
       });
     }
-    console.log(project);
+    // console.log(project);
   }
 
   updateState = async (data) => {
