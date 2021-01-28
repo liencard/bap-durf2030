@@ -8,8 +8,12 @@
     "start": "next start"
   },
   "dependencies": {
+    "@formiz/core": "^1.0.1",
+    "@formiz/validations": "^1.0.0",
     "@material-ui/core": "^4.11.2",
+    "@material-ui/data-grid": "^4.0.0-alpha.17",
     "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.57",
     "firebase": "^8.2.3",
     "mobx": "^6.0.4",
     "mobx-react-lite": "^3.1.6",
@@ -18,6 +22,8 @@
     "react-dom": "^17.0.1",
     "react-material-ui-carousel": "^2.1.2",
     "sass": "^1.32.4",
+    "slate": "^0.59.0",
+    "slate-react": "^0.59.0",
     "uuid": "^8.3.2"
   }
 }

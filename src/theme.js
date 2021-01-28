@@ -20,9 +20,9 @@ const theme = createMuiTheme({
       dark: `#e62336`,
     },
     action: {
-      active: `#e62336`, // geel
-      hover: `#ffed00`,
-      selected: `#ffed00`,
+      active: `#d8d8d8`, // rood
+      hover: `#d8eded`, // geel
+      selected: `#d8eded`,
     },
     background: {
       default: '#fff',
@@ -48,16 +48,101 @@ const theme = createMuiTheme({
       textTransform: 'capitalize',
       fontSize: '1.6rem',
     },
-    body1: { lineHeight: 1.7 },
-    body2: { lineHeight: 1.7 },
+    body1: { lineHeight: 1.7, fontSize: '1.6rem' },
+    body2: { lineHeight: 1.7, fontSize: '1.6rem' },
   },
-  // overrides: {
-  //   PrivateNotchedOutline: {
-  //     legend: {
-  //       width: '400px',
-  //     },
-  //   },
-  // },
+  overrides: {
+    // FORM - Inputs & labels
+    MuiOutlinedInput: {
+      root: {
+        marginBottom: '2rem',
+        marginTop: '1rem',
+        '&:hover fieldset': {
+          borderColor: '#54bbab !important',
+        },
+      },
+      notchedOutline: {
+        borderColor: '#e1e2e7',
+      },
+    },
+    MuiInputLabel: {
+      root: {
+        marginTop: '1rem',
+        fontSize: '1.6rem',
+        color: '#0c1424',
+        letterSpacing: '0.1rem',
+        fontWeight: 300,
+      },
+    },
+    MuiInputBase: {
+      input: {
+        fontSize: '1.6rem',
+        color: '#0c1424',
+      },
+    },
+
+    // FORM - Switch
+    MuiIconButton: {
+      root: {
+        '&:hover': {
+          backgroundColor: 'rgba(84, 187, 171, 0.1)',
+        },
+      },
+    },
+    // FORM - Dropdown
+    MuiSelect: {
+      icon: {
+        color: '#d8d8d8',
+      },
+      select: {
+        '&:focus': {
+          backgroundColor: 'white',
+        },
+      },
+    },
+    // FORM - Slider
+    MuiSlider: {
+      rail: {
+        height: '0.5rem',
+      },
+      track: {
+        height: '0.5rem',
+      },
+      thumb: {
+        height: '1.8rem',
+        width: '1.8rem',
+        marginTop: '-0.2rem',
+        marginLeft: '-0.9rem',
+      },
+      valueLabel: {
+        left: 'auto',
+        fontWeight: 500,
+        circle: {
+          width: '40px',
+        },
+      },
+      MuiTooltip: {
+        toolip: {
+          backgroundColor: 'red !important',
+        },
+      },
+    },
+
+    // FORM - Checkbox
+    MuiSvgIcon: {
+      root: {
+        width: '2rem',
+        height: '2rem',
+      },
+    },
+
+    MuiFormHelperText: {
+      root: {
+        marginTop: '-1.7rem',
+        marginLeft: 0,
+      },
+    },
+  },
 });
 
 export default theme;

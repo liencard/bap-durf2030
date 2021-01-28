@@ -15,14 +15,22 @@ const ProjectCard = ({ title, intro, id }) => {
             <img src="/icons/money-white.svg" alt="geld" />
             <img src="/icons/service-white.svg" alt="service" />
           </div>
-          <img className={styles.image} src="thumbnail-temp.jpg" alt="service" />
+          <img
+            className={styles.image}
+            src="thumbnail-temp.jpg"
+            alt="service"
+          />
         </div>
 
         <div className={styles.content}>
           <h3 className={styles.title}>{title}</h3>
           <div className={styles.author__wrapper}>
             <div className={styles.author}>
-              <img className={styles.author__image} src="pfp-temp.jpg" alt="profielfoto van organisator" />
+              <img
+                className={styles.author__image}
+                src="pfp-temp.jpg"
+                alt="profielfoto van organisator"
+              />
               <p className={styles.author__name}>John Doe</p>
             </div>
             <p className={styles.date}>6 dagen geleden</p>

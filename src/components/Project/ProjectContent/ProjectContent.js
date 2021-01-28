@@ -38,7 +38,7 @@ const ProjectContent = () => {
 
   return (
     <>
-      <AppBar color="transparent" className={styles.appbar} position="static">
+      <AppBar elevation={0} color="transparent" className={styles.appbar} position="static">
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="Campagne" {...a11yProps(0)} />
           <Tab label="Updates" {...a11yProps(1)} />

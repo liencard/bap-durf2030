@@ -14,16 +14,18 @@ class RootStore {
 
   getFirebase = () => {
     const config = {
-      apiKey: process.env.DB_API_KEY,
-      authDomain: process.env.DB_AUTH_DOMAIN,
-      projectId: process.env.DB_PROJECT_ID,
-      storageBucket: process.env.DB_STORAGE_BUCKET,
-      messagingSenderId: process.env.MESSAGING_SENDER_ID,
-      appId: process.env.DB_APP_ID,
+      apiKey: process.env.NEXT_PUBLIC_DB_API_KEY,
+      authDomain: process.env.NEXT_PUBLIC_DB_AUTH_DOMAIN,
+      projectId: process.env.NEXT_PUBLIC_DB_PROJECT_ID,
+      storageBucket: process.env.NEXT_PUBLIC_DB_STORAGE_BUCKET,
+      messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
+      appId: process.env.NEXT_PUBLIC_DB_APP_ID,
     };
 
     // prevent multiple app inits
-    return !firebase.apps.length ? firebase.initializeApp(config) : firebase.app();
+    return !firebase.apps.length
+      ? firebase.initializeApp(config)
+      : firebase.app();
   };
 }
 

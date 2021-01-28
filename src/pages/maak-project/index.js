@@ -3,62 +3,138 @@ import { ROUTES } from '../../consts/index';
 import { Container } from '../../components/Layout';
 import styles from './CreateProject.module.scss';
 import { Button } from '../../components/UI';
-import { OnboardingOne, FormOne } from '../../components/Create';
+import {
+  FormPartOne,
+  FormPartTwo,
+  FormPartThree,
+  FormPartFour,
+  FormPartFive,
+  FormPartSix,
+  FormPartSeven,
+  FormPartEight,
+} from '../../components/Create';
 import { useState } from 'react';
+import { Formiz, useForm, FormizStep } from '@formiz/core';
+import { useStores } from '../../hooks/useStores';
+import Project from '../../models/Project';
+import { v4 } from 'uuid';
 
 const CreateProject = () => {
-  const [activeStep, setActiveStep] = useState(0);
+  const projectForm = useForm();
+  const { projectStore, uiStore } = useStores();
 
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
+  // Uit database halen
+  const themes = ['Eeenzaamheid rond corona', 'Ondernemingschap', 'Klimaat', 'Andere'];
+  const categories = [
+    'Muziek',
+    'Sociaal',
+    'Kinderen',
+    'Kunst',
+    'Theater',
+    'Technologie',
+    'Dans',
+    'Audiovisueel',
+    'Natuur',
+    'Divers',
+  ];
 
-  const handleBack = () => {
-    if (activeStep != 0) {
-      setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    }
-  };
+  const handleSubmit = async (values) => {
+    console.log(values);
+    // let categoriesWithValues = {};
+    // let themesWithValues = {};
 
-  const getStepContent = (step) => {
-    switch (step) {
-      case 0:
-        return <OnboardingOne />;
-      case 1:
-        return 'Volgende onboarding';
-      case 2:
-        return 'Laatste onboarding';
-      case 3:
-        return <FormOne />;
-      default:
-        return 'Unknown step';
-    }
+    // categories.forEach((category, i) => {
+    //   const key = category.toLowerCase();
+    //   categoriesWithValues[key] = values.categories[i];
+    // });
+
+    // themes.forEach((theme, i) => {
+    //   const key = theme.toLowerCase();
+    //   themesWithValues[key] = values.themes[i];
+    // });
+
+    const project = new Project({
+      // id: v4(),
+      id: 'formtest',
+      userId: 'tijdelijk',
+      store: projectStore,
+      image: values.image,
+    });
+
+    projectStore.uploadImage(project.image);
+
+    // const project = new Project({
+    //   // id: v4(),
+    //   id: 'formtest',
+    //   userId: 'tijdelijk',
+    //   title: values.title,
+    //   intro: values.intro,
+    //   description: values.description,
+    //   isKnownPlace: values.isKnownPlace,
+    //   categories: categoriesWithValues,
+    //   themes: themesWithValues,
+    //   city: values.city ?? '',
+    //   street: values.street ?? '',
+    //   number: values.number ?? '',
+    //   store: projectStore,
+    // });
+
+    // const result = await projectStore.createProject(project);
   };
 
   return (
     <>
-      <Container>
-        <div className={styles.image}>Image</div>
-        <div className={styles.content}>
-          <h1 className={styles.title}>Dien jouw projectidee in, hoe zot het ook is</h1>
-          <p className={styles.intro}>
-            Momenteel loopt een oproep waarbij we projecten rond eenzaamheid stimuleren. Heb jij een ander idee? Dat is
-            perfect mogelijk!
-          </p>
-          {getStepContent(activeStep)}
-          <div className={styles.navigate}>
-            <Button onClick={handleBack} text={'Back'} />
-            {activeStep < 3 && (
-              <ul className={styles.steps}>
-                <li className={`${styles.step} ${activeStep == 0 && styles.active}`} />
-                <li className={`${styles.step} ${activeStep == 1 && styles.active}`} />
-                <li className={`${styles.step} ${activeStep == 2 && styles.active}`} />
-              </ul>
-            )}
+      <div className={styles.create}>
+        <Container>
+          <div className={styles.image}>Image</div>
+          <div className={styles.content}>
+            <Formiz connect={projectForm} onValidSubmit={handleSubmit}>
+              <form noValidate onSubmit={projectForm.submitStep}>
+                <FormizStep name="step1">
+                  <FormPartEight />
+                </FormizStep>
+                {/* <FormizStep name="step2">
+                  <FormPartTwo />
+                </FormizStep>
+                <FormizStep name="step3">
+                  <FormPartThree />
+                </FormizStep>
+                <FormizStep name="step4">
+                  <FormPartFour />
+                </FormizStep>
+                <FormizStep name="step5">
+                  <FormPartFive />
+                </FormizStep>
+                <FormizStep name="step6">
+                  <FormPartSix />
+                </FormizStep>
+                <FormizStep name="step7">
+                  <FormPartSeven />
+                </FormizStep>
+                <FormizStep name="step8">
+                  <FormPartEight />
+                </FormizStep> */}
 
-            <Button onClick={handleNext} text={'Next'} />
+                {/* Update the submit button to allow navigation between steps. */}
+                {!projectForm.isFirstStep && (
+                  <button type="button" onClick={projectForm.prevStep}>
+                    Back
+                  </button>
+                )}
+                {projectForm.isLastStep ? (
+                  <button type="submit" disabled={!projectForm.isValid}>
+                    Submit
+                  </button>
+                ) : (
+                  <button type="submit" disabled={!projectForm.isStepValid}>
+                    Continue
+                  </button>
+                )}
+              </form>
+            </Formiz>
           </div>
-        </div>
-      </Container>
+        </Container>
+      </div>
     </>
   );
 };

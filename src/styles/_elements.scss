@@ -55,34 +55,34 @@
   }
 }
 
-@mixin textfield {
-  color: $blue-dark;
-  font-size: 1.6rem;
-  font-weight: 300;
+// @mixin textfield {
+//   color: $blue-dark;
+//   font-size: 1.6rem;
+//   font-weight: 300;
 
-  & fieldset {
-    border-color: $blue-light !important;
-  }
+//   & fieldset {
+//     border-color: $blue-light !important;
+//   }
 
-  &:hover fieldset {
-    border-color: $green !important;
-  }
+//   &:hover fieldset {
+//     border-color: $green !important;
+//   }
 
-  label {
-    color: $blue-dark;
-    font-size: 1.6rem;
-    font-weight: 300;
-    letter-spacing: 0.1rem;
-  }
+//   label {
+//     color: $blue-dark;
+//     font-size: 1.6rem;
+//     font-weight: 300;
+//     letter-spacing: 0.1rem;
+//   }
 
-  legend {
-    font-size: 1.2rem;
-    letter-spacing: 0.1rem;
-  }
+//   legend {
+//     font-size: 1.2rem;
+//     letter-spacing: 0.1rem;
+//   }
 
-  input[type='text'] {
-    font-size: 1.6rem;
-    font-weight: 300;
-    font-family: $font-body;
-  }
-}
+//   input[type='text'] {
+//     font-size: 1.6rem;
+//     font-weight: 300;
+//     font-family: $font-body;
+//   }
+// }
