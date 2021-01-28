@@ -1,5 +1,6 @@
 import { makeObservable, observable, action } from 'mobx';
 import ProjectService from '../services/ProjectService';
+import UserService from '../services/UserService';
 import Project from '../models/Project';
 import { v4 } from 'uuid';
 
@@ -10,9 +11,10 @@ class ProjectStore {
     this.projectService = new ProjectService({
       firebase: this.rootStore.firebase,
     });
+    this.userService = new UserService(this.rootStore.firebase);
 
     // TO DO: Enkel bij 'Projects' pagina of SSR
-    this.loadAllProjects();
+    //this.loadAllProjects();
 
     makeObservable(this, {
       loadAllProjects: action,
@@ -48,14 +50,28 @@ class ProjectStore {
   //     this.projects = [];
   //   }
 
+  getProjectsForUser = async () => {
+    console.log('hi store');
+    const projectArr = await this.userService.getProjectsByUser(
+      this.rootStore.uiStore.currentUser
+    );
+    projectArr.forEach(this.addProject);
+  };
+
   loadAllProjects = async () => {
+<<<<<<< HEAD
     // console.log('projects');
+=======
+>>>>>>> bd1928741c2c98deea6a211a92bc271c2577c764
     const jsonProjects = await this.projectService.getAll();
     jsonProjects.forEach((json) => this.updateProjectFromServer(json));
   };
 
   updateProjectFromServer(json) {
+<<<<<<< HEAD
     // console.log(json);
+=======
+>>>>>>> bd1928741c2c98deea6a211a92bc271c2577c764
     let project = this.projects.find((project) => project.id === json.id);
     if (!project) {
       project = new Project({
@@ -68,7 +84,10 @@ class ProjectStore {
         store: this.rootStore.projectStore,
       });
     }
+<<<<<<< HEAD
     // console.log(project);
+=======
+>>>>>>> bd1928741c2c98deea6a211a92bc271c2577c764
   }
 
   updateState = async (data) => {
