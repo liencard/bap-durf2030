@@ -6,9 +6,6 @@ import { ProjectHeader, ProjectContent, ProjectFooter, ProjectComments } from '.
 import RootStore from '../../stores';
 
 const Project = observer(({ project, id }) => {
-  console.log('test');
-  console.log(project);
-
   return (
     <>
       <p>Test SSR</p>
@@ -22,10 +19,26 @@ const Project = observer(({ project, id }) => {
   );
 });
 
-export const getServerSideProps = async (context) => {
+// Get all possible static paths - all ids of projects to generate webpage
+export const getStaticPaths = async () => {
   const store = new RootStore();
   const { projectStore } = store;
-  const project = await projectStore.projectService.getById(context.params.id);
+  // const projectIds = projectStore.projectService.getAllIds();
+  const projects = await projectStore.projectService.getAll();
+  const ids = projects.map((project) => project.id);
+  const paths = ids.map((id) => ({ params: { id } }));
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+// Get whole project based on id, build project page by sending parameter
+export const getStaticProps = async ({ params }) => {
+  const store = new RootStore();
+  const { projectStore } = store;
+  const project = await projectStore.projectService.getById(params.id);
 
   return {
     props: { project: project.data, id: project.id },

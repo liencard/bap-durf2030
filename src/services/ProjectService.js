@@ -16,6 +16,10 @@ class ProjectService {
     });
   };
 
+  // getAllIds = () => {
+  //   return this.db.collection('projects').listDocuments();
+  // };
+
   getById = async (id) => {
     const snapshot = await this.db.collection('projects').doc(id).get();
     return { id: snapshot.id, data: snapshot.data() };
