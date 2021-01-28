@@ -35,6 +35,10 @@ class ProjectStore {
     return await this.projectService.create(project);
   };
 
+  createImageForProject = async (image) => {
+    // return await this.
+  };
+
   resolveProject = (id) => this.projects.find((project) => project.id === id);
 
   // Front-end
@@ -69,6 +73,10 @@ class ProjectStore {
 
   updateState = async (data) => {
     return await this.projectService.updateState(data);
+  };
+
+  uploadImage = (image) => {
+    this.projectService.uploadImage(image.file, image.name, 'testid');
   };
 }
 

@@ -1,9 +1,11 @@
 import 'firebase/firestore';
+import 'firebase/storage';
 import { firestore } from 'firebase/app';
 
 class ProjectService {
   constructor({ firebase }) {
     this.db = firebase.firestore();
+    this.storage = firebase.storage().ref();
   }
 
   getAll = async () => {
@@ -44,6 +46,11 @@ class ProjectService {
   updateState = async (data) => {
     const result = await this.db.collection('projects').doc(`${data.id}`).update({ state: data.state });
     return result;
+  };
+
+  uploadImage = (file, name, userId) => {
+    let imageRef = this.storage.child(`images/${name}`);
+    imageRef.put(file);
   };
 }
 

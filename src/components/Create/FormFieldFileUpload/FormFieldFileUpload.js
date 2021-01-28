@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useField } from '@formiz/core';
+
 import styles from './FormFieldFileUpload.module.scss';
 
 const FormFieldFileUpload = (props) => {
   const { errorMessage, id, isValid, isSubmitted, setValue, value } = useField(props);
-  const { required, defaultValue, option } = props;
+  const { required, defaultValue, option, userId } = props;
   const [isTouched, setIsTouched] = useState(false);
   const showError = !isValid && (isTouched || isSubmitted);
   const [preview, setPreview] = useState(null);
@@ -13,7 +14,7 @@ const FormFieldFileUpload = (props) => {
     const targetFile = target.files[0];
     const imageURL = URL.createObjectURL(targetFile);
     setPreview(imageURL);
-    setValue({ file: targetFile, url: imageURL, name: targetFile.name });
+    setValue({ file: targetFile, path: imageURL, name: targetFile.name });
   };
 
   const handleClickRemoveImage = () => {

@@ -53,6 +53,16 @@ const CreateProject = () => {
     //   themesWithValues[key] = values.themes[i];
     // });
 
+    const project = new Project({
+      // id: v4(),
+      id: 'formtest',
+      userId: 'tijdelijk',
+      store: projectStore,
+      image: values.image,
+    });
+
+    projectStore.uploadImage(project.image);
+
     // const project = new Project({
     //   // id: v4(),
     //   id: 'formtest',

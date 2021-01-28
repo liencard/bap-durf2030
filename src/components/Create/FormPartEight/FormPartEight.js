@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { FormFieldFileUpload } from '../';
+import { useStores } from '../../../hooks/useStores';
 import styles from './FormPartEight.module.scss';
 
 const FormPartEight = () => {
+  // const userId = uiStore.currentUser.userId;
   return (
     <>
       <h2 className={styles.title}>Je bent er bijna!</h2>
