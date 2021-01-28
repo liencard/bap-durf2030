@@ -14,9 +14,7 @@ const Profile = observer(() => {
   const STATE_FULLY_LOADED = 'fullyLoaded';
 
   const [currentUser, setCurrentUser] = useState(uiStore.currentUser);
-  const [state, setState] = useState(
-    currentUser ? STATE_LOADING_MORE_DETAILS : STATE_LOADING
-  );
+  const [state, setState] = useState(currentUser ? STATE_LOADING_MORE_DETAILS : STATE_LOADING);
 
   useEffect(() => {
     const loadUser = async () => {
@@ -24,20 +22,20 @@ const Profile = observer(() => {
         //console.log('test');
         //console.log(uiStore.currentUser);
         //const setUser = await uiStore.setCurrentUser('lien@gmail.com');
-        const setUser = await uiStore.currentUser;
-        console.log('test2');
-        if (!setUser) {
+        const user = await uiStore.currentUser;
+        console.log(user);
+        if (!user) {
           setState(STATE_DOES_NOT_EXIST);
           return;
         }
         setState(STATE_FULLY_LOADED);
-        setCurrentUser(setUser);
+        setCurrentUser(user);
       } catch (error) {
         console.log('User failed loading');
       }
     };
     loadUser();
-  }, [uiStore, setCurrentUser]);
+  }, [uiStore, setCurrentUser, uiStore.currentUser]);
 
   // if (uiStore.currentUser) {
   //   console.log(uiStore.currentUser);
@@ -52,7 +50,7 @@ const Profile = observer(() => {
         <p>test</p>
         <p>test</p>
         <p>State: {state}</p>
-        <p>test</p>
+        <p>Testname: {currentUser ? currentUser.id : 'nee'}</p>
         <p>test</p>
       </div>
     </>
