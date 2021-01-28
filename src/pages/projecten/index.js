@@ -1,9 +1,5 @@
-import { useStores } from '../../hooks/useStores';
-import { observer } from 'mobx-react-lite';
 import { Container } from '../../components/Layout';
 import { ProjectCard } from '../../components/Project';
-import { storesContext } from '../../contexts';
-import { useContext } from 'react';
 import RootStore from '../../stores';
 
 const Projects = ({ projects }) => {
