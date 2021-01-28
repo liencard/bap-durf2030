@@ -17,7 +17,7 @@ const Profile = observer(() => {
     <>
       <Header />
       <div className={styles.profile}>
-        <p>{uiStore.currentUser.id}</p>
+        <p>test</p>
         <p>test</p>
         <p>test</p>
         <p>test</p>
