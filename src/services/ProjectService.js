@@ -5,7 +5,7 @@ import { firestore } from 'firebase/app';
 class ProjectService {
   constructor({ firebase }) {
     this.db = firebase.firestore();
-    this.storage = firebase.storage().ref();
+    this.storage = firebase.storage();
   }
 
   getAll = async () => {
@@ -49,7 +49,7 @@ class ProjectService {
   };
 
   uploadImage = (file, name, userId) => {
-    let imageRef = this.storage.child(`images/${name}`);
+    let imageRef = this.storage.ref().child(`images/${name}`);
     imageRef.put(file);
   };
 }
