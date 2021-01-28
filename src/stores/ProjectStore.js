@@ -46,13 +46,13 @@ class ProjectStore {
   //     this.projects = [];
   //   }
 
-  getProjectsForUser = async () => {
-    console.log('hi store');
-    const projectArr = await this.userService.getProjectsByUser(
-      this.rootStore.uiStore.currentUser
-    );
-    projectArr.forEach(this.addProject);
-  };
+  // getProjectsForUser = async () => {
+  //   console.log('hi store');
+  //   const projectArr = await this.userService.getProjectsByUser(
+  //     this.rootStore.uiStore.currentUser
+  //   );
+  //   projectArr.forEach(this.addProject);
+  // };
 
   loadAllProjects = async () => {
     const jsonProjects = await this.projectService.getAll();
