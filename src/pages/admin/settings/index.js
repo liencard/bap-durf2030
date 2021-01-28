@@ -9,18 +9,14 @@ import Sidebar from '../../../components/Admin/Sidebar/Sidebar';
 const Settings = observer(() => {
   const { userStore } = useStores();
 
-  console.log('hey');
-  console.log(userStore.users);
+  //console.log(userStore.users);
 
   useEffect(() => {
     const loadAdmins = async (users) => {
       try {
         const findAdmins = await userStore.loadAdmins(users);
-        console.log('hiiii');
-        console.log(findAdmins);
-      } catch (error) {
-        console.log('failed');
-      }
+        //console.log(findAdmins);
+      } catch (error) {}
     };
     loadAdmins(userStore.users);
   }, [userStore.users, userStore]);

@@ -41,6 +41,19 @@ class UserService {
       .get();
   };
 
+  getProjectsByUser = async (user) => {
+    console.log('hi user');
+    console.log(user);
+    const projectsRef = this.db
+      .collection('users')
+      .doc(user.email)
+      .collection('projects');
+
+    const projects = await projectsRef.withConverter(userConverter).get();
+
+    return projects.docs.map((project) => project.data());
+  };
+
   addAdminState = async (data) => {
     const result = await this.db
       .collection('users')

@@ -24,7 +24,7 @@ const ProjectManagement = observer(() => {
   let projectList = [];
   let id = 1;
   projectStore.projects.map((project) => {
-    console.log(project);
+    //console.log(project);
     const projectState = getState(project.state);
     projectList.push({
       id: id,
@@ -36,7 +36,7 @@ const ProjectManagement = observer(() => {
     id++;
   });
 
-  console.log(projectList);
+  //console.log(projectList);
 
   const handleChangeState = async (data) => {
     const project = await projectStore.getProjectById(data.id);
