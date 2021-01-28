@@ -8,16 +8,16 @@ import styles from './Profile.module.scss';
 const Profile = observer(() => {
   const { projectStore, userStore, uiStore } = useStores();
 
-  // if (uiStore.currentUser) {
-  //   console.log(uiStore.currentUser);
-  //   console.log(projectStore.projects);
-  // }
+  if (uiStore.currentUser) {
+    console.log(uiStore.currentUser);
+    console.log(projectStore.projects);
+  }
 
   return (
     <>
       <Header />
       <div className={styles.profile}>
-        <p>test</p>
+        <p>{uiStore.currentUser.id}</p>
         <p>test</p>
         <p>test</p>
         <p>test</p>
@@ -27,24 +27,24 @@ const Profile = observer(() => {
   );
 });
 
-export const getStaticProps = async ({ preview = null }) => {
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
-  //const res = await fetch('https://.../posts');
-  //const posts = await res.json();
+// export const getStaticProps = async ({ preview = null }) => {
+//   // Call an external API endpoint to get posts.
+//   // You can use any data fetching library
+//   //const res = await fetch('https://.../posts');
+//   //const posts = await res.json();
 
-  const { projectStore, userStore, uiStore } = useStores();
+//   const { projectStore, userStore, uiStore } = useStores();
 
-  if (uiStore.currentUser) {
-    console.log(uiStore.currentUser);
-    console.log(projectStore.projects);
-  }
+//   if (uiStore.currentUser) {
+//     console.log(uiStore.currentUser);
+//     console.log(projectStore.projects);
+//   }
 
-  return {
-    props: {
-      currentUser,
-    },
-  };
-};
+//   return {
+//     props: {
+//       currentUser,
+//     },
+//   };
+// };
 
 export default Profile;
