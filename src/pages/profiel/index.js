@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Container } from '../../components/Layout';
 import Header from '../../components/Header/Header';
 import styles from './Profile.module.scss';
+import { ProjectCard } from '../../components/Project';
 
 const Profile = observer(() => {
   const { projectStore, uiStore } = useStores();
@@ -28,6 +29,8 @@ const Profile = observer(() => {
         }
         setState(STATE_FULLY_LOADED);
         setCurrentUser(setUser);
+        projectStore.getProjectsForUser();
+        console.log(projectStore.projects);
       } catch (error) {
         console.log('User failed loading');
       }
@@ -38,21 +41,48 @@ const Profile = observer(() => {
   return (
     <>
       <Header />
-      <div className={styles.profile}>
-        {uiStore.currentUser ? (
-          <>
-            <p>test</p>
-            <p>test</p>
-            <p>test</p>
-            <p>State: {state}</p>
-            <p>{uiStore.currentUser.name}</p>
-            <p>test</p>
-            <p>test</p>
-          </>
-        ) : (
-          ' '
-        )}
-      </div>
+      {currentUser ? (
+        <>
+          <div className={styles.profile}>
+            <Container>
+              <div className={styles.profile__wrapper}>
+                <img
+                  className={styles.avatar}
+                  width="80"
+                  height="80"
+                  src={currentUser.avatar}
+                />
+                <div>
+                  <p className={styles.name}>{currentUser.name}</p>
+                  <p className={styles.email}>{currentUser.email}</p>
+                </div>
+              </div>
+              <div className={styles.projects}>
+                <h1 className={styles.title}>Projecten</h1>
+                {projectStore.projects.length != 0 ? (
+                  <>
+                    {projectStore.projects.map((project) => (
+                      <ProjectCard
+                        key={project.id}
+                        title={project.title}
+                        intro={project.intro}
+                        id={project.id}
+                      />
+                    ))}
+                  </>
+                ) : (
+                  <p>Geen eigen projecten</p>
+                )}
+              </div>
+              <div className={styles.badges}>
+                <h1 className={styles.title}>Badges &amp; Awards</h1>
+              </div>
+            </Container>
+          </div>
+        </>
+      ) : (
+        ' '
+      )}
     </>
   );
 });

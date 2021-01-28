@@ -17,9 +17,9 @@ class Project {
     description,
     image,
   }) {
-    if (!store) {
-      throw new Error('voorzie een store');
-    }
+    // if (!store) {
+    //   throw new Error('voorzie een store');
+    // }
     this.store = store;
     this.id = id;
     this.userId = userId;
@@ -35,7 +35,7 @@ class Project {
     this.categories = categories;
     this.image = image;
     this.getAssignedTags(tags);
-    this.store.addProject(this);
+    //this.store.addProject(this);
 
     makeObservable(this, {
       title: observable,
@@ -64,5 +64,28 @@ class Project {
     // }
   };
 }
+
+const projectConverter = {
+  toFirestore: function (project) {
+    // left DB naam, right Model naam
+    return {
+      title: project.title,
+      intro: project.intro,
+      userId: project.userId,
+    };
+  },
+  fromFirestore: function (snapshot, options) {
+    const data = snapshot.data(options);
+    // left Model naam, right DB naam
+    return new Project({
+      id: snapshot.id,
+      title: data.title,
+      intro: data.intro,
+      userId: data.userId,
+    });
+  },
+};
+
+export { projectConverter };
 
 export default Project;
