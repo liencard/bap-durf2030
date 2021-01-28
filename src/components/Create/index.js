@@ -13,3 +13,4 @@ export { default as FormFieldSwitch } from './FormFieldSwitch/FormFieldSwitch';
 export { default as FormFieldCheckbox } from './FormFieldCheckbox/FormFieldCheckbox';
 export { default as FormFieldAddItem } from './FormFieldAddItem/FormFieldAddItem';
 export { default as FormFieldAddUser } from './FormFieldAddUser/FormFieldAddUser';
+export { default as FormFieldFileUpload } from './FormFieldFileUpload/FormFieldFileUpload';

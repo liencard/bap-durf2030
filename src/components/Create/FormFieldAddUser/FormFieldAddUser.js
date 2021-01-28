@@ -15,12 +15,13 @@ const FormFieldAddUser = (props) => {
   const { userStore } = useStores();
   const users = userStore.users;
 
-  const [creators, setCreators] = useState([{ name: 'Test' }]);
+  const [creators, setCreators] = useState([]);
 
   const addCreator = (newValue, input) => {
     // newValue = {inputValue: "Test", name: "Voeg "Test" toe"}
     if (input === 'custom') {
-      setCreators([...creators, { name: newValue.inputValue }]);
+      // On hold
+      // setCreators([...creators, { name: newValue.inputValue }]);
     } else if (input === 'data') {
       // newValue = User object
       setCreators([...creators, { name: newValue.name, id: newValue.userId }]);

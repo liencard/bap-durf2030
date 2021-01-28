@@ -40,36 +40,35 @@ const CreateProject = () => {
 
   const handleSubmit = async (values) => {
     console.log(values);
-    let categoriesWithValues = {};
-    let themesWithValues = {};
+    // let categoriesWithValues = {};
+    // let themesWithValues = {};
 
-    categories.forEach((category, i) => {
-      const key = category.toLowerCase();
-      categoriesWithValues[key] = values.categories[i];
-    });
+    // categories.forEach((category, i) => {
+    //   const key = category.toLowerCase();
+    //   categoriesWithValues[key] = values.categories[i];
+    // });
 
-    themes.forEach((theme, i) => {
-      const key = theme.toLowerCase();
-      themesWithValues[key] = values.themes[i];
-    });
+    // themes.forEach((theme, i) => {
+    //   const key = theme.toLowerCase();
+    //   themesWithValues[key] = values.themes[i];
+    // });
 
-    const project = new Project({
-      // id: v4(),
-      id: 'formtest',
-      userId: 'tijdelijk',
-      title: values.title,
-      intro: values.intro,
-      description: values.description,
-      isKnownPlace: values.isKnownPlace,
-      categories: categoriesWithValues,
-      themes: themesWithValues,
-      city: values.city ?? '',
-      street: values.street ?? '',
-      number: values.number ?? '',
-      store: projectStore,
-    });
+    // const project = new Project({
+    //   // id: v4(),
+    //   id: 'formtest',
+    //   userId: 'tijdelijk',
+    //   title: values.title,
+    //   intro: values.intro,
+    //   description: values.description,
+    //   isKnownPlace: values.isKnownPlace,
+    //   categories: categoriesWithValues,
+    //   themes: themesWithValues,
+    //   city: values.city ?? '',
+    //   street: values.street ?? '',
+    //   number: values.number ?? '',
+    //   store: projectStore,
+    // });
 
-    // console.log(project);
     // const result = await projectStore.createProject(project);
   };
 
@@ -84,7 +83,7 @@ const CreateProject = () => {
                 <FormizStep name="step1">
                   <FormPartEight />
                 </FormizStep>
-                <FormizStep name="step2">
+                {/* <FormizStep name="step2">
                   <FormPartTwo />
                 </FormizStep>
                 <FormizStep name="step3">
@@ -104,7 +103,7 @@ const CreateProject = () => {
                 </FormizStep>
                 <FormizStep name="step8">
                   <FormPartEight />
-                </FormizStep>
+                </FormizStep> */}
 
                 {/* Update the submit button to allow navigation between steps. */}
                 {!projectForm.isFirstStep && (

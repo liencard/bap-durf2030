@@ -1,8 +1,5 @@
-import { useState } from 'react';
 import styles from './FormPartSix.module.scss';
-import { FormFieldInput } from '../index';
-import TextField from '@material-ui/core/TextField';
-import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
+import { FormFieldAddUser } from '../index';
 
 const FormPartSix = () => {
   return (
@@ -18,7 +15,7 @@ const FormPartSix = () => {
         Zoek naar bestaande DURF 2030 accounts, dit kunnen leden of teams zijn. Of voeg manueel iemand toe zonder
         account.
       </p>
-      <FormFieldInput name="email" label="E-mail adres" required />
+      <FormFieldAddUser name="owners" />
     </>
   );
 };

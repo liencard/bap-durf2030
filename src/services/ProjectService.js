@@ -23,7 +23,7 @@ class ProjectService {
     // .add(...) and .doc().set(...) are completely equivalent
     const result = await this.db
       .collection('projects')
-      .doc(`${data.id}`)
+      .doc(data.id)
       .set({
         title: data.title,
         intro: data.intro,
@@ -42,10 +42,7 @@ class ProjectService {
   };
 
   updateState = async (data) => {
-    const result = await this.db
-      .collection('projects')
-      .doc(`${data.id}`)
-      .update({ state: data.state });
+    const result = await this.db.collection('projects').doc(`${data.id}`).update({ state: data.state });
     return result;
   };
 }
