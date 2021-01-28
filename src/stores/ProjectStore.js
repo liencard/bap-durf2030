@@ -37,6 +37,10 @@ class ProjectStore {
     return await this.projectService.create(project);
   };
 
+  createImageForProject = async (image) => {
+    // return await this.
+  };
+
   resolveProject = (id) => this.projects.find((project) => project.id === id);
 
   // Front-end
@@ -55,11 +59,19 @@ class ProjectStore {
   // };
 
   loadAllProjects = async () => {
+<<<<<<< HEAD
+    // console.log('projects');
+=======
+>>>>>>> bd1928741c2c98deea6a211a92bc271c2577c764
     const jsonProjects = await this.projectService.getAll();
     jsonProjects.forEach((json) => this.updateProjectFromServer(json));
   };
 
   updateProjectFromServer(json) {
+<<<<<<< HEAD
+    // console.log(json);
+=======
+>>>>>>> bd1928741c2c98deea6a211a92bc271c2577c764
     let project = this.projects.find((project) => project.id === json.id);
     if (!project) {
       project = new Project({
@@ -72,10 +84,18 @@ class ProjectStore {
         store: this.rootStore.projectStore,
       });
     }
+<<<<<<< HEAD
+    // console.log(project);
+=======
+>>>>>>> bd1928741c2c98deea6a211a92bc271c2577c764
   }
 
   updateState = async (data) => {
     return await this.projectService.updateState(data);
+  };
+
+  uploadImage = (image) => {
+    this.projectService.uploadImage(image.file, image.name, 'testid');
   };
 }
 
