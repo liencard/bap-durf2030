@@ -7,8 +7,8 @@ import ProjectStore from './ProjectStore';
 class RootStore {
   constructor() {
     this.firebase = this.getFirebase();
-    this.projectStore = new ProjectStore(this);
     this.userStore = new UserStore(this);
+    this.projectStore = new ProjectStore(this);
     this.uiStore = new UiStore(this);
   }
 

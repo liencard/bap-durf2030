@@ -15,6 +15,7 @@ class Project {
     categories,
     themes,
     description,
+    image,
   }) {
     if (!store) {
       throw new Error('voorzie een store');
@@ -32,6 +33,7 @@ class Project {
     this.tags = []; // weg?
     this.themes = themes;
     this.categories = categories;
+    this.image = image;
     this.getAssignedTags(tags);
     this.store.addProject(this);
 

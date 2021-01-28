@@ -1,9 +1,11 @@
 import 'firebase/firestore';
+import 'firebase/storage';
 import { firestore } from 'firebase/app';
 
 class ProjectService {
   constructor({ firebase }) {
     this.db = firebase.firestore();
+    this.storage = firebase.storage().ref();
   }
 
   getAll = async () => {
@@ -23,7 +25,7 @@ class ProjectService {
     // .add(...) and .doc().set(...) are completely equivalent
     const result = await this.db
       .collection('projects')
-      .doc(`${data.id}`)
+      .doc(data.id)
       .set({
         title: data.title,
         intro: data.intro,
@@ -42,11 +44,13 @@ class ProjectService {
   };
 
   updateState = async (data) => {
-    const result = await this.db
-      .collection('projects')
-      .doc(`${data.id}`)
-      .update({ state: data.state });
+    const result = await this.db.collection('projects').doc(`${data.id}`).update({ state: data.state });
     return result;
+  };
+
+  uploadImage = (file, name, userId) => {
+    let imageRef = this.storage.child(`images/${name}`);
+    imageRef.put(file);
   };
 }
 

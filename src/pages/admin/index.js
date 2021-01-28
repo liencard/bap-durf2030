@@ -9,7 +9,7 @@ import Sidebar from '../../components/Admin/Sidebar/Sidebar';
 
 const Admin = observer(() => {
   const { projectStore, uiStore } = useStores();
-  console.log(projectStore.projects);
+  //console.log(projectStore.projects);
   const router = useRouter();
 
   useEffect(() => {
