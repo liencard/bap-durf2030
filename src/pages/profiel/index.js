@@ -14,9 +14,7 @@ const Profile = observer(() => {
   const STATE_FULLY_LOADED = 'fullyLoaded';
 
   const [currentUser, setCurrentUser] = useState(uiStore.currentUser);
-  const [state, setState] = useState(
-    currentUser ? STATE_LOADING_MORE_DETAILS : STATE_LOADING
-  );
+  const [state, setState] = useState(currentUser ? STATE_LOADING_MORE_DETAILS : STATE_LOADING);
 
   useEffect(() => {
     const loadUser = async () => {
