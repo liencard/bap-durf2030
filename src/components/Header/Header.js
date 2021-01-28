@@ -71,7 +71,7 @@ const Header = observer(() => {
               <span className={styles.menu__item}>Nieuws</span>
             </Link>
 
-            <Button text="Maak project aan" link="/maak-project" />
+            <Button text="Maak project aan" href="/maak-project" />
           </nav>
         </div>
         <div className={styles.header__right}>

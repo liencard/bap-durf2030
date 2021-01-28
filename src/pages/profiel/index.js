@@ -21,11 +21,7 @@ const Profile = observer(() => {
   useEffect(() => {
     const loadUser = async () => {
       try {
-        //console.log('test');
-        //console.log(uiStore.currentUser);
-        //const setUser = await uiStore.setCurrentUser('lien@gmail.com');
         const setUser = await uiStore.currentUser;
-        console.log('test2');
         if (!setUser) {
           setState(STATE_DOES_NOT_EXIST);
           return;
@@ -37,23 +33,25 @@ const Profile = observer(() => {
       }
     };
     loadUser();
-  }, [uiStore, setCurrentUser]);
-
-  // if (uiStore.currentUser) {
-  //   console.log(uiStore.currentUser);
-  //   console.log(projectStore.projects);
-  // }
+  }, [uiStore, setCurrentUser, uiStore.currentUser]);
 
   return (
     <>
       <Header />
       <div className={styles.profile}>
-        <p>test</p>
-        <p>test</p>
-        <p>test</p>
-        <p>State: {state}</p>
-        <p>test</p>
-        <p>test</p>
+        {uiStore.currentUser ? (
+          <>
+            <p>test</p>
+            <p>test</p>
+            <p>test</p>
+            <p>State: {state}</p>
+            <p>{uiStore.currentUser.name}</p>
+            <p>test</p>
+            <p>test</p>
+          </>
+        ) : (
+          ' '
+        )}
       </div>
     </>
   );
