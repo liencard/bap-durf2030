@@ -12,30 +12,15 @@ const Project = observer(({ project, id }) => {
   return (
     <>
       <p>Test SSR</p>
-
       <Container>
-        <>
-          <ProjectHeader project={project} />
-          <ProjectContent />
-          <ProjectFooter />
-          <ProjectComments />
-        </>
+        <ProjectHeader project={project} />
+        <ProjectContent />
+        <ProjectFooter />
+        <ProjectComments />
       </Container>
     </>
   );
 });
-
-// export const getStaticPaths = async () => {
-//   const allPosts = await getAllProjectsWithSlug();
-
-//   const slugs = allPosts.map((post) => post.slug);
-//   const paths = slugs.map((slug) => ({ params: { slug } }));
-
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// };
 
 export const getServerSideProps = async (context) => {
   const store = new RootStore();
