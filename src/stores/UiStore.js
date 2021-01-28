@@ -16,6 +16,7 @@ class UiStore {
     makeObservable(this, {
       currentUser: observable,
       setCurrentUser: action,
+      onAuthStateChanged: action,
     });
   }
 
@@ -27,7 +28,7 @@ class UiStore {
       if (!this.currentUser) {
         this.setCurrentUser(user.email);
         console.log('user ophalen');
-        this.rootStore.projectStore.getProjectsForUser();
+        //this.rootStore.projectStore.getProjectsForUser();
       }
 
       //inlezen van de projecten van de currentuser
