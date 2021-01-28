@@ -12,6 +12,7 @@ const Projects = ({ projects }) => {
 
   return (
     <>
+      <p>Test SSR projecten</p>
       <Container>
         {projects.map((project) => (
           <ProjectCard key={project.id} title={project.title} intro={project.intro} id={project.id} />
@@ -21,7 +22,7 @@ const Projects = ({ projects }) => {
   );
 };
 
-export const getStaticProps = async () => {
+export const getStaticProps = async (context) => {
   // Temporary instance of rootStore to make connection to db
   const store = new RootStore();
   const { projectStore } = store;
@@ -31,7 +32,8 @@ export const getStaticProps = async () => {
   let projects = [];
 
   // Get necessary data (not whole Projects model)
-  projectStore.projects.forEach((project) => {
+  // To do: in _app and all projects as provider?
+  await projectStore.projects.forEach((project) => {
     projects.push({ id: project.id, title: project.title, intro: project.intro });
   });
 
