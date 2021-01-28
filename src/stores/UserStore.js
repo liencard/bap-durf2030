@@ -38,6 +38,7 @@ class UserStore {
   findAdmins = (users) => this.users.find((user) => user.admin === false);
 
   updateUserFromServer(json) {
+    // console.log(json);
     let user = this.users.find((user) => user.email === json.email);
     if (!user) {
       user = new User({
@@ -49,6 +50,8 @@ class UserStore {
         store: this.rootStore.userStore,
       });
     }
+    // console.log('user');
+    // console.log(user);
     this.addUser(user);
   }
 }

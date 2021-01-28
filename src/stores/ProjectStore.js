@@ -51,17 +51,19 @@ class ProjectStore {
   //   }
 
   getProjectsForUser = async () => {
-    console.log('hi store');
-    const projectArr = await this.userService.getProjectsByUser(this.rootStore.uiStore.currentUser);
-    projectArr.forEach(this.addProject);
+    // console.log('hi store');
+    // const projectArr = await this.userService.getProjectsByUser(this.rootStore.uiStore.currentUser);
+    // projectArr.forEach(this.addProject);
   };
 
   loadAllProjects = async () => {
+    // console.log('projects');
     const jsonProjects = await this.projectService.getAll();
     jsonProjects.forEach((json) => this.updateProjectFromServer(json));
   };
 
   updateProjectFromServer(json) {
+    // console.log(json);
     let project = this.projects.find((project) => project.id === json.id);
     if (!project) {
       project = new Project({
@@ -74,6 +76,7 @@ class ProjectStore {
         store: this.rootStore.projectStore,
       });
     }
+    // console.log(project);
   }
 
   updateState = async (data) => {
