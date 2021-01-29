@@ -133,12 +133,12 @@ const CreateProject = () => {
                 <div className={styles.buttons}>
                   {!projectForm.isFirstStep && (
                     <button className={styles.button} type="button" onClick={projectForm.prevStep}>
-                      Back
+                      Vorige
                     </button>
                   )}
                   {projectForm.isLastStep ? (
                     <button className={styles.button} type="submit" disabled={!projectForm.isValid}>
-                      Submit
+                      Project indienen
                     </button>
                   ) : (
                     <button
@@ -146,7 +146,7 @@ const CreateProject = () => {
                       type="submit"
                       disabled={!projectForm.isStepValid}
                     >
-                      Continue
+                      Volgende
                     </button>
                   )}
                 </div>
