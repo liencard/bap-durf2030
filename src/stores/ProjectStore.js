@@ -43,13 +43,6 @@ class ProjectStore {
 
   getProjectById = (id) => this.projects.find((project) => project.id === id);
 
-  getProjectsForUser = async () => {
-    const projectArr = await this.userService.getProjectsByUser(
-      this.rootStore.uiStore.currentUser
-    );
-    projectArr.forEach(this.addProject);
-  };
-
   loadAllProjects = async () => {
     const jsonProjects = await this.projectService.getAll();
     jsonProjects.forEach((json) => this.updateProjectFromServer(json));
@@ -68,8 +61,8 @@ class ProjectStore {
         store: this.rootStore.projectStore,
       });
     }
-  }
-  
+  };
+
   loadProjectLikesById = async (id) => {
     return await this.projectService.getLikesById(id);
   };
