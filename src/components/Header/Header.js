@@ -28,6 +28,10 @@ const Header = observer(() => {
     setAnchorEl(null);
   };
 
+  const handleProfile = () => {
+    router.push(ROUTES.profile);
+  };
+
   const handleLogout = async (e) => {
     e.preventDefault();
     const result = await uiStore.logoutUser();
@@ -59,19 +63,24 @@ const Header = observer(() => {
     <>
       <div className={styles.header} ref={headerBanner}>
         <div className={styles.header__left}>
-          <img src="/logo.svg" alt="logo DURF2030" width="45" height="60" />
+          <Link href={ROUTES.home}>
+            <img src="/logo.svg" alt="logo DURF2030" width="45" height="60" />
+          </Link>
           <nav className={styles.menu}>
-            <Link href="/projecten">
+            <Link href={ROUTES.projects}>
               <span className={styles.menu__item}>Alle projecten</span>
             </Link>
-            <Link href="/admin">
+            <Link href={ROUTES.admin}>
               <span className={styles.menu__item}>Kalender</span>
             </Link>
             <Link href="/">
               <span className={styles.menu__item}>Nieuws</span>
             </Link>
-
-            <Button text="Maak project aan" href="/maak-project" />
+            {!uiStore.currentUser ? (
+              <Button text="Maak project aan" href="/login" />
+            ) : (
+              <Button text="Maak project aan" href="/maak-project" />
+            )}
           </nav>
         </div>
         <div className={styles.header__right}>
@@ -149,7 +158,7 @@ const Header = observer(() => {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  <MenuItem onClick={handleClose}>Mijn profiel</MenuItem>
+                  <MenuItem onClick={handleProfile}>Mijn profiel</MenuItem>
                   <MenuItem onClick={handleClose}>Instellingen</MenuItem>
                   <MenuItem onClick={handleLogout}>Afmelden</MenuItem>
                 </Menu>

@@ -28,7 +28,6 @@ class UiStore {
       if (!this.currentUser) {
         this.setCurrentUser(user.email);
         console.log('user ophalen');
-        //this.rootStore.projectStore.getProjectsForUser();
       }
 
       //inlezen van de projecten van de currentuser
