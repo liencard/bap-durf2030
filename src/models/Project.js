@@ -28,6 +28,7 @@ class Project {
     id,
     userId,
     store,
+    likes,
   }) {
     if (!store) {
       throw new Error('voorzie een store');
@@ -53,17 +54,18 @@ class Project {
     this.servicesDescription = servicesDescription;
     this.servicesRequirement = servicesRequirement;
     this.street = street;
-    this.themes = street;
+    this.themes = themes;
     this.title = title;
+
     this.id = id;
     this.userId = userId;
     this.store = store;
-    this.about = about;
+    this.likes = [];
+
     this.store.addProject(this);
 
     makeObservable(this, {
-      title: observable,
-      intro: observable,
+      likes: observable,
     });
   }
 }

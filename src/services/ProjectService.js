@@ -26,6 +26,12 @@ class ProjectService {
     return { id: snapshot.id, data: snapshot.data() };
   };
 
+  getLikesById = async (id) => {
+    const snapshot = await this.db.collection('projects').doc('formtest').collection('likes').get();
+    const test = snapshot.docs.map((like) => like.data());
+    console.log(test);
+  };
+
   create = async (data) => {
     // .add(...) and .doc().set(...) are completely equivalent
     const result = await this.db

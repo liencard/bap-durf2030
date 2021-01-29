@@ -7,7 +7,7 @@ const Project = observer(({ project, id }) => {
   return (
     <>
       <Container>
-        <ProjectHeader project={project} />
+        <ProjectHeader project={project} id={id} />
         <ProjectContent />
         <ProjectFooter />
         <ProjectComments />
