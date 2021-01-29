@@ -31,8 +31,7 @@ const Profile = observer(() => {
         }
         setState(STATE_FULLY_LOADED);
         setCurrentUser(setUser);
-        console.log('testje');
-        await uiStore.getProjectsForUser();
+        uiStore.getProjectsForUser();
       } catch (error) {
         console.log('User failed loading');
       }
@@ -58,11 +57,11 @@ const Profile = observer(() => {
                 <h1 className={styles.title}>Projecten</h1>
                 {uiStore.userProjects.length != 0 ? (
                   <>
-                    {uiStore.userProjects.map((project, i) => (
-                      <div key={project.id}>
-                        <ProjectCard title={project.title} intro={project.intro} id={project.id} />
+                    {uiStore.userProjects.map((project) => (
+                      <>
+                        <ProjectCard key={project.id} title={project.title} intro={project.intro} id={project.id} />
                         <Button href={ROUTES.edit.to + project.id} text={'Bewerk project'} />
-                      </div>
+                      </>
                     ))}
                   </>
                 ) : (

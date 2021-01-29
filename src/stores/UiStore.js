@@ -17,7 +17,6 @@ class UiStore {
       onAuthStateChanged: action,
       addUserProjects: action,
       userProjects: observable,
-      getProjectsForUser: action,
     });
   }
 
