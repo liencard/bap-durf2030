@@ -1,7 +1,7 @@
 import styles from './Button.module.scss';
 import Link from 'next/link';
 
-const Button = ({ text, href, onClick }) => {
+const Button = ({ text, href, onClick, type }) => {
   if (href) {
     return (
       <Link href={href}>
@@ -12,7 +12,7 @@ const Button = ({ text, href, onClick }) => {
     );
   } else {
     return (
-      <button className={styles.button} onClick={onClick}>
+      <button className={styles.button} onClick={onClick} type={type ? type : 'button'}>
         {text}
       </button>
     );

@@ -13,9 +13,6 @@ class ProjectStore {
     });
     this.userService = new UserService(this.rootStore.firebase);
 
-    // TO DO: Enkel bij 'Projects' pagina of SSR
-    //this.loadAllProjects();
-
     makeObservable(this, {
       loadAllProjects: action,
       loadProject: action,
@@ -39,17 +36,12 @@ class ProjectStore {
   };
 
   createImageForProject = async (image) => {
-    // return await this.
+    // to do linken
   };
 
   resolveProject = (id) => this.projects.find((project) => project.id === id);
 
-  // Front-end
   getProjectById = (id) => this.projects.find((project) => project.id === id);
-
-  //   empty() {
-  //     this.projects = [];
-  //   }
 
   getProjectsForUser = async () => {
     const projectArr = await this.userService.getProjectsByUser(
@@ -63,7 +55,7 @@ class ProjectStore {
     jsonProjects.forEach((json) => this.updateProjectFromServer(json));
   };
 
-  updateProjectFromServer(json) {
+  updateProjectFromServer = (json) => {
     let project = this.projects.find((project) => project.id === json.id);
     if (!project) {
       project = new Project({
@@ -77,6 +69,10 @@ class ProjectStore {
       });
     }
   }
+  
+  loadProjectLikesById = async (id) => {
+    return await this.projectService.getLikesById(id);
+  };
 
   updateState = async (data) => {
     return await this.projectService.updateState(data);

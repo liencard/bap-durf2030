@@ -1,65 +1,44 @@
 import { observer } from 'mobx-react-lite';
-import { useState, useEffect } from 'react';
-import { useStores } from '../../hooks/useStores';
 import { Container } from '../../components/Layout';
-import {
-  ProjectHeader,
-  ProjectContent,
-  ProjectFooter,
-  ProjectComments,
-} from '../../components/Project';
+import { ProjectHeader, ProjectContent, ProjectFooter, ProjectComments } from '../../components/Project';
+import RootStore from '../../stores';
 
-const Project = observer(({ query }) => {
-  const id = query.id;
-  const { projectStore } = useStores();
-
-  const STATE_LOADING = 'loading';
-  const STATE_DOES_NOT_EXIST = 'doesNotExist';
-  const STATE_LOADING_MORE_DETAILS = 'loadingMoreDetails';
-  const STATE_FULLY_LOADED = 'fullyLoaded';
-
-  const [project, setProject] = useState(projectStore.resolveProject(id));
-  const [state, setState] = useState(
-    project ? STATE_LOADING_MORE_DETAILS : STATE_LOADING
-  );
-
-  useEffect(() => {
-    const loadProject = async (id) => {
-      try {
-        // const resolvedProject = await projectStore.resolveProject(id);
-        const resolvedProject = await projectStore.loadProject(id);
-        if (!resolvedProject) {
-          setState(STATE_DOES_NOT_EXIST);
-          return;
-        }
-        setState(STATE_FULLY_LOADED);
-        setProject(resolvedProject);
-      } catch (error) {
-        console.log('Project failed loading');
-      }
-    };
-    loadProject(id);
-  }, [id, projectStore, setProject]);
+const Project = observer(({ project, id }) => {
 
   return (
     <>
-      <p>State: {state}</p>
       <Container>
-        {project && (
-          <>
-            <ProjectHeader project={project} />
-            <ProjectContent />
-            <ProjectFooter />
-            <ProjectComments />
-          </>
-        )}
+        <ProjectHeader project={project} id={id} />
+        <ProjectContent />
+        <ProjectFooter />
+        <ProjectComments />
       </Container>
     </>
   );
 });
 
-Project.getInitialProps = ({ query }) => {
-  return { query };
+export const getStaticPaths = async () => {
+  const store = new RootStore();
+  const { projectStore } = store;
+  // const projectIds = projectStore.projectService.getAllIds();
+  const projects = await projectStore.projectService.getAll();
+  const ids = projects.map((project) => project.id);
+  const paths = ids.map((id) => ({ params: { id } }));
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps = async ({ params }) => {
+  const store = new RootStore();
+  const { projectStore } = store;
+  const project = await projectStore.projectService.getById(params.id);
+
+  return {
+    props: { project: project.data, id: project.id },
+  };
 };
 
 export default Project;
