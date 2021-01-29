@@ -6,9 +6,9 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
 const FormPartFour = () => {
-  const [serviceRequirement, setServiceRequirement] = useState(false);
+  const [servicesRequirement, setServicesRequirement] = useState(false);
   const [materialsRequirement, setMaterialsRequirement] = useState(false);
-  const [fundingRequirement, setFundingRequirement] = useState(false);
+  const [budgetRequirement, setBudgetRequirement] = useState(false);
 
   // Rich text: https://dev.to/shaerins/setting-up-a-basic-rich-text-editor-in-react-3afg
   return (
@@ -21,17 +21,17 @@ const FormPartFour = () => {
       </p>
       <div className={styles.requirements}>
         <div
-          className={`${styles.requirement} ${serviceRequirement && styles.requirementChecked}`}
+          className={`${styles.requirement} ${servicesRequirement && styles.requirementChecked}`}
           onClick={() => {
-            setServiceRequirement(!serviceRequirement);
+            setServicesRequirement(!servicesRequirement);
           }}
         >
           <span>Diensten</span>
           <FormFieldSwitch
-            name="serviceRequirement"
-            label="serviceRequirement"
-            setToggleValue={setServiceRequirement}
-            defaultValue={serviceRequirement}
+            name="servicesRequirement"
+            label="servicesRequirement"
+            setToggleValue={setServicesRequirement}
+            defaultValue={servicesRequirement}
           />
         </div>
         <div
@@ -49,23 +49,23 @@ const FormPartFour = () => {
           />
         </div>
         <div
-          className={`${styles.requirement} ${fundingRequirement && styles.requirementChecked}`}
+          className={`${styles.requirement} ${budgetRequirement && styles.requirementChecked}`}
           onClick={() => {
-            setFundingRequirement(!fundingRequirement);
+            setBudgetRequirement(!budgetRequirement);
           }}
         >
           <span>Donaties</span>
           <FormFieldSwitch
-            name="fundingRequirement"
-            label="fundingRequirement"
-            setToggleValue={setFundingRequirement}
-            defaultValue={fundingRequirement}
+            name="budgetRequirement"
+            label="budgetRequirement"
+            setToggleValue={setBudgetRequirement}
+            defaultValue={budgetRequirement}
           />
         </div>
       </div>
 
       {/* Geld */}
-      {fundingRequirement && (
+      {budgetRequirement && (
         <>
           <h2 className={styles.title}>Geld</h2>
           <h3 className={styles.subtitle}>Wat is het budget? </h3>
@@ -118,7 +118,7 @@ const FormPartFour = () => {
       )}
 
       {/* Diensten */}
-      {serviceRequirement && (
+      {servicesRequirement && (
         <>
           <h2 className={styles.title}>Diensten</h2>
           <h3 className={styles.subtitle}>Noteer welk soort diensten je nodig hebt</h3>

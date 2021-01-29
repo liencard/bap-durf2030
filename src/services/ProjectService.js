@@ -1,6 +1,7 @@
 import 'firebase/firestore';
 import 'firebase/storage';
 import { firestore } from 'firebase/app';
+import { values } from 'mobx';
 
 class ProjectService {
   constructor({ firebase }) {
@@ -31,18 +32,28 @@ class ProjectService {
       .collection('projects')
       .doc(data.id)
       .set({
-        title: data.title,
-        intro: data.intro,
+        about: data.about,
+        // budget: {
+        //   required: data.budgetRequirement,
+        //   amount: data.budget,
+        //   info: data.budgetDescription,
+        // },
+        categories: data.categories,
+        // contact: values.contact,
         description: data.description,
+        intro: data.intro,
         location: {
           isKnownPlace: data.isKnownPlace,
           city: data.city,
           street: data.street,
           number: data.number,
         },
-        userId: data.userId,
-        categories: data.categories,
+        // materials: {},
+        // services: {},
         themes: data.themes,
+        title: data.title,
+
+        userId: data.userId,
       });
     return result;
   };

@@ -53,6 +53,15 @@
     background-color: $green-dark;
     cursor: pointer;
   }
+
+  &:disabled {
+    background-color: $green-light;
+
+    &:hover {
+      background-color: $green-light;
+      cursor: default;
+    }
+  }
 }
 
 // @mixin textfield {
