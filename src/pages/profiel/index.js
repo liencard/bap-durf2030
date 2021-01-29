@@ -23,13 +23,16 @@ const Profile = observer(() => {
     const loadUser = async () => {
       try {
         const setUser = await uiStore.currentUser;
+        console.log('user');
+        console.log(setUser);
         if (!setUser) {
           setState(STATE_DOES_NOT_EXIST);
           return;
         }
         setState(STATE_FULLY_LOADED);
         setCurrentUser(setUser);
-        projectStore.getProjectsForUser();
+        console.log('testje');
+        await uiStore.getProjectsForUser();
       } catch (error) {
         console.log('User failed loading');
       }
@@ -45,12 +48,7 @@ const Profile = observer(() => {
           <div className={styles.profile}>
             <Container>
               <div className={styles.profile__wrapper}>
-                <img
-                  className={styles.avatar}
-                  width="80"
-                  height="80"
-                  src={currentUser.avatar}
-                />
+                <img className={styles.avatar} width="80" height="80" src={currentUser.avatar} />
                 <div>
                   <p className={styles.name}>{currentUser.name}</p>
                   <p className={styles.email}>{currentUser.email}</p>
@@ -58,21 +56,13 @@ const Profile = observer(() => {
               </div>
               <div className={styles.projects}>
                 <h1 className={styles.title}>Projecten</h1>
-                {projectStore.projects.length != 0 ? (
+                {uiStore.userProjects.length != 0 ? (
                   <>
-                    {projectStore.projects.map((project) => (
-                      <>
-                        <ProjectCard
-                          key={project.id}
-                          title={project.title}
-                          intro={project.intro}
-                          id={project.id}
-                        />
-                        <Button
-                          href={ROUTES.edit.to + project.id}
-                          text={'Bewerk project'}
-                        />
-                      </>
+                    {uiStore.userProjects.map((project, i) => (
+                      <div key={project.id}>
+                        <ProjectCard title={project.title} intro={project.intro} id={project.id} />
+                        <Button href={ROUTES.edit.to + project.id} text={'Bewerk project'} />
+                      </div>
                     ))}
                   </>
                 ) : (

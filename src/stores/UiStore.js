@@ -7,23 +7,27 @@ class UiStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.currentUser = undefined;
-    this.authService = new AuthService(
-      this.rootStore.firebase,
-      this.onAuthStateChanged
-    );
+    this.userProjects = [];
+    this.authService = new AuthService(this.rootStore.firebase, this.onAuthStateChanged);
     this.userService = new UserService(this.rootStore.firebase);
 
     makeObservable(this, {
       currentUser: observable,
       setCurrentUser: action,
       onAuthStateChanged: action,
+      addUserProjects: action,
+      userProjects: observable,
+      getProjectsForUser: action,
     });
   }
+
+  addUserProjects = (project) => {
+    this.userProjects.push(project);
+  };
 
   onAuthStateChanged = (user) => {
     if (user) {
       console.log(`de user is ingelogd ${user.email}`);
-      console.log(user);
 
       if (!this.currentUser) {
         this.setCurrentUser(user.email);
@@ -53,12 +57,7 @@ class UiStore {
   };
 
   registerUser = async (user) => {
-    const result = await this.authService.register(
-      user.name,
-      user.email,
-      user.password,
-      user.avatar
-    );
+    const result = await this.authService.register(user.name, user.email, user.password, user.avatar);
     const newRegisteredUser = new User({
       id: result.uid,
       name: result.displayName,
@@ -72,6 +71,13 @@ class UiStore {
       this.rootStore.userStore.createUser(newRegisteredUser);
     }
     return result;
+  };
+
+  getProjectsForUser = async () => {
+    const projectArr = await this.userService.getProjectsByUser(this.currentUser);
+    projectArr.forEach((project) => {
+      this.addUserProjects(project);
+    });
   };
 }
 
