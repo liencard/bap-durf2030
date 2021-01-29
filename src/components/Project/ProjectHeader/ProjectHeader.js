@@ -5,9 +5,9 @@ import { useStores } from '../../../hooks/useStores';
 
 const ProjectHeader = ({ project, id }) => {
   const { projectStore } = useStores();
-  projectStore.loadProjectLikesById(id);
-  // const likes = projectStore.loadProjectLikesById(id);
-  // console.log(likes);
+  const likes = projectStore.loadProjectLikesById(id);
+  console.log(likes);
+  console.log(likes.length);
 
   return (
     <>
@@ -41,7 +41,7 @@ const ProjectHeader = ({ project, id }) => {
         <div className={styles.buttons}>
           <Button className={styles.button} text={'Ik durf mee te helpen'} />
           <div className={styles.interact}>
-            <ProjectLikes />
+            <ProjectLikes likes={likes} />
             <ProjectHelpers />
           </div>
         </div>

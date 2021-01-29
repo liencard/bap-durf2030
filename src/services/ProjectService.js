@@ -27,9 +27,8 @@ class ProjectService {
   };
 
   getLikesById = async (id) => {
-    const snapshot = await this.db.collection('projects').doc('formtest').collection('likes').get();
-    const test = snapshot.docs.map((like) => like.data());
-    console.log(test);
+    const snapshot = await this.db.collection('projects').doc(id).collection('likes').get();
+    return snapshot.docs.map((like) => like.data());
   };
 
   create = async (data) => {
