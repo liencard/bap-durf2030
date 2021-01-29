@@ -63,12 +63,14 @@ const Header = observer(() => {
     <>
       <div className={styles.header} ref={headerBanner}>
         <div className={styles.header__left}>
-          <img src="/logo.svg" alt="logo DURF2030" width="45" height="60" />
+          <Link href={ROUTES.home}>
+            <img src="/logo.svg" alt="logo DURF2030" width="45" height="60" />
+          </Link>
           <nav className={styles.menu}>
-            <Link href="/projecten">
+            <Link href={ROUTES.projects}>
               <span className={styles.menu__item}>Alle projecten</span>
             </Link>
-            <Link href="/admin">
+            <Link href={ROUTES.admin}>
               <span className={styles.menu__item}>Kalender</span>
             </Link>
             <Link href="/">

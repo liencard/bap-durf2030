@@ -2,7 +2,12 @@ import { observer } from 'mobx-react-lite';
 import { useState, useEffect } from 'react';
 import { useStores } from '../../hooks/useStores';
 import { Container } from '../../components/Layout';
-import { ProjectHeader, ProjectContent, ProjectFooter, ProjectComments } from '../../components/Project';
+import {
+  ProjectHeader,
+  ProjectContent,
+  ProjectFooter,
+  ProjectComments,
+} from '../../components/Project';
 
 const Project = observer(({ query }) => {
   const id = query.id;
@@ -14,7 +19,9 @@ const Project = observer(({ query }) => {
   const STATE_FULLY_LOADED = 'fullyLoaded';
 
   const [project, setProject] = useState(projectStore.resolveProject(id));
-  const [state, setState] = useState(project ? STATE_LOADING_MORE_DETAILS : STATE_LOADING);
+  const [state, setState] = useState(
+    project ? STATE_LOADING_MORE_DETAILS : STATE_LOADING
+  );
 
   useEffect(() => {
     const loadProject = async (id) => {

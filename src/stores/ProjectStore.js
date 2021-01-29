@@ -20,6 +20,7 @@ class ProjectStore {
       loadAllProjects: action,
       loadProject: action,
       projects: observable,
+      updateProject: action,
     });
   }
 
@@ -79,6 +80,10 @@ class ProjectStore {
 
   updateState = async (data) => {
     return await this.projectService.updateState(data);
+  };
+
+  updateProject = async (project) => {
+    return await this.projectService.updateProject(project);
   };
 
   uploadImage = (image) => {

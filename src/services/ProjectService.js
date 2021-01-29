@@ -43,8 +43,21 @@ class ProjectService {
     return result;
   };
 
+  updateProject = async (data) => {
+    console.log('service');
+    console.log(data);
+    const result = await this.db.collection('projects').doc(data.id).update({
+      title: data.title,
+      intro: data.intro,
+    });
+    return result;
+  };
+
   updateState = async (data) => {
-    const result = await this.db.collection('projects').doc(`${data.id}`).update({ state: data.state });
+    const result = await this.db
+      .collection('projects')
+      .doc(`${data.id}`)
+      .update({ state: data.state });
     return result;
   };
 

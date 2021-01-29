@@ -1,7 +1,9 @@
 import { observer } from 'mobx-react-lite';
 import { useStores } from '../../hooks/useStores';
 import { useState, useEffect } from 'react';
+import { ROUTES } from '../../consts/index';
 import { Container } from '../../components/Layout';
+import { Button } from '../../components/UI';
 import Header from '../../components/Header/Header';
 import styles from './Profile.module.scss';
 import { ProjectCard } from '../../components/Project';
@@ -30,7 +32,6 @@ const Profile = observer(() => {
         setState(STATE_FULLY_LOADED);
         setCurrentUser(setUser);
         projectStore.getProjectsForUser();
-        console.log(projectStore.projects);
       } catch (error) {
         console.log('User failed loading');
       }
@@ -62,12 +63,18 @@ const Profile = observer(() => {
                 {projectStore.projects.length != 0 ? (
                   <>
                     {projectStore.projects.map((project) => (
-                      <ProjectCard
-                        key={project.id}
-                        title={project.title}
-                        intro={project.intro}
-                        id={project.id}
-                      />
+                      <>
+                        <ProjectCard
+                          key={project.id}
+                          title={project.title}
+                          intro={project.intro}
+                          id={project.id}
+                        />
+                        <Button
+                          href={ROUTES.edit.to + project.id}
+                          text={'Bewerk project'}
+                        />
+                      </>
                     ))}
                   </>
                 ) : (
