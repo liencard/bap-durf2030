@@ -59,10 +59,12 @@ class Project {
 
     this.id = id;
     this.userId = userId;
-    this.store = store;
     this.likes = [];
 
-    this.store.addProject(this);
+    if (store) {
+      this.store = store;
+      this.store.addProject(this);
+    }
 
     makeObservable(this, {
       likes: observable,
@@ -81,6 +83,7 @@ const projectConverter = {
   },
   fromFirestore: function (snapshot, options) {
     const data = snapshot.data(options);
+    console.log(snapshot.id);
     // left Model naam, right DB naam
     return new Project({
       id: snapshot.id,
