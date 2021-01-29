@@ -6,7 +6,6 @@ export { default as FormPartFour } from './FormPartFour/FormPartFour';
 export { default as FormPartFive } from './FormPartFive/FormPartFive';
 export { default as FormPartSix } from './FormPartSix/FormPartSix';
 export { default as FormPartSeven } from './FormPartSeven/FormPartSeven';
-export { default as FormPartEight } from './FormPartEight/FormPartEight';
 export { default as FormFieldInput } from './FormFieldInput/FormFieldInput';
 export { default as FormFieldSelect } from './FormFieldSelect/FormFieldSelect';
 export { default as FormFieldSwitch } from './FormFieldSwitch/FormFieldSwitch';

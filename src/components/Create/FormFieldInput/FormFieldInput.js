@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useField } from '@formiz/core';
 import TextField from '@material-ui/core/TextField';
-import InputAdornment from '@material-ui/core/InputAdornment';
 
 const FormFieldInput = (props) => {
   const { errorMessage, id, isValid, isSubmitted, setValue, value } = useField(props);
@@ -12,6 +11,7 @@ const FormFieldInput = (props) => {
   return (
     <>
       <TextField
+        error={showError}
         aria-required={!!required}
         required={required ? true : false}
         fullWidth
@@ -22,33 +22,13 @@ const FormFieldInput = (props) => {
         label={label}
         variant="outlined"
         value={value ?? ''}
-        onChange={(e) => setValue(e.target.value)}
-        InputProps={{ ...InputProps }}
-      />
-      {/* 
-    <div className={`${showError ? 'is-error' : ''}`}>
-
-    <label className="demo-label" htmlFor={id}>
-        {label}
-        {!!required && ' *'}
-      </label>
-      <input
-        id={id}
-        type={type || 'text'}
-        value={value ?? ''}
-        className="demo-input"
-        onChange={(e) => setValue(e.target.value)}
         onBlur={() => setIsTouched(true)}
         aria-invalid={showError}
         aria-required={!!required}
-        aria-describedby={showError ? `${id}-error` : null}
+        onChange={(e) => setValue(e.target.value)}
+        InputProps={{ ...InputProps }}
+        helperText={showError ? 'Dit veld is verplicht' : ''}
       />
-      {showError && (
-        <div id={`${id}-error`} className="demo-form-feedback">
-          {errorMessage}
-        </div>
-      )} 
-    </div>*/}
     </>
   );
 };

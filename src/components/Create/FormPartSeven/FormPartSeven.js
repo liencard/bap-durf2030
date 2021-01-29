@@ -1,18 +1,13 @@
-import { useState } from 'react';
 import styles from './FormPartSeven.module.scss';
-import { FormFieldInput } from '../index';
-import TextField from '@material-ui/core/TextField';
-import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
+import { FormFieldFileUpload } from '../';
 
 const FormPartSeven = () => {
   return (
     <>
-      <h2 className={styles.title}>Over jezelf</h2>
-      <p>Laat andere durvers iets meer over jou weten.</p>
-      <FormFieldInput multiline name="about" label="Schrijf iets over jezelf" rows={8} required />
-      <h3 className={styles.title}>Contactgegevens</h3>
-      <p>Via welk e-mail adres kunnen durvers jou contacteren?</p>
-      <FormFieldInput name="email" label="E-mail adres" required />
+      <h2 className={styles.title}>Je bent er bijna!</h2>
+      <h3 className={styles.subtitle}>Kies een omslagfoto voor je project (optioneel)</h3>
+      <p>Selecteer een foto om je project te laten opvallen.</p>
+      <FormFieldFileUpload name="image" />
     </>
   );
 };
