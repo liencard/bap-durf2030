@@ -17,6 +17,7 @@ class ProjectStore {
       loadAllProjects: action,
       loadProject: action,
       projects: observable,
+      updateProject: action,
     });
   }
 
@@ -42,21 +43,19 @@ class ProjectStore {
 
   getProjectById = (id) => this.projects.find((project) => project.id === id);
 
-  // getProjectsForUser = async () => {
-  //   console.log('hi store');
-  //   const projectArr = await this.userService.getProjectsByUser(
-  //     this.rootStore.uiStore.currentUser
-  //   );
-  //   projectArr.forEach(this.addProject);
-  // };
+  getProjectsForUser = async () => {
+    const projectArr = await this.userService.getProjectsByUser(
+      this.rootStore.uiStore.currentUser
+    );
+    projectArr.forEach(this.addProject);
+  };
 
   loadAllProjects = async () => {
-    // console.log('projects');
     const jsonProjects = await this.projectService.getAll();
     jsonProjects.forEach((json) => this.updateProjectFromServer(json));
   };
 
-  updateProjectFromServer = async (json) => {
+  updateProjectFromServer = (json) => {
     let project = this.projects.find((project) => project.id === json.id);
     if (!project) {
       project = new Project({
@@ -69,14 +68,18 @@ class ProjectStore {
         store: this.rootStore.projectStore,
       });
     }
-  };
-
+  }
+  
   loadProjectLikesById = async (id) => {
     return await this.projectService.getLikesById(id);
   };
 
   updateState = async (data) => {
     return await this.projectService.updateState(data);
+  };
+
+  updateProject = async (project) => {
+    return await this.projectService.updateProject(project);
   };
 
   uploadImage = (image) => {

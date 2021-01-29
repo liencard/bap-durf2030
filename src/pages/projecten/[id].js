@@ -4,6 +4,7 @@ import { ProjectHeader, ProjectContent, ProjectFooter, ProjectComments } from '.
 import RootStore from '../../stores';
 
 const Project = observer(({ project, id }) => {
+
   return (
     <>
       <Container>

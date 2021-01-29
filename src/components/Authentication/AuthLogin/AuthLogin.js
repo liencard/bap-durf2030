@@ -27,6 +27,7 @@ const LoginForm = () => {
       password: password,
     });
     const result = await uiStore.loginUser(user);
+    console.log(uiStore.currentUser);
     if (uiStore.currentUser) {
       router.push(ROUTES.home);
     } else {
