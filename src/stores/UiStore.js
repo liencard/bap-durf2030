@@ -7,6 +7,7 @@ class UiStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.currentUser = undefined;
+    this.userProjects = [];
     this.authService = new AuthService(
       this.rootStore.firebase,
       this.onAuthStateChanged
@@ -19,6 +20,10 @@ class UiStore {
       onAuthStateChanged: action,
     });
   }
+
+  addUserProjects = (project) => {
+    this.userProjects.push(project);
+  };
 
   onAuthStateChanged = (user) => {
     if (user) {
@@ -72,6 +77,15 @@ class UiStore {
       this.rootStore.userStore.createUser(newRegisteredUser);
     }
     return result;
+  };
+
+  getProjectsForUser = async () => {
+    const projectArr = await this.userService.getProjectsByUser(
+      this.currentUser
+    );
+    console.log('test');
+    console.log(projectArr);
+    projectArr.forEach(this.addUserProjects);
   };
 }
 

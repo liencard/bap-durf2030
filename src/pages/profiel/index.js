@@ -17,19 +17,23 @@ const Profile = observer(() => {
   const STATE_FULLY_LOADED = 'fullyLoaded';
 
   const [currentUser, setCurrentUser] = useState(uiStore.currentUser);
-  const [state, setState] = useState(currentUser ? STATE_LOADING_MORE_DETAILS : STATE_LOADING);
+  const [state, setState] = useState(
+    currentUser ? STATE_LOADING_MORE_DETAILS : STATE_LOADING
+  );
 
   useEffect(() => {
     const loadUser = async () => {
       try {
         const setUser = await uiStore.currentUser;
+        console.log('userr');
+        console.log(setUser);
         if (!setUser) {
           setState(STATE_DOES_NOT_EXIST);
           return;
         }
         setState(STATE_FULLY_LOADED);
         setCurrentUser(setUser);
-        projectStore.getProjectsForUser();
+        await uiStore.getProjectsForUser();
       } catch (error) {
         console.log('User failed loading');
       }
