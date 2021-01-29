@@ -53,15 +53,15 @@ const CreateProject = () => {
     //   themesWithValues[key] = values.themes[i];
     // });
 
-    const project = new Project({
-      // id: v4(),
-      id: 'formtest',
-      userId: 'tijdelijk',
-      store: projectStore,
-      image: values.image,
-    });
+    // const project = new Project({
+    //   // id: v4(),
+    //   id: 'formtest',
+    //   userId: 'tijdelijk',
+    //   store: projectStore,
+    //   image: values.image,
+    // });
 
-    projectStore.uploadImage(project.image);
+    // projectStore.uploadImage(project.image);
 
     // const project = new Project({
     //   // id: v4(),
@@ -91,9 +91,9 @@ const CreateProject = () => {
             <Formiz connect={projectForm} onValidSubmit={handleSubmit}>
               <form noValidate onSubmit={projectForm.submitStep}>
                 <FormizStep name="step1">
-                  <FormPartEight />
+                  <FormPartOne />
                 </FormizStep>
-                {/* <FormizStep name="step2">
+                <FormizStep name="step2">
                   <FormPartTwo />
                 </FormizStep>
                 <FormizStep name="step3">
@@ -111,7 +111,7 @@ const CreateProject = () => {
                 <FormizStep name="step7">
                   <FormPartSeven />
                 </FormizStep>
-                <FormizStep name="step8">
+                {/* <FormizStep name="step8">
                   <FormPartEight />
                 </FormizStep> */}
 

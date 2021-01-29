@@ -1,15 +1,9 @@
 import { useState } from 'react';
 import styles from './FormPartFour.module.scss';
-import { FormFieldSwitch, FormFieldInput, FormFieldSelect, FormFieldAddItem } from '../index';
-import Slider from '@material-ui/core/Slider';
-import Tooltip from '@material-ui/core/Tooltip';
+import { FormFieldSwitch, FormFieldInput, FormFieldAddItem } from '../index';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import TextField from '@material-ui/core/TextField';
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
 
 const FormPartFour = () => {
   const [serviceRequirement, setServiceRequirement] = useState(false);
