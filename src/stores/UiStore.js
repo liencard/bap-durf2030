@@ -18,6 +18,8 @@ class UiStore {
       currentUser: observable,
       setCurrentUser: action,
       onAuthStateChanged: action,
+      addUserProjects: action,
+      userProjects: observable,
     });
   }
 
@@ -83,9 +85,9 @@ class UiStore {
     const projectArr = await this.userService.getProjectsByUser(
       this.currentUser
     );
-    console.log('test');
-    console.log(projectArr);
-    projectArr.forEach(this.addUserProjects);
+    projectArr.forEach((project) => {
+      this.addUserProjects(project);
+    });
   };
 }
 

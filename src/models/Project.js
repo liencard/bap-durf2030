@@ -63,9 +63,8 @@ class Project {
 
     if (store) {
       this.store = store;
+      this.store.addProject(this);
     }
-
-    this.store.addProject(this);
 
     makeObservable(this, {
       likes: observable,
