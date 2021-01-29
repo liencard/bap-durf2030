@@ -30,7 +30,6 @@ class Project {
     store,
     likes,
   }) {
-
     // if (!store) {
     //   throw new Error('voorzie een store');
     // }
@@ -64,7 +63,6 @@ class Project {
     this.likes = [];
 
     this.store.addProject(this);
-
 
     makeObservable(this, {
       likes: observable,
