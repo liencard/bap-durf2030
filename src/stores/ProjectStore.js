@@ -1,7 +1,7 @@
 import { makeObservable, observable, action } from 'mobx';
 import ProjectService from '../services/ProjectService';
-import UserService from '../services/UserService';
 import RequirementService from '../services/RequirementService';
+import { getCurrenTimeStamp } from './';
 import Project from '../models/Project';
 import { v4 } from 'uuid';
 
@@ -12,8 +12,9 @@ class ProjectStore {
     this.projectService = new ProjectService({
       firebase: this.rootStore.firebase,
     });
-    //  this.userService = new UserService(this.rootStore.firebase);
-    this.requirementService = new RequirementService({ firebase: this.rootStore.firebase });
+    this.requirementService = new RequirementService({
+      firebase: this.rootStore.firebase,
+    });
 
     makeObservable(this, {
       loadAllProjects: action,
@@ -39,7 +40,10 @@ class ProjectStore {
 
   createRequirementsForProject = async ({ requirements, info, projectId }) => {
     if (info.materialsRequired) {
-      this.requirementService.createMaterials(requirements.materials, projectId);
+      this.requirementService.createMaterials(
+        requirements.materials,
+        projectId
+      );
     }
     if (info.servicesRequired) {
       this.requirementService.createServices(requirements.services, projectId);
@@ -75,6 +79,15 @@ class ProjectStore {
 
   loadProjectLikesById = (id) => {
     return this.projectService.getLikesById(id);
+  };
+
+  sendComment = async (comment) => {
+    comment.timestamp = getCurrenTimeStamp();
+    return await this.projectService.createComment(comment);
+  };
+
+  getCommentsForProject = async (project) => {
+    return await this.projectService.getComments(project.id);
   };
 
   updateState = async (data) => {
