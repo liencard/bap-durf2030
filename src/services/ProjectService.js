@@ -2,6 +2,7 @@ import 'firebase/firestore';
 import 'firebase/storage';
 import { firestore } from 'firebase/app';
 import { values } from 'mobx';
+import { userConverter } from '../models/User';
 
 class ProjectService {
   constructor({ firebase }) {
@@ -27,9 +28,21 @@ class ProjectService {
   };
 
   getLikesById = async (id) => {
-    const snapshot = await this.db.collection('projects').doc('formtest').collection('likes').get();
+    const snapshot = await this.db
+      .collection('projects')
+      .doc('formtest')
+      .collection('likes')
+      .get();
     const test = snapshot.docs.map((like) => like.data());
     console.log(test);
+  };
+
+  getProjectForUser = async (userId) => {
+    await this.db
+      .collectionGroup('owners')
+      .where('userId', '==', userId)
+      .withConverter(userConverter)
+      .get();
   };
 
   create = async (data) => {
