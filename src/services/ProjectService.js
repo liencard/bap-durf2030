@@ -3,6 +3,7 @@ import 'firebase/storage';
 import { projectConverter } from '../models/Project';
 import { firestore } from 'firebase/app';
 import { values } from 'mobx';
+import { userConverter } from '../models/User';
 
 class ProjectService {
   constructor({ firebase }) {
@@ -26,12 +27,45 @@ class ProjectService {
   };
 
   getLikesById = async (id) => {
-    const snapshot = await this.db.collection('projects').doc(id).collection('likes').get();
-    return snapshot.docs.map((like) => like.data());
+    const snapshot = await this.db.collection('projects').doc('formtest').collection('likes').get();
+    const test = snapshot.docs.map((like) => like.data());
+    console.log(test);
   };
 
-  create = async (project) => {
-    return await this.db.collection('projects').doc(project.id).withConverter(projectConverter).set(project);
+  getProjectForUser = async (userId) => {
+    await this.db.collectionGroup('owners').where('userId', '==', userId).withConverter(userConverter).get();
+  };
+
+  create = async (data) => {
+    // .add(...) and .doc().set(...) are completely equivalent
+    const result = await this.db
+      .collection('projects')
+      .doc(data.id)
+      .set({
+        about: data.about,
+        // budget: {
+        //   required: data.budgetRequirement,
+        //   amount: data.budget,
+        //   info: data.budgetDescription,
+        // },
+        categories: data.categories,
+        // contact: values.contact,
+        description: data.description,
+        intro: data.intro,
+        location: {
+          isKnownPlace: data.isKnownPlace,
+          city: data.city,
+          street: data.street,
+          number: data.number,
+        },
+        // materials: {},
+        // services: {},
+        themes: data.themes,
+        title: data.title,
+
+        userId: data.userId,
+      });
+    return result;
   };
 
   updateProject = async (data) => {
