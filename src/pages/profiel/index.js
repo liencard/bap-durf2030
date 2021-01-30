@@ -9,7 +9,7 @@ import styles from './Profile.module.scss';
 import { ProjectCard } from '../../components/Project';
 
 const Profile = observer(() => {
-  const { projectStore, uiStore } = useStores();
+  const { uiStore } = useStores();
 
   const STATE_LOADING = 'loading';
   const STATE_DOES_NOT_EXIST = 'doesNotExist';

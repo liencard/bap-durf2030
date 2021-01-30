@@ -1,6 +1,7 @@
 import 'firebase/firestore';
 import 'firebase/storage';
 import { projectConverter } from '../models/Project';
+import { commentConverter } from '../models/Comment';
 import { firestore } from 'firebase/app';
 import { values } from 'mobx';
 
@@ -11,7 +12,10 @@ class ProjectService {
   }
 
   getAll = async () => {
-    const snapshot = await this.db.collection('projects').withConverter(projectConverter).get();
+    const snapshot = await this.db
+      .collection('projects')
+      .withConverter(projectConverter)
+      .get();
     return snapshot.docs.map((project) => project.data());
   };
 
@@ -20,7 +24,11 @@ class ProjectService {
   // };
 
   getById = async (id) => {
-    const project = await this.db.collection('projects').doc(id).withConverter(projectConverter).get();
+    const project = await this.db
+      .collection('projects')
+      .doc(id)
+      .withConverter(projectConverter)
+      .get();
     // project = await user.project();
     return project.data();
   };
@@ -42,15 +50,6 @@ class ProjectService {
       .withConverter(userConverter)
       .get();
 
-    // const result = await snapshot.docs.map(async (doc) => {
-    //   const projectId = doc.ref.parent.parent.id;
-    //   const project = await this.getById(projectId);
-    //   console.log(project);
-    //   return project;
-    // });
-    // console.log(result);
-    // return result;
-
     return snapshot.docs.map((doc) => doc.ref.parent.parent.id);
   };
 
@@ -60,6 +59,42 @@ class ProjectService {
     ref.withConverter(projectConverter).set(project);
     return ref.id;
   };
+
+  createComment = async (comment) => {
+    return await this.db
+      .collection('projects')
+      .doc(comment.project.id)
+      .collection('comments')
+      .doc()
+      .withConverter(commentConverter)
+      .set(comment);
+  };
+
+  getComments = async (projectId) => {
+    const snapshot = await this.db
+      .collectionGroup('comments')
+      .where('projectId', '==', projectId)
+      .orderBy('timestamp')
+      .withConverter(commentConverter)
+      .get();
+    return snapshot.docs.map((comment) => comment.data());
+  };
+
+  // getComments = async (projectId, onChange) => {
+  //   await this.db
+  //     .collectionGroup('comments')
+  //     .where('projectId', '==', projectId)
+  //     .orderBy('timestamp')
+  //     .withConverter(commentConverter)
+  //     .onSnapshot(async (snapshot) => {
+  //       snapshot.docChanges().forEach(async (change) => {
+  //         if (change.type === 'added') {
+  //           const commentObj = change.doc.data();
+  //           onChange(commentObj);
+  //         }
+  //       });
+  //     });
+  // };
 
   updateProject = async (data) => {
     console.log('service');
@@ -72,7 +107,10 @@ class ProjectService {
   };
 
   updateState = async (data) => {
-    const result = await this.db.collection('projects').doc(`${data.id}`).update({ state: data.state });
+    const result = await this.db
+      .collection('projects')
+      .doc(`${data.id}`)
+      .update({ state: data.state });
     return result;
   };
 
