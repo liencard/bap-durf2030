@@ -73,8 +73,8 @@ class ProjectStore {
     }
   };
 
-  loadProjectLikesById = async (id) => {
-    return await this.projectService.getLikesById(id);
+  loadProjectLikesById = (id) => {
+    return this.projectService.getLikesById(id);
   };
 
   updateState = async (data) => {
