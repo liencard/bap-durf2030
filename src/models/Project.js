@@ -102,7 +102,6 @@ const projectConverter = {
   },
   fromFirestore: function (snapshot, options) {
     const data = snapshot.data(options);
-    // left Model naam, right DB naam
     return new Project({
       id: snapshot.id,
       title: data.title,
