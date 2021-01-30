@@ -1,7 +1,6 @@
 import { makeObservable, observable, action } from 'mobx';
 import AuthService from '../services/AuthService';
 import UserService from '../services/UserService';
-import ProjectService from '../services/ProjectService';
 import User from '../models/User';
 
 class UiStore {
@@ -13,15 +12,15 @@ class UiStore {
       this.rootStore.firebase,
       this.onAuthStateChanged
     );
-    this.projectService = new ProjectService(this.rootStore.firebase);
     this.userService = new UserService(this.rootStore.firebase);
 
     makeObservable(this, {
       currentUser: observable,
       setCurrentUser: action,
       onAuthStateChanged: action,
-      addUserProjects: action,
       userProjects: observable,
+      getProjectsForUser: action,
+      addProject: action,
     });
   }
 
@@ -82,26 +81,18 @@ class UiStore {
     return result;
   };
 
-  // NEW!!!!
   getProjectsForUser = async () => {
-    await this.projectService.getProjectsForUser(this.currentUser.id);
+    const projectArr = await this.rootStore.projectStore.projectService.getProjectsForUser(
+      this.currentUser.id
+    );
+
+    projectArr.forEach(async (projectId) => {
+      const project = await this.rootStore.projectStore.projectService.getById(
+        projectId
+      );
+      await this.addProject(project);
+    });
   };
-
-  // getProjectsForUser = async () => {
-  //   await this.rootStore.projectStore.projectService.getProjectsForUser(
-  //     this.currentUser.id
-  //   );
-  // };
-
-  // OLD CODE
-  // getProjectsForUser = async () => {
-  //   const projectArr = await this.userService.getProjectsByUser(
-  //     this.currentUser
-  //   );
-  //   projectArr.forEach((project) => {
-  //     this.addUserProjects(project);
-  //   });
-  // };
 }
 
 export default UiStore;

@@ -37,12 +37,23 @@ class ProjectService {
     console.log(test);
   };
 
-  getProjectForUser = async (userId) => {
-    await this.db
+  getProjectsForUser = async (userId) => {
+    const snapshot = await this.db
       .collectionGroup('owners')
       .where('userId', '==', userId)
       .withConverter(userConverter)
       .get();
+
+    // const result = await snapshot.docs.map(async (doc) => {
+    //   const projectId = doc.ref.parent.parent.id;
+    //   const project = await this.getById(projectId);
+    //   console.log(project);
+    //   return project;
+    // });
+    // console.log(result);
+    // return result;
+
+    return snapshot.docs.map((doc) => doc.ref.parent.parent.id);
   };
 
   create = async (data) => {
