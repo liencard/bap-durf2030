@@ -29,6 +29,7 @@ class Project {
     userId,
     store,
     likes,
+    comments = [],
   }) {
     // if (!store) {
     //   throw new Error('voorzie een store');
@@ -60,6 +61,7 @@ class Project {
     this.id = id;
     this.userId = userId;
     this.likes = [];
+    this.comments = comments;
 
     if (store) {
       this.store = store;
@@ -68,7 +70,12 @@ class Project {
 
     makeObservable(this, {
       likes: observable,
+      comments: observable,
     });
+  }
+
+  linkComment(comment) {
+    !this.comments.includes(comment) && this.comments.push(comment);
   }
 }
 

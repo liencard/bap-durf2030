@@ -8,7 +8,12 @@ const Projects = ({ projects }) => {
       <p>Test SSR projecten</p>
       <Container>
         {projects.map((project) => (
-          <ProjectCard key={project.id} title={project.title} intro={project.intro} id={project.id} />
+          <ProjectCard
+            key={project.id}
+            title={project.title}
+            intro={project.intro}
+            id={project.id}
+          />
         ))}
       </Container>
     </>
@@ -23,7 +28,12 @@ export const getStaticProps = async (context) => {
   let projects = [];
 
   await projectStore.projects.forEach((project) => {
-    projects.push({ id: project.id, title: project.title, intro: project.intro });
+    console.log(project);
+    projects.push({
+      id: project.id,
+      title: project.title,
+      intro: project.intro,
+    });
   });
 
   return {
