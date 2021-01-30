@@ -68,9 +68,9 @@ const CreateProject = () => {
     const project = new Project({
       // id: v4(),
       about: values.about,
-      budget: parseInt(values.budget) ?? '',
-      budgetDescription: values.budgetDescription ?? '',
-      budgetRequirement: values.budgetRequirement,
+      fundingAmount: parseInt(values.fundingAmount) ?? '',
+      fundingDescription: values.fundingDescription ?? '',
+      fundingRequired: values.fundingRequired,
       categories: categoriesWithValues,
       city: values.city ?? '',
       cocreators: values.cocreators ?? [],
@@ -81,22 +81,38 @@ const CreateProject = () => {
       isKnownPlace: values.isKnownPlace,
       materials: values.materials ?? [],
       materialsDescription: values.materialsDescription ?? '',
-      materialsRequirement: values.materialsRequirement,
+      materialsRequired: values.materialsRequired,
       number: values.number ?? '',
       services: values.services ?? [],
       servicesDescription: values.servicesDescription ?? '',
-      servicesRequirement: values.servicesRequirement,
+      servicesRequired: values.servicesRequired,
       street: values.street ?? '',
       themes: themesWithValues,
       title: values.title,
 
-      id: 'formtest',
+      // id: 'formtest',
       userId: 'tijdelijk',
       store: projectStore,
     });
 
-    console.log(project);
-    const result = await projectStore.createProject(project);
+    const projectId = await projectStore.createProject(project);
+
+    projectStore.createRequirementsForProject({
+      requirements: {
+        materials: project.materials,
+        services: project.services,
+      },
+      info: {
+        materialsRequired: project.materialsRequired,
+        materialsDescription: project.materialsDescription ?? '',
+        servicesRequired: project.servicesRequired,
+        servicesDescription: project.servicesDescription ?? '',
+        fundingRequired: project.fundingRequired,
+        fundingAmount: project.fundingAmount ?? 0,
+        fundingDescription: project.fundingDescription ?? '',
+      },
+      projectId: projectId,
+    });
   };
 
   return (

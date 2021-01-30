@@ -3,9 +3,9 @@ import { makeObservable, observable, action } from 'mobx';
 class Project {
   constructor({
     about,
-    budget,
-    budgetDescription,
-    budgetRequirement,
+    fundingAmount,
+    fundingDescription,
+    fundingRequired,
     categories,
     city,
     cocreators,
@@ -16,11 +16,11 @@ class Project {
     isKnownPlace,
     materials,
     materialsDescription,
-    materialsRequirement,
+    materialsRequired,
     number,
     services,
     servicesDescription,
-    servicesRequirement,
+    servicesRequired,
     street,
     themes,
     title,
@@ -34,9 +34,9 @@ class Project {
     //   throw new Error('voorzie een store');
     // }
     this.about = about;
-    this.budget = budget;
-    this.budgetDescription = budgetDescription;
-    this.budgetRequirement = budgetRequirement;
+    this.fundingAmount = fundingAmount;
+    this.fundingDescription = fundingDescription;
+    this.fundingRequired = fundingRequired;
     this.categories = categories;
     this.city = city;
     this.cocreators = cocreators;
@@ -48,11 +48,11 @@ class Project {
     this.isKnownPlace = isKnownPlace;
     this.materials = materials;
     this.materialsDescription = materialsDescription;
-    this.materialsRequirement = materialsRequirement;
+    this.materialsRequired = materialsRequired;
     this.number = number;
     this.services = services;
     this.servicesDescription = servicesDescription;
-    this.servicesRequirement = servicesRequirement;
+    this.servicesRequired = servicesRequired;
     this.street = street;
     this.themes = themes;
     this.title = title;
@@ -77,13 +77,13 @@ const projectConverter = {
     // left DB naam, right Model naam
     return {
       about: project.about,
-      budget: {
-        required: data.budgetRequirement,
-        amount: data.budget,
-        info: data.budgetDescription,
-      },
+      // budget: {
+      //   required: data.budgetRequirement,
+      //   amount: data.budget,
+      //   info: data.budgetDescription,
+      // },
       categories: project.categories,
-      contact: values.contact,
+      contact: project.contact,
       description: project.description,
       intro: project.intro,
       location: {

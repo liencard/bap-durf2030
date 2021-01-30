@@ -7,14 +7,46 @@ class RequirementService {
   }
 
   createMaterials = async (materials, projectId) => {
-    const data = materials.map((material) => {
-      return await this.db.collection('requirements').doc(projectId).collection('materials').set({
+    materials.forEach((material) => {
+      this.db.collection('requirements').doc(projectId).collection('materials').doc().set({
         amount: material.amount,
         category: material.category,
-        name: materials.name,
-        required: true,
+        name: material.name,
+        completed: false,
       });
-    })
+    });
+  };
+
+  createServices = async (services, projectId) => {
+    services.forEach((service) => {
+      this.db.collection('requirements').doc(projectId).collection('services').doc().set({
+        amount: service.amount,
+        category: service.category,
+        name: service.name,
+        completed: false,
+      });
+    });
+  };
+
+  createInfo = async (info, projectId) => {
+    this.db
+      .collection('requirements')
+      .doc(projectId)
+      .set({
+        materialsDetails: {
+          required: info.materialsRequired,
+          description: info.materialsDescription,
+        },
+        servicesDetails: {
+          required: info.servicesRequired,
+          description: info.servicesDescription,
+        },
+        fundingDetails: {
+          required: info.fundingRequired,
+          fundingAmount: info.fundingAmount,
+          fundingDescription: info.fundingDescription,
+        },
+      });
   };
 }
 
