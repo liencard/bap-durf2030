@@ -77,13 +77,13 @@ const projectConverter = {
     // left DB naam, right Model naam
     return {
       about: project.about,
-      // budget: {
-      //   required: data.budgetRequirement,
-      //   amount: data.budget,
-      //   info: data.budgetDescription,
-      // },
+      budget: {
+        required: data.budgetRequirement,
+        amount: data.budget,
+        info: data.budgetDescription,
+      },
       categories: project.categories,
-      // contact: values.contact,
+      contact: values.contact,
       description: project.description,
       intro: project.intro,
       location: {
@@ -92,11 +92,8 @@ const projectConverter = {
         street: project.street,
         number: project.number,
       },
-      // materials: {},
-      // services: {},
       themes: project.themes,
       title: project.title,
-
       userId: project.userId,
     };
   },
