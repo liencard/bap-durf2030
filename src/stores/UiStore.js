@@ -21,7 +21,7 @@ class UiStore {
     });
   }
 
-  addUserProjects = (project) => {
+  addProject = (project) => {
     this.userProjects.push(project);
   };
 
@@ -74,14 +74,10 @@ class UiStore {
   };
 
   getProjectsForUser = async () => {
-    const projectArr = await this.rootStore.projectStore.projectService.getProjectsForUser(
-      this.currentUser.id
-    );
+    const projectArr = await this.rootStore.projectStore.projectService.getProjectsForUser(this.currentUser.id);
 
     projectArr.forEach(async (projectId) => {
-      const project = await this.rootStore.projectStore.projectService.getById(
-        projectId
-      );
+      const project = await this.rootStore.projectStore.projectService.getById(projectId);
       await this.addProject(project);
     });
   };
