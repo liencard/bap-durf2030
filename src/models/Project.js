@@ -8,7 +8,6 @@ class Project {
     fundingRequired,
     categories,
     city,
-    cocreators,
     contact,
     description,
     image,
@@ -18,6 +17,7 @@ class Project {
     materialsDescription,
     materialsRequired,
     number,
+    owners,
     services,
     servicesDescription,
     servicesRequired,
@@ -40,9 +40,7 @@ class Project {
     this.fundingRequired = fundingRequired;
     this.categories = categories;
     this.city = city;
-    this.cocreators = cocreators;
     this.contact = contact;
-
     this.description = description;
     this.image = image;
     this.intro = intro;
@@ -51,6 +49,7 @@ class Project {
     this.materialsDescription = materialsDescription;
     this.materialsRequired = materialsRequired;
     this.number = number;
+    this.owners = owners;
     this.services = services;
     this.servicesDescription = servicesDescription;
     this.servicesRequired = servicesRequired;

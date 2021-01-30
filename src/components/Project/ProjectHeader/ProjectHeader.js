@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import styles from './ProjectHeader.module.scss';
 import { Button } from '../../UI';
 import { ProjectLikes, ProjectHelpers } from '../../Project';
@@ -5,9 +6,13 @@ import { useStores } from '../../../hooks/useStores';
 
 const ProjectHeader = ({ project }) => {
   const { projectStore } = useStores();
-  const likes = projectStore.loadProjectLikesById(project.id);
-  console.log(likes);
-  console.log(likes.length);
+  const [likes, setLikes] = useState([]);
+
+  useEffect(() => {
+    projectStore.loadProjectLikesById('formtest').then((result) => {
+      setLikes(result.length);
+    });
+  }, []);
 
   return (
     <>
@@ -16,6 +21,7 @@ const ProjectHeader = ({ project }) => {
         <ul className={styles.tags}>
           <li className={styles.tag}>Cultuur</li>
           <li className={styles.tag}>Theater</li>
+          <li className={styles.tag}>{likes}</li>
         </ul>
         <div className={styles.text}>
           <h1 className={styles.title}>{project.title}</h1>

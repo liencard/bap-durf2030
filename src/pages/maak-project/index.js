@@ -52,28 +52,13 @@ const CreateProject = () => {
       themesWithValues[key] = values.themes[i];
     });
 
-    // projectStore.uploadImage(values.image);
-
-    // let projectFromForm = {};
-
-    // if (values.isKnownPlace) {
-    //   projectFromForm[city] = values.city;
-    // }
-
-    // if (values.budgetRequirement) {
-    //   projectFromForm[budget] = values.budget;
-    //   projectFromForm[budgetDescription] = values.budgetDescription;
-    // }
-
     const project = new Project({
-      // id: v4(),
       about: values.about,
-      fundingAmount: parseInt(values.fundingAmount) ?? '',
+      fundingAmount: values.fundingAmount ?? '',
       fundingDescription: values.fundingDescription ?? '',
       fundingRequired: values.fundingRequired,
       categories: categoriesWithValues,
       city: values.city ?? '',
-      cocreators: values.cocreators ?? [],
       contact: values.contact,
       description: values.description,
       image: values.image,
@@ -83,6 +68,7 @@ const CreateProject = () => {
       materialsDescription: values.materialsDescription ?? '',
       materialsRequired: values.materialsRequired,
       number: values.number ?? '',
+      owners: values.owners ?? [],
       services: values.services ?? [],
       servicesDescription: values.servicesDescription ?? '',
       servicesRequired: values.servicesRequired,
@@ -90,8 +76,7 @@ const CreateProject = () => {
       themes: themesWithValues,
       title: values.title,
 
-      // id: 'formtest',
-      userId: 'tijdelijk',
+      userId: uiStore.currentUser.id,
       store: projectStore,
     });
 
