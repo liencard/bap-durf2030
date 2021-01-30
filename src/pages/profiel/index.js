@@ -17,14 +17,14 @@ const Profile = observer(() => {
   const STATE_FULLY_LOADED = 'fullyLoaded';
 
   const [currentUser, setCurrentUser] = useState(uiStore.currentUser);
-  const [state, setState] = useState(currentUser ? STATE_LOADING_MORE_DETAILS : STATE_LOADING);
+  const [state, setState] = useState(
+    currentUser ? STATE_LOADING_MORE_DETAILS : STATE_LOADING
+  );
 
   useEffect(() => {
     const loadUser = async () => {
       try {
         const setUser = await uiStore.currentUser;
-        console.log('user');
-        console.log(setUser);
         if (!setUser) {
           setState(STATE_DOES_NOT_EXIST);
           return;
@@ -32,6 +32,8 @@ const Profile = observer(() => {
         setState(STATE_FULLY_LOADED);
         setCurrentUser(setUser);
         uiStore.getProjectsForUser();
+        console.log('project array');
+        console.log(uiStore.userProjects);
       } catch (error) {
         console.log('User failed loading');
       }
@@ -47,7 +49,12 @@ const Profile = observer(() => {
           <div className={styles.profile}>
             <Container>
               <div className={styles.profile__wrapper}>
-                <img className={styles.avatar} width="80" height="80" src={currentUser.avatar} />
+                <img
+                  className={styles.avatar}
+                  width="80"
+                  height="80"
+                  src={currentUser.avatar}
+                />
                 <div>
                   <p className={styles.name}>{currentUser.name}</p>
                   <p className={styles.email}>{currentUser.email}</p>
@@ -58,10 +65,18 @@ const Profile = observer(() => {
                 {uiStore.userProjects.length != 0 ? (
                   <>
                     {uiStore.userProjects.map((project) => (
-                      <>
-                        <ProjectCard key={project.id} title={project.title} intro={project.intro} id={project.id} />
-                        <Button href={ROUTES.edit.to + project.id} text={'Bewerk project'} />
-                      </>
+                      <div key={project.id}>
+                        <ProjectCard
+                          key={project.id}
+                          title={project.data.title}
+                          intro={project.data.intro}
+                          id={project.id}
+                        />
+                        <Button
+                          href={ROUTES.edit.to + project.id}
+                          text={'Bewerk project'}
+                        />
+                      </div>
                     ))}
                   </>
                 ) : (

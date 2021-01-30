@@ -42,6 +42,7 @@ class UserService {
       .get();
   };
 
+  // WEG
   getProjectsByUser = async (user) => {
     const projectsRef = this.db
       .collection('users')
