@@ -51,11 +51,11 @@ class ProjectStore {
     if (!project) {
       project = new Project({
         id: json.id,
-        title: json.data.title,
-        userId: json.data.userId,
-        intro: json.data.intro,
-        tags: json.data.tags,
-        state: json.data.state,
+        title: json.title,
+        userId: json.userId,
+        intro: json.intro,
+        // tags: json.tags,
+        state: json.state,
         store: this.rootStore.projectStore,
       });
     }

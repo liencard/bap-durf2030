@@ -1,5 +1,6 @@
 import 'firebase/firestore';
 import 'firebase/storage';
+import { projectConverter } from '../models/Project';
 import { firestore } from 'firebase/app';
 import { values } from 'mobx';
 
@@ -10,11 +11,8 @@ class ProjectService {
   }
 
   getAll = async () => {
-    const snapshot = await this.db.collection('projects').get();
-    // return snapshot.docs.map((project) => project.data());
-    return snapshot.docs.map((projectFromDB) => {
-      return { id: projectFromDB.id, data: projectFromDB.data() };
-    });
+    const snapshot = await this.db.collection('projects').withConverter(projectConverter).get();
+    return snapshot.docs.map((project) => project.data());
   };
 
   // getAllIds = () => {
@@ -22,8 +20,9 @@ class ProjectService {
   // };
 
   getById = async (id) => {
-    const snapshot = await this.db.collection('projects').doc(id).get();
-    return { id: snapshot.id, data: snapshot.data() };
+    const project = await this.db.collection('projects').doc(id).withConverter(projectConverter).get();
+    // project = await user.project();
+    return project.data();
   };
 
   getLikesById = async (id) => {
@@ -31,36 +30,8 @@ class ProjectService {
     return snapshot.docs.map((like) => like.data());
   };
 
-  create = async (data) => {
-    // .add(...) and .doc().set(...) are completely equivalent
-    const result = await this.db
-      .collection('projects')
-      .doc(data.id)
-      .set({
-        about: data.about,
-        // budget: {
-        //   required: data.budgetRequirement,
-        //   amount: data.budget,
-        //   info: data.budgetDescription,
-        // },
-        categories: data.categories,
-        // contact: values.contact,
-        description: data.description,
-        intro: data.intro,
-        location: {
-          isKnownPlace: data.isKnownPlace,
-          city: data.city,
-          street: data.street,
-          number: data.number,
-        },
-        // materials: {},
-        // services: {},
-        themes: data.themes,
-        title: data.title,
-
-        userId: data.userId,
-      });
-    return result;
+  create = async (project) => {
+    return await this.db.collection('projects').doc(project.id).withConverter(projectConverter).set(project);
   };
 
   updateProject = async (data) => {
@@ -74,10 +45,7 @@ class ProjectService {
   };
 
   updateState = async (data) => {
-    const result = await this.db
-      .collection('projects')
-      .doc(`${data.id}`)
-      .update({ state: data.state });
+    const result = await this.db.collection('projects').doc(`${data.id}`).update({ state: data.state });
     return result;
   };
 

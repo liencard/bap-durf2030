@@ -76,20 +76,39 @@ const projectConverter = {
   toFirestore: function (project) {
     // left DB naam, right Model naam
     return {
-      title: project.title,
+      about: project.about,
+      // budget: {
+      //   required: data.budgetRequirement,
+      //   amount: data.budget,
+      //   info: data.budgetDescription,
+      // },
+      categories: project.categories,
+      // contact: values.contact,
+      description: project.description,
       intro: project.intro,
+      location: {
+        isKnownPlace: project.isKnownPlace,
+        city: project.city,
+        street: project.street,
+        number: project.number,
+      },
+      // materials: {},
+      // services: {},
+      themes: project.themes,
+      title: project.title,
+
       userId: project.userId,
     };
   },
   fromFirestore: function (snapshot, options) {
     const data = snapshot.data(options);
-    console.log(snapshot.id);
     // left Model naam, right DB naam
     return new Project({
       id: snapshot.id,
       title: data.title,
       intro: data.intro,
       userId: data.userId,
+      state: data.state,
     });
   },
 };

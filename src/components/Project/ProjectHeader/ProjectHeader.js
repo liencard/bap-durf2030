@@ -3,9 +3,9 @@ import { Button } from '../../UI';
 import { ProjectLikes, ProjectHelpers } from '../../Project';
 import { useStores } from '../../../hooks/useStores';
 
-const ProjectHeader = ({ project, id }) => {
+const ProjectHeader = ({ project }) => {
   const { projectStore } = useStores();
-  const likes = projectStore.loadProjectLikesById(id);
+  const likes = projectStore.loadProjectLikesById(project.id);
   console.log(likes);
   console.log(likes.length);
 

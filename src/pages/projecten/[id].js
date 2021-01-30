@@ -3,12 +3,11 @@ import { Container } from '../../components/Layout';
 import { ProjectHeader, ProjectContent, ProjectFooter, ProjectComments } from '../../components/Project';
 import RootStore from '../../stores';
 
-const Project = observer(({ project, id }) => {
-
+const Project = observer(({ project }) => {
   return (
     <>
       <Container>
-        <ProjectHeader project={project} id={id} />
+        <ProjectHeader project={project} />
         <ProjectContent />
         <ProjectFooter />
         <ProjectComments />
@@ -34,10 +33,15 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async ({ params }) => {
   const store = new RootStore();
   const { projectStore } = store;
-  const project = await projectStore.projectService.getById(params.id);
+  const data = await projectStore.projectService.getById(params.id);
+  const project = {
+    id: data.id,
+    title: data.title,
+    intro: data.intro,
+  };
 
   return {
-    props: { project: project.data, id: project.id },
+    props: { project },
   };
 };
 
