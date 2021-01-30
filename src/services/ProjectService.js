@@ -26,8 +26,32 @@ class ProjectService {
   };
 
   getLikesById = async (id) => {
-    const snapshot = await this.db.collection('projects').doc(id).collection('likes').get();
-    return snapshot.docs.map((like) => like.data());
+    const snapshot = await this.db
+      .collection('projects')
+      .doc('formtest')
+      .collection('likes')
+      .get();
+    const test = snapshot.docs.map((like) => like.data());
+    console.log(test);
+  };
+
+  getProjectsForUser = async (userId) => {
+    const snapshot = await this.db
+      .collectionGroup('owners')
+      .where('userId', '==', userId)
+      .withConverter(userConverter)
+      .get();
+
+    // const result = await snapshot.docs.map(async (doc) => {
+    //   const projectId = doc.ref.parent.parent.id;
+    //   const project = await this.getById(projectId);
+    //   console.log(project);
+    //   return project;
+    // });
+    // console.log(result);
+    // return result;
+
+    return snapshot.docs.map((doc) => doc.ref.parent.parent.id);
   };
 
   create = async (project) => {

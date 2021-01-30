@@ -30,6 +30,7 @@ class UserService {
     return await this.db.collectionGroup('users').where('admin', '==', false).withConverter(userConverter).get();
   };
 
+  // WEG
   getProjectsByUser = async (user) => {
     const projectsRef = this.db.collection('users').doc(user.email).collection('projects');
 
