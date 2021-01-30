@@ -26,11 +26,7 @@ class ProjectService {
   };
 
   getLikesById = async (id) => {
-    const snapshot = await this.db
-      .collection('projects')
-      .doc('formtest')
-      .collection('likes')
-      .get();
+    const snapshot = await this.db.collection('projects').doc('formtest').collection('likes').get();
     const test = snapshot.docs.map((like) => like.data());
     console.log(test);
   };
@@ -55,9 +51,17 @@ class ProjectService {
   };
 
   create = async (project) => {
-    // formtest verwijderen
+    // dummy verwijderen (doc leeg laten)
     const ref = await this.db.collection('projects').doc('dummy');
     ref.withConverter(projectConverter).set(project);
+    project.owners.forEach((owner) => {
+      ref.collection('owners').doc(owner.id).set({
+        id: owner.id,
+        avatar: owner.avatar,
+        name: owner.name,
+      });
+    });
+
     return ref.id;
   };
 
