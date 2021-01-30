@@ -28,7 +28,7 @@ class ProjectStore {
   loadProject = async (id) => {
     const jsonProject = await this.projectService.getById(id);
     this.updateProjectFromServer(jsonProject);
-    return this.resolveProject(id);
+    return this.getProjectById(id);
   };
 
   createProject = async (project) => {
@@ -38,8 +38,6 @@ class ProjectStore {
   createImageForProject = async (image) => {
     // to do linken
   };
-
-  resolveProject = (id) => this.projects.find((project) => project.id === id);
 
   getProjectById = (id) => this.projects.find((project) => project.id === id);
 
