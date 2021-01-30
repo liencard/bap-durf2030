@@ -1,6 +1,7 @@
 import 'firebase/firestore';
 import 'firebase/storage';
 import { projectConverter } from '../models/Project';
+import { userConverter } from '../models/User';
 import { commentConverter } from '../models/Comment';
 import { firestore } from 'firebase/app';
 import { values } from 'mobx';
@@ -34,13 +35,8 @@ class ProjectService {
   };
 
   getLikesById = async (id) => {
-    const snapshot = await this.db
-      .collection('projects')
-      .doc('formtest')
-      .collection('likes')
-      .get();
-    const test = snapshot.docs.map((like) => like.data());
-    console.log(test);
+    const snapshot = await this.db.collection('projects').doc(id).collection('likes').get();
+    return snapshot.docs.map((like) => like.data());
   };
 
   getProjectsForUser = async (userId) => {
@@ -54,9 +50,17 @@ class ProjectService {
   };
 
   create = async (project) => {
-    // formtest verwijderen
-    const ref = await this.db.collection('projects').doc('dummy');
+    // dummy verwijderen (doc leeg laten)
+    const ref = await this.db.collection('projects').doc();
     ref.withConverter(projectConverter).set(project);
+    project.owners.forEach((owner) => {
+      ref.collection('owners').doc(owner.id).set({
+        userId: owner.id,
+        avatar: owner.avatar,
+        name: owner.name,
+      });
+    });
+
     return ref.id;
   };
 
