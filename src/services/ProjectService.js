@@ -1,6 +1,7 @@
 import 'firebase/firestore';
 import 'firebase/storage';
 import { projectConverter } from '../models/Project';
+import { userConverter } from '../models/User';
 import { firestore } from 'firebase/app';
 import { values } from 'mobx';
 
@@ -55,7 +56,7 @@ class ProjectService {
     ref.withConverter(projectConverter).set(project);
     project.owners.forEach((owner) => {
       ref.collection('owners').doc(owner.id).set({
-        id: owner.id,
+        userId: owner.id,
         avatar: owner.avatar,
         name: owner.name,
       });

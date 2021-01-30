@@ -26,7 +26,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 };
 
@@ -42,6 +42,11 @@ export const getStaticProps = async ({ params }) => {
 
   return {
     props: { project },
+
+    // Next.js will attempt to re-generate the page:
+    // - When a request comes in
+    // - At most once every second
+    revalidate: 1, // In seconds
   };
 };
 
