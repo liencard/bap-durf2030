@@ -3,9 +3,9 @@ import { makeObservable, observable, action } from 'mobx';
 class Project {
   constructor({
     about,
-    budget,
-    budgetDescription,
-    budgetRequirement,
+    fundingAmount,
+    fundingDescription,
+    fundingRequired,
     categories,
     city,
     cocreators,
@@ -16,11 +16,11 @@ class Project {
     isKnownPlace,
     materials,
     materialsDescription,
-    materialsRequirement,
+    materialsRequired,
     number,
     services,
     servicesDescription,
-    servicesRequirement,
+    servicesRequired,
     street,
     themes,
     title,
@@ -34,9 +34,9 @@ class Project {
     //   throw new Error('voorzie een store');
     // }
     this.about = about;
-    this.budget = budget;
-    this.budgetDescription = budgetDescription;
-    this.budgetRequirement = budgetRequirement;
+    this.fundingAmount = fundingAmount;
+    this.fundingDescription = fundingDescription;
+    this.fundingRequired = fundingRequired;
     this.categories = categories;
     this.city = city;
     this.cocreators = cocreators;
@@ -48,11 +48,11 @@ class Project {
     this.isKnownPlace = isKnownPlace;
     this.materials = materials;
     this.materialsDescription = materialsDescription;
-    this.materialsRequirement = materialsRequirement;
+    this.materialsRequired = materialsRequired;
     this.number = number;
     this.services = services;
     this.servicesDescription = servicesDescription;
-    this.servicesRequirement = servicesRequirement;
+    this.servicesRequired = servicesRequired;
     this.street = street;
     this.themes = themes;
     this.title = title;
@@ -76,20 +76,35 @@ const projectConverter = {
   toFirestore: function (project) {
     // left DB naam, right Model naam
     return {
-      title: project.title,
+      about: project.about,
+      // budget: {
+      //   required: data.budgetRequirement,
+      //   amount: data.budget,
+      //   info: data.budgetDescription,
+      // },
+      categories: project.categories,
+      contact: project.contact,
+      description: project.description,
       intro: project.intro,
+      location: {
+        isKnownPlace: project.isKnownPlace,
+        city: project.city,
+        street: project.street,
+        number: project.number,
+      },
+      themes: project.themes,
+      title: project.title,
       userId: project.userId,
     };
   },
   fromFirestore: function (snapshot, options) {
     const data = snapshot.data(options);
-    console.log(snapshot.id);
-    // left Model naam, right DB naam
     return new Project({
       id: snapshot.id,
       title: data.title,
       intro: data.intro,
       userId: data.userId,
+      state: data.state,
     });
   },
 };

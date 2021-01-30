@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import styles from './FormPartTwo.module.scss';
-import { FormFieldInput, FormFieldSelect, FormFieldSwitch, FormFieldCheckbox } from '../index';
-import { Grid } from '../../Layout';
+import { FormFieldCheckbox } from '../index';
 
 import FormControl from '@material-ui/core/FormControl';
 
