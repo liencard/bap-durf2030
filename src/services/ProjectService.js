@@ -52,7 +52,7 @@ class ProjectService {
 
   create = async (project) => {
     // dummy verwijderen (doc leeg laten)
-    const ref = await this.db.collection('projects').doc('dummy');
+    const ref = await this.db.collection('projects').doc();
     ref.withConverter(projectConverter).set(project);
     project.owners.forEach((owner) => {
       ref.collection('owners').doc(owner.id).set({
