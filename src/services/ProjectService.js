@@ -35,7 +35,11 @@ class ProjectService {
   };
 
   getLikesById = async (id) => {
-    const snapshot = await this.db.collection('projects').doc(id).collection('likes').get();
+    const snapshot = await this.db
+      .collection('projects')
+      .doc(id)
+      .collection('likes')
+      .get();
     return snapshot.docs.map((like) => like.data());
   };
 

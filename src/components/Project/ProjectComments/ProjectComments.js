@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useStores } from '../../../hooks/useStores';
 import styles from './ProjectComments.module.scss';
+import ProjectComment from './ProjectComment';
 import Comment from '../../../models/Comment';
 
 const ProjectComments = ({ project }) => {
@@ -31,18 +32,9 @@ const ProjectComments = ({ project }) => {
   };
 
   useEffect(() => {
-    // projectStore.getCommentsForProject(project).then((result) => {
-    //   console.log(result);
-    //   setComments(result);
-    //   console.log(comments);
-    // });
-    // console.log('WERK');
-    // console.log(comments);
     const loadComments = async () => {
       try {
         const result = await projectStore.getCommentsForProject(project);
-        console.log('result');
-        console.log(result);
         if (result.length === 0) {
           console.log('test');
           setState(STATE_DOES_NOT_EXIST);
@@ -50,8 +42,6 @@ const ProjectComments = ({ project }) => {
         }
         setState(STATE_FULLY_LOADED);
         setComments(result);
-        console.log('comments');
-        console.log(comments);
       } catch (error) {
         console.log('comments failed loading');
       }
@@ -64,43 +54,19 @@ const ProjectComments = ({ project }) => {
       <div className={styles.comments}>
         <h2 className={styles.title}>Comments</h2>
 
-        {/* COMMENT */}
-        <div className={styles.comment}>
-          <div className={styles.user}>
-            <img
-              className={styles.image}
-              src="/pfp-temp.jpg"
-              alt="profielfoto van organisator"
-            />
-            <div>
-              <p className={styles.name}>Naam Voornaam</p>
-              <p className={styles.date}>x dagen geleden</p>
-            </div>
+        {comments.length != 0 ? (
+          <>
+            {comments.map((comment) => (
+              <ProjectComment key={comment.id} comment={comment} />
+            ))}
+          </>
+        ) : (
+          <div>
+            <p>Geen commments</p>
           </div>
-          <p>Tekstje</p>
-        </div>
-
-        {/* COMMENT */}
-        <div className={styles.comment}>
-          <div className={styles.user}>
-            <img
-              className={styles.image}
-              src="/pfp-temp.jpg"
-              alt="profielfoto van organisator"
-            />
-            <div>
-              <p className={styles.name}>Naam Voornaam</p>
-              <p className={styles.date}>x dagen geleden</p>
-            </div>
-          </div>
-          <p>
-            Dit is zeker iets leuks om samen te doen met de familie, ik help
-            graag mee :)
-          </p>
-        </div>
+        )}
       </div>
 
-      {/* FORM */}
       <div className={styles.create}>
         <p className={styles.title}>Laat een bericht achter</p>
         <form onSubmit={handleSubmit}>

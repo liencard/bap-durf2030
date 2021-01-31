@@ -86,8 +86,29 @@ class ProjectStore {
     return await this.projectService.createComment(comment);
   };
 
+  onCommentChanged = async (comment) => {
+    const project = this.getProjectById(comment.project.id);
+    project.linkComment(comment);
+    //CASE 1: de message is van de currentuser
+    if (message.user.id === this.rootStore.uiStore.currentUser.id) {
+      this.rootStore.uiStore.currentUser.linkMessage(message);
+    } else {
+      //CASE 2: de message is van een contact
+      const fromContact = this.rootStore.userStore.getUserById(message.user.id);
+      if (fromContact) {
+        fromContact.linkMessage(message);
+      } else {
+        //CASE 3: de message is van een "niet contact"
+        //niets doen
+      }
+    }
+  };
+
   getCommentsForProject = async (project) => {
-    return await this.projectService.getComments(project.id);
+    return await this.projectService.getComments(
+      project.id,
+      this.onCommentChanged
+    );
   };
 
   updateState = async (data) => {

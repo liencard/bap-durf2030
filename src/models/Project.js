@@ -70,6 +70,7 @@ class Project {
     makeObservable(this, {
       likes: observable,
       comments: observable,
+      linkComment: action,
     });
   }
 
