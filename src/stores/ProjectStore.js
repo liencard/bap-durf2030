@@ -43,10 +43,7 @@ class ProjectStore {
 
   createRequirementsForProject = async ({ requirements, info, projectId }) => {
     if (info.materialsRequired) {
-      this.requirementService.createMaterials(
-        requirements.materials,
-        projectId
-      );
+      this.requirementService.createMaterials(requirements.materials, projectId);
     }
     if (info.servicesRequired) {
       this.requirementService.createServices(requirements.services, projectId);
@@ -98,10 +95,8 @@ class ProjectStore {
   };
 
   getCommentsForProject = async (project) => {
-    return await this.projectService.getComments(
-      project.id,
-      this.onCommentChanged
-    );
+    const comments = await this.projectService.getComments(project.id, this.onCommentChanged);
+    console.log(comments);
   };
 
   updateState = async (data) => {

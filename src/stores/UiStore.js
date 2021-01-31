@@ -8,6 +8,7 @@ class UiStore {
     this.rootStore = rootStore;
     this.currentUser = undefined;
     this.userProjects = [];
+    this.userLikes = [];
     this.authService = new AuthService(
       this.rootStore.firebase,
       this.onAuthStateChanged
@@ -82,10 +83,14 @@ class UiStore {
   };
 
   getProjectsForUser = async () => {
-    const projectArr = await this.rootStore.projectStore.projectService.getProjectsForUser(this.currentUser.id);
+    const projectArr = await this.rootStore.projectStore.projectService.getProjectsForUser(
+      this.currentUser.id
+    );
 
     projectArr.forEach(async (projectId) => {
-      const project = await this.rootStore.projectStore.projectService.getById(projectId);
+      const project = await this.rootStore.projectStore.projectService.getById(
+        projectId
+      );
       await this.addProject(project);
     });
   };

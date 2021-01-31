@@ -15,6 +15,7 @@ const ProjectComment = ({ comment }) => {
     'Nov',
     'Dec',
   ];
+
   const year = comment.timestamp.toDate().getFullYear();
   const month = months[comment.timestamp.toDate().getMonth()];
   const day = comment.timestamp.toDate().getDate();

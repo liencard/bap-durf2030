@@ -1,10 +1,11 @@
+import { observer } from 'mobx-react-lite';
 import { useState, useEffect } from 'react';
 import { useStores } from '../../../hooks/useStores';
 import styles from './ProjectComments.module.scss';
 import ProjectComment from './ProjectComment';
 import Comment from '../../../models/Comment';
 
-const ProjectComments = ({ project }) => {
+const ProjectComments = observer(({ project }) => {
   const { uiStore, projectStore } = useStores();
   const [content, setContent] = useState('');
   const [comments, setComments] = useState([]);
@@ -33,6 +34,7 @@ const ProjectComments = ({ project }) => {
 
   useEffect(() => {
     const loadComments = async () => {
+      console.log('load comments wordt uitgevoerd');
       try {
         //await projectStore.loadAllProjects();
         const result = await projectStore.loadProject(project.id);
@@ -96,6 +98,6 @@ const ProjectComments = ({ project }) => {
       </div>
     </>
   );
-};
+});
 
 export default ProjectComments;

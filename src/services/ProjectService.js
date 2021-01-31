@@ -13,10 +13,7 @@ class ProjectService {
   }
 
   getAll = async () => {
-    const snapshot = await this.db
-      .collection('projects')
-      .withConverter(projectConverter)
-      .get();
+    const snapshot = await this.db.collection('projects').withConverter(projectConverter).get();
     return snapshot.docs.map((project) => project.data());
   };
 
@@ -25,21 +22,13 @@ class ProjectService {
   // };
 
   getById = async (id) => {
-    const project = await this.db
-      .collection('projects')
-      .doc(id)
-      .withConverter(projectConverter)
-      .get();
+    const project = await this.db.collection('projects').doc(id).withConverter(projectConverter).get();
     // project = await user.project();
     return project.data();
   };
 
   getLikesById = async (id) => {
-    const snapshot = await this.db
-      .collection('projects')
-      .doc(id)
-      .collection('likes')
-      .get();
+    const snapshot = await this.db.collection('projects').doc(id).collection('likes').get();
     return snapshot.docs.map((like) => like.data());
   };
 
@@ -116,10 +105,7 @@ class ProjectService {
   };
 
   updateState = async (data) => {
-    const result = await this.db
-      .collection('projects')
-      .doc(`${data.id}`)
-      .update({ state: data.state });
+    const result = await this.db.collection('projects').doc(`${data.id}`).update({ state: data.state });
     return result;
   };
 
