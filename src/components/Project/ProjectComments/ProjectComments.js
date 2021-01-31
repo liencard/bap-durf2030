@@ -33,6 +33,7 @@ const ProjectComments = ({ project }) => {
     const loadComments = async () => {
       console.log('load comments wordt uitgevoerd');
       try {
+        await projectStore.loadAllProjects();
         const result = await projectStore.getCommentsForProject(project);
         console.log(result);
         if (result.length === 0) {
@@ -42,6 +43,10 @@ const ProjectComments = ({ project }) => {
         }
         setState(STATE_FULLY_LOADED);
         setComments(result);
+        console.log(projectStore.projects);
+        //const project = await projectStore.getProjectById(project.id);
+        console.log('test');
+        //console.log(project);
       } catch (error) {
         console.log('comments failed loading');
       }

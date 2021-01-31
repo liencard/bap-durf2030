@@ -21,6 +21,11 @@ class User {
     this.email = email;
     this.password = password;
     this.admin = admin;
+    this.comments = [];
+  }
+
+  linkComment(comment) {
+    !this.comments.includes(comment) && this.comments.push(comment);
   }
 }
 

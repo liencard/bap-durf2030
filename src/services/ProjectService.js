@@ -77,6 +77,7 @@ class ProjectService {
   //   return snapshot.docs.map((comment) => comment.data());
   // };
 
+  // functie werkt (commentObj is steeds nieuwe toegevoegde comment)
   getComments = async (projectId, onChange) => {
     await this.db
       .collectionGroup('comments')
