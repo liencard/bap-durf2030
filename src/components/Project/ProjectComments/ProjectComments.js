@@ -14,9 +14,7 @@ const ProjectComments = ({ project }) => {
   const STATE_LOADING_MORE_DETAILS = 'loadingMoreDetails';
   const STATE_FULLY_LOADED = 'fullyLoaded';
 
-  const [state, setState] = useState(
-    comments ? STATE_LOADING_MORE_DETAILS : STATE_LOADING
-  );
+  const [state, setState] = useState(comments ? STATE_LOADING_MORE_DETAILS : STATE_LOADING);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,8 +31,10 @@ const ProjectComments = ({ project }) => {
 
   useEffect(() => {
     const loadComments = async () => {
+      console.log('load comments wordt uitgevoerd');
       try {
         const result = await projectStore.getCommentsForProject(project);
+        console.log(result);
         if (result.length === 0) {
           console.log('test');
           setState(STATE_DOES_NOT_EXIST);
