@@ -60,7 +60,7 @@ class Project {
     this.id = id;
     this.userId = userId;
     this.likes = [];
-    this.comments = comments;
+    this.comments = [];
 
     if (store) {
       this.store = store;
@@ -70,7 +70,13 @@ class Project {
     makeObservable(this, {
       likes: observable,
       comments: observable,
+      linkComment: action,
     });
+  }
+
+  getComments() {
+    const res = this.store.loadProjectCommentsById(this.id);
+    console.log(res);
   }
 
   linkComment(comment) {
@@ -78,6 +84,27 @@ class Project {
   }
 }
 
+// Server side rendering of detail page, convert data
+const convertData = {
+  toJSON(project) {
+    return {
+      id: project.id,
+      title: project.title,
+      intro: project.intro,
+    };
+  },
+
+  fromJSON(project, store) {
+    return new Project({
+      id: project.id,
+      title: project.title,
+      intro: project.intro,
+      store: store,
+    });
+  },
+};
+
+// From and to firebase data
 const projectConverter = {
   toFirestore: function (project) {
     // left DB naam, right Model naam
@@ -115,6 +142,6 @@ const projectConverter = {
   },
 };
 
-export { projectConverter };
+export { projectConverter, convertData };
 
 export default Project;
