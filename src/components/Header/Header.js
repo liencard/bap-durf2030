@@ -137,11 +137,7 @@ const Header = observer(() => {
                 ''
               )}
               <div>
-                <ButtonUI
-                  aria-controls="simple-menu"
-                  aria-haspopup="true"
-                  onClick={handleClick}
-                >
+                <ButtonUI aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                   <img
                     className={styles.menu__pfp}
                     src={uiStore.currentUser.avatar}

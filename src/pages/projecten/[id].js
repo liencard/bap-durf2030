@@ -1,14 +1,15 @@
 import { observer } from 'mobx-react-lite';
 import { Container } from '../../components/Layout';
-import {
-  ProjectHeader,
-  ProjectContent,
-  ProjectFooter,
-  ProjectComments,
-} from '../../components/Project';
+import { ProjectHeader, ProjectContent, ProjectFooter, ProjectComments } from '../../components/Project';
 import RootStore from '../../stores';
+import { convertData } from '../../models/Project';
+import { useStores } from '../../hooks/useStores';
 
-const Project = observer(({ project }) => {
+const Project = observer(({ projectJSON }) => {
+  const { projectStore } = useStores();
+  const project = convertData.fromJSON(projectJSON, projectStore);
+  project.getComments();
+
   return (
     <>
       <Container>
@@ -39,21 +40,12 @@ export const getStaticProps = async ({ params }) => {
   const store = new RootStore();
   const { projectStore } = store;
   const data = await projectStore.projectService.getById(params.id);
-  console.log('hii');
-  console.log(data);
-  const project = {
-    id: data.id,
-    title: data.title,
-    intro: data.intro,
-  };
+  // const projectFromServer = data.toJSON();
+  const projectJSON = convertData.toJSON(data);
 
   return {
-    props: { project },
-
-    // Next.js will attempt to re-generate the page:
-    // - When a request comes in
-    // - At most once every second
-    revalidate: 1, // In seconds
+    props: { projectJSON },
+    revalidate: 5,
   };
 };
 

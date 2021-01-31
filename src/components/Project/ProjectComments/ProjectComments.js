@@ -8,16 +8,6 @@ import Comment from '../../../models/Comment';
 const ProjectComments = observer(({ project }) => {
   const { uiStore, projectStore } = useStores();
   const [content, setContent] = useState('');
-  const [comments, setComments] = useState([]);
-
-  const STATE_LOADING = 'loading';
-  const STATE_DOES_NOT_EXIST = 'doesNotExist';
-  const STATE_LOADING_MORE_DETAILS = 'loadingMoreDetails';
-  const STATE_FULLY_LOADED = 'fullyLoaded';
-
-  const [state, setState] = useState(
-    comments ? STATE_LOADING_MORE_DETAILS : STATE_LOADING
-  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,44 +22,17 @@ const ProjectComments = observer(({ project }) => {
     }
   };
 
-  useEffect(() => {
-    const loadComments = async () => {
-      console.log('load comments wordt uitgevoerd');
-      try {
-        //await projectStore.loadAllProjects();
-        const result = await projectStore.loadProject(project.id);
-        console.log(result);
-        //const result = await projectStore.getCommentsForProject(project);
-        if (result.length === 0) {
-          console.log('test');
-          setState(STATE_DOES_NOT_EXIST);
-          return;
-        }
-        setState(STATE_FULLY_LOADED);
-        console.log(result.comments);
-        setComments(result.comments);
-        //console.log(projectStore.projects);
-        //const project = await projectStore.getProjectById(project.id);
-        //console.log('test');
-        //console.log(project);
-      } catch (error) {
-        console.log('comments failed loading');
-      }
-    };
-    loadComments();
-  }, [projectStore, project, setComments]);
-
   return (
     <>
       <div className={styles.comments}>
         <h2 className={styles.title}>Comments</h2>
 
-        {comments.length != 0 ? (
-          <>
-            {comments.map((comment) => (
+        {project.comments.length != 0 ? (
+          <div className={styles.comments__wrapper}>
+            {project.comments.map((comment) => (
               <ProjectComment key={comment.id} comment={comment} />
             ))}
-          </>
+          </div>
         ) : (
           <div>
             <p>Geen commments</p>
