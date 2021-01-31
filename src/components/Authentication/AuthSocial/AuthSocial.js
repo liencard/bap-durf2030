@@ -1,12 +1,12 @@
-import { user } from 'next/r';
+import { useRouter } from 'next/router';
 import { useStores } from '../../../hooks/useStores';
-import { S } from '../../../consts/index';
+import { ROUTES } from '../../../consts/index';
 import User from '../../../models/User';
 import firebase from 'firebase/app';
 import styles from './AuthSocial.module.scss';
 
 const AuthSocial = () => {
-  const r = user();
+  const router = useRouter();
   const { userStore } = useStores();
 
   const googleSignIn = () => {
@@ -54,7 +54,7 @@ const AuthSocial = () => {
       admin: false,
     });
     const result = userStore.createUser(newUser);
-    r.push(S.home);
+    router.push(ROUTES.home);
   };
 
   return (
