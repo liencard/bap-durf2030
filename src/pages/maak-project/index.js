@@ -16,7 +16,6 @@ import { useState } from 'react';
 import { Formiz, useForm, FormizStep } from '@formiz/core';
 import { useStores } from '../../hooks/useStores';
 import Project from '../../models/Project';
-import { v4 } from 'uuid';
 
 const CreateProject = () => {
   const projectForm = useForm();
