@@ -1,12 +1,12 @@
-import { useRouter } from 'next/router';
+import { user } from 'next/r';
 import { useStores } from '../../../hooks/useStores';
-import { ROUTES } from '../../../consts/index';
+import { S } from '../../../consts/index';
 import User from '../../../models/User';
 import firebase from 'firebase/app';
 import styles from './AuthSocial.module.scss';
 
 const AuthSocial = () => {
-  const router = useRouter();
+  const r = user();
   const { userStore } = useStores();
 
   const googleSignIn = () => {
@@ -54,21 +54,15 @@ const AuthSocial = () => {
       admin: false,
     });
     const result = userStore.createUser(newUser);
-    router.push(ROUTES.home);
+    r.push(S.home);
   };
 
   return (
     <div className={styles.form__socials}>
-      <button
-        className={`${styles.form__btn} ${styles.btn__social} ${styles.btn__google}`}
-        onClick={googleSignIn}
-      >
+      <button className={`${styles.form__btn} ${styles.btn__social} ${styles.btn__google}`} onClick={googleSignIn}>
         Verdergaan met Google
       </button>
-      <button
-        className={`${styles.form__btn} ${styles.btn__social} ${styles.btn__facebook}`}
-        onClick={facebookSignIn}
-      >
+      <button className={`${styles.form__btn} ${styles.btn__social} ${styles.btn__facebook}`} onClick={facebookSignIn}>
         Verdergaan met Facebook
       </button>
     </div>
