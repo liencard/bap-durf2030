@@ -37,7 +37,7 @@ class UiStore {
       //inlezen van de projecten van de currentuser
     } else {
       console.log(`de user is uitgelogd`);
-      this.setCurrentUser(null);
+      this.currentUser = null;
     }
   };
 

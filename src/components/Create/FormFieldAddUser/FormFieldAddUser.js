@@ -15,13 +15,17 @@ const FormFieldAddUser = (props) => {
   const { userStore, uiStore } = useStores();
   const users = userStore.users;
 
-  const [owners, setOwners] = useState([
-    { name: uiStore.currentUser.name, id: uiStore.currentUser.id, avatar: uiStore.currentUser.avatar },
-  ]);
+  const [owners, setOwners] = useState([]);
 
   useEffect(() => {
-    setValue(owners);
-  }, []);
+    if (uiStore.currentUser) {
+      setOwners([
+        ...owners,
+        { name: uiStore.currentUser.name, id: uiStore.currentUser.id, avatar: uiStore.currentUser.avatar },
+      ]);
+      setValue(owners);
+    }
+  }, [uiStore.currentUser]);
 
   const addOwner = (newValue, input) => {
     // newValue = {inputValue: "Test", name: "Voeg "Test" toe"}
