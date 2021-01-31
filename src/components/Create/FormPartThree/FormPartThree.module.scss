@@ -7,3 +7,13 @@
 .subtitle {
   @include title-three;
 }
+
+.richtext {
+  h1 {
+    @include title-one;
+  }
+
+  h2 {
+    @include title-two;
+  }
+}
