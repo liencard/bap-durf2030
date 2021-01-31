@@ -78,31 +78,33 @@ class ProjectService {
       .set(comment);
   };
 
-  getComments = async (projectId) => {
-    const snapshot = await this.db
-      .collectionGroup('comments')
-      .where('projectId', '==', projectId)
-      .orderBy('timestamp')
-      .withConverter(commentConverter)
-      .get();
-    return snapshot.docs.map((comment) => comment.data());
-  };
-
-  // getComments = async (projectId, onChange) => {
-  //   await this.db
+  // getComments = async (projectId) => {
+  //   const snapshot = await this.db
   //     .collectionGroup('comments')
   //     .where('projectId', '==', projectId)
   //     .orderBy('timestamp')
   //     .withConverter(commentConverter)
-  //     .onSnapshot(async (snapshot) => {
-  //       snapshot.docChanges().forEach(async (change) => {
-  //         if (change.type === 'added') {
-  //           const commentObj = change.doc.data();
-  //           onChange(commentObj);
-  //         }
-  //       });
-  //     });
+  //     .get();
+  //   return snapshot.docs.map((comment) => comment.data());
   // };
+
+  // functie werkt (commentObj is steeds nieuwe toegevoegde comment)
+  getComments = async (projectId, onChange) => {
+    await this.db
+      .collectionGroup('comments')
+      .where('projectId', '==', projectId)
+      .orderBy('timestamp')
+      .withConverter(commentConverter)
+      .onSnapshot(async (snapshot) => {
+        snapshot.docChanges().forEach(async (change) => {
+          if (change.type === 'added') {
+            const commentObj = change.doc.data();
+            console.log(commentObj);
+            onChange(commentObj);
+          }
+        });
+      });
+  };
 
   updateProject = async (data) => {
     console.log('service');

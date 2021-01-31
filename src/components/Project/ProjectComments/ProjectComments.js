@@ -34,6 +34,7 @@ const ProjectComments = ({ project }) => {
   useEffect(() => {
     const loadComments = async () => {
       try {
+        await projectStore.loadAllProjects();
         const result = await projectStore.getCommentsForProject(project);
         if (result.length === 0) {
           console.log('test');
@@ -42,6 +43,10 @@ const ProjectComments = ({ project }) => {
         }
         setState(STATE_FULLY_LOADED);
         setComments(result);
+        console.log(projectStore.projects);
+        //const project = await projectStore.getProjectById(project.id);
+        console.log('test');
+        //console.log(project);
       } catch (error) {
         console.log('comments failed loading');
       }
