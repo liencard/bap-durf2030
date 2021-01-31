@@ -34,18 +34,21 @@ const ProjectComments = ({ project }) => {
   useEffect(() => {
     const loadComments = async () => {
       try {
-        await projectStore.loadAllProjects();
-        const result = await projectStore.getCommentsForProject(project);
+        //await projectStore.loadAllProjects();
+        const result = await projectStore.loadProject(project.id);
+        console.log(result);
+        //const result = await projectStore.getCommentsForProject(project);
         if (result.length === 0) {
           console.log('test');
           setState(STATE_DOES_NOT_EXIST);
           return;
         }
         setState(STATE_FULLY_LOADED);
-        setComments(result);
-        console.log(projectStore.projects);
+        console.log(result.comments);
+        setComments(result.comments);
+        //console.log(projectStore.projects);
         //const project = await projectStore.getProjectById(project.id);
-        console.log('test');
+        //console.log('test');
         //console.log(project);
       } catch (error) {
         console.log('comments failed loading');

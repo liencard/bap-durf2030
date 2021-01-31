@@ -31,7 +31,10 @@ class ProjectStore {
   loadProject = async (id) => {
     const jsonProject = await this.projectService.getById(id);
     this.updateProjectFromServer(jsonProject);
-    return this.getProjectById(id);
+    //
+    const project = this.getProjectById(id);
+    this.getCommentsForProject(project);
+    return project;
   };
 
   createProject = async (project) => {
@@ -88,7 +91,6 @@ class ProjectStore {
 
   onCommentChanged = (comment) => {
     const project = this.getProjectById(comment.project.id);
-    console.log(project);
     project.linkComment(comment);
 
     //const incomingComment = comment;

@@ -99,7 +99,6 @@ class ProjectService {
         snapshot.docChanges().forEach(async (change) => {
           if (change.type === 'added') {
             const commentObj = change.doc.data();
-            console.log(commentObj);
             onChange(commentObj);
           }
         });
