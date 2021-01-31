@@ -1,7 +1,6 @@
 import styles from './ProjectComments.module.scss';
 
 const ProjectComment = ({ comment }) => {
-  console.log(comment.timestamp);
   const months = [
     'Jan',
     'Feb',
@@ -16,7 +15,6 @@ const ProjectComment = ({ comment }) => {
     'Nov',
     'Dec',
   ];
-  console.log(comment.timestamp.toDate());
   const year = comment.timestamp.toDate().getFullYear();
   const month = months[comment.timestamp.toDate().getMonth()];
   const day = comment.timestamp.toDate().getDate();
