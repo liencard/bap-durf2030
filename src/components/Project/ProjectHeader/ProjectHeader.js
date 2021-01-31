@@ -12,6 +12,7 @@ const ProjectHeader = ({ project }) => {
     projectStore.loadProjectLikesById('formtest').then((result) => {
       setLikes(result.length);
     });
+    console.log(project);
   }, []);
 
   return (
@@ -25,23 +26,38 @@ const ProjectHeader = ({ project }) => {
         </ul>
         <div className={styles.text}>
           <h1 className={styles.title}>{project.title}</h1>
+          {project.isKnownPlace ? (
+            <div className={styles.location}>
+              <img
+                src="/icons/location-green.svg"
+                alt="logo DURF2030"
+                width="13.75"
+                height="15.9"
+              />
+              <p>
+                {project.street} {project.number}, {project.city}
+              </p>
+            </div>
+          ) : (
+            ''
+          )}
           <p className={styles.intro}>{project.intro}</p>
         </div>
         <div className={styles.help}>
           <div className={styles.item}>
             <div className={`${styles.circle} ${styles.service}`} />
             <p className={styles.info}>7/10 diensten</p>
-            <p>Bekijk info</p>
+            <p className={styles.item__btn}>Bekijk info</p>
           </div>
           <div className={styles.item}>
             <div className={`${styles.circle} ${styles.material}`} />
             <p className={styles.info}>7/10 materialen</p>
-            <p>Bekijk info</p>
+            <p className={styles.item__btn}>Bekijk info</p>
           </div>
           <div className={styles.item}>
             <div className={`${styles.circle} ${styles.money}`} />
             <p className={styles.info}>7/10 materialen</p>
-            <p>Bekijk info</p>
+            <p className={styles.item__btn}>Bekijk info</p>
           </div>
         </div>
         <div className={styles.buttons}>

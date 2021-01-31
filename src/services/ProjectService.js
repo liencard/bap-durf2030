@@ -13,7 +13,10 @@ class ProjectService {
   }
 
   getAll = async () => {
-    const snapshot = await this.db.collection('projects').withConverter(projectConverter).get();
+    const snapshot = await this.db
+      .collection('projects')
+      .withConverter(projectConverter)
+      .get();
     return snapshot.docs.map((project) => project.data());
   };
 
@@ -22,13 +25,21 @@ class ProjectService {
   // };
 
   getById = async (id) => {
-    const project = await this.db.collection('projects').doc(id).withConverter(projectConverter).get();
+    const project = await this.db
+      .collection('projects')
+      .doc(id)
+      .withConverter(projectConverter)
+      .get();
     // project = await user.project();
     return project.data();
   };
 
   getLikesById = async (id) => {
-    const snapshot = await this.db.collection('projects').doc(id).collection('likes').get();
+    const snapshot = await this.db
+      .collection('projects')
+      .doc(id)
+      .collection('likes')
+      .get();
     return snapshot.docs.map((like) => like.data());
   };
 
@@ -67,17 +78,31 @@ class ProjectService {
       .set(comment);
   };
 
-  // getComments = async (projectId) => {
+  getOwners = async (projectId) => {
+    const snapshot = await this.db
+      .collection('projects')
+      .doc(projectId)
+      .collection('owners')
+      .withConverter(userConverter)
+      .get();
+    const result = snapshot.docs.map((user) => user.data());
+    return result;
+  };
+
+  // getOwners = async (projectId) => {
+  //   console.log(projectId);
   //   const snapshot = await this.db
-  //     .collectionGroup('comments')
+  //     .collectionGroup('owners')
   //     .where('projectId', '==', projectId)
-  //     .orderBy('timestamp')
-  //     .withConverter(commentConverter)
+  //     .orderBy('name')
+  //     .withConverter(userConverter)
   //     .get();
-  //   return snapshot.docs.map((comment) => comment.data());
+  //   //console.log(snapshot);
+  //   const result = snapshot.docs.map((user) => user.data());
+  //   console.log(result);
+  //   //return result;
   // };
 
-  // functie werkt (commentObj is steeds nieuwe toegevoegde comment)
   getComments = async (projectId, onChange) => {
     await this.db
       .collectionGroup('comments')
@@ -105,7 +130,10 @@ class ProjectService {
   };
 
   updateState = async (data) => {
-    const result = await this.db.collection('projects').doc(`${data.id}`).update({ state: data.state });
+    const result = await this.db
+      .collection('projects')
+      .doc(`${data.id}`)
+      .update({ state: data.state });
     return result;
   };
 

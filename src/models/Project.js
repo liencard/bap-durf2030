@@ -91,6 +91,12 @@ const convertData = {
       id: project.id,
       title: project.title,
       intro: project.intro,
+      about: project.about,
+      contact: project.contact,
+      isKnownPlace: project.isKnownPlace,
+      city: project.city,
+      street: project.street,
+      number: project.number,
     };
   },
 
@@ -99,6 +105,12 @@ const convertData = {
       id: project.id,
       title: project.title,
       intro: project.intro,
+      about: project.about,
+      contact: project.contact,
+      isKnownPlace: project.isKnownPlace,
+      city: project.city,
+      street: project.street,
+      number: project.number,
       store: store,
     });
   },
@@ -132,11 +144,19 @@ const projectConverter = {
   },
   fromFirestore: function (snapshot, options) {
     const data = snapshot.data(options);
+    console.log('data');
+    console.log(data.location);
     return new Project({
       id: snapshot.id,
       title: data.title,
       intro: data.intro,
+      about: data.about,
+      contact: data.contact,
       userId: data.userId,
+      isKnownPlace: data.location.isKnownPlace,
+      city: data.location.city,
+      street: data.location.street,
+      number: data.location.number,
       state: data.state,
     });
   },

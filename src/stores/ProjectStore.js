@@ -40,7 +40,10 @@ class ProjectStore {
 
   createRequirementsForProject = async ({ requirements, info, projectId }) => {
     if (info.materialsRequired) {
-      this.requirementService.createMaterials(requirements.materials, projectId);
+      this.requirementService.createMaterials(
+        requirements.materials,
+        projectId
+      );
     }
     if (info.servicesRequired) {
       this.requirementService.createServices(requirements.services, projectId);
@@ -75,6 +78,10 @@ class ProjectStore {
 
   loadProjectLikesById = (id) => {
     return this.projectService.getLikesById(id);
+  };
+
+  loadProjectOwnersById = async (id) => {
+    return await this.projectService.getOwners(id);
   };
 
   loadProjectCommentsById = async (id) => {

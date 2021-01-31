@@ -31,6 +31,8 @@ class User {
 
 const userConverter = {
   toFirestore: function (user) {
+    console.log('user');
+    console.log(user);
     return {
       userId: user.id,
       name: user.name,
