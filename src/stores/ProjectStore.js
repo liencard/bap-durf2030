@@ -31,9 +31,6 @@ class ProjectStore {
   loadProject = async (id) => {
     const jsonProject = await this.projectService.getById(id);
     this.updateProjectFromServer(jsonProject);
-    //
-    const project = this.getProjectById(id);
-    this.getCommentsForProject(project);
     return project;
   };
 
@@ -70,7 +67,6 @@ class ProjectStore {
         title: json.title,
         userId: json.userId,
         intro: json.intro,
-        // tags: json.tags,
         state: json.state,
         store: this.rootStore.projectStore,
       });
@@ -81,6 +77,10 @@ class ProjectStore {
     return this.projectService.getLikesById(id);
   };
 
+  loadProjectCommentsById = async (id) => {
+    return await this.projectService.getComments(id, this.onCommentChanged);
+  };
+
   sendComment = async (comment) => {
     comment.timestamp = getCurrenTimeStamp();
     return await this.projectService.createComment(comment);
@@ -89,14 +89,6 @@ class ProjectStore {
   onCommentChanged = (comment) => {
     const project = this.getProjectById(comment.project.id);
     project.linkComment(comment);
-
-    //const incomingComment = comment;
-    //this.addProjectComment(incomingComment);
-  };
-
-  getCommentsForProject = async (project) => {
-    const comments = await this.projectService.getComments(project.id, this.onCommentChanged);
-    console.log(comments);
   };
 
   updateState = async (data) => {
