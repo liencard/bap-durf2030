@@ -1,0 +1,24 @@
+@import '../../styles/styles.scss';
+
+.edit {
+  padding-top: 14rem;
+  grid-column: span 12;
+
+  .title {
+    @include title-one;
+    margin-bottom: 0.8rem;
+  }
+
+  .title__project {
+    @include title-two;
+    color: $green;
+  }
+}
+
+.appbar {
+  @include appbar;
+}
+
+.panel {
+  grid-column: span 12;
+}

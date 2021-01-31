@@ -3,7 +3,7 @@ import { Modal } from '../../UI';
 import { Grid } from '../../Layout';
 import { useState, useRef } from 'react';
 
-const ProjectShare = ({}) => {
+const ProjectShare = () => {
   const [open, setOpen] = useState(false);
   const [copyStatus, setCopyStatus] = useState('Kopieer');
   const textAreaRef = useRef(null);
@@ -20,8 +20,6 @@ const ProjectShare = ({}) => {
   const handleClickCopy = (e) => {
     textAreaRef.current.select();
     document.execCommand('copy');
-    // This is just personal preference.
-    // I prefer to not show the whole text area selected.
     e.target.focus();
     setCopyStatus('Gekopieerd!');
   };
@@ -51,7 +49,8 @@ const ProjectShare = ({}) => {
               <p>Kopieer link</p>
               <div>
                 <form>
-                  <input type="text" ref={textAreaRef} value={`${window.location.href}`} />
+                  {/* ${window.location.href} */}
+                  <input type="text" ref={textAreaRef} value={`undefined`} />
                 </form>
                 <button onClick={handleClickCopy}>{copyStatus}</button>
               </div>

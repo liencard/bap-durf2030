@@ -3,3 +3,7 @@
 @import './typography';
 @import './helpers';
 @import './elements';
+
+:export {
+  green: $green-light;
+}

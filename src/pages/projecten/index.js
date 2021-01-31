@@ -1,20 +1,44 @@
-import { useStores } from '../../hooks/useStores';
-import { observer } from 'mobx-react-lite';
 import { Container } from '../../components/Layout';
 import { ProjectCard } from '../../components/Project';
+import RootStore from '../../stores';
 
-const Projects = observer(() => {
-  const { projectStore } = useStores();
-
+const Projects = ({ projects }) => {
   return (
     <>
+      <p>Test SSR projecten</p>
       <Container>
-        {projectStore.projects.map((project) => (
-          <ProjectCard key={project.id} title={project.title} intro={project.intro} id={project.id} />
+        {projects.map((project) => (
+          <ProjectCard
+            key={project.id}
+            title={project.title}
+            intro={project.intro}
+            id={project.id}
+          />
         ))}
       </Container>
     </>
   );
-});
+};
+
+export const getStaticProps = async (context) => {
+  const store = new RootStore();
+  const { projectStore } = store;
+
+  await projectStore.loadAllProjects();
+  let projects = [];
+
+  await projectStore.projects.forEach((project) => {
+    console.log(project);
+    projects.push({
+      id: project.id,
+      title: project.title,
+      intro: project.intro,
+    });
+  });
+
+  return {
+    props: { projects },
+  };
+};
 
 export default Projects;

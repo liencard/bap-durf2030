@@ -1,0 +1,36 @@
+@import '../../../styles/styles.scss';
+
+.title {
+  @include title-one;
+}
+
+.subtitle {
+  @include title-three;
+}
+
+.requirements {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: $grid-gap;
+
+  .requirement {
+    margin: 1rem 0;
+    border: $border;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+    font-weight: 500;
+    font-size: 1.4rem;
+    transition: 0.2s;
+
+    &:hover {
+      cursor: pointer;
+      border: 0.1rem solid $green;
+    }
+
+    &.requirementChecked {
+      border: 0.2rem solid $green;
+    }
+  }
+}

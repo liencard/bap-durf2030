@@ -53,36 +53,78 @@
     background-color: $green-dark;
     cursor: pointer;
   }
-}
 
-@mixin textfield {
-  color: $blue-dark;
-  font-size: 1.6rem;
-  font-weight: 300;
+  &:disabled {
+    background-color: $green-light;
 
-  & fieldset {
-    border-color: $blue-light !important;
-  }
-
-  &:hover fieldset {
-    border-color: $green !important;
-  }
-
-  label {
-    color: $blue-dark;
-    font-size: 1.6rem;
-    font-weight: 300;
-    letter-spacing: 0.1rem;
-  }
-
-  legend {
-    font-size: 1.2rem;
-    letter-spacing: 0.1rem;
-  }
-
-  input[type='text'] {
-    font-size: 1.6rem;
-    font-weight: 300;
-    font-family: $font-body;
+    &:hover {
+      background-color: $green-light;
+      cursor: default;
+    }
   }
 }
+
+@mixin appbar {
+  grid-column: span 12;
+  margin: 5rem 0;
+
+  div {
+    height: 8rem;
+    position: relative;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      content: '';
+      height: 0.1rem;
+      width: 100%;
+      background-color: $blue-light;
+    }
+
+    &::after {
+      position: absolute;
+      content: '';
+      height: 0.1rem;
+      width: 100%;
+      background-color: $blue-light;
+      left: 0;
+      bottom: 0;
+    }
+
+    span {
+      padding: 0.15rem;
+    }
+  }
+}
+
+// @mixin textfield {
+//   color: $blue-dark;
+//   font-size: 1.6rem;
+//   font-weight: 300;
+
+//   & fieldset {
+//     border-color: $blue-light !important;
+//   }
+
+//   &:hover fieldset {
+//     border-color: $green !important;
+//   }
+
+//   label {
+//     color: $blue-dark;
+//     font-size: 1.6rem;
+//     font-weight: 300;
+//     letter-spacing: 0.1rem;
+//   }
+
+//   legend {
+//     font-size: 1.2rem;
+//     letter-spacing: 0.1rem;
+//   }
+
+//   input[type='text'] {
+//     font-size: 1.6rem;
+//     font-weight: 300;
+//     font-family: $font-body;
+//   }
+// }
