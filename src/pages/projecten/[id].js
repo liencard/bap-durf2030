@@ -9,8 +9,6 @@ import {
 import RootStore from '../../stores';
 
 const Project = observer(({ project }) => {
-  console.log('pagina');
-  console.log(project);
   return (
     <>
       <Container>

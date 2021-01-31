@@ -1,10 +1,11 @@
+import { observer } from 'mobx-react-lite';
 import { useState, useEffect } from 'react';
 import { useStores } from '../../../hooks/useStores';
 import styles from './ProjectComments.module.scss';
 import ProjectComment from './ProjectComment';
 import Comment from '../../../models/Comment';
 
-const ProjectComments = ({ project }) => {
+const ProjectComments = observer(({ project }) => {
   const { uiStore, projectStore } = useStores();
   const [content, setContent] = useState('');
   const [comments, setComments] = useState([]);
@@ -33,19 +34,21 @@ const ProjectComments = ({ project }) => {
     const loadComments = async () => {
       console.log('load comments wordt uitgevoerd');
       try {
-        await projectStore.loadAllProjects();
-        const result = await projectStore.getCommentsForProject(project);
+        //await projectStore.loadAllProjects();
+        const result = await projectStore.loadProject(project.id);
         console.log(result);
+        //const result = await projectStore.getCommentsForProject(project);
         if (result.length === 0) {
           console.log('test');
           setState(STATE_DOES_NOT_EXIST);
           return;
         }
         setState(STATE_FULLY_LOADED);
-        setComments(result);
-        console.log(projectStore.projects);
+        console.log(result.comments);
+        setComments(result.comments);
+        //console.log(projectStore.projects);
         //const project = await projectStore.getProjectById(project.id);
-        console.log('test');
+        //console.log('test');
         //console.log(project);
       } catch (error) {
         console.log('comments failed loading');
@@ -93,6 +96,6 @@ const ProjectComments = ({ project }) => {
       </div>
     </>
   );
-};
+});
 
 export default ProjectComments;
