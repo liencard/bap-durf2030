@@ -5,8 +5,6 @@ import { FormFieldCheckbox } from '../index';
 import FormControl from '@material-ui/core/FormControl';
 
 const FormPartTwo = () => {
-  const [isKnownPlace, setIsKnownPlace] = useState(false);
-
   // Uit database halen
   const themes = ['Eeenzaamheid rond corona', 'Ondernemingschap', 'Klimaat', 'Andere'];
   const categories = [

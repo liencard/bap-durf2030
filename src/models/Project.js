@@ -77,6 +77,10 @@ class Project {
       addLike: action,
       removeLike: action,
       setLiked: action,
+      title: observable,
+      intro: observable,
+      description: observable,
+      updateProject: action,
     });
   }
 
@@ -111,6 +115,13 @@ class Project {
 
   linkComment(comment) {
     !this.comments.includes(comment) && this.comments.push(comment);
+  }
+
+  updateProject(newValues) {
+    Object.keys(newValues).forEach((key) => {
+      this[key] = newValues[key];
+    });
+    this.store.updateProject(this);
   }
 }
 

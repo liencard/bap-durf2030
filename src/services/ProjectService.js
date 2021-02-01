@@ -51,7 +51,6 @@ class ProjectService {
   };
 
   create = async (project) => {
-    // dummy verwijderen (doc leeg laten)
     const ref = await this.db.collection('projects').doc();
     ref.withConverter(projectConverter).set(project);
     project.owners.forEach((owner) => {
@@ -117,13 +116,11 @@ class ProjectService {
   };
 
   updateProject = async (data) => {
-    console.log('service');
-    console.log(data);
-    const result = await this.db.collection('projects').doc(data.id).update({
+    await this.db.collection('projects').doc(data.id).withConverter(projectConverter).update({
       title: data.title,
       intro: data.intro,
+      description: data.description,
     });
-    return result;
   };
 
   updateState = async (data) => {

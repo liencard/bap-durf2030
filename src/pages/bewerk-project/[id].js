@@ -30,7 +30,6 @@ const TabPanel = (props) => {
 
 const EditProject = observer(({ query }) => {
   const id = query.id;
-  console.log(id);
   const { projectStore } = useStores();
   const [value, setValue] = useState(0);
 

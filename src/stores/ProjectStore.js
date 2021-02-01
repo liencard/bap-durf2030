@@ -31,7 +31,7 @@ class ProjectStore {
 
   loadProject = async (id) => {
     const jsonProject = await this.projectService.getById(id);
-    this.updateProjectFromServer(jsonProject);
+    const project = this.updateProjectFromServer(jsonProject);
     return project;
   };
 
@@ -79,6 +79,7 @@ class ProjectStore {
         store: this.rootStore.projectStore,
       });
     }
+    return project;
   };
 
   loadProjectLikesById = async (id) => {
@@ -108,7 +109,7 @@ class ProjectStore {
   };
 
   updateProject = async (project) => {
-    return await this.projectService.updateProject(project);
+    await this.projectService.updateProject(project);
   };
 
   uploadImage = (image) => {
