@@ -1,5 +1,8 @@
 import 'firebase/firestore';
 import 'firebase/storage';
+import { projectConverter } from '../models/Project';
+import { userConverter } from '../models/User';
+import { commentConverter } from '../models/Comment';
 import { firestore } from 'firebase/app';
 import { values } from 'mobx';
 
@@ -10,11 +13,11 @@ class ProjectService {
   }
 
   getAll = async () => {
-    const snapshot = await this.db.collection('projects').get();
-    // return snapshot.docs.map((project) => project.data());
-    return snapshot.docs.map((projectFromDB) => {
-      return { id: projectFromDB.id, data: projectFromDB.data() };
-    });
+    const snapshot = await this.db
+      .collection('projects')
+      .withConverter(projectConverter)
+      .get();
+    return snapshot.docs.map((project) => project.data());
   };
 
   // getAllIds = () => {
@@ -22,46 +25,98 @@ class ProjectService {
   // };
 
   getById = async (id) => {
-    const snapshot = await this.db.collection('projects').doc(id).get();
-    return { id: snapshot.id, data: snapshot.data() };
+    const project = await this.db
+      .collection('projects')
+      .doc(id)
+      .withConverter(projectConverter)
+      .get();
+    // project = await user.project();
+    return project.data();
   };
 
   getLikesById = async (id) => {
-    const snapshot = await this.db.collection('projects').doc('formtest').collection('likes').get();
-    const test = snapshot.docs.map((like) => like.data());
-    console.log(test);
+    const snapshot = await this.db
+      .collection('projects')
+      .doc(id)
+      .collection('likes')
+      .get();
+    return snapshot.docs.map((like) => like.data());
   };
 
-  create = async (data) => {
-    // .add(...) and .doc().set(...) are completely equivalent
-    const result = await this.db
-      .collection('projects')
-      .doc(data.id)
-      .set({
-        about: data.about,
-        // budget: {
-        //   required: data.budgetRequirement,
-        //   amount: data.budget,
-        //   info: data.budgetDescription,
-        // },
-        categories: data.categories,
-        // contact: values.contact,
-        description: data.description,
-        intro: data.intro,
-        location: {
-          isKnownPlace: data.isKnownPlace,
-          city: data.city,
-          street: data.street,
-          number: data.number,
-        },
-        // materials: {},
-        // services: {},
-        themes: data.themes,
-        title: data.title,
+  getProjectsForUser = async (userId) => {
+    const snapshot = await this.db
+      .collectionGroup('owners')
+      .where('userId', '==', userId)
+      .withConverter(userConverter)
+      .get();
 
-        userId: data.userId,
+    return snapshot.docs.map((doc) => doc.ref.parent.parent.id);
+  };
+
+  create = async (project) => {
+    // dummy verwijderen (doc leeg laten)
+    const ref = await this.db.collection('projects').doc();
+    ref.withConverter(projectConverter).set(project);
+    project.owners.forEach((owner) => {
+      ref.collection('owners').doc(owner.id).set({
+        userId: owner.id,
+        avatar: owner.avatar,
+        name: owner.name,
       });
+    });
+
+    return ref.id;
+  };
+
+  createComment = async (comment) => {
+    return await this.db
+      .collection('projects')
+      .doc(comment.project.id)
+      .collection('comments')
+      .doc()
+      .withConverter(commentConverter)
+      .set(comment);
+  };
+
+  getOwners = async (projectId) => {
+    const snapshot = await this.db
+      .collection('projects')
+      .doc(projectId)
+      .collection('owners')
+      .withConverter(userConverter)
+      .get();
+    const result = snapshot.docs.map((user) => user.data());
     return result;
+  };
+
+  // getOwners = async (projectId) => {
+  //   console.log(projectId);
+  //   const snapshot = await this.db
+  //     .collectionGroup('owners')
+  //     .where('projectId', '==', projectId)
+  //     .orderBy('name')
+  //     .withConverter(userConverter)
+  //     .get();
+  //   //console.log(snapshot);
+  //   const result = snapshot.docs.map((user) => user.data());
+  //   console.log(result);
+  //   //return result;
+  // };
+
+  getComments = async (projectId, onChange) => {
+    await this.db
+      .collectionGroup('comments')
+      .where('projectId', '==', projectId)
+      .orderBy('timestamp')
+      .withConverter(commentConverter)
+      .onSnapshot(async (snapshot) => {
+        snapshot.docChanges().forEach(async (change) => {
+          if (change.type === 'added') {
+            const commentObj = change.doc.data();
+            onChange(commentObj);
+          }
+        });
+      });
   };
 
   updateProject = async (data) => {

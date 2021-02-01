@@ -1,13 +1,19 @@
+import { useEffect, useState } from 'react';
 import styles from './ProjectHeader.module.scss';
 import { Button } from '../../UI';
 import { ProjectLikes, ProjectHelpers } from '../../Project';
 import { useStores } from '../../../hooks/useStores';
 
-const ProjectHeader = ({ project, id }) => {
+const ProjectHeader = ({ project }) => {
   const { projectStore } = useStores();
-  projectStore.loadProjectLikesById(id);
-  // const likes = projectStore.loadProjectLikesById(id);
-  // console.log(likes);
+  const [likes, setLikes] = useState([]);
+
+  useEffect(() => {
+    projectStore.loadProjectLikesById('formtest').then((result) => {
+      setLikes(result.length);
+    });
+    console.log(project);
+  }, []);
 
   return (
     <>
@@ -16,32 +22,48 @@ const ProjectHeader = ({ project, id }) => {
         <ul className={styles.tags}>
           <li className={styles.tag}>Cultuur</li>
           <li className={styles.tag}>Theater</li>
+          <li className={styles.tag}>{likes}</li>
         </ul>
         <div className={styles.text}>
           <h1 className={styles.title}>{project.title}</h1>
+          {project.isKnownPlace ? (
+            <div className={styles.location}>
+              <img
+                src="/icons/location-green.svg"
+                alt="logo DURF2030"
+                width="13.75"
+                height="15.9"
+              />
+              <p>
+                {project.street} {project.number}, {project.city}
+              </p>
+            </div>
+          ) : (
+            ''
+          )}
           <p className={styles.intro}>{project.intro}</p>
         </div>
         <div className={styles.help}>
           <div className={styles.item}>
             <div className={`${styles.circle} ${styles.service}`} />
             <p className={styles.info}>7/10 diensten</p>
-            <p>Bekijk info</p>
+            <p className={styles.item__btn}>Bekijk info</p>
           </div>
           <div className={styles.item}>
             <div className={`${styles.circle} ${styles.material}`} />
             <p className={styles.info}>7/10 materialen</p>
-            <p>Bekijk info</p>
+            <p className={styles.item__btn}>Bekijk info</p>
           </div>
           <div className={styles.item}>
             <div className={`${styles.circle} ${styles.money}`} />
             <p className={styles.info}>7/10 materialen</p>
-            <p>Bekijk info</p>
+            <p className={styles.item__btn}>Bekijk info</p>
           </div>
         </div>
         <div className={styles.buttons}>
           <Button className={styles.button} text={'Ik durf mee te helpen'} />
           <div className={styles.interact}>
-            <ProjectLikes />
+            <ProjectLikes likes={likes} />
             <ProjectHelpers />
           </div>
         </div>

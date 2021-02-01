@@ -15,12 +15,13 @@ class UiStore {
       currentUser: observable,
       setCurrentUser: action,
       onAuthStateChanged: action,
-      addUserProjects: action,
       userProjects: observable,
+      getProjectsForUser: action,
+      addProject: action,
     });
   }
 
-  addUserProjects = (project) => {
+  addProject = (project) => {
     this.userProjects.push(project);
   };
 
@@ -36,7 +37,7 @@ class UiStore {
       //inlezen van de projecten van de currentuser
     } else {
       console.log(`de user is uitgelogd`);
-      this.setCurrentUser(undefined);
+      this.setCurrentUser(null);
     }
   };
 
@@ -73,9 +74,11 @@ class UiStore {
   };
 
   getProjectsForUser = async () => {
-    const projectArr = await this.userService.getProjectsByUser(this.currentUser);
-    projectArr.forEach((project) => {
-      this.addUserProjects(project);
+    const projectArr = await this.rootStore.projectStore.projectService.getProjectsForUser(this.currentUser.id);
+
+    projectArr.forEach(async (projectId) => {
+      const project = await this.rootStore.projectStore.projectService.getById(projectId);
+      await this.addProject(project);
     });
   };
 }

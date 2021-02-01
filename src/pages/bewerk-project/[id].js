@@ -30,7 +30,7 @@ const TabPanel = (props) => {
 
 const EditProject = observer(({ query }) => {
   const id = query.id;
-  console.log(id);
+
   const { projectStore } = useStores();
   const [value, setValue] = useState(0);
 
@@ -39,27 +39,26 @@ const EditProject = observer(({ query }) => {
   const STATE_LOADING_MORE_DETAILS = 'loadingMoreDetails';
   const STATE_FULLY_LOADED = 'fullyLoaded';
 
-  const [project, setProject] = useState(projectStore.resolveProject(id));
-  const [state, setState] = useState(
-    project ? STATE_LOADING_MORE_DETAILS : STATE_LOADING
-  );
+  // const [project, setProject] = useState(projectStore.getProjectById(id));
+  const [project, setProject] = useState();
+  const [state, setState] = useState(project ? STATE_LOADING_MORE_DETAILS : STATE_LOADING);
 
-  useEffect(() => {
-    const loadProject = async (id) => {
-      try {
-        const resolvedProject = await projectStore.loadProject(id);
-        if (!resolvedProject) {
-          setState(STATE_DOES_NOT_EXIST);
-          return;
-        }
-        setState(STATE_FULLY_LOADED);
-        setProject(resolvedProject);
-      } catch (error) {
-        console.log('Project failed loading');
-      }
-    };
-    loadProject(id);
-  }, [id, projectStore, setProject]);
+  // useEffect(() => {
+  //   const loadProject = async (id) => {
+  //     try {
+  //       const resolvedProject = await projectStore.loadProject(id);
+  //       if (!resolvedProject) {
+  //         setState(STATE_DOES_NOT_EXIST);
+  //         return;
+  //       }
+  //       setState(STATE_FULLY_LOADED);
+  //       setProject(resolvedProject);
+  //     } catch (error) {
+  //       console.log('Project failed loading');
+  //     }
+  //   };
+  //   loadProject(id);
+  // }, [id, projectStore, setProject]);
 
   const a11yProps = (index) => {
     return {
@@ -75,31 +74,18 @@ const EditProject = observer(({ query }) => {
   return (
     <>
       <Header />
-      <Container>
+      {/* <Container>
         {project && (
           <>
             <section className={styles.edit}>
               <h1 className={styles.title}>Bewerk project</h1>
               <p className={styles.title__project}>{project.title}</p>
-              <AppBar
-                elevation={0}
-                color="transparent"
-                className={styles.appbar}
-                position="static"
-              >
-                <Tabs
-                  value={value}
-                  onChange={handleChange}
-                  aria-label="simple tabs example"
-                >
+              <AppBar elevation={0} color="transparent" className={styles.appbar} position="static">
+                <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
                   <Tab label="Basis Informatie" {...a11yProps(0)} />
                   <Tab label="Ondersteuningen" {...a11yProps(1)} />
                   <Tab label="Durvers" {...a11yProps(2)} />
-                  <Button
-                    className={styles.button}
-                    href={ROUTES.home}
-                    text={'Update posten'}
-                  />
+                  <Button className={styles.button} href={ROUTES.home} text={'Update posten'} />
                 </Tabs>
               </AppBar>
               <TabPanel className={styles.panel} value={value} index={0}>
@@ -118,7 +104,7 @@ const EditProject = observer(({ query }) => {
             </section>
           </>
         )}
-      </Container>
+      </Container> */}
     </>
   );
 });

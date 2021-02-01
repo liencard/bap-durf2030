@@ -30,6 +30,11 @@ $spacing-top: 5rem;
       margin-right: 2rem;
     }
   }
+
+  .comments__wrapper {
+    display: flex;
+    flex-direction: column-reverse;
+  }
 }
 
 .create {

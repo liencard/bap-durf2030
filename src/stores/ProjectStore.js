@@ -1,6 +1,7 @@
 import { makeObservable, observable, action } from 'mobx';
 import ProjectService from '../services/ProjectService';
-import UserService from '../services/UserService';
+import RequirementService from '../services/RequirementService';
+import { getCurrenTimeStamp } from './';
 import Project from '../models/Project';
 import { v4 } from 'uuid';
 
@@ -11,7 +12,9 @@ class ProjectStore {
     this.projectService = new ProjectService({
       firebase: this.rootStore.firebase,
     });
-    this.userService = new UserService(this.rootStore.firebase);
+    this.requirementService = new RequirementService({
+      firebase: this.rootStore.firebase,
+    });
 
     makeObservable(this, {
       loadAllProjects: action,
@@ -28,18 +31,29 @@ class ProjectStore {
   loadProject = async (id) => {
     const jsonProject = await this.projectService.getById(id);
     this.updateProjectFromServer(jsonProject);
-    return this.resolveProject(id);
+    return project;
   };
 
   createProject = async (project) => {
     return await this.projectService.create(project);
   };
 
+  createRequirementsForProject = async ({ requirements, info, projectId }) => {
+    if (info.materialsRequired) {
+      this.requirementService.createMaterials(
+        requirements.materials,
+        projectId
+      );
+    }
+    if (info.servicesRequired) {
+      this.requirementService.createServices(requirements.services, projectId);
+    }
+    this.requirementService.createInfo(info, projectId);
+  };
+
   createImageForProject = async (image) => {
     // to do linken
   };
-
-  resolveProject = (id) => this.projects.find((project) => project.id === id);
 
   getProjectById = (id) => this.projects.find((project) => project.id === id);
 
@@ -53,18 +67,35 @@ class ProjectStore {
     if (!project) {
       project = new Project({
         id: json.id,
-        title: json.data.title,
-        userId: json.data.userId,
-        intro: json.data.intro,
-        tags: json.data.tags,
-        state: json.data.state,
+        title: json.title,
+        userId: json.userId,
+        intro: json.intro,
+        state: json.state,
         store: this.rootStore.projectStore,
       });
     }
   };
 
-  loadProjectLikesById = async (id) => {
-    return await this.projectService.getLikesById(id);
+  loadProjectLikesById = (id) => {
+    return this.projectService.getLikesById(id);
+  };
+
+  loadProjectOwnersById = async (id) => {
+    return await this.projectService.getOwners(id);
+  };
+
+  loadProjectCommentsById = async (id) => {
+    return await this.projectService.getComments(id, this.onCommentChanged);
+  };
+
+  sendComment = async (comment) => {
+    comment.timestamp = getCurrenTimeStamp();
+    return await this.projectService.createComment(comment);
+  };
+
+  onCommentChanged = (comment) => {
+    const project = this.getProjectById(comment.project.id);
+    project.linkComment(comment);
   };
 
   updateState = async (data) => {

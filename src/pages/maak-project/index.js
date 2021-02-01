@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router';
 import { ROUTES } from '../../consts/index';
+import { useEffect } from 'react';
 import { Container } from '../../components/Layout';
+import { observer } from 'mobx-react-lite';
 import styles from './CreateProject.module.scss';
 import { Button } from '../../components/UI';
 import {
@@ -12,18 +14,32 @@ import {
   FormPartSix,
   FormPartSeven,
 } from '../../components/Create';
-import { useState } from 'react';
 import { Formiz, useForm, FormizStep } from '@formiz/core';
 import { useStores } from '../../hooks/useStores';
 import Project from '../../models/Project';
-import { v4 } from 'uuid';
 
-const CreateProject = () => {
+const CreateProject = observer(() => {
   const projectForm = useForm();
   const { projectStore, uiStore } = useStores();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (uiStore.currentUser === null) {
+      router.push(ROUTES.login);
+    }
+  }, [uiStore.currentUser]);
+
+  if (uiStore.currentUser === undefined) {
+    return <div>User inladen</div>;
+  }
 
   // Uit database halen
-  const themes = ['Eeenzaamheid rond corona', 'Ondernemingschap', 'Klimaat', 'Andere'];
+  const themes = [
+    'Eeenzaamheid rond corona',
+    'Ondernemingschap',
+    'Klimaat',
+    'Andere',
+  ];
   const categories = [
     'Muziek',
     'Sociaal',
@@ -52,28 +68,13 @@ const CreateProject = () => {
       themesWithValues[key] = values.themes[i];
     });
 
-    // projectStore.uploadImage(values.image);
-
-    // let projectFromForm = {};
-
-    // if (values.isKnownPlace) {
-    //   projectFromForm[city] = values.city;
-    // }
-
-    // if (values.budgetRequirement) {
-    //   projectFromForm[budget] = values.budget;
-    //   projectFromForm[budgetDescription] = values.budgetDescription;
-    // }
-
     const project = new Project({
-      // id: v4(),
-      about: values.about,
-      budget: parseInt(values.budget) ?? '',
-      budgetDescription: values.budgetDescription ?? '',
-      budgetRequirement: values.budgetRequirement,
+      about: values.about ?? '',
+      fundingAmount: values.fundingAmount ?? '',
+      fundingDescription: values.fundingDescription ?? '',
+      fundingRequired: values.fundingRequired,
       categories: categoriesWithValues,
       city: values.city ?? '',
-      cocreators: values.cocreators ?? [],
       contact: values.contact,
       description: values.description,
       image: values.image,
@@ -81,22 +82,41 @@ const CreateProject = () => {
       isKnownPlace: values.isKnownPlace,
       materials: values.materials ?? [],
       materialsDescription: values.materialsDescription ?? '',
-      materialsRequirement: values.materialsRequirement,
+      materialsRequired: values.materialsRequired,
       number: values.number ?? '',
+      owners: values.owners ?? [],
       services: values.services ?? [],
       servicesDescription: values.servicesDescription ?? '',
-      servicesRequirement: values.servicesRequirement,
+      servicesRequired: values.servicesRequired,
       street: values.street ?? '',
       themes: themesWithValues,
       title: values.title,
+      timpestamp: projectStore.rootStore.getCurrenTimeStamp,
 
-      id: 'formtest',
-      userId: 'tijdelijk',
+      userId: uiStore.currentUser.id,
       store: projectStore,
     });
 
-    console.log(project);
-    const result = await projectStore.createProject(project);
+    const projectId = await projectStore.createProject(project);
+
+    projectStore.createRequirementsForProject({
+      requirements: {
+        materials: project.materials,
+        services: project.services,
+      },
+      info: {
+        materialsRequired: project.materialsRequired,
+        materialsDescription: project.materialsDescription ?? '',
+        servicesRequired: project.servicesRequired,
+        servicesDescription: project.servicesDescription ?? '',
+        fundingRequired: project.fundingRequired,
+        fundingAmount: project.fundingAmount ?? 0,
+        fundingDescription: project.fundingDescription ?? '',
+      },
+      projectId: projectId,
+    });
+
+    router.push(ROUTES.login);
   };
 
   return (
@@ -132,12 +152,20 @@ const CreateProject = () => {
                 {/* Update the submit button to allow navigation between steps. */}
                 <div className={styles.buttons}>
                   {!projectForm.isFirstStep && (
-                    <button className={styles.button} type="button" onClick={projectForm.prevStep}>
+                    <button
+                      className={styles.button}
+                      type="button"
+                      onClick={projectForm.prevStep}
+                    >
                       Vorige
                     </button>
                   )}
                   {projectForm.isLastStep ? (
-                    <button className={styles.button} type="submit" disabled={!projectForm.isValid}>
+                    <button
+                      className={styles.button}
+                      type="submit"
+                      disabled={!projectForm.isValid}
+                    >
                       Project indienen
                     </button>
                   ) : (
@@ -157,6 +185,6 @@ const CreateProject = () => {
       </div>
     </>
   );
-};
+});
 
 export default CreateProject;

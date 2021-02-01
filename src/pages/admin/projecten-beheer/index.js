@@ -10,6 +10,8 @@ const ProjectManagement = observer(() => {
   const { projectStore } = useStores();
   const projectAmount = projectStore.projects.length;
 
+  projectStore.loadAllProjects();
+
   const getState = (state) => {
     switch (state) {
       case 0:

@@ -21,11 +21,18 @@ class User {
     this.email = email;
     this.password = password;
     this.admin = admin;
+    this.comments = [];
+  }
+
+  linkComment(comment) {
+    !this.comments.includes(comment) && this.comments.push(comment);
   }
 }
 
 const userConverter = {
   toFirestore: function (user) {
+    console.log('user');
+    console.log(user);
     return {
       userId: user.id,
       name: user.name,
