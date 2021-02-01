@@ -139,7 +139,7 @@ const projectConverter = {
       title: project.title,
       userId: project.userId,
       state: 0,
-      timestamp: project.timestamp,
+      // timestamp: project.timestamp,
     };
   },
   fromFirestore: function (snapshot, options) {

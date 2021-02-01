@@ -34,12 +34,7 @@ const CreateProject = observer(() => {
   }
 
   // Uit database halen
-  const themes = [
-    'Eeenzaamheid rond corona',
-    'Ondernemingschap',
-    'Klimaat',
-    'Andere',
-  ];
+  const themes = ['Eeenzaamheid rond corona', 'Ondernemingschap', 'Klimaat', 'Andere'];
   const categories = [
     'Muziek',
     'Sociaal',
@@ -91,7 +86,7 @@ const CreateProject = observer(() => {
       street: values.street ?? '',
       themes: themesWithValues,
       title: values.title,
-      timpestamp: projectStore.rootStore.getCurrenTimeStamp,
+      //  timpestamp: projectStore.rootStore.getCurrenTimeStamp(),
 
       userId: uiStore.currentUser.id,
       store: projectStore,
@@ -152,20 +147,12 @@ const CreateProject = observer(() => {
                 {/* Update the submit button to allow navigation between steps. */}
                 <div className={styles.buttons}>
                   {!projectForm.isFirstStep && (
-                    <button
-                      className={styles.button}
-                      type="button"
-                      onClick={projectForm.prevStep}
-                    >
+                    <button className={styles.button} type="button" onClick={projectForm.prevStep}>
                       Vorige
                     </button>
                   )}
                   {projectForm.isLastStep ? (
-                    <button
-                      className={styles.button}
-                      type="submit"
-                      disabled={!projectForm.isValid}
-                    >
+                    <button className={styles.button} type="submit" disabled={!projectForm.isValid}>
                       Project indienen
                     </button>
                   ) : (
