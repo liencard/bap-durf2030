@@ -4,10 +4,12 @@
   background: pink;
   grid-column: span 6;
   margin-right: 5rem;
+  margin-top: 14rem;
 }
 
 .content {
   grid-column: span 6;
+  padding-top: 14rem;
 
   .tags {
     display: flex;
@@ -27,7 +29,23 @@
       font-size: 3.2rem;
       line-height: 1.5;
       font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .location {
+      display: flex;
+      align-items: center;
       margin-bottom: 2rem;
+
+      img {
+        margin-right: 1rem;
+      }
+
+      p {
+        font-size: 1.4rem;
+        font-weight: 500;
+        color: $green;
+      }
     }
   }
 
@@ -51,7 +69,12 @@
         font-size: 1.2rem;
         text-transform: uppercase;
         letter-spacing: 0.1rem;
-        margin-bottom: 1.2 rem;
+        margin-bottom: 1.8rem;
+      }
+
+      .item__btn {
+        font-size: 1.2rem;
+        font-weight: 500;
       }
 
       .circle {

@@ -34,7 +34,12 @@ const CreateProject = observer(() => {
   }
 
   // Uit database halen
-  const themes = ['Eeenzaamheid rond corona', 'Ondernemingschap', 'Klimaat', 'Andere'];
+  const themes = [
+    'Eeenzaamheid rond corona',
+    'Ondernemingschap',
+    'Klimaat',
+    'Andere',
+  ];
   const categories = [
     'Muziek',
     'Sociaal',
@@ -64,7 +69,7 @@ const CreateProject = observer(() => {
     });
 
     const project = new Project({
-      about: values.about,
+      about: values.about ?? '',
       fundingAmount: values.fundingAmount ?? '',
       fundingDescription: values.fundingDescription ?? '',
       fundingRequired: values.fundingRequired,
@@ -147,12 +152,20 @@ const CreateProject = observer(() => {
                 {/* Update the submit button to allow navigation between steps. */}
                 <div className={styles.buttons}>
                   {!projectForm.isFirstStep && (
-                    <button className={styles.button} type="button" onClick={projectForm.prevStep}>
+                    <button
+                      className={styles.button}
+                      type="button"
+                      onClick={projectForm.prevStep}
+                    >
                       Vorige
                     </button>
                   )}
                   {projectForm.isLastStep ? (
-                    <button className={styles.button} type="submit" disabled={!projectForm.isValid}>
+                    <button
+                      className={styles.button}
+                      type="submit"
+                      disabled={!projectForm.isValid}
+                    >
                       Project indienen
                     </button>
                   ) : (

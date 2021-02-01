@@ -35,7 +35,11 @@ class ProjectService {
   };
 
   getLikesById = async (id) => {
-    const snapshot = await this.db.collection('projects').doc(id).collection('likes').get();
+    const snapshot = await this.db
+      .collection('projects')
+      .doc(id)
+      .collection('likes')
+      .get();
     return snapshot.docs.map((like) => like.data());
   };
 
@@ -74,31 +78,46 @@ class ProjectService {
       .set(comment);
   };
 
-  getComments = async (projectId) => {
+  getOwners = async (projectId) => {
     const snapshot = await this.db
+      .collection('projects')
+      .doc(projectId)
+      .collection('owners')
+      .withConverter(userConverter)
+      .get();
+    const result = snapshot.docs.map((user) => user.data());
+    return result;
+  };
+
+  // getOwners = async (projectId) => {
+  //   console.log(projectId);
+  //   const snapshot = await this.db
+  //     .collectionGroup('owners')
+  //     .where('projectId', '==', projectId)
+  //     .orderBy('name')
+  //     .withConverter(userConverter)
+  //     .get();
+  //   //console.log(snapshot);
+  //   const result = snapshot.docs.map((user) => user.data());
+  //   console.log(result);
+  //   //return result;
+  // };
+
+  getComments = async (projectId, onChange) => {
+    await this.db
       .collectionGroup('comments')
       .where('projectId', '==', projectId)
       .orderBy('timestamp')
       .withConverter(commentConverter)
-      .get();
-    return snapshot.docs.map((comment) => comment.data());
+      .onSnapshot(async (snapshot) => {
+        snapshot.docChanges().forEach(async (change) => {
+          if (change.type === 'added') {
+            const commentObj = change.doc.data();
+            onChange(commentObj);
+          }
+        });
+      });
   };
-
-  // getComments = async (projectId, onChange) => {
-  //   await this.db
-  //     .collectionGroup('comments')
-  //     .where('projectId', '==', projectId)
-  //     .orderBy('timestamp')
-  //     .withConverter(commentConverter)
-  //     .onSnapshot(async (snapshot) => {
-  //       snapshot.docChanges().forEach(async (change) => {
-  //         if (change.type === 'added') {
-  //           const commentObj = change.doc.data();
-  //           onChange(commentObj);
-  //         }
-  //       });
-  //     });
-  // };
 
   updateProject = async (data) => {
     console.log('service');

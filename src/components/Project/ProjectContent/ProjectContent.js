@@ -22,7 +22,7 @@ const TabPanel = (props) => {
   );
 };
 
-const ProjectContent = () => {
+const ProjectContent = ({ project }) => {
   const [value, setValue] = useState(0);
 
   const a11yProps = (index) => {
@@ -46,12 +46,12 @@ const ProjectContent = () => {
       </AppBar>
       <TabPanel className={styles.panel} value={value} index={0}>
         <Grid>
-          <ProjectDescription />
+          <ProjectDescription project={project} />
         </Grid>
       </TabPanel>
       <TabPanel className={styles.panel} value={value} index={1}>
         <Grid>
-          <ProjectDescription />
+          <p>Updates</p>
         </Grid>
       </TabPanel>
     </>

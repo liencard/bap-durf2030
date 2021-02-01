@@ -2,6 +2,8 @@
 
 .likes {
   @include text-detail;
+  border: none;
+  background-color: transparent;
 
   &.small {
     font-size: 1.2rem;
