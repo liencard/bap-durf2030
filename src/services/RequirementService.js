@@ -1,5 +1,5 @@
 import 'firebase/firestore';
-// import { projectConverter } from '../models/Project';
+import { listConverter } from '../models/List';
 
 class RequirementService {
   constructor({ firebase }) {
@@ -59,6 +59,17 @@ class RequirementService {
           fundingDescription: info.fundingDescription,
         },
       });
+  };
+
+  getList = async (projectId) => {
+    const snapshot = await this.db
+      .collection('requirements')
+      .doc(projectId)
+      .collection('list')
+      .withConverter(listConverter)
+      .get();
+    const result = snapshot.docs.map((list) => list.data());
+    return result;
   };
 }
 

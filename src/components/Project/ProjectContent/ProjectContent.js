@@ -1,5 +1,5 @@
 import styles from './ProjectContent.module.scss';
-import { ProjectDescription } from '../../Project';
+import { ProjectDescription, ProjectRequirements } from '../../Project';
 import { Grid } from '../../Layout';
 import { useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';
@@ -38,10 +38,21 @@ const ProjectContent = ({ project }) => {
 
   return (
     <>
-      <AppBar elevation={0} color="transparent" className={styles.appbar} position="static">
-        <Tabs value={value} onChange={handleChange} aria-label="navigeer door project">
+      <AppBar
+        elevation={0}
+        color="transparent"
+        className={styles.appbar}
+        position="static"
+      >
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="navigeer door project"
+        >
           <Tab label="Campagne" {...a11yProps(0)} />
           <Tab label="Updates" {...a11yProps(1)} />
+          <Tab label="Nodige Hulp" {...a11yProps(2)} />
+          <Tab label="Durvers" {...a11yProps(3)} />
         </Tabs>
       </AppBar>
       <TabPanel className={styles.panel} value={value} index={0}>
@@ -52,6 +63,16 @@ const ProjectContent = ({ project }) => {
       <TabPanel className={styles.panel} value={value} index={1}>
         <Grid>
           <p>Updates</p>
+        </Grid>
+      </TabPanel>
+      <TabPanel className={styles.panel} value={value} index={2}>
+        <Grid>
+          <ProjectRequirements project={project} />
+        </Grid>
+      </TabPanel>
+      <TabPanel className={styles.panel} value={value} index={3}>
+        <Grid>
+          <p>Durvers</p>
         </Grid>
       </TabPanel>
     </>
