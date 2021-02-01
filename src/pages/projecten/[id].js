@@ -1,13 +1,17 @@
 import { observer } from 'mobx-react-lite';
 import { Container } from '../../components/Layout';
 import Header from '../../components/Header/Header';
-import { ProjectHeader, ProjectContent, ProjectFooter, ProjectComments } from '../../components/Project';
+import {
+  ProjectHeader,
+  ProjectContent,
+  ProjectFooter,
+  ProjectComments,
+} from '../../components/Project';
 import RootStore from '../../stores';
 import { convertData } from '../../models/Project';
 import { useStores } from '../../hooks/useStores';
 
-const Project = observer(({ projectJSON }) => {
-  console.log(projectJSON);
+const Project = observer(({ projectJSON, info }) => {
   const { projectStore } = useStores();
   const project = convertData.fromJSON(projectJSON, projectStore);
   project.getComments();
@@ -17,7 +21,7 @@ const Project = observer(({ projectJSON }) => {
       <Header />
       <Container>
         <ProjectHeader project={project} />
-        <ProjectContent project={project} />
+        <ProjectContent project={project} info={info} />
         <ProjectFooter project={project} />
         <ProjectComments project={project} />
       </Container>
@@ -50,10 +54,11 @@ export const getStaticProps = async ({ params }) => {
     avatar: owner.avatar,
     id: owner.id,
   }));
+  const info = await projectStore.loadRequirementListInfoById(params.id);
   projectJSON['owners'] = owners;
 
   return {
-    props: { projectJSON },
+    props: { projectJSON, info },
     revalidate: 5,
   };
 };

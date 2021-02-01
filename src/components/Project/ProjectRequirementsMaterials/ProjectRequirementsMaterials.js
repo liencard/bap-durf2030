@@ -6,7 +6,7 @@ import { Container } from '../../Layout';
 import { Button } from '../../UI';
 import { ProjectHelpers } from '..';
 
-const ProjectRequirementsMaterials = ({ project, materials }) => {
+const ProjectRequirementsMaterials = ({ materials, info }) => {
   const { projectStore } = useStores();
 
   const [bouw, setBouw] = useState('');
@@ -58,14 +58,7 @@ const ProjectRequirementsMaterials = ({ project, materials }) => {
           <div className={styles.content}>
             <h2 className={styles.title}>Materiaal</h2>
             <div className={styles.wrapper}>
-              <p>
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-                quae ab illo inventore veritatis et quasi architecto beatae
-                vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia
-                voluptas sit aspernatur aut odit aut fugit, sed quia
-                consequuntur magni dolores eos qui
-              </p>
+              <p>{info.materialsDetails.description}</p>
 
               <div className={styles.list}>
                 {bouw.length != 0 ? (

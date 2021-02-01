@@ -6,7 +6,7 @@ import { Container } from '../../Layout';
 import { Button } from '../../UI';
 import { ProjectHelpers } from '../../Project';
 
-const ProjectRequirementsServices = ({ project, services }) => {
+const ProjectRequirementsServices = ({ services, info }) => {
   const { projectStore } = useStores();
 
   const [physical, setPhysical] = useState('');
@@ -17,8 +17,6 @@ const ProjectRequirementsServices = ({ project, services }) => {
     let physicalArr = [];
     let creativeArr = [];
     let diversArr = [];
-
-    console.log(services);
 
     const loadServices = async () => {
       services.forEach((service) => {
@@ -45,14 +43,7 @@ const ProjectRequirementsServices = ({ project, services }) => {
           <div className={styles.content}>
             <h2 className={styles.title}>Diensten</h2>
             <div className={styles.wrapper}>
-              <p>
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-                quae ab illo inventore veritatis et quasi architecto beatae
-                vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia
-                voluptas sit aspernatur aut odit aut fugit, sed quia
-                consequuntur magni dolores eos qui
-              </p>
+              <p>{info.servicesDetails.description}</p>
               <div className={styles.list}>
                 {physical.length != 0 ? (
                   <article className={styles.list__item}>

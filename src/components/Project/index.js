@@ -11,3 +11,4 @@ export { default as ProjectCard } from './ProjectCard/ProjectCard';
 export { default as ProjectRequirements } from './ProjectRequirements/ProjectRequirements';
 export { default as ProjectRequirementsServices } from './ProjectRequirementsServices/ProjectRequirementsServices';
 export { default as ProjectRequirementsMaterials } from './ProjectRequirementsMaterials/ProjectRequirementsMaterials';
+export { default as ProjectRequirementsFunding } from './ProjectRequirementsFunding/ProjectRequirementsFunding';

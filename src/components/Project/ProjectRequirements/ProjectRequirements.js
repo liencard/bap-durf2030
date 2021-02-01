@@ -2,14 +2,15 @@ import styles from './ProjectRequirements.module.scss';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useStores } from '../../../hooks/useStores';
-import { Container } from '../../Layout';
 
 import {
   ProjectRequirementsServices,
   ProjectRequirementsMaterials,
+  ProjectRequirementsFunding,
 } from '../../Project';
+import { SettingsOutlined } from '@material-ui/icons';
 
-const ProjectRequirements = ({ project }) => {
+const ProjectRequirements = ({ project, info }) => {
   const { projectStore } = useStores();
   const [services, setServices] = useState('');
   const [materials, setMaterials] = useState('');
@@ -32,21 +33,27 @@ const ProjectRequirements = ({ project }) => {
       });
     };
     loadRequirements();
-  }, [projectStore]);
+  }, [projectStore, setMaterials, setServices]);
 
   return (
     <>
       <div className={styles.requirements}>
+        {/* CROWDFUNDING */}
+        {info.fundingDetails.required ? (
+          <ProjectRequirementsFunding info={info} />
+        ) : (
+          ''
+        )}
         {/* DIENSTEN */}
         {services.length != 0 ? (
-          <ProjectRequirementsServices services={services} />
+          <ProjectRequirementsServices services={services} info={info} />
         ) : (
           ''
         )}
 
         {/* MATERIAAL */}
         {materials.length != 0 ? (
-          <ProjectRequirementsMaterials materials={materials} />
+          <ProjectRequirementsMaterials materials={materials} info={info} />
         ) : (
           ''
         )}

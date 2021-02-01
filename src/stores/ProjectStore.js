@@ -88,6 +88,10 @@ class ProjectStore {
     return await this.requirementService.getList(id);
   };
 
+  loadRequirementListInfoById = async (id) => {
+    return await this.requirementService.getListInfo(id);
+  };
+
   loadProjectCommentsById = async (id) => {
     return await this.projectService.getComments(id, this.onCommentChanged);
   };

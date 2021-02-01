@@ -22,7 +22,7 @@ const TabPanel = (props) => {
   );
 };
 
-const ProjectContent = ({ project }) => {
+const ProjectContent = ({ project, info }) => {
   const [value, setValue] = useState(0);
 
   const a11yProps = (index) => {
@@ -67,7 +67,7 @@ const ProjectContent = ({ project }) => {
       </TabPanel>
       <TabPanel className={styles.panel} value={value} index={2}>
         <Grid>
-          <ProjectRequirements project={project} />
+          <ProjectRequirements project={project} info={info} />
         </Grid>
       </TabPanel>
       <TabPanel className={styles.panel} value={value} index={3}>

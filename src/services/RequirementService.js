@@ -71,6 +71,14 @@ class RequirementService {
     const result = snapshot.docs.map((list) => list.data());
     return result;
   };
+
+  getListInfo = async (projectId) => {
+    const snapshot = await this.db
+      .collection('requirements')
+      .doc(projectId)
+      .get();
+    return snapshot.data();
+  };
 }
 
 export default RequirementService;
