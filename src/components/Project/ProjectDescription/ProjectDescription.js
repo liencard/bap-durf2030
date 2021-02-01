@@ -12,7 +12,7 @@ const ProjectDescription = ({ project }) => {
           <Button text="Ik durf mee te helpen" />
           <div>
             <ProjectShare />
-            <ProjectLikes />
+            <ProjectLikes project={project} />
           </div>
         </div>
       </div>

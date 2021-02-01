@@ -21,6 +21,7 @@ class ProjectStore {
       loadProject: action,
       projects: observable,
       updateProject: action,
+      loadProjectLikesById: action,
     });
   }
 
@@ -40,10 +41,7 @@ class ProjectStore {
 
   createRequirementsForProject = async ({ requirements, info, projectId }) => {
     if (info.materialsRequired) {
-      this.requirementService.createMaterials(
-        requirements.materials,
-        projectId
-      );
+      this.requirementService.createMaterials(requirements.materials, projectId);
     }
     if (info.servicesRequired) {
       this.requirementService.createServices(requirements.services, projectId);
@@ -68,16 +66,23 @@ class ProjectStore {
       project = new Project({
         id: json.id,
         title: json.title,
-        userId: json.userId,
         intro: json.intro,
+        about: json.about,
+        contact: json.contact,
+        description: json.description,
+        isKnownPlace: json.isKnownPlace,
+        city: json.city,
+        street: json.street,
+        number: json.number,
+        userId: json.userId,
         state: json.state,
         store: this.rootStore.projectStore,
       });
     }
   };
 
-  loadProjectLikesById = (id) => {
-    return this.projectService.getLikesById(id);
+  loadProjectLikesById = async (id) => {
+    return await this.projectService.getLikesById(id);
   };
 
   loadProjectOwnersById = async (id) => {
@@ -108,6 +113,14 @@ class ProjectStore {
 
   uploadImage = (image) => {
     this.projectService.uploadImage(image.file, image.name, 'testid');
+  };
+
+  addLikeToProject = (projectId, userId) => {
+    this.projectService.addLike(projectId, userId);
+  };
+
+  removeLikeFromProject = (projectId, userId) => {
+    this.projectService.removeLike(projectId, userId);
   };
 }
 
