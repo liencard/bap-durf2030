@@ -122,11 +122,6 @@ const projectConverter = {
     // left DB naam, right Model naam
     return {
       about: project.about,
-      // budget: {
-      //   required: data.budgetRequirement,
-      //   amount: data.budget,
-      //   info: data.budgetDescription,
-      // },
       categories: project.categories,
       contact: project.contact,
       description: project.description,
@@ -140,6 +135,8 @@ const projectConverter = {
       themes: project.themes,
       title: project.title,
       userId: project.userId,
+      state: 0,
+      timestamp: project.timestamp,
     };
   },
   fromFirestore: function (snapshot, options) {

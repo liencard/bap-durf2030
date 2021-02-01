@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router';
 import { ROUTES } from '../../consts/index';
+import { useEffect } from 'react';
 import { Container } from '../../components/Layout';
+import { observer } from 'mobx-react-lite';
 import styles from './CreateProject.module.scss';
 import { Button } from '../../components/UI';
 import {
@@ -12,15 +14,24 @@ import {
   FormPartSix,
   FormPartSeven,
 } from '../../components/Create';
-import { useState } from 'react';
 import { Formiz, useForm, FormizStep } from '@formiz/core';
 import { useStores } from '../../hooks/useStores';
 import Project from '../../models/Project';
-import { v4 } from 'uuid';
 
-const CreateProject = () => {
+const CreateProject = observer(() => {
   const projectForm = useForm();
   const { projectStore, uiStore } = useStores();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (uiStore.currentUser === null) {
+      router.push(ROUTES.login);
+    }
+  }, [uiStore.currentUser]);
+
+  if (uiStore.currentUser === undefined) {
+    return <div>User inladen</div>;
+  }
 
   // Uit database halen
   const themes = [
@@ -80,6 +91,7 @@ const CreateProject = () => {
       street: values.street ?? '',
       themes: themesWithValues,
       title: values.title,
+      timpestamp: projectStore.rootStore.getCurrenTimeStamp,
 
       userId: uiStore.currentUser.id,
       store: projectStore,
@@ -103,6 +115,8 @@ const CreateProject = () => {
       },
       projectId: projectId,
     });
+
+    router.push(ROUTES.login);
   };
 
   return (
@@ -171,6 +185,6 @@ const CreateProject = () => {
       </div>
     </>
   );
-};
+});
 
 export default CreateProject;
