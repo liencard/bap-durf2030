@@ -8,23 +8,33 @@ class RequirementService {
 
   createMaterials = async (materials, projectId) => {
     materials.forEach((material) => {
-      this.db.collection('requirements').doc(projectId).collection('materials').doc().set({
-        amount: material.amount,
-        category: material.category,
-        name: material.name,
-        completed: false,
-      });
+      this.db
+        .collection('requirements')
+        .doc(projectId)
+        .collection('materials')
+        .doc()
+        .set({
+          amount: material.amount,
+          category: material.category,
+          name: material.name,
+          completed: false,
+        });
     });
   };
 
   createServices = async (services, projectId) => {
     services.forEach((service) => {
-      this.db.collection('requirements').doc(projectId).collection('services').doc().set({
-        amount: service.amount,
-        category: service.category,
-        name: service.name,
-        completed: false,
-      });
+      this.db
+        .collection('requirements')
+        .doc(projectId)
+        .collection('services')
+        .doc()
+        .set({
+          amount: service.amount,
+          category: service.category,
+          name: service.name,
+          completed: false,
+        });
     });
   };
 
