@@ -1,6 +1,7 @@
 import 'firebase/firestore';
 //import { firestore } from 'firebase/app';
 import { userConverter } from '../models/User';
+import { projectConverter } from '../models/Project';
 
 class UserService {
   constructor(firebase) {
@@ -42,15 +43,12 @@ class UserService {
   };
 
   getProjectsByUser = async (user) => {
-    console.log('hi user');
-    console.log(user);
     const projectsRef = this.db
       .collection('users')
       .doc(user.email)
       .collection('projects');
 
-    const projects = await projectsRef.withConverter(userConverter).get();
-
+    const projects = await projectsRef.withConverter(projectConverter).get();
     return projects.docs.map((project) => project.data());
   };
 

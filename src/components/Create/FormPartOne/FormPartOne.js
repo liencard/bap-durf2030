@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styles from './FormPartOne.module.scss';
 import { FormFieldInput, FormFieldSelect, FormFieldSwitch } from '../index';
 import { Grid } from '../../Layout';
+import { isNotEmptyString } from '@formiz/validations';
 
 const FormPartOne = () => {
   const [isKnownPlace, setIsKnownPlace] = useState(false);
@@ -12,7 +13,17 @@ const FormPartOne = () => {
 
       {/* Titel */}
       <h3 className={styles.subtitle}>Geef je project een titel</h3>
-      <FormFieldInput name="title" label="Titel" required />
+      <FormFieldInput
+        name="title"
+        label="Titel"
+        required
+        validations={[
+          {
+            rule: isNotEmptyString(),
+            message: 'Voeg een titel toe aan je project',
+          },
+        ]}
+      />
       <h3 className={styles.subtitle}>Project plaats</h3>
       <p>
         Een project kan enkel doorgaan in Kortrijk en omstreken. Dit adres dient als startpunt voor je project, dit kan

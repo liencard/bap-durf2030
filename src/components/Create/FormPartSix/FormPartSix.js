@@ -1,21 +1,15 @@
 import styles from './FormPartSix.module.scss';
-import { FormFieldAddUser } from '../index';
+import { FormFieldInput } from '../index';
 
 const FormPartSix = () => {
   return (
     <>
-      <h2 className={styles.title}>Samenwerken</h2>
-      <p>
-        Deel mee met wie je gaat samenwerken. Dit is een opsomming van individuen, organisaties, bedrijven, waarmee jij
-        dit project wilt uitvoeren. Heb je die nog niet? Geen probleem dan zoeken we samen naar de juiste partners voor
-        jouw project.
-      </p>
+      <h2 className={styles.title}>Over jezelf</h2>
+      <p>Laat andere durvers iets meer over jou weten.</p>
+      <FormFieldInput multiline name="about" label="Schrijf iets over jezelf" rows={8} required />
       <h3 className={styles.title}>Durvers toevoegen</h3>
-      <p>
-        Zoek naar bestaande DURF 2030 accounts, dit kunnen leden of teams zijn. Of voeg manueel iemand toe zonder
-        account.
-      </p>
-      <FormFieldAddUser name="owners" />
+      <p>Contacteer.</p>
+      <FormFieldInput name="contact" label="Email" required />
     </>
   );
 };

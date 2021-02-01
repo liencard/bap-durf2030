@@ -13,8 +13,8 @@ const TabPanel = (props) => {
     <div
       role="tabpanel"
       hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
+      id={`project-info-${index}`}
+      aria-labelledby={`project-info-${index}`}
       {...other}
     >
       {value === index && <div>{children}</div>}
@@ -27,8 +27,8 @@ const ProjectContent = () => {
 
   const a11yProps = (index) => {
     return {
-      id: `simple-tab-${index}`,
-      'aria-controls': `simple-tabpanel-${index}`,
+      id: `project-info-${index}`,
+      'aria-controls': `project-info-${index}`,
     };
   };
 
@@ -39,7 +39,7 @@ const ProjectContent = () => {
   return (
     <>
       <AppBar elevation={0} color="transparent" className={styles.appbar} position="static">
-        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+        <Tabs value={value} onChange={handleChange} aria-label="navigeer door project">
           <Tab label="Campagne" {...a11yProps(0)} />
           <Tab label="Updates" {...a11yProps(1)} />
         </Tabs>

@@ -13,13 +13,11 @@ class ProjectStore {
     });
     this.userService = new UserService(this.rootStore.firebase);
 
-    // TO DO: Enkel bij 'Projects' pagina of SSR
-    //this.loadAllProjects();
-
     makeObservable(this, {
       loadAllProjects: action,
       loadProject: action,
       projects: observable,
+      updateProject: action,
     });
   }
 
@@ -38,34 +36,19 @@ class ProjectStore {
   };
 
   createImageForProject = async (image) => {
-    // return await this.
+    // to do linken
   };
 
   resolveProject = (id) => this.projects.find((project) => project.id === id);
 
-  // Front-end
   getProjectById = (id) => this.projects.find((project) => project.id === id);
 
-  //   empty() {
-  //     this.projects = [];
-  //   }
-
-  // getProjectsForUser = async () => {
-  //   console.log('hi store');
-  //   const projectArr = await this.userService.getProjectsByUser(
-  //     this.rootStore.uiStore.currentUser
-  //   );
-  //   projectArr.forEach(this.addProject);
-  // };
-
   loadAllProjects = async () => {
-    // console.log('projects');
     const jsonProjects = await this.projectService.getAll();
     jsonProjects.forEach((json) => this.updateProjectFromServer(json));
   };
 
-  updateProjectFromServer(json) {
-    // console.log(json);
+  updateProjectFromServer = (json) => {
     let project = this.projects.find((project) => project.id === json.id);
     if (!project) {
       project = new Project({
@@ -78,11 +61,18 @@ class ProjectStore {
         store: this.rootStore.projectStore,
       });
     }
-    // console.log(project);
-  }
+  };
+
+  loadProjectLikesById = async (id) => {
+    return await this.projectService.getLikesById(id);
+  };
 
   updateState = async (data) => {
     return await this.projectService.updateState(data);
+  };
+
+  updateProject = async (project) => {
+    return await this.projectService.updateProject(project);
   };
 
   uploadImage = (image) => {

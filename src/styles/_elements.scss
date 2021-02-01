@@ -53,6 +53,48 @@
     background-color: $green-dark;
     cursor: pointer;
   }
+
+  &:disabled {
+    background-color: $green-light;
+
+    &:hover {
+      background-color: $green-light;
+      cursor: default;
+    }
+  }
+}
+
+@mixin appbar {
+  grid-column: span 12;
+  margin: 5rem 0;
+
+  div {
+    height: 8rem;
+    position: relative;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      content: '';
+      height: 0.1rem;
+      width: 100%;
+      background-color: $blue-light;
+    }
+
+    &::after {
+      position: absolute;
+      content: '';
+      height: 0.1rem;
+      width: 100%;
+      background-color: $blue-light;
+      left: 0;
+      bottom: 0;
+    }
+
+    span {
+      padding: 0.15rem;
+    }
+  }
 }
 
 // @mixin textfield {

@@ -1,8 +1,14 @@
 import styles from './ProjectHeader.module.scss';
 import { Button } from '../../UI';
 import { ProjectLikes, ProjectHelpers } from '../../Project';
+import { useStores } from '../../../hooks/useStores';
 
-const ProjectHeader = ({ project }) => {
+const ProjectHeader = ({ project, id }) => {
+  const { projectStore } = useStores();
+  projectStore.loadProjectLikesById(id);
+  // const likes = projectStore.loadProjectLikesById(id);
+  // console.log(likes);
+
   return (
     <>
       <div className={styles.images}>Images</div>

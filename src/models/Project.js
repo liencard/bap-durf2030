@@ -2,67 +2,98 @@ import { makeObservable, observable, action } from 'mobx';
 
 class Project {
   constructor({
-    userId,
-    id,
-    title,
-    store,
-    intro,
-    tags,
-    isKnownPlace,
-    city,
-    street,
-    number,
+    about,
+    budget,
+    budgetDescription,
+    budgetRequirement,
     categories,
-    themes,
+    city,
+    cocreators,
+    contact,
     description,
     image,
+    intro,
+    isKnownPlace,
+    materials,
+    materialsDescription,
+    materialsRequirement,
+    number,
+    services,
+    servicesDescription,
+    servicesRequirement,
+    street,
+    themes,
+    title,
+
+    id,
+    userId,
+    store,
+    likes,
   }) {
-    if (!store) {
-      throw new Error('voorzie een store');
-    }
-    this.store = store;
+    // if (!store) {
+    //   throw new Error('voorzie een store');
+    // }
+    this.about = about;
+    this.budget = budget;
+    this.budgetDescription = budgetDescription;
+    this.budgetRequirement = budgetRequirement;
+    this.categories = categories;
+    this.city = city;
+    this.cocreators = cocreators;
+    this.contact = contact;
+
+    this.description = description;
+    this.image = image;
+    this.intro = intro;
+    this.isKnownPlace = isKnownPlace;
+    this.materials = materials;
+    this.materialsDescription = materialsDescription;
+    this.materialsRequirement = materialsRequirement;
+    this.number = number;
+    this.services = services;
+    this.servicesDescription = servicesDescription;
+    this.servicesRequirement = servicesRequirement;
+    this.street = street;
+    this.themes = themes;
+    this.title = title;
+
     this.id = id;
     this.userId = userId;
-    this.title = title;
-    this.intro = intro;
-    this.description = description;
-    this.isKnownPlace = isKnownPlace;
-    this.city = isKnownPlace ? city : 'unknown';
-    this.street = isKnownPlace ? street : 'unknown';
-    this.number = isKnownPlace ? number : 'unknown';
-    this.tags = []; // weg?
-    this.themes = themes;
-    this.categories = categories;
-    this.image = image;
-    this.getAssignedTags(tags);
-    this.store.addProject(this);
+    this.likes = [];
+
+    if (store) {
+      this.store = store;
+      this.store.addProject(this);
+    }
 
     makeObservable(this, {
-      title: observable,
-      intro: observable,
-      setParam: action,
+      likes: observable,
     });
   }
-
-  getAssignedTags(tags) {
-    // console.log(tags);
-    // tags.forEach((tag) => {
-    //   console.log(tag);
-    // });
-  }
-
-  setParam = ({ param, value }) => {
-    // switch (param) {
-    //   case 'title':
-    //     this.title = value;
-    //     break;
-    //   case 'intro':
-    //     this.intro = value;
-    //     break;
-    //   default:
-    //     return 'Unknown';
-    // }
-  };
 }
+
+const projectConverter = {
+  toFirestore: function (project) {
+    // left DB naam, right Model naam
+    return {
+      title: project.title,
+      intro: project.intro,
+      userId: project.userId,
+    };
+  },
+  fromFirestore: function (snapshot, options) {
+    const data = snapshot.data(options);
+    console.log(snapshot.id);
+    // left Model naam, right DB naam
+    return new Project({
+      id: snapshot.id,
+      title: data.title,
+      intro: data.intro,
+      userId: data.userId,
+    });
+  },
+};
+
+export { projectConverter };
 
 export default Project;
