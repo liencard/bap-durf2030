@@ -60,7 +60,7 @@ class Project {
     this.id = id;
     this.userId = userId;
     this.likes = [];
-    this.comments = comments;
+    this.comments = [];
 
     if (store) {
       this.store = store;
@@ -70,7 +70,13 @@ class Project {
     makeObservable(this, {
       likes: observable,
       comments: observable,
+      linkComment: action,
     });
+  }
+
+  getComments() {
+    const res = this.store.loadProjectCommentsById(this.id);
+    console.log(res);
   }
 
   linkComment(comment) {
@@ -78,6 +84,39 @@ class Project {
   }
 }
 
+// Server side rendering of detail page, convert data
+const convertData = {
+  toJSON(project) {
+    return {
+      id: project.id,
+      title: project.title,
+      intro: project.intro,
+      about: project.about,
+      contact: project.contact,
+      isKnownPlace: project.isKnownPlace,
+      city: project.city,
+      street: project.street,
+      number: project.number,
+    };
+  },
+
+  fromJSON(project, store) {
+    return new Project({
+      id: project.id,
+      title: project.title,
+      intro: project.intro,
+      about: project.about,
+      contact: project.contact,
+      isKnownPlace: project.isKnownPlace,
+      city: project.city,
+      street: project.street,
+      number: project.number,
+      store: store,
+    });
+  },
+};
+
+// From and to firebase data
 const projectConverter = {
   toFirestore: function (project) {
     // left DB naam, right Model naam
@@ -102,16 +141,24 @@ const projectConverter = {
   },
   fromFirestore: function (snapshot, options) {
     const data = snapshot.data(options);
+    console.log('data');
+    console.log(data.location);
     return new Project({
       id: snapshot.id,
       title: data.title,
       intro: data.intro,
+      about: data.about,
+      contact: data.contact,
       userId: data.userId,
+      isKnownPlace: data.location.isKnownPlace,
+      city: data.location.city,
+      street: data.location.street,
+      number: data.location.number,
       state: data.state,
     });
   },
 };
 
-export { projectConverter };
+export { projectConverter, convertData };
 
 export default Project;

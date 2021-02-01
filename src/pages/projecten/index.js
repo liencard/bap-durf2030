@@ -1,11 +1,12 @@
 import { Container } from '../../components/Layout';
 import { ProjectCard } from '../../components/Project';
+import Header from '../../components/Header/Header';
 import RootStore from '../../stores';
 
 const Projects = ({ projects }) => {
   return (
     <>
-      <p>Test SSR projecten</p>
+      <Header />
       <Container>
         {projects.map((project) => (
           <ProjectCard
