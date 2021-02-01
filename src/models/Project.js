@@ -76,7 +76,6 @@ class Project {
 
   getComments() {
     const res = this.store.loadProjectCommentsById(this.id);
-    console.log(res);
   }
 
   linkComment(comment) {
@@ -144,8 +143,6 @@ const projectConverter = {
   },
   fromFirestore: function (snapshot, options) {
     const data = snapshot.data(options);
-    console.log('data');
-    console.log(data.location);
     return new Project({
       id: snapshot.id,
       title: data.title,

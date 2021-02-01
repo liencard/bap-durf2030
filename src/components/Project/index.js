@@ -9,3 +9,5 @@ export { default as ProjectCreatorImage } from './ProjectCreatorImage/ProjectCre
 export { default as ProjectShare } from './ProjectShare/ProjectShare';
 export { default as ProjectCard } from './ProjectCard/ProjectCard';
 export { default as ProjectRequirements } from './ProjectRequirements/ProjectRequirements';
+export { default as ProjectRequirementsServices } from './ProjectRequirementsServices/ProjectRequirementsServices';
+export { default as ProjectRequirementsMaterials } from './ProjectRequirementsMaterials/ProjectRequirementsMaterials';

@@ -12,7 +12,6 @@ const ProjectHeader = ({ project }) => {
     projectStore.loadProjectLikesById('formtest').then((result) => {
       setLikes(result.length);
     });
-    console.log(project);
   }, []);
 
   return (
