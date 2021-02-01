@@ -1,17 +1,13 @@
 import { observer } from 'mobx-react-lite';
 import { Container } from '../../components/Layout';
 import Header from '../../components/Header/Header';
-import {
-  ProjectHeader,
-  ProjectContent,
-  ProjectFooter,
-  ProjectComments,
-} from '../../components/Project';
+import { ProjectHeader, ProjectContent, ProjectFooter, ProjectComments } from '../../components/Project';
 import RootStore from '../../stores';
 import { convertData } from '../../models/Project';
 import { useStores } from '../../hooks/useStores';
 
-const Project = observer(({ projectJSON, owners }) => {
+const Project = observer(({ projectJSON }) => {
+  console.log(projectJSON);
   const { projectStore } = useStores();
   const project = convertData.fromJSON(projectJSON, projectStore);
   project.getComments();
@@ -21,7 +17,7 @@ const Project = observer(({ projectJSON, owners }) => {
       <Header />
       <Container>
         <ProjectHeader project={project} />
-        <ProjectContent owners={owners} project={project} />
+        <ProjectContent project={project} />
         <ProjectFooter project={project} />
         <ProjectComments project={project} />
       </Container>
@@ -39,7 +35,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
 };
 
@@ -47,18 +43,17 @@ export const getStaticProps = async ({ params }) => {
   const store = new RootStore();
   const { projectStore } = store;
   const data = await projectStore.projectService.getById(params.id);
-  // const projectFromServer = data.toJSON();
   const projectJSON = convertData.toJSON(data);
   const ownersArr = await projectStore.loadProjectOwnersById(params.id);
-  console.log(ownersArr);
   const owners = ownersArr.map((owner) => ({
     name: owner.name,
     avatar: owner.avatar,
     id: owner.id,
   }));
+  projectJSON['owners'] = owners;
 
   return {
-    props: { projectJSON, owners },
+    props: { projectJSON },
     revalidate: 5,
   };
 };

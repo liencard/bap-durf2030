@@ -11,13 +11,14 @@ class RequirementService {
       this.db
         .collection('requirements')
         .doc(projectId)
-        .collection('materials')
+        .collection('list')
         .doc()
         .set({
           amount: material.amount,
           category: material.category,
           name: material.name,
           completed: false,
+          type: 'material',
         });
     });
   };
@@ -27,13 +28,14 @@ class RequirementService {
       this.db
         .collection('requirements')
         .doc(projectId)
-        .collection('services')
+        .collection('list')
         .doc()
         .set({
           amount: service.amount,
           category: service.category,
           name: service.name,
           completed: false,
+          type: 'service',
         });
     });
   };

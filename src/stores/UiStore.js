@@ -8,10 +8,7 @@ class UiStore {
     this.rootStore = rootStore;
     this.currentUser = undefined;
     this.userProjects = [];
-    this.authService = new AuthService(
-      this.rootStore.firebase,
-      this.onAuthStateChanged
-    );
+    this.authService = new AuthService(this.rootStore.firebase, this.onAuthStateChanged);
     this.userService = new UserService(this.rootStore.firebase);
 
     makeObservable(this, {
@@ -40,7 +37,7 @@ class UiStore {
       //inlezen van de projecten van de currentuser
     } else {
       console.log(`de user is uitgelogd`);
-      this.setCurrentUser(undefined);
+      this.currentUser = null;
     }
   };
 
@@ -60,12 +57,7 @@ class UiStore {
   };
 
   registerUser = async (user) => {
-    const result = await this.authService.register(
-      user.name,
-      user.email,
-      user.password,
-      user.avatar
-    );
+    const result = await this.authService.register(user.name, user.email, user.password, user.avatar);
     const newRegisteredUser = new User({
       id: result.uid,
       name: result.displayName,

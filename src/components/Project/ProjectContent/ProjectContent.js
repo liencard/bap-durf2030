@@ -22,7 +22,7 @@ const TabPanel = (props) => {
   );
 };
 
-const ProjectContent = ({ owners, project }) => {
+const ProjectContent = ({ project }) => {
   const [value, setValue] = useState(0);
 
   const a11yProps = (index) => {
@@ -38,29 +38,20 @@ const ProjectContent = ({ owners, project }) => {
 
   return (
     <>
-      <AppBar
-        elevation={0}
-        color="transparent"
-        className={styles.appbar}
-        position="static"
-      >
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="navigeer door project"
-        >
+      <AppBar elevation={0} color="transparent" className={styles.appbar} position="static">
+        <Tabs value={value} onChange={handleChange} aria-label="navigeer door project">
           <Tab label="Campagne" {...a11yProps(0)} />
           <Tab label="Updates" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
       <TabPanel className={styles.panel} value={value} index={0}>
         <Grid>
-          <ProjectDescription owners={owners} project={project} />
+          <ProjectDescription project={project} />
         </Grid>
       </TabPanel>
       <TabPanel className={styles.panel} value={value} index={1}>
         <Grid>
-          <ProjectDescription owners={owners} />
+          <p>Updates</p>
         </Grid>
       </TabPanel>
     </>

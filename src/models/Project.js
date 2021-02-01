@@ -93,6 +93,7 @@ const convertData = {
       intro: project.intro,
       about: project.about,
       contact: project.contact,
+      description: project.description,
       isKnownPlace: project.isKnownPlace,
       city: project.city,
       street: project.street,
@@ -107,10 +108,12 @@ const convertData = {
       intro: project.intro,
       about: project.about,
       contact: project.contact,
+      description: project.description,
       isKnownPlace: project.isKnownPlace,
       city: project.city,
       street: project.street,
       number: project.number,
+      owners: project.owners,
       store: store,
     });
   },
@@ -122,11 +125,6 @@ const projectConverter = {
     // left DB naam, right Model naam
     return {
       about: project.about,
-      // budget: {
-      //   required: data.budgetRequirement,
-      //   amount: data.budget,
-      //   info: data.budgetDescription,
-      // },
       categories: project.categories,
       contact: project.contact,
       description: project.description,
@@ -140,6 +138,8 @@ const projectConverter = {
       themes: project.themes,
       title: project.title,
       userId: project.userId,
+      state: 0,
+      // timestamp: project.timestamp,
     };
   },
   fromFirestore: function (snapshot, options) {
@@ -152,6 +152,7 @@ const projectConverter = {
       intro: data.intro,
       about: data.about,
       contact: data.contact,
+      description: data.description,
       userId: data.userId,
       isKnownPlace: data.location.isKnownPlace,
       city: data.location.city,

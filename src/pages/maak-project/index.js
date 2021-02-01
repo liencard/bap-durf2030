@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router';
 import { ROUTES } from '../../consts/index';
+import { useEffect } from 'react';
 import { Container } from '../../components/Layout';
+import { observer } from 'mobx-react-lite';
 import styles from './CreateProject.module.scss';
 import { Button } from '../../components/UI';
 import {
@@ -12,23 +14,27 @@ import {
   FormPartSix,
   FormPartSeven,
 } from '../../components/Create';
-import { useState } from 'react';
 import { Formiz, useForm, FormizStep } from '@formiz/core';
 import { useStores } from '../../hooks/useStores';
 import Project from '../../models/Project';
-import { v4 } from 'uuid';
 
-const CreateProject = () => {
+const CreateProject = observer(() => {
   const projectForm = useForm();
   const { projectStore, uiStore } = useStores();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (uiStore.currentUser === null) {
+      router.push(ROUTES.login);
+    }
+  }, [uiStore.currentUser]);
+
+  if (uiStore.currentUser === undefined) {
+    return <div>User inladen</div>;
+  }
 
   // Uit database halen
-  const themes = [
-    'Eeenzaamheid rond corona',
-    'Ondernemingschap',
-    'Klimaat',
-    'Andere',
-  ];
+  const themes = ['Eeenzaamheid rond corona', 'Ondernemingschap', 'Klimaat', 'Andere'];
   const categories = [
     'Muziek',
     'Sociaal',
@@ -80,6 +86,7 @@ const CreateProject = () => {
       street: values.street ?? '',
       themes: themesWithValues,
       title: values.title,
+      //  timpestamp: projectStore.rootStore.getCurrenTimeStamp(),
 
       userId: uiStore.currentUser.id,
       store: projectStore,
@@ -103,6 +110,8 @@ const CreateProject = () => {
       },
       projectId: projectId,
     });
+
+    router.push(ROUTES.login);
   };
 
   return (
@@ -138,20 +147,12 @@ const CreateProject = () => {
                 {/* Update the submit button to allow navigation between steps. */}
                 <div className={styles.buttons}>
                   {!projectForm.isFirstStep && (
-                    <button
-                      className={styles.button}
-                      type="button"
-                      onClick={projectForm.prevStep}
-                    >
+                    <button className={styles.button} type="button" onClick={projectForm.prevStep}>
                       Vorige
                     </button>
                   )}
                   {projectForm.isLastStep ? (
-                    <button
-                      className={styles.button}
-                      type="submit"
-                      disabled={!projectForm.isValid}
-                    >
+                    <button className={styles.button} type="submit" disabled={!projectForm.isValid}>
                       Project indienen
                     </button>
                   ) : (
@@ -171,6 +172,6 @@ const CreateProject = () => {
       </div>
     </>
   );
-};
+});
 
 export default CreateProject;
