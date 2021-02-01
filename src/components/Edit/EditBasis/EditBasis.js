@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './EditBasis.module.scss';
 import { EditPart } from '../';
 import { FormFieldRichTextEditor, FormFieldInput } from '../../Create';
+import { THEMES } from '../../../consts';
 
 const EditBasis = ({ project }) => {
   const handleSaveProject = async (values) => {

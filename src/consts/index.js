@@ -12,4 +12,18 @@ const ROUTES = {
   adminSettings: '/admin/settings',
 };
 
-export { ROUTES };
+const THEMES = ['Eeenzaamheid rond corona', 'Ondernemingschap', 'Klimaat', 'Andere'];
+const CATEGORIES = [
+  'Muziek',
+  'Sociaal',
+  'Kinderen',
+  'Kunst',
+  'Theater',
+  'Technologie',
+  'Dans',
+  'Audiovisueel',
+  'Natuur',
+  'Divers',
+];
+
+export { ROUTES, THEMES, CATEGORIES };
