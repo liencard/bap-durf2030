@@ -1,6 +1,6 @@
-import styles from './FormPartTwo.module.scss';
 import { FormFieldCheckbox } from '../index';
 import { THEMES, CATEGORIES } from '../../../consts';
+import styles from './FormPartTwo.module.scss';
 
 const FormPartTwo = () => {
   return (
