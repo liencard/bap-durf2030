@@ -10,18 +10,33 @@ import {
 import RootStore from '../../stores';
 import { convertData } from '../../models/Project';
 import { useStores } from '../../hooks/useStores';
+import { useState, useEffect } from 'react';
 
 const Project = observer(({ projectJSON, info }) => {
   const { projectStore } = useStores();
+  const [requirements, setRequirements] = useState([]);
+
   const project = convertData.fromJSON(projectJSON, projectStore);
   project.getComments();
+
+  useEffect(() => {
+    const loadData = async () => {
+      const list = await projectStore.loadRequirementListById(project.id);
+      setRequirements(list);
+    };
+    loadData();
+  }, [projectStore, setRequirements]);
 
   return (
     <>
       <Header />
       <Container>
-        <ProjectHeader project={project} />
-        <ProjectContent project={project} info={info} />
+        <ProjectHeader project={project} requirements={requirements} />
+        <ProjectContent
+          project={project}
+          requirements={requirements}
+          info={info}
+        />
         <ProjectFooter project={project} />
         <ProjectComments project={project} />
       </Container>
@@ -55,6 +70,7 @@ export const getStaticProps = async ({ params }) => {
     id: owner.id,
   }));
   const info = await projectStore.loadRequirementListInfoById(params.id);
+  //const projectItems = await projectStore.loadRequirementListById(params.id);
   projectJSON['owners'] = owners;
 
   return {

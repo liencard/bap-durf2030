@@ -9,9 +9,9 @@ import { ProjectHelpers } from '../../Project';
 const ProjectRequirementsServices = ({ services, info }) => {
   const { projectStore } = useStores();
 
-  const [physical, setPhysical] = useState('');
-  const [creative, setCreative] = useState('');
-  const [divers, setDivers] = useState('');
+  const [physical, setPhysical] = useState([]);
+  const [creative, setCreative] = useState([]);
+  const [divers, setDivers] = useState([]);
 
   useEffect(() => {
     let physicalArr = [];
@@ -45,11 +45,14 @@ const ProjectRequirementsServices = ({ services, info }) => {
             <div className={styles.wrapper}>
               <p>{info.servicesDetails.description}</p>
               <div className={styles.list}>
-                {physical.length != 0 ? (
+                {physical.length != 0 && (
                   <article className={styles.list__item}>
                     <h3>Fysieke hulp</h3>
                     {physical.map((item) => (
-                      <span key={item.id}>
+                      <span
+                        className={item.completed ? `${styles.completed}` : ``}
+                        key={item.id}
+                      >
                         <span>
                           {item.amount} {item.name}
                         </span>
@@ -57,14 +60,15 @@ const ProjectRequirementsServices = ({ services, info }) => {
                       </span>
                     ))}
                   </article>
-                ) : (
-                  ''
                 )}
-                {creative.length != 0 ? (
+                {creative.length != 0 && (
                   <article className={styles.list__item}>
                     <h3>Creatieve hulp</h3>
                     {creative.map((item) => (
-                      <span key={item.id}>
+                      <span
+                        className={item.completed ? `${styles.completed}` : ``}
+                        key={item.id}
+                      >
                         <span>
                           {item.amount} {item.name}
                         </span>
@@ -72,14 +76,15 @@ const ProjectRequirementsServices = ({ services, info }) => {
                       </span>
                     ))}
                   </article>
-                ) : (
-                  ''
                 )}
-                {divers.length != 0 ? (
+                {divers.length != 0 && (
                   <article className={styles.list__item}>
                     <h3>Andere hulp</h3>
                     {divers.map((item) => (
-                      <span key={item.id}>
+                      <span
+                        className={item.completed ? `${styles.completed}` : ``}
+                        key={item.id}
+                      >
                         <span>
                           {item.amount} {item.name}
                         </span>
@@ -87,8 +92,6 @@ const ProjectRequirementsServices = ({ services, info }) => {
                       </span>
                     ))}
                   </article>
-                ) : (
-                  ''
                 )}
               </div>
             </div>

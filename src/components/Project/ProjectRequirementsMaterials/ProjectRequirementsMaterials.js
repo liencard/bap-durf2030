@@ -9,12 +9,12 @@ import { ProjectHelpers } from '..';
 const ProjectRequirementsMaterials = ({ materials, info }) => {
   const { projectStore } = useStores();
 
-  const [bouw, setBouw] = useState('');
-  const [art, setArt] = useState('');
-  const [infra, setInfra] = useState('');
-  const [food, setFood] = useState('');
-  const [toys, setToy] = useState('');
-  const [divers, setDivers] = useState('');
+  const [bouw, setBouw] = useState([]);
+  const [art, setArt] = useState([]);
+  const [infra, setInfra] = useState([]);
+  const [food, setFood] = useState([]);
+  const [toys, setToy] = useState([]);
+  const [divers, setDivers] = useState([]);
 
   useEffect(() => {
     let bouwArr = [];
@@ -48,7 +48,16 @@ const ProjectRequirementsMaterials = ({ materials, info }) => {
       });
     };
     loadMaterial();
-  }, [projectStore, setBouw, setArt, setFood, setInfra, setToy, setDivers]);
+  }, [
+    projectStore,
+    materials,
+    setBouw,
+    setArt,
+    setFood,
+    setInfra,
+    setToy,
+    setDivers,
+  ]);
 
   return (
     <>
@@ -61,11 +70,14 @@ const ProjectRequirementsMaterials = ({ materials, info }) => {
               <p>{info.materialsDetails.description}</p>
 
               <div className={styles.list}>
-                {bouw.length != 0 ? (
+                {bouw.length != 0 && (
                   <article className={styles.list__item}>
                     <h3>Bouwmateriaal</h3>
                     {bouw.map((item) => (
-                      <span key={item.id}>
+                      <span
+                        className={item.completed ? `${styles.completed}` : ``}
+                        key={item.id}
+                      >
                         <span>
                           {item.amount} {item.name}
                         </span>
@@ -73,14 +85,15 @@ const ProjectRequirementsMaterials = ({ materials, info }) => {
                       </span>
                     ))}
                   </article>
-                ) : (
-                  ''
                 )}
-                {food.length != 0 ? (
+                {food.length != 0 && (
                   <article className={styles.list__item}>
                     <h3>Eten &amp; Drinken</h3>
                     {food.map((item) => (
-                      <span key={item.id}>
+                      <span
+                        className={item.completed ? `${styles.completed}` : ``}
+                        key={item.id}
+                      >
                         <span>
                           {item.amount} {item.name}
                         </span>
@@ -88,14 +101,15 @@ const ProjectRequirementsMaterials = ({ materials, info }) => {
                       </span>
                     ))}
                   </article>
-                ) : (
-                  ''
                 )}
-                {infra.length != 0 ? (
+                {infra.length != 0 && (
                   <article className={styles.list__item}>
                     <h3>Infrastructuur</h3>
                     {infra.map((item) => (
-                      <span key={item.id}>
+                      <span
+                        className={item.completed ? `${styles.completed}` : ``}
+                        key={item.id}
+                      >
                         <span>
                           {item.amount} {item.name}
                         </span>
@@ -103,14 +117,15 @@ const ProjectRequirementsMaterials = ({ materials, info }) => {
                       </span>
                     ))}
                   </article>
-                ) : (
-                  ''
                 )}
-                {art.length != 0 ? (
+                {art.length != 0 && (
                   <article className={styles.list__item}>
                     <h3>Knutselmateriaal</h3>
                     {art.map((item) => (
-                      <span key={item.id}>
+                      <span
+                        className={item.completed ? `${styles.completed}` : ``}
+                        key={item.id}
+                      >
                         <span>
                           {item.amount} {item.name}
                         </span>
@@ -118,14 +133,15 @@ const ProjectRequirementsMaterials = ({ materials, info }) => {
                       </span>
                     ))}
                   </article>
-                ) : (
-                  ''
                 )}
-                {toys.length != 0 ? (
+                {toys.length != 0 && (
                   <article className={styles.list__item}>
                     <h3>Speelgoed</h3>
                     {toys.map((item) => (
-                      <span key={item.id}>
+                      <span
+                        className={item.completed ? `${styles.completed}` : ``}
+                        key={item.id}
+                      >
                         <span>
                           {item.amount} {item.name}
                         </span>
@@ -133,14 +149,15 @@ const ProjectRequirementsMaterials = ({ materials, info }) => {
                       </span>
                     ))}
                   </article>
-                ) : (
-                  ''
                 )}
-                {divers.length != 0 ? (
+                {divers.length != 0 && (
                   <article className={styles.list__item}>
                     <h3>Andere hulp</h3>
                     {divers.map((item) => (
-                      <span key={item.id}>
+                      <span
+                        className={item.completed ? `${styles.completed}` : ``}
+                        key={item.id}
+                      >
                         <span>
                           {item.amount} {item.name}
                         </span>
@@ -148,8 +165,6 @@ const ProjectRequirementsMaterials = ({ materials, info }) => {
                       </span>
                     ))}
                   </article>
-                ) : (
-                  ''
                 )}
               </div>
             </div>

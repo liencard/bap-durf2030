@@ -2,7 +2,6 @@ import styles from './ProjectRequirements.module.scss';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useStores } from '../../../hooks/useStores';
-
 import {
   ProjectRequirementsServices,
   ProjectRequirementsMaterials,
@@ -10,19 +9,17 @@ import {
 } from '../../Project';
 import { SettingsOutlined } from '@material-ui/icons';
 
-const ProjectRequirements = ({ project, info }) => {
+const ProjectRequirements = ({ project, info, requirements }) => {
   const { projectStore } = useStores();
-  const [services, setServices] = useState('');
-  const [materials, setMaterials] = useState('');
+  const [services, setServices] = useState([]);
+  const [materials, setMaterials] = useState([]);
 
   useEffect(() => {
     let materialsArr = [];
     let servicesArr = [];
 
     const loadRequirements = async () => {
-      const items = await projectStore.loadRequirementListById(project.id);
-
-      items.forEach((item) => {
+      requirements.forEach((item) => {
         if (item.type === 'material') {
           materialsArr.push(item);
           setMaterials(materialsArr);
@@ -50,7 +47,6 @@ const ProjectRequirements = ({ project, info }) => {
         ) : (
           ''
         )}
-
         {/* MATERIAAL */}
         {materials.length != 0 ? (
           <ProjectRequirementsMaterials materials={materials} info={info} />
