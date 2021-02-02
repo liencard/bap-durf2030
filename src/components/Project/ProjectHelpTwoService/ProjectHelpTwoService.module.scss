@@ -54,16 +54,16 @@
 }
 
 .itemLight {
-  background-color: $grey;
+  background-color: $grey-border;
 
   p {
-    color: grey;
+    color: rgb(200, 200, 200);
   }
 
   .amount::after {
-    background: $grey-border;
+    background: rgb(210, 210, 210);
   }
   .sign {
-    color: $grey-border;
+    color: rgb(200, 200, 200);
   }
 }

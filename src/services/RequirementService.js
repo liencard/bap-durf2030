@@ -1,5 +1,6 @@
 import 'firebase/firestore';
 import { listConverter } from '../models/List';
+import { durverConverter } from '../models/Durver';
 
 class RequirementService {
   constructor({ firebase }) {
@@ -59,6 +60,18 @@ class RequirementService {
           fundingDescription: info.fundingDescription,
         },
       });
+  };
+
+  createDurver = async (durver, projectId) => {
+    console.log(projectId);
+    console.log(durver);
+    this.db
+      .collection('requirements')
+      .doc(projectId)
+      .collection('durvers')
+      .doc()
+      .withConverter(durverConverter)
+      .set(durver);
   };
 
   getList = async (projectId) => {

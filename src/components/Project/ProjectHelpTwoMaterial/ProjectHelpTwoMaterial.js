@@ -5,7 +5,6 @@ import styles from './ProjectHelpTwoMaterial.module.scss';
 import { useField } from '@formiz/core';
 
 const ProjectHelpTwoMaterial = observer(({ info, materials }) => {
-  console.log(materials);
   //   const {
   //     errorMessage,
   //     id,
@@ -14,29 +13,24 @@ const ProjectHelpTwoMaterial = observer(({ info, materials }) => {
   //     setValue,
   //     value,
   //   } = useField();
-  //const { label, required, options, defaultValue } = props;
-  //const [isTouched, setIsTouched] = useState(false);
-  //const showError = !isValid && (isTouched || isSubmitted);
+
   const [items, setItems] = useState([]);
   const [amount, setAmount] = useState(0);
 
   const changeItemAmount = (item, type) => {
-    let newItems = items.slice();
-    newItems = newItems.filter((currentItem) => {
+    let counter = amount;
+    materials = materials.filter((currentItem) => {
+      //console.log(currentItem);
+      ////console.log(item);
       if (currentItem == item) {
         if (type == 'increase') {
-          item.amount++;
+          counter++;
         } else if (type == 'decrease') {
-          item.amount--;
+          counter--;
         }
       }
-      if (item.amount !== 0) {
-        return currentItem;
-      }
     });
-
-    setItems(newItems);
-    //setValue(items);
+    setAmount(counter);
   };
 
   return (

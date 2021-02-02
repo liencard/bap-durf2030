@@ -131,12 +131,20 @@ const CreateProject = observer(() => {
                 {/* Update the submit button to allow navigation between steps. */}
                 <div className={styles.buttons}>
                   {!projectForm.isFirstStep && (
-                    <button className={styles.button} type="button" onClick={projectForm.prevStep}>
+                    <button
+                      className={styles.button}
+                      type="button"
+                      onClick={projectForm.prevStep}
+                    >
                       Vorige
                     </button>
                   )}
                   {projectForm.isLastStep ? (
-                    <button className={styles.button} type="submit" disabled={!projectForm.isValid}>
+                    <button
+                      className={styles.button}
+                      type="submit"
+                      disabled={!projectForm.isValid}
+                    >
                       Project indienen
                     </button>
                   ) : (

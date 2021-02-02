@@ -41,12 +41,21 @@ class ProjectStore {
 
   createRequirementsForProject = async ({ requirements, info, projectId }) => {
     if (info.materialsRequired) {
-      this.requirementService.createMaterials(requirements.materials, projectId);
+      this.requirementService.createMaterials(
+        requirements.materials,
+        projectId
+      );
     }
     if (info.servicesRequired) {
       this.requirementService.createServices(requirements.services, projectId);
     }
     this.requirementService.createInfo(info, projectId);
+  };
+
+  createDurver = async (durver, projectId) => {
+    console.log(durver);
+    durver.timestamp = getCurrenTimeStamp();
+    return await this.requirementService.createDurver(durver, projectId);
   };
 
   createImageForProject = async (image) => {

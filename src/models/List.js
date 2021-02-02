@@ -30,7 +30,7 @@ const listConverter = {
     //const parentGroup = snapshot.ref.parent.parent;
     //const project = new Project({ id: parentGroup.id });
     return new List({
-      id: data.id,
+      id: snapshot.id,
       amount: data.amount,
       category: data.category,
       completed: data.completed,

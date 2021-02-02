@@ -18,3 +18,4 @@ export { default as ProjectHelpOne } from './ProjectHelpOne/ProjectHelpOne';
 export { default as ProjectHelpTwoMaterial } from './ProjectHelpTwoMaterial/ProjectHelpTwoMaterial';
 export { default as ProjectHelpTwoFunding } from './ProjectHelpTwoFunding/ProjectHelpTwoFunding';
 export { default as ProjectHelpTwoService } from './ProjectHelpTwoService/ProjectHelpTwoService';
+export { default as ProjectHelpThree } from './ProjectHelpThree/ProjectHelpThree';

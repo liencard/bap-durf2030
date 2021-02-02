@@ -91,7 +91,12 @@ const ProjectHeader = ({ project, requirements, info }) => {
           </div>
         </div>
         <div className={styles.buttons}>
-          <ProjectHelp materials={materials} services={services} info={info} />
+          <ProjectHelp
+            project={project}
+            materials={materials}
+            services={services}
+            info={info}
+          />
           <div className={styles.interact}>
             <ProjectLikes project={project} />
             <ProjectHelpers />
