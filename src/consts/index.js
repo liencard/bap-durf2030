@@ -27,4 +27,8 @@ const CATEGORIES = [
 
 const THEMES = ['Eeenzaamheid rond corona', 'Ondernemingschap', 'Klimaat', 'Andere'];
 
-export { ROUTES, THEMES, CATEGORIES };
+const MATERIALTYPES = ['Bouwmateriaal', 'Eten & Drinken', 'Infrastructuur', 'Knutselmateriaal', 'Speelgoed', 'Andere'];
+
+const SERVICESTYPES = ['Creatieve hulp', 'Fysieke hulp', 'Andere'];
+
+export { ROUTES, THEMES, CATEGORIES, MATERIALTYPES, SERVICESTYPES };
