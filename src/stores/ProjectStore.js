@@ -49,16 +49,20 @@ class ProjectStore {
     this.requirementService.createInfo(info, projectId);
   };
 
-  createRequirement = (item, projectId, type) => {
+  createRequirementItem = (item, projectId, type) => {
     this.requirementService.createItem(item, projectId, type);
   };
 
-  deleteRequirement = (itemId, projectId) => {
+  deleteRequirementItem = (itemId, projectId) => {
     this.requirementService.deleteItem(itemId, projectId);
   };
 
-  updateRequirement = (item, itemId, projectId) => {
+  updateRequirementItem = (item, itemId, projectId) => {
     this.requirementService.updateItem(item, itemId, projectId);
+  };
+
+  updateRequirementDetails = (project) => {
+    this.requirementService.updateDetails(project);
   };
 
   createImageForProject = async (image) => {

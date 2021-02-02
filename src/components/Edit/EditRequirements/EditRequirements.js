@@ -3,10 +3,9 @@ import styles from './EditRequirements.module.scss';
 import { EditPart, EditLabel, EditItemIcons } from '..';
 import { FormFieldInput, FormFieldSelect, FormFieldAddItem } from '../../Create';
 import { SERVICETYPES, MATERIALTYPES } from '../../../consts';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 const EditRequirements = ({ project }) => {
-  console.log(project);
-
   const updateItems = (updatedItems, originalItems, type) => {
     updatedItems.forEach((updatedItem) => {
       if (updatedItem.id) {
@@ -32,10 +31,16 @@ const EditRequirements = ({ project }) => {
 
   const handleSaveServices = (values) => {
     updateItems(values.services, project.services, 'service');
+    project.updateRequirementDetails(values);
   };
 
   const handleSaveMaterials = (values) => {
     updateItems(values.materials, project.materials, 'material');
+    project.updateRequirementDetails(values);
+  };
+
+  const handleSaveFunding = (values) => {
+    project.updateRequirementDetails(values);
   };
 
   return (
@@ -88,6 +93,32 @@ const EditRequirements = ({ project }) => {
             textRow
             defaultValue={project.materials}
             label="Materiaal toevoegen"
+          />
+        </div>
+      </EditPart>
+
+      <EditPart title="Donatie" handleSaveProject={handleSaveFunding}>
+        <div className={styles.field__wrapper}>
+          <EditLabel text="Leg het doel uit" htmlFor="fundingDescription" />
+          <FormFieldInput
+            defaultValue={project.fundingDescription}
+            multiline
+            rows={5}
+            name="fundingDescription"
+            required
+          />
+        </div>
+        <div className={styles.field__wrapper}>
+          <EditLabel text="Budget" htmlFor="fundingDescription" />
+          <FormFieldInput
+            defaultValue={project.fundingAmount}
+            type="number"
+            name="fundingAmount"
+            InputProps={{
+              inputProps: { min: 1, max: 3000 },
+              startAdornment: <InputAdornment position="start">€</InputAdornment>,
+            }}
+            required
           />
         </div>
       </EditPart>

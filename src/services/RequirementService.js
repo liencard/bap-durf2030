@@ -6,7 +6,7 @@ class RequirementService {
     this.db = firebase.firestore();
   }
 
-  createItems = async (items, projectId, type) => {
+  createItems = (items, projectId, type) => {
     items.forEach((item) => {
       this.db.collection('requirements').doc(projectId).collection('list').doc().set({
         amount: item.amount,
@@ -18,7 +18,7 @@ class RequirementService {
     });
   };
 
-  createItem = async (item, projectId, type) => {
+  createItem = (item, projectId, type) => {
     this.db.collection('requirements').doc(projectId).collection('list').doc().set({
       amount: item.amount,
       category: item.category,
@@ -28,11 +28,32 @@ class RequirementService {
     });
   };
 
-  updateItem = async (item, itemId, projectId) => {
+  updateItem = (item, itemId, projectId) => {
     this.db.collection('requirements').doc(projectId).collection('list').doc(itemId).update({
       amount: item.amount,
       completed: false,
     });
+  };
+
+  updateDetails = (project) => {
+    this.db
+      .collection('requirements')
+      .doc(project.id)
+      .update({
+        materialsDetails: {
+          required: project.materialsRequired,
+          description: project.materialsDescription,
+        },
+        servicesDetails: {
+          required: project.servicesRequired,
+          description: project.servicesDescription,
+        },
+        fundingDetails: {
+          required: project.fundingRequired,
+          fundingAmount: project.fundingAmount,
+          fundingDescription: project.fundingDescription,
+        },
+      });
   };
 
   deleteItem = async (itemId, projectId) => {

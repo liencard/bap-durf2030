@@ -87,6 +87,7 @@ class Project {
       materialsDescription: observable,
       servicesRequired: observable,
       servicesDescription: observable,
+      updateRequirementDetails: action,
     });
   }
 
@@ -125,18 +126,25 @@ class Project {
     this.services = listServices;
   };
 
-  removeRequirementsItem = (item) => {};
-
   createRequirementItem = (item, type) => {
-    this.store.createRequirement(item, this.id, type);
+    this.store.createRequirementItem(item, this.id, type);
   };
 
   removeRequirementItem = (item) => {
-    this.store.deleteRequirement(item.id, this.id);
+    this.store.deleteRequirementItem(item.id, this.id);
   };
 
   updateRequirementItem = (item, itemId) => {
-    this.store.updateRequirement(item, itemId, this.id);
+    this.store.updateRequirementItem(item, itemId, this.id);
+  };
+
+  updateRequirementDetails = (newValues) => {
+    Object.keys(newValues).forEach((key) => {
+      if (this[key] !== newValues[key]) {
+        this[key] = newValues[key];
+        this.store.updateRequirementDetails(this);
+      }
+    });
   };
 
   setLiked = (bool) => {
