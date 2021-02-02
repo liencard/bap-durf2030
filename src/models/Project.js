@@ -28,8 +28,6 @@ class Project {
     id,
     userId,
     store,
-    likes,
-    comments = [],
   }) {
     // if (!store) {
     //   throw new Error('voorzie een store');
@@ -60,6 +58,7 @@ class Project {
     this.id = id;
     this.userId = userId;
     this.likes = [];
+    this.liked = false;
     this.comments = [];
 
     if (store) {
@@ -69,17 +68,58 @@ class Project {
 
     makeObservable(this, {
       likes: observable,
+      liked: observable,
       comments: observable,
       linkComment: action,
+      getLikes: action,
+      addLike: action,
+      removeLike: action,
+      setLiked: action,
+      title: observable,
+      intro: observable,
+      description: observable,
+      updateProject: action,
     });
   }
 
   getComments() {
-    const res = this.store.loadProjectCommentsById(this.id);
+    this.store.loadProjectCommentsById(this.id);
   }
+
+  getLikes = async () => {
+    const likes = await this.store.loadProjectLikesById(this.id);
+    this.likes = likes;
+  };
+
+  setLiked = (bool) => {
+    this.liked = bool;
+  };
+
+  addLike = (userId) => {
+    this.store.addLikeToProject(this.id, userId);
+    this.likes.push({ userId: userId });
+    this.setLiked(true);
+  };
+
+  removeLike = (userId) => {
+    this.store.removeLikeFromProject(this.id, userId);
+
+    this.likes = this.likes.filter((like) => {
+      return like.userId !== userId;
+    });
+
+    this.setLiked(false);
+  };
 
   linkComment(comment) {
     !this.comments.includes(comment) && this.comments.push(comment);
+  }
+
+  updateProject(newValues) {
+    Object.keys(newValues).forEach((key) => {
+      this[key] = newValues[key];
+    });
+    this.store.updateProject(this);
   }
 }
 

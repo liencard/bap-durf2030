@@ -4,8 +4,10 @@ import { ROUTES } from '../../../consts/index';
 import { useEffect, useState } from 'react';
 import { useStores } from '../../../hooks/useStores';
 import { ProjectLikes, ProjectHelpers } from '../';
+import { observer } from 'mobx-react-lite';
 
-const ProjectCard = ({ title, intro, id }) => {
+
+const ProjectCard = ({ project }) => {
   const { projectStore } = useStores();
 
   const tags = ['Cultuur', 'Theater'];
@@ -23,9 +25,17 @@ const ProjectCard = ({ title, intro, id }) => {
   console.log(info);
 
   return (
-    <Link href={ROUTES.detail.to + id}>
+    <Link href={ROUTES.detail.to + project.id}>
       <a className={styles.card}>
         <div className={styles.thumbnail}>
+
+          <div className={styles.icons}>
+            <img src="/icons/material-white.svg" alt="materiaal" />
+            <img src="/icons/money-white.svg" alt="geld" />
+            <img src="/icons/service-white.svg" alt="service" />
+          </div>
+          <img className={styles.image} src="thumbnail-temp.jpg" alt="service" />
+
           {/* {(info.fundingDetails.required === true ||
             info.materialsDetails.required === true ||
             info.servicesDetails.required === true) && ( 
@@ -49,20 +59,16 @@ const ProjectCard = ({ title, intro, id }) => {
         </div>
 
         <div className={styles.content}>
-          <h3 className={styles.title}>{title}</h3>
+          <h3 className={styles.title}>{project.title}</h3>
           <div className={styles.author__wrapper}>
             <div className={styles.author}>
-              <img
-                className={styles.author__image}
-                src="pfp-temp.jpg"
-                alt="profielfoto van organisator"
-              />
+              <img className={styles.author__image} src="pfp-temp.jpg" alt="profielfoto van organisator" />
               <p className={styles.author__name}>John Doe</p>
             </div>
             <p className={styles.date}>6 dagen geleden</p>
           </div>
 
-          <p className={styles.intro}>{intro}</p>
+          <p className={styles.intro}>{project.intro}</p>
           <ul className={styles.tags}>
             {tags.map((tag) => (
               <li key={tag} className={styles.tag}>
@@ -71,7 +77,7 @@ const ProjectCard = ({ title, intro, id }) => {
             ))}
           </ul>
           <div className={styles.stats}>
-            <ProjectLikes small />
+            <ProjectLikes project={project} small />
             <ProjectHelpers small />
           </div>
         </div>

@@ -30,7 +30,6 @@ const TabPanel = (props) => {
 
 const EditProject = observer(({ query }) => {
   const id = query.id;
-  console.log(id);
   const { projectStore } = useStores();
   const [value, setValue] = useState(0);
 
@@ -52,6 +51,7 @@ const EditProject = observer(({ query }) => {
         }
         setState(STATE_FULLY_LOADED);
         setProject(resolvedProject);
+        console.log(resolvedProject);
       } catch (error) {
         console.log('Project failed loading');
       }

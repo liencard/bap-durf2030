@@ -1,25 +1,34 @@
+import { useEffect, useState } from 'react';
 import { Container } from '../../components/Layout';
 import { ProjectCard } from '../../components/Project';
 import Header from '../../components/Header/Header';
 import RootStore from '../../stores';
 import styles from './Projects.module.scss';
+import { convertData } from '../../models/Project';
+import { useStores } from '../../hooks/useStores';
 
-const Projects = ({ projects }) => {
+const Projects = ({ projectsJSON }) => {
+  const { projectStore } = useStores();
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    const projectsArr = [];
+    projectsJSON.forEach((projectJSON) => {
+      const project = convertData.fromJSON(projectJSON, projectStore);
+      project.getLikes();
+      projectsArr.push(project);
+    });
+    setProjects(projectsArr);
+  }, [setProjects]);
+
   return (
     <>
       <Header />
-      <div className={styles.projects}>
-        <Container>
-          {projects.map((project) => (
-            <ProjectCard
-              key={project.id}
-              title={project.title}
-              intro={project.intro}
-              id={project.id}
-            />
-          ))}
-        </Container>
-      </div>
+      <Container>
+        {projects.map((project) => (
+          <ProjectCard key={project.id} project={project} />
+        ))}
+      </Container>
     </>
   );
 };
@@ -29,21 +38,17 @@ export const getStaticProps = async (context) => {
   const { projectStore } = store;
 
   await projectStore.loadAllProjects();
-  let projects = [];
+  let projectsJSON = [];
 
-  await projectStore.projects.forEach((project) => {
-    console.log(project);
-    projects.push({
-      id: project.id,
-      title: project.title,
-      intro: project.intro,
-    });
+  await projectStore.projects.forEach((data) => {
+    const project = convertData.toJSON(data);
+    projectsJSON.push(project);
   });
 
   //const info = await projectStore.loadRequirementListInfoById(params.id);
 
   return {
-    props: { projects },
+    props: { projectsJSON },
   };
 };
 

@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import styles from './ProjectHeader.module.scss';
 import { Button } from '../../UI';
 import { ProjectLikes, ProjectHelpers } from '../../Project';
-import { useStores } from '../../../hooks/useStores';
 
 const ProjectHeader = ({ project, requirements }) => {
   const { projectStore } = useStores();
@@ -51,24 +50,16 @@ const ProjectHeader = ({ project, requirements }) => {
         <ul className={styles.tags}>
           <li className={styles.tag}>Cultuur</li>
           <li className={styles.tag}>Theater</li>
-          <li className={styles.tag}>{likes}</li>
         </ul>
         <div className={styles.text}>
           <h1 className={styles.title}>{project.title}</h1>
-          {project.isKnownPlace ? (
+          {project.isKnownPlace && (
             <div className={styles.location}>
-              <img
-                src="/icons/location-green.svg"
-                alt="logo DURF2030"
-                width="13.75"
-                height="15.9"
-              />
+              <img src="/icons/location-green.svg" alt="logo DURF2030" width="13.75" height="15.9" />
               <p>
                 {project.street} {project.number}, {project.city}
               </p>
             </div>
-          ) : (
-            ''
           )}
           <p className={styles.intro}>{project.intro}</p>
         </div>
@@ -96,7 +87,7 @@ const ProjectHeader = ({ project, requirements }) => {
         <div className={styles.buttons}>
           <Button className={styles.button} text={'Ik durf mee te helpen'} />
           <div className={styles.interact}>
-            <ProjectLikes likes={likes} />
+            <ProjectLikes project={project} />
             <ProjectHelpers />
           </div>
         </div>

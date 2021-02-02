@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Container } from '../../components/Layout';
 import Header from '../../components/Header/Header';
@@ -12,12 +13,31 @@ import { convertData } from '../../models/Project';
 import { useStores } from '../../hooks/useStores';
 import { useState, useEffect } from 'react';
 
+
 const Project = observer(({ projectJSON, info }) => {
-  const { projectStore } = useStores();
+  const { projectStore, uiStore } = useStores();
+  const [project, setProject] = useState();
   const [requirements, setRequirements] = useState([]);
 
-  const project = convertData.fromJSON(projectJSON, projectStore);
-  project.getComments();
+  useEffect(() => {
+    const data = convertData.fromJSON(projectJSON, projectStore);
+    data.getComments();
+    data.getLikes();
+    setProject(data);
+
+    if (project && uiStore.currentUser) {
+      const projectIsLiked = project.likes.find((like) => like.userId === uiStore.currentUser.id);
+      if (projectIsLiked) {
+        project.setLiked(true);
+      } else {
+        project.setLiked(false);
+      }
+    }
+  }, [setProject]);
+
+  if (!project) {
+    return <p>Project laden...</p>;
+  }
 
   useEffect(() => {
     const loadData = async () => {

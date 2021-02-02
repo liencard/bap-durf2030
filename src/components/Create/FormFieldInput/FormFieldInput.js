@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 
 const FormFieldInput = (props) => {
   const { errorMessage, id, isValid, isSubmitted, setValue, value } = useField(props);
-  const { label, type, required, multiline, rows, InputProps } = props;
+  const { label, type, required, multiline, rows, InputProps, defaultValue } = props;
   const [isTouched, setIsTouched] = useState(false);
   const showError = !isValid && (isTouched || isSubmitted);
 
@@ -19,9 +19,9 @@ const FormFieldInput = (props) => {
         multiline={multiline ? true : false}
         rows={rows ? rows : 3}
         type={type ? type : 'text'}
-        label={label}
+        label={label ?? ''}
         variant="outlined"
-        value={value ?? ''}
+        value={value ?? defaultValue}
         onBlur={() => setIsTouched(true)}
         aria-invalid={showError}
         aria-required={!!required}
