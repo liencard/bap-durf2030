@@ -5,23 +5,28 @@ import { FormFieldInput, FormFieldSelect, FormFieldAddItem } from '../../Create'
 import { SERVICETYPES, MATERIALTYPES } from '../../../consts';
 
 const EditRequirements = ({ project }) => {
-  console.log(project.services);
+  console.log(project);
   const handleSaveProject = (values) => {
-    // if (values.categories && values.themes) {
-    //   let categoriesWithValues = {};
-    //   let themesWithValues = {};
-    //   CATEGORIES.forEach((category, i) => {
-    //     const key = category.toLowerCase();
-    //     categoriesWithValues[key] = values.categories[i];
-    //   });
-    //   THEMES.forEach((theme, i) => {
-    //     const key = theme.toLowerCase();
-    //     themesWithValues[key] = values.themes[i];
-    //   });
-    //   values['categories'] = categoriesWithValues;
-    //   values['themes'] = themesWithValues;
-    // }
-    // project.updateProject(values);
+    console.log(values);
+    values.services.forEach((service) => {
+      if (service.id) {
+        project.services.forEach((dbService) => {
+          if (service.id == dbService.id) {
+            // UPDATE
+            // console.log(service.amount); // zelfde (model)
+            // console.log(dbService.amount); // zelfde
+          }
+        });
+      } else {
+        // CREATE
+        console.log('create'); // ok!!
+      }
+    });
+    project.services.forEach((dbService) => {
+      // DELETE
+      // Indien dbService.id niet gevonden in
+      console.log('delete');
+    });
   };
 
   return (

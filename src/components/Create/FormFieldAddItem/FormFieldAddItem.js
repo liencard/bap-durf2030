@@ -20,13 +20,15 @@ const FormFieldAddItem = (props) => {
 
   useEffect(() => {
     setItems(defaultValue);
-    setValue(defaultValue);
-  }, [defaultValue]);
+  }, []);
+
+  useEffect(() => {
+    setValue(items);
+  }, [items]);
 
   const addItem = () => {
     setItems([...items, { name: activeItem, amount: 1, category: activeItemCategory }]);
     setActiveItem('');
-    setValue(items);
   };
 
   const removeItem = (item) => {
@@ -35,7 +37,6 @@ const FormFieldAddItem = (props) => {
       return currentItem !== item;
     });
     setItems(newItems);
-    setValue(items);
   };
 
   const changeItemAmount = (item, type) => {
@@ -54,7 +55,6 @@ const FormFieldAddItem = (props) => {
     });
 
     setItems(newItems);
-    setValue(items);
   };
 
   return (
