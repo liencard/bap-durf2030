@@ -11,13 +11,20 @@ import {
 import RootStore from '../../stores';
 import { convertData } from '../../models/Project';
 import { useStores } from '../../hooks/useStores';
-import { useState, useEffect } from 'react';
-
 
 const Project = observer(({ projectJSON, info }) => {
   const { projectStore, uiStore } = useStores();
   const [project, setProject] = useState();
   const [requirements, setRequirements] = useState([]);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const data = convertData.fromJSON(projectJSON, projectStore);
+      const list = await projectStore.loadRequirementListById(data.id);
+      setRequirements(list);
+    };
+    loadData();
+  }, [projectStore, setRequirements]);
 
   useEffect(() => {
     const data = convertData.fromJSON(projectJSON, projectStore);
@@ -26,7 +33,9 @@ const Project = observer(({ projectJSON, info }) => {
     setProject(data);
 
     if (project && uiStore.currentUser) {
-      const projectIsLiked = project.likes.find((like) => like.userId === uiStore.currentUser.id);
+      const projectIsLiked = project.likes.find(
+        (like) => like.userId === uiStore.currentUser.id
+      );
       if (projectIsLiked) {
         project.setLiked(true);
       } else {
@@ -38,15 +47,6 @@ const Project = observer(({ projectJSON, info }) => {
   if (!project) {
     return <p>Project laden...</p>;
   }
-
-  useEffect(() => {
-    const loadData = async () => {
-      const list = await projectStore.loadRequirementListById(project.id);
-      setRequirements(list);
-    };
-    loadData();
-  }, [projectStore, setRequirements]);
-
   return (
     <>
       <Header />
