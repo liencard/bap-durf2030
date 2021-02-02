@@ -2,14 +2,22 @@ import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Container } from '../../components/Layout';
 import Header from '../../components/Header/Header';
-import { ProjectHeader, ProjectContent, ProjectFooter, ProjectComments } from '../../components/Project';
+import {
+  ProjectHeader,
+  ProjectContent,
+  ProjectFooter,
+  ProjectComments,
+} from '../../components/Project';
 import RootStore from '../../stores';
 import { convertData } from '../../models/Project';
 import { useStores } from '../../hooks/useStores';
+import { useState, useEffect } from 'react';
 
-const Project = observer(({ projectJSON }) => {
+
+const Project = observer(({ projectJSON, info }) => {
   const { projectStore, uiStore } = useStores();
   const [project, setProject] = useState();
+  const [requirements, setRequirements] = useState([]);
 
   useEffect(() => {
     const data = convertData.fromJSON(projectJSON, projectStore);
@@ -31,12 +39,24 @@ const Project = observer(({ projectJSON }) => {
     return <p>Project laden...</p>;
   }
 
+  useEffect(() => {
+    const loadData = async () => {
+      const list = await projectStore.loadRequirementListById(project.id);
+      setRequirements(list);
+    };
+    loadData();
+  }, [projectStore, setRequirements]);
+
   return (
     <>
       <Header />
       <Container>
-        <ProjectHeader project={project} />
-        <ProjectContent project={project} />
+        <ProjectHeader project={project} requirements={requirements} />
+        <ProjectContent
+          project={project}
+          requirements={requirements}
+          info={info}
+        />
         <ProjectFooter project={project} />
         <ProjectComments project={project} />
       </Container>
@@ -69,10 +89,12 @@ export const getStaticProps = async ({ params }) => {
     avatar: owner.avatar,
     id: owner.id,
   }));
+  const info = await projectStore.loadRequirementListInfoById(params.id);
+  //const projectItems = await projectStore.loadRequirementListById(params.id);
   projectJSON['owners'] = owners;
 
   return {
-    props: { projectJSON },
+    props: { projectJSON, info },
     revalidate: 5,
   };
 };

@@ -14,14 +14,19 @@ const FormPartFour = () => {
   return (
     <>
       <h2 className={styles.title}>Ondersteuning</h2>
-      <h3 className={styles.subtitle}>Naar welke soort ondersteuning ben je op zoek?</h3>
+      <h3 className={styles.subtitle}>
+        Naar welke soort ondersteuning ben je op zoek?
+      </h3>
       <p>
-        DURF2030 kan helpen met het zoeken naar de juiste partners voor je project, we kunnen communicatief ondersteunen
-        en je helpen zoeken naar middelen om je project te realiseren.
+        DURF2030 kan helpen met het zoeken naar de juiste partners voor je
+        project, we kunnen communicatief ondersteunen en je helpen zoeken naar
+        middelen om je project te realiseren.
       </p>
       <div className={styles.requirements}>
         <div
-          className={`${styles.requirement} ${servicesRequired && styles.requirementChecked}`}
+          className={`${styles.requirement} ${
+            servicesRequired && styles.requirementChecked
+          }`}
           onClick={() => {
             setServicesRequired(!servicesRequired);
           }}
@@ -35,7 +40,9 @@ const FormPartFour = () => {
           />
         </div>
         <div
-          className={`${styles.requirement} ${materialsRequired && styles.requirementChecked}`}
+          className={`${styles.requirement} ${
+            materialsRequired && styles.requirementChecked
+          }`}
           onClick={() => {
             setMaterialsRequired(!materialsRequired);
           }}
@@ -49,7 +56,9 @@ const FormPartFour = () => {
           />
         </div>
         <div
-          className={`${styles.requirement} ${fundingRequired && styles.requirementChecked}`}
+          className={`${styles.requirement} ${
+            fundingRequired && styles.requirementChecked
+          }`}
           onClick={() => {
             setFundingRequired(!fundingRequired);
           }}
@@ -95,14 +104,26 @@ const FormPartFour = () => {
               label="Funding"
               InputProps={{
                 inputProps: { min: 1, max: 3000 },
-                startAdornment: <InputAdornment position="start">€</InputAdornment>,
+                startAdornment: (
+                  <InputAdornment position="start">€</InputAdornment>
+                ),
               }}
               required
             />
-            <FormHelperText id="outlined-weight-helper-text">Max 3000 euro</FormHelperText>
+            <FormHelperText id="outlined-weight-helper-text">
+              Max 3000 euro
+            </FormHelperText>
           </FormControl>
-          <h3 className={styles.subtitle}>Beschrijf waar het geld voor gebruikt zal worden</h3>
-          <FormFieldInput multiline name="fundingDescription" label="Beschrijving" rows={8} required />
+          <h3 className={styles.subtitle}>
+            Beschrijf waar het geld voor gebruikt zal worden
+          </h3>
+          <FormFieldInput
+            multiline
+            name="fundingDescription"
+            label="Beschrijving"
+            rows={8}
+            required
+          />
         </>
       )}
 
@@ -110,10 +131,30 @@ const FormPartFour = () => {
       {materialsRequired && (
         <>
           <h2 className={styles.title}>Materiaal</h2>
-          <h3 className={styles.subtitle}>Noteer welk soort materiaal je nodig hebt</h3>
-          <FormFieldAddItem name="materials" options={['Bouwmateriaal', 'x', 'y', 'andere']} />
-          <h3 className={styles.subtitle}>Waarvoor wordt het materiaal gebruikt?</h3>
-          <FormFieldInput multiline name="materialsDescription" label="Beschrijving" rows={8} required />
+          <h3 className={styles.subtitle}>
+            Noteer welk soort materiaal je nodig hebt
+          </h3>
+          <FormFieldAddItem
+            name="materials"
+            options={[
+              'Bouwmateriaal',
+              'Eten & Drinken',
+              'Infrastructuur',
+              'Knutselmateriaal',
+              'Speelgoed',
+              'Andere',
+            ]}
+          />
+          <h3 className={styles.subtitle}>
+            Waarvoor wordt het materiaal gebruikt?
+          </h3>
+          <FormFieldInput
+            multiline
+            name="materialsDescription"
+            label="Beschrijving"
+            rows={8}
+            required
+          />
         </>
       )}
 
@@ -121,10 +162,23 @@ const FormPartFour = () => {
       {servicesRequired && (
         <>
           <h2 className={styles.title}>Diensten</h2>
-          <h3 className={styles.subtitle}>Noteer welk soort diensten je nodig hebt</h3>
-          <FormFieldAddItem name="services" options={['Grafische hulp', 'x', 'y', 'andere']} />
-          <h3 className={styles.subtitle}>Waarvoor heb je deze diensten nodig?</h3>
-          <FormFieldInput multiline name="servicesDescription" label="Beschrijving" rows={8} required />
+          <h3 className={styles.subtitle}>
+            Noteer welk soort diensten je nodig hebt
+          </h3>
+          <FormFieldAddItem
+            name="services"
+            options={['Creatieve hulp', 'Fysieke hulp', 'Andere']}
+          />
+          <h3 className={styles.subtitle}>
+            Waarvoor heb je deze diensten nodig?
+          </h3>
+          <FormFieldInput
+            multiline
+            name="servicesDescription"
+            label="Beschrijving"
+            rows={8}
+            required
+          />
         </>
       )}
     </>

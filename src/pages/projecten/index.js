@@ -3,6 +3,7 @@ import { Container } from '../../components/Layout';
 import { ProjectCard } from '../../components/Project';
 import Header from '../../components/Header/Header';
 import RootStore from '../../stores';
+import styles from './Projects.module.scss';
 import { convertData } from '../../models/Project';
 import { useStores } from '../../hooks/useStores';
 
@@ -43,6 +44,8 @@ export const getStaticProps = async (context) => {
     const project = convertData.toJSON(data);
     projectsJSON.push(project);
   });
+
+  //const info = await projectStore.loadRequirementListInfoById(params.id);
 
   return {
     props: { projectsJSON },
