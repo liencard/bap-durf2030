@@ -5,6 +5,8 @@ import { FormFieldInput, FormFieldSelect, FormFieldAddItem } from '../../Create'
 import { SERVICETYPES, MATERIALTYPES } from '../../../consts';
 
 const EditRequirements = ({ project }) => {
+  console.log(project);
+
   const updateItems = (updatedItems, originalItems, type) => {
     updatedItems.forEach((updatedItem) => {
       if (updatedItem.id) {
@@ -41,7 +43,13 @@ const EditRequirements = ({ project }) => {
       <EditPart title="Diensten" handleSaveProject={handleSaveServices}>
         <div className={styles.field__wrapper}>
           <EditLabel text="Leg het doel uit" htmlFor="servicesDescription" />
-          <FormFieldInput defaultValue={project.servicesDescription} multiline rows={5} name="title" required />
+          <FormFieldInput
+            defaultValue={project.servicesDescription}
+            multiline
+            rows={5}
+            name="servicesDescription"
+            required
+          />
         </div>
         <div className={styles.field__wrapper}>
           <div className={styles.label__wrapper}>
@@ -61,7 +69,13 @@ const EditRequirements = ({ project }) => {
       <EditPart title="Materialen" handleSaveProject={handleSaveMaterials}>
         <div className={styles.field__wrapper}>
           <EditLabel text="Leg het doel uit" htmlFor="materialsDescription" />
-          <FormFieldInput defaultValue={project.materialsDescription} name="materialsDescription" required />
+          <FormFieldInput
+            defaultValue={project.materialsDescription}
+            multiline
+            rows={5}
+            name="materialsDescription"
+            required
+          />
         </div>
         <div className={styles.field__wrapper}>
           <div className={styles.label__wrapper}>
