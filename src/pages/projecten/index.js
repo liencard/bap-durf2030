@@ -16,8 +16,10 @@ const Projects = ({ projectsJSON }) => {
       const project = convertData.fromJSON(projectJSON, projectStore);
       project.getLikes();
       projectsArr.push(project);
+      // sfdsf
     });
     setProjects(projectsArr);
+    console.log(projects[0]);
   }, [setProjects]);
 
   return (

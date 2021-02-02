@@ -126,6 +126,14 @@ class Project {
 // Server side rendering of detail page, convert data
 const convertData = {
   toJSON(project) {
+    // let projectData = {};
+    // Object.keys(project).forEach((key) => {
+    //   if (key !== 'store') {
+    //     projectData[key] = project[key];
+    //   }
+    // });
+
+    // return projectData;
     return {
       id: project.id,
       title: project.title,
@@ -141,20 +149,29 @@ const convertData = {
   },
 
   fromJSON(project, store) {
-    return new Project({
-      id: project.id,
-      title: project.title,
-      intro: project.intro,
-      about: project.about,
-      contact: project.contact,
-      description: project.description,
-      isKnownPlace: project.isKnownPlace,
-      city: project.city,
-      street: project.street,
-      number: project.number,
-      owners: project.owners,
-      store: store,
+    // Over alle project keys lopen en gelijkstellen
+    // Minder kans om iets te vergeten
+    let projectData = {};
+    Object.keys(project).forEach((key) => {
+      projectData[key] = project[key];
     });
+    projectData['store'] = store;
+    return new Project(projectData);
+
+    // return new Project({
+    //   id: project.id,
+    //   title: project.title,
+    //   intro: project.intro,
+    //   about: project.about,
+    //   contact: project.contact,
+    //   description: project.description,
+    //   isKnownPlace: project.isKnownPlace,
+    //   city: project.city,
+    //   street: project.street,
+    //   number: project.number,
+    //   owners: project.owners,
+    //   store: store,
+    // });
   },
 };
 
@@ -183,7 +200,7 @@ const projectConverter = {
   },
   fromFirestore: function (snapshot, options) {
     const data = snapshot.data(options);
-    return new Project({
+    return {
       id: snapshot.id,
       title: data.title,
       intro: data.intro,
@@ -196,7 +213,9 @@ const projectConverter = {
       street: data.location.street,
       number: data.location.number,
       state: data.state,
-    });
+      themes: data.themes,
+      categories: data.categories,
+    };
   },
 };
 

@@ -4,7 +4,7 @@ import { useStores } from '../../hooks/useStores';
 import { ROUTES } from '../../consts';
 import { Container, Grid } from '../../components/Layout';
 import { Button } from '../../components/UI';
-import { EditBasis } from '../../components/Edit';
+import { EditBasis, EditRequirements } from '../../components/Edit';
 import Header from '../../components/Header/Header';
 import styles from './EditProject.module.scss';
 
@@ -91,14 +91,10 @@ const EditProject = observer(({ query }) => {
                 <EditBasis project={project} />
               </TabPanel>
               <TabPanel className={styles.panel} value={value} index={1}>
-                <Grid>
-                  <p>Ondersteuningen</p>
-                </Grid>
+                <EditRequirements project={project} />
               </TabPanel>
               <TabPanel className={styles.panel} value={value} index={2}>
-                <Grid>
-                  <p>Durvers</p>
-                </Grid>
+                <p>Durvers</p>
               </TabPanel>
             </section>
           </>
