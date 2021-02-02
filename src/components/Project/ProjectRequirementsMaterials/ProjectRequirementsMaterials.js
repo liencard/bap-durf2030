@@ -1,6 +1,5 @@
 import styles from '../ProjectRequirements/ProjectRequirements.module.scss';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useStores } from '../../../hooks/useStores';
 import { Container } from '../../Layout';
 import { Button } from '../../UI';
