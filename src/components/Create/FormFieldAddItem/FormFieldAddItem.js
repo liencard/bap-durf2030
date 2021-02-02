@@ -19,7 +19,15 @@ const FormFieldAddItem = (props) => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    setItems(defaultValue);
+    const itemsArr = defaultValue.map((item) => {
+      return {
+        id: item.id ?? undefined,
+        name: item.name,
+        category: item.category,
+        amount: item.amount,
+      };
+    });
+    setItems(itemsArr);
   }, []);
 
   useEffect(() => {

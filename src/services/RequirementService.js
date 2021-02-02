@@ -6,28 +6,37 @@ class RequirementService {
     this.db = firebase.firestore();
   }
 
-  createMaterials = async (materials, projectId) => {
-    materials.forEach((material) => {
+  createItems = async (items, projectId, type) => {
+    items.forEach((item) => {
       this.db.collection('requirements').doc(projectId).collection('list').doc().set({
-        amount: material.amount,
-        category: material.category,
-        name: material.name,
+        amount: item.amount,
+        category: item.category,
+        name: item.name,
         completed: false,
-        type: 'material',
+        type: type,
       });
     });
   };
 
-  createServices = async (services, projectId) => {
-    services.forEach((service) => {
-      this.db.collection('requirements').doc(projectId).collection('list').doc().set({
-        amount: service.amount,
-        category: service.category,
-        name: service.name,
-        completed: false,
-        type: 'service',
-      });
+  createItem = async (item, projectId, type) => {
+    this.db.collection('requirements').doc(projectId).collection('list').doc().set({
+      amount: item.amount,
+      category: item.category,
+      name: item.name,
+      completed: false,
+      type: type,
     });
+  };
+
+  updateItem = async (item, itemId, projectId) => {
+    this.db.collection('requirements').doc(projectId).collection('list').doc(itemId).update({
+      amount: item.amount,
+      completed: false,
+    });
+  };
+
+  deleteItem = async (itemId, projectId) => {
+    this.db.collection('requirements').doc(projectId).collection('list').doc(itemId).delete();
   };
 
   createInfo = async (info, projectId) => {

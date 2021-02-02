@@ -111,7 +111,7 @@ class Project {
   };
 
   getRequirementsList = async () => {
-    const list = await this.store.loadRequirementListById('nDBGlZQCZ2ABDEzDdMcJ');
+    const list = await this.store.loadRequirementListById(this.id);
     let listMaterials = [];
     let listServices = [];
     list.forEach((item) => {
@@ -123,6 +123,20 @@ class Project {
     });
     this.materials = listMaterials;
     this.services = listServices;
+  };
+
+  removeRequirementsItem = (item) => {};
+
+  createRequirementItem = (item, type) => {
+    this.store.createRequirement(item, this.id, type);
+  };
+
+  removeRequirementItem = (item) => {
+    this.store.deleteRequirement(item.id, this.id);
+  };
+
+  updateRequirementItem = (item, itemId) => {
+    this.store.updateRequirement(item, itemId, this.id);
   };
 
   setLiked = (bool) => {
