@@ -4,7 +4,7 @@ import { FormFieldSwitch, FormFieldInput, FormFieldAddItem } from '../index';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import { MATERIALTYPES } from '../../../consts';
+import { MATERIALTYPES, SERVICETYPES } from '../../../consts';
 
 const FormPartFour = () => {
   const [servicesRequired, setServicesRequired] = useState(false);
@@ -122,7 +122,7 @@ const FormPartFour = () => {
         <>
           <h2 className={styles.title}>Diensten</h2>
           <h3 className={styles.subtitle}>Noteer welk soort diensten je nodig hebt</h3>
-          <FormFieldAddItem name="services" options={SERVICESTYPES} />
+          <FormFieldAddItem name="services" options={SERVICETYPES} />
           <h3 className={styles.subtitle}>Waarvoor heb je deze diensten nodig?</h3>
           <FormFieldInput multiline name="servicesDescription" label="Beschrijving" rows={8} required />
         </>

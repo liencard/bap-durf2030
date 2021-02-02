@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from './EditRequirements.module.scss';
 import { EditPart, EditLabel, EditItemIcons } from '..';
 import { FormFieldInput, FormFieldSelect, FormFieldAddItem } from '../../Create';
-import { SERVICESTYPES, MATERIALTYPES } from '../../../consts';
+import { SERVICETYPES, MATERIALTYPES } from '../../../consts';
 
 const EditRequirements = ({ project }) => {
   console.log(project.services);
@@ -38,7 +38,7 @@ const EditRequirements = ({ project }) => {
           </div>
           <FormFieldAddItem
             name="services"
-            options={SERVICESTYPES}
+            options={SERVICETYPES}
             textRow
             defaultValue={project.services}
             label="Dienst toevoegen"

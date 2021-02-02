@@ -29,6 +29,6 @@ const THEMES = ['Eeenzaamheid rond corona', 'Ondernemingschap', 'Klimaat', 'Ande
 
 const MATERIALTYPES = ['Bouwmateriaal', 'Eten & Drinken', 'Infrastructuur', 'Knutselmateriaal', 'Speelgoed', 'Andere'];
 
-const SERVICESTYPES = ['Creatieve hulp', 'Fysieke hulp', 'Andere'];
+const SERVICETYPES = ['Creatieve hulp', 'Fysieke hulp', 'Andere'];
 
-export { ROUTES, THEMES, CATEGORIES, MATERIALTYPES, SERVICESTYPES };
+export { ROUTES, THEMES, CATEGORIES, MATERIALTYPES, SERVICETYPES };
