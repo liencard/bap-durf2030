@@ -79,6 +79,14 @@ class Project {
       intro: observable,
       description: observable,
       updateProject: action,
+      getRequirementsInfo: action,
+      fundingAmount: observable,
+      fundingDescription: observable,
+      fundingRequired: observable,
+      materialsRequired: observable,
+      materialsDescription: observable,
+      servicesRequired: observable,
+      servicesDescription: observable,
     });
   }
 
@@ -89,6 +97,31 @@ class Project {
   getLikes = async () => {
     const likes = await this.store.loadProjectLikesById(this.id);
     this.likes = likes;
+  };
+
+  getRequirementsInfo = async () => {
+    const info = await this.store.loadRequirementListInfoById(this.id);
+    this.fundingAmount = info.fundingDetails.fundingAmount;
+    this.fundingDescription = info.fundingDetails.fundingDescription;
+    this.fundingRequired = info.fundingDetails.required;
+    this.materialsRequired = info.materialsDetails.required;
+    this.materialsDescription = info.materialsDetails.description;
+    this.servicesRequired = info.servicesDetails.required;
+    this.servicesDescription = info.servicesDetails.description;
+  };
+
+  getRequirementsList = async () => {
+    // this.id
+    const list = await this.store.loadRequirementListById('nDBGlZQCZ2ABDEzDdMcJ');
+    let listMaterials = [];
+    let listServices = [];
+    list.forEach((item) => {
+      if (item.type === 'material') {
+        listMaterials.push(item);
+      } else if (item.type === 'service') {
+        listServices.push(item);
+      }
+    });
   };
 
   setLiked = (bool) => {
@@ -156,8 +189,9 @@ const convertData = {
       projectData[key] = project[key];
     });
     projectData['store'] = store;
-    return new Project(projectData);    
-      {/* 
+    return new Project(projectData);
+    {
+      /* 
     return new Project({
       id: project.id,
       title: project.title,
@@ -172,7 +206,8 @@ const convertData = {
       owners: project.owners,
 
       store: store,
-    }); */ }
+    }); */
+    }
   },
 };
 

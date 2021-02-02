@@ -8,35 +8,25 @@ class RequirementService {
 
   createMaterials = async (materials, projectId) => {
     materials.forEach((material) => {
-      this.db
-        .collection('requirements')
-        .doc(projectId)
-        .collection('list')
-        .doc()
-        .set({
-          amount: material.amount,
-          category: material.category,
-          name: material.name,
-          completed: false,
-          type: 'material',
-        });
+      this.db.collection('requirements').doc(projectId).collection('list').doc().set({
+        amount: material.amount,
+        category: material.category,
+        name: material.name,
+        completed: false,
+        type: 'material',
+      });
     });
   };
 
   createServices = async (services, projectId) => {
     services.forEach((service) => {
-      this.db
-        .collection('requirements')
-        .doc(projectId)
-        .collection('list')
-        .doc()
-        .set({
-          amount: service.amount,
-          category: service.category,
-          name: service.name,
-          completed: false,
-          type: 'service',
-        });
+      this.db.collection('requirements').doc(projectId).collection('list').doc().set({
+        amount: service.amount,
+        category: service.category,
+        name: service.name,
+        completed: false,
+        type: 'service',
+      });
     });
   };
 
@@ -73,10 +63,7 @@ class RequirementService {
   };
 
   getListInfo = async (projectId) => {
-    const snapshot = await this.db
-      .collection('requirements')
-      .doc(projectId)
-      .get();
+    const snapshot = await this.db.collection('requirements').doc(projectId).get();
     return snapshot.data();
   };
 }

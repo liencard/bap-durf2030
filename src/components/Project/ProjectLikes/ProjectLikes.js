@@ -20,7 +20,7 @@ const ProjectLikes = observer(({ project, small }) => {
       className={`${styles.likes} ${small && styles.small} ${project.liked && styles.liked}`}
       onClick={toggleLike}
     >
-      <p>{project ? project.likes.length : 0} likes</p>
+      <p>{project ? project.likes.length : 0}</p>
     </button>
   );
 });
