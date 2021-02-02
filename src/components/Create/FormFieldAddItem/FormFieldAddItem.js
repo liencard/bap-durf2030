@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useField } from '@formiz/core';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -10,13 +10,18 @@ import styles from './FormFieldAddItem.module.scss';
 
 const FormFieldAddItem = (props) => {
   const { errorMessage, id, isValid, isSubmitted, setValue, value } = useField(props);
-  const { label, required, options, defaultValue } = props;
+  const { label, required, options, defaultValue = [], textRow } = props;
   const [isTouched, setIsTouched] = useState(false);
   const showError = !isValid && (isTouched || isSubmitted);
 
   const [activeItem, setActiveItem] = useState('');
   const [activeItemCategory, setActiveItemCategory] = useState(options[0]);
   const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    setItems(defaultValue);
+    setValue(defaultValue);
+  }, [defaultValue]);
 
   const addItem = () => {
     setItems([...items, { name: activeItem, amount: 1, category: activeItemCategory }]);
@@ -76,7 +81,7 @@ const FormFieldAddItem = (props) => {
                 +
               </div>
             </div>
-            <div className={styles.text}>
+            <div className={`${styles.text} ${textRow && styles.textRow}`}>
               <p className={styles.category}>{item.category}</p>
               <p className={styles.name}>{item.name}</p>
             </div>
@@ -91,7 +96,6 @@ const FormFieldAddItem = (props) => {
           </div>
         );
       })}
-
       <div className={styles.wrapper}>
         <FormControl variant="outlined" fullWidth>
           <InputLabel>Categorie</InputLabel>
@@ -115,7 +119,7 @@ const FormFieldAddItem = (props) => {
             }}
             fullWidth
             type="text"
-            label="Materiaal"
+            label={label ?? ''}
             variant="outlined"
             value={activeItem ?? ''}
             onChange={(e) => setActiveItem(e.target.value)}

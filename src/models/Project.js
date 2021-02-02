@@ -111,7 +111,6 @@ class Project {
   };
 
   getRequirementsList = async () => {
-    // this.id
     const list = await this.store.loadRequirementListById('nDBGlZQCZ2ABDEzDdMcJ');
     let listMaterials = [];
     let listServices = [];
@@ -122,6 +121,8 @@ class Project {
         listServices.push(item);
       }
     });
+    this.materials = listMaterials;
+    this.services = listServices;
   };
 
   setLiked = (bool) => {
