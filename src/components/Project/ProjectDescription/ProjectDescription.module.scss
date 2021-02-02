@@ -6,12 +6,19 @@ $spacing-top: 3rem;
   grid-column: span 7;
 
   .text {
-    width: 100%;
-    overflow: hidden;
-    .text__img {
+    h1 {
+      @include title-one;
+      margin: 2rem 0 1rem 0;
+    }
+
+    h2 {
+      @include title-two;
+      margin: 2rem 0 0 0;
+    }
+
+    img {
       width: 100%;
-      overflow: hidden;
-      margin: 1rem 0rem 3rem;
+      margin: 1rem 0;
     }
 
     & > p {

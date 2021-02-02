@@ -26,12 +26,19 @@ const formats = ['header', 'bold', 'italic', 'underline', 'blockquote', 'list', 
 
 export default (props) => {
   const { setValue, value } = useField(props);
-  const { label, type, required, multiline, rows, InputProps, setTemp } = props;
+  const { label, type, required, multiline, rows, InputProps, defaultValue } = props;
 
   const handleChange = (value) => {
     setValue(value);
-    setTemp(value);
   };
 
-  return <FormFieldRichTextEditor modules={modules} formats={formats} theme="snow" onChange={handleChange} />;
+  return (
+    <FormFieldRichTextEditor
+      modules={modules}
+      value={value ?? defaultValue}
+      formats={formats}
+      theme="snow"
+      onChange={handleChange}
+    />
+  );
 };

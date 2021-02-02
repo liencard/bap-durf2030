@@ -59,7 +59,7 @@ const Profile = observer(() => {
                   <>
                     {uiStore.userProjects.map((project) => (
                       <div key={project.id}>
-                        <ProjectCard key={project.id} title={project.title} intro={project.intro} id={project.id} />
+                        <ProjectCard key={project.id} project={project} />
                         <Button href={ROUTES.edit.to + project.id} text={'Bewerk project'} />
                       </div>
                     ))}

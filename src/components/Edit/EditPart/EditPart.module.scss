@@ -1,11 +1,4 @@
 @import '../../../styles/styles.scss';
-$border-radius: 0.5rem;
-
-.status {
-  background-color: $green-light;
-  padding: 2rem 3rem;
-  margin-bottom: 7rem;
-}
 
 .section {
   margin-bottom: 5rem;
@@ -47,26 +40,4 @@ $border-radius: 0.5rem;
       z-index: 3;
     }
   }
-}
-
-.input__wrapper {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 2.5rem;
-}
-
-.form__label {
-  @include form__label;
-  font-size: 1.6rem;
-  padding-bottom: 1rem;
-}
-
-.form__input {
-  @include form__input;
-}
-
-.themes,
-.categories {
-  display: flex;
-  flex-direction: column;
 }

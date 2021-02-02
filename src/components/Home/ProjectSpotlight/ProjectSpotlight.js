@@ -15,10 +15,11 @@ const ProjectSpotlight = () => {
           </Link>
         </div>
         <Container>
+          {/* Data komt van db nu, dus als prop doorgegeven */}
+          {/* <ProjectCard />
           <ProjectCard />
           <ProjectCard />
-          <ProjectCard />
-          <ProjectCard />
+          <ProjectCard /> */}
           <Link href="/">
             <a className={styles.card}>
               <div className={styles.thumbnail}></div>

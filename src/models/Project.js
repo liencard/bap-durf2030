@@ -28,8 +28,6 @@ class Project {
     id,
     userId,
     store,
-    likes,
-    comments = [],
   }) {
     // if (!store) {
     //   throw new Error('voorzie een store');
@@ -60,6 +58,7 @@ class Project {
     this.id = id;
     this.userId = userId;
     this.likes = [];
+    this.liked = false;
     this.comments = [];
 
     if (store) {
@@ -69,18 +68,58 @@ class Project {
 
     makeObservable(this, {
       likes: observable,
+      liked: observable,
       comments: observable,
       linkComment: action,
+      getLikes: action,
+      addLike: action,
+      removeLike: action,
+      setLiked: action,
+      title: observable,
+      intro: observable,
+      description: observable,
+      updateProject: action,
     });
   }
 
   getComments() {
-    const res = this.store.loadProjectCommentsById(this.id);
-    console.log(res);
+    this.store.loadProjectCommentsById(this.id);
   }
+
+  getLikes = async () => {
+    const likes = await this.store.loadProjectLikesById(this.id);
+    this.likes = likes;
+  };
+
+  setLiked = (bool) => {
+    this.liked = bool;
+  };
+
+  addLike = (userId) => {
+    this.store.addLikeToProject(this.id, userId);
+    this.likes.push({ userId: userId });
+    this.setLiked(true);
+  };
+
+  removeLike = (userId) => {
+    this.store.removeLikeFromProject(this.id, userId);
+
+    this.likes = this.likes.filter((like) => {
+      return like.userId !== userId;
+    });
+
+    this.setLiked(false);
+  };
 
   linkComment(comment) {
     !this.comments.includes(comment) && this.comments.push(comment);
+  }
+
+  updateProject(newValues) {
+    Object.keys(newValues).forEach((key) => {
+      this[key] = newValues[key];
+    });
+    this.store.updateProject(this);
   }
 }
 
@@ -93,6 +132,7 @@ const convertData = {
       intro: project.intro,
       about: project.about,
       contact: project.contact,
+      description: project.description,
       isKnownPlace: project.isKnownPlace,
       city: project.city,
       street: project.street,
@@ -107,10 +147,12 @@ const convertData = {
       intro: project.intro,
       about: project.about,
       contact: project.contact,
+      description: project.description,
       isKnownPlace: project.isKnownPlace,
       city: project.city,
       street: project.street,
       number: project.number,
+      owners: project.owners,
       store: store,
     });
   },
@@ -136,19 +178,18 @@ const projectConverter = {
       title: project.title,
       userId: project.userId,
       state: 0,
-      timestamp: project.timestamp,
+      // timestamp: project.timestamp,
     };
   },
   fromFirestore: function (snapshot, options) {
     const data = snapshot.data(options);
-    console.log('data');
-    console.log(data.location);
     return new Project({
       id: snapshot.id,
       title: data.title,
       intro: data.intro,
       about: data.about,
       contact: data.contact,
+      description: data.description,
       userId: data.userId,
       isKnownPlace: data.location.isKnownPlace,
       city: data.location.city,
