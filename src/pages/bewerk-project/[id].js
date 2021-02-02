@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useStores } from '../../hooks/useStores';
 import { ROUTES } from '../../consts';
 import { Container, Grid } from '../../components/Layout';
-import { Button } from '../../components/UI';
+import { Button, TabPanel } from '../../components/UI';
 import { EditBasis, EditRequirements } from '../../components/Edit';
 import Header from '../../components/Header/Header';
 import styles from './EditProject.module.scss';
@@ -11,22 +11,6 @@ import styles from './EditProject.module.scss';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-
-const TabPanel = (props) => {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && <div>{children}</div>}
-    </div>
-  );
-};
 
 const EditProject = observer(({ query }) => {
   const id = query.id;
@@ -49,9 +33,10 @@ const EditProject = observer(({ query }) => {
           setState(STATE_DOES_NOT_EXIST);
           return;
         }
+        resolvedProject.getRequirementsInfo();
+        resolvedProject.getRequirementsList();
         setState(STATE_FULLY_LOADED);
         setProject(resolvedProject);
-        console.log(resolvedProject);
       } catch (error) {
         console.log('Project failed loading');
       }

@@ -1,5 +1,4 @@
 @import '../../../styles/styles.scss';
-$border-radius: 0.5rem;
 
 .field__wrapper {
   display: flex;
@@ -9,5 +8,11 @@ $border-radius: 0.5rem;
   &.field__wrapperRow {
     flex-direction: row;
     align-items: center;
+  }
+
+  .label__wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
   }
 }

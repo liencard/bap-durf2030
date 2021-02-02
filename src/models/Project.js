@@ -79,6 +79,15 @@ class Project {
       intro: observable,
       description: observable,
       updateProject: action,
+      getRequirementsInfo: action,
+      fundingAmount: observable,
+      fundingDescription: observable,
+      fundingRequired: observable,
+      materialsRequired: observable,
+      materialsDescription: observable,
+      servicesRequired: observable,
+      servicesDescription: observable,
+      updateRequirementDetails: action,
     });
   }
 
@@ -89,6 +98,53 @@ class Project {
   getLikes = async () => {
     const likes = await this.store.loadProjectLikesById(this.id);
     this.likes = likes;
+  };
+
+  getRequirementsInfo = async () => {
+    const info = await this.store.loadRequirementListInfoById(this.id);
+    this.fundingAmount = info.fundingDetails.fundingAmount;
+    this.fundingDescription = info.fundingDetails.fundingDescription;
+    this.fundingRequired = info.fundingDetails.required;
+    this.materialsRequired = info.materialsDetails.required;
+    this.materialsDescription = info.materialsDetails.description;
+    this.servicesRequired = info.servicesDetails.required;
+    this.servicesDescription = info.servicesDetails.description;
+  };
+
+  getRequirementsList = async () => {
+    const list = await this.store.loadRequirementListById(this.id);
+    let listMaterials = [];
+    let listServices = [];
+    list.forEach((item) => {
+      if (item.type === 'material') {
+        listMaterials.push(item);
+      } else if (item.type === 'service') {
+        listServices.push(item);
+      }
+    });
+    this.materials = listMaterials;
+    this.services = listServices;
+  };
+
+  createRequirementItem = (item, type) => {
+    this.store.createRequirementItem(item, this.id, type);
+  };
+
+  removeRequirementItem = (item) => {
+    this.store.deleteRequirementItem(item.id, this.id);
+  };
+
+  updateRequirementItem = (item, itemId) => {
+    this.store.updateRequirementItem(item, itemId, this.id);
+  };
+
+  updateRequirementDetails = (newValues) => {
+    Object.keys(newValues).forEach((key) => {
+      if (this[key] !== newValues[key]) {
+        this[key] = newValues[key];
+        this.store.updateRequirementDetails(this);
+      }
+    });
   };
 
   setLiked = (bool) => {
@@ -156,8 +212,9 @@ const convertData = {
       projectData[key] = project[key];
     });
     projectData['store'] = store;
-    return new Project(projectData);    
-      {/* 
+    return new Project(projectData);
+    {
+      /* 
     return new Project({
       id: project.id,
       title: project.title,
@@ -172,7 +229,8 @@ const convertData = {
       owners: project.owners,
 
       store: store,
-    }); */ }
+    }); */
+    }
   },
 };
 

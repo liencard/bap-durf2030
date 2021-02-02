@@ -41,12 +41,28 @@ class ProjectStore {
 
   createRequirementsForProject = async ({ requirements, info, projectId }) => {
     if (info.materialsRequired) {
-      this.requirementService.createMaterials(requirements.materials, projectId);
+      this.requirementService.createItems(requirements.materials, projectId, 'material');
     }
     if (info.servicesRequired) {
-      this.requirementService.createServices(requirements.services, projectId);
+      this.requirementService.createItems(requirements.services, projectId, 'service');
     }
     this.requirementService.createInfo(info, projectId);
+  };
+
+  createRequirementItem = (item, projectId, type) => {
+    this.requirementService.createItem(item, projectId, type);
+  };
+
+  deleteRequirementItem = (itemId, projectId) => {
+    this.requirementService.deleteItem(itemId, projectId);
+  };
+
+  updateRequirementItem = (item, itemId, projectId) => {
+    this.requirementService.updateItem(item, itemId, projectId);
+  };
+
+  updateRequirementDetails = (project) => {
+    this.requirementService.updateDetails(project);
   };
 
   createImageForProject = async (image) => {
