@@ -126,6 +126,14 @@ class Project {
 // Server side rendering of detail page, convert data
 const convertData = {
   toJSON(project) {
+    // let projectData = {};
+    // Object.keys(project).forEach((key) => {
+    //   if (key !== 'store') {
+    //     projectData[key] = project[key];
+    //   }
+    // });
+
+    // return projectData;
     return {
       id: project.id,
       title: project.title,
@@ -141,6 +149,15 @@ const convertData = {
   },
 
   fromJSON(project, store) {
+    // Over alle project keys lopen en gelijkstellen
+    // Minder kans om iets te vergeten
+    let projectData = {};
+    Object.keys(project).forEach((key) => {
+      projectData[key] = project[key];
+    });
+    projectData['store'] = store;
+    return new Project(projectData);    
+      {/* 
     return new Project({
       id: project.id,
       title: project.title,
@@ -153,11 +170,9 @@ const convertData = {
       street: project.street,
       number: project.number,
       owners: project.owners,
-      servicesRequired: project.servicesRequired,
-      materialsRequired: project.materialsRequired,
-      fundingRequired: project.fundingRequired,
+
       store: store,
-    });
+    }); */ }
   },
 };
 
@@ -186,7 +201,7 @@ const projectConverter = {
   },
   fromFirestore: function (snapshot, options) {
     const data = snapshot.data(options);
-    return new Project({
+    return {
       id: snapshot.id,
       title: data.title,
       intro: data.intro,
@@ -199,7 +214,9 @@ const projectConverter = {
       street: data.location.street,
       number: data.location.number,
       state: data.state,
-    });
+      themes: data.themes,
+      categories: data.categories,
+    };
   },
 };
 

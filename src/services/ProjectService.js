@@ -116,11 +116,22 @@ class ProjectService {
   };
 
   updateProject = async (data) => {
-    await this.db.collection('projects').doc(data.id).withConverter(projectConverter).update({
-      title: data.title,
-      intro: data.intro,
-      description: data.description,
-    });
+    await this.db
+      .collection('projects')
+      .doc(data.id)
+      .update({
+        title: data.title,
+        intro: data.intro,
+        description: data.description,
+        location: {
+          isKnownPlace: data.isKnownPlace,
+          city: data.city,
+          street: data.street,
+          number: data.number,
+        },
+        themes: data.themes,
+        categories: data.categories,
+      });
   };
 
   updateState = async (data) => {

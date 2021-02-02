@@ -71,6 +71,8 @@ class ProjectStore {
         contact: json.contact,
         description: json.description,
         isKnownPlace: json.isKnownPlace,
+        themes: json.themes,
+        categories: json.categories,
         city: json.city,
         street: json.street,
         number: json.number,
