@@ -31,6 +31,7 @@ const FormPartFour = () => {
             setServicesRequired(!servicesRequired);
           }}
         >
+          <div className={`${styles.circle} ${styles.service}`} />
           <span>Diensten</span>
           <FormFieldSwitch
             name="servicesRequired"
@@ -47,6 +48,7 @@ const FormPartFour = () => {
             setMaterialsRequired(!materialsRequired);
           }}
         >
+          <div className={`${styles.circle} ${styles.material}`} />
           <span>Materialen</span>
           <FormFieldSwitch
             name="materialsRequired"
@@ -63,6 +65,7 @@ const FormPartFour = () => {
             setFundingRequired(!fundingRequired);
           }}
         >
+          <div className={`${styles.circle} ${styles.money}`} />
           <span>Donaties</span>
           <FormFieldSwitch
             name="fundingRequired"

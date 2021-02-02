@@ -12,3 +12,9 @@ export { default as ProjectRequirements } from './ProjectRequirements/ProjectReq
 export { default as ProjectRequirementsServices } from './ProjectRequirementsServices/ProjectRequirementsServices';
 export { default as ProjectRequirementsMaterials } from './ProjectRequirementsMaterials/ProjectRequirementsMaterials';
 export { default as ProjectRequirementsFunding } from './ProjectRequirementsFunding/ProjectRequirementsFunding';
+
+export { default as ProjectHelp } from './ProjectHelp/ProjectHelp';
+export { default as ProjectHelpOne } from './ProjectHelpOne/ProjectHelpOne';
+export { default as ProjectHelpTwoMaterial } from './ProjectHelpTwoMaterial/ProjectHelpTwoMaterial';
+export { default as ProjectHelpTwoFunding } from './ProjectHelpTwoFunding/ProjectHelpTwoFunding';
+export { default as ProjectHelpTwoService } from './ProjectHelpTwoService/ProjectHelpTwoService';

@@ -9,7 +9,9 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import styles from './FormFieldAddItem.module.scss';
 
 const FormFieldAddItem = (props) => {
-  const { errorMessage, id, isValid, isSubmitted, setValue, value } = useField(props);
+  const { errorMessage, id, isValid, isSubmitted, setValue, value } = useField(
+    props
+  );
   const { label, required, options, defaultValue } = props;
   const [isTouched, setIsTouched] = useState(false);
   const showError = !isValid && (isTouched || isSubmitted);
@@ -19,7 +21,10 @@ const FormFieldAddItem = (props) => {
   const [items, setItems] = useState([]);
 
   const addItem = () => {
-    setItems([...items, { name: activeItem, amount: 1, category: activeItemCategory }]);
+    setItems([
+      ...items,
+      { name: activeItem, amount: 1, category: activeItemCategory },
+    ]);
     setActiveItem('');
     setValue(items);
   };
@@ -95,7 +100,10 @@ const FormFieldAddItem = (props) => {
       <div className={styles.wrapper}>
         <FormControl variant="outlined" fullWidth>
           <InputLabel>Categorie</InputLabel>
-          <Select onChange={(e) => setActiveItemCategory(e.target.value)} defaultValue={options[0]}>
+          <Select
+            onChange={(e) => setActiveItemCategory(e.target.value)}
+            defaultValue={options[0]}
+          >
             {options.map((option) => {
               return (
                 <MenuItem key={option} value={option}>
@@ -120,7 +128,9 @@ const FormFieldAddItem = (props) => {
             value={activeItem ?? ''}
             onChange={(e) => setActiveItem(e.target.value)}
           />
-          <FormHelperText id="outlined-weight-helper-text">Druk op ENTER om toe te voegen</FormHelperText>
+          <FormHelperText id="outlined-weight-helper-text">
+            Druk op ENTER om toe te voegen
+          </FormHelperText>
 
           <div className={styles.add__button}>
             <div

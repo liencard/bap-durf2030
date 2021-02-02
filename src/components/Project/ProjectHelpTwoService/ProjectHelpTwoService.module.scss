@@ -1,0 +1,69 @@
+@import '../../../styles/styles.scss';
+
+.title {
+  @include title-two;
+  margin-bottom: 2rem;
+}
+
+.services {
+  margin-top: 3.5rem;
+}
+
+.item {
+  background: $green-light;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+
+  .text {
+    margin-left: 2rem;
+    text-transform: capitalize;
+    .category {
+      @include text-detail;
+      color: $green;
+    }
+  }
+
+  .amount {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-right: 2rem;
+
+    &::after {
+      height: 100%;
+      width: 0.2rem;
+      background: $green;
+      position: absolute;
+      right: 0;
+      content: '';
+    }
+
+    .number {
+      font-weight: 400;
+      padding: 0 0.5rem;
+    }
+
+    .sign {
+      font-weight: 400;
+      font-size: 2rem;
+      padding: 0 0.5rem;
+    }
+  }
+}
+
+.itemLight {
+  background-color: $grey;
+
+  p {
+    color: grey;
+  }
+
+  .amount::after {
+    background: $grey-border;
+  }
+  .sign {
+    color: $grey-border;
+  }
+}
