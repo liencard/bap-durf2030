@@ -156,22 +156,23 @@ const convertData = {
       projectData[key] = project[key];
     });
     projectData['store'] = store;
-    return new Project(projectData);
+    return new Project(projectData);    
+      {/* 
+    return new Project({
+      id: project.id,
+      title: project.title,
+      intro: project.intro,
+      about: project.about,
+      contact: project.contact,
+      description: project.description,
+      isKnownPlace: project.isKnownPlace,
+      city: project.city,
+      street: project.street,
+      number: project.number,
+      owners: project.owners,
 
-    // return new Project({
-    //   id: project.id,
-    //   title: project.title,
-    //   intro: project.intro,
-    //   about: project.about,
-    //   contact: project.contact,
-    //   description: project.description,
-    //   isKnownPlace: project.isKnownPlace,
-    //   city: project.city,
-    //   street: project.street,
-    //   number: project.number,
-    //   owners: project.owners,
-    //   store: store,
-    // });
+      store: store,
+    }); */ }
   },
 };
 
