@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './ProjectHeader.module.scss';
 import { Button } from '../../UI';
+import { useStores } from '../../../hooks/useStores';
 import { ProjectLikes, ProjectHelpers } from '../../Project';
 
 const ProjectHeader = ({ project, requirements }) => {
@@ -55,7 +56,12 @@ const ProjectHeader = ({ project, requirements }) => {
           <h1 className={styles.title}>{project.title}</h1>
           {project.isKnownPlace && (
             <div className={styles.location}>
-              <img src="/icons/location-green.svg" alt="logo DURF2030" width="13.75" height="15.9" />
+              <img
+                src="/icons/location-green.svg"
+                alt="logo DURF2030"
+                width="13.75"
+                height="15.9"
+              />
               <p>
                 {project.street} {project.number}, {project.city}
               </p>

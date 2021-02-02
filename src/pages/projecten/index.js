@@ -38,14 +38,27 @@ export const getStaticProps = async (context) => {
   const { projectStore } = store;
 
   await projectStore.loadAllProjects();
-  let projectsJSON = [];
+  //let projectsJSON = [];
 
-  await projectStore.projects.forEach((data) => {
-    const project = convertData.toJSON(data);
-    projectsJSON.push(project);
+  const projectsJSON = projectStore.projects.map((data) => {
+    let project = convertData.toJSON(data);
+    project['servicesRequired'] = true;
+    project['materialsRequired'] = true;
+    project['fundingRequired'] = false;
+
+    // const loadData = async (project) => {
+    //   const info = await projectStore.loadRequirementListInfoById(project.id);
+    //   console.log(info.servicesDetails.required);
+    //   project['servicesRequired'] = info.servicesDetails.required;
+    // };
+    // await loadData(project);
+
+    //projectsJSON.push(project);
+
+    return project;
   });
 
-  //const info = await projectStore.loadRequirementListInfoById(params.id);
+  console.log(projectsJSON[0]);
 
   return {
     props: { projectsJSON },

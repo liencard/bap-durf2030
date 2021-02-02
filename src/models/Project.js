@@ -153,6 +153,9 @@ const convertData = {
       street: project.street,
       number: project.number,
       owners: project.owners,
+      servicesRequired: project.servicesRequired,
+      materialsRequired: project.materialsRequired,
+      fundingRequired: project.fundingRequired,
       store: store,
     });
   },
