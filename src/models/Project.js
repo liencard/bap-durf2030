@@ -28,8 +28,6 @@ class Project {
     id,
     userId,
     store,
-    likes,
-    comments = [],
   }) {
     // if (!store) {
     //   throw new Error('voorzie een store');

@@ -51,6 +51,7 @@ const EditProject = observer(({ query }) => {
         }
         setState(STATE_FULLY_LOADED);
         setProject(resolvedProject);
+        console.log(resolvedProject);
       } catch (error) {
         console.log('Project failed loading');
       }

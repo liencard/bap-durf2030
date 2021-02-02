@@ -1,10 +1,17 @@
-import React from 'react';
+import { useState } from 'react';
 import styles from './EditBasis.module.scss';
 import { EditPart } from '../';
-import { FormFieldRichTextEditor, FormFieldInput } from '../../Create';
-import { THEMES } from '../../../consts';
+import {
+  FormFieldRichTextEditor,
+  FormFieldInput,
+  FormFieldCheckbox,
+  FormFieldSwitch,
+  FormFieldSelect,
+} from '../../Create';
+import { THEMES, CATEGORIES } from '../../../consts';
 
 const EditBasis = ({ project }) => {
+  const [isKnownPlace, setIsKnownPlace] = useState(false);
   const handleSaveProject = async (values) => {
     project.updateProject(values);
   };
@@ -42,7 +49,41 @@ const EditBasis = ({ project }) => {
       </EditPart>
 
       <EditPart title="Tags" handleSaveProject={handleSaveProject}>
-        <p>fotos</p>
+        <label className={styles.form__label} htmlFor="themes[]">
+          Thema's
+        </label>
+        <fieldset className={styles.themes}>
+          {THEMES.map((theme, i) => {
+            return <FormFieldCheckbox key={theme} name={`themes[${i}]`} option={theme} defaultValue={false} />;
+          })}
+        </fieldset>
+        <label className={styles.form__label} htmlFor="description[]">
+          Categorieën
+        </label>
+        <fieldset className={styles.categories}>
+          {CATEGORIES.map((category, i) => {
+            return (
+              <FormFieldCheckbox key={category} name={`categories[${i}]`} option={category} defaultValue={false} />
+            );
+          })}
+        </fieldset>
+      </EditPart>
+
+      <EditPart title="Locatie" handleSaveProject={handleSaveProject}>
+        <p>Weet je in welke stad je project doorgaat?</p>
+        <FormFieldSelect name="city" options={['Kortrijk', 'Izegem']} defaultValue="Kortrijk" />
+        <div>
+          <span className={styles.place__label}>Nee</span>
+          <FormFieldSwitch
+            name="isKnownPlace"
+            label="isKnownPlace"
+            setToggleValue={setIsKnownPlace}
+            defaultValue={project.isKnownPlace}
+          />
+          <span className={styles.place__label}>Ja</span>
+        </div>
+        <FormFieldInput defaultValue={project.street} name="street" />
+        <FormFieldInput defaultValue={project.number} name="number" />
       </EditPart>
     </>
   );
