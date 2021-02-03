@@ -31,20 +31,30 @@ const ProjectHelp = observer(({ project }) => {
   };
 
   const handleSubmit = async (values) => {
-    console.log(values);
+    const offers = [];
+    if (values.materials) {
+      values.materials.forEach((material) => {
+        if (material.count > 0) {
+          offers.push({ id: material.id, count: material.count, name: material.name, type: 'material' });
+        }
+      });
+    }
 
+    if (values.services) {
+      values.services.forEach((service) => {
+        if (service.count > 0) {
+          offers.push({ id: service.id, count: service.count, name: service.name, type: 'service' });
+        }
+      });
+    }
     const newDurver = new Durver({
-      amount: 2,
       message: values.message ?? '',
       user: uiStore.currentUser,
-      name: 'hamer',
+      offers: offers,
     });
 
-    console.log(newDurver);
-
-    // await projectStore.createDurver(newDurver, project.id);
-
-    //setOpen(false);
+    projectStore.createDurver(newDurver, project.id);
+    setOpen(false);
   };
 
   return (
@@ -68,49 +78,31 @@ const ProjectHelp = observer(({ project }) => {
                     servicesRequired={servicesRequired}
                   />
                 </FormizStep>
-                {materialsRequired && (
-                  <FormizStep name="step2">
-                    <ProjectHelpTwoMaterial
-                      name="materials"
-                      project={project}
-                      materials={project.materials}
-                    />
-                  </FormizStep>
-                )}
-                {servicesRequired && (
-                  <FormizStep name="step3">
-                    <ProjectHelpTwoService
-                      name="services"
-                      project={project}
-                      services={project.services}
-                    />
-                  </FormizStep>
-                )}
-                {fundingRequired && (
-                  <FormizStep name="step4">
-                    <ProjectHelpTwoFunding project={project} />
-                  </FormizStep>
-                )}
+
+                <FormizStep name="step2" isEnabled={materialsRequired}>
+                  <ProjectHelpTwoMaterial name="materials" project={project} materials={project.materials} />
+                </FormizStep>
+
+                <FormizStep name="step3" isEnabled={servicesRequired}>
+                  <ProjectHelpTwoService name="services" project={project} services={project.services} />
+                </FormizStep>
+
+                <FormizStep name="step4" isEnabled={fundingRequired}>
+                  <ProjectHelpTwoFunding project={project} />
+                </FormizStep>
+
                 <FormizStep name="step5">
                   <ProjectHelpThree />
                 </FormizStep>
 
                 <div className={styles.buttons}>
                   {!durverForm.isFirstStep && (
-                    <button
-                      className={styles.button}
-                      type="button"
-                      onClick={durverForm.prevStep}
-                    >
+                    <button className={styles.button} type="button" onClick={durverForm.prevStep}>
                       Vorige
                     </button>
                   )}
                   {durverForm.isLastStep ? (
-                    <button
-                      className={styles.button}
-                      type="submit"
-                      disabled={!durverForm.isValid}
-                    >
+                    <button className={styles.button} type="submit" disabled={!durverForm.isValid}>
                       Versturen
                     </button>
                   ) : (
@@ -128,11 +120,7 @@ const ProjectHelp = observer(({ project }) => {
           </div>
         </Grid>
       </Modal>
-      <Button
-        className={styles.button}
-        onClick={handleOpen}
-        text={'Ik durf mee te helpen'}
-      />
+      <Button className={styles.button} onClick={handleOpen} text={'Ik durf mee te helpen'} />
     </>
   );
 });

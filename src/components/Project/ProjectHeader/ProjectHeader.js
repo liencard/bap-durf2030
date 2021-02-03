@@ -4,30 +4,27 @@ import styles from './ProjectHeader.module.scss';
 import { ProjectLikes, ProjectHelpers, ProjectHelp } from '../../Project';
 
 const ProjectHeader = observer(({ project }) => {
-  const [servicesCount, setServicesCount] = useState('');
-  const [materialsCount, setMaterialsCount] = useState('');
+  const [servicesCount, setServicesCount] = useState(0);
+  const [materialsCount, setMaterialsCount] = useState(0);
 
   useEffect(() => {
-    let materialsCount = 0;
-    let servicesCount = 0;
+    let materialsCountNew = 0;
+    let servicesCountNew = 0;
 
-    const loadCounter = async () => {
-      project.materials.forEach((item) => {
-        if (item.completed === true) {
-          materialsCount++;
-        }
-      });
-      project.services.forEach((item) => {
-        if (item.completed === true) {
-          servicesCount++;
-        }
-      });
-      setMaterialsCount(materialsCount);
-      setServicesCount(servicesCount);
-    };
-    loadCounter();
-    console.log(project.materials.length);
-  }, [setMaterialsCount, setServicesCount]);
+    project.materials.forEach((item) => {
+      if (item.completed === true) {
+        materialsCountNew++;
+      }
+    });
+    project.services.forEach((item) => {
+      if (item.completed === true) {
+        servicesCountNew++;
+      }
+    });
+
+    setMaterialsCount(materialsCountNew);
+    setServicesCount(servicesCountNew);
+  }, [project.materials, project.services]);
 
   return (
     <>
@@ -41,12 +38,7 @@ const ProjectHeader = observer(({ project }) => {
           <h1 className={styles.title}>{project.title}</h1>
           {project.isKnownPlace && (
             <div className={styles.location}>
-              <img
-                src="/icons/location-green.svg"
-                alt="logo DURF2030"
-                width="13.75"
-                height="15.9"
-              />
+              <img src="/icons/location-green.svg" alt="logo DURF2030" width="13.75" height="15.9" />
               <p>
                 {project.street} {project.number}, {project.city}
               </p>
