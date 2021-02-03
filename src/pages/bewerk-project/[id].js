@@ -53,7 +53,8 @@ const EditProject = observer(({ query }) => {
               <AppBar value={value} setValue={setValue}>
                 <Tab label="Basis Informatie" />
                 <Tab label="Ondersteuningen" />
-                <Tab label="Durvers" />
+                <Tab label="Organisators" />
+                <Tab label="Updates" />
                 <TabSideElement>
                   <Button href={ROUTES.home} text={'Update posten'} />
                 </TabSideElement>
@@ -65,7 +66,10 @@ const EditProject = observer(({ query }) => {
                 <EditRequirements project={project} />
               </TabPanel>
               <TabPanel className={styles.panel} value={value} index={2}>
-                <p>Durvers</p>
+                <p>Organisators</p>
+              </TabPanel>
+              <TabPanel className={styles.panel} value={value} index={3}>
+                <p>Updates</p>
               </TabPanel>
             </section>
           </>
