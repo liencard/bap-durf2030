@@ -49,7 +49,6 @@ class ProjectStore {
     this.requirementService.createInfo(info, projectId);
   };
 
-
   createRequirementItem = (item, projectId, type) => {
     this.requirementService.createItem(item, projectId, type);
   };
@@ -64,6 +63,7 @@ class ProjectStore {
 
   updateRequirementDetails = (project) => {
     this.requirementService.updateDetails(project);
+  };
 
   createDurver = async (durver, projectId) => {
     console.log(durver);

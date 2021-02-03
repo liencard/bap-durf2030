@@ -2,12 +2,7 @@ import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Container } from '../../components/Layout';
 import Header from '../../components/Header/Header';
-import {
-  ProjectHeader,
-  ProjectContent,
-  ProjectFooter,
-  ProjectComments,
-} from '../../components/Project';
+import { ProjectHeader, ProjectContent, ProjectFooter, ProjectComments } from '../../components/Project';
 import RootStore from '../../stores';
 import { convertData } from '../../models/Project';
 import { useStores } from '../../hooks/useStores';
@@ -30,12 +25,11 @@ const Project = observer(({ projectJSON, info }) => {
     const data = convertData.fromJSON(projectJSON, projectStore);
     data.getComments();
     data.getLikes();
+    data.getRequirementsList();
     setProject(data);
 
     if (project && uiStore.currentUser) {
-      const projectIsLiked = project.likes.find(
-        (like) => like.userId === uiStore.currentUser.id
-      );
+      const projectIsLiked = project.likes.find((like) => like.userId === uiStore.currentUser.id);
       if (projectIsLiked) {
         project.setLiked(true);
       } else {
@@ -51,16 +45,8 @@ const Project = observer(({ projectJSON, info }) => {
     <>
       <Header />
       <Container>
-        <ProjectHeader
-          project={project}
-          requirements={requirements}
-          info={info}
-        />
-        <ProjectContent
-          project={project}
-          requirements={requirements}
-          info={info}
-        />
+        <ProjectHeader project={project} requirements={requirements} info={info} />
+        <ProjectContent project={project} requirements={requirements} info={info} />
         <ProjectFooter project={project} />
         <ProjectComments project={project} />
       </Container>

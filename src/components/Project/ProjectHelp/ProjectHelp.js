@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useStores } from '../../../hooks/useStores';
 import styles from './ProjectHelp.module.scss';
 import { Modal, Button } from '../../UI';
@@ -33,17 +33,17 @@ const ProjectHelp = observer(({ project, info, materials, services }) => {
   const handleSubmit = async (values) => {
     console.log(values);
 
-    const newDurver = new Durver({
-      amount: 2,
-      message: values.message ?? '',
-      user: uiStore.currentUser,
-      name: 'hamer',
-    });
+    // const newDurver = new Durver({
+    //   amount: 2,
+    //   message: values.message ?? '',
+    //   user: uiStore.currentUser,
+    //   name: 'hamer',
+    // });
 
-    console.log(newDurver);
-    console.log(project.id);
+    // console.log(newDurver);
+    // console.log(project.id);
 
-    await projectStore.createDurver(newDurver, project.id);
+    // await projectStore.createDurver(newDurver, project.id);
 
     //setOpen(false);
   };
@@ -71,7 +71,7 @@ const ProjectHelp = observer(({ project, info, materials, services }) => {
                 </FormizStep>
                 {materialsRequired && (
                   <FormizStep name="step2">
-                    <ProjectHelpTwoMaterial info={info} materials={materials} />
+                    <ProjectHelpTwoMaterial name="materials" info={info} materials={project.materials} />
                   </FormizStep>
                 )}
                 {servicesRequired && (
@@ -90,20 +90,12 @@ const ProjectHelp = observer(({ project, info, materials, services }) => {
 
                 <div className={styles.buttons}>
                   {!durverForm.isFirstStep && (
-                    <button
-                      className={styles.button}
-                      type="button"
-                      onClick={durverForm.prevStep}
-                    >
+                    <button className={styles.button} type="button" onClick={durverForm.prevStep}>
                       Vorige
                     </button>
                   )}
                   {durverForm.isLastStep ? (
-                    <button
-                      className={styles.button}
-                      type="submit"
-                      disabled={!durverForm.isValid}
-                    >
+                    <button className={styles.button} type="submit" disabled={!durverForm.isValid}>
                       Versturen
                     </button>
                   ) : (
@@ -121,11 +113,7 @@ const ProjectHelp = observer(({ project, info, materials, services }) => {
           </div>
         </Grid>
       </Modal>
-      <Button
-        className={styles.button}
-        onClick={handleOpen}
-        text={'Ik durf mee te helpen'}
-      />
+      <Button className={styles.button} onClick={handleOpen} text={'Ik durf mee te helpen'} />
     </>
   );
 });
