@@ -83,8 +83,6 @@ class RequirementService {
   };
 
   createDurver = async (durver, projectId) => {
-    console.log(projectId);
-    console.log(durver);
     this.db
       .collection('requirements')
       .doc(projectId)

@@ -44,10 +44,7 @@ const ProjectHelpTwoService = (props) => {
       <p>{project.servicesDescription}</p>
       <div className={styles.services}>
         {items.map((item) => (
-          <div
-            key={item.id}
-            className={`${styles.item} ${item.count === 0 && styles.itemLight}`}
-          >
+          <div key={item.id} className={`${styles.item} ${item.count === 0 && styles.itemLight}`}>
             <div className={styles.amount}>
               <div
                 className={`${styles.sign}`}
