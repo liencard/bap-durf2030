@@ -14,11 +14,3 @@
     color: $green;
   }
 }
-
-.appbar {
-  @include appbar;
-}
-
-.panel {
-  grid-column: span 12;
-}
