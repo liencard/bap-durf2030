@@ -51,7 +51,7 @@ const ProjectHelpTwoMaterial = (props) => {
           >
             <div className={styles.amount}>
               <div
-                className={`${styles.sign}`}
+                className={`${styles.sign} ${styles.sign__min}`}
                 onClick={(e) => {
                   e.preventDefault();
                   changeItemAmount(item, 'decrease');
@@ -61,7 +61,7 @@ const ProjectHelpTwoMaterial = (props) => {
               </div>
               <p className={styles.number}>{item.count}</p>
               <div
-                className={`${styles.sign}`}
+                className={`${styles.sign} ${styles.sign__add}`}
                 onClick={() => {
                   changeItemAmount(item, 'increase');
                 }}
@@ -69,9 +69,7 @@ const ProjectHelpTwoMaterial = (props) => {
                 +
               </div>
             </div>
-            <div className={styles.text}>
-              <p className={styles.name}>{item.name}</p>
-            </div>
+            <p className={styles.name}>{item.name}</p>
           </div>
         ))}
       </div>
