@@ -33,15 +33,14 @@ const ProjectHelp = observer(({ project }) => {
   const handleSubmit = async (values) => {
     console.log(values);
 
-    // const newDurver = new Durver({
-    //   amount: 2,
-    //   message: values.message ?? '',
-    //   user: uiStore.currentUser,
-    //   name: 'hamer',
-    // });
+    const newDurver = new Durver({
+      amount: 2,
+      message: values.message ?? '',
+      user: uiStore.currentUser,
+      name: 'hamer',
+    });
 
-    // console.log(newDurver);
-    // console.log(project.id);
+    console.log(newDurver);
 
     // await projectStore.createDurver(newDurver, project.id);
 
