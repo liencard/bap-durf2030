@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useStores } from '../../../hooks/useStores';
 import styles from './ProjectHelp.module.scss';
 import { Modal, Button } from '../../UI';
@@ -14,7 +14,7 @@ import {
   ProjectHelpThree,
 } from '../../Project';
 
-const ProjectHelp = observer(({ project, info, materials, services }) => {
+const ProjectHelp = observer(({ project }) => {
   const durverForm = useForm();
   const { projectStore, uiStore } = useStores();
   const [open, setOpen] = useState(false);
@@ -30,22 +30,49 @@ const ProjectHelp = observer(({ project, info, materials, services }) => {
     setOpen(false);
   };
 
+  const getName = (id) => {
+    const service = project.services.find((service) => service.id === id);
+    return service.name;
+  };
+
   const handleSubmit = async (values) => {
     console.log(values);
+    const offers = [];
+    if (values.materials) {
+      values.materials.forEach((material) => {
+        if (material.count > 0) {
+          offers.push({
+            id: material.id,
+            count: material.count,
+            name: material.name,
+            type: 'material',
+          });
+        }
+      });
+    }
 
+    if (values.items) {
+      Object.keys(values.items).forEach((key) => {
+        if (values.items[key] === true) {
+          offers.push({
+            id: key,
+            count: 1,
+            type: 'service',
+            name: getName(key),
+          });
+        }
+      });
+    }
     const newDurver = new Durver({
-      amount: 2,
       message: values.message ?? '',
       user: uiStore.currentUser,
-      name: 'hamer',
+      offers: offers,
     });
 
     console.log(newDurver);
-    console.log(project.id);
 
-    await projectStore.createDurver(newDurver, project.id);
-
-    //setOpen(false);
+    projectStore.createDurver(newDurver, project.id);
+    setOpen(false);
   };
 
   return (
@@ -69,21 +96,26 @@ const ProjectHelp = observer(({ project, info, materials, services }) => {
                     servicesRequired={servicesRequired}
                   />
                 </FormizStep>
-                {materialsRequired && (
-                  <FormizStep name="step2">
-                    <ProjectHelpTwoMaterial info={info} materials={materials} />
-                  </FormizStep>
-                )}
-                {servicesRequired && (
-                  <FormizStep name="step3">
-                    <ProjectHelpTwoService info={info} services={services} />
-                  </FormizStep>
-                )}
-                {fundingRequired && (
-                  <FormizStep name="step4">
-                    <ProjectHelpTwoFunding info={info} />
-                  </FormizStep>
-                )}
+
+                <FormizStep name="step2" isEnabled={materialsRequired}>
+                  <ProjectHelpTwoMaterial
+                    name="materials"
+                    project={project}
+                    materials={project.materials}
+                  />
+                </FormizStep>
+
+                <FormizStep name="step3" isEnabled={servicesRequired}>
+                  <ProjectHelpTwoService
+                    project={project}
+                    services={project.services}
+                  />
+                </FormizStep>
+
+                <FormizStep name="step4" isEnabled={fundingRequired}>
+                  <ProjectHelpTwoFunding project={project} />
+                </FormizStep>
+
                 <FormizStep name="step5">
                   <ProjectHelpThree />
                 </FormizStep>

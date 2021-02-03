@@ -12,24 +12,16 @@ import RootStore from '../../stores';
 import { convertData } from '../../models/Project';
 import { useStores } from '../../hooks/useStores';
 
-const Project = observer(({ projectJSON, info }) => {
+const Project = observer(({ projectJSON }) => {
   const { projectStore, uiStore } = useStores();
   const [project, setProject] = useState();
-  const [requirements, setRequirements] = useState([]);
-
-  useEffect(() => {
-    const loadData = async () => {
-      const data = convertData.fromJSON(projectJSON, projectStore);
-      const list = await projectStore.loadRequirementListById(data.id);
-      setRequirements(list);
-    };
-    loadData();
-  }, [projectStore, setRequirements]);
 
   useEffect(() => {
     const data = convertData.fromJSON(projectJSON, projectStore);
     data.getComments();
     data.getLikes();
+    data.getRequirementsList();
+    data.getRequirementsInfo();
     setProject(data);
 
     if (project && uiStore.currentUser) {
@@ -51,16 +43,8 @@ const Project = observer(({ projectJSON, info }) => {
     <>
       <Header />
       <Container>
-        <ProjectHeader
-          project={project}
-          requirements={requirements}
-          info={info}
-        />
-        <ProjectContent
-          project={project}
-          requirements={requirements}
-          info={info}
-        />
+        <ProjectHeader project={project} />
+        <ProjectContent project={project} />
         <ProjectFooter project={project} />
         <ProjectComments project={project} />
       </Container>
@@ -71,7 +55,6 @@ const Project = observer(({ projectJSON, info }) => {
 export const getStaticPaths = async () => {
   const store = new RootStore();
   const { projectStore } = store;
-  // const projectIds = projectStore.projectService.getAllIds();
   const projects = await projectStore.projectService.getAll();
   const ids = projects.map((project) => project.id);
   const paths = ids.map((id) => ({ params: { id } }));
@@ -93,12 +76,10 @@ export const getStaticProps = async ({ params }) => {
     avatar: owner.avatar,
     id: owner.id,
   }));
-  const info = await projectStore.loadRequirementListInfoById(params.id);
-  //const projectItems = await projectStore.loadRequirementListById(params.id);
   projectJSON['owners'] = owners;
 
   return {
-    props: { projectJSON, info },
+    props: { projectJSON },
     revalidate: 5,
   };
 };

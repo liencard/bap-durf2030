@@ -1,48 +1,30 @@
+import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
 import styles from './ProjectHeader.module.scss';
-import { Button } from '../../UI';
-import { useStores } from '../../../hooks/useStores';
 import { ProjectLikes, ProjectHelpers, ProjectHelp } from '../../Project';
 
-const ProjectHeader = ({ project, requirements, info }) => {
-  const { projectStore } = useStores();
-  const [likes, setLikes] = useState([]);
-  const [services, setServices] = useState([]);
-  const [materials, setMaterials] = useState([]);
-  const [servicesCount, setServicesCount] = useState('');
-  const [materialsCount, setMaterialsCount] = useState('');
+const ProjectHeader = observer(({ project }) => {
+  const [servicesCount, setServicesCount] = useState(0);
+  const [materialsCount, setMaterialsCount] = useState(0);
 
   useEffect(() => {
-    projectStore.loadProjectLikesById('formtest').then((result) => {
-      setLikes(result.length);
+    let materialsCountNew = 0;
+    let servicesCountNew = 0;
+
+    project.materials.forEach((item) => {
+      if (item.completed === true) {
+        materialsCountNew++;
+      }
+    });
+    project.services.forEach((item) => {
+      if (item.completed === true) {
+        servicesCountNew++;
+      }
     });
 
-    let materialsArr = [];
-    let servicesArr = [];
-    let materialsCount = 0;
-    let servicesCount = 0;
-
-    const loadRequirments = async () => {
-      requirements.forEach((item) => {
-        if (item.type === 'material') {
-          materialsArr.push(item);
-          setMaterials(materialsArr);
-          if (item.completed === true) {
-            materialsCount++;
-          }
-        } else if (item.type === 'service') {
-          servicesArr.push(item);
-          setServices(servicesArr);
-          if (item.completed === true) {
-            servicesCount++;
-          }
-        }
-      });
-      setMaterialsCount(materialsCount);
-      setServicesCount(servicesCount);
-    };
-    loadRequirments();
-  }, [requirements]);
+    setMaterialsCount(materialsCountNew);
+    setServicesCount(servicesCountNew);
+  }, [project.materials, project.services]);
 
   return (
     <>
@@ -56,12 +38,7 @@ const ProjectHeader = ({ project, requirements, info }) => {
           <h1 className={styles.title}>{project.title}</h1>
           {project.isKnownPlace && (
             <div className={styles.location}>
-              <img
-                src="/icons/location-green.svg"
-                alt="logo DURF2030"
-                width="13.75"
-                height="15.9"
-              />
+              <img src="/icons/location-green.svg" alt="logo DURF2030" width="13.75" height="15.9" />
               <p>
                 {project.street} {project.number}, {project.city}
               </p>
@@ -73,14 +50,14 @@ const ProjectHeader = ({ project, requirements, info }) => {
           <div className={styles.item}>
             <div className={`${styles.circle} ${styles.service}`} />
             <p className={styles.info}>
-              {servicesCount}/{services.length} diensten
+              {servicesCount}/{project.services.length} diensten
             </p>
             <p className={styles.item__btn}>Bekijk info</p>
           </div>
           <div className={styles.item}>
             <div className={`${styles.circle} ${styles.material}`} />
             <p className={styles.info}>
-              {materialsCount}/{materials.length} materialen
+              {materialsCount}/{project.materials.length} materialen
             </p>
             <p className={styles.item__btn}>Bekijk info</p>
           </div>
@@ -91,12 +68,7 @@ const ProjectHeader = ({ project, requirements, info }) => {
           </div>
         </div>
         <div className={styles.buttons}>
-          <ProjectHelp
-            project={project}
-            materials={materials}
-            services={services}
-            info={info}
-          />
+          <ProjectHelp project={project} />
           <div className={styles.interact}>
             <ProjectLikes project={project} />
             <ProjectHelpers />
@@ -105,6 +77,6 @@ const ProjectHeader = ({ project, requirements, info }) => {
       </div>
     </>
   );
-};
+});
 
 export default ProjectHeader;

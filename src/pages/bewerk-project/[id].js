@@ -20,7 +20,9 @@ const EditProject = observer(({ query }) => {
   const STATE_FULLY_LOADED = 'fullyLoaded';
 
   const [project, setProject] = useState(projectStore.getProjectById(id));
-  const [state, setState] = useState(project ? STATE_LOADING_MORE_DETAILS : STATE_LOADING);
+  const [state, setState] = useState(
+    project ? STATE_LOADING_MORE_DETAILS : STATE_LOADING
+  );
 
   useEffect(() => {
     const loadProject = async (id) => {
@@ -50,6 +52,8 @@ const EditProject = observer(({ query }) => {
             <section className={styles.edit}>
               <h1 className={styles.title}>Bewerk project</h1>
               <p className={styles.title__project}>{project.title}</p>
+
+
               <AppBar value={value} setValue={setValue}>
                 <Tab label="Basis Informatie" />
                 <Tab label="Ondersteuningen" />
@@ -58,6 +62,7 @@ const EditProject = observer(({ query }) => {
                 <TabSideElement>
                   <Button href={ROUTES.home} text={'Update posten'} />
                 </TabSideElement>
+
               </AppBar>
               <TabPanel className={styles.panel} value={value} index={0}>
                 <EditBasis project={project} />

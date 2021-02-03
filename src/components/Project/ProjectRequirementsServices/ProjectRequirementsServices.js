@@ -6,7 +6,7 @@ import { Container } from '../../Layout';
 import { Button } from '../../UI';
 import { ProjectHelpers } from '../../Project';
 
-const ProjectRequirementsServices = ({ services, info }) => {
+const ProjectRequirementsServices = ({ project }) => {
   const { projectStore } = useStores();
 
   const [physical, setPhysical] = useState([]);
@@ -19,7 +19,7 @@ const ProjectRequirementsServices = ({ services, info }) => {
     let diversArr = [];
 
     const loadServices = async () => {
-      services.forEach((service) => {
+      project.services.forEach((service) => {
         if (service.category === 'Fysieke hulp') {
           physicalArr.push(service);
           setPhysical(physicalArr);
@@ -43,7 +43,7 @@ const ProjectRequirementsServices = ({ services, info }) => {
           <div className={styles.content}>
             <h2 className={styles.title}>Diensten</h2>
             <div className={styles.wrapper}>
-              <p>{info.servicesDetails.description}</p>
+              <p>{project.servicesDescription}</p>
               <div className={styles.list}>
                 {physical.length != 0 && (
                   <article className={styles.list__item}>

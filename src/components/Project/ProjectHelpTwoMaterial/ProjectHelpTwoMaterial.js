@@ -1,60 +1,67 @@
 import { observer } from 'mobx-react-lite';
-import { useState, useRef } from 'react';
-import { useStores } from '../../../hooks/useStores';
+import { useState, useEffect } from 'react';
 import styles from './ProjectHelpTwoMaterial.module.scss';
 import { useField } from '@formiz/core';
 
-const ProjectHelpTwoMaterial = observer(({ info, materials }) => {
-  //   const {
-  //     errorMessage,
-  //     id,
-  //     isValid,
-  //     isSubmitted,
-  //     setValue,
-  //     value,
-  //   } = useField();
+const ProjectHelpTwoMaterial = (props) => {
+  const { setValue, value } = useField(props);
+  const { project, materials } = props;
 
   const [items, setItems] = useState([]);
-  const [amount, setAmount] = useState(0);
+
+  useEffect(() => {
+    setValue(items);
+  }, [items]);
+
+  useEffect(() => {
+    const itemsArr = materials.map((material) => {
+      return {
+        id: material.id,
+        name: material.name,
+        amount: material.amount,
+        count: 0,
+      };
+    });
+    setItems(itemsArr);
+  }, []);
 
   const changeItemAmount = (item, type) => {
-    let counter = amount;
-    materials = materials.filter((currentItem) => {
-      //console.log(currentItem);
-      ////console.log(item);
+    const itemsArr = items.filter((currentItem) => {
       if (currentItem == item) {
-        if (type == 'increase') {
-          counter++;
-        } else if (type == 'decrease') {
-          counter--;
+        if (type == 'increase' && currentItem.amount !== currentItem.count) {
+          item.count++;
+        } else if (type == 'decrease' && currentItem.count !== 0) {
+          item.count--;
         }
       }
+      return currentItem;
     });
-    setAmount(counter);
+    setItems(itemsArr);
   };
 
   return (
     <>
       <h2 className={styles.title}>Materiaal aanbieden</h2>
-      <p>{info.materialsDetails.description}</p>
+      <p>{project.materialsDescription}</p>
       <div className={styles.materials}>
-        {materials.map((item) => (
+        {items.map((item) => (
           <div
             key={item.id}
-            className={`${styles.item} ${amount === 0 && styles.itemLight}`}
+            className={`${styles.item} ${item.count === 0 && styles.itemLight}`}
           >
             <div className={styles.amount}>
               <div
-                className={`${styles.sign}`}
-                onClick={() => {
+                className={`${styles.sign} ${styles.sign__min}`}
+                onClick={(e) => {
+                  e.preventDefault();
                   changeItemAmount(item, 'decrease');
                 }}
               >
                 -
               </div>
-              <p className={styles.number}>{amount}</p>
+              <p className={styles.number}>{item.count}</p>
               <div
-                className={`${styles.sign}`}
+                className={`${styles.sign} ${styles.sign__add}`}
                 onClick={() => {
                   changeItemAmount(item, 'increase');
                 }}
@@ -62,14 +69,12 @@ const ProjectHelpTwoMaterial = observer(({ info, materials }) => {
                 +
               </div>
             </div>
-            <div className={styles.text}>
-              <p className={styles.name}>{item.name}</p>
-            </div>
+            <p className={styles.name}>{item.name}</p>
           </div>
         ))}
       </div>
     </>
   );
-});
+};
 
 export default ProjectHelpTwoMaterial;

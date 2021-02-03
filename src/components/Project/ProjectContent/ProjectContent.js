@@ -22,7 +22,7 @@ const TabPanel = (props) => {
   );
 };
 
-const ProjectContent = ({ project, info, requirements }) => {
+const ProjectContent = ({ project }) => {
   const [value, setValue] = useState(0);
 
   const a11yProps = (index) => {
@@ -49,7 +49,7 @@ const ProjectContent = ({ project, info, requirements }) => {
           onChange={handleChange}
           aria-label="navigeer door project"
         >
-          <Tab label="Campagne" {...a11yProps(0)} />
+          <Tab label="Overview" {...a11yProps(0)} />
           <Tab label="Updates" {...a11yProps(1)} />
           <Tab label="Nodige Hulp" {...a11yProps(2)} />
           <Tab label="Durvers" {...a11yProps(3)} />
@@ -67,11 +67,7 @@ const ProjectContent = ({ project, info, requirements }) => {
       </TabPanel>
       <TabPanel className={styles.panel} value={value} index={2}>
         <Grid>
-          <ProjectRequirements
-            project={project}
-            info={info}
-            requirements={requirements}
-          />
+          <ProjectRequirements project={project} />
         </Grid>
       </TabPanel>
       <TabPanel className={styles.panel} value={value} index={3}>
