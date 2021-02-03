@@ -14,15 +14,20 @@ const EditPart = ({ children, title, handleSaveProject }) => {
           <div className={styles.header}>
             <h2 className={styles.subtitle}>{title}</h2>
             <div>
-              <button className={styles.edit__btn} onClick={() => setAllowEdit(!allowEdit)}>
+              <button
+                className={styles.edit__btn}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setAllowEdit(!allowEdit);
+                }}
+              >
                 {allowEdit ? 'Annuleer' : 'Bewerken'}
               </button>
               {allowEdit && <Button type="submit" className={styles.save__btn} text={'Bewerking opslaan'} />}
             </div>
           </div>
-          <div className={styles.form__wrapper}>
+          <div className={`${styles.form__wrapper} ${!allowEdit && styles.form__locked}`}>
             <div className={styles.form}>{children}</div>
-            {!allowEdit && <div className={styles.form__locked}></div>}
           </div>
         </section>
       </form>

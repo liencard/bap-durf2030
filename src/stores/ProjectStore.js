@@ -41,16 +41,29 @@ class ProjectStore {
 
   createRequirementsForProject = async ({ requirements, info, projectId }) => {
     if (info.materialsRequired) {
-      this.requirementService.createMaterials(
-        requirements.materials,
-        projectId
-      );
+      this.requirementService.createItems(requirements.materials, projectId, 'material');
     }
     if (info.servicesRequired) {
-      this.requirementService.createServices(requirements.services, projectId);
+      this.requirementService.createItems(requirements.services, projectId, 'service');
     }
     this.requirementService.createInfo(info, projectId);
   };
+
+
+  createRequirementItem = (item, projectId, type) => {
+    this.requirementService.createItem(item, projectId, type);
+  };
+
+  deleteRequirementItem = (itemId, projectId) => {
+    this.requirementService.deleteItem(itemId, projectId);
+  };
+
+  updateRequirementItem = (item, itemId, projectId) => {
+    this.requirementService.updateItem(item, itemId, projectId);
+  };
+
+  updateRequirementDetails = (project) => {
+    this.requirementService.updateDetails(project);
 
   createDurver = async (durver, projectId) => {
     console.log(durver);
@@ -80,6 +93,8 @@ class ProjectStore {
         contact: json.contact,
         description: json.description,
         isKnownPlace: json.isKnownPlace,
+        themes: json.themes,
+        categories: json.categories,
         city: json.city,
         street: json.street,
         number: json.number,

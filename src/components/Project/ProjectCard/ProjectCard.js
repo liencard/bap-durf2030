@@ -58,7 +58,7 @@ const ProjectCard = ({ project }) => {
             ))}
           </ul>
           <div className={styles.stats}>
-            <ProjectLikes project={project} small />
+            {/* <ProjectLikes project={project} small /> */}
             <ProjectHelpers small />
           </div>
         </div>

@@ -1,8 +1,5 @@
-import { v4 } from 'uuid';
-import Project from './Project';
-
 class List {
-  constructor({ id = v4(), amount, category, completed, name, type, project }) {
+  constructor({ id, amount, category, completed, name, type, project }) {
     this.id = id;
     this.amount = amount;
     this.category = category;

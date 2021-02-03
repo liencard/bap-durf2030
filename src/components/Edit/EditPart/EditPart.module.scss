@@ -23,6 +23,7 @@
 
   .form__wrapper {
     display: grid;
+    z-index: 3;
 
     .form {
       border: 0.1rem solid $grey-border;
@@ -32,12 +33,9 @@
       grid-row: 1;
     }
 
-    .form__locked {
-      grid-column: 1;
-      grid-row: 1;
-      background-color: $grey;
-      opacity: 0.3;
-      z-index: 3;
+    &.form__locked {
+      opacity: 0.5;
+      pointer-events: none;
     }
   }
 }
