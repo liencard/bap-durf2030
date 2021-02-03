@@ -13,10 +13,7 @@ class ProjectService {
   }
 
   getAll = async () => {
-    const snapshot = await this.db
-      .collection('projects')
-      .withConverter(projectConverter)
-      .get();
+    const snapshot = await this.db.collection('projects').withConverter(projectConverter).get();
     return snapshot.docs.map((project) => project.data());
   };
 
@@ -25,22 +22,22 @@ class ProjectService {
   // };
 
   getById = async (id) => {
-    const project = await this.db
-      .collection('projects')
-      .doc(id)
-      .withConverter(projectConverter)
-      .get();
+    const project = await this.db.collection('projects').doc(id).withConverter(projectConverter).get();
     // project = await user.project();
     return project.data();
   };
 
   getLikesById = async (id) => {
-    const snapshot = await this.db
-      .collection('projects')
-      .doc(id)
-      .collection('likes')
-      .get();
+    const snapshot = await this.db.collection('projects').doc(id).collection('likes').get();
     return snapshot.docs.map((like) => like.data());
+  };
+
+  addLike = async (projectId, userId) => {
+    this.db.collection('projects').doc(projectId).collection('likes').doc(userId).set({ userId: userId });
+  };
+
+  removeLike = async (projectId, userId) => {
+    this.db.collection('projects').doc(projectId).collection('likes').doc(userId).delete();
   };
 
   getProjectsForUser = async (userId) => {
@@ -54,7 +51,6 @@ class ProjectService {
   };
 
   create = async (project) => {
-    // dummy verwijderen (doc leeg laten)
     const ref = await this.db.collection('projects').doc();
     ref.withConverter(projectConverter).set(project);
     project.owners.forEach((owner) => {
@@ -120,20 +116,26 @@ class ProjectService {
   };
 
   updateProject = async (data) => {
-    console.log('service');
-    console.log(data);
-    const result = await this.db.collection('projects').doc(data.id).update({
-      title: data.title,
-      intro: data.intro,
-    });
-    return result;
+    await this.db
+      .collection('projects')
+      .doc(data.id)
+      .update({
+        title: data.title,
+        intro: data.intro,
+        description: data.description,
+        location: {
+          isKnownPlace: data.isKnownPlace,
+          city: data.city,
+          street: data.street,
+          number: data.number,
+        },
+        themes: data.themes,
+        categories: data.categories,
+      });
   };
 
   updateState = async (data) => {
-    const result = await this.db
-      .collection('projects')
-      .doc(`${data.id}`)
-      .update({ state: data.state });
+    const result = await this.db.collection('projects').doc(`${data.id}`).update({ state: data.state });
     return result;
   };
 

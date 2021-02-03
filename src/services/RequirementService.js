@@ -1,31 +1,64 @@
 import 'firebase/firestore';
-// import { projectConverter } from '../models/Project';
+import { listConverter } from '../models/List';
+import { durverConverter } from '../models/Durver';
 
 class RequirementService {
   constructor({ firebase }) {
     this.db = firebase.firestore();
   }
 
-  createMaterials = async (materials, projectId) => {
-    materials.forEach((material) => {
-      this.db.collection('requirements').doc(projectId).collection('materials').doc().set({
-        amount: material.amount,
-        category: material.category,
-        name: material.name,
+  createItems = (items, projectId, type) => {
+    items.forEach((item) => {
+      this.db.collection('requirements').doc(projectId).collection('list').doc().set({
+        amount: item.amount,
+        category: item.category,
+        name: item.name,
         completed: false,
+        type: type,
       });
     });
   };
 
-  createServices = async (services, projectId) => {
-    services.forEach((service) => {
-      this.db.collection('requirements').doc(projectId).collection('services').doc().set({
-        amount: service.amount,
-        category: service.category,
-        name: service.name,
-        completed: false,
-      });
+  createItem = (item, projectId, type) => {
+    this.db.collection('requirements').doc(projectId).collection('list').doc().set({
+      amount: item.amount,
+      category: item.category,
+      name: item.name,
+      completed: false,
+      type: type,
     });
+  };
+
+  updateItem = (item, itemId, projectId) => {
+    this.db.collection('requirements').doc(projectId).collection('list').doc(itemId).update({
+      amount: item.amount,
+      completed: false,
+    });
+  };
+
+  updateDetails = (project) => {
+    this.db
+      .collection('requirements')
+      .doc(project.id)
+      .update({
+        materialsDetails: {
+          required: project.materialsRequired,
+          description: project.materialsDescription,
+        },
+        servicesDetails: {
+          required: project.servicesRequired,
+          description: project.servicesDescription,
+        },
+        fundingDetails: {
+          required: project.fundingRequired,
+          fundingAmount: project.fundingAmount,
+          fundingDescription: project.fundingDescription,
+        },
+      });
+  };
+
+  deleteItem = async (itemId, projectId) => {
+    this.db.collection('requirements').doc(projectId).collection('list').doc(itemId).delete();
   };
 
   createInfo = async (info, projectId) => {
@@ -47,6 +80,34 @@ class RequirementService {
           fundingDescription: info.fundingDescription,
         },
       });
+  };
+
+  createDurver = async (durver, projectId) => {
+    console.log(projectId);
+    console.log(durver);
+    this.db
+      .collection('requirements')
+      .doc(projectId)
+      .collection('durvers')
+      .doc()
+      .withConverter(durverConverter)
+      .set(durver);
+  };
+
+  getList = async (projectId) => {
+    const snapshot = await this.db
+      .collection('requirements')
+      .doc(projectId)
+      .collection('list')
+      .withConverter(listConverter)
+      .get();
+    const result = snapshot.docs.map((list) => list.data());
+    return result;
+  };
+
+  getListInfo = async (projectId) => {
+    const snapshot = await this.db.collection('requirements').doc(projectId).get();
+    return snapshot.data();
   };
 }
 

@@ -1,4 +1,3 @@
-import { makeObservable, observable, action } from 'mobx';
 import { v4 } from 'uuid';
 import Project from './Project';
 import User from './User';
@@ -6,13 +5,13 @@ import User from './User';
 class Comment {
   constructor({ id = v4(), content, user, project, timestamp }) {
     if (!project) {
-      throw new Error('A message must have a group');
+      throw new Error('A comment must have a project');
     }
     if (!user) {
-      throw new Error('A message must have a user');
+      throw new Error('A comment must have a user');
     }
     if (!content || content === '') {
-      throw new Error('A message must have some content');
+      throw new Error('A comment must have some content');
     }
     this.id = id;
     this.project = project;

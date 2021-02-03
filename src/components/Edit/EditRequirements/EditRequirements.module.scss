@@ -1,0 +1,18 @@
+@import '../../../styles/styles.scss';
+
+.field__wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+
+  &.field__wrapperRow {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .label__wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+}

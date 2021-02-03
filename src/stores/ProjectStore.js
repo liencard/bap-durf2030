@@ -21,6 +21,7 @@ class ProjectStore {
       loadProject: action,
       projects: observable,
       updateProject: action,
+      loadProjectLikesById: action,
     });
   }
 
@@ -30,7 +31,7 @@ class ProjectStore {
 
   loadProject = async (id) => {
     const jsonProject = await this.projectService.getById(id);
-    this.updateProjectFromServer(jsonProject);
+    const project = this.updateProjectFromServer(jsonProject);
     return project;
   };
 
@@ -40,15 +41,34 @@ class ProjectStore {
 
   createRequirementsForProject = async ({ requirements, info, projectId }) => {
     if (info.materialsRequired) {
-      this.requirementService.createMaterials(
-        requirements.materials,
-        projectId
-      );
+      this.requirementService.createItems(requirements.materials, projectId, 'material');
     }
     if (info.servicesRequired) {
-      this.requirementService.createServices(requirements.services, projectId);
+      this.requirementService.createItems(requirements.services, projectId, 'service');
     }
     this.requirementService.createInfo(info, projectId);
+  };
+
+  createRequirementItem = (item, projectId, type) => {
+    this.requirementService.createItem(item, projectId, type);
+  };
+
+  deleteRequirementItem = (itemId, projectId) => {
+    this.requirementService.deleteItem(itemId, projectId);
+  };
+
+  updateRequirementItem = (item, itemId, projectId) => {
+    this.requirementService.updateItem(item, itemId, projectId);
+  };
+
+  updateRequirementDetails = (project) => {
+    this.requirementService.updateDetails(project);
+  };
+
+  createDurver = async (durver, projectId) => {
+    console.log(durver);
+    durver.timestamp = getCurrenTimeStamp();
+    return await this.requirementService.createDurver(durver, projectId);
   };
 
   createImageForProject = async (image) => {
@@ -68,20 +88,38 @@ class ProjectStore {
       project = new Project({
         id: json.id,
         title: json.title,
-        userId: json.userId,
         intro: json.intro,
+        about: json.about,
+        contact: json.contact,
+        description: json.description,
+        isKnownPlace: json.isKnownPlace,
+        themes: json.themes,
+        categories: json.categories,
+        city: json.city,
+        street: json.street,
+        number: json.number,
+        userId: json.userId,
         state: json.state,
         store: this.rootStore.projectStore,
       });
     }
+    return project;
   };
 
-  loadProjectLikesById = (id) => {
-    return this.projectService.getLikesById(id);
+  loadProjectLikesById = async (id) => {
+    return await this.projectService.getLikesById(id);
   };
 
   loadProjectOwnersById = async (id) => {
     return await this.projectService.getOwners(id);
+  };
+
+  loadRequirementListById = async (id) => {
+    return await this.requirementService.getList(id);
+  };
+
+  loadRequirementListInfoById = async (id) => {
+    return await this.requirementService.getListInfo(id);
   };
 
   loadProjectCommentsById = async (id) => {
@@ -103,11 +141,19 @@ class ProjectStore {
   };
 
   updateProject = async (project) => {
-    return await this.projectService.updateProject(project);
+    await this.projectService.updateProject(project);
   };
 
   uploadImage = (image) => {
     this.projectService.uploadImage(image.file, image.name, 'testid');
+  };
+
+  addLikeToProject = (projectId, userId) => {
+    this.projectService.addLike(projectId, userId);
+  };
+
+  removeLikeFromProject = (projectId, userId) => {
+    this.projectService.removeLike(projectId, userId);
   };
 }
 

@@ -4,13 +4,13 @@ import { FormFieldSwitch, FormFieldInput, FormFieldAddItem } from '../index';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import { MATERIALTYPES, SERVICETYPES } from '../../../consts';
 
 const FormPartFour = () => {
   const [servicesRequired, setServicesRequired] = useState(false);
   const [materialsRequired, setMaterialsRequired] = useState(false);
   const [fundingRequired, setFundingRequired] = useState(false);
 
-  // Rich text: https://dev.to/shaerins/setting-up-a-basic-rich-text-editor-in-react-3afg
   return (
     <>
       <h2 className={styles.title}>Ondersteuning</h2>
@@ -26,6 +26,7 @@ const FormPartFour = () => {
             setServicesRequired(!servicesRequired);
           }}
         >
+          <div className={`${styles.circle} ${styles.service}`} />
           <span>Diensten</span>
           <FormFieldSwitch
             name="servicesRequired"
@@ -40,6 +41,7 @@ const FormPartFour = () => {
             setMaterialsRequired(!materialsRequired);
           }}
         >
+          <div className={`${styles.circle} ${styles.material}`} />
           <span>Materialen</span>
           <FormFieldSwitch
             name="materialsRequired"
@@ -54,6 +56,7 @@ const FormPartFour = () => {
             setFundingRequired(!fundingRequired);
           }}
         >
+          <div className={`${styles.circle} ${styles.money}`} />
           <span>Donaties</span>
           <FormFieldSwitch
             name="fundingRequired"
@@ -111,7 +114,7 @@ const FormPartFour = () => {
         <>
           <h2 className={styles.title}>Materiaal</h2>
           <h3 className={styles.subtitle}>Noteer welk soort materiaal je nodig hebt</h3>
-          <FormFieldAddItem name="materials" options={['Bouwmateriaal', 'x', 'y', 'andere']} />
+          <FormFieldAddItem name="materials" options={MATERIALTYPES} />
           <h3 className={styles.subtitle}>Waarvoor wordt het materiaal gebruikt?</h3>
           <FormFieldInput multiline name="materialsDescription" label="Beschrijving" rows={8} required />
         </>
@@ -122,7 +125,7 @@ const FormPartFour = () => {
         <>
           <h2 className={styles.title}>Diensten</h2>
           <h3 className={styles.subtitle}>Noteer welk soort diensten je nodig hebt</h3>
-          <FormFieldAddItem name="services" options={['Grafische hulp', 'x', 'y', 'andere']} />
+          <FormFieldAddItem name="services" options={SERVICETYPES} />
           <h3 className={styles.subtitle}>Waarvoor heb je deze diensten nodig?</h3>
           <FormFieldInput multiline name="servicesDescription" label="Beschrijving" rows={8} required />
         </>

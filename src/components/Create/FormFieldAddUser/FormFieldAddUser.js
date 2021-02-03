@@ -7,7 +7,7 @@ import styles from './FormFieldAddUser.module.scss';
 
 const FormFieldAddUser = (props) => {
   const { errorMessage, id, isValid, isSubmitted, setValue, value } = useField(props);
-  const { label, required } = props;
+  const { label, required, defaultValue } = props;
   const [isTouched, setIsTouched] = useState(false);
   const showError = !isValid && (isTouched || isSubmitted);
 
@@ -15,13 +15,20 @@ const FormFieldAddUser = (props) => {
   const { userStore, uiStore } = useStores();
   const users = userStore.users;
 
-  const [owners, setOwners] = useState([
-    { name: uiStore.currentUser.name, id: uiStore.currentUser.id, avatar: uiStore.currentUser.avatar },
-  ]);
+  const [owners, setOwners] = useState([]);
 
   useEffect(() => {
     setValue(owners);
-  }, []);
+  }, [owners]);
+
+  useEffect(() => {
+    if (uiStore.currentUser) {
+      setOwners([
+        ...owners,
+        { name: uiStore.currentUser.name, id: uiStore.currentUser.id, avatar: uiStore.currentUser.avatar },
+      ]);
+    }
+  }, [uiStore.currentUser]);
 
   const addOwner = (newValue, input) => {
     // newValue = {inputValue: "Test", name: "Voeg "Test" toe"}
@@ -32,7 +39,6 @@ const FormFieldAddUser = (props) => {
       // newValue = User object
       console.log(newValue);
       setOwners([...owners, { name: newValue.name, id: newValue.id, avatar: newValue.avatar }]);
-      setValue(owners);
     }
   };
 
@@ -42,7 +48,6 @@ const FormFieldAddUser = (props) => {
       return currentOwner !== owner;
     });
     setOwners(newOwners);
-    setValue(owners);
   };
 
   return (
