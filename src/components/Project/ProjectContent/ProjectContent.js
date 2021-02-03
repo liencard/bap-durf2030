@@ -49,7 +49,7 @@ const ProjectContent = ({ project, info, requirements }) => {
           onChange={handleChange}
           aria-label="navigeer door project"
         >
-          <Tab label="Campagne" {...a11yProps(0)} />
+          <Tab label="Overview" {...a11yProps(0)} />
           <Tab label="Updates" {...a11yProps(1)} />
           <Tab label="Nodige Hulp" {...a11yProps(2)} />
           <Tab label="Durvers" {...a11yProps(3)} />

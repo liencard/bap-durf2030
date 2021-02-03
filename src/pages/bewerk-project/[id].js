@@ -23,7 +23,9 @@ const EditProject = observer(({ query }) => {
   const STATE_FULLY_LOADED = 'fullyLoaded';
 
   const [project, setProject] = useState(projectStore.getProjectById(id));
-  const [state, setState] = useState(project ? STATE_LOADING_MORE_DETAILS : STATE_LOADING);
+  const [state, setState] = useState(
+    project ? STATE_LOADING_MORE_DETAILS : STATE_LOADING
+  );
 
   useEffect(() => {
     const loadProject = async (id) => {
@@ -43,6 +45,8 @@ const EditProject = observer(({ query }) => {
     };
     loadProject(id);
   }, [id, projectStore, setProject]);
+
+  console.log(project);
 
   const a11yProps = (index) => {
     return {
@@ -64,12 +68,25 @@ const EditProject = observer(({ query }) => {
             <section className={styles.edit}>
               <h1 className={styles.title}>Bewerk project</h1>
               <p className={styles.title__project}>{project.title}</p>
-              <AppBar elevation={0} color="transparent" className={styles.appbar} position="static">
-                <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+              <AppBar
+                elevation={0}
+                color="transparent"
+                className={styles.appbar}
+                position="static"
+              >
+                <Tabs
+                  value={value}
+                  onChange={handleChange}
+                  aria-label="simple tabs example"
+                >
                   <Tab label="Basis Informatie" {...a11yProps(0)} />
                   <Tab label="Ondersteuningen" {...a11yProps(1)} />
                   <Tab label="Durvers" {...a11yProps(2)} />
-                  <Button className={styles.button} href={ROUTES.home} text={'Update posten'} />
+                  <Button
+                    className={styles.button}
+                    href={ROUTES.home}
+                    text={'Update posten'}
+                  />
                 </Tabs>
               </AppBar>
               <TabPanel className={styles.panel} value={value} index={0}>

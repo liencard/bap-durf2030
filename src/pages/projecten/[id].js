@@ -30,6 +30,8 @@ const Project = observer(({ projectJSON, info }) => {
     const data = convertData.fromJSON(projectJSON, projectStore);
     data.getComments();
     data.getLikes();
+    //data.getRequirementsInfo();
+    //data.getRequirementsList();
     setProject(data);
 
     if (project && uiStore.currentUser) {
