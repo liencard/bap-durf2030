@@ -1,18 +1,52 @@
-import { observer } from 'mobx-react-lite';
-import { useState, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './ProjectHelpTwoService.module.scss';
+import { useField } from '@formiz/core';
 
-const ProjectHelpTwoService = observer(({ info, services }) => {
-  const [amount, setAmount] = useState(1);
+const ProjectHelpTwoService = (props) => {
+  const { setValue, value } = useField(props);
+  const { project, services } = props;
+
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    setValue(items);
+  }, [items]);
+
+  useEffect(() => {
+    const itemsArr = services.map((service) => {
+      return {
+        id: service.id,
+        name: service.name,
+        amount: service.amount,
+        count: 0,
+      };
+    });
+    setItems(itemsArr);
+  }, []);
+
+  const changeItemAmount = (item, type) => {
+    const itemsArr = items.filter((currentItem) => {
+      if (currentItem == item) {
+        if (type == 'increase' && currentItem.amount !== currentItem.count) {
+          item.count++;
+        } else if (type == 'decrease' && currentItem.count !== 0) {
+          item.count--;
+        }
+      }
+      return currentItem;
+    });
+    setItems(itemsArr);
+  };
+
   return (
     <>
       <h2 className={styles.title}>Dienst aanbieden</h2>
-      <p>{info.servicesDetails.description}</p>
+      <p>{project.servicesDescription}</p>
       <div className={styles.services}>
-        {services.map((item) => (
+        {items.map((item) => (
           <div
             key={item.id}
-            className={`${styles.item} ${amount === 0 && styles.itemLight}`}
+            className={`${styles.item} ${item.count === 0 && styles.itemLight}`}
           >
             <div className={styles.amount}>
               <div
@@ -23,7 +57,7 @@ const ProjectHelpTwoService = observer(({ info, services }) => {
               >
                 -
               </div>
-              <p className={styles.number}>{amount}</p>
+              <p className={styles.number}>{item.count}</p>
               <div
                 className={`${styles.sign}`}
                 onClick={() => {
@@ -41,6 +75,6 @@ const ProjectHelpTwoService = observer(({ info, services }) => {
       </div>
     </>
   );
-});
+};
 
 export default ProjectHelpTwoService;

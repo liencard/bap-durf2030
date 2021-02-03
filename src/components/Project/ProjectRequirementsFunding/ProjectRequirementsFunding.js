@@ -17,14 +17,7 @@ const ProjectRequirementsFunding = ({ project }) => {
           <div className={styles.content}>
             <h2 className={styles.title}>Ingezameld geld</h2>
             <p>--- Loading bar ----</p>
-            <p>
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-              quae ab illo inventore veritatis et quasi architecto beatae vitae
-              dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-              aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
-              eos qui ratione voluptatem sequi nesciunt.
-            </p>
+            <p>{project.fundingDescription}</p>
             <div className={styles.footer}>
               <ProjectHelpers />
               <Button text={'Doneren'} />

@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useStores } from '../../../hooks/useStores';
 import styles from './ProjectHelp.module.scss';
 import { Modal, Button } from '../../UI';
@@ -14,7 +14,7 @@ import {
   ProjectHelpThree,
 } from '../../Project';
 
-const ProjectHelp = observer(({ project, info, materials, services }) => {
+const ProjectHelp = observer(({ project }) => {
   const durverForm = useForm();
   const { projectStore, uiStore } = useStores();
   const [open, setOpen] = useState(false);
@@ -33,17 +33,17 @@ const ProjectHelp = observer(({ project, info, materials, services }) => {
   const handleSubmit = async (values) => {
     console.log(values);
 
-    const newDurver = new Durver({
-      amount: 2,
-      message: values.message ?? '',
-      user: uiStore.currentUser,
-      name: 'hamer',
-    });
+    // const newDurver = new Durver({
+    //   amount: 2,
+    //   message: values.message ?? '',
+    //   user: uiStore.currentUser,
+    //   name: 'hamer',
+    // });
 
-    console.log(newDurver);
-    console.log(project.id);
+    // console.log(newDurver);
+    // console.log(project.id);
 
-    await projectStore.createDurver(newDurver, project.id);
+    // await projectStore.createDurver(newDurver, project.id);
 
     //setOpen(false);
   };
@@ -71,17 +71,25 @@ const ProjectHelp = observer(({ project, info, materials, services }) => {
                 </FormizStep>
                 {materialsRequired && (
                   <FormizStep name="step2">
-                    <ProjectHelpTwoMaterial info={info} materials={materials} />
+                    <ProjectHelpTwoMaterial
+                      name="materials"
+                      project={project}
+                      materials={project.materials}
+                    />
                   </FormizStep>
                 )}
                 {servicesRequired && (
                   <FormizStep name="step3">
-                    <ProjectHelpTwoService info={info} services={services} />
+                    <ProjectHelpTwoService
+                      name="services"
+                      project={project}
+                      services={project.services}
+                    />
                   </FormizStep>
                 )}
                 {fundingRequired && (
                   <FormizStep name="step4">
-                    <ProjectHelpTwoFunding info={info} />
+                    <ProjectHelpTwoFunding project={project} />
                   </FormizStep>
                 )}
                 <FormizStep name="step5">

@@ -1,48 +1,33 @@
+import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
 import styles from './ProjectHeader.module.scss';
-import { Button } from '../../UI';
-import { useStores } from '../../../hooks/useStores';
 import { ProjectLikes, ProjectHelpers, ProjectHelp } from '../../Project';
 
-const ProjectHeader = ({ project, requirements, info }) => {
-  const { projectStore } = useStores();
-  const [likes, setLikes] = useState([]);
-  const [services, setServices] = useState([]);
-  const [materials, setMaterials] = useState([]);
+const ProjectHeader = observer(({ project }) => {
   const [servicesCount, setServicesCount] = useState('');
   const [materialsCount, setMaterialsCount] = useState('');
 
   useEffect(() => {
-    projectStore.loadProjectLikesById('formtest').then((result) => {
-      setLikes(result.length);
-    });
-
-    let materialsArr = [];
-    let servicesArr = [];
     let materialsCount = 0;
     let servicesCount = 0;
 
-    const loadRequirments = async () => {
-      requirements.forEach((item) => {
-        if (item.type === 'material') {
-          materialsArr.push(item);
-          setMaterials(materialsArr);
-          if (item.completed === true) {
-            materialsCount++;
-          }
-        } else if (item.type === 'service') {
-          servicesArr.push(item);
-          setServices(servicesArr);
-          if (item.completed === true) {
-            servicesCount++;
-          }
+    const loadCounter = async () => {
+      project.materials.forEach((item) => {
+        if (item.completed === true) {
+          materialsCount++;
+        }
+      });
+      project.services.forEach((item) => {
+        if (item.completed === true) {
+          servicesCount++;
         }
       });
       setMaterialsCount(materialsCount);
       setServicesCount(servicesCount);
     };
-    loadRequirments();
-  }, [requirements]);
+    loadCounter();
+    console.log(project.materials.length);
+  }, [setMaterialsCount, setServicesCount]);
 
   return (
     <>
@@ -73,14 +58,14 @@ const ProjectHeader = ({ project, requirements, info }) => {
           <div className={styles.item}>
             <div className={`${styles.circle} ${styles.service}`} />
             <p className={styles.info}>
-              {servicesCount}/{services.length} diensten
+              {servicesCount}/{project.services.length} diensten
             </p>
             <p className={styles.item__btn}>Bekijk info</p>
           </div>
           <div className={styles.item}>
             <div className={`${styles.circle} ${styles.material}`} />
             <p className={styles.info}>
-              {materialsCount}/{materials.length} materialen
+              {materialsCount}/{project.materials.length} materialen
             </p>
             <p className={styles.item__btn}>Bekijk info</p>
           </div>
@@ -91,12 +76,7 @@ const ProjectHeader = ({ project, requirements, info }) => {
           </div>
         </div>
         <div className={styles.buttons}>
-          <ProjectHelp
-            project={project}
-            materials={materials}
-            services={services}
-            info={info}
-          />
+          <ProjectHelp project={project} />
           <div className={styles.interact}>
             <ProjectLikes project={project} />
             <ProjectHelpers />
@@ -105,6 +85,6 @@ const ProjectHeader = ({ project, requirements, info }) => {
       </div>
     </>
   );
-};
+});
 
 export default ProjectHeader;

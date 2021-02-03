@@ -5,7 +5,7 @@ import { Container } from '../../Layout';
 import { Button } from '../../UI';
 import { ProjectHelpers } from '..';
 
-const ProjectRequirementsMaterials = ({ materials, info }) => {
+const ProjectRequirementsMaterials = ({ project }) => {
   const { projectStore } = useStores();
 
   const [bouw, setBouw] = useState([]);
@@ -24,7 +24,7 @@ const ProjectRequirementsMaterials = ({ materials, info }) => {
     let diversArr = [];
 
     const loadMaterial = async () => {
-      materials.forEach((material) => {
+      project.materials.forEach((material) => {
         if (material.category === 'Bouwmateriaal') {
           bouwArr.push(material);
           setBouw(bouwArr);
@@ -47,16 +47,7 @@ const ProjectRequirementsMaterials = ({ materials, info }) => {
       });
     };
     loadMaterial();
-  }, [
-    projectStore,
-    materials,
-    setBouw,
-    setArt,
-    setFood,
-    setInfra,
-    setToy,
-    setDivers,
-  ]);
+  }, [projectStore, setBouw, setArt, setFood, setInfra, setToy, setDivers]);
 
   return (
     <>
@@ -66,7 +57,7 @@ const ProjectRequirementsMaterials = ({ materials, info }) => {
           <div className={styles.content}>
             <h2 className={styles.title}>Materiaal</h2>
             <div className={styles.wrapper}>
-              <p>{info.materialsDetails.description}</p>
+              <p>{project.materialsDescription}</p>
 
               <div className={styles.list}>
                 {bouw.length != 0 && (
