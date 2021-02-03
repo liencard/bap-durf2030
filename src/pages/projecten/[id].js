@@ -51,7 +51,11 @@ const Project = observer(({ projectJSON, info }) => {
     <>
       <Header />
       <Container>
-        <ProjectHeader project={project} requirements={requirements} />
+        <ProjectHeader
+          project={project}
+          requirements={requirements}
+          info={info}
+        />
         <ProjectContent
           project={project}
           requirements={requirements}

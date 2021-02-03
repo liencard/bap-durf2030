@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import styles from './ProjectHeader.module.scss';
 import { Button } from '../../UI';
 import { useStores } from '../../../hooks/useStores';
-import { ProjectLikes, ProjectHelpers } from '../../Project';
+import { ProjectLikes, ProjectHelpers, ProjectHelp } from '../../Project';
 
-const ProjectHeader = ({ project, requirements }) => {
+const ProjectHeader = ({ project, requirements, info }) => {
   const { projectStore } = useStores();
   const [likes, setLikes] = useState([]);
   const [services, setServices] = useState([]);
@@ -91,7 +91,12 @@ const ProjectHeader = ({ project, requirements }) => {
           </div>
         </div>
         <div className={styles.buttons}>
-          <Button className={styles.button} text={'Ik durf mee te helpen'} />
+          <ProjectHelp
+            project={project}
+            materials={materials}
+            services={services}
+            info={info}
+          />
           <div className={styles.interact}>
             <ProjectLikes project={project} />
             <ProjectHelpers />
