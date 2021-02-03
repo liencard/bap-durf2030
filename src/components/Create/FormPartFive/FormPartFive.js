@@ -15,7 +15,7 @@ const FormPartFive = () => {
         Zoek naar bestaande DURF 2030 accounts, dit kunnen leden of teams zijn. Of voeg manueel iemand toe zonder
         account.
       </p>
-      <FormFieldAddUser name="cocreators" />
+      <FormFieldAddUser name="owners" />
     </>
   );
 };

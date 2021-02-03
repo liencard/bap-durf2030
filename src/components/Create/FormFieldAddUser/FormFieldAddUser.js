@@ -12,43 +12,55 @@ const FormFieldAddUser = (props) => {
   const showError = !isValid && (isTouched || isSubmitted);
 
   const filter = createFilterOptions();
-  const { userStore } = useStores();
+  const { userStore, uiStore } = useStores();
   const users = userStore.users;
 
-  const [creators, setCreators] = useState([]);
+  const [owners, setOwners] = useState([]);
 
-  const addCreator = (newValue, input) => {
+  useEffect(() => {
+    setValue(owners);
+  }, [owners]);
+
+  useEffect(() => {
+    if (uiStore.currentUser) {
+      setOwners([
+        ...owners,
+        { name: uiStore.currentUser.name, id: uiStore.currentUser.id, avatar: uiStore.currentUser.avatar },
+      ]);
+    }
+  }, [uiStore.currentUser]);
+
+  const addOwner = (newValue, input) => {
     // newValue = {inputValue: "Test", name: "Voeg "Test" toe"}
     if (input === 'custom') {
       // On hold
-      // setCreators([...creators, { name: newValue.inputValue }]);
+      // setOwners([...owners, { name: newValue.inputValue }]);
     } else if (input === 'data') {
       // newValue = User object
-      setCreators([...creators, { name: newValue.name, id: newValue.userId }]);
+      console.log(newValue);
+      setOwners([...owners, { name: newValue.name, id: newValue.id, avatar: newValue.avatar }]);
     }
-    setValue(creators);
   };
 
-  const removeCreator = (creator) => {
-    let newCreators = creators.slice();
-    newCreators = newCreators.filter((currentCreator) => {
-      return currentCreator !== creator;
+  const removeOwner = (owner) => {
+    let newOwners = owners.slice();
+    newOwners = newOwners.filter((currentOwner) => {
+      return currentOwner !== owner;
     });
-    setCreators(newCreators);
-    setValue(creators);
+    setOwners(newOwners);
   };
 
   return (
     <>
-      {creators.map((creator, i) => {
+      {owners.map((owner, i) => {
         return (
           <div key={i} className={styles.item}>
             <div className={styles.text}>
-              <p className={styles.name}>{creator.name}</p>
+              <p className={styles.name}>{owner.name}</p>
             </div>
             <p
               onClick={() => {
-                removeCreator(creator);
+                removeOwner(owner);
               }}
               className={styles.delete}
             >
@@ -63,10 +75,11 @@ const FormFieldAddUser = (props) => {
         // value={value}
         onChange={(event, newValue) => {
           if (newValue && newValue.inputValue) {
-            addCreator(newValue, 'custom');
+            addOwner(newValue, 'custom');
           } else {
             if (newValue) {
-              addCreator(newValue, 'data');
+              console.log(newValue);
+              addOwner(newValue, 'data');
             }
           }
         }}
@@ -83,7 +96,7 @@ const FormFieldAddUser = (props) => {
         selectOnFocus
         clearOnBlur
         handleHomeEndKeys
-        id="free-solo-with-text-demo"
+        id="owners"
         options={users}
         getOptionLabel={(option) => {
           if (typeof option === 'string') {

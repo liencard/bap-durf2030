@@ -14,7 +14,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
 const Header = observer(() => {
-  const headerBanner = useRef();
+  const headerBanner = useRef(null);
   const { uiStore } = useStores();
   const router = useRouter();
 
@@ -47,7 +47,7 @@ const Header = observer(() => {
 
     const handleScroll = () => {
       const currentScrollPos = window.pageYOffset;
-      if (currentScrollPos < 300) {
+      if (currentScrollPos < 300 && headerBanner) {
         headerBanner.current.classList.add(styles.header__dark);
       } else {
         headerBanner.current.classList.remove(styles.header__dark);
@@ -57,7 +57,7 @@ const Header = observer(() => {
     if (window.location.pathname === '/') {
       window.addEventListener('scroll', handleScroll);
     }
-  });
+  }, [headerBanner]);
 
   return (
     <>
@@ -137,11 +137,7 @@ const Header = observer(() => {
                 ''
               )}
               <div>
-                <ButtonUI
-                  aria-controls="simple-menu"
-                  aria-haspopup="true"
-                  onClick={handleClick}
-                >
+                <ButtonUI aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                   <img
                     className={styles.menu__pfp}
                     src={uiStore.currentUser.avatar}

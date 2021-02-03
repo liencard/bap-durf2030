@@ -1,14 +1,34 @@
+import { useEffect, useState } from 'react';
 import { Container } from '../../components/Layout';
 import { ProjectCard } from '../../components/Project';
+import Header from '../../components/Header/Header';
 import RootStore from '../../stores';
+import styles from './Projects.module.scss';
+import { convertData } from '../../models/Project';
+import { useStores } from '../../hooks/useStores';
 
-const Projects = ({ projects }) => {
+const Projects = ({ projectsJSON }) => {
+  const { projectStore } = useStores();
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    const projectsArr = [];
+    projectsJSON.forEach((projectJSON) => {
+      const project = convertData.fromJSON(projectJSON, projectStore);
+      project.getLikes();
+      projectsArr.push(project);
+      // sfdsf
+    });
+    setProjects(projectsArr);
+    console.log(projects[0]);
+  }, [setProjects]);
+
   return (
     <>
-      <p>Test SSR projecten</p>
+      <Header />
       <Container>
         {projects.map((project) => (
-          <ProjectCard key={project.id} title={project.title} intro={project.intro} id={project.id} />
+          <ProjectCard key={project.id} project={project} />
         ))}
       </Container>
     </>
@@ -16,22 +36,34 @@ const Projects = ({ projects }) => {
 };
 
 export const getStaticProps = async (context) => {
-  // Temporary instance of rootStore to make connection to db
   const store = new RootStore();
   const { projectStore } = store;
 
-  // Loading all projects
   await projectStore.loadAllProjects();
-  let projects = [];
+  //let projectsJSON = [];
 
-  // Get necessary data (not whole Projects model)
-  // To do: in _app and all projects as provider?
-  await projectStore.projects.forEach((project) => {
-    projects.push({ id: project.id, title: project.title, intro: project.intro });
+  const projectsJSON = projectStore.projects.map((data) => {
+    let project = convertData.toJSON(data);
+    project['servicesRequired'] = true;
+    project['materialsRequired'] = true;
+    project['fundingRequired'] = false;
+
+    // const loadData = async (project) => {
+    //   const info = await projectStore.loadRequirementListInfoById(project.id);
+    //   console.log(info.servicesDetails.required);
+    //   project['servicesRequired'] = info.servicesDetails.required;
+    // };
+    // await loadData(project);
+
+    //projectsJSON.push(project);
+
+    return project;
   });
 
+  console.log(projectsJSON[0]);
+
   return {
-    props: { projects: projects },
+    props: { projectsJSON },
   };
 };
 

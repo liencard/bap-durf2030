@@ -9,7 +9,7 @@ import styles from './Profile.module.scss';
 import { ProjectCard } from '../../components/Project';
 
 const Profile = observer(() => {
-  const { projectStore, uiStore } = useStores();
+  const { uiStore } = useStores();
 
   const STATE_LOADING = 'loading';
   const STATE_DOES_NOT_EXIST = 'doesNotExist';
@@ -23,8 +23,6 @@ const Profile = observer(() => {
     const loadUser = async () => {
       try {
         const setUser = await uiStore.currentUser;
-        console.log('user');
-        console.log(setUser);
         if (!setUser) {
           setState(STATE_DOES_NOT_EXIST);
           return;
@@ -32,6 +30,8 @@ const Profile = observer(() => {
         setState(STATE_FULLY_LOADED);
         setCurrentUser(setUser);
         uiStore.getProjectsForUser();
+        console.log('project array');
+        console.log(uiStore.userProjects);
       } catch (error) {
         console.log('User failed loading');
       }
@@ -58,10 +58,10 @@ const Profile = observer(() => {
                 {uiStore.userProjects.length != 0 ? (
                   <>
                     {uiStore.userProjects.map((project) => (
-                      <>
-                        <ProjectCard key={project.id} title={project.title} intro={project.intro} id={project.id} />
+                      <div key={project.id}>
+                        <ProjectCard key={project.id} project={project} />
                         <Button href={ROUTES.edit.to + project.id} text={'Bewerk project'} />
-                      </>
+                      </div>
                     ))}
                   </>
                 ) : (

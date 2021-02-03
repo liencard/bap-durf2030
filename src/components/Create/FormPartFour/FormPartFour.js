@@ -4,13 +4,13 @@ import { FormFieldSwitch, FormFieldInput, FormFieldAddItem } from '../index';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import { MATERIALTYPES, SERVICETYPES } from '../../../consts';
 
 const FormPartFour = () => {
-  const [servicesRequirement, setServicesRequirement] = useState(false);
-  const [materialsRequirement, setMaterialsRequirement] = useState(false);
-  const [budgetRequirement, setBudgetRequirement] = useState(false);
+  const [servicesRequired, setServicesRequired] = useState(false);
+  const [materialsRequired, setMaterialsRequired] = useState(false);
+  const [fundingRequired, setFundingRequired] = useState(false);
 
-  // Rich text: https://dev.to/shaerins/setting-up-a-basic-rich-text-editor-in-react-3afg
   return (
     <>
       <h2 className={styles.title}>Ondersteuning</h2>
@@ -21,51 +21,54 @@ const FormPartFour = () => {
       </p>
       <div className={styles.requirements}>
         <div
-          className={`${styles.requirement} ${servicesRequirement && styles.requirementChecked}`}
+          className={`${styles.requirement} ${servicesRequired && styles.requirementChecked}`}
           onClick={() => {
-            setServicesRequirement(!servicesRequirement);
+            setServicesRequired(!servicesRequired);
           }}
         >
+          <div className={`${styles.circle} ${styles.service}`} />
           <span>Diensten</span>
           <FormFieldSwitch
-            name="servicesRequirement"
-            label="servicesRequirement"
-            setToggleValue={setServicesRequirement}
-            defaultValue={servicesRequirement}
+            name="servicesRequired"
+            label="servicesRequired"
+            setToggleValue={setServicesRequired}
+            defaultValue={servicesRequired}
           />
         </div>
         <div
-          className={`${styles.requirement} ${materialsRequirement && styles.requirementChecked}`}
+          className={`${styles.requirement} ${materialsRequired && styles.requirementChecked}`}
           onClick={() => {
-            setMaterialsRequirement(!materialsRequirement);
+            setMaterialsRequired(!materialsRequired);
           }}
         >
+          <div className={`${styles.circle} ${styles.material}`} />
           <span>Materialen</span>
           <FormFieldSwitch
-            name="materialsRequirement"
-            label="materialsRequirement"
-            setToggleValue={setMaterialsRequirement}
-            defaultValue={materialsRequirement}
+            name="materialsRequired"
+            label="materialsRequired"
+            setToggleValue={setMaterialsRequired}
+            defaultValue={materialsRequired}
           />
         </div>
         <div
-          className={`${styles.requirement} ${budgetRequirement && styles.requirementChecked}`}
+          className={`${styles.requirement} ${fundingRequired && styles.requirementChecked}`}
           onClick={() => {
-            setBudgetRequirement(!budgetRequirement);
+            setFundingRequired(!fundingRequired);
           }}
         >
+          <div className={`${styles.circle} ${styles.money}`} />
           <span>Donaties</span>
           <FormFieldSwitch
-            name="budgetRequirement"
-            label="budgetRequirement"
-            setToggleValue={setBudgetRequirement}
-            defaultValue={budgetRequirement}
+            name="fundingRequired"
+            label="fundingRequired"
+            setToggleValue={setFundingRequired}
+            defaultValue={fundingRequired}
           />
         </div>
       </div>
 
       {/* Geld */}
-      {budgetRequirement && (
+      {fundingRequired && (
         <>
           <h2 className={styles.title}>Geld</h2>
           <h3 className={styles.subtitle}>Wat is het budget? </h3>
@@ -91,8 +94,8 @@ const FormPartFour = () => {
           <FormControl variant="outlined" fullWidth>
             <FormFieldInput
               type="number"
-              name="budget"
-              label="Budget"
+              name="fundingAmount"
+              label="Funding"
               InputProps={{
                 inputProps: { min: 1, max: 3000 },
                 startAdornment: <InputAdornment position="start">€</InputAdornment>,
@@ -102,27 +105,27 @@ const FormPartFour = () => {
             <FormHelperText id="outlined-weight-helper-text">Max 3000 euro</FormHelperText>
           </FormControl>
           <h3 className={styles.subtitle}>Beschrijf waar het geld voor gebruikt zal worden</h3>
-          <FormFieldInput multiline name="budgetDescription" label="Beschrijving" rows={8} required />
+          <FormFieldInput multiline name="fundingDescription" label="Beschrijving" rows={8} required />
         </>
       )}
 
       {/* Materiaal */}
-      {materialsRequirement && (
+      {materialsRequired && (
         <>
           <h2 className={styles.title}>Materiaal</h2>
           <h3 className={styles.subtitle}>Noteer welk soort materiaal je nodig hebt</h3>
-          <FormFieldAddItem name="materials" options={['Bouwmateriaal', 'x', 'y', 'andere']} />
+          <FormFieldAddItem name="materials" options={MATERIALTYPES} />
           <h3 className={styles.subtitle}>Waarvoor wordt het materiaal gebruikt?</h3>
           <FormFieldInput multiline name="materialsDescription" label="Beschrijving" rows={8} required />
         </>
       )}
 
       {/* Diensten */}
-      {servicesRequirement && (
+      {servicesRequired && (
         <>
           <h2 className={styles.title}>Diensten</h2>
           <h3 className={styles.subtitle}>Noteer welk soort diensten je nodig hebt</h3>
-          <FormFieldAddItem name="services" options={['Bouwmateriaal', 'x', 'y', 'andere']} />
+          <FormFieldAddItem name="services" options={SERVICETYPES} />
           <h3 className={styles.subtitle}>Waarvoor heb je deze diensten nodig?</h3>
           <FormFieldInput multiline name="servicesDescription" label="Beschrijving" rows={8} required />
         </>

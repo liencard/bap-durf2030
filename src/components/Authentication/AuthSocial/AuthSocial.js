@@ -59,16 +59,10 @@ const AuthSocial = () => {
 
   return (
     <div className={styles.form__socials}>
-      <button
-        className={`${styles.form__btn} ${styles.btn__social} ${styles.btn__google}`}
-        onClick={googleSignIn}
-      >
+      <button className={`${styles.form__btn} ${styles.btn__social} ${styles.btn__google}`} onClick={googleSignIn}>
         Verdergaan met Google
       </button>
-      <button
-        className={`${styles.form__btn} ${styles.btn__social} ${styles.btn__facebook}`}
-        onClick={facebookSignIn}
-      >
+      <button className={`${styles.form__btn} ${styles.btn__social} ${styles.btn__facebook}`} onClick={facebookSignIn}>
         Verdergaan met Facebook
       </button>
     </div>
