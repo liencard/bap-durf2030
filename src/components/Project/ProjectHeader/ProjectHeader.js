@@ -6,7 +6,7 @@ import { ProjectLikes, ProjectHelpers, ProjectHelp } from '../../Project';
 const ProjectHeader = observer(({ project }) => {
   const [servicesCount, setServicesCount] = useState(0);
   const [materialsCount, setMaterialsCount] = useState(0);
-
+  console.log(project);
   useEffect(() => {
     let materialsCountNew = 0;
     let servicesCountNew = 0;

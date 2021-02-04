@@ -5,7 +5,6 @@ import { Button } from '../../UI';
 import ReactHtmlParser from 'react-html-parser';
 
 const ProjectDescription = observer(({ project }) => {
-  console.log(project.durvers);
   return (
     <>
       <div className={styles.text__wrapper}>

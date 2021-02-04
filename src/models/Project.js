@@ -209,14 +209,6 @@ class Project {
 // Server side rendering of detail page, convert data
 const convertData = {
   toJSON(project) {
-    // let projectData = {};
-    // Object.keys(project).forEach((key) => {
-    //   if (key !== 'store') {
-    //     projectData[key] = project[key];
-    //   }
-    // });
-
-    // return projectData;
     return {
       id: project.id,
       title: project.title,
@@ -228,6 +220,8 @@ const convertData = {
       city: project.city,
       street: project.street,
       number: project.number,
+      themes: project.themes,
+      categories: project.categories,
     };
   },
 
@@ -240,24 +234,6 @@ const convertData = {
     });
     projectData['store'] = store;
     return new Project(projectData);
-    {
-      /* 
-    return new Project({
-      id: project.id,
-      title: project.title,
-      intro: project.intro,
-      about: project.about,
-      contact: project.contact,
-      description: project.description,
-      isKnownPlace: project.isKnownPlace,
-      city: project.city,
-      street: project.street,
-      number: project.number,
-      owners: project.owners,
-
-      store: store,
-    }); */
-    }
   },
 };
 

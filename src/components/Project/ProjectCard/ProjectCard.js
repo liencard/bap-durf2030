@@ -1,13 +1,23 @@
+import { observer } from 'mobx-react-lite';
 import styles from './ProjectCard.module.scss';
 import Link from 'next/link';
 import { ROUTES } from '../../../consts/index';
-import { useEffect, useState } from 'react';
-import { useStores } from '../../../hooks/useStores';
 import { ProjectLikes, ProjectHelpers } from '../';
-import { observer } from 'mobx-react-lite';
+import LinesEllipsis from 'react-lines-ellipsis';
 
-const ProjectCard = ({ project }) => {
-  const tags = ['Cultuur', 'Theater'];
+const ProjectCard = observer(({ project }) => {
+  let tags = [];
+  // Object.keys(project.themes).forEach((key) => {
+  //   if (project.themes[key] === true) {
+  //     tags.push(key);
+  //   }
+  // });
+
+  Object.keys(project.categories).forEach((key) => {
+    if (project.categories[key] === true) {
+      tags.push(key);
+    }
+  });
 
   return (
     <Link href={ROUTES.detail.to + project.id}>
@@ -36,20 +46,18 @@ const ProjectCard = ({ project }) => {
         </div>
 
         <div className={styles.content}>
+          <p className={styles.date}>6 dagen geleden</p>
           <h3 className={styles.title}>{project.title}</h3>
-          <div className={styles.author__wrapper}>
-            <div className={styles.author}>
-              <img
-                className={styles.author__image}
-                src="pfp-temp.jpg"
-                alt="profielfoto van organisator"
-              />
-              <p className={styles.author__name}>John Doe</p>
-            </div>
-            <p className={styles.date}>6 dagen geleden</p>
-          </div>
 
-          <p className={styles.intro}>{project.intro}</p>
+          <p className={styles.intro}>
+            <LinesEllipsis
+              text={project.intro}
+              maxLine="3"
+              ellipsis="..."
+              trimRight
+              basedOn="letters"
+            />
+          </p>
           <ul className={styles.tags}>
             {tags.map((tag) => (
               <li key={tag} className={styles.tag}>
@@ -58,7 +66,7 @@ const ProjectCard = ({ project }) => {
             ))}
           </ul>
           <div className={styles.stats}>
-            {/* <ProjectLikes project={project} small /> */}
+            <ProjectLikes project={project} small />
             {project.durvers.length != 0 && (
               <ProjectHelpers small project={project} />
             )}
@@ -67,6 +75,6 @@ const ProjectCard = ({ project }) => {
       </a>
     </Link>
   );
-};
+});
 
 export default ProjectCard;
