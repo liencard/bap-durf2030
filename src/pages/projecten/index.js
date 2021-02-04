@@ -16,11 +16,12 @@ const Projects = ({ projectsJSON }) => {
     projectsJSON.forEach((projectJSON) => {
       const project = convertData.fromJSON(projectJSON, projectStore);
       project.getLikes();
+      project.getRequirementsList();
+      project.getRequirementsInfo();
+      project.getDurvers();
       projectsArr.push(project);
-      // sfdsf
     });
     setProjects(projectsArr);
-    console.log(projects[0]);
   }, [setProjects]);
 
   return (
@@ -40,27 +41,11 @@ export const getStaticProps = async (context) => {
   const { projectStore } = store;
 
   await projectStore.loadAllProjects();
-  //let projectsJSON = [];
 
   const projectsJSON = projectStore.projects.map((data) => {
     let project = convertData.toJSON(data);
-    project['servicesRequired'] = true;
-    project['materialsRequired'] = true;
-    project['fundingRequired'] = false;
-
-    // const loadData = async (project) => {
-    //   const info = await projectStore.loadRequirementListInfoById(project.id);
-    //   console.log(info.servicesDetails.required);
-    //   project['servicesRequired'] = info.servicesDetails.required;
-    // };
-    // await loadData(project);
-
-    //projectsJSON.push(project);
-
     return project;
   });
-
-  console.log(projectsJSON[0]);
 
   return {
     props: { projectsJSON },

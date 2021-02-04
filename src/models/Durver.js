@@ -1,9 +1,17 @@
-import { v4 } from 'uuid';
-import List from './List';
+import { makeObservable, observable } from 'mobx';
 import User from './User';
 
 class Durver {
-  constructor({ timestamp, message, user, offers = [] }) {
+  constructor({
+    timestamp,
+    message,
+    user,
+    offers = [],
+    fundingAmount,
+    fundingOffered,
+    materialsOffered,
+    servicesOffered,
+  }) {
     if (!user) {
       throw new Error('A comment must have a user');
     }
@@ -11,31 +19,60 @@ class Durver {
     this.message = message;
     this.user = user;
     this.offers = offers;
+    this.fundingAmount = fundingAmount;
+    this.fundingOffered = fundingOffered;
+    this.materialsOffered = materialsOffered;
+    this.servicesOffered = servicesOffered;
+
+    makeObservable(this, {
+      offers: observable,
+      user: observable,
+      servicesOffered: observable,
+      materialsOffered: observable,
+      fundingOffered: observable,
+      fundingAmount: observable,
+    });
   }
 }
 
 const durverConverter = {
   toFirestore: function (durver) {
     return {
-      userId: durver.user.id,
+      user: {
+        name: durver.user.name,
+        userId: durver.user.id,
+        email: durver.user.email,
+        avatar: durver.user.avatar,
+      },
+      requirementsOffered: {
+        funding: durver.fundingOffered,
+        materials: durver.materialsOffered,
+        services: durver.servicesOffered,
+      },
       timestamp: durver.timestamp,
       message: durver.message,
       offers: durver.offers,
+      fundingAmount: durver.fundingAmount,
     };
   },
   fromFirestore: function (snapshot, options) {
     const data = snapshot.data(options);
     const user = new User({
-      id: data.userId,
-      name: data.name,
-      avatar: data.avatar,
+      id: data.user.userId,
+      name: data.user.name,
+      avatar: data.user.avatar,
+      email: data.user.email,
     });
     return new Durver({
       id: snapshot.id,
       timestamp: data.timestamp,
       message: data.message,
       user: user,
-      offers: offers,
+      offers: data.offers,
+      fundingAmount: data.fundingAmount,
+      fundingOffered: data.requirementsOffered.funding,
+      materialsOffered: data.requirementsOffered.materials,
+      servicesOffered: data.requirementsOffered.services,
     });
   },
 };
