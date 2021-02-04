@@ -59,7 +59,9 @@ const ProjectCard = ({ project }) => {
           </ul>
           <div className={styles.stats}>
             {/* <ProjectLikes project={project} small /> */}
-            <ProjectHelpers small />
+            {project.durvers.length != 0 && (
+              <ProjectHelpers small project={project} />
+            )}
           </div>
         </div>
       </a>

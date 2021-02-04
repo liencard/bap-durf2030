@@ -7,6 +7,7 @@ class Durver {
     message,
     user,
     offers = [],
+    fundingAmount,
     fundingOffered,
     materialsOffered,
     servicesOffered,
@@ -18,6 +19,7 @@ class Durver {
     this.message = message;
     this.user = user;
     this.offers = offers;
+    this.fundingAmount = fundingAmount;
     this.fundingOffered = fundingOffered;
     this.materialsOffered = materialsOffered;
     this.servicesOffered = servicesOffered;
@@ -28,6 +30,7 @@ class Durver {
       servicesOffered: observable,
       materialsOffered: observable,
       fundingOffered: observable,
+      fundingAmount: observable,
     });
   }
 }
@@ -49,6 +52,7 @@ const durverConverter = {
       timestamp: durver.timestamp,
       message: durver.message,
       offers: durver.offers,
+      fundingAmount: durver.fundingAmount,
     };
   },
   fromFirestore: function (snapshot, options) {
@@ -65,6 +69,7 @@ const durverConverter = {
       message: data.message,
       user: user,
       offers: data.offers,
+      fundingAmount: data.fundingAmount,
       fundingOffered: data.requirementsOffered.funding,
       materialsOffered: data.requirementsOffered.materials,
       servicesOffered: data.requirementsOffered.services,

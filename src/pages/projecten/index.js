@@ -16,6 +16,9 @@ const Projects = ({ projectsJSON }) => {
     projectsJSON.forEach((projectJSON) => {
       const project = convertData.fromJSON(projectJSON, projectStore);
       project.getLikes();
+      project.getRequirementsList();
+      project.getRequirementsInfo();
+      project.getDurvers();
       projectsArr.push(project);
       // sfdsf
     });

@@ -6,15 +6,6 @@ import { Button } from '../../UI';
 const ProjectDurvers = observer(({ project }) => {
   console.log(project.durvers);
 
-  useEffect(() => {
-    const durver = project.durvers.map((durver) => {
-      return durver;
-    });
-
-    //durver.offers.map((offer) => console.log(offer));
-    //setItems(itemsArr);
-  }, [project.durvers]);
-
   return (
     <>
       <section className={styles.header}>
@@ -23,7 +14,6 @@ const ProjectDurvers = observer(({ project }) => {
         </h2>
         <Button text={'Wordt durver'} />
       </section>
-      {/* <div className={styles.durvers}> */}
       {project.durvers.map((durver) => (
         <div className={styles.durver}>
           <div className={styles.user}>
@@ -64,17 +54,24 @@ const ProjectDurvers = observer(({ project }) => {
                 )}
               </span>
               <p className={styles.offer}>
-                {durver.offers.map((offer) => (
-                  <span>{offer.name}, </span>
-                ))}{' '}
-                aangeboden
+                {durver.fundingOffered && (
+                  <span>
+                    {durver.fundingAmount} EUR
+                    {durver.offers.length != 0 && ', '}
+                  </span>
+                )}
+                {durver.offers.map((offer, i) => (
+                  <span>
+                    {offer.name}
+                    {durver.offers.length !== i && ', '}
+                  </span>
+                ))}
               </p>
             </div>
           </div>
           <p>{durver.message}</p>
         </div>
       ))}
-      {/* </div> */}
     </>
   );
 });

@@ -76,7 +76,9 @@ const ProjectHeader = observer(({ project }) => {
           <ProjectHelp project={project} />
           <div className={styles.interact}>
             <ProjectLikes project={project} />
-            <ProjectHelpers project={project} />
+            {project.durvers.length != 0 && (
+              <ProjectHelpers project={project} />
+            )}
           </div>
         </div>
       </div>
