@@ -1,0 +1,21 @@
+@import '../../../styles/styles.scss';
+
+.subtitle {
+  @include title-two;
+}
+
+.date {
+  @include text-detail;
+  margin-bottom: 1rem;
+}
+
+.updates {
+  display: flex;
+  flex-direction: column-reverse;
+
+  .update {
+    padding: 3rem;
+    border: 0.1rem solid $grey-border;
+    margin-bottom: 3rem;
+  }
+}

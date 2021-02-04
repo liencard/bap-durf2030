@@ -1,10 +1,8 @@
 import styles from './EditOwners.module.scss';
-import { EditPart, EditLabel, EditItemIcons } from '..';
+import { EditPart, EditLabel } from '..';
 import { FormFieldAddUser } from '../../Create';
 
 const EditOwners = ({ project }) => {
-  console.log(project.owners);
-
   const showOwners = () => {
     return project.owners.map((owner) => {
       return {
@@ -16,7 +14,6 @@ const EditOwners = ({ project }) => {
   };
 
   const handleSaveOwners = (values) => {
-    console.log(values);
     values.owners.forEach((updatedOwner) => {
       const existingOwner = project.owners.find((existingOwner) => updatedOwner.id === existingOwner.id);
       if (!existingOwner) {

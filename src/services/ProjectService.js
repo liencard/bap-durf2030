@@ -1,10 +1,9 @@
 import 'firebase/firestore';
 import 'firebase/storage';
+// import firebase from 'firebase/app';
 import { projectConverter } from '../models/Project';
 import { userConverter } from '../models/User';
 import { commentConverter } from '../models/Comment';
-import { firestore } from 'firebase/app';
-import { values } from 'mobx';
 
 class ProjectService {
   constructor({ firebase }) {
@@ -81,6 +80,10 @@ class ProjectService {
       .collection('owners')
       .doc()
       .set({ userId: owner.id, avatar: owner.avatar, name: owner.name });
+  };
+
+  updateProjectUpdates = async (updates, projectId) => {
+    return await this.db.collection('projects').doc(projectId).update(updates);
   };
 
   removeOwner = async (ownerId, projectId) => {

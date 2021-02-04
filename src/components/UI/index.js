@@ -4,3 +4,4 @@ export { default as NavLink } from './NavLink/NavLink';
 export { default as TabPanel } from './TabPanel/TabPanel';
 export { default as AppBar } from './AppBar/AppBar';
 export { default as TabSideElement } from './TabSideElement/TabSideElement';
+export { default as ParsedRichText } from './ParsedRichText/ParsedRichText';
