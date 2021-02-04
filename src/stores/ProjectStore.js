@@ -154,12 +154,16 @@ class ProjectStore {
     project.linkComment(comment);
   };
 
-  updateState = async (data) => {
-    return await this.projectService.updateState(data);
+  updateState = (state, projectId) => {
+    this.projectService.updateState(state, projectId);
   };
 
   updateProject = async (project) => {
     await this.projectService.updateProject(project);
+  };
+
+  updateContact = (email, projectId) => {
+    this.projectService.updateProjectContact(email, projectId);
   };
 
   uploadImage = (image) => {

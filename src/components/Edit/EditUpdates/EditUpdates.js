@@ -26,12 +26,14 @@ const EditUpdates = observer(({ project }) => {
           {project.updates.map((update, i) => {
             return (
               <section key={i} className={styles.update}>
-                <p className={styles.date}>{project.getReadableDate(update.timestamp)}</p>
+                <div className={styles.header}>
+                  <p className={styles.date}>{project.getReadableDate(update.timestamp)}</p>
+                  <button className={styles.delete} onClick={() => handleDeleteUpdate(update)}>
+                    <img src="/icons/delete-red.svg" />
+                    <span className="hidden">Verwijder</span>
+                  </button>
+                </div>
                 <ParsedRichText html={update.text} />
-                <button onClick={() => handleDeleteUpdate(update)}>
-                  <img src="/icons/delete-red.svg" />
-                  <span className="hidden">Verwijder</span>
-                </button>
               </section>
             );
           })}

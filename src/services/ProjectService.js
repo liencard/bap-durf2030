@@ -73,8 +73,8 @@ class ProjectService {
       .set(comment);
   };
 
-  createOwner = async (owner, projectId) => {
-    return await this.db
+  createOwner = (owner, projectId) => {
+    this.db
       .collection('projects')
       .doc(projectId)
       .collection('owners')
@@ -82,11 +82,11 @@ class ProjectService {
       .set({ userId: owner.id, avatar: owner.avatar, name: owner.name });
   };
 
-  updateProjectUpdates = async (updates, projectId) => {
-    return await this.db.collection('projects').doc(projectId).update(updates);
+  updateProjectUpdates = (updates, projectId) => {
+    this.db.collection('projects').doc(projectId).update(updates);
   };
 
-  removeOwner = async (ownerId, projectId) => {
+  removeOwner = (ownerId, projectId) => {
     this.db.collection('projects').doc(projectId).collection('owners').doc(ownerId).delete();
   };
 
@@ -99,6 +99,10 @@ class ProjectService {
       .get();
     const result = snapshot.docs.map((user) => user.data());
     return result;
+  };
+
+  updateProjectContact = (email, projectId) => {
+    this.db.collection('projects').doc(projectId).update({ contact: email });
   };
 
   // getOwners = async (projectId) => {
@@ -150,9 +154,8 @@ class ProjectService {
       });
   };
 
-  updateState = async (data) => {
-    const result = await this.db.collection('projects').doc(`${data.id}`).update({ state: data.state });
-    return result;
+  updateState = (state, projectId) => {
+    this.db.collection('projects').doc(projectId).update({ state: state });
   };
 
   uploadImage = (file, name, userId) => {

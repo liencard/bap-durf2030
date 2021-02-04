@@ -25,6 +25,7 @@ class Project {
     street,
     themes,
     title,
+    state = 0,
 
     updates = [],
     id,
@@ -56,6 +57,7 @@ class Project {
     this.street = street;
     this.themes = themes;
     this.title = title;
+    this.state = state;
 
     this.updates = updates;
     this.id = id;
@@ -99,6 +101,10 @@ class Project {
       updates: observable,
       createUpdate: action,
       removeUpdate: action,
+      updateProjectContact: action,
+      contact: observable,
+      state: observable,
+      updateState: action,
     });
   }
 
@@ -216,6 +222,16 @@ class Project {
         this.store.updateRequirementDetails(this);
       }
     });
+  };
+
+  updateState = (state) => {
+    this.store.updateState(state, this.id);
+    this.state = state;
+  };
+
+  updateProjectContact = (email) => {
+    this.store.updateContact(email, this.id);
+    this.contact = email;
   };
 
   setLiked = (bool) => {

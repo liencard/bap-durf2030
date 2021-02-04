@@ -21,7 +21,7 @@ const EditPart = ({ children, title, handleSaveProject, alwaysEnabled }) => {
             <h2 className={styles.subtitle}>{title}</h2>
             {alwaysEnabled ? (
               <div>
-                <Button type="submit" className={styles.save__btn} text={'Post opslaan'} />
+                <Button type="submit" className={styles.save__btn} text="Post opslaan" />
               </div>
             ) : (
               <div>
@@ -34,7 +34,7 @@ const EditPart = ({ children, title, handleSaveProject, alwaysEnabled }) => {
                 >
                   {allowEdit ? 'Annuleer' : 'Bewerken'}
                 </button>
-                {allowEdit && <Button type="submit" className={styles.save__btn} text={'Bewerking opslaan'} />}
+                {allowEdit && <Button type="submit" className={styles.save__btn} text="Bewerking opslaan" />}
               </div>
             )}
           </div>

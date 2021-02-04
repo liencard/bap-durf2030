@@ -4,7 +4,7 @@ import { useStores } from '../../hooks/useStores';
 import { ROUTES } from '../../consts';
 import { Container } from '../../components/Layout';
 import { Button, TabPanel, AppBar, TabSideElement } from '../../components/UI';
-import { EditBasis, EditRequirements, EditOwners, EditUpdates } from '../../components/Edit';
+import { EditBasis, EditRequirements, EditOwners, EditUpdates, EditState } from '../../components/Edit';
 import Header from '../../components/Header/Header';
 import styles from './EditProject.module.scss';
 import Tab from '@material-ui/core/Tab';
@@ -57,6 +57,7 @@ const EditProject = observer(({ query }) => {
                 <Tab label="Ondersteuningen" />
                 <Tab label="Organisatoren" />
                 <Tab label="Updates" />
+                <Tab label="Status" />
                 <TabSideElement>
                   <Button href={ROUTES.home} text={'Update posten'} />
                 </TabSideElement>
@@ -72,6 +73,9 @@ const EditProject = observer(({ query }) => {
               </TabPanel>
               <TabPanel className={styles.panel} value={value} index={3}>
                 <EditUpdates project={project} />
+              </TabPanel>
+              <TabPanel className={styles.panel} value={value} index={4}>
+                <EditState project={project} />
               </TabPanel>
             </section>
           </>
