@@ -1,4 +1,5 @@
 import { makeObservable, observable, action } from 'mobx';
+import { getCurrenTimeStamp } from '../stores';
 
 class Project {
   constructor({
@@ -24,7 +25,11 @@ class Project {
     street,
     themes,
     title,
+    state = 0,
+    impact = '',
+    date = {},
 
+    updates = [],
     id,
     userId,
     store,
@@ -54,12 +59,16 @@ class Project {
     this.street = street;
     this.themes = themes;
     this.title = title;
+    this.state = state;
 
+    this.updates = updates;
     this.id = id;
     this.userId = userId;
     this.likes = [];
     this.liked = false;
     this.comments = [];
+    this.impact = impact;
+    this.date = date;
 
     if (store) {
       this.store = store;
@@ -93,6 +102,15 @@ class Project {
       updateRequirementDetails: action,
       getOwners: action,
       owners: observable,
+      updates: observable,
+      createUpdate: action,
+      removeUpdate: action,
+      updateProjectContact: action,
+      contact: observable,
+      state: observable,
+      updateState: action,
+      impact: observable,
+      date: observable,
     });
   }
 
@@ -144,8 +162,55 @@ class Project {
     this.store.createProjectOwner(owner, this.id);
   };
 
+  createUpdate = (update) => {
+    const timestamp = getCurrenTimeStamp();
+    this.store.createUpdate(update, timestamp, this.id);
+    this.updates.push({
+      text: update,
+      timestamp: timestamp,
+    });
+  };
+
+  removeUpdate = (update) => {
+    this.store.deleteUpdate(update, this.id);
+    const updates = this.updates.filter((currUpdate) => {
+      return currUpdate !== update;
+    });
+    this.updates = updates;
+  };
+
   removeProjectOwner = (ownerId) => {
     this.store.deleteProjectOwner(ownerId, this.id);
+  };
+
+  getReadableDate = (timestamp) => {
+    const months = [
+      'januari',
+      'februari',
+      'maart',
+      'april',
+      'mei',
+      'juni',
+      'juli',
+      'augustus',
+      'september',
+      'oktober',
+      'november',
+      'december',
+    ];
+
+    const date = timestamp.toDate();
+    const today = new Date();
+    const seconds = Math.abs(today - date) / 1000;
+    const days = Math.floor(seconds / 86400);
+
+    if (days < 1) {
+      return `${date.getHours()}:${date.getMinutes() < 10 ? 0 : ''}${date.getMinutes()}`;
+    } else if (days < 7) {
+      return `${days} dag${days > 1 && 'en'} geleden`;
+    } else {
+      return `${date.getDate()} ${months[date.getMonth()]}`;
+    }
   };
 
   removeRequirementItem = (item) => {
@@ -163,6 +228,16 @@ class Project {
         this.store.updateRequirementDetails(this);
       }
     });
+  };
+
+  updateState = (state) => {
+    this.store.updateState(state, this.id);
+    this.state = state;
+  };
+
+  updateProjectContact = (email) => {
+    this.store.updateContact(email, this.id);
+    this.contact = email;
   };
 
   setLiked = (bool) => {
@@ -190,10 +265,26 @@ class Project {
   }
 
   updateProject(newValues) {
+    let updatedValues = {};
+
     Object.keys(newValues).forEach((key) => {
       this[key] = newValues[key];
+
+      if (key !== 'isKnownPlace' && key !== 'number' && key !== 'city' && key !== 'street') {
+        updatedValues[key] = newValues[key];
+      }
     });
-    this.store.updateProject(this);
+
+    if (newValues.isKnownPlace) {
+      updatedValues.location = {
+        isKnownPlace: this.isKnownPlace,
+        city: this.city,
+        number: this.number,
+        street: this.street,
+      };
+    }
+
+    this.store.updateProject(newValues, this.id); // this
   }
 }
 
@@ -292,6 +383,9 @@ const projectConverter = {
       state: data.state,
       themes: data.themes,
       categories: data.categories,
+      updates: data.updates,
+      impact: data.impact,
+      date: data.date,
     };
   },
 };

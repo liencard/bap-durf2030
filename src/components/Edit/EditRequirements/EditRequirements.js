@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from './EditRequirements.module.scss';
-import { EditPart, EditLabel, EditItemIcons } from '..';
+import { EditPart, EditLabel, EditItemIcons, EditField } from '..';
 import { FormFieldInput, FormFieldSelect, FormFieldAddItem } from '../../Create';
 import { SERVICETYPES, MATERIALTYPES } from '../../../consts';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -46,7 +46,7 @@ const EditRequirements = ({ project }) => {
   return (
     <>
       <EditPart title="Diensten" handleSaveProject={handleSaveServices}>
-        <div className={styles.field__wrapper}>
+        <EditField>
           <EditLabel text="Leg het doel uit" htmlFor="servicesDescription" />
           <FormFieldInput
             defaultValue={project.servicesDescription}
@@ -55,8 +55,8 @@ const EditRequirements = ({ project }) => {
             name="servicesDescription"
             required
           />
-        </div>
-        <div className={styles.field__wrapper}>
+        </EditField>
+        <EditField>
           <div className={styles.label__wrapper}>
             <EditLabel text="Diensten" htmlFor="services" />
             <EditItemIcons text="dienst" />
@@ -68,11 +68,11 @@ const EditRequirements = ({ project }) => {
             defaultValue={project.services}
             label="Dienst toevoegen"
           />
-        </div>
+        </EditField>
       </EditPart>
 
       <EditPart title="Materialen" handleSaveProject={handleSaveMaterials}>
-        <div className={styles.field__wrapper}>
+        <EditField>
           <EditLabel text="Leg het doel uit" htmlFor="materialsDescription" />
           <FormFieldInput
             defaultValue={project.materialsDescription}
@@ -81,8 +81,8 @@ const EditRequirements = ({ project }) => {
             name="materialsDescription"
             required
           />
-        </div>
-        <div className={styles.field__wrapper}>
+        </EditField>
+        <EditField>
           <div className={styles.label__wrapper}>
             <EditLabel text="Materialen" htmlFor="materials" />
             <EditItemIcons text="materiaal" />
@@ -94,11 +94,11 @@ const EditRequirements = ({ project }) => {
             defaultValue={project.materials}
             label="Materiaal toevoegen"
           />
-        </div>
+        </EditField>
       </EditPart>
 
       <EditPart title="Donatie" handleSaveProject={handleSaveFunding}>
-        <div className={styles.field__wrapper}>
+        <EditField>
           <EditLabel text="Leg het doel uit" htmlFor="fundingDescription" />
           <FormFieldInput
             defaultValue={project.fundingDescription}
@@ -107,8 +107,8 @@ const EditRequirements = ({ project }) => {
             name="fundingDescription"
             required
           />
-        </div>
-        <div className={styles.field__wrapper}>
+        </EditField>
+        <EditField>
           <EditLabel text="Budget" htmlFor="fundingDescription" />
           <FormFieldInput
             defaultValue={project.fundingAmount}
@@ -120,7 +120,7 @@ const EditRequirements = ({ project }) => {
             }}
             required
           />
-        </div>
+        </EditField>
       </EditPart>
     </>
   );

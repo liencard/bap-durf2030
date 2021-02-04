@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styles from './EditBasis.module.scss';
-import { EditPart, EditLabel } from '../';
+import { EditPart, EditLabel, EditField } from '../';
 import {
   FormFieldRichTextEditor,
   FormFieldInput,
@@ -39,18 +39,18 @@ const EditBasis = ({ project }) => {
       </section>
 
       <EditPart title="Algemene Info" handleSaveProject={handleSaveProject}>
-        <div className={styles.field__wrapper}>
+        <EditField>
           <EditLabel text="Title" htmlFor="title" />
           <FormFieldInput defaultValue={project.title} name="title" required />
-        </div>
-        <div className={styles.field__wrapper}>
+        </EditField>
+        <EditField>
           <EditLabel text="Korte samenvatting" htmlFor="intro" />
           <FormFieldInput defaultValue={project.intro} name="intro" multiline required />
-        </div>
-        <div className={styles.field__wrapper}>
+        </EditField>
+        <EditField>
           <EditLabel text="Beschrijving" htmlFor="description" />
           <FormFieldRichTextEditor defaultValue={project.description} name="description" />
-        </div>
+        </EditField>
       </EditPart>
 
       <EditPart title="Foto's" handleSaveProject={handleSaveProject}>
@@ -58,7 +58,7 @@ const EditBasis = ({ project }) => {
       </EditPart>
 
       <EditPart title="Tags" handleSaveProject={handleSaveProject}>
-        <div className={styles.field__wrapper}>
+        <EditField>
           <EditLabel text="Thema's" htmlFor="themes[]" />
           <fieldset className={styles.themes}>
             {THEMES.map((theme, i) => {
@@ -72,8 +72,8 @@ const EditBasis = ({ project }) => {
               );
             })}
           </fieldset>
-        </div>
-        <div className={styles.field__wrapper}>
+        </EditField>
+        <EditField>
           <EditLabel text="Categorieën" htmlFor="categories[]" />
           <fieldset className={styles.categories}>
             {CATEGORIES.map((category, i) => {
@@ -87,11 +87,11 @@ const EditBasis = ({ project }) => {
               );
             })}
           </fieldset>
-        </div>
+        </EditField>
       </EditPart>
 
       <EditPart title="Locatie" handleSaveProject={handleSaveProject}>
-        <div className={`${styles.field__wrapper} ${styles.field__wrapperRow}`}>
+        <EditField row>
           <EditLabel text="Weet je in welke stad je project doorgaat?" htmlFor="isKnownPlace" />
           <div className={styles.form__switch}>
             <span className={styles.place__label}>Nee</span>
@@ -103,23 +103,23 @@ const EditBasis = ({ project }) => {
             />
             <span className={styles.place__label}>Ja</span>
           </div>
-        </div>
+        </EditField>
 
         {isKnownPlace && (
           <>
             <div className={styles.location}>
-              <div className={`${styles.field__wrapper} ${styles.city}`}>
+              <EditField>
                 <EditLabel text="Stad" htmlFor="city" />
                 <FormFieldSelect name="city" options={['Kortrijk', 'Izegem']} defaultValue="Kortrijk" />
-              </div>
-              <div className={`${styles.field__wrapper} ${styles.street}`}>
+              </EditField>
+              <EditField>
                 <EditLabel text="Straat" htmlFor="street" />
                 <FormFieldInput defaultValue={project.street} name="street" />
-              </div>
-              <div className={`${styles.field__wrapper} ${styles.number}`}>
+              </EditField>
+              <EditField>
                 <EditLabel text="Nr" htmlFor="number" />
                 <FormFieldInput defaultValue={project.number} name="number" />
-              </div>
+              </EditField>
             </div>
           </>
         )}

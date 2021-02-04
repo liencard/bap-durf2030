@@ -1,0 +1,39 @@
+@import '../../../styles/styles.scss';
+
+.text {
+  h1 {
+    @include title-one;
+    margin: 2rem 0 1rem 0;
+  }
+
+  h2 {
+    @include title-two;
+    margin: 2rem 0 0 0;
+  }
+
+  img {
+    width: 100%;
+    margin: 1rem 0;
+  }
+
+  h1 + p,
+  h2 + p,
+  p + p,
+  h1 + h1,
+  h1 + h2,
+  h2 + h2,
+  h2 + h1 {
+    margin-top: 1rem;
+  }
+
+  p + h1,
+  p + h2 {
+    margin-top: 2rem;
+  }
+
+  p > img {
+    margin: 1rem 0;
+    max-height: 40rem;
+    width: auto;
+  }
+}

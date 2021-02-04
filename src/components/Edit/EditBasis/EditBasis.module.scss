@@ -7,17 +7,6 @@ $border-radius: 0.5rem;
   margin-bottom: 7rem;
 }
 
-.field__wrapper {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-
-  &.field__wrapperRow {
-    flex-direction: row;
-    align-items: center;
-  }
-}
-
 .form__switch {
   margin-left: 3rem;
 
@@ -42,22 +31,10 @@ $border-radius: 0.5rem;
 
 .location {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: 3fr 2fr 1fr;
   grid-column-gap: $grid-gap;
 
   & > div {
     margin-top: 2rem;
-  }
-
-  .city {
-    grid-column: span 6;
-  }
-
-  .street {
-    grid-column: span 4;
-  }
-
-  .number {
-    grid-column: span 2;
   }
 }

@@ -1,7 +1,7 @@
 import { makeObservable, observable, action } from 'mobx';
 import ProjectService from '../services/ProjectService';
 import RequirementService from '../services/RequirementService';
-import { getCurrenTimeStamp } from './';
+import { getCurrenTimeStamp, getArrayUnion, removeFromArray } from './';
 import Project from '../models/Project';
 import { v4 } from 'uuid';
 
@@ -57,6 +57,16 @@ class ProjectStore {
     this.projectService.createOwner(owner, projectId);
   };
 
+  createUpdate = (newUpdate, timestamp, projectId) => {
+    const updates = { updates: getArrayUnion({ text: newUpdate, timestamp: timestamp }) };
+    this.projectService.updateProjectUpdates(updates, projectId);
+  };
+
+  deleteUpdate = (deletedUpdate, projectId) => {
+    const updates = { updates: removeFromArray(deletedUpdate) };
+    this.projectService.updateProjectUpdates(updates, projectId);
+  };
+
   deleteProjectOwner = (ownerId, projectId) => {
     this.projectService.removeOwner(ownerId, projectId);
   };
@@ -107,6 +117,9 @@ class ProjectStore {
         number: json.number,
         userId: json.userId,
         state: json.state,
+        updates: json.updates,
+        impact: json.impact,
+        date: json.date,
         store: this.rootStore.projectStore,
       });
     }
@@ -143,12 +156,16 @@ class ProjectStore {
     project.linkComment(comment);
   };
 
-  updateState = async (data) => {
-    return await this.projectService.updateState(data);
+  updateState = (state, projectId) => {
+    this.projectService.updateState(state, projectId);
   };
 
-  updateProject = async (project) => {
-    await this.projectService.updateProject(project);
+  updateProject = async (newValues, projectId) => {
+    await this.projectService.updateProject(newValues, projectId);
+  };
+
+  updateContact = (email, projectId) => {
+    this.projectService.updateProjectContact(email, projectId);
   };
 
   uploadImage = (image) => {

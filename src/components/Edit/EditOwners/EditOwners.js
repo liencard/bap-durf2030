@@ -1,10 +1,9 @@
+import { observer } from 'mobx-react-lite';
 import styles from './EditOwners.module.scss';
-import { EditPart, EditLabel, EditItemIcons } from '..';
-import { FormFieldAddUser } from '../../Create';
+import { EditPart, EditLabel, EditField } from '..';
+import { FormFieldAddUser, FormFieldInput } from '../../Create';
 
-const EditOwners = ({ project }) => {
-  console.log(project.owners);
-
+const EditOwners = observer(({ project }) => {
   const showOwners = () => {
     return project.owners.map((owner) => {
       return {
@@ -16,7 +15,6 @@ const EditOwners = ({ project }) => {
   };
 
   const handleSaveOwners = (values) => {
-    console.log(values);
     values.owners.forEach((updatedOwner) => {
       const existingOwner = project.owners.find((existingOwner) => updatedOwner.id === existingOwner.id);
       if (!existingOwner) {
@@ -33,14 +31,28 @@ const EditOwners = ({ project }) => {
     });
   };
 
+  const handleSaveContact = ({ email }) => {
+    if (email !== project.contact) {
+      project.updateProjectContact(email);
+    }
+  };
+
   return (
-    <EditPart title="Organisatoren" handleSaveProject={handleSaveOwners}>
-      <div className={styles.field__wrapper}>
-        <EditLabel text="Leg het doel uit" htmlFor="materialsDescription" />
-        <FormFieldAddUser defaultValue={showOwners()} name="owners" />
-      </div>
-    </EditPart>
+    <>
+      <EditPart title="Organisatoren" handleSaveProject={handleSaveOwners}>
+        <EditField>
+          <EditLabel text="Leg het doel uit" htmlFor="owners" />
+          <FormFieldAddUser defaultValue={showOwners()} name="owners" />
+        </EditField>
+      </EditPart>
+      <EditPart title="Contact" handleSaveProject={handleSaveContact}>
+        <EditField>
+          <EditLabel text="E-mail adres" htmlFor="email" />
+          <FormFieldInput defaultValue={project.contact} name="email" required />
+        </EditField>
+      </EditPart>
+    </>
   );
-};
+});
 
 export default EditOwners;

@@ -4,7 +4,7 @@ import { useStores } from '../../hooks/useStores';
 import { ROUTES } from '../../consts';
 import { Container } from '../../components/Layout';
 import { Button, TabPanel, AppBar, TabSideElement } from '../../components/UI';
-import { EditBasis, EditRequirements, EditOwners } from '../../components/Edit';
+import { EditBasis, EditRequirements, EditOwners, EditUpdates, EditState } from '../../components/Edit';
 import Header from '../../components/Header/Header';
 import styles from './EditProject.module.scss';
 import Tab from '@material-ui/core/Tab';
@@ -20,9 +20,7 @@ const EditProject = observer(({ query }) => {
   const STATE_FULLY_LOADED = 'fullyLoaded';
 
   const [project, setProject] = useState(projectStore.getProjectById(id));
-  const [state, setState] = useState(
-    project ? STATE_LOADING_MORE_DETAILS : STATE_LOADING
-  );
+  const [state, setState] = useState(project ? STATE_LOADING_MORE_DETAILS : STATE_LOADING);
 
   useEffect(() => {
     const loadProject = async (id) => {
@@ -54,16 +52,15 @@ const EditProject = observer(({ query }) => {
               <h1 className={styles.title}>Bewerk project</h1>
               <p className={styles.title__project}>{project.title}</p>
 
-
               <AppBar value={value} setValue={setValue}>
                 <Tab label="Basis Informatie" />
                 <Tab label="Ondersteuningen" />
                 <Tab label="Organisatoren" />
                 <Tab label="Updates" />
+                <Tab label="Status" />
                 <TabSideElement>
                   <Button href={ROUTES.home} text={'Update posten'} />
                 </TabSideElement>
-
               </AppBar>
               <TabPanel className={styles.panel} value={value} index={0}>
                 <EditBasis project={project} />
@@ -75,7 +72,10 @@ const EditProject = observer(({ query }) => {
                 <EditOwners project={project} />
               </TabPanel>
               <TabPanel className={styles.panel} value={value} index={3}>
-                <p>Updates</p>
+                <EditUpdates project={project} />
+              </TabPanel>
+              <TabPanel className={styles.panel} value={value} index={4}>
+                <EditState project={project} />
               </TabPanel>
             </section>
           </>
