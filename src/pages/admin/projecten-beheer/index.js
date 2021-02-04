@@ -42,8 +42,7 @@ const ProjectManagement = observer(() => {
 
   const handleChangeState = async (data) => {
     const project = await projectStore.getProjectById(data.id);
-    project.setState(1);
-    const result = await projectStore.updateState(project);
+    project.updateState(1);
   };
 
   const columns = [

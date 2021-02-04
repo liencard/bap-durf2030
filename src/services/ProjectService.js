@@ -1,10 +1,9 @@
 import 'firebase/firestore';
 import 'firebase/storage';
+// import firebase from 'firebase/app';
 import { projectConverter } from '../models/Project';
 import { userConverter } from '../models/User';
 import { commentConverter } from '../models/Comment';
-import { firestore } from 'firebase/app';
-import { values } from 'mobx';
 
 class ProjectService {
   constructor({ firebase }) {
@@ -74,8 +73,8 @@ class ProjectService {
       .set(comment);
   };
 
-  createOwner = async (owner, projectId) => {
-    return await this.db
+  createOwner = (owner, projectId) => {
+    this.db
       .collection('projects')
       .doc(projectId)
       .collection('owners')
@@ -83,7 +82,11 @@ class ProjectService {
       .set({ userId: owner.id, avatar: owner.avatar, name: owner.name });
   };
 
-  removeOwner = async (ownerId, projectId) => {
+  updateProjectUpdates = (updates, projectId) => {
+    this.db.collection('projects').doc(projectId).update(updates);
+  };
+
+  removeOwner = (ownerId, projectId) => {
     this.db.collection('projects').doc(projectId).collection('owners').doc(ownerId).delete();
   };
 
@@ -96,6 +99,10 @@ class ProjectService {
       .get();
     const result = snapshot.docs.map((user) => user.data());
     return result;
+  };
+
+  updateProjectContact = (email, projectId) => {
+    this.db.collection('projects').doc(projectId).update({ contact: email });
   };
 
   // getOwners = async (projectId) => {
@@ -128,28 +135,31 @@ class ProjectService {
       });
   };
 
-  updateProject = async (data) => {
-    await this.db
-      .collection('projects')
-      .doc(data.id)
-      .update({
-        title: data.title,
-        intro: data.intro,
-        description: data.description,
-        location: {
-          isKnownPlace: data.isKnownPlace,
-          city: data.city,
-          street: data.street,
-          number: data.number,
-        },
-        themes: data.themes,
-        categories: data.categories,
-      });
+  // updateProject = async (data) => {
+  //   await this.db
+  //     .collection('projects')
+  //     .doc(data.id)
+  //     .update({
+  //       title: data.title,
+  //       intro: data.intro,
+  //       description: data.description,
+  //       location: {
+  //         isKnownPlace: data.isKnownPlace,
+  //         city: data.city,
+  //         street: data.street,
+  //         number: data.number,
+  //       },
+  //       themes: data.themes,
+  //       categories: data.categories,
+  //     });
+  // };
+
+  updateProject = async (newValues, projectId) => {
+    await this.db.collection('projects').doc(projectId).update(newValues);
   };
 
-  updateState = async (data) => {
-    const result = await this.db.collection('projects').doc(`${data.id}`).update({ state: data.state });
-    return result;
+  updateState = (state, projectId) => {
+    this.db.collection('projects').doc(projectId).update({ state: state });
   };
 
   uploadImage = (file, name, userId) => {
