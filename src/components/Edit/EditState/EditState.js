@@ -23,7 +23,7 @@ const EditState = observer(({ project }) => {
     }
 
     Object.keys(values).forEach((key) => {
-      if (key === 'starttate') {
+      if (key === 'startdate') {
         updatedValues.date.start = values[key];
       } else if (key === 'enddate') {
         updatedValues.date.end = values[key];
