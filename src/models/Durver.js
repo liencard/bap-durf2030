@@ -35,7 +35,7 @@ const durverConverter = {
       timestamp: data.timestamp,
       message: data.message,
       user: user,
-      offers: offers,
+      offers: data.offers,
     });
   },
 };

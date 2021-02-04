@@ -10,6 +10,7 @@ class Project {
     city,
     contact,
     description,
+    durvers,
     image,
     intro,
     isKnownPlace,
@@ -40,6 +41,7 @@ class Project {
     this.city = city;
     this.contact = contact;
     this.description = description;
+    this.durvers = durvers;
     this.image = image;
     this.intro = intro;
     this.isKnownPlace = isKnownPlace;
@@ -93,6 +95,8 @@ class Project {
       updateRequirementDetails: action,
       getOwners: action,
       owners: observable,
+      getDurvers: action,
+      durvers: observable,
     });
   }
 
@@ -108,6 +112,11 @@ class Project {
   getOwners = async () => {
     const ownersList = await this.store.loadProjectOwnersById(this.id);
     this.owners = ownersList;
+  };
+
+  getDurvers = async () => {
+    const durversList = await this.store.loadProjectDurversById(this.id);
+    this.durvers = durversList;
   };
 
   getRequirementsInfo = async () => {
@@ -255,7 +264,6 @@ const convertData = {
 // From and to firebase data
 const projectConverter = {
   toFirestore: function (project) {
-    // left DB naam, right Model naam
     return {
       about: project.about,
       categories: project.categories,

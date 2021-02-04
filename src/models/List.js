@@ -1,19 +1,17 @@
 class List {
-  constructor({ id, amount, category, completed, name, type, project }) {
+  constructor({ id, amount, category, completed, name, type }) {
     this.id = id;
     this.amount = amount;
     this.category = category;
     this.completed = completed;
     this.name = name;
     this.type = type;
-    this.project = project;
   }
 }
 
 const listConverter = {
   toFirestore: function (list) {
     return {
-      //projectId: list.project.id,
       amount: list.amount,
       category: list.category,
       completed: list.completed,
@@ -24,8 +22,6 @@ const listConverter = {
   },
   fromFirestore: function (snapshot, options) {
     const data = snapshot.data(options);
-    //const parentGroup = snapshot.ref.parent.parent;
-    //const project = new Project({ id: parentGroup.id });
     return new List({
       id: snapshot.id,
       amount: data.amount,
@@ -33,7 +29,6 @@ const listConverter = {
       completed: data.completed,
       name: data.name,
       type: data.type,
-      //project: project,
     });
   },
 };

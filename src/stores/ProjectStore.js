@@ -41,10 +41,18 @@ class ProjectStore {
 
   createRequirementsForProject = async ({ requirements, info, projectId }) => {
     if (info.materialsRequired) {
-      this.requirementService.createItems(requirements.materials, projectId, 'material');
+      this.requirementService.createItems(
+        requirements.materials,
+        projectId,
+        'material'
+      );
     }
     if (info.servicesRequired) {
-      this.requirementService.createItems(requirements.services, projectId, 'service');
+      this.requirementService.createItems(
+        requirements.services,
+        projectId,
+        'service'
+      );
     }
     this.requirementService.createInfo(info, projectId);
   };
@@ -127,6 +135,10 @@ class ProjectStore {
 
   loadRequirementListInfoById = async (id) => {
     return await this.requirementService.getListInfo(id);
+  };
+
+  loadProjectDurversById = async (id) => {
+    return await this.requirementService.getDurvers(id);
   };
 
   loadProjectCommentsById = async (id) => {

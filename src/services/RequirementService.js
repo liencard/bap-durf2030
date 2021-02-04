@@ -9,31 +9,46 @@ class RequirementService {
 
   createItems = (items, projectId, type) => {
     items.forEach((item) => {
-      this.db.collection('requirements').doc(projectId).collection('list').doc().set({
+      this.db
+        .collection('requirements')
+        .doc(projectId)
+        .collection('list')
+        .doc()
+        .set({
+          amount: item.amount,
+          category: item.category,
+          name: item.name,
+          completed: false,
+          type: type,
+        });
+    });
+  };
+
+  createItem = (item, projectId, type) => {
+    this.db
+      .collection('requirements')
+      .doc(projectId)
+      .collection('list')
+      .doc()
+      .set({
         amount: item.amount,
         category: item.category,
         name: item.name,
         completed: false,
         type: type,
       });
-    });
-  };
-
-  createItem = (item, projectId, type) => {
-    this.db.collection('requirements').doc(projectId).collection('list').doc().set({
-      amount: item.amount,
-      category: item.category,
-      name: item.name,
-      completed: false,
-      type: type,
-    });
   };
 
   updateItem = (item, itemId, projectId) => {
-    this.db.collection('requirements').doc(projectId).collection('list').doc(itemId).update({
-      amount: item.amount,
-      completed: false,
-    });
+    this.db
+      .collection('requirements')
+      .doc(projectId)
+      .collection('list')
+      .doc(itemId)
+      .update({
+        amount: item.amount,
+        completed: false,
+      });
   };
 
   updateDetails = (project) => {
@@ -58,7 +73,12 @@ class RequirementService {
   };
 
   deleteItem = async (itemId, projectId) => {
-    this.db.collection('requirements').doc(projectId).collection('list').doc(itemId).delete();
+    this.db
+      .collection('requirements')
+      .doc(projectId)
+      .collection('list')
+      .doc(itemId)
+      .delete();
   };
 
   createInfo = async (info, projectId) => {
@@ -82,16 +102,6 @@ class RequirementService {
       });
   };
 
-  createDurver = async (durver, projectId) => {
-    this.db
-      .collection('requirements')
-      .doc(projectId)
-      .collection('durvers')
-      .doc()
-      .withConverter(durverConverter)
-      .set(durver);
-  };
-
   getList = async (projectId) => {
     const snapshot = await this.db
       .collection('requirements')
@@ -104,8 +114,32 @@ class RequirementService {
   };
 
   getListInfo = async (projectId) => {
-    const snapshot = await this.db.collection('requirements').doc(projectId).get();
+    const snapshot = await this.db
+      .collection('requirements')
+      .doc(projectId)
+      .get();
     return snapshot.data();
+  };
+
+  createDurver = async (durver, projectId) => {
+    this.db
+      .collection('requirements')
+      .doc(projectId)
+      .collection('durvers')
+      .doc()
+      .withConverter(durverConverter)
+      .set(durver);
+  };
+
+  getDurvers = async (projectId) => {
+    const snapshot = await this.db
+      .collection('requirements')
+      .doc(projectId)
+      .collection('durvers')
+      .withConverter(durverConverter)
+      .get();
+    const result = snapshot.docs.map((durver) => durver.data());
+    return result;
   };
 }
 
