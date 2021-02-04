@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import styles from './EditUpdates.module.scss';
-import { EditPart, EditLabel } from '..';
+import { EditPart, EditLabel, EditField } from '..';
 import { FormFieldRichTextEditor } from '../../Create';
 import { ParsedRichText } from '../../UI';
 
@@ -15,10 +15,10 @@ const EditUpdates = observer(({ project }) => {
   return (
     <>
       <EditPart title="Update plaatsen" alwaysEnabled handleSaveProject={handleSaveUpdate}>
-        <div className={styles.field__wrapper}>
+        <EditField>
           <EditLabel text="Nieuwe update" htmlFor="description" />
           <FormFieldRichTextEditor name="update" />
-        </div>
+        </EditField>
       </EditPart>
       <article>
         <h2 className={styles.subtitle}>Alle updates</h2>

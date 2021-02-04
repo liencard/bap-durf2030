@@ -26,6 +26,8 @@ class Project {
     themes,
     title,
     state = 0,
+    impact = '',
+    date = {},
 
     updates = [],
     id,
@@ -65,6 +67,8 @@ class Project {
     this.likes = [];
     this.liked = false;
     this.comments = [];
+    this.impact = impact;
+    this.date = date;
 
     if (store) {
       this.store = store;
@@ -105,6 +109,8 @@ class Project {
       contact: observable,
       state: observable,
       updateState: action,
+      impact: observable,
+      date: observable,
     });
   }
 
@@ -259,10 +265,26 @@ class Project {
   }
 
   updateProject(newValues) {
+    let updatedValues = {};
+
     Object.keys(newValues).forEach((key) => {
       this[key] = newValues[key];
+
+      if (key !== 'isKnownPlace' && key !== 'number' && key !== 'city' && key !== 'street') {
+        updatedValues[key] = newValues[key];
+      }
     });
-    this.store.updateProject(this);
+
+    if (newValues.isKnownPlace) {
+      updatedValues.location = {
+        isKnownPlace: this.isKnownPlace,
+        city: this.city,
+        number: this.number,
+        street: this.street,
+      };
+    }
+
+    this.store.updateProject(newValues, this.id); // this
   }
 }
 
@@ -362,6 +384,8 @@ const projectConverter = {
       themes: data.themes,
       categories: data.categories,
       updates: data.updates,
+      impact: data.impact,
+      date: data.date,
     };
   },
 };

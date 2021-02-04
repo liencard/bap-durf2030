@@ -1,15 +1,38 @@
 import { observer } from 'mobx-react-lite';
 import styles from './EditState.module.scss';
-import { EditPart, EditLabel } from '..';
+import { EditPart, EditLabel, EditField } from '..';
 import { Button } from '../../UI';
 import { useEffect, useState } from 'react';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import { FormFieldRichTextEditor, FormFieldInput, FormFieldSwitch, FormFieldSelect } from '../../Create';
 
 const EditState = observer(({ project }) => {
   const [content, setContent] = useState({});
+  const [isKnownPlace, setIsKnownPlace] = useState(true);
 
   const handleChangeState = (state) => {
     project.updateState(state);
+  };
+
+  const handleSaveProject = (values) => {
+    console.log(values);
+    let updatedValues = {};
+
+    if (values.startdate || values.enddate) {
+      updatedValues.date = {};
+    }
+
+    Object.keys(values).forEach((key) => {
+      if (key === 'starttate') {
+        updatedValues.date.start = values[key];
+      } else if (key === 'enddate') {
+        updatedValues.date.end = values[key];
+      } else {
+        updatedValues[key] = values[key];
+      }
+    });
+
+    project.updateProject(updatedValues);
   };
 
   useEffect(() => {
@@ -72,8 +95,6 @@ const EditState = observer(({ project }) => {
           ),
         });
         break;
-      default:
-      // code block
     }
   }, [project.state]);
 
@@ -98,6 +119,66 @@ const EditState = observer(({ project }) => {
           {content.change}
         </div>
       </div>
+
+      {project.state == 3 && (
+        <EditPart alwaysEnabled title="Deel je ervaring" handleSaveProject={handleSaveProject}>
+          <EditField>
+            <EditLabel text="Beschrijf" htmlFor="impact" />
+            <p>
+              Laat gebruikers weten wat voor impact jou project had, de ervaring die je hebt opgedaan en eventuele
+              foto's achter de schermen!
+            </p>
+            <FormFieldRichTextEditor defaultValue={project.impact} name="impact" />
+          </EditField>
+        </EditPart>
+      )}
+
+      {project.state > 1 && (
+        <EditPart title="Datum en locatie" handleSaveProject={handleSaveProject}>
+          <div className={styles.dates}>
+            <EditField>
+              <EditLabel text="Start datum" htmlFor="startdate" />
+              <FormFieldInput name="startdate" type="date" />
+            </EditField>
+            <EditField>
+              <EditLabel text="Eind datum" htmlFor="enddate" />
+              <FormFieldInput name="enddate" type="date" />
+            </EditField>
+          </div>
+          <div className={`${styles.field__wrapper} ${styles.field__wrapperRow}`}>
+            <EditLabel text="Weet je in welke stad je project doorgaat?" htmlFor="isKnownPlace" />
+            <div className={styles.form__switch}>
+              <span className={styles.place__label}>Nee</span>
+              <FormFieldSwitch
+                name="isKnownPlace"
+                label="isKnownPlace"
+                setToggleValue={setIsKnownPlace}
+                defaultValue={project.isKnownPlace}
+              />
+              <span className={styles.place__label}>Ja</span>
+            </div>
+          </div>
+
+          {isKnownPlace && (
+            <>
+              <div className={styles.location}>
+                <EditField>
+                  <EditLabel text="Stad" htmlFor="city" />
+                  <FormFieldSelect name="city" options={['Kortrijk', 'Izegem']} defaultValue="Kortrijk" />
+                </EditField>
+                <EditField>
+                  <EditLabel text="Straat" htmlFor="street" />
+                  <FormFieldInput defaultValue={project.street} name="street" />
+                </EditField>
+                <EditField>
+                  <EditLabel text="Nr" htmlFor="number" />
+                  <FormFieldInput defaultValue={project.number} name="number" />
+                </EditField>
+              </div>
+            </>
+          )}
+        </EditPart>
+      )}
     </>
   );
 });

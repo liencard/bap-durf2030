@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import styles from './EditOwners.module.scss';
-import { EditPart, EditLabel } from '..';
+import { EditPart, EditLabel, EditField } from '..';
 import { FormFieldAddUser, FormFieldInput } from '../../Create';
 
 const EditOwners = observer(({ project }) => {
@@ -40,16 +40,16 @@ const EditOwners = observer(({ project }) => {
   return (
     <>
       <EditPart title="Organisatoren" handleSaveProject={handleSaveOwners}>
-        <div className={styles.field__wrapper}>
+        <EditField>
           <EditLabel text="Leg het doel uit" htmlFor="owners" />
           <FormFieldAddUser defaultValue={showOwners()} name="owners" />
-        </div>
+        </EditField>
       </EditPart>
       <EditPart title="Contact" handleSaveProject={handleSaveContact}>
-        <div className={styles.field__wrapper}>
+        <EditField>
           <EditLabel text="E-mail adres" htmlFor="email" />
           <FormFieldInput defaultValue={project.contact} name="email" required />
-        </div>
+        </EditField>
       </EditPart>
     </>
   );

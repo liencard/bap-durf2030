@@ -118,6 +118,8 @@ class ProjectStore {
         userId: json.userId,
         state: json.state,
         updates: json.updates,
+        impact: json.impact,
+        date: json.date,
         store: this.rootStore.projectStore,
       });
     }
@@ -158,8 +160,8 @@ class ProjectStore {
     this.projectService.updateState(state, projectId);
   };
 
-  updateProject = async (project) => {
-    await this.projectService.updateProject(project);
+  updateProject = async (newValues, projectId) => {
+    await this.projectService.updateProject(newValues, projectId);
   };
 
   updateContact = (email, projectId) => {
