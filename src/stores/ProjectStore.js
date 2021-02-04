@@ -53,6 +53,14 @@ class ProjectStore {
     this.requirementService.createItem(item, projectId, type);
   };
 
+  createProjectOwner = (owner, projectId) => {
+    this.projectService.createOwner(owner, projectId);
+  };
+
+  deleteProjectOwner = (ownerId, projectId) => {
+    this.projectService.removeOwner(ownerId, projectId);
+  };
+
   deleteRequirementItem = (itemId, projectId) => {
     this.requirementService.deleteItem(itemId, projectId);
   };

@@ -91,6 +91,8 @@ class Project {
       servicesRequired: observable,
       servicesDescription: observable,
       updateRequirementDetails: action,
+      getOwners: action,
+      owners: observable,
     });
   }
 
@@ -101,6 +103,11 @@ class Project {
   getLikes = async () => {
     const likes = await this.store.loadProjectLikesById(this.id);
     this.likes = likes;
+  };
+
+  getOwners = async () => {
+    const ownersList = await this.store.loadProjectOwnersById(this.id);
+    this.owners = ownersList;
   };
 
   getRequirementsInfo = async () => {
@@ -131,6 +138,14 @@ class Project {
 
   createRequirementItem = (item, type) => {
     this.store.createRequirementItem(item, this.id, type);
+  };
+
+  createProjectOwner = (owner) => {
+    this.store.createProjectOwner(owner, this.id);
+  };
+
+  removeProjectOwner = (ownerId) => {
+    this.store.deleteProjectOwner(ownerId, this.id);
   };
 
   removeRequirementItem = (item) => {

@@ -2,9 +2,9 @@ import { observer } from 'mobx-react-lite';
 import { useState, useEffect } from 'react';
 import { useStores } from '../../hooks/useStores';
 import { ROUTES } from '../../consts';
-import { Container, Grid } from '../../components/Layout';
+import { Container } from '../../components/Layout';
 import { Button, TabPanel, AppBar, TabSideElement } from '../../components/UI';
-import { EditBasis, EditRequirements } from '../../components/Edit';
+import { EditBasis, EditRequirements, EditOwners } from '../../components/Edit';
 import Header from '../../components/Header/Header';
 import styles from './EditProject.module.scss';
 import Tab from '@material-ui/core/Tab';
@@ -34,6 +34,7 @@ const EditProject = observer(({ query }) => {
         }
         resolvedProject.getRequirementsInfo();
         resolvedProject.getRequirementsList();
+        resolvedProject.getOwners();
         setState(STATE_FULLY_LOADED);
         setProject(resolvedProject);
       } catch (error) {
@@ -57,7 +58,7 @@ const EditProject = observer(({ query }) => {
               <AppBar value={value} setValue={setValue}>
                 <Tab label="Basis Informatie" />
                 <Tab label="Ondersteuningen" />
-                <Tab label="Organisators" />
+                <Tab label="Organisatoren" />
                 <Tab label="Updates" />
                 <TabSideElement>
                   <Button href={ROUTES.home} text={'Update posten'} />
@@ -71,7 +72,7 @@ const EditProject = observer(({ query }) => {
                 <EditRequirements project={project} />
               </TabPanel>
               <TabPanel className={styles.panel} value={value} index={2}>
-                <p>Organisators</p>
+                <EditOwners project={project} />
               </TabPanel>
               <TabPanel className={styles.panel} value={value} index={3}>
                 <p>Updates</p>
