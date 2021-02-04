@@ -74,6 +74,19 @@ class ProjectService {
       .set(comment);
   };
 
+  createOwner = async (owner, projectId) => {
+    return await this.db
+      .collection('projects')
+      .doc(projectId)
+      .collection('owners')
+      .doc()
+      .set({ userId: owner.id, avatar: owner.avatar, name: owner.name });
+  };
+
+  removeOwner = async (ownerId, projectId) => {
+    this.db.collection('projects').doc(projectId).collection('owners').doc(ownerId).delete();
+  };
+
   getOwners = async (projectId) => {
     const snapshot = await this.db
       .collection('projects')

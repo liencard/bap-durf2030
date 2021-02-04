@@ -7,7 +7,7 @@ import styles from './FormFieldAddUser.module.scss';
 
 const FormFieldAddUser = (props) => {
   const { errorMessage, id, isValid, isSubmitted, setValue, value } = useField(props);
-  const { label, required, defaultValue } = props;
+  const { label, required, defaultValue, showCurrentUser } = props;
   const [isTouched, setIsTouched] = useState(false);
   const showError = !isValid && (isTouched || isSubmitted);
 
@@ -22,7 +22,13 @@ const FormFieldAddUser = (props) => {
   }, [owners]);
 
   useEffect(() => {
-    if (uiStore.currentUser) {
+    if (defaultValue) {
+      setOwners(defaultValue);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (uiStore.currentUser && showCurrentUser) {
       setOwners([
         ...owners,
         { name: uiStore.currentUser.name, id: uiStore.currentUser.id, avatar: uiStore.currentUser.avatar },

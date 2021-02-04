@@ -137,6 +137,14 @@ class Project {
     this.store.createRequirementItem(item, this.id, type);
   };
 
+  createProjectOwner = (owner) => {
+    this.store.createProjectOwner(owner, this.id);
+  };
+
+  removeProjectOwner = (ownerId) => {
+    this.store.deleteProjectOwner(ownerId, this.id);
+  };
+
   removeRequirementItem = (item) => {
     this.store.deleteRequirementItem(item.id, this.id);
   };
