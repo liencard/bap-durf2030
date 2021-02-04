@@ -1,6 +1,7 @@
+import { observer } from 'mobx-react-lite';
 import styles from './ProjectHelpers.module.scss';
 
-const ProjectHelpers = ({ small }) => {
+const ProjectHelpers = observer(({ small, project }) => {
   const durvers = [
     {
       id: 1,
@@ -30,10 +31,10 @@ const ProjectHelpers = ({ small }) => {
             </div>
           ))}
         </div>
-        + 8 durvers
+        {durvers.length} durvers
       </div>
     </>
   );
-};
+});
 
 export default ProjectHelpers;

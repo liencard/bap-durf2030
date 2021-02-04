@@ -17,7 +17,14 @@ class Durver {
 const durverConverter = {
   toFirestore: function (durver) {
     return {
-      userId: durver.user.id,
+      //userId: durver.user.id,
+      //name: durver.user.name,
+      user: {
+        name: durver.user.name,
+        userId: durver.user.id,
+        email: durver.user.email,
+        avatar: durver.user.avatar,
+      },
       timestamp: durver.timestamp,
       message: durver.message,
       offers: durver.offers,
@@ -25,10 +32,13 @@ const durverConverter = {
   },
   fromFirestore: function (snapshot, options) {
     const data = snapshot.data(options);
+    console.log('data');
+    console.log(data);
     const user = new User({
       id: data.userId,
       name: data.name,
       avatar: data.avatar,
+      email: data.email,
     });
     return new Durver({
       id: snapshot.id,

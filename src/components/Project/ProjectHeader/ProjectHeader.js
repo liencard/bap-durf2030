@@ -38,7 +38,12 @@ const ProjectHeader = observer(({ project }) => {
           <h1 className={styles.title}>{project.title}</h1>
           {project.isKnownPlace && (
             <div className={styles.location}>
-              <img src="/icons/location-green.svg" alt="logo DURF2030" width="13.75" height="15.9" />
+              <img
+                src="/icons/location-green.svg"
+                alt="logo DURF2030"
+                width="13.75"
+                height="15.9"
+              />
               <p>
                 {project.street} {project.number}, {project.city}
               </p>
@@ -71,7 +76,7 @@ const ProjectHeader = observer(({ project }) => {
           <ProjectHelp project={project} />
           <div className={styles.interact}>
             <ProjectLikes project={project} />
-            <ProjectHelpers />
+            <ProjectHelpers project={project} />
           </div>
         </div>
       </div>
