@@ -1,5 +1,4 @@
 @import '../../../styles/styles.scss';
-
 $spacing-top: 3rem;
 
 .text__wrapper {
@@ -99,4 +98,10 @@ $spacing-top: 3rem;
       }
     }
   }
+}
+
+.image {
+  @include pfp-large;
+  margin-right: 2rem;
+  background-color: $grey;
 }

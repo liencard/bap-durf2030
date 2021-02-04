@@ -67,9 +67,10 @@ const ProjectHelp = observer(({ project }) => {
       message: values.message ?? '',
       user: uiStore.currentUser,
       offers: offers,
+      fundingOffered: values.fundingRequired,
+      materialsOffered: values.materialsRequired,
+      servicesOffered: values.servicesRequired,
     });
-
-    console.log(newDurver);
 
     projectStore.createDurver(newDurver, project.id);
     setOpen(false);

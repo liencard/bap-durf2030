@@ -3,5 +3,5 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-column-gap: $grid-gap;
+  grid-gap: $grid-gap;
 }

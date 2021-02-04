@@ -1,10 +1,11 @@
 import styles from './ProjectDescription.module.scss';
-import { ProjectLikes, ProjectCreatorImage, ProjectShare } from '../../Project';
+import { observer } from 'mobx-react-lite';
+import { ProjectLikes, ProjectShare } from '../../Project';
 import { Button } from '../../UI';
 import ReactHtmlParser from 'react-html-parser';
 
-const ProjectDescription = ({ project }) => {
-  console.log(project);
+const ProjectDescription = observer(({ project }) => {
+  console.log(project.durvers);
   return (
     <>
       <div className={styles.text__wrapper}>
@@ -44,24 +45,24 @@ const ProjectDescription = ({ project }) => {
           <p className={styles.helpers__subtitle}>
             Deze mensen durfden mee op de boot te springen voor dit project.
           </p>
-          <div className={styles.helper}>
-            <ProjectCreatorImage />
-            <div>
-              <p className={styles.helper__name}>John Doe</p>
-              <p>Extra info</p>
+          {project.durvers.map((durver) => (
+            <div key={durver.timestamp.seconds} className={styles.helper}>
+              <img
+                className={styles.image}
+                src={durver.user.avatar}
+                alt="profielfoto van organisator"
+              />
+              <div>
+                <p className={styles.helper__name}>{durver.user.name}</p>
+                <p>Extra info</p>
+              </div>
             </div>
-          </div>
-          <div className={styles.helper}>
-            <ProjectCreatorImage />
-            <div>
-              <p className={styles.helper__name}>John Doe</p>
-              <p>Extra info</p>
-            </div>
-          </div>
+          ))}
+          <a>Bekijk alle durvers</a>
         </div>
       </aside>
     </>
   );
-};
+});
 
 export default ProjectDescription;
