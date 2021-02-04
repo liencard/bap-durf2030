@@ -6,10 +6,11 @@ import { Container } from '../../components/Layout';
 import { Button } from '../../components/UI';
 import Header from '../../components/Header/Header';
 import styles from './Profile.module.scss';
+import { convertData } from '../../models/Project';
 import { ProjectCard } from '../../components/Project';
 
 const Profile = observer(() => {
-  const { uiStore } = useStores();
+  const { uiStore, projectStore } = useStores();
 
   const STATE_LOADING = 'loading';
   const STATE_DOES_NOT_EXIST = 'doesNotExist';
@@ -17,7 +18,10 @@ const Profile = observer(() => {
   const STATE_FULLY_LOADED = 'fullyLoaded';
 
   const [currentUser, setCurrentUser] = useState(uiStore.currentUser);
-  const [state, setState] = useState(currentUser ? STATE_LOADING_MORE_DETAILS : STATE_LOADING);
+  const [state, setState] = useState(
+    currentUser ? STATE_LOADING_MORE_DETAILS : STATE_LOADING
+  );
+  const [projects, setProjects] = useState([]);
 
   useEffect(() => {
     const loadUser = async () => {
@@ -29,15 +33,31 @@ const Profile = observer(() => {
         }
         setState(STATE_FULLY_LOADED);
         setCurrentUser(setUser);
+
+        // PROJECTS VAN USER
         uiStore.getProjectsForUser();
-        console.log('project array');
         console.log(uiStore.userProjects);
+
+        // PROJECTS LINKEN AAN PROJECTMODEL
+        const projectsArr = [];
+        uiStore.userProjects.forEach((projectJSON) => {
+          const project = convertData.fromJSON(projectJSON, projectStore);
+          project.getLikes();
+          project.getDurvers();
+
+          console.log('rrrrr');
+          console.log(project);
+          projectsArr.push(project);
+        });
+        setProjects(projectsArr);
       } catch (error) {
         console.log('User failed loading');
       }
     };
     loadUser();
-  }, [uiStore, setCurrentUser, uiStore.currentUser]);
+  }, [uiStore.currentUser, setProjects]);
+
+  console.log(projects);
 
   return (
     <>
@@ -47,7 +67,12 @@ const Profile = observer(() => {
           <div className={styles.profile}>
             <Container>
               <div className={styles.profile__wrapper}>
-                <img className={styles.avatar} width="80" height="80" src={currentUser.avatar} />
+                <img
+                  className={styles.avatar}
+                  width="80"
+                  height="80"
+                  src={currentUser.avatar}
+                />
                 <div>
                   <p className={styles.name}>{currentUser.name}</p>
                   <p className={styles.email}>{currentUser.email}</p>
@@ -55,12 +80,15 @@ const Profile = observer(() => {
               </div>
               <div className={styles.projects}>
                 <h1 className={styles.title}>Projecten</h1>
-                {uiStore.userProjects.length != 0 ? (
+                {projects.length != 0 ? (
                   <>
-                    {uiStore.userProjects.map((project) => (
+                    {projects.map((project) => (
                       <div key={project.id}>
                         <ProjectCard key={project.id} project={project} />
-                        <Button href={ROUTES.edit.to + project.id} text={'Bewerk project'} />
+                        <Button
+                          href={ROUTES.edit.to + project.id}
+                          text={'Bewerk project'}
+                        />
                       </div>
                     ))}
                   </>
