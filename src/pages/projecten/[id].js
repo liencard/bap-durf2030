@@ -22,6 +22,7 @@ const Project = observer(({ projectJSON }) => {
     data.getLikes();
     data.getRequirementsList();
     data.getRequirementsInfo();
+    data.getDurvers();
     setProject(data);
 
     if (project && uiStore.currentUser) {

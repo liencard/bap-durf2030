@@ -13,11 +13,14 @@
 
   .tags {
     display: flex;
+    flex-wrap: wrap;
     margin-bottom: 2rem;
+    text-transform: capitalize;
 
     .tag {
       @include tag;
       margin-right: 0.7rem;
+      margin-bottom: 0.7rem;
     }
   }
 

@@ -1,5 +1,9 @@
 import styles from './ProjectContent.module.scss';
-import { ProjectDescription, ProjectRequirements } from '../../Project';
+import {
+  ProjectDescription,
+  ProjectRequirements,
+  ProjectDurvers,
+} from '../../Project';
 import { Grid } from '../../Layout';
 import { useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';
@@ -72,7 +76,7 @@ const ProjectContent = ({ project }) => {
       </TabPanel>
       <TabPanel className={styles.panel} value={value} index={3}>
         <Grid>
-          <p>Durvers</p>
+          <ProjectDurvers project={project} />
         </Grid>
       </TabPanel>
     </>

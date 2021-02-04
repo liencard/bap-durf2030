@@ -11,6 +11,7 @@ class Project {
     city,
     contact,
     description,
+    durvers = [],
     image,
     intro,
     isKnownPlace,
@@ -18,7 +19,7 @@ class Project {
     materialsDescription,
     materialsRequired,
     number,
-    owners,
+    owners = [],
     services = [],
     servicesDescription,
     servicesRequired,
@@ -45,6 +46,7 @@ class Project {
     this.city = city;
     this.contact = contact;
     this.description = description;
+    this.durvers = durvers;
     this.image = image;
     this.intro = intro;
     this.isKnownPlace = isKnownPlace;
@@ -102,6 +104,8 @@ class Project {
       updateRequirementDetails: action,
       getOwners: action,
       owners: observable,
+      getDurvers: action,
+      durvers: observable,
       updates: observable,
       createUpdate: action,
       removeUpdate: action,
@@ -126,6 +130,11 @@ class Project {
   getOwners = async () => {
     const ownersList = await this.store.loadProjectOwnersById(this.id);
     this.owners = ownersList;
+  };
+
+  getDurvers = async () => {
+    const durversList = await this.store.loadProjectDurversById(this.id);
+    this.durvers = durversList;
   };
 
   getRequirementsInfo = async () => {
@@ -291,14 +300,6 @@ class Project {
 // Server side rendering of detail page, convert data
 const convertData = {
   toJSON(project) {
-    // let projectData = {};
-    // Object.keys(project).forEach((key) => {
-    //   if (key !== 'store') {
-    //     projectData[key] = project[key];
-    //   }
-    // });
-
-    // return projectData;
     return {
       id: project.id,
       title: project.title,
@@ -310,6 +311,8 @@ const convertData = {
       city: project.city,
       street: project.street,
       number: project.number,
+      themes: project.themes,
+      categories: project.categories,
     };
   },
 
@@ -322,31 +325,12 @@ const convertData = {
     });
     projectData['store'] = store;
     return new Project(projectData);
-    {
-      /* 
-    return new Project({
-      id: project.id,
-      title: project.title,
-      intro: project.intro,
-      about: project.about,
-      contact: project.contact,
-      description: project.description,
-      isKnownPlace: project.isKnownPlace,
-      city: project.city,
-      street: project.street,
-      number: project.number,
-      owners: project.owners,
-
-      store: store,
-    }); */
-    }
   },
 };
 
 // From and to firebase data
 const projectConverter = {
   toFirestore: function (project) {
-    // left DB naam, right Model naam
     return {
       about: project.about,
       categories: project.categories,
