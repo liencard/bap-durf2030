@@ -53,7 +53,7 @@ const EditState = observer(({ project }) => {
               </p>
               <div className={styles.buttons}>
                 <Button text="Project afronden" onClick={() => handleChangeState(3)} />
-                <Button text="Naar vorige fase" onClick={() => handleChangeState(1)} />
+                <Button text="Naar vorige fase" variant="secondary" onClick={() => handleChangeState(1)} />
               </div>
             </>
           ),
@@ -66,7 +66,7 @@ const EditState = observer(({ project }) => {
             <>
               <p>Je project is afgerond. Laat gebruikers en DURF2030 weten hoe je project is verlopen.</p>
               <div className={styles.buttons}>
-                <Button text="Project terug open zetten" onClick={() => handleChangeState(2)} />
+                <Button text="Project terug open zetten" variant="secondary" onClick={() => handleChangeState(2)} />
               </div>
             </>
           ),
@@ -77,7 +77,6 @@ const EditState = observer(({ project }) => {
     }
   }, [project.state]);
 
-  const handleSaveOwners = () => {};
   return (
     <>
       <div className={styles.status}>
