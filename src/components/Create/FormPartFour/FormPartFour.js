@@ -16,7 +16,7 @@ const FormPartFour = () => {
       <FormFieldWrapper>
         <h2 className={styles.title}>Ondersteuning</h2>
         <h3 className={styles.subtitle}>Naar welke soort ondersteuning ben je op zoek?</h3>
-        <p>
+        <p className={styles.info}>
           DURF2030 kan helpen met het zoeken naar de juiste partners voor je project, we kunnen communicatief
           ondersteunen en je helpen zoeken naar middelen om je project te realiseren.
         </p>
@@ -72,9 +72,39 @@ const FormPartFour = () => {
         </div>
       </FormFieldWrapper>
 
+      {/* Diensten */}
+      {servicesRequired && (
+        <div className={styles.formRequirement}>
+          <FormFieldWrapper>
+            <h2 className={styles.title}>Diensten</h2>
+            <h3 className={styles.subtitle}>Noteer welk soort diensten je nodig hebt</h3>
+            <FormFieldAddItem name="services" options={SERVICETYPES} />
+          </FormFieldWrapper>
+          <FormFieldWrapper>
+            <h3 className={styles.subtitle}>Waarvoor heb je deze diensten nodig?</h3>
+            <FormFieldInput multiline name="servicesDescription" label="Beschrijving" rows={8} required />
+          </FormFieldWrapper>
+        </div>
+      )}
+
+      {/* Materiaal */}
+      {materialsRequired && (
+        <div className={styles.formRequirement}>
+          <FormFieldWrapper>
+            <h2 className={styles.title}>Materiaal</h2>
+            <h3 className={styles.subtitle}>Noteer welk soort materiaal je nodig hebt</h3>
+            <FormFieldAddItem name="materials" options={MATERIALTYPES} />
+          </FormFieldWrapper>
+          <FormFieldWrapper>
+            <h3 className={styles.subtitle}>Waarvoor wordt het materiaal gebruikt?</h3>
+            <FormFieldInput multiline name="materialsDescription" label="Beschrijving" rows={8} required />
+          </FormFieldWrapper>
+        </div>
+      )}
+
       {/* Geld */}
       {fundingRequired && (
-        <>
+        <div className={styles.formRequirement}>
           <FormFieldWrapper>
             <h2 className={styles.title}>Geld</h2>
             <h3 className={styles.subtitle}>Wat is het budget? </h3>
@@ -117,29 +147,7 @@ const FormPartFour = () => {
             <h3 className={styles.subtitle}>Beschrijf waar het geld voor gebruikt zal worden</h3>
             <FormFieldInput multiline name="fundingDescription" label="Beschrijving" rows={8} required />
           </FormFieldWrapper>
-        </>
-      )}
-
-      {/* Materiaal */}
-      {materialsRequired && (
-        <>
-          <h2 className={styles.title}>Materiaal</h2>
-          <h3 className={styles.subtitle}>Noteer welk soort materiaal je nodig hebt</h3>
-          <FormFieldAddItem name="materials" options={MATERIALTYPES} />
-          <h3 className={styles.subtitle}>Waarvoor wordt het materiaal gebruikt?</h3>
-          <FormFieldInput multiline name="materialsDescription" label="Beschrijving" rows={8} required />
-        </>
-      )}
-
-      {/* Diensten */}
-      {servicesRequired && (
-        <>
-          <h2 className={styles.title}>Diensten</h2>
-          <h3 className={styles.subtitle}>Noteer welk soort diensten je nodig hebt</h3>
-          <FormFieldAddItem name="services" options={SERVICETYPES} />
-          <h3 className={styles.subtitle}>Waarvoor heb je deze diensten nodig?</h3>
-          <FormFieldInput multiline name="servicesDescription" label="Beschrijving" rows={8} required />
-        </>
+        </div>
       )}
     </>
   );

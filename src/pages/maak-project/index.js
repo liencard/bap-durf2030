@@ -102,7 +102,9 @@ const CreateProject = observer(() => {
     <>
       <div className={styles.create}>
         <Container>
-          <div className={styles.image}>Image</div>
+          <div className={styles.image}>
+            <div className={styles.background}></div>
+          </div>
           <div className={styles.content}>
             <Formiz connect={projectForm} onValidSubmit={handleSubmit}>
               <form noValidate onSubmit={projectForm.submitStep}>
@@ -131,20 +133,12 @@ const CreateProject = observer(() => {
                 {/* Update the submit button to allow navigation between steps. */}
                 <div className={styles.buttons}>
                   {!projectForm.isFirstStep && (
-                    <button
-                      className={styles.button}
-                      type="button"
-                      onClick={projectForm.prevStep}
-                    >
+                    <button className={styles.button} type="button" onClick={projectForm.prevStep}>
                       Vorige
                     </button>
                   )}
                   {projectForm.isLastStep ? (
-                    <button
-                      className={styles.button}
-                      type="submit"
-                      disabled={!projectForm.isValid}
-                    >
+                    <button className={styles.button} type="submit" disabled={!projectForm.isValid}>
                       Project indienen
                     </button>
                   ) : (

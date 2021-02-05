@@ -29,14 +29,14 @@ const FormPartOne = () => {
 
       <FormFieldWrapper>
         <h3 className={styles.subtitle}>Project plaats</h3>
-        <p>
+        <p className={styles.info}>
           Een project kan enkel doorgaan in Kortrijk en omstreken. Dit adres dient als startpunt voor je project, dit
           kan je later nog wijzigen.
         </p>
 
         {/* Plaats */}
         <div className={styles.place}>
-          <p>Weet je in welke stad je project doorgaat?</p>
+          <p className={styles.info}>Weet je in welke stad je project doorgaat?</p>
           <div>
             <span className={styles.place__label}>Nee</span>
             <FormFieldSwitch
