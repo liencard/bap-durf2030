@@ -2,6 +2,7 @@ import { makeObservable, observable, action } from 'mobx';
 import AuthService from '../services/AuthService';
 import UserService from '../services/UserService';
 import User from '../models/User';
+import Project from '../models/Project';
 
 class UiStore {
   constructor(rootStore) {
@@ -87,9 +88,10 @@ class UiStore {
     );
 
     projectArr.forEach(async (projectId) => {
-      const project = await this.rootStore.projectStore.projectService.getById(
-        projectId
-      );
+      const json = await this.rootStore.projectStore.projectService.getById(projectId);
+      const project = await this.rootStore.projectStore.updateProjectFromServer(json);
+      project.getLikes();
+      project.getDurvers();
       await this.addProject(project);
     });
   };

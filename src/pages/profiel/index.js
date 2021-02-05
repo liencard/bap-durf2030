@@ -10,85 +10,45 @@ import { convertData } from '../../models/Project';
 import { ProjectCard } from '../../components/Project';
 
 const Profile = observer(() => {
-  const { uiStore, projectStore } = useStores();
-
-  const STATE_LOADING = 'loading';
-  const STATE_DOES_NOT_EXIST = 'doesNotExist';
-  const STATE_LOADING_MORE_DETAILS = 'loadingMoreDetails';
-  const STATE_FULLY_LOADED = 'fullyLoaded';
-
-  const [currentUser, setCurrentUser] = useState(uiStore.currentUser);
-  const [state, setState] = useState(
-    currentUser ? STATE_LOADING_MORE_DETAILS : STATE_LOADING
-  );
+  const { uiStore } = useStores();
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    const loadUser = async () => {
-      try {
-        const setUser = await uiStore.currentUser;
-        if (!setUser) {
-          setState(STATE_DOES_NOT_EXIST);
-          return;
-        }
-        setState(STATE_FULLY_LOADED);
-        setCurrentUser(setUser);
+    if (uiStore.currentUser && projects.length === 0) {
+      const loadProjects = async () => {
+        await uiStore.getProjectsForUser();
+      };
+      loadProjects();
+    }
+  }, [uiStore.currentUser]);
 
-        // PROJECTS VAN USER
-        uiStore.getProjectsForUser();
-        console.log(uiStore.userProjects);
-
-        // PROJECTS LINKEN AAN PROJECTMODEL
-        const projectsArr = [];
-        uiStore.userProjects.forEach((projectJSON) => {
-          const project = convertData.fromJSON(projectJSON, projectStore);
-          project.getLikes();
-          project.getDurvers();
-
-          console.log('rrrrr');
-          console.log(project);
-          projectsArr.push(project);
-        });
-        setProjects(projectsArr);
-      } catch (error) {
-        console.log('User failed loading');
-      }
-    };
-    loadUser();
-  }, [uiStore.currentUser, setProjects]);
-
-  console.log(projects);
+  useEffect(() => {
+    const userProjects = uiStore.userProjects;
+    setProjects(userProjects);
+  }, [uiStore.userProjects]);
 
   return (
     <>
       <Header />
-      {currentUser ? (
+      {uiStore.currentUser ? (
         <>
           <div className={styles.profile}>
             <Container>
               <div className={styles.profile__wrapper}>
-                <img
-                  className={styles.avatar}
-                  width="80"
-                  height="80"
-                  src={currentUser.avatar}
-                />
+                <img className={styles.avatar} width="80" height="80" src={uiStore.currentUser.avatar} />
                 <div>
-                  <p className={styles.name}>{currentUser.name}</p>
-                  <p className={styles.email}>{currentUser.email}</p>
+                  <p className={styles.name}>{uiStore.currentUser.name}</p>
+                  <p className={styles.email}>{uiStore.currentUser.email}</p>
                 </div>
               </div>
               <div className={styles.projects}>
                 <h1 className={styles.title}>Projecten</h1>
-                {projects.length != 0 ? (
+                {projects ? (
                   <>
-                    {projects.map((project) => (
-                      <div key={project.id}>
+                    {projects.map((project, i) => (
+                      <div key={i}>
                         <ProjectCard key={project.id} project={project} />
-                        <Button
-                          href={ROUTES.edit.to + project.id}
-                          text={'Bewerk project'}
-                        />
+                        <Button href={ROUTES.edit.to + project.id} text={'Bewerk project'} />
                       </div>
                     ))}
                   </>

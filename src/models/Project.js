@@ -78,22 +78,11 @@ class Project {
     }
 
     makeObservable(this, {
-      likes: observable,
-      liked: observable,
-      comments: observable,
-      linkComment: action,
-      getLikes: action,
-      addLike: action,
-      removeLike: action,
-      setLiked: action,
       title: observable,
       intro: observable,
       description: observable,
       services: observable,
       materials: observable,
-      updateProject: action,
-      getRequirementsList: action,
-      getRequirementsInfo: action,
       fundingAmount: observable,
       fundingDescription: observable,
       fundingRequired: observable,
@@ -101,20 +90,35 @@ class Project {
       materialsDescription: observable,
       servicesRequired: observable,
       servicesDescription: observable,
-      updateRequirementDetails: action,
-      getOwners: action,
+      updateProject: action,
+
       owners: observable,
-      getDurvers: action,
       durvers: observable,
+      likes: observable,
+      liked: observable,
+      addLike: action,
+      removeLike: action,
+      setLiked: action,
+
+      comments: observable,
+      linkComment: action,
+
+      impact: observable,
+      date: observable,
+
+      updateRequirementDetails: action,
+      getRequirementsList: action,
+      getRequirementsInfo: action,
+
+      contact: observable,
+      updateProjectContact: action,
+
       updates: observable,
       createUpdate: action,
       removeUpdate: action,
-      updateProjectContact: action,
-      contact: observable,
+
       state: observable,
       updateState: action,
-      impact: observable,
-      date: observable,
     });
   }
 
@@ -122,31 +126,43 @@ class Project {
     this.store.loadProjectCommentsById(this.id);
   }
 
-  getLikes = async () => {
-    const likes = await this.store.loadProjectLikesById(this.id);
-    this.likes = likes;
-  };
+  getLikes() {
+    this.store.loadProjectLikesById(this.id).then(
+      action('fetchSuccess', (likes) => {
+        this.likes = likes;
+      })
+    );
+  }
 
-  getOwners = async () => {
-    const ownersList = await this.store.loadProjectOwnersById(this.id);
-    this.owners = ownersList;
-  };
+  getOwners() {
+    this.store.loadProjectOwnersById(this.id).then(
+      action('fetchSuccess', (owners) => {
+        this.owners = owners;
+      })
+    );
+  }
 
-  getDurvers = async () => {
-    const durversList = await this.store.loadProjectDurversById(this.id);
-    this.durvers = durversList;
-  };
+  getDurvers() {
+    this.store.loadProjectDurversById(this.id).then(
+      action('fetchSuccess', (durvers) => {
+        this.durvers = durvers;
+      })
+    );
+  }
 
-  getRequirementsInfo = async () => {
-    const info = await this.store.loadRequirementListInfoById(this.id);
-    this.fundingAmount = info.fundingDetails.fundingAmount;
-    this.fundingDescription = info.fundingDetails.fundingDescription;
-    this.fundingRequired = info.fundingDetails.required;
-    this.materialsRequired = info.materialsDetails.required;
-    this.materialsDescription = info.materialsDetails.description;
-    this.servicesRequired = info.servicesDetails.required;
-    this.servicesDescription = info.servicesDetails.description;
-  };
+  getRequirementsInfo() {
+    this.store.loadRequirementListInfoById(this.id).then(
+      action('fetchSuccess', (info) => {
+        this.fundingAmount = info.fundingDetails.fundingAmount;
+        this.fundingDescription = info.fundingDetails.fundingDescription;
+        this.fundingRequired = info.fundingDetails.required;
+        this.materialsRequired = info.materialsDetails.required;
+        this.materialsDescription = info.materialsDetails.description;
+        this.servicesRequired = info.servicesDetails.required;
+        this.servicesDescription = info.servicesDetails.description;
+      })
+    );
+  }
 
   getRequirementsList = async () => {
     const list = await this.store.loadRequirementListById(this.id);
