@@ -7,6 +7,7 @@ const ProjectHeader = observer(({ project }) => {
   const [servicesCount, setServicesCount] = useState(0);
   const [materialsCount, setMaterialsCount] = useState(0);
   const [fundingCount, setFundingCount] = useState(0);
+  const [image, setImage] = useState('../thumbnail-temp.jpg');
 
   let tags = [];
   Object.keys(project.themes).forEach((key) => {
@@ -20,6 +21,12 @@ const ProjectHeader = observer(({ project }) => {
       tags.push(key);
     }
   });
+
+  useEffect(() => {
+    if (project.image.enabled && project.image.url) {
+      setImage(project.image.url);
+    }
+  }, []);
 
   useEffect(() => {
     let materialsCountNew = 0;
@@ -54,7 +61,8 @@ const ProjectHeader = observer(({ project }) => {
 
   return (
     <>
-      <div className={styles.images}>Images</div>
+      <img className={styles.images} src={image} />
+      {/* <div className={styles.images}>Images</div> */}
       <div className={styles.content}>
         <ul className={styles.tags}>
           {tags.map((tag) => (
