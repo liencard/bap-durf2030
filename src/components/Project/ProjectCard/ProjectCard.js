@@ -1,17 +1,25 @@
 import { observer } from 'mobx-react-lite';
 import styles from './ProjectCard.module.scss';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ROUTES } from '../../../consts/index';
 import { ProjectLikes, ProjectHelpers } from '../';
 import LinesEllipsis from 'react-lines-ellipsis';
 
 const ProjectCard = observer(({ project }) => {
+  const [image, setImage] = useState('thumbnail-temp.jpg');
   let tags = [];
   // Object.keys(project.themes).forEach((key) => {
   //   if (project.themes[key] === true) {
   //     tags.push(key);
   //   }
   // });
+
+  useEffect(() => {
+    if (project.image.enabled && project.image.url) {
+      setImage(project.image.url);
+    }
+  }, []);
 
   Object.keys(project.categories).forEach((key) => {
     if (project.categories[key] === true) {
@@ -27,22 +35,12 @@ const ProjectCard = observer(({ project }) => {
             project.materialsRequired === true ||
             project.servicesRequired === true) && (
             <div className={styles.icons}>
-              {project.servicesRequired && (
-                <img src="/icons/service-white.svg" alt="service" />
-              )}
-              {project.materialsRequired && (
-                <img src="/icons/material-white.svg" alt="materiaal" />
-              )}
-              {project.fundingRequired && (
-                <img src="/icons/money-white.svg" alt="geld" />
-              )}
+              {project.servicesRequired && <img src="/icons/service-white.svg" alt="service" />}
+              {project.materialsRequired && <img src="/icons/material-white.svg" alt="materiaal" />}
+              {project.fundingRequired && <img src="/icons/money-white.svg" alt="geld" />}
             </div>
           )}
-          <img
-            className={styles.image}
-            src="thumbnail-temp.jpg"
-            alt="service"
-          />
+          <img className={styles.image} src={image} alt="service" />
         </div>
 
         <div className={styles.content}>
@@ -50,13 +48,7 @@ const ProjectCard = observer(({ project }) => {
           <h3 className={styles.title}>{project.title}</h3>
 
           <p className={styles.intro}>
-            <LinesEllipsis
-              text={project.intro}
-              maxLine="3"
-              ellipsis="..."
-              trimRight
-              basedOn="letters"
-            />
+            <LinesEllipsis text={project.intro} maxLine="3" ellipsis="..." trimRight basedOn="letters" />
           </p>
           <ul className={styles.tags}>
             {tags.map((tag) => (
@@ -67,9 +59,7 @@ const ProjectCard = observer(({ project }) => {
           </ul>
           <div className={styles.stats}>
             <ProjectLikes project={project} small />
-            {project.durvers.length != 0 && (
-              <ProjectHelpers small project={project} />
-            )}
+            {project.durvers.length != 0 && <ProjectHelpers small project={project} />}
           </div>
         </div>
       </a>

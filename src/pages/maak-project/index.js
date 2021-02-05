@@ -56,7 +56,12 @@ const CreateProject = observer(() => {
       city: values.city ?? '',
       contact: values.contact,
       description: values.description,
-      image: values.image,
+      image: {
+        enabled: values.image ? true : false,
+        name: values.image ? values.image.name : '',
+        file: values.image ? values.image.file : '',
+        url: '',
+      },
       intro: values.intro,
       isKnownPlace: values.isKnownPlace,
       materials: values.materials ?? [],
@@ -95,7 +100,7 @@ const CreateProject = observer(() => {
       projectId: projectId,
     });
 
-    router.push(ROUTES.login);
+    //  router.push(ROUTES.home);
   };
 
   return (
