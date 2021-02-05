@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { useStores } from '../../../hooks/useStores';
 import { Container } from '../../Layout';
 import { Button } from '../../UI';
-import { ProjectHelpers } from '..';
 
 const ProjectRequirementsMaterials = ({ project }) => {
   const { projectStore } = useStores();
@@ -159,7 +158,7 @@ const ProjectRequirementsMaterials = ({ project }) => {
               </div>
             </div>
             <div className={styles.footer}>
-              <ProjectHelpers />
+              <p></p>
               <Button text={'Hulp aanbieden'} />
             </div>
           </div>

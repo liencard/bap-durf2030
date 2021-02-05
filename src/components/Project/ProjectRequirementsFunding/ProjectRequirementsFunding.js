@@ -4,11 +4,8 @@ import { useState } from 'react';
 import { useStores } from '../../../hooks/useStores';
 import { Container } from '../../Layout';
 import { Button } from '../../UI';
-import { ProjectHelpers } from '..';
 
 const ProjectRequirementsFunding = ({ project }) => {
-  const { projectStore } = useStores();
-
   return (
     <>
       <section className={styles.requirement}>
@@ -19,7 +16,7 @@ const ProjectRequirementsFunding = ({ project }) => {
             <p>--- Loading bar ----</p>
             <p>{project.fundingDescription}</p>
             <div className={styles.footer}>
-              <ProjectHelpers />
+              <p></p>
               <Button text={'Doneren'} />
             </div>
           </div>
