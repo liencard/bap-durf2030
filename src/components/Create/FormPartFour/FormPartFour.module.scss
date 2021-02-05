@@ -8,6 +8,10 @@
   @include title-three;
 }
 
+.info {
+  margin-bottom: 2rem;
+}
+
 .requirements {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -75,6 +79,24 @@
 
     &::before {
       background: url('/icons/money-yellow.svg');
+    }
+  }
+}
+
+.formRequirement {
+  margin-top: 5rem;
+  position: relative;
+
+  &:not(:last-of-type) {
+    margin-bottom: 10rem;
+
+    &::after {
+      bottom: -5rem;
+      position: absolute;
+      content: '';
+      height: 0.1rem;
+      background: $green-light;
+      width: 100%;
     }
   }
 }

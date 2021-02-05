@@ -7,8 +7,7 @@ const ProjectHeader = observer(({ project }) => {
   const [servicesCount, setServicesCount] = useState(0);
   const [materialsCount, setMaterialsCount] = useState(0);
   const [fundingCount, setFundingCount] = useState(0);
-
-  console.log(project);
+  const [image, setImage] = useState('../thumbnail-temp.jpg');
 
   let tags = [];
   Object.keys(project.themes).forEach((key) => {
@@ -22,6 +21,12 @@ const ProjectHeader = observer(({ project }) => {
       tags.push(key);
     }
   });
+
+  useEffect(() => {
+    if (project.image.enabled && project.image.url) {
+      setImage(project.image.url);
+    }
+  }, []);
 
   useEffect(() => {
     let materialsCountNew = 0;
@@ -56,7 +61,8 @@ const ProjectHeader = observer(({ project }) => {
 
   return (
     <>
-      <div className={styles.images}>Images</div>
+      <img className={styles.images} src={image} />
+      {/* <div className={styles.images}>Images</div> */}
       <div className={styles.content}>
         <ul className={styles.tags}>
           {tags.map((tag) => (
@@ -69,12 +75,7 @@ const ProjectHeader = observer(({ project }) => {
           <h1 className={styles.title}>{project.title}</h1>
           {project.isKnownPlace && (
             <div className={styles.location}>
-              <img
-                src="/icons/location-green.svg"
-                alt="logo DURF2030"
-                width="13.75"
-                height="15.9"
-              />
+              <img src="/icons/location-green.svg" alt="logo DURF2030" width="13.75" height="15.9" />
               <p>
                 {project.street} {project.number}, {project.city}
               </p>
@@ -115,9 +116,7 @@ const ProjectHeader = observer(({ project }) => {
           <ProjectHelp project={project} />
           <div className={styles.interact}>
             <ProjectLikes project={project} />
-            {project.durvers.length != 0 && (
-              <ProjectHelpers project={project} />
-            )}
+            {project.durvers.length != 0 && <ProjectHelpers project={project} />}
           </div>
         </div>
       </div>

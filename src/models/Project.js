@@ -329,6 +329,7 @@ const convertData = {
       number: project.number,
       themes: project.themes,
       categories: project.categories,
+      image: project.image,
     };
   },
 
@@ -362,8 +363,13 @@ const projectConverter = {
       themes: project.themes,
       title: project.title,
       userId: project.userId,
-      state: 0,
-      // timestamp: project.timestamp,
+      state: project.state,
+      timestamp: project.timestamp,
+      image: {
+        enabled: project.image.enabled,
+        name: project.image.name,
+        url: project.image.url,
+      },
     };
   },
   fromFirestore: function (snapshot, options) {
@@ -383,6 +389,7 @@ const projectConverter = {
       state: data.state,
       themes: data.themes,
       categories: data.categories,
+      image: data.image,
       updates: data.updates,
       impact: data.impact,
       date: data.date,

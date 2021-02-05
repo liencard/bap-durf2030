@@ -56,7 +56,12 @@ const CreateProject = observer(() => {
       city: values.city ?? '',
       contact: values.contact,
       description: values.description,
-      image: values.image,
+      image: {
+        enabled: values.image ? true : false,
+        name: values.image ? values.image.name : '',
+        file: values.image ? values.image.file : '',
+        url: '',
+      },
       intro: values.intro,
       isKnownPlace: values.isKnownPlace,
       materials: values.materials ?? [],
@@ -95,14 +100,16 @@ const CreateProject = observer(() => {
       projectId: projectId,
     });
 
-    router.push(ROUTES.login);
+    //  router.push(ROUTES.home);
   };
 
   return (
     <>
       <div className={styles.create}>
         <Container>
-          <div className={styles.image}>Image</div>
+          <div className={styles.image}>
+            <div className={styles.background}></div>
+          </div>
           <div className={styles.content}>
             <Formiz connect={projectForm} onValidSubmit={handleSubmit}>
               <form noValidate onSubmit={projectForm.submitStep}>
@@ -131,20 +138,12 @@ const CreateProject = observer(() => {
                 {/* Update the submit button to allow navigation between steps. */}
                 <div className={styles.buttons}>
                   {!projectForm.isFirstStep && (
-                    <button
-                      className={styles.button}
-                      type="button"
-                      onClick={projectForm.prevStep}
-                    >
+                    <button className={styles.button} type="button" onClick={projectForm.prevStep}>
                       Vorige
                     </button>
                   )}
                   {projectForm.isLastStep ? (
-                    <button
-                      className={styles.button}
-                      type="submit"
-                      disabled={!projectForm.isValid}
-                    >
+                    <button className={styles.button} type="submit" disabled={!projectForm.isValid}>
                       Project indienen
                     </button>
                   ) : (
