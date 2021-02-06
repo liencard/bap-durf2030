@@ -45,11 +45,6 @@ const EditBasis = ({ project }) => {
 
   return (
     <>
-      <section className={styles.status}>
-        <h2 className={styles.title}>Status</h2>
-        <p>Lorum ipsum</p>
-      </section>
-
       <EditPart title="Algemene Info" handleSaveProject={handleSaveProject}>
         <EditField>
           <EditLabel text="Title" htmlFor="title" />
@@ -65,7 +60,7 @@ const EditBasis = ({ project }) => {
         </EditField>
       </EditPart>
 
-      <EditPart title="Foto's" handleSaveProject={handleSaveImage}>
+      <EditPart title="Foto" handleSaveProject={handleSaveImage}>
         <FormFieldFileUpload name="image" defaultValue={project.image.url} />
       </EditPart>
 
