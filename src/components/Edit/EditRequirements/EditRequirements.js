@@ -34,12 +34,16 @@ const EditRequirements = ({ project }) => {
   };
 
   const handleSaveServices = (values) => {
-    updateItems(values.services, project.services, 'service');
+    if (values.services) {
+      updateItems(values.services, project.services, 'service');
+    }
     project.updateRequirementDetails(values);
   };
 
   const handleSaveMaterials = (values) => {
-    updateItems(values.materials, project.materials, 'material');
+    if (values.materials) {
+      updateItems(values.materials, project.materials, 'material');
+    }
     project.updateRequirementDetails(values);
   };
 

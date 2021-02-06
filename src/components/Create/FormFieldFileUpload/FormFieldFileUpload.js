@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useField } from '@formiz/core';
 import { Button } from '../../UI';
+import Compress from 'react-image-file-resizer';
 
 import styles from './FormFieldFileUpload.module.scss';
 
@@ -13,9 +14,19 @@ const FormFieldFileUpload = (props) => {
 
   const handleLoadImage = (target) => {
     const targetFile = target.files[0];
-    const imageURL = URL.createObjectURL(targetFile);
-    setPreview(imageURL);
-    setValue({ file: targetFile, path: imageURL, name: targetFile.name });
+    Compress.imageFileResizer(
+      targetFile,
+      1000,
+      750,
+      'JPEG',
+      70,
+      0,
+      (uri) => {
+        setPreview(uri);
+        setValue({ file: targetFile, path: uri, name: targetFile.name });
+      },
+      'blob'
+    );
   };
 
   const handleClickRemoveImage = () => {
