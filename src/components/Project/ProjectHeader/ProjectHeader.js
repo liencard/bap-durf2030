@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
 import styles from './ProjectHeader.module.scss';
+import { Container } from '../../Layout';
 import { ProjectLikes, ProjectHelpers, ProjectHelp } from '../../Project';
 
 const ProjectHeader = observer(({ project }) => {
@@ -60,7 +61,7 @@ const ProjectHeader = observer(({ project }) => {
   }, [project.materials, project.services, project.durvers]);
 
   return (
-    <>
+    <Container>
       <img className={styles.images} src={image} />
       {/* <div className={styles.images}>Images</div> */}
       <div className={styles.content}>
@@ -75,7 +76,12 @@ const ProjectHeader = observer(({ project }) => {
           <h1 className={styles.title}>{project.title}</h1>
           {project.isKnownPlace && (
             <div className={styles.location}>
-              <img src="/icons/location-green.svg" alt="logo DURF2030" width="13.75" height="15.9" />
+              <img
+                src="/icons/location-green.svg"
+                alt="logo DURF2030"
+                width="13.75"
+                height="15.9"
+              />
               <p>
                 {project.street} {project.number}, {project.city}
               </p>
@@ -116,11 +122,13 @@ const ProjectHeader = observer(({ project }) => {
           <ProjectHelp project={project} />
           <div className={styles.interact}>
             <ProjectLikes project={project} />
-            {project.durvers.length != 0 && <ProjectHelpers project={project} />}
+            {project.durvers.length != 0 && (
+              <ProjectHelpers project={project} />
+            )}
           </div>
         </div>
       </div>
-    </>
+    </Container>
   );
 });
 

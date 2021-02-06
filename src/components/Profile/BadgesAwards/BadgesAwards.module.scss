@@ -1,9 +1,13 @@
 @import '../../../styles/styles.scss';
 $border-radius: 0.5rem;
 
+.badges__awards {
+  grid-column: span 12;
+}
+
 .title {
   @include title-two;
-  margin-top: 6rem;
+  margin-top: 2rem;
   margin-bottom: 5rem;
 }
 

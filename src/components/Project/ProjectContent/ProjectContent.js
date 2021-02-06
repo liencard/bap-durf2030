@@ -3,81 +3,51 @@ import {
   ProjectDescription,
   ProjectRequirements,
   ProjectDurvers,
+  ProjectShare,
 } from '../../Project';
-import { Grid } from '../../Layout';
+import { Container } from '../../Layout';
 import { useState } from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
+import { TabPanel, AppBar, TabSideElement } from '../../UI';
 import Tab from '@material-ui/core/Tab';
-
-const TabPanel = (props) => {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`project-info-${index}`}
-      aria-labelledby={`project-info-${index}`}
-      {...other}
-    >
-      {value === index && <div>{children}</div>}
-    </div>
-  );
-};
 
 const ProjectContent = ({ project, users }) => {
   const [value, setValue] = useState(0);
 
-  const a11yProps = (index) => {
-    return {
-      id: `project-info-${index}`,
-      'aria-controls': `project-info-${index}`,
-    };
-  };
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
   return (
     <>
-      <AppBar
-        elevation={0}
-        color="transparent"
-        className={styles.appbar}
-        position="static"
-      >
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="navigeer door project"
-        >
-          <Tab label="Overview" {...a11yProps(0)} />
-          <Tab label="Updates" {...a11yProps(1)} />
-          <Tab label="Nodige Hulp" {...a11yProps(2)} />
-          <Tab label="Durvers" {...a11yProps(3)} />
-        </Tabs>
-      </AppBar>
+      <div className={`${styles.line} ${styles.lineTop}`}></div>
+      <Container>
+        <AppBar value={value} setValue={setValue}>
+          <Tab label="Overview" />
+          <Tab label="Updates" />
+          <Tab label="Nodige Hulp" />
+          <Tab label="Durvers" />
+          <TabSideElement>
+            <ProjectShare />
+          </TabSideElement>
+        </AppBar>
+      </Container>
+      <div className={`${styles.line} ${styles.lineBottom}`}></div>
+
       <TabPanel className={styles.panel} value={value} index={0}>
-        <Grid>
+        <Container>
           <ProjectDescription project={project} users={users} />
-        </Grid>
+        </Container>
       </TabPanel>
       <TabPanel className={styles.panel} value={value} index={1}>
-        <Grid>
+        <Container>
           <p>Updates</p>
-        </Grid>
+        </Container>
       </TabPanel>
       <TabPanel className={styles.panel} value={value} index={2}>
-        <Grid>
+        <Container>
           <ProjectRequirements project={project} />
-        </Grid>
+        </Container>
       </TabPanel>
       <TabPanel className={styles.panel} value={value} index={3}>
-        <Grid>
+        <Container>
           <ProjectDurvers project={project} />
-        </Grid>
+        </Container>
       </TabPanel>
     </>
   );

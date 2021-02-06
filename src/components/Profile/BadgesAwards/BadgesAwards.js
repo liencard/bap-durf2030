@@ -20,7 +20,7 @@ const BadgesAwards = () => {
 
   return (
     <>
-      <div className={styles.badges}>
+      <section className={styles.badges__awards}>
         <h1 className={styles.title}>Badges &amp; Awards</h1>
         {uiStore.currentUser && (
           <Grid>
@@ -51,7 +51,7 @@ const BadgesAwards = () => {
             </section>
           </Grid>
         )}
-      </div>
+      </section>
     </>
   );
 };

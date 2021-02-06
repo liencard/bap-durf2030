@@ -4,8 +4,15 @@ import { useStores } from '../../hooks/useStores';
 import { ROUTES } from '../../consts';
 import { Container } from '../../components/Layout';
 import { Button, TabPanel, AppBar, TabSideElement } from '../../components/UI';
-import { EditBasis, EditRequirements, EditOwners, EditUpdates, EditState } from '../../components/Edit';
+import {
+  EditBasis,
+  EditRequirements,
+  EditOwners,
+  EditUpdates,
+  EditState,
+} from '../../components/Edit';
 import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 import styles from './EditProject.module.scss';
 import Tab from '@material-ui/core/Tab';
 
@@ -20,7 +27,9 @@ const EditProject = observer(({ query }) => {
   const STATE_FULLY_LOADED = 'fullyLoaded';
 
   const [project, setProject] = useState(projectStore.getProjectById(id));
-  const [state, setState] = useState(project ? STATE_LOADING_MORE_DETAILS : STATE_LOADING);
+  const [state, setState] = useState(
+    project ? STATE_LOADING_MORE_DETAILS : STATE_LOADING
+  );
 
   useEffect(() => {
     const loadProject = async (id) => {
@@ -45,43 +54,50 @@ const EditProject = observer(({ query }) => {
   return (
     <>
       <Header />
-      <Container>
-        {project && (
-          <>
-            <section className={styles.edit}>
+      {project && (
+        <section className={styles.edit}>
+          <Container>
+            <div className={styles.header}>
               <h1 className={styles.title}>Bewerk project</h1>
               <p className={styles.title__project}>{project.title}</p>
+            </div>
+          </Container>
 
-              <AppBar value={value} setValue={setValue}>
-                <Tab label="Basis Informatie" />
-                <Tab label="Ondersteuningen" />
-                <Tab label="Organisatoren" />
-                <Tab label="Updates" />
-                <Tab label="Status" />
-                <TabSideElement>
-                  <Button href={ROUTES.home} text={'Update posten'} />
-                </TabSideElement>
-              </AppBar>
+          <div className={`${styles.line} ${styles.lineTop}`}></div>
+          <Container>
+            <AppBar value={value} setValue={setValue}>
+              <Tab label="Basis Informatie" />
+              <Tab label="Ondersteuningen" />
+              <Tab label="Organisatoren" />
+              <Tab label="Updates" />
+              <Tab label="Status" />
+              <TabSideElement>
+                <Button href={ROUTES.home} text={'Update posten'} />
+              </TabSideElement>
+            </AppBar>
+          </Container>
+          <div className={`${styles.line} ${styles.lineBottom}`}></div>
 
-              <TabPanel value={value} index={0}>
-                <EditBasis project={project} />
-              </TabPanel>
-              <TabPanel value={value} index={1}>
-                <EditRequirements project={project} />
-              </TabPanel>
-              <TabPanel value={value} index={2}>
-                <EditOwners project={project} />
-              </TabPanel>
-              <TabPanel value={value} index={3}>
-                <EditUpdates project={project} />
-              </TabPanel>
-              <TabPanel value={value} index={4}>
-                <EditState project={project} />
-              </TabPanel>
-            </section>
-          </>
-        )}
-      </Container>
+          <Container>
+            <TabPanel value={value} index={0}>
+              <EditBasis project={project} />
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+              <EditRequirements project={project} />
+            </TabPanel>
+            <TabPanel value={value} index={2}>
+              <EditOwners project={project} />
+            </TabPanel>
+            <TabPanel value={value} index={3}>
+              <EditUpdates project={project} />
+            </TabPanel>
+            <TabPanel value={value} index={4}>
+              <EditState project={project} />
+            </TabPanel>
+          </Container>
+        </section>
+      )}
+      <Footer />
     </>
   );
 });

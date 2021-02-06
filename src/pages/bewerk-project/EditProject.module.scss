@@ -4,6 +4,10 @@
   padding-top: 14rem;
   grid-column: span 12;
 
+  .header {
+    grid-column: span 12;
+  }
+
   .title {
     @include title-one;
     margin-bottom: 0.8rem;
@@ -13,4 +17,17 @@
     @include title-two;
     color: $green;
   }
+}
+
+.line {
+  @include tab-line;
+}
+
+.lineTop {
+  @include tab-lineTop;
+  margin-top: 3rem;
+}
+
+.lineBottom {
+  @include tab-lineBottom;
 }

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Container } from '../../components/Layout';
 import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 import {
   ProjectHeader,
   ProjectContent,
@@ -52,12 +53,11 @@ const Project = observer(({ projectJSON, usersJSON }) => {
   return (
     <>
       <Header />
-      <Container>
-        <ProjectHeader project={project} />
-        <ProjectContent project={project} users={users} />
-        <ProjectFooter project={project} />
-        <ProjectComments project={project} />
-      </Container>
+      <ProjectHeader project={project} />
+      <ProjectContent project={project} users={users} />
+      <ProjectFooter project={project} />
+      <ProjectComments project={project} />
+      <Footer />
     </>
   );
 });

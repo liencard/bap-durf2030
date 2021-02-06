@@ -1,4 +1,5 @@
 import Header from '../components/Header/Header';
+import Footer from '../components/Footer/Footer';
 import HomeHero from '../components/Home/HomeHero/HomeHero';
 import HomeSpotlight from '../components/Home/HomeSpotlight/HomeSpotlight';
 import ProjectSpotlight from '../components/Home/ProjectSpotlight/ProjectSpotlight';
@@ -14,6 +15,7 @@ const Home = () => {
       <Container>
         <ProjectSpotlight />
       </Container>
+      <Footer />
     </>
   );
 };

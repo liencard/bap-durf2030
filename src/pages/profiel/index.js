@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Container, Grid } from '../../components/Layout';
 import { TabPanel, AppBar, TabSideElement } from '../../components/UI';
 import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 import styles from './Profile.module.scss';
 import {
   LikedProjects,
@@ -21,8 +22,9 @@ const Profile = observer(() => {
   return (
     <>
       <Header />
-      <Container>
-        <div className={styles.profile}>
+
+      <div className={styles.profile}>
+        <Container>
           {uiStore.currentUser && (
             <div className={styles.profile__wrapper}>
               <img
@@ -42,7 +44,10 @@ const Profile = observer(() => {
               </div>
             </div>
           )}
+        </Container>
 
+        <div className={`${styles.line} ${styles.lineTop}`}></div>
+        <Container>
           <AppBar value={value} setValue={setValue}>
             <Tab label="Overview" />
             <Tab label="Gewaardeerde projecten" />
@@ -51,27 +56,33 @@ const Profile = observer(() => {
               <Tab label="Instellingen" />
             </TabSideElement>
           </AppBar>
+        </Container>
+        <div className={`${styles.line} ${styles.lineBottom}`}></div>
 
-          <TabPanel className={styles.panel} value={value} index={0}>
-            <Grid>
-              <OwnProjects />
-              <OwnAwards />
-            </Grid>
-          </TabPanel>
+        <TabPanel className={styles.panel} value={value} index={0}>
+          <Container>
+            <OwnProjects />
+            <OwnAwards />
+          </Container>
+        </TabPanel>
 
-          <TabPanel className={styles.panel} value={value} index={1}>
+        <TabPanel className={styles.panel} value={value} index={1}>
+          <Container>
             <LikedProjects />
-          </TabPanel>
+          </Container>
+        </TabPanel>
 
-          <TabPanel className={styles.panel} value={value} index={2}>
+        <TabPanel className={styles.panel} value={value} index={2}>
+          <Container>
             <BadgesAwards />
-          </TabPanel>
+          </Container>
+        </TabPanel>
 
-          <TabPanel className={styles.panel} value={value} index={3}>
-            <h1 className={styles.title}>Instellingen</h1>
-          </TabPanel>
-        </div>
-      </Container>
+        <TabPanel className={styles.panel} value={value} index={3}>
+          <h1 className={styles.title}>Instellingen</h1>
+        </TabPanel>
+      </div>
+      <Footer />
     </>
   );
 });

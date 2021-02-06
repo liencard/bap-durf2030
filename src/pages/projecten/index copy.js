@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Container, Grid } from '../../components/Layout';
 import { ProjectCard, ProjectRequirementsCard } from '../../components/Project';
 import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
 import RootStore from '../../stores';
 import styles from './Projects.module.scss';
 import { convertData } from '../../models/Project';
@@ -41,6 +40,8 @@ const Projects = ({ projectsJSON }) => {
     });
   }, [projects]);
 
+  console.log(milestones);
+
   return (
     <>
       <Header />
@@ -69,7 +70,7 @@ const Projects = ({ projectsJSON }) => {
           </div>
         </Container>
       </section>
-      <div className={`${styles.line} ${styles.lineTop}`}></div>
+      <div className={styles.line}></div>
       <Container>
         <AppBar reverse value={value} setValue={setValue}>
           <Tab label="Lopende projecten" />
@@ -80,7 +81,6 @@ const Projects = ({ projectsJSON }) => {
           </TabSideElement>
         </AppBar>
       </Container>
-      <div className={`${styles.line} ${styles.lineBottom}`}></div>
       <Container>
         <TabPanel value={value} index={0}>
           <Grid>
@@ -116,7 +116,6 @@ const Projects = ({ projectsJSON }) => {
           </Masonry>
         </TabPanel>
       </Container>
-      <Footer />
     </>
   );
 };
