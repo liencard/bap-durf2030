@@ -12,7 +12,7 @@ const OwnAwards = observer(() => {
         {uiStore.currentUser && (
           <div className={styles.list}>
             {uiStore.currentUser.awards.map((award) => (
-              <div className={styles.list__item}>
+              <div key={award.name} className={styles.list__item}>
                 <img
                   className={styles.icon}
                   src={award.img}
