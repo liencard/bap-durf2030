@@ -115,7 +115,7 @@ const FormFieldAddUser = (props) => {
         }}
         renderOption={(option) => option.name}
         freeSolo
-        renderInput={(params) => <TextField {...params} fullWidth label="Zoek durver" variant="outlined" />}
+        renderInput={(params) => <TextField {...params} fullWidth label="Zoek een gebruiker" variant="outlined" />}
       />
     </>
   );

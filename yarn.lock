@@ -4051,6 +4051,11 @@ react-html-parser@^2.0.2:
   dependencies:
     htmlparser2 "^3.9.0"
 
+react-image-file-resizer@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/react-image-file-resizer/-/react-image-file-resizer-0.4.0.tgz#041881bd38f9031f051b49f08fbd36ec226c84b4"
+  integrity sha512-no0m3/YfgT+WxWwDynM4OwruUas3FrokE9QHkANuPL8Ihk8SK/ienHE3l+WW1fFouYoVSNMgvDtQYoQknvVavg==
+
 react-is@16.13.1, react-is@^16.7.0, react-is@^16.8.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
@@ -5174,7 +5179,7 @@ wrappy@1:
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
   integrity sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=
 
-xmlhttprequest@1.8.0, xmlhttprequest@^1.8.0:
+xmlhttprequest@1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/xmlhttprequest/-/xmlhttprequest-1.8.0.tgz#67fe075c5c24fef39f9d65f5f7b7fe75171968fc"
   integrity sha1-Z/4HXFwk/vOfnWX197f+dRcZaPw=

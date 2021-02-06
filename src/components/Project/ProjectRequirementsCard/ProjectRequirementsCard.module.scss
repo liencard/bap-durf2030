@@ -23,7 +23,7 @@ $border-radius: 0.5rem;
     grid-template-columns: 20rem 1fr;
     margin-bottom: $grid-gap;
 
-    & img {
+    .image {
       width: 20rem;
       height: 100%;
       object-fit: cover;

@@ -19,10 +19,6 @@ class ProjectService {
     return snapshot.docs.map((project) => project.data());
   };
 
-  // getAllIds = () => {
-  //   return this.db.collection('projects').listDocuments();
-  // };
-
   getById = async (id) => {
     const project = await this.db
       .collection('projects')
@@ -81,7 +77,6 @@ class ProjectService {
   };
 
   create = async (project) => {
-    console.log(project);
     const ref = await this.db.collection('projects').doc('dummy');
     ref.withConverter(projectConverter).set(project);
     project.owners.forEach((owner) => {
@@ -108,7 +103,7 @@ class ProjectService {
       .collection('projects')
       .doc(projectId)
       .collection('owners')
-      .doc()
+      .doc(owner.id)
       .set({ userId: owner.id, avatar: owner.avatar, name: owner.name });
   };
 
@@ -140,20 +135,6 @@ class ProjectService {
     this.db.collection('projects').doc(projectId).update({ contact: email });
   };
 
-  // getOwners = async (projectId) => {
-  //   console.log(projectId);
-  //   const snapshot = await this.db
-  //     .collectionGroup('owners')
-  //     .where('projectId', '==', projectId)
-  //     .orderBy('name')
-  //     .withConverter(userConverter)
-  //     .get();
-  //   //console.log(snapshot);
-  //   const result = snapshot.docs.map((user) => user.data());
-  //   console.log(result);
-  //   //return result;
-  // };
-
   getComments = async (projectId, onChange) => {
     await this.db
       .collectionGroup('comments')
@@ -170,25 +151,6 @@ class ProjectService {
       });
   };
 
-  // updateProject = async (data) => {
-  //   await this.db
-  //     .collection('projects')
-  //     .doc(data.id)
-  //     .update({
-  //       title: data.title,
-  //       intro: data.intro,
-  //       description: data.description,
-  //       location: {
-  //         isKnownPlace: data.isKnownPlace,
-  //         city: data.city,
-  //         street: data.street,
-  //         number: data.number,
-  //       },
-  //       themes: data.themes,
-  //       categories: data.categories,
-  //     });
-  // };
-
   updateProject = async (newValues, projectId) => {
     await this.db.collection('projects').doc(projectId).update(newValues);
   };
@@ -203,13 +165,17 @@ class ProjectService {
     return imageRef.getDownloadURL();
   };
 
-  getImage = (name, projectId) => {
-    let imageRef = this.storage.ref(`images/${projectId}/${name}`);
-    console.log(name);
-    // console.log(imageRef.getDownloadURL());
-    // imageRef.getDownloadURL().then((url) => {
-    //   return url;
-    // });
+  updateImageURL = (image, projectId) => {
+    this.db
+      .collection('projects')
+      .doc(projectId)
+      .update({
+        image: {
+          enabled: image.enabled,
+          name: image.name,
+          url: image.url,
+        },
+      });
   };
 }
 

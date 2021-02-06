@@ -32,7 +32,7 @@ const ProjectCard = observer(({ project }) => {
       <a className={styles.card}>
         <div className={styles.thumbnail}>
           <ProjectIcons project={project} />
-          <img className={styles.image} src="thumbnail-temp.jpg" alt="service" />
+          <img className={styles.image} src={image} alt="service" />
         </div>
 
         <div className={styles.content}>

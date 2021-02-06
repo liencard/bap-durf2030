@@ -12,12 +12,14 @@
       @include title-two;
     }
 
-    .edit__btn {
-      border: none;
-      background-color: transparent;
-      border-bottom: 0.1rem solid $grey;
-      height: 4rem;
-      margin-right: 2rem;
+    .buttons {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+
+      button:last-of-type {
+        margin-left: 3rem;
+      }
     }
   }
 

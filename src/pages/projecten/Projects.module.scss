@@ -8,10 +8,10 @@
   grid-column: span 12;
   display: flex;
   flex-direction: row-reverse;
-}
 
-.column:first-of-type {
-  margin-right: $grid-gap;
+  .column:last-of-type {
+    margin-right: $grid-gap;
+  }
 }
 
 .title {
