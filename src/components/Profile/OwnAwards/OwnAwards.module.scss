@@ -1,0 +1,33 @@
+@import '../../../styles/styles.scss';
+$border-radius: 0.5rem;
+
+.awards {
+  grid-column: 9 / span 4;
+}
+
+.title {
+  @include title-two;
+  margin-top: 6rem;
+  margin-bottom: 4rem;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 2rem;
+}
+
+.list__item {
+  border: 0.1rem solid $grey-border;
+  border-radius: $border-radius;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  span {
+    @include text-small;
+    text-transform: capitalize;
+    margin-top: 1rem;
+  }
+}

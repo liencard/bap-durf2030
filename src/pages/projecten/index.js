@@ -6,6 +6,7 @@ import RootStore from '../../stores';
 import styles from './Projects.module.scss';
 import { convertData } from '../../models/Project';
 import { useStores } from '../../hooks/useStores';
+import UserStore from '../../stores/UserStore';
 
 const Projects = ({ projectsJSON }) => {
   const { projectStore } = useStores();

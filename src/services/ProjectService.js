@@ -12,7 +12,10 @@ class ProjectService {
   }
 
   getAll = async () => {
-    const snapshot = await this.db.collection('projects').withConverter(projectConverter).get();
+    const snapshot = await this.db
+      .collection('projects')
+      .withConverter(projectConverter)
+      .get();
     return snapshot.docs.map((project) => project.data());
   };
 
@@ -21,27 +24,55 @@ class ProjectService {
   // };
 
   getById = async (id) => {
-    const project = await this.db.collection('projects').doc(id).withConverter(projectConverter).get();
+    const project = await this.db
+      .collection('projects')
+      .doc(id)
+      .withConverter(projectConverter)
+      .get();
     // project = await user.project();
     return project.data();
   };
 
   getLikesById = async (id) => {
-    const snapshot = await this.db.collection('projects').doc(id).collection('likes').get();
+    const snapshot = await this.db
+      .collection('projects')
+      .doc(id)
+      .collection('likes')
+      .get();
     return snapshot.docs.map((like) => like.data());
   };
 
   addLike = async (projectId, userId) => {
-    this.db.collection('projects').doc(projectId).collection('likes').doc(userId).set({ userId: userId });
+    this.db
+      .collection('projects')
+      .doc(projectId)
+      .collection('likes')
+      .doc(userId)
+      .set({ userId: userId });
   };
 
   removeLike = async (projectId, userId) => {
-    this.db.collection('projects').doc(projectId).collection('likes').doc(userId).delete();
+    this.db
+      .collection('projects')
+      .doc(projectId)
+      .collection('likes')
+      .doc(userId)
+      .delete();
   };
 
   getProjectsForUser = async (userId) => {
     const snapshot = await this.db
       .collectionGroup('owners')
+      .where('userId', '==', userId)
+      .withConverter(userConverter)
+      .get();
+
+    return snapshot.docs.map((doc) => doc.ref.parent.parent.id);
+  };
+
+  getLikedProjectsByUser = async (userId) => {
+    const snapshot = await this.db
+      .collectionGroup('likes')
       .where('userId', '==', userId)
       .withConverter(userConverter)
       .get();
@@ -55,8 +86,6 @@ class ProjectService {
     project.owners.forEach((owner) => {
       ref.collection('owners').doc(owner.id).set({
         userId: owner.id,
-        avatar: owner.avatar,
-        name: owner.name,
       });
     });
 
@@ -87,7 +116,12 @@ class ProjectService {
   };
 
   removeOwner = (ownerId, projectId) => {
-    this.db.collection('projects').doc(projectId).collection('owners').doc(ownerId).delete();
+    this.db
+      .collection('projects')
+      .doc(projectId)
+      .collection('owners')
+      .doc(ownerId)
+      .delete();
   };
 
   getOwners = async (projectId) => {

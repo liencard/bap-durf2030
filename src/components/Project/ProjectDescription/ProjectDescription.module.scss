@@ -59,9 +59,15 @@ $spacing-top: 3rem;
       font-weight: 600;
       margin-bottom: 2rem;
 
+      .name__wrapper {
+        display: flex;
+        align-items: center;
+      }
+
       .creator__name {
         line-height: 1.2;
         font-weight: 600;
+        margin-right: 1rem;
       }
 
       .creator__organisation {
@@ -70,7 +76,6 @@ $spacing-top: 3rem;
 
       .people__image {
         @include pfp-large;
-        background-color: $grey;
         margin-right: 2rem;
       }
     }
@@ -92,9 +97,15 @@ $spacing-top: 3rem;
       align-items: center;
       margin-bottom: 2rem;
 
-      .helper__name {
-        font-weight: 600;
-        line-height: 1.2;
+      .name__wrapper {
+        display: flex;
+        align-items: center;
+
+        .helper__name {
+          font-weight: 600;
+          line-height: 1.2;
+          margin-right: 1rem;
+        }
       }
     }
   }
@@ -103,5 +114,4 @@ $spacing-top: 3rem;
 .image {
   @include pfp-large;
   margin-right: 2rem;
-  background-color: $grey;
 }

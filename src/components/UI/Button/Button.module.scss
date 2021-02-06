@@ -6,12 +6,12 @@
 
 .buttonOutline {
   background: transparent;
-  border: 0.1rem solid $green;
+  border: 0.1rem solid $grey;
   color: $blue-dark;
 
   &:hover {
-    background: $green;
-    color: white;
+    background: $grey;
+    color: $blue-dark;
   }
 }
 

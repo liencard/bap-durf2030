@@ -1,0 +1,8 @@
+@import '../../../styles/styles.scss';
+$border-radius: 0.5rem;
+
+.title {
+  @include title-two;
+  margin-top: 6rem;
+  margin-bottom: 5rem;
+}

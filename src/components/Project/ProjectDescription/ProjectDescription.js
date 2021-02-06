@@ -2,9 +2,31 @@ import styles from './ProjectDescription.module.scss';
 import { observer } from 'mobx-react-lite';
 import { ProjectLikes, ProjectShare } from '../../Project';
 import { Button } from '../../UI';
+import { useStores } from '../../../hooks/useStores';
 import ReactHtmlParser from 'react-html-parser';
 
-const ProjectDescription = observer(({ project }) => {
+const ProjectDescription = observer(({ project, users }) => {
+  let durversInfo = [];
+  let ownersInfo = [];
+
+  project.durvers.forEach((durver) => {
+    const newDurver = users.find(
+      (existingUser) => durver.user.id === existingUser.id
+    );
+    //console.log('NEW');
+    durversInfo.push(newDurver);
+    //console.log(durversInfo);
+  });
+
+  console.log(project.owners);
+
+  project.owners.forEach((owner) => {
+    const newOwner = users.find((existingUser) => owner.id === existingUser.id);
+    console.log('NEW');
+    ownersInfo.push(newOwner);
+    console.log(ownersInfo);
+  });
+
   return (
     <>
       <div className={styles.text__wrapper}>
@@ -22,7 +44,7 @@ const ProjectDescription = observer(({ project }) => {
       <aside className={styles.details}>
         <div className={styles.creator__wrapper}>
           <h3 className={styles.creator__title}>Organisator(en)</h3>
-          {project.owners.map((owner) => (
+          {ownersInfo.map((owner) => (
             <div key={owner.id} className={styles.creator}>
               <img
                 className={styles.people__image}
@@ -30,7 +52,17 @@ const ProjectDescription = observer(({ project }) => {
                 alt="profielfoto van organisator"
               />
               <div>
-                <p className={styles.creator__name}>{owner.name}</p>
+                <span className={styles.name__wrapper}>
+                  <p className={styles.creator__name}>{owner.name}</p>
+                  {owner.awards.map((award) => (
+                    <img
+                      key={award.name}
+                      width="20"
+                      height="20"
+                      src={award.img}
+                    />
+                  ))}
+                </span>
                 <p className={styles.creator__organisation}>Individu</p>
               </div>
             </div>
@@ -46,15 +78,25 @@ const ProjectDescription = observer(({ project }) => {
           </p>
           {project.durvers.length > 3 ? (
             <>
-              {project.durvers.slice(0, 3).map((durver) => (
-                <div key={durver.timestamp.seconds} className={styles.helper}>
+              {durversInfo.slice(0, 3).map((durver) => (
+                <div key={durver.id} className={styles.helper}>
                   <img
                     className={styles.image}
-                    src={durver.user.avatar}
+                    src={durver.avatar}
                     alt="profielfoto van organisator"
                   />
                   <div>
-                    <p className={styles.helper__name}>{durver.user.name}</p>
+                    <span className={styles.name__wrapper}>
+                      <p className={styles.helper__name}>{durver.name}</p>
+                      {durver.awards.map((award) => (
+                        <img
+                          key={award.name}
+                          width="20"
+                          height="20"
+                          src={award.img}
+                        />
+                      ))}
+                    </span>
                     <p>Extra info</p>
                   </div>
                 </div>
@@ -62,15 +104,25 @@ const ProjectDescription = observer(({ project }) => {
             </>
           ) : (
             <>
-              {project.durvers.map((durver) => (
-                <div key={durver.timestamp.seconds} className={styles.helper}>
+              {durversInfo.map((durver) => (
+                <div key={durver.id} className={styles.helper}>
                   <img
                     className={styles.image}
-                    src={durver.user.avatar}
+                    src={durver.avatar}
                     alt="profielfoto van organisator"
                   />
                   <div>
-                    <p className={styles.helper__name}>{durver.user.name}</p>
+                    <span className={styles.name__wrapper}>
+                      <p className={styles.helper__name}>{durver.name}</p>
+                      {durver.awards.map((award) => (
+                        <img
+                          key={award.name}
+                          width="20"
+                          height="20"
+                          src={award.img}
+                        />
+                      ))}
+                    </span>
                     <p>Extra info</p>
                   </div>
                 </div>

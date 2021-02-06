@@ -4,8 +4,6 @@ import styles from './ProjectDurvers.module.scss';
 import { Button } from '../../UI';
 
 const ProjectDurvers = observer(({ project }) => {
-  console.log(project.durvers);
-
   return (
     <>
       <section className={styles.header}>

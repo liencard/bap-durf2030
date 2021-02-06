@@ -9,6 +9,7 @@ class UiStore {
     this.rootStore = rootStore;
     this.currentUser = undefined;
     this.userProjects = [];
+    this.userLikedProjects = [];
     this.authService = new AuthService(
       this.rootStore.firebase,
       this.onAuthStateChanged
@@ -20,13 +21,20 @@ class UiStore {
       setCurrentUser: action,
       onAuthStateChanged: action,
       userProjects: observable,
+      userLikedProjects: observable,
       getProjectsForUser: action,
+      getLikedProjectsByUser: action,
       addProject: action,
+      addLikedProject: action,
     });
   }
 
   addProject = (project) => {
     this.userProjects.push(project);
+  };
+
+  addLikedProject = (project) => {
+    this.userLikedProjects.push(project);
   };
 
   onAuthStateChanged = (user) => {
@@ -88,11 +96,34 @@ class UiStore {
     );
 
     projectArr.forEach(async (projectId) => {
-      const json = await this.rootStore.projectStore.projectService.getById(projectId);
-      const project = await this.rootStore.projectStore.updateProjectFromServer(json);
+      const json = await this.rootStore.projectStore.projectService.getById(
+        projectId
+      );
+      const project = await this.rootStore.projectStore.updateProjectFromServer(
+        json
+      );
       project.getLikes();
       project.getDurvers();
+      project.getRequirementsInfo();
       await this.addProject(project);
+    });
+  };
+
+  getLikedProjectsByUser = async () => {
+    const projectArr = await this.rootStore.projectStore.projectService.getLikedProjectsByUser(
+      this.currentUser.id
+    );
+    projectArr.forEach(async (projectId) => {
+      const json = await this.rootStore.projectStore.projectService.getById(
+        projectId
+      );
+      const project = await this.rootStore.projectStore.updateProjectFromServer(
+        json
+      );
+      project.getLikes();
+      project.getDurvers();
+      project.getRequirementsInfo();
+      await this.addLikedProject(project);
     });
   };
 }
