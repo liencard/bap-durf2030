@@ -52,6 +52,19 @@ const theme = createMuiTheme({
     body2: { lineHeight: 1.7, fontSize: '1.6rem' },
   },
   overrides: {
+    // Tab elementen
+    MuiTab: {
+      root: {
+        padding: '0.6rem 0.4rem',
+        marginRight: '3rem',
+        '&:last-of-type': {
+          marginRight: '0',
+        },
+        '@media (min-width: 0px)': {
+          minWidth: 0,
+        },
+      },
+    },
     // FORM - Inputs & labels
     MuiOutlinedInput: {
       root: {
@@ -80,7 +93,6 @@ const theme = createMuiTheme({
         color: '#0c1424',
       },
     },
-
     // FORM - Switch
     MuiIconButton: {
       root: {
@@ -143,12 +155,6 @@ const theme = createMuiTheme({
       },
     },
   },
-  MuiTab: {
-    root: {
-      minWidth: '0 !important', // werkt niet
-    },
-  },
-  // Tab elementen
 });
 
 export default theme;
