@@ -45,6 +45,13 @@ class ProjectStore {
     return projectId;
   };
 
+  updateImageForProject = async (image, projectId) => {
+    const imageURL = await this.createImageForProject(image, projectId);
+    image.url = imageURL;
+    this.projectService.updateImageURL(image, projectId);
+    return imageURL;
+  };
+
   createRequirementsForProject = async ({ requirements, info, projectId }) => {
     if (info.materialsRequired) {
       this.requirementService.createItems(requirements.materials, projectId, 'material');
@@ -108,12 +115,6 @@ class ProjectStore {
   updateProjectFromServer = (json) => {
     let project = this.projects.find((project) => project.id === json.id);
     if (!project) {
-      // image ophalen
-      if (json.image.enabled) {
-        this.projectService.getImage(json.image.name, json.id);
-        // json.image.file =
-      }
-
       project = new Project({
         id: json.id,
         title: json.title,

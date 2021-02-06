@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useField } from '@formiz/core';
+import { Button } from '../../UI';
 
 import styles from './FormFieldFileUpload.module.scss';
 
@@ -19,32 +20,42 @@ const FormFieldFileUpload = (props) => {
 
   const handleClickRemoveImage = () => {
     setPreview('');
+    setValue(null);
   };
+
+  useEffect(() => {
+    if (defaultValue) {
+      setPreview(defaultValue);
+    }
+  }, []);
 
   return (
     <>
-      <input
-        type="file"
-        id="myFile"
-        accept="image/png, image/jpeg, image/jpg"
-        name="filename"
-        onChange={(e) => handleLoadImage(e.currentTarget)}
-      />
-      {preview && (
-        <>
-          <div
-            className={styles.style__customPreview}
-            style={{
-              background: `center / cover no-repeat url(${preview ? preview : ''})`,
-              height: '20rem',
-              width: '20rem',
-            }}
-          ></div>
-          {/* <p className={styles.style__remove} onClick={handleClickRemoveImage}>
-            Remove
-          </p> */}
-        </>
-      )}
+      <div className={styles.upload}>
+        <div className={styles.buttons}>
+          <label for="fotoUpload" class={styles.button}>
+            Foto uploaden
+          </label>
+          <input
+            type="file"
+            id="fotoUpload"
+            accept="image/png, image/jpeg, image/jpg"
+            name="filename"
+            onChange={(e) => handleLoadImage(e.currentTarget)}
+          />
+          {preview && <Button text="Foto verwijderen" onClick={handleClickRemoveImage} variant="secondary" />}
+        </div>
+        {preview && (
+          <>
+            <div
+              className={styles.image}
+              style={{
+                background: `center / cover no-repeat url(${preview ? preview : ''})`,
+              }}
+            ></div>
+          </>
+        )}
+      </div>
     </>
   );
 };

@@ -7,6 +7,7 @@ import {
   FormFieldCheckbox,
   FormFieldSwitch,
   FormFieldSelect,
+  FormFieldFileUpload,
 } from '../../Create';
 import { THEMES, CATEGORIES } from '../../../consts';
 
@@ -28,7 +29,18 @@ const EditBasis = ({ project }) => {
       values['categories'] = categoriesWithValues;
       values['themes'] = themesWithValues;
     }
+
     project.updateProject(values);
+  };
+
+  const handleSaveImage = (values) => {
+    values.image = {
+      enabled: values.image ? true : false,
+      name: values.image ? values.image.name : '',
+      file: values.image ? values.image.file : '',
+      url: '',
+    };
+    project.updateImage(values.image);
   };
 
   return (
@@ -53,8 +65,8 @@ const EditBasis = ({ project }) => {
         </EditField>
       </EditPart>
 
-      <EditPart title="Foto's" handleSaveProject={handleSaveProject}>
-        <p>fotos</p>
+      <EditPart title="Foto's" handleSaveProject={handleSaveImage}>
+        <FormFieldFileUpload name="image" defaultValue={project.image.url} />
       </EditPart>
 
       <EditPart title="Tags" handleSaveProject={handleSaveProject}>
