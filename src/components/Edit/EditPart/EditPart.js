@@ -24,16 +24,16 @@ const EditPart = ({ children, title, handleSaveProject, alwaysEnabled }) => {
                 <Button type="submit" className={styles.save__btn} text="Post opslaan" />
               </div>
             ) : (
-              <div>
-                <button
+              <div className={styles.buttons}>
+                <Button
                   className={styles.edit__btn}
                   onClick={(e) => {
                     e.preventDefault();
                     setAllowEdit(!allowEdit);
                   }}
-                >
-                  {allowEdit ? 'Annuleer' : 'Bewerken'}
-                </button>
+                  variant="secondary"
+                  text={allowEdit ? 'Annuleer' : 'Bewerken'}
+                />
                 {allowEdit && <Button type="submit" className={styles.save__btn} text="Bewerking opslaan" />}
               </div>
             )}

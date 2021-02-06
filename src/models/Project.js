@@ -119,6 +119,9 @@ class Project {
 
       state: observable,
       updateState: action,
+
+      image: observable,
+      updateImage: action,
     });
   }
 
@@ -311,6 +314,11 @@ class Project {
 
     this.store.updateProject(newValues, this.id); // this
   }
+
+  updateImage = async (image) => {
+    const imageURL = await this.store.updateImageForProject(image, this.id);
+    this.image.url = imageURL;
+  };
 }
 
 // Server side rendering of detail page, convert data

@@ -25,7 +25,7 @@ const CATEGORIES = [
   'Divers',
 ];
 
-const THEMES = ['Eeenzaamheid rond corona', 'Ondernemingschap', 'Klimaat', 'Andere'];
+const THEMES = ['Eenzaamheid rond corona', 'Ondernemingschap', 'Klimaat', 'Andere'];
 
 const MATERIALTYPES = ['Bouwmateriaal', 'Eten & Drinken', 'Infrastructuur', 'Knutselmateriaal', 'Speelgoed', 'Andere'];
 

@@ -1,12 +1,6 @@
 @import '../../../styles/styles.scss';
 $border-radius: 0.5rem;
 
-.status {
-  background-color: $green-light;
-  padding: 2rem 3rem;
-  margin-bottom: 7rem;
-}
-
 .form__switch {
   margin-left: 3rem;
 
@@ -37,4 +31,8 @@ $border-radius: 0.5rem;
   & > div {
     margin-top: 2rem;
   }
+}
+
+.image {
+  height: 30rem;
 }

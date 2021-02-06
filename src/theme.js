@@ -143,6 +143,12 @@ const theme = createMuiTheme({
       },
     },
   },
+  MuiTab: {
+    root: {
+      minWidth: '0 !important', // werkt niet
+    },
+  },
+  // Tab elementen
 });
 
 export default theme;
