@@ -46,7 +46,6 @@ class ProjectService {
   };
 
   create = async (project) => {
-    console.log(project);
     const ref = await this.db.collection('projects').doc('dummy');
     ref.withConverter(projectConverter).set(project);
     project.owners.forEach((owner) => {
