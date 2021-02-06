@@ -50,7 +50,8 @@ class ProjectService {
   };
 
   create = async (project) => {
-    const ref = await this.db.collection('projects').doc();
+    console.log(project);
+    const ref = await this.db.collection('projects').doc('dummy');
     ref.withConverter(projectConverter).set(project);
     project.owners.forEach((owner) => {
       ref.collection('owners').doc(owner.id).set({
@@ -162,9 +163,19 @@ class ProjectService {
     this.db.collection('projects').doc(projectId).update({ state: state });
   };
 
-  uploadImage = (file, name, userId) => {
-    let imageRef = this.storage.ref().child(`images/${name}`);
-    imageRef.put(file);
+  uploadImage = async (file, name, projectId) => {
+    let imageRef = this.storage.ref().child(`images/${projectId}/${name}`);
+    await imageRef.put(file);
+    return imageRef.getDownloadURL();
+  };
+
+  getImage = (name, projectId) => {
+    let imageRef = this.storage.ref(`images/${projectId}/${name}`);
+    console.log(name);
+    // console.log(imageRef.getDownloadURL());
+    // imageRef.getDownloadURL().then((url) => {
+    //   return url;
+    // });
   };
 }
 

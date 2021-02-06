@@ -1,17 +1,25 @@
 import { observer } from 'mobx-react-lite';
 import styles from './ProjectCard.module.scss';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ROUTES } from '../../../consts/index';
 import { ProjectLikes, ProjectHelpers, ProjectIcons } from '../';
 import LinesEllipsis from 'react-lines-ellipsis';
 
 const ProjectCard = observer(({ project }) => {
+  const [image, setImage] = useState('thumbnail-temp.jpg');
   let tags = [];
   // Object.keys(project.themes).forEach((key) => {
   //   if (project.themes[key] === true) {
   //     tags.push(key);
   //   }
   // });
+
+  useEffect(() => {
+    if (project.image.enabled && project.image.url) {
+      setImage(project.image.url);
+    }
+  }, []);
 
   Object.keys(project.categories).forEach((key) => {
     if (project.categories[key] === true) {
