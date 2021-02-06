@@ -1,4 +1,3 @@
-import ProjectList from '../components/ProjectList/ProjectList';
 import Header from '../components/Header/Header';
 import HomeHero from '../components/Home/HomeHero/HomeHero';
 import HomeSpotlight from '../components/Home/HomeSpotlight/HomeSpotlight';
