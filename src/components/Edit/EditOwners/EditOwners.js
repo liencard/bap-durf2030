@@ -41,7 +41,7 @@ const EditOwners = observer(({ project }) => {
     <>
       <EditPart title="Organisatoren" handleSaveProject={handleSaveOwners}>
         <EditField>
-          <EditLabel text="Leg het doel uit" htmlFor="owners" />
+          <EditLabel text="Alle organisatoren" htmlFor="owners" />
           <FormFieldAddUser defaultValue={showOwners()} name="owners" />
         </EditField>
       </EditPart>
