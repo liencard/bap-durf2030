@@ -3,3 +3,19 @@
 .projects {
   padding-top: 15rem;
 }
+
+.masonry {
+  grid-column: span 12;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.column:first-of-type {
+  margin-right: $grid-gap;
+}
+
+.title {
+  @include title-one;
+  margin: 0;
+  padding: 0;
+}

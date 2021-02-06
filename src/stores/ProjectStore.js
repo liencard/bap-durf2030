@@ -3,7 +3,6 @@ import ProjectService from '../services/ProjectService';
 import RequirementService from '../services/RequirementService';
 import { getCurrenTimeStamp, getArrayUnion, removeFromArray } from './';
 import Project from '../models/Project';
-import { v4 } from 'uuid';
 
 class ProjectStore {
   constructor(rootStore) {
@@ -36,7 +35,14 @@ class ProjectStore {
   };
 
   createProject = async (project) => {
-    return await this.projectService.create(project);
+    project.timestamp = getCurrenTimeStamp();
+    project.state = 0;
+    if (project.image) {
+      const imageURL = await this.createImageForProject(project.image, projectId);
+      project.image.url = imageURL;
+    }
+    const projectId = await this.projectService.create(project);
+    return projectId;
   };
 
   createRequirementsForProject = async ({ requirements, info, projectId }) => {
@@ -88,8 +94,8 @@ class ProjectStore {
     this.requirementService.createDurver(durver, projectId);
   };
 
-  createImageForProject = async (image) => {
-    // to do linken
+  createImageForProject = (image, projectId) => {
+    return this.projectService.uploadImage(image.file, image.file.name, projectId);
   };
 
   getProjectById = (id) => this.projects.find((project) => project.id === id);
@@ -102,6 +108,12 @@ class ProjectStore {
   updateProjectFromServer = (json) => {
     let project = this.projects.find((project) => project.id === json.id);
     if (!project) {
+      // image ophalen
+      if (json.image.enabled) {
+        this.projectService.getImage(json.image.name, json.id);
+        // json.image.file =
+      }
+
       project = new Project({
         id: json.id,
         title: json.title,
@@ -118,6 +130,7 @@ class ProjectStore {
         userId: json.userId,
         state: json.state,
         updates: json.updates,
+        image: json.image,
         impact: json.impact,
         date: json.date,
         store: this.rootStore.projectStore,
