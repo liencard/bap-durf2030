@@ -1,3 +1,5 @@
+import styles from './TabPanel.module.scss';
+
 const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
 
@@ -7,9 +9,11 @@ const TabPanel = (props) => {
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
+      className={styles.panel}
       {...other}
     >
-      {value === index && <div>{children}</div>}
+      {/* {children} */}
+      {value === index && <>{children} </>}
     </div>
   );
 };

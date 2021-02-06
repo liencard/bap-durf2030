@@ -17,22 +17,6 @@ $border-radius: 0.5rem;
       width: 100%;
       object-fit: cover;
     }
-
-    .icons {
-      position: absolute;
-      background: $red;
-      right: 1.5rem;
-      top: 1.5rem;
-      border-radius: $border-radius;
-      display: flex;
-      padding: 0.3rem 0.5rem;
-
-      img {
-        display: block;
-        padding: 0.3rem;
-        transform: scale(1.1);
-      }
-    }
   }
 
   .content {

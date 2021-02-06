@@ -3,7 +3,6 @@ import ProjectService from '../services/ProjectService';
 import RequirementService from '../services/RequirementService';
 import { getCurrenTimeStamp, getArrayUnion, removeFromArray } from './';
 import Project from '../models/Project';
-import { v4 } from 'uuid';
 
 class ProjectStore {
   constructor(rootStore) {

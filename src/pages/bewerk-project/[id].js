@@ -62,19 +62,20 @@ const EditProject = observer(({ query }) => {
                   <Button href={ROUTES.home} text={'Update posten'} />
                 </TabSideElement>
               </AppBar>
-              <TabPanel className={styles.panel} value={value} index={0}>
+
+              <TabPanel value={value} index={0}>
                 <EditBasis project={project} />
               </TabPanel>
-              <TabPanel className={styles.panel} value={value} index={1}>
+              <TabPanel value={value} index={1}>
                 <EditRequirements project={project} />
               </TabPanel>
-              <TabPanel className={styles.panel} value={value} index={2}>
+              <TabPanel value={value} index={2}>
                 <EditOwners project={project} />
               </TabPanel>
-              <TabPanel className={styles.panel} value={value} index={3}>
+              <TabPanel value={value} index={3}>
                 <EditUpdates project={project} />
               </TabPanel>
-              <TabPanel className={styles.panel} value={value} index={4}>
+              <TabPanel value={value} index={4}>
                 <EditState project={project} />
               </TabPanel>
             </section>

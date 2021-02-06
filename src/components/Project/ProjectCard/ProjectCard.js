@@ -3,7 +3,7 @@ import styles from './ProjectCard.module.scss';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ROUTES } from '../../../consts/index';
-import { ProjectLikes, ProjectHelpers } from '../';
+import { ProjectLikes, ProjectHelpers, ProjectIcons } from '../';
 import LinesEllipsis from 'react-lines-ellipsis';
 
 const ProjectCard = observer(({ project }) => {
@@ -31,16 +31,8 @@ const ProjectCard = observer(({ project }) => {
     <Link href={ROUTES.detail.to + project.id}>
       <a className={styles.card}>
         <div className={styles.thumbnail}>
-          {(project.fundingRequired === true ||
-            project.materialsRequired === true ||
-            project.servicesRequired === true) && (
-            <div className={styles.icons}>
-              {project.servicesRequired && <img src="/icons/service-white.svg" alt="service" />}
-              {project.materialsRequired && <img src="/icons/material-white.svg" alt="materiaal" />}
-              {project.fundingRequired && <img src="/icons/money-white.svg" alt="geld" />}
-            </div>
-          )}
-          <img className={styles.image} src={image} alt="service" />
+          <ProjectIcons project={project} />
+          <img className={styles.image} src="thumbnail-temp.jpg" alt="service" />
         </div>
 
         <div className={styles.content}>
