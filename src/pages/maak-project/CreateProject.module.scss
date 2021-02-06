@@ -17,23 +17,11 @@
     background: $green;
   }
 
-  // &::after {
-  //   position: fixed;
-  //   content: '';
-  //   background: url('/pfp-temp.jpg');
-  //   height: 100%;
-  //   width: 30%;
-  //   z-index: 3;
-  //   left: 0;
-  // }
-}
-
 .content {
   grid-column: 7 / span 6;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  // height: 100%;
 
   .text {
     min-height: 60rem;

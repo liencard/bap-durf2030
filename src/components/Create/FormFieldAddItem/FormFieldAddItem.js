@@ -9,11 +9,8 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import styles from './FormFieldAddItem.module.scss';
 
 const FormFieldAddItem = (props) => {
-
-  const { errorMessage, id, isValid, isSubmitted, setValue, value } = useField(props);
-  const { label, required, options, defaultValue = [], textRow } = props;
-  const [isTouched, setIsTouched] = useState(false);
-  const showError = !isValid && (isTouched || isSubmitted);
+  const { isValid, isSubmitted, setValue, value } = useField(props);
+  const { label, required, options, defaultValue = [], textRow, completeOption, setComplete } = props;
 
   const [activeItem, setActiveItem] = useState('');
   const [activeItemCategory, setActiveItemCategory] = useState(options[0]);
@@ -26,6 +23,8 @@ const FormFieldAddItem = (props) => {
         name: item.name,
         category: item.category,
         amount: item.amount,
+        completed: item.completed,
+        type: item.type,
       };
     });
     setItems(itemsArr);
@@ -36,10 +35,7 @@ const FormFieldAddItem = (props) => {
   }, [items]);
 
   const addItem = () => {
-    setItems([
-      ...items,
-      { name: activeItem, amount: 1, category: activeItemCategory },
-    ]);
+    setItems([...items, { name: activeItem, amount: 1, category: activeItemCategory }]);
     setActiveItem('');
   };
 
@@ -73,7 +69,7 @@ const FormFieldAddItem = (props) => {
     <>
       {items.map((item, i) => {
         return (
-          <div key={i} className={styles.item}>
+          <div key={i} className={`${styles.item} ${item.completed && styles.itemCompleted}`}>
             <div className={styles.amount}>
               <div
                 className={`${styles.sign}`}
@@ -93,28 +89,39 @@ const FormFieldAddItem = (props) => {
                 +
               </div>
             </div>
-            <div className={`${styles.text} ${textRow && styles.textRow}`}>
+            <div className={`${styles.text} ${textRow && styles.textRow} `}>
               <p className={styles.category}>{item.category}</p>
               <p className={styles.name}>{item.name}</p>
             </div>
-            <p
-              onClick={() => {
-                removeItem(item);
-              }}
-              className={styles.delete}
-            >
-              verwijder
-            </p>
+            <div className={styles.buttons}>
+              {completeOption && (
+                <div
+                  className={styles.complete}
+                  onClick={() => {
+                    setComplete(item);
+                  }}
+                >
+                  <img src="../icons/check-green.svg" />
+                  <span className="hidden">Voltooien</span>
+                </div>
+              )}
+              <div
+                onClick={() => {
+                  removeItem(item);
+                }}
+                className={styles.delete}
+              >
+                <img src="../icons/delete-red.svg" />
+                <span className="hidden">Verwijder</span>
+              </div>
+            </div>
           </div>
         );
       })}
       <div className={styles.wrapper}>
         <FormControl variant="outlined" fullWidth>
           <InputLabel>Categorie</InputLabel>
-          <Select
-            onChange={(e) => setActiveItemCategory(e.target.value)}
-            defaultValue={options[0]}
-          >
+          <Select onChange={(e) => setActiveItemCategory(e.target.value)} defaultValue={options[0]}>
             {options.map((option) => {
               return (
                 <MenuItem key={option} value={option}>
@@ -139,9 +146,7 @@ const FormFieldAddItem = (props) => {
             value={activeItem ?? ''}
             onChange={(e) => setActiveItem(e.target.value)}
           />
-          <FormHelperText id="outlined-weight-helper-text">
-            Druk op ENTER om toe te voegen
-          </FormHelperText>
+          <FormHelperText id="outlined-weight-helper-text">Druk op ENTER om toe te voegen</FormHelperText>
 
           <div className={styles.add__button}>
             <div

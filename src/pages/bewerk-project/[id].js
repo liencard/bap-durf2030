@@ -33,6 +33,7 @@ const EditProject = observer(({ query }) => {
         resolvedProject.getRequirementsInfo();
         resolvedProject.getRequirementsList();
         resolvedProject.getOwners();
+        resolvedProject.getDurvers();
         setState(STATE_FULLY_LOADED);
         setProject(resolvedProject);
       } catch (error) {

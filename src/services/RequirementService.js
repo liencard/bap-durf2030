@@ -36,6 +36,12 @@ class RequirementService {
     });
   };
 
+  updateItemStatus = (itemId, status, projectId) => {
+    this.db.collection('requirements').doc(projectId).collection('list').doc(itemId).update({
+      completed: status,
+    });
+  };
+
   updateDetails = (project) => {
     this.db
       .collection('requirements')
