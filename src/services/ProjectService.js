@@ -75,7 +75,7 @@ class ProjectService {
       .collection('projects')
       .doc(projectId)
       .collection('owners')
-      .doc()
+      .doc(owner.id)
       .set({ userId: owner.id, avatar: owner.avatar, name: owner.name });
   };
 
