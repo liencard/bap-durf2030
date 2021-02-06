@@ -47,9 +47,9 @@ const Header = observer(() => {
 
     const handleScroll = () => {
       const currentScrollPos = window.pageYOffset;
-      if (currentScrollPos < 300 && headerBanner) {
+      if (currentScrollPos < 300 && headerBanner.current) {
         headerBanner.current.classList.add(styles.header__dark);
-      } else {
+      } else if (headerBanner.current) {
         headerBanner.current.classList.remove(styles.header__dark);
       }
     };
