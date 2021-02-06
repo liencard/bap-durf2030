@@ -6,8 +6,6 @@ import { ProjectLikes, ProjectHelpers } from '../../Project';
 import LinesEllipsis from 'react-lines-ellipsis';
 
 const OwnProjectCard = observer(({ project }) => {
-  console.log(project);
-
   const getState = (state) => {
     switch (state) {
       case 0:
