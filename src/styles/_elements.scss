@@ -13,6 +13,7 @@
   width: 2.5rem;
   object-fit: cover;
   border-radius: 50%;
+  background-color: white;
 }
 
 @mixin form__label {
@@ -36,6 +37,7 @@
   width: 4.3rem;
   object-fit: cover;
   border-radius: 50%;
+  background-color: white;
 }
 
 @mixin button {

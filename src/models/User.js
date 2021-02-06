@@ -16,7 +16,8 @@ class User {
     //this.lastname = lastname;
     this.avatar = avatar;
     if (!avatar) {
-      this.avatar = `https://avatars.dicebear.com/v2/avataaars/${this.id}.svg`;
+      //this.avatar = `https://avatars.dicebear.com/v2/avataaars/${this.id}.svg`;
+      this.avatar = `https://avatars.dicebear.com/api/identicon/${this.id}.svg`;
     }
 
     this.email = email;
@@ -30,6 +31,31 @@ class User {
     !this.comments.includes(comment) && this.comments.push(comment);
   }
 }
+
+const convertDataUser = {
+  toJSON(user) {
+    return {
+      userId: user.id,
+      name: user.name,
+      avatar: user.avatar,
+      email: user.email,
+      admin: user.admin,
+      awards: user.awards,
+    };
+  },
+
+  fromJSON(user, store) {
+    return new User({
+      id: user.userId,
+      name: user.name,
+      avatar: user.avatar,
+      email: user.email,
+      admin: user.admin,
+      awards: user.awards,
+      store: store,
+    });
+  },
+};
 
 const userConverter = {
   toFirestore: function (user) {
@@ -57,5 +83,5 @@ const userConverter = {
   },
 };
 
-export { userConverter };
+export { userConverter, convertDataUser };
 export default User;

@@ -11,6 +11,7 @@ import { Button, TabPanel, AppBar, TabSideElement } from '../../components/UI';
 import Tab from '@material-ui/core/Tab';
 import Masonry from 'react-masonry-css';
 
+
 const Projects = ({ projectsJSON }) => {
   const { projectStore } = useStores();
   const [projects, setProjects] = useState([]);
