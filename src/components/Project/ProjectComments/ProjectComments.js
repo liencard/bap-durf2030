@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import { useState, useEffect } from 'react';
 import { useStores } from '../../../hooks/useStores';
+import { Container } from '../../Layout';
 import styles from './ProjectComments.module.scss';
 import ProjectComment from './ProjectComment';
 import Comment from '../../../models/Comment';
@@ -23,7 +24,7 @@ const ProjectComments = observer(({ project }) => {
   };
 
   return (
-    <>
+    <Container>
       <div className={styles.comments}>
         <h2 className={styles.title}>Comments</h2>
 
@@ -59,7 +60,7 @@ const ProjectComments = observer(({ project }) => {
           <input className={styles.submit} type="submit" value="Verzenden" />
         </form>
       </div>
-    </>
+    </Container>
   );
 });
 

@@ -38,7 +38,10 @@ class ProjectStore {
     project.timestamp = getCurrenTimeStamp();
     project.state = 0;
     if (project.image) {
-      const imageURL = await this.createImageForProject(project.image, projectId);
+      const imageURL = await this.createImageForProject(
+        project.image,
+        projectId
+      );
       project.image.url = imageURL;
     }
     const projectId = await this.projectService.create(project);
@@ -54,10 +57,18 @@ class ProjectStore {
 
   createRequirementsForProject = async ({ requirements, info, projectId }) => {
     if (info.materialsRequired) {
-      this.requirementService.createItems(requirements.materials, projectId, 'material');
+      this.requirementService.createItems(
+        requirements.materials,
+        projectId,
+        'material'
+      );
     }
     if (info.servicesRequired) {
-      this.requirementService.createItems(requirements.services, projectId, 'service');
+      this.requirementService.createItems(
+        requirements.services,
+        projectId,
+        'service'
+      );
     }
     this.requirementService.createInfo(info, projectId);
   };
@@ -71,7 +82,9 @@ class ProjectStore {
   };
 
   createUpdate = (newUpdate, timestamp, projectId) => {
-    const updates = { updates: getArrayUnion({ text: newUpdate, timestamp: timestamp }) };
+    const updates = {
+      updates: getArrayUnion({ text: newUpdate, timestamp: timestamp }),
+    };
     this.projectService.updateProjectUpdates(updates, projectId);
   };
 
@@ -106,7 +119,11 @@ class ProjectStore {
   };
 
   createImageForProject = (image, projectId) => {
-    return this.projectService.uploadImage(image.file, image.file.name, projectId);
+    return this.projectService.uploadImage(
+      image.file,
+      image.file.name,
+      projectId
+    );
   };
 
   getProjectById = (id) => this.projects.find((project) => project.id === id);
@@ -118,6 +135,7 @@ class ProjectStore {
 
   updateProjectFromServer = (json) => {
     let project = this.projects.find((project) => project.id === json.id);
+    console.log(json);
     if (!project) {
       project = new Project({
         id: json.id,

@@ -84,8 +84,8 @@ const OwnProjects = observer(() => {
               <h3 className={styles.subtitle}>Recente activeiten</h3>
               {currentProject.durvers.length > 3 ? (
                 <>
-                  {currentProject.durvers.slice(0, 3).map((durver) => (
-                    <article className={styles.activity}>
+                  {currentProject.durvers.slice(0, 3).map((durver, i) => (
+                    <article key={i} className={styles.activity}>
                       <span className={styles.name}>
                         <p>{durver.user.name}</p>
                         {durver.fundingOffered && (
@@ -135,8 +135,8 @@ const OwnProjects = observer(() => {
                 </>
               ) : (
                 <>
-                  {currentProject.durvers.map((durver) => (
-                    <article className={styles.activity}>
+                  {currentProject.durvers.map((durver, i) => (
+                    <article key={i} className={styles.activity}>
                       <span className={styles.name}>
                         <p>{durver.user.name}</p>
                         {durver.fundingOffered && (

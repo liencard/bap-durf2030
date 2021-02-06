@@ -13,18 +13,14 @@ const ProjectDescription = observer(({ project, users }) => {
     const newDurver = users.find(
       (existingUser) => durver.user.id === existingUser.id
     );
-    //console.log('NEW');
     durversInfo.push(newDurver);
-    //console.log(durversInfo);
   });
 
   console.log(project.owners);
 
   project.owners.forEach((owner) => {
     const newOwner = users.find((existingUser) => owner.id === existingUser.id);
-    console.log('NEW');
     ownersInfo.push(newOwner);
-    console.log(ownersInfo);
   });
 
   return (

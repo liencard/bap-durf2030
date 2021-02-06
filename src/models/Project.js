@@ -233,7 +233,9 @@ class Project {
     const days = Math.floor(seconds / 86400);
 
     if (days < 1) {
-      return `${date.getHours()}:${date.getMinutes() < 10 ? 0 : ''}${date.getMinutes()}`;
+      return `${date.getHours()}:${
+        date.getMinutes() < 10 ? 0 : ''
+      }${date.getMinutes()}`;
     } else if (days < 7) {
       return `${days} dag${days > 1 ? 'en' : ''} geleden`;
     } else {
@@ -298,7 +300,12 @@ class Project {
     Object.keys(newValues).forEach((key) => {
       this[key] = newValues[key];
 
-      if (key !== 'isKnownPlace' && key !== 'number' && key !== 'city' && key !== 'street') {
+      if (
+        key !== 'isKnownPlace' &&
+        key !== 'number' &&
+        key !== 'city' &&
+        key !== 'street'
+      ) {
         updatedValues[key] = newValues[key];
       }
     });
@@ -347,6 +354,7 @@ const convertData = {
       city: project.city,
       street: project.street,
       number: project.number,
+      state: project.state,
       themes: project.themes,
       categories: project.categories,
       image: project.image,
