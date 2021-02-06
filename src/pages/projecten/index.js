@@ -1,23 +1,20 @@
 import { useEffect, useState } from 'react';
 import { Container, Grid } from '../../components/Layout';
-import {
-  ProjectCard,
-  ProjectRequirementsCard,
-  ProjectCardList,
-} from '../../components/Project';
+import { ProjectCard, ProjectRequirementsCard } from '../../components/Project';
 import Header from '../../components/Header/Header';
 import RootStore from '../../stores';
 import styles from './Projects.module.scss';
 import { convertData } from '../../models/Project';
 import { useStores } from '../../hooks/useStores';
-import { ROUTES } from '../../consts';
 import { Button, TabPanel, AppBar, TabSideElement } from '../../components/UI';
 import Tab from '@material-ui/core/Tab';
 import Masonry from 'react-masonry-css';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 const Projects = ({ projectsJSON }) => {
   const { projectStore } = useStores();
   const [projects, setProjects] = useState([]);
+  const [milestones, setMilestones] = useState(0);
   const [value, setValue] = useState(0);
 
   useEffect(() => {
@@ -32,7 +29,18 @@ const Projects = ({ projectsJSON }) => {
     setProjects(projectsArr);
   }, [setProjects]);
 
-  console.log(projects);
+  let milestonesArr = [];
+
+  useEffect(() => {
+    projects.forEach((project) => {
+      if (project.themes['eenzaamheid rond corona'] === true) {
+        milestonesArr.push(project);
+        setMilestones(milestonesArr);
+      }
+    });
+  }, [projects]);
+
+  console.log(milestones);
 
   return (
     <>
@@ -47,6 +55,14 @@ const Projects = ({ projectsJSON }) => {
               via kunst en creativiteit een antwoord op bieden? DURF 2030 zoekt
               naar 40 projecten die eenzaamheid rond corona aanpakken.
             </p>
+            <div className={styles.milestone__bar}>
+              <LinearProgress
+                variant="determinate"
+                value={(milestones.length / 40) * 100}
+              />
+              <span>{milestones.length}</span>
+            </div>
+
             <div className={styles.buttons}>
               <Button text={'Bekijk deze projecten'} />
               <Button text={'Kom meer te weten'} variant="outline" />

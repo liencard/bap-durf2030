@@ -21,11 +21,22 @@
 
     .buttons {
       display: flex;
-      margin-top: 4rem;
 
       button {
         margin-right: 3rem;
       }
+    }
+  }
+
+  .milestone__bar {
+    width: 80%;
+    margin: 3rem 0;
+    position: relative;
+
+    &:after {
+      content: '🏁';
+      position: absolute;
+      right: 0;
     }
   }
 }
