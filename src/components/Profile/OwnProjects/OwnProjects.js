@@ -6,7 +6,6 @@ import { OwnProjectCard } from '../';
 import { ROUTES } from '../../../consts/index';
 import { Button } from '../../../components/UI';
 import styles from './OwnProjects.module.scss';
-import { setPageStateUpdate } from '@material-ui/data-grid';
 
 const OwnProjects = observer(() => {
   const { uiStore } = useStores();
