@@ -92,6 +92,10 @@ class ProjectStore {
     this.requirementService.updateItem(item, itemId, projectId);
   };
 
+  updateItemStatus = (itemId, status, projectId) => {
+    this.requirementService.updateItemStatus(itemId, status, projectId);
+  };
+
   updateRequirementDetails = (project) => {
     this.requirementService.updateDetails(project);
   };

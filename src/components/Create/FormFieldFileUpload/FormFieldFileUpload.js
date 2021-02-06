@@ -44,7 +44,7 @@ const FormFieldFileUpload = (props) => {
     <>
       <div className={styles.upload}>
         <div className={styles.buttons}>
-          <label for="fotoUpload" class={styles.button}>
+          <label htmlFor="fotoUpload" className={styles.button}>
             Foto uploaden
           </label>
           <input

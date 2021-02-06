@@ -235,7 +235,7 @@ class Project {
     if (days < 1) {
       return `${date.getHours()}:${date.getMinutes() < 10 ? 0 : ''}${date.getMinutes()}`;
     } else if (days < 7) {
-      return `${days} dag${days > 1 && 'en'} geleden`;
+      return `${days} dag${days > 1 ? 'en' : ''} geleden`;
     } else {
       return `${date.getDate()} ${months[date.getMonth()]}`;
     }
@@ -318,6 +318,18 @@ class Project {
   updateImage = async (image) => {
     const imageURL = await this.store.updateImageForProject(image, this.id);
     this.image.url = imageURL;
+  };
+
+  updateItemStatus = async (itemId, status, type) => {
+    console.log(this.materials);
+
+    this.store.updateItemStatus(itemId, status, this.id);
+
+    if (type === 'material') {
+      const material = this.materials.find((material) => material.id === itemId);
+    } else if (type === 'service') {
+      const service = this.services.find((service) => service.id === itemId);
+    }
   };
 }
 

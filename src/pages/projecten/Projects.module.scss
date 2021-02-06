@@ -7,9 +7,8 @@
 .masonry {
   grid-column: span 12;
   display: flex;
-  flex-direction: row-reverse;
 
-  .column:last-of-type {
+  .column:first-of-type {
     margin-right: $grid-gap;
   }
 }

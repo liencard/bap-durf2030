@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './EditRequirements.module.scss';
-import { EditPart, EditLabel, EditItemIcons, EditField } from '..';
+import { EditPart, EditLabel, EditItemIcons, EditField, EditOfferList } from '..';
 import { FormFieldInput, FormFieldSwitch, FormFieldAddItem } from '../../Create';
 import { SERVICETYPES, MATERIALTYPES } from '../../../consts';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -9,6 +9,39 @@ const EditRequirements = ({ project }) => {
   const [servicesRequired, setServicesRequired] = useState(project.servicesRequired);
   const [materialsRequired, setMaterialsRequired] = useState(project.materialsRequired);
   const [fundingRequired, setFundingRequired] = useState(project.fundingRequired);
+
+  const [servicesOffers, setServicesOffers] = useState([]);
+  const [materialsOffers, setMaterialsOffers] = useState([]);
+
+  useEffect(() => {
+    let servicesOffersArr = [];
+    let materialsOffersArr = [];
+
+    project.durvers.forEach((durver) => {
+      let servicesOffersByUser = [];
+      let materialsOffersByUser = [];
+
+      durver.offers.forEach((offer) => {
+        if (offer.type === 'material') {
+          materialsOffersByUser.push(offer);
+        } else if (offer.type === 'service') {
+          servicesOffersByUser.push(offer);
+        }
+      });
+
+      if (servicesOffersByUser.length > 0) {
+        servicesOffersArr.push({ durver: durver.user, list: servicesOffersByUser, timestamp: durver.timestamp });
+      }
+
+      if (materialsOffersByUser.length > 0) {
+        materialsOffersArr.push({ durver: durver.user, list: materialsOffersByUser, timestamp: durver.timestamp });
+      }
+    });
+
+    console.log(servicesOffersArr[0]);
+    setServicesOffers(servicesOffersArr);
+    setMaterialsOffers(materialsOffersArr);
+  }, []);
 
   const updateItems = (updatedItems, originalItems, type) => {
     updatedItems.forEach((updatedItem) => {
@@ -49,6 +82,10 @@ const EditRequirements = ({ project }) => {
 
   const handleSaveFunding = (values) => {
     project.updateRequirementDetails(values);
+  };
+
+  const handleCompleteItem = (item) => {
+    project.updateItemStatus(item.id, !item.completed, item.type);
   };
 
   return (
@@ -93,6 +130,7 @@ const EditRequirements = ({ project }) => {
                 label="Dienst toevoegen"
               />
             </EditField>
+            <EditOfferList project={project} offers={servicesOffers} />
           </>
         )}
       </EditPart>
@@ -131,12 +169,16 @@ const EditRequirements = ({ project }) => {
               </div>
               <FormFieldAddItem
                 name="materials"
+                completeOption
+                setComplete={handleCompleteItem}
                 options={MATERIALTYPES}
                 textRow
                 defaultValue={project.materials}
                 label="Materiaal toevoegen"
               />
             </EditField>
+
+            <EditOfferList project={project} offers={materialsOffers} />
           </>
         )}
       </EditPart>

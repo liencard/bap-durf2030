@@ -71,10 +71,10 @@ const EditBasis = ({ project }) => {
             {THEMES.map((theme, i) => {
               return (
                 <FormFieldCheckbox
-                  key={theme}
+                  key={i}
                   name={`themes[${i}]`}
                   option={theme}
-                  defaultValue={theme ? project.themes[theme.toLowerCase()] : false}
+                  defaultValue={project.themes[theme.toLowerCase()]}
                 />
               );
             })}
@@ -86,10 +86,10 @@ const EditBasis = ({ project }) => {
             {CATEGORIES.map((category, i) => {
               return (
                 <FormFieldCheckbox
-                  key={category}
+                  key={i}
                   name={`categories[${i}]`}
                   option={category}
-                  defaultValue={category ? project.categories[category.toLowerCase()] : false}
+                  defaultValue={project.categories[category.toLowerCase()]}
                 />
               );
             })}

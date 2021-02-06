@@ -1,20 +1,5 @@
 @import '../../../styles/styles.scss';
 
-.label__wrapper {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-}
-
-.form__switch {
-  margin-left: 3rem;
-
-  .place__label {
-    @include text-detail;
-    text-transform: uppercase;
-  }
-}
-
 .offers {
   margin-top: 7rem;
   position: relative;
@@ -41,6 +26,14 @@
       bottom: -2.5rem;
     }
 
+    .count {
+      &::after {
+        content: 'x';
+        margin: 0 2rem;
+        @include text-detail;
+      }
+    }
+
     .user {
       align-self: flex-start;
       display: flex;
@@ -49,8 +42,13 @@
       .text {
         display: flex;
         flex-direction: column;
+
+        .date {
+          @include text-detail;
+        }
       }
     }
+
     img {
       width: 4rem;
       border-radius: 50%;
