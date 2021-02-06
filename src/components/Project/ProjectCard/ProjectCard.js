@@ -38,10 +38,10 @@ const ProjectCard = observer(({ project }) => {
         <div className={styles.content}>
           <p className={styles.date}>6 dagen geleden</p>
           <h3 className={styles.title}>{project.title}</h3>
-
           <p className={styles.intro}>
             <LinesEllipsis text={project.intro} maxLine="3" ellipsis="..." trimRight basedOn="letters" />
           </p>
+
           <ul className={styles.tags}>
             {tags.map((tag) => (
               <li key={tag} className={styles.tag}>

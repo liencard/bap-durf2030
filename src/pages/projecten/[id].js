@@ -10,11 +10,13 @@ import {
 } from '../../components/Project';
 import RootStore from '../../stores';
 import { convertData } from '../../models/Project';
+import { convertDataUser } from '../../models/User';
 import { useStores } from '../../hooks/useStores';
 
-const Project = observer(({ projectJSON }) => {
-  const { projectStore, uiStore } = useStores();
+const Project = observer(({ projectJSON, usersJSON }) => {
+  const { projectStore, uiStore, userStore } = useStores();
   const [project, setProject] = useState();
+  const [users, setUsers] = useState();
 
   useEffect(() => {
     const data = convertData.fromJSON(projectJSON, projectStore);
@@ -24,6 +26,13 @@ const Project = observer(({ projectJSON }) => {
     data.getRequirementsInfo();
     data.getDurvers();
     setProject(data);
+
+    const usersArr = [];
+    usersJSON.forEach((userJSON) => {
+      const user = convertDataUser.fromJSON(userJSON, userStore);
+      usersArr.push(user);
+    });
+    setUsers(usersArr);
 
     if (project && uiStore.currentUser) {
       const projectIsLiked = project.likes.find(
@@ -45,7 +54,7 @@ const Project = observer(({ projectJSON }) => {
       <Header />
       <Container>
         <ProjectHeader project={project} />
-        <ProjectContent project={project} />
+        <ProjectContent project={project} users={users} />
         <ProjectFooter project={project} />
         <ProjectComments project={project} />
       </Container>
@@ -68,9 +77,11 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }) => {
   const store = new RootStore();
-  const { projectStore } = store;
+  const { projectStore, userStore } = store;
+  // PROJECT
   const data = await projectStore.projectService.getById(params.id);
   const projectJSON = convertData.toJSON(data);
+  // OWNERS
   const ownersArr = await projectStore.loadProjectOwnersById(params.id);
   const owners = ownersArr.map((owner) => ({
     name: owner.name,
@@ -79,8 +90,15 @@ export const getStaticProps = async ({ params }) => {
   }));
   projectJSON['owners'] = owners;
 
+  // USERS
+  await userStore.loadAllUsers();
+  const usersJSON = userStore.users.map((data) => {
+    let user = convertDataUser.toJSON(data);
+    return user;
+  });
+
   return {
-    props: { projectJSON },
+    props: { projectJSON, usersJSON },
     revalidate: 5,
   };
 };
