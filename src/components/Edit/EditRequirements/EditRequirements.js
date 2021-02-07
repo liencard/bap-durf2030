@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite';
 import { useState, useEffect } from 'react';
 import styles from './EditRequirements.module.scss';
 import { EditPart, EditLabel, EditItemIcons, EditField, EditOfferList } from '..';
@@ -5,7 +6,7 @@ import { FormFieldInput, FormFieldSwitch, FormFieldAddItem } from '../../Create'
 import { SERVICETYPES, MATERIALTYPES } from '../../../consts';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
-const EditRequirements = ({ project }) => {
+const EditRequirements = observer(({ project }) => {
   const [servicesRequired, setServicesRequired] = useState(project.servicesRequired);
   const [materialsRequired, setMaterialsRequired] = useState(project.materialsRequired);
   const [fundingRequired, setFundingRequired] = useState(project.fundingRequired);
@@ -228,6 +229,6 @@ const EditRequirements = ({ project }) => {
       </EditPart>
     </>
   );
-};
+});
 
 export default EditRequirements;

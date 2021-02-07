@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite';
 import { useState, useEffect } from 'react';
 import { useField } from '@formiz/core';
 import FormControl from '@material-ui/core/FormControl';
@@ -17,17 +18,7 @@ const FormFieldAddItem = (props) => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    const itemsArr = defaultValue.map((item) => {
-      return {
-        id: item.id ?? undefined,
-        name: item.name,
-        category: item.category,
-        amount: item.amount,
-        completed: item.completed,
-        type: item.type,
-      };
-    });
-    setItems(itemsArr);
+    setItems(defaultValue);
   }, []);
 
   useEffect(() => {

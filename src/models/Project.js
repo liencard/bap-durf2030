@@ -321,15 +321,28 @@ class Project {
   };
 
   updateItemStatus = async (itemId, status, type) => {
-    console.log(this.materials);
-
-    this.store.updateItemStatus(itemId, status, this.id);
-
     if (type === 'material') {
-      const material = this.materials.find((material) => material.id === itemId);
+      const newMaterials = this.materials.map((material) => {
+        if (material.id === itemId) {
+          material.completed = status;
+          return material;
+        } else {
+          return material;
+        }
+      });
+      this.materials = newMaterials;
     } else if (type === 'service') {
-      const service = this.services.find((service) => service.id === itemId);
+      const newServices = this.services.map((service) => {
+        if (service.id === itemId) {
+          service.completed = status;
+          return service;
+        } else {
+          return service;
+        }
+      });
+      this.services = newServices;
     }
+    this.store.updateItemStatus(itemId, status, this.id);
   };
 }
 
