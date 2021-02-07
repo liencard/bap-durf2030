@@ -1,15 +1,15 @@
-<svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0)">
-<path d="M2.91602 20.2053H6.59929L18.5699 8.23468C19.0584 7.74625 19.3328 7.08379 19.3328 6.39304C19.3328 5.70229 19.0584 5.03984 18.5699 4.55141C18.0815 4.06297 17.419 3.78857 16.7283 3.78857C16.0375 3.78857 15.3751 4.06297 14.8867 4.55141L2.91602 16.522V20.2053Z" stroke="#E62336" stroke-width="1.14039" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M13.5039 5.93262L17.1872 9.61589" stroke="#E62336" stroke-width="1.14039" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M11.2034 8.23446L6.59929 3.63037L2.91602 7.31364L7.52011 11.9177" stroke="#E62336" stroke-width="1.14039" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M6.59802 8.23486L5.2168 9.61609" stroke="#E62336" stroke-width="1.14039" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M14.8825 11.918L19.4866 16.5221L15.8033 20.2053L11.1992 15.6012" stroke="#E62336" stroke-width="1.14039" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M14.8851 16.522L13.5039 17.9032" stroke="#E62336" stroke-width="1.14039" stroke-linecap="round" stroke-linejoin="round"/>
-</g>
-<defs>
-<clipPath id="clip0">
-<rect width="20" height="20" fill="white" transform="translate(0.464844 0.824707)"/>
-</clipPath>
-</defs>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#E62336;stroke-width:1.1404;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+<path class="st0" d="M1.7,18.3h3.7l12-12c0.5-0.5,0.8-1.2,0.8-1.8s-0.3-1.4-0.8-1.8c-0.5-0.5-1.2-0.8-1.8-0.8
+	c-0.7,0-1.4,0.3-1.8,0.8l-12,12V18.3z"/>
+<path class="st0" d="M12.3,4L16,7.7"/>
+<path class="st0" d="M10,6.3L5.4,1.7L1.7,5.4L6.3,10"/>
+<path class="st0" d="M5.4,6.3L4,7.7"/>
+<path class="st0" d="M13.7,10l4.6,4.6l-3.7,3.7L10,13.7"/>
+<path class="st0" d="M13.7,14.6L12.3,16"/>
 </svg>

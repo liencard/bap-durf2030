@@ -73,12 +73,44 @@
         font-size: 1.2rem;
         text-transform: uppercase;
         letter-spacing: 0.1rem;
-        margin-bottom: 1.8rem;
+        margin: 2rem 0 1.8rem 0;
       }
 
       .item__btn {
         font-size: 1.2rem;
         font-weight: 500;
+      }
+
+      .progress {
+        position: relative;
+        margin-bottom: 2rem;
+        height: 6.5rem;
+        width: 6.5rem;
+        border-radius: 50%;
+        background-color: $green-extra-light;
+
+        & div {
+          position: absolute;
+          left: 0;
+          top: 0;
+        }
+
+        & div:last-of-type {
+          opacity: 0.5;
+        }
+
+        &::before {
+          position: absolute;
+          content: '';
+          background-repeat: no-repeat;
+          background-size: 2rem;
+          height: 2rem;
+          width: 2rem;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background: url('/icons/service-green.svg');
+        }
       }
 
       .circle {

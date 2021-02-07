@@ -49,16 +49,12 @@ const Projects = ({ projectsJSON }) => {
           <div className={styles.content}>
             <h1 className={styles.title}>Samen pakken we eenzaamheid aan</h1>
             <p>
-              De coronastorm woedt: we zitten in dezelfde storm maar niet in
-              hetzelfde schuitje. Hoe kunnen we met een creatieve mindset hier
-              via kunst en creativiteit een antwoord op bieden? DURF 2030 zoekt
-              naar 40 projecten die eenzaamheid rond corona aanpakken.
+              De coronastorm woedt: we zitten in dezelfde storm maar niet in hetzelfde schuitje. Hoe kunnen we met een
+              creatieve mindset hier via kunst en creativiteit een antwoord op bieden? DURF 2030 zoekt naar 40 projecten
+              die eenzaamheid rond corona aanpakken.
             </p>
             <div className={styles.milestone__bar}>
-              <LinearProgress
-                variant="determinate"
-                value={(milestones.length / 40) * 100}
-              />
+              <LinearProgress variant="determinate" value={(milestones.length / 40) * 100} />
               <span>{milestones.length}</span>
             </div>
 
@@ -101,16 +97,10 @@ const Projects = ({ projectsJSON }) => {
           </Grid>
         </TabPanel>
         <TabPanel value={value} index={2}>
-          <Masonry
-            breakpointCols={2}
-            className={styles.masonry}
-            columnClassName={styles.column}
-          >
+          <Masonry breakpointCols={2} className={styles.masonry} columnClassName={styles.column}>
             {projects.map((project) => {
               if (project.materialsRequired || project.servicesRequired) {
-                return (
-                  <ProjectRequirementsCard key={project.id} project={project} />
-                );
+                return <ProjectRequirementsCard key={project.id} project={project} />;
               }
             })}
           </Masonry>

@@ -16,6 +16,17 @@
         margin-bottom: 2rem;
       }
 
+      .progress {
+        margin-bottom: 3rem;
+
+        .text {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 1rem;
+          @include text-detail;
+        }
+      }
+
       .wrapper {
         display: grid;
         grid-template-columns: 50% 40%;
@@ -41,65 +52,6 @@
       display: flex;
       justify-content: space-between;
       margin-top: 4rem;
-    }
-  }
-}
-
-// iconen
-.circle {
-  grid-column: span 2;
-  height: 11.3rem;
-  width: 11.3rem;
-  border-radius: 50%;
-  margin-bottom: 2rem;
-  position: relative;
-  align-self: center;
-
-  &::before {
-    position: absolute;
-    content: '';
-    background-repeat: no-repeat;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  &.service {
-    background-color: $green-light;
-    border: 0.3rem solid $green;
-
-    &::before {
-      background: url('/icons/service-green.svg');
-      background-repeat: no-repeat;
-      height: 2.8rem;
-      width: 2.2rem;
-      background-size: 2.2rem;
-    }
-  }
-
-  &.material {
-    background-color: $red-light;
-    border: 0.3rem solid $red;
-
-    &::before {
-      background: url('/icons/material-red.svg');
-      background-repeat: no-repeat;
-      height: 3rem;
-      width: 3rem;
-      background-size: 2.6rem;
-    }
-  }
-
-  &.money {
-    background-color: $yellow-light;
-    border: 0.3rem solid $yellow;
-
-    &::before {
-      background: url('/icons/money-yellow.svg');
-      background-repeat: no-repeat;
-      height: 3rem;
-      width: 3rem;
-      background-size: 3rem;
     }
   }
 }

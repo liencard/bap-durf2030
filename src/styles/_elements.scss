@@ -66,6 +66,53 @@
   }
 }
 
+@mixin buttonOutline {
+  background: transparent;
+  border: 0.1rem solid $grey;
+  color: $blue-dark;
+
+  &:hover {
+    background: $grey;
+    color: $blue-dark;
+  }
+}
+
+@mixin buttonSecondary {
+  background: transparent;
+  color: $blue-dark;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 0.5rem 0;
+
+  &::after {
+    position: absolute;
+    content: '';
+    height: 0.1rem;
+    width: 100%;
+    background: $green;
+    bottom: 0;
+  }
+
+  &:not(:disabled):hover {
+    font-weight: 600;
+    background: transparent;
+    &::after {
+      height: 0.2rem;
+    }
+  }
+
+  &:disabled {
+    background: transparent;
+    opacity: 0.3;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+}
+
 @mixin appbar {
   grid-column: span 12;
   margin: 0;
@@ -81,7 +128,7 @@
 }
 
 @mixin tab-line {
-  background-color: $grey;
+  background-color: $blue-light;
   height: 0.1rem;
   width: 100vw;
 }
@@ -125,3 +172,57 @@
 //     font-family: $font-body;
 //   }
 // }
+
+// .imageStep1 {
+//   &::after {
+//     background: url('/create/create-7.png');
+//   }
+// }
+
+.step1 {
+  &::after {
+    background: url('/create/create-1.png');
+  }
+}
+
+.step2 {
+  &::after {
+    background: url('/create/create-2.png');
+  }
+}
+
+.step3 {
+  &::after {
+    background: url('/create/create-3.png');
+  }
+}
+
+.step4 {
+  &::after {
+    background: url('/create/create-4.png');
+  }
+}
+
+.step5 {
+  &::after {
+    background: url('/create/create-5.png');
+  }
+}
+
+.step6 {
+  &::after {
+    background: url('/create/create-6.png');
+  }
+}
+
+.step7 {
+  &::after {
+    background: url('/create/create-7.png');
+  }
+}
+
+.step8 {
+  &::after {
+    background: url('/create/create-8.png');
+  }
+}

@@ -21,3 +21,4 @@ export { default as ProjectHelpTwoService } from './ProjectHelpTwoService/Projec
 export { default as ProjectHelpThree } from './ProjectHelpThree/ProjectHelpThree';
 export { default as ProjectRequirementsCard } from './ProjectRequirementsCard/ProjectRequirementsCard';
 export { default as ProjectIcons } from './ProjectIcons/ProjectIcons';
+export { default as ProjectCircle } from './ProjectCircle/ProjectCircle';
