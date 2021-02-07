@@ -1,58 +1,106 @@
+import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import { useState, useEffect } from 'react';
-import { useStores } from '../../hooks/useStores';
 import { Container } from '../../components/Layout';
-import { ProjectHeader, ProjectContent, ProjectFooter, ProjectComments } from '../../components/Project';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import {
+  ProjectHeader,
+  ProjectContent,
+  ProjectFooter,
+  ProjectComments,
+} from '../../components/Project';
+import RootStore from '../../stores';
+import { convertData } from '../../models/Project';
+import { convertDataUser } from '../../models/User';
+import { useStores } from '../../hooks/useStores';
 
-const Project = observer(({ query }) => {
-  const id = query.id;
-  const { projectStore } = useStores();
-
-  const STATE_LOADING = 'loading';
-  const STATE_DOES_NOT_EXIST = 'doesNotExist';
-  const STATE_LOADING_MORE_DETAILS = 'loadingMoreDetails';
-  const STATE_FULLY_LOADED = 'fullyLoaded';
-
-  const [project, setProject] = useState(projectStore.resolveProject(id));
-  const [state, setState] = useState(project ? STATE_LOADING_MORE_DETAILS : STATE_LOADING);
+const Project = observer(({ projectJSON, usersJSON }) => {
+  const { projectStore, uiStore, userStore } = useStores();
+  const [project, setProject] = useState();
+  const [users, setUsers] = useState();
 
   useEffect(() => {
-    const loadProject = async (id) => {
-      try {
-        // const resolvedProject = await projectStore.resolveProject(id);
-        const resolvedProject = await projectStore.loadProject(id);
-        if (!resolvedProject) {
-          setState(STATE_DOES_NOT_EXIST);
-          return;
-        }
-        setState(STATE_FULLY_LOADED);
-        setProject(resolvedProject);
-      } catch (error) {
-        console.log('Project failed loading');
-      }
-    };
-    loadProject(id);
-  }, [id, projectStore, setProject]);
+    const data = convertData.fromJSON(projectJSON, projectStore);
+    data.getComments();
+    data.getLikes();
+    data.getRequirementsList();
+    data.getRequirementsInfo();
+    data.getDurvers();
+    setProject(data);
 
+    const usersArr = [];
+    usersJSON.forEach((userJSON) => {
+      const user = convertDataUser.fromJSON(userJSON, userStore);
+      usersArr.push(user);
+    });
+    setUsers(usersArr);
+
+    if (project && uiStore.currentUser) {
+      const projectIsLiked = project.likes.find(
+        (like) => like.userId === uiStore.currentUser.id
+      );
+      if (projectIsLiked) {
+        project.setLiked(true);
+      } else {
+        project.setLiked(false);
+      }
+    }
+  }, [setProject]);
+
+  if (!project) {
+    return <p>Project laden...</p>;
+  }
   return (
     <>
-      <p>State: {state}</p>
-      <Container>
-        {project && (
-          <>
-            <ProjectHeader project={project} />
-            <ProjectContent />
-            <ProjectFooter />
-            <ProjectComments />
-          </>
-        )}
-      </Container>
+      <Header />
+      <ProjectHeader project={project} />
+      <ProjectContent project={project} users={users} />
+      <ProjectFooter project={project} />
+      <ProjectComments project={project} />
+      <Footer />
     </>
   );
 });
 
-Project.getInitialProps = ({ query }) => {
-  return { query };
+export const getStaticPaths = async () => {
+  const store = new RootStore();
+  const { projectStore } = store;
+  const projects = await projectStore.projectService.getAll();
+  const ids = projects.map((project) => project.id);
+  const paths = ids.map((id) => ({ params: { id } }));
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps = async ({ params }) => {
+  const store = new RootStore();
+  const { projectStore, userStore } = store;
+  // PROJECT
+  const data = await projectStore.projectService.getById(params.id);
+  const projectJSON = convertData.toJSON(data);
+  // OWNERS
+  const ownersArr = await projectStore.loadProjectOwnersById(params.id);
+  const owners = ownersArr.map((owner) => ({
+    name: owner.name,
+    avatar: owner.avatar,
+    id: owner.id,
+  }));
+  projectJSON['owners'] = owners;
+
+  // USERS
+  await userStore.loadAllUsers();
+  const usersJSON = userStore.users.map((data) => {
+    let user = convertDataUser.toJSON(data);
+    return user;
+  });
+
+  return {
+    props: { projectJSON, usersJSON },
+    revalidate: 5,
+  };
 };
 
 export default Project;

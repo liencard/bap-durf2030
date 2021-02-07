@@ -13,6 +13,7 @@
   width: 2.5rem;
   object-fit: cover;
   border-radius: 50%;
+  background-color: white;
 }
 
 @mixin form__label {
@@ -21,7 +22,7 @@
 }
 
 @mixin form__input {
-  border: 0.1rem solid $blue-light;
+  border: $border;
   padding: 1.5rem 2rem;
   font-weight: 300;
   font-size: 1.4;
@@ -32,10 +33,11 @@
 }
 
 @mixin pfp-large {
-  height: 4rem;
-  width: 4rem;
+  height: 4.3rem;
+  width: 4.3rem;
   object-fit: cover;
   border-radius: 50%;
+  background-color: white;
 }
 
 @mixin button {
@@ -53,36 +55,73 @@
     background-color: $green-dark;
     cursor: pointer;
   }
-}
 
-@mixin textfield {
-  color: $blue-dark;
-  font-size: 1.6rem;
-  font-weight: 300;
+  &:disabled {
+    background-color: $green-light;
 
-  & fieldset {
-    border-color: $blue-light !important;
-  }
-
-  &:hover fieldset {
-    border-color: $green !important;
-  }
-
-  label {
-    color: $blue-dark;
-    font-size: 1.6rem;
-    font-weight: 300;
-    letter-spacing: 0.1rem;
-  }
-
-  legend {
-    font-size: 1.2rem;
-    letter-spacing: 0.1rem;
-  }
-
-  input[type='text'] {
-    font-size: 1.6rem;
-    font-weight: 300;
-    font-family: $font-body;
+    &:hover {
+      background-color: $green-light;
+      cursor: default;
+    }
   }
 }
+
+@mixin appbar {
+  grid-column: span 12;
+  margin: 0;
+
+  div {
+    height: 8rem;
+    position: relative;
+
+    span {
+      padding: 0.15rem;
+    }
+  }
+}
+
+@mixin tab-line {
+  background-color: $grey;
+  height: 0.1rem;
+  width: 100vw;
+}
+
+@mixin tab-lineTop {
+  margin-top: 5rem;
+}
+
+@mixin tab-lineBottom {
+  margin-bottom: 5rem;
+}
+
+// @mixin textfield {
+//   color: $blue-dark;
+//   font-size: 1.6rem;
+//   font-weight: 300;
+
+//   & fieldset {
+//     border-color: $blue-light !important;
+//   }
+
+//   &:hover fieldset {
+//     border-color: $green !important;
+//   }
+
+//   label {
+//     color: $blue-dark;
+//     font-size: 1.6rem;
+//     font-weight: 300;
+//     letter-spacing: 0.1rem;
+//   }
+
+//   legend {
+//     font-size: 1.2rem;
+//     letter-spacing: 0.1rem;
+//   }
+
+//   input[type='text'] {
+//     font-size: 1.6rem;
+//     font-weight: 300;
+//     font-family: $font-body;
+//   }
+// }

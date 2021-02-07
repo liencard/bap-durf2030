@@ -1,0 +1,73 @@
+@import '../../styles/styles.scss';
+
+.milestones {
+  padding-top: 15rem;
+  background-image: url('/milestone.png');
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-position: top 100px right;
+
+  .content {
+    grid-column: span 6;
+
+    .title {
+      @include title-one;
+      line-height: 1.3;
+    }
+
+    p {
+      width: 80%;
+    }
+
+    .buttons {
+      display: flex;
+
+      button {
+        margin-right: 3rem;
+      }
+    }
+  }
+
+  .milestone__bar {
+    width: 80%;
+    margin: 3rem 0;
+    position: relative;
+
+    &:after {
+      content: '🏁';
+      position: absolute;
+      right: 0;
+    }
+  }
+}
+
+.projects {
+  padding-top: 15rem;
+}
+
+.masonry {
+  grid-column: span 12;
+  display: flex;
+
+  .column:first-of-type {
+    margin-right: $grid-gap;
+  }
+}
+
+.title {
+  @include title-one;
+  margin: 0;
+  padding: 0;
+}
+
+.line {
+  @include tab-line;
+}
+
+.lineTop {
+  @include tab-lineTop;
+}
+
+.lineBottom {
+  @include tab-lineBottom;
+}

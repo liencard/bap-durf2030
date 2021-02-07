@@ -1,51 +1,21 @@
 @import '../../../styles/styles.scss';
 
-$spacing-top: 10rem;
-$spacing-pfp: 2rem;
+.appbar {
+  @include appbar;
+}
 
-// $padding-one-side: calc(100vw - #{$container} / 2);
-
-.tabs {
+.panel {
   grid-column: span 12;
-  margin-top: 5rem;
+}
 
-  .tabs__list {
-    display: flex;
-    align-items: center;
-    position: relative;
+.line {
+  @include tab-line;
+}
 
-    &::before {
-      position: absolute;
-      top: 0;
-      content: '';
-      height: 0.1rem;
-      width: 100%;
-      background-color: $blue-light;
-      // left: calc(-#{$padding-one-side});
-      // left: -72rem;
-    }
+.lineTop {
+  @include tab-lineTop;
+}
 
-    &::after {
-      position: absolute;
-      content: '';
-      height: 0.1rem;
-      width: 100%;
-      background-color: $blue-light;
-      left: 0;
-      bottom: 0;
-    }
-
-    .tab {
-      padding: 3rem 0;
-      margin-right: 4em;
-    }
-  }
-
-  .tabs__content {
-    margin-top: $spacing-top;
-
-    // .text__wrapper {
-    //   grid-column: span 7;
-    // }
-  }
+.lineBottom {
+  @include tab-lineBottom;
 }

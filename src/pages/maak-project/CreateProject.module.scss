@@ -1,43 +1,74 @@
 @import '../../styles/styles.scss';
 
-.image {
-  grid-column: span 6;
-  width: 100%;
+.create {
   height: 100vh;
-  background: pink;
 }
 
-.content {
-  grid-column: span 6;
-  background: bue;
+.image {
+  position: relative;
+  grid-column: span 5;
 
-  .title {
-    @include title-one;
-    margin: 0 7rem 3rem 0;
+  &::before {
+    position: absolute;
+    content: '';
+    right: 0;
+    width: calc((100% + ((100vw - #{$container})) / 2));
+    height: 100%;
+    background: $green;
   }
 
-  .intro {
-    margin-bottom: 3rem;
-  }
-
-  .navigate {
-    margin-top: 5rem;
+  .content {
+    grid-column: 7 / span 6;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
 
-    .steps {
+    .text {
+      min-height: 60rem;
+
+      .title {
+        @include title-one;
+        margin: 0 7rem 3rem 0;
+      }
+
+      .intro {
+        margin-bottom: 3rem;
+      }
+    }
+
+    .navigate {
+      margin-top: 8rem;
       display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-      .step {
-        margin: 0.8rem;
-        height: 0.7rem;
-        width: 0.7rem;
-        border-radius: 50%;
-        background: $blue-light;
+      .steps {
+        display: flex;
 
-        &.active {
-          background: $green;
+        .step {
+          margin: 0.8rem;
+          height: 0.7rem;
+          width: 0.7rem;
+          border-radius: 50%;
+          background: $blue-light;
+
+          &.active {
+            background: $green;
+          }
+        }
+      }
+    }
+
+    .buttons {
+      margin-top: 4rem;
+      display: flex;
+      justify-content: space-between;
+
+      .button {
+        @include button;
+
+        &.buttonSubmit {
+          margin-left: auto;
         }
       }
     }

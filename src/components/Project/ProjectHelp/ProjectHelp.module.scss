@@ -1,0 +1,33 @@
+@import '../../../styles/styles.scss';
+
+.img {
+  grid-column: 1 / span 4;
+  position: relative;
+
+  & div {
+    background: blue;
+    position: absolute;
+    height: calc(100% + (#{$modal-spacing-large} * 2));
+    width: calc(100% + #{$modal-spacing-large});
+    top: -$modal-spacing-large;
+    left: -$modal-spacing-large;
+  }
+}
+
+.text {
+  grid-column: 5 / span 8;
+}
+
+.buttons {
+  margin-top: 4rem;
+  display: flex;
+  justify-content: space-between;
+
+  .button {
+    @include button;
+
+    &.buttonSubmit {
+      margin-left: auto;
+    }
+  }
+}

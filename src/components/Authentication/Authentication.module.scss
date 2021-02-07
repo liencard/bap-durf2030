@@ -6,6 +6,7 @@ $border-radius: 0.5rem;
   cursor: pointer;
   left: 3vw;
   top: 3vh;
+  z-index: 4;
 }
 
 .auth__img {
@@ -51,16 +52,6 @@ $border-radius: 0.5rem;
     display: flex;
     flex-direction: column;
     margin-bottom: 2.5rem;
-
-    a {
-      @include text-small;
-      padding-top: 1rem;
-
-      &:hover {
-        cursor: pointer;
-        color: $green;
-      }
-    }
   }
 
   .form__label {
@@ -69,11 +60,6 @@ $border-radius: 0.5rem;
 
   .form__input {
     @include form__input;
-  }
-
-  .form__socials {
-    display: flex;
-    flex-direction: column;
   }
 
   .form__btn {
@@ -91,45 +77,6 @@ $border-radius: 0.5rem;
     }
   }
 
-  .btn__social {
-    border: 0.1rem solid $grey;
-    background-color: white;
-    margin-bottom: 1.5rem;
-    font-weight: 200;
-    color: black;
-    border-radius: 0;
-    position: relative;
-
-    &:hover {
-      background-color: #f9f9f9;
-    }
-
-    &::before {
-      content: '';
-      position: absolute;
-      background-repeat: no-repeat;
-      bottom: 0.75rem;
-    }
-  }
-
-  .btn__google {
-    &::before {
-      background-image: url('/google-logo.svg');
-      left: 1.5rem;
-      width: 28px;
-      height: 28px;
-    }
-  }
-
-  .btn__facebook {
-    &::before {
-      background-image: url('/facebook-logo.svg');
-      left: 2rem;
-      width: 14px;
-      height: 28px;
-    }
-  }
-
   .redirect {
     border-top: 0.1rem solid $grey;
     margin-top: 2rem;
@@ -142,3 +89,7 @@ $border-radius: 0.5rem;
     }
   }
 }
+
+// .textfield {
+//   @include textfield;
+// }

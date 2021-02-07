@@ -1,39 +1,39 @@
+import { observer } from 'mobx-react-lite';
 import styles from './ProjectHelpers.module.scss';
 
-const ProjectHelpers = ({ small }) => {
-  const durvers = [
-    {
-      id: 1,
-      img: 'https://via.placeholder.com/150',
-    },
-    {
-      id: 2,
-      img: 'https://via.placeholder.com/150',
-    },
-    {
-      id: 3,
-      img: 'https://via.placeholder.com/150',
-    },
-    {
-      id: 4,
-      img: 'https://via.placeholder.com/150',
-    },
-  ];
-
+const ProjectHelpers = observer(({ small, project }) => {
   return (
     <>
       <div className={`${styles.helpers} ${small && styles.small}`}>
         <div className={styles.helpers__pictures}>
-          {durvers.slice(0, 3).map((durver) => (
-            <div key={durver.id}>
-              <img src={durver.img} alt="profielfoto van mede-durver" />
-            </div>
-          ))}
+          {project.durvers.length > 3 ? (
+            <>
+              {project.durvers.slice(0, 3).map((durver) => (
+                <div key={durver.timestamp.seconds}>
+                  <img
+                    src={durver.user.avatar}
+                    alt="profielfoto van mede-durver"
+                  />
+                </div>
+              ))}
+            </>
+          ) : (
+            <>
+              {project.durvers.map((durver) => (
+                <div key={durver.timestamp.seconds}>
+                  <img
+                    src={durver.user.avatar}
+                    alt="profielfoto van mede-durver"
+                  />
+                </div>
+              ))}
+            </>
+          )}
         </div>
-        + 8 durvers
+        {project.durvers.length} durvers
       </div>
     </>
   );
-};
+});
 
 export default ProjectHelpers;

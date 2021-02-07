@@ -1,0 +1,37 @@
+@import '../../../styles/styles.scss';
+
+.title {
+  @include title-one;
+}
+
+.subtitle {
+  @include title-three;
+}
+
+.info {
+  margin-bottom: 2rem;
+}
+
+.richtext {
+  background: $green-light;
+  padding: 4rem;
+  width: 150%;
+
+  h1 {
+    @include title-one;
+    margin: 0;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    @include title-two;
+    margin: 0;
+    margin-top: 2rem;
+  }
+
+  img {
+    width: 100%;
+    margin: 1rem 0;
+  }
+}

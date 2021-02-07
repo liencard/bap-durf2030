@@ -1,6 +1,7 @@
 @import '../../../styles/styles.scss';
 
-.test {
+.spotlight__item {
+  grid-column: span 7;
   display: flex;
   z-index: 1;
 

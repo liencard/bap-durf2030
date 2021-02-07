@@ -8,7 +8,7 @@ const OnboardingOne = () => {
         <div className={styles.item}>
           <img src="/icons/like-default.svg" />
           <p>
-            Start met het aanmaken van je project, geen nood, alles wat je schrijft ga je nadien nog kunnen aanpassen.{' '}
+            Start met het aanmaken van je project, geen nood, alles wat je schrijft ga je nadien nog kunnen aanpassen.
           </p>
         </div>
         <div className={styles.item}>

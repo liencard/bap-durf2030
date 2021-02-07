@@ -2,7 +2,7 @@ import styles from './ProjectSpotlight.module.scss';
 import Link from 'next/link';
 import { Container } from '../../Layout';
 import { ProjectCard } from '../../Project';
-import BtnPrim from '../../Button/Button';
+import { Button } from '../../UI';
 
 const ProjectSpotlight = () => {
   return (
@@ -15,17 +15,18 @@ const ProjectSpotlight = () => {
           </Link>
         </div>
         <Container>
+          {/* Data komt van db nu, dus als prop doorgegeven */}
+          {/* <ProjectCard />
           <ProjectCard />
           <ProjectCard />
-          <ProjectCard />
-          <ProjectCard />
+          <ProjectCard /> */}
           <Link href="/">
             <a className={styles.card}>
               <div className={styles.thumbnail}></div>
               <div className={styles.content}>
                 <div className={styles.content__wrapper}>
                   <h3 className={styles.title}>Jouw project</h3>
-                  <BtnPrim text="Maak project aan" link="/" />
+                  <Button text="Maak project aan" link="/" />
                 </div>
               </div>
             </a>

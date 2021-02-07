@@ -1,16 +1,27 @@
 import styles from './ProjectShare.module.scss';
 import { Modal } from '../../UI';
 import { Grid } from '../../Layout';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
-const ProjectShare = ({}) => {
+const ProjectShare = () => {
   const [open, setOpen] = useState(false);
+  const [copyStatus, setCopyStatus] = useState('Kopieer');
+  const textAreaRef = useRef(null);
+
   const handleOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
+    setCopyStatus('Kopieer');
+  };
+
+  const handleClickCopy = (e) => {
+    textAreaRef.current.select();
+    document.execCommand('copy');
+    e.target.focus();
+    setCopyStatus('Gekopieerd!');
   };
 
   return (
@@ -34,6 +45,16 @@ const ProjectShare = ({}) => {
               <li>E-mail</li>
               <li>Print Flyer</li>
             </ul>
+            <div className={styles.copy}>
+              <p>Kopieer link</p>
+              <div>
+                <form>
+                  {/* ${window.location.href} */}
+                  <input type="text" ref={textAreaRef} value={`undefined`} />
+                </form>
+                <button onClick={handleClickCopy}>{copyStatus}</button>
+              </div>
+            </div>
           </div>
         </Grid>
       </Modal>
