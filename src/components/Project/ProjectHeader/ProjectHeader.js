@@ -2,13 +2,15 @@ import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
 import styles from './ProjectHeader.module.scss';
 import { Container } from '../../Layout';
-import { ProjectLikes, ProjectHelpers, ProjectHelp } from '../../Project';
+import { ProjectLikes, ProjectHelpers, ProjectHelp, ProjectCircle } from '../../Project';
 
 const ProjectHeader = observer(({ project }) => {
   const [servicesCount, setServicesCount] = useState(0);
   const [materialsCount, setMaterialsCount] = useState(0);
   const [fundingCount, setFundingCount] = useState(0);
   const [image, setImage] = useState('../thumbnail-temp.jpg');
+
+  console.log(project);
 
   let tags = [];
   Object.keys(project.themes).forEach((key) => {
@@ -50,8 +52,6 @@ const ProjectHeader = observer(({ project }) => {
       if (item.fundingOffered === true) {
         const number = parseInt(item.fundingAmount);
         fundingCountNew = fundingCountNew + number * 2;
-
-        console.log(item.fundingAmount);
       }
     });
 
@@ -76,12 +76,7 @@ const ProjectHeader = observer(({ project }) => {
           <h1 className={styles.title}>{project.title}</h1>
           {project.isKnownPlace && (
             <div className={styles.location}>
-              <img
-                src="/icons/location-green.svg"
-                alt="logo DURF2030"
-                width="13.75"
-                height="15.9"
-              />
+              <img src="/icons/location-green.svg" alt="logo DURF2030" width="13.75" height="15.9" />
               <p>
                 {project.street} {project.number}, {project.city}
               </p>
@@ -92,7 +87,7 @@ const ProjectHeader = observer(({ project }) => {
         <div className={styles.help}>
           {project.servicesRequired && (
             <div className={styles.item}>
-              <div className={`${styles.circle} ${styles.service}`} />
+              <ProjectCircle type="service" progress={(servicesCount / project.services.length) * 100} />
               <p className={styles.info}>
                 {servicesCount}/{project.services.length} diensten
               </p>
@@ -101,7 +96,7 @@ const ProjectHeader = observer(({ project }) => {
           )}
           {project.materialsRequired && (
             <div className={styles.item}>
-              <div className={`${styles.circle} ${styles.material}`} />
+              <ProjectCircle type="material" progress={(materialsCount / project.materials.length) * 100} />
               <p className={styles.info}>
                 {materialsCount}/{project.materials.length} materialen
               </p>
@@ -110,7 +105,7 @@ const ProjectHeader = observer(({ project }) => {
           )}
           {project.fundingRequired && (
             <div className={styles.item}>
-              <div className={`${styles.circle} ${styles.money}`} />
+              <ProjectCircle type="funding" progress={(fundingCount / project.fundingAmount) * 100} />
               <p className={styles.info}>
                 {fundingCount}/{project.fundingAmount} geld
               </p>
@@ -122,9 +117,7 @@ const ProjectHeader = observer(({ project }) => {
           <ProjectHelp project={project} />
           <div className={styles.interact}>
             <ProjectLikes project={project} />
-            {project.durvers.length != 0 && (
-              <ProjectHelpers project={project} />
-            )}
+            {project.durvers.length != 0 && <ProjectHelpers project={project} />}
           </div>
         </div>
       </div>

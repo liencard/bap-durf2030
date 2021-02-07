@@ -4,8 +4,9 @@ import { useState } from 'react';
 import { useStores } from '../../../hooks/useStores';
 import { Container } from '../../Layout';
 import { Button } from '../../UI';
+import { ProjectCircle } from '../';
 
-const ProjectRequirementsServices = ({ project }) => {
+const ProjectRequirementsServices = ({ project, progress }) => {
   const { projectStore } = useStores();
 
   const [physical, setPhysical] = useState([]);
@@ -38,7 +39,7 @@ const ProjectRequirementsServices = ({ project }) => {
     <>
       <section className={styles.requirement}>
         <Container>
-          <div className={`${styles.circle} ${styles.service}`} />
+          <ProjectCircle type="service" progress={progress} large />
           <div className={styles.content}>
             <h2 className={styles.title}>Diensten</h2>
             <div className={styles.wrapper}>
@@ -48,10 +49,7 @@ const ProjectRequirementsServices = ({ project }) => {
                   <article className={styles.list__item}>
                     <h3>Fysieke hulp</h3>
                     {physical.map((item) => (
-                      <span
-                        className={item.completed ? `${styles.completed}` : ``}
-                        key={item.id}
-                      >
+                      <span className={item.completed ? `${styles.completed}` : ``} key={item.id}>
                         <span>
                           {item.amount} {item.name}
                         </span>
@@ -64,10 +62,7 @@ const ProjectRequirementsServices = ({ project }) => {
                   <article className={styles.list__item}>
                     <h3>Creatieve hulp</h3>
                     {creative.map((item) => (
-                      <span
-                        className={item.completed ? `${styles.completed}` : ``}
-                        key={item.id}
-                      >
+                      <span className={item.completed ? `${styles.completed}` : ``} key={item.id}>
                         <span>
                           {item.amount} {item.name}
                         </span>
@@ -80,10 +75,7 @@ const ProjectRequirementsServices = ({ project }) => {
                   <article className={styles.list__item}>
                     <h3>Andere hulp</h3>
                     {divers.map((item) => (
-                      <span
-                        className={item.completed ? `${styles.completed}` : ``}
-                        key={item.id}
-                      >
+                      <span className={item.completed ? `${styles.completed}` : ``} key={item.id}>
                         <span>
                           {item.amount} {item.name}
                         </span>
