@@ -68,9 +68,9 @@ const ProjectHelp = observer(({ project }) => {
       user: uiStore.currentUser,
       offers: offers,
       fundingAmount: values.fundingAmount ?? '',
-      fundingOffered: values.fundingRequired,
-      materialsOffered: values.materialsRequired,
-      servicesOffered: values.servicesRequired,
+      fundingOffered: values.fundingRequired ?? false,
+      materialsOffered: values.materialsRequired ?? false,
+      servicesOffered: values.servicesRequired ?? false,
     });
 
     projectStore.createDurver(newDurver, project.id);
@@ -96,6 +96,7 @@ const ProjectHelp = observer(({ project }) => {
                     materialsRequired={materialsRequired}
                     setServicesRequired={setServicesRequired}
                     servicesRequired={servicesRequired}
+                    project={project}
                   />
                 </FormizStep>
 
