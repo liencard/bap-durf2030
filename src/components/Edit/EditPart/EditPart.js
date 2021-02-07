@@ -21,7 +21,11 @@ const EditPart = ({ children, title, handleSaveProject, alwaysEnabled }) => {
             <h2 className={styles.subtitle}>{title}</h2>
             {alwaysEnabled ? (
               <div>
-                <Button type="submit" className={styles.save__btn} text="Post opslaan" />
+                <Button
+                  type="submit"
+                  className={styles.save__btn}
+                  text="Post opslaan"
+                />
               </div>
             ) : (
               <div className={styles.buttons}>
@@ -34,11 +38,21 @@ const EditPart = ({ children, title, handleSaveProject, alwaysEnabled }) => {
                   variant="secondary"
                   text={allowEdit ? 'Annuleer' : 'Bewerken'}
                 />
-                {allowEdit && <Button type="submit" className={styles.save__btn} text="Bewerking opslaan" />}
+                {allowEdit && (
+                  <Button
+                    type="submit"
+                    className={styles.save__btn}
+                    text="Bewerking opslaan"
+                  />
+                )}
               </div>
             )}
           </div>
-          <div className={`${styles.form__wrapper} ${!allowEdit && styles.form__locked}`}>
+          <div
+            className={`${styles.form__wrapper} ${
+              !allowEdit && styles.form__locked
+            }`}
+          >
             <div className={styles.form}>{children}</div>
           </div>
         </section>

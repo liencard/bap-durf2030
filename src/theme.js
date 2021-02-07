@@ -148,6 +148,20 @@ const theme = createMuiTheme({
       },
     },
 
+    // PROGRESS BAR
+    MuiLinearProgress: {
+      root: {
+        height: '.6rem',
+      },
+    },
+
+    // APPBAR
+    MuiAppBar: {
+      root: {
+        zIndex: 10,
+      },
+    },
+
     MuiFormHelperText: {
       root: {
         marginTop: '-1.7rem',

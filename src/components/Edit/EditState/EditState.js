@@ -4,7 +4,12 @@ import { EditPart, EditLabel, EditField } from '..';
 import { Button } from '../../UI';
 import { useEffect, useState } from 'react';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import { FormFieldRichTextEditor, FormFieldInput, FormFieldSwitch, FormFieldSelect } from '../../Create';
+import {
+  FormFieldRichTextEditor,
+  FormFieldInput,
+  FormFieldSwitch,
+  FormFieldSelect,
+} from '../../Create';
 
 const EditState = observer(({ project }) => {
   const [content, setContent] = useState({});
@@ -39,26 +44,33 @@ const EditState = observer(({ project }) => {
     switch (project.state) {
       case 0:
         setContent({
-          info: '0 Je project staat live op de website maar is nog niet goedgekeurd door DURF2030.',
+          info:
+            '0 Je project staat live op de website maar is nog niet goedgekeurd door DURF2030.',
           change: (
             <p>
-              Om crowdfunding mogelijk te maken, moet een project voldoen aan 3 criteria. Zodra DURF2030 je project
-              overloopt en goedgkeurd, zal je geld kunnen inzamelen voor je project.
+              Om crowdfunding mogelijk te maken, moet een project voldoen aan 3
+              criteria. Zodra DURF2030 je project overloopt en goedgkeurd, zal
+              je geld kunnen inzamelen voor je project.
             </p>
           ),
         });
         break;
       case 1:
         setContent({
-          info: '1 Je project staat live op de website maar is nog niet goedgekeurd door DURF2030.',
+          info:
+            '1 Je project staat live op de website maar is nog niet goedgekeurd door DURF2030.',
           change: (
             <>
               <p>
-                Heb je alles om je project van start te laten gaan? Eenmaal je klikt op op ‘Klaar om te starten’, wordt
-                het aanbieden van diensten, materiaal en geld vergrendeld.
+                Heb je alles om je project van start te laten gaan? Eenmaal je
+                klikt op op ‘Klaar om te starten’, wordt het aanbieden van
+                diensten, materiaal en geld vergrendeld.
               </p>
               <div className={styles.buttons}>
-                <Button text="Mijn project gaat van start" onClick={() => handleChangeState(2)} />
+                <Button
+                  text="Mijn project gaat van start"
+                  onClick={() => handleChangeState(2)}
+                />
               </div>
             </>
           ),
@@ -71,12 +83,20 @@ const EditState = observer(({ project }) => {
           change: (
             <>
               <p>
-                Is je project volledig afgerond? Indien je project afgelopen is, dan kan je gebruikers dit laten weten.
-                Je project blijft zichtbaar op de website.
+                Is je project volledig afgerond? Indien je project afgelopen is,
+                dan kan je gebruikers dit laten weten. Je project blijft
+                zichtbaar op de website.
               </p>
               <div className={styles.buttons}>
-                <Button text="Project afronden" onClick={() => handleChangeState(3)} />
-                <Button text="Naar vorige fase" variant="secondary" onClick={() => handleChangeState(1)} />
+                <Button
+                  text="Project afronden"
+                  onClick={() => handleChangeState(3)}
+                />
+                <Button
+                  text="Naar vorige fase"
+                  variant="secondary"
+                  onClick={() => handleChangeState(1)}
+                />
               </div>
             </>
           ),
@@ -87,9 +107,16 @@ const EditState = observer(({ project }) => {
           info: 'Je project is volledig afgerond!',
           change: (
             <>
-              <p>Je project is afgerond. Laat gebruikers en DURF2030 weten hoe je project is verlopen.</p>
+              <p>
+                Je project is afgerond. Laat gebruikers en DURF2030 weten hoe je
+                project is verlopen.
+              </p>
               <div className={styles.buttons}>
-                <Button text="Project terug open zetten" variant="secondary" onClick={() => handleChangeState(2)} />
+                <Button
+                  text="Project terug open zetten"
+                  variant="secondary"
+                  onClick={() => handleChangeState(2)}
+                />
               </div>
             </>
           ),
@@ -105,7 +132,10 @@ const EditState = observer(({ project }) => {
           <h2 className={styles.subtitle}>Huidige status</h2>
           <p>{content.info}</p>
           <div className={styles.timeline}>
-            <LinearProgress variant="determinate" value={project.state * 33.33} />
+            <LinearProgress
+              variant="determinate"
+              value={project.state * 33.33}
+            />
             <ul className={styles.points}>
               <li>Project is opgezet</li>
               <li>Crowdfunding is mogelijk</li>
@@ -121,20 +151,30 @@ const EditState = observer(({ project }) => {
       </div>
 
       {project.state == 3 && (
-        <EditPart alwaysEnabled title="Deel je ervaring" handleSaveProject={handleSaveProject}>
+        <EditPart
+          alwaysEnabled
+          title="Deel je ervaring"
+          handleSaveProject={handleSaveProject}
+        >
           <EditField>
             <EditLabel text="Beschrijf" htmlFor="impact" />
             <p>
-              Laat gebruikers weten wat voor impact jou project had, de ervaring die je hebt opgedaan en eventuele
-              foto's achter de schermen!
+              Laat gebruikers weten wat voor impact jou project had, de ervaring
+              die je hebt opgedaan en eventuele foto's achter de schermen!
             </p>
-            <FormFieldRichTextEditor defaultValue={project.impact} name="impact" />
+            <FormFieldRichTextEditor
+              defaultValue={project.impact}
+              name="impact"
+            />
           </EditField>
         </EditPart>
       )}
 
       {project.state > 1 && (
-        <EditPart title="Datum en locatie" handleSaveProject={handleSaveProject}>
+        <EditPart
+          title="Datum en locatie"
+          handleSaveProject={handleSaveProject}
+        >
           <div className={styles.dates}>
             <EditField>
               <EditLabel text="Start datum" htmlFor="startdate" />
@@ -145,8 +185,13 @@ const EditState = observer(({ project }) => {
               <FormFieldInput name="enddate" type="date" />
             </EditField>
           </div>
-          <div className={`${styles.field__wrapper} ${styles.field__wrapperRow}`}>
-            <EditLabel text="Weet je in welke stad je project doorgaat?" htmlFor="isKnownPlace" />
+          <div
+            className={`${styles.field__wrapper} ${styles.field__wrapperRow}`}
+          >
+            <EditLabel
+              text="Weet je in welke stad je project doorgaat?"
+              htmlFor="isKnownPlace"
+            />
             <div className={styles.form__switch}>
               <span className={styles.place__label}>Nee</span>
               <FormFieldSwitch
@@ -164,7 +209,11 @@ const EditState = observer(({ project }) => {
               <div className={styles.location}>
                 <EditField>
                   <EditLabel text="Stad" htmlFor="city" />
-                  <FormFieldSelect name="city" options={['Kortrijk', 'Izegem']} defaultValue="Kortrijk" />
+                  <FormFieldSelect
+                    name="city"
+                    options={['Kortrijk', 'Izegem']}
+                    defaultValue="Kortrijk"
+                  />
                 </EditField>
                 <EditField>
                   <EditLabel text="Straat" htmlFor="street" />

@@ -160,6 +160,21 @@
         }
       }
     }
+
+    .item__locked {
+      opacity: 0.4;
+
+      .circle {
+        &.money {
+          background-color: #f9f9f9;
+          border: 0.3rem solid $grey;
+
+          &::before {
+            background: url('/icons/money-grey.svg');
+          }
+        }
+      }
+    }
   }
 
   .buttons {

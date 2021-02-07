@@ -68,12 +68,10 @@ const ProjectHelp = observer(({ project }) => {
       user: uiStore.currentUser,
       offers: offers,
       fundingAmount: values.fundingAmount ?? '',
-      fundingOffered: values.fundingRequired,
-      materialsOffered: values.materialsRequired,
-      servicesOffered: values.servicesRequired,
+      fundingOffered: values.fundingRequired ?? false,
+      materialsOffered: values.materialsRequired ?? false,
+      servicesOffered: values.servicesRequired ?? false,
     });
-
-    console.log(newDurver);
 
     projectStore.createDurver(newDurver, project.id);
     setOpen(false);
@@ -98,6 +96,7 @@ const ProjectHelp = observer(({ project }) => {
                     materialsRequired={materialsRequired}
                     setServicesRequired={setServicesRequired}
                     servicesRequired={servicesRequired}
+                    project={project}
                   />
                 </FormizStep>
 
@@ -157,11 +156,15 @@ const ProjectHelp = observer(({ project }) => {
           </div>
         </Grid>
       </Modal>
-      <Button
-        className={styles.button}
-        onClick={handleOpen}
-        text={'Ik durf mee te helpen'}
-      />
+      {!uiStore.currentUser ? (
+        <Button text="Ik durf mee te helpen" href="/login" />
+      ) : (
+        <Button
+          className={styles.button}
+          onClick={handleOpen}
+          text={'Ik durf mee te helpen'}
+        />
+      )}
     </>
   );
 });
