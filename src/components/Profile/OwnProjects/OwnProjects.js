@@ -64,7 +64,7 @@ const OwnProjects = observer(() => {
               />
             </button>
             <p>
-              <span>01</span> / 04
+              <span>0{step + 1}</span> / 04
             </p>
             <button onClick={() => handleChangeStep(step + 1)}>
               <img

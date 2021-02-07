@@ -70,7 +70,7 @@ const Header = observer(() => {
             <Link href={ROUTES.projects}>
               <span className={styles.menu__item}>Alle projecten</span>
             </Link>
-            <Link href={ROUTES.admin}>
+            <Link href="/">
               <span className={styles.menu__item}>Kalender</span>
             </Link>
             <Link href="/">
@@ -137,7 +137,11 @@ const Header = observer(() => {
                 ''
               )}
               <div>
-                <ButtonUI aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                <ButtonUI
+                  aria-controls="simple-menu"
+                  aria-haspopup="true"
+                  onClick={handleClick}
+                >
                   <img
                     className={styles.menu__pfp}
                     src={uiStore.currentUser.avatar}

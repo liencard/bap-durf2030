@@ -63,7 +63,6 @@ const ProjectHeader = observer(({ project }) => {
   return (
     <Container>
       <img className={styles.images} src={image} />
-      {/* <div className={styles.images}>Images</div> */}
       <div className={styles.content}>
         <ul className={styles.tags}>
           {tags.map((tag) => (
@@ -109,11 +108,19 @@ const ProjectHeader = observer(({ project }) => {
             </div>
           )}
           {project.fundingRequired && (
-            <div className={styles.item}>
+            <div
+              className={`${styles.item} ${
+                project.state === 1 && styles.item__locked
+              }`}
+            >
               <div className={`${styles.circle} ${styles.money}`} />
-              <p className={styles.info}>
-                {fundingCount}/{project.fundingAmount} geld
-              </p>
+              {project.state === 1 ? (
+                <p className={styles.info}>vergrendeld</p>
+              ) : (
+                <p className={styles.info}>
+                  {fundingCount}/{project.fundingAmount} geld
+                </p>
+              )}
               <p className={styles.item__btn}>Bekijk info</p>
             </div>
           )}

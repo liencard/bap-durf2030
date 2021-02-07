@@ -11,10 +11,8 @@ const ProjectHelpOne = observer(
     setMaterialsRequired,
     servicesRequired,
     setServicesRequired,
+    project,
   }) => {
-    //const [servicesRequired, setServicesRequired] = useState(false);
-    //const [materialsRequired, setMaterialsRequired] = useState(false);
-    //const [fundingRequired, setFundingRequired] = useState(false);
     const [invisibleToggle, setInvisibleToggle] = useState(false);
 
     useEffect(() => {
@@ -37,8 +35,10 @@ const ProjectHelpOne = observer(
       <>
         <h2 className={styles.title}>Ik help mee!</h2>
         <p>
-          Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-          accusantium doloremque laudantium, totam rem aperiam.
+          Help mee met realiseren van{' '}
+          <span className={styles.bold}>{project.title}</span>, het uitlenen van
+          je materiaal, een handje helpen of een centje doneren, alle kleine
+          beetjes helpen!
         </p>
         <div className={styles.hidden}>
           <FormFieldSwitch
@@ -52,54 +52,75 @@ const ProjectHelpOne = observer(
         <div className={styles.requirements}>
           <div
             className={`${styles.requirement} ${
-              materialsRequired && styles.requirementChecked
+              materialsRequired &&
+              project.materialsRequired &&
+              styles.requirementChecked
             }`}
             onClick={() => {
-              setMaterialsRequired(!materialsRequired);
+              {
+                project.materialsRequired &&
+                  setMaterialsRequired(!materialsRequired);
+              }
             }}
           >
             <div className={`${styles.circle} ${styles.material}`} />
             <span className={styles.subtitle}>Materialen aanbieden</span>
-            <FormFieldSwitch
-              name="materialsRequired"
-              label="materialsRequired"
-              setToggleValue={setMaterialsRequired}
-              defaultValue={materialsRequired}
-            />
+            {project.materialsRequired && (
+              <FormFieldSwitch
+                name="materialsRequired"
+                label="materialsRequired"
+                setToggleValue={setMaterialsRequired}
+                defaultValue={materialsRequired}
+              />
+            )}
           </div>
           <div
             className={`${styles.requirement} ${
-              servicesRequired && styles.requirementChecked
+              servicesRequired &&
+              project.servicesRequired &&
+              styles.requirementChecked
             }`}
             onClick={() => {
-              setServicesRequired(!servicesRequired);
+              {
+                project.servicesRequired &&
+                  setServicesRequired(!servicesRequired);
+              }
             }}
           >
             <div className={`${styles.circle} ${styles.service}`} />
             <span className={styles.subtitle}>Diensten aanbieden</span>
-            <FormFieldSwitch
-              name="servicesRequired"
-              label="servicesRequired"
-              setToggleValue={setServicesRequired}
-              defaultValue={servicesRequired}
-            />
+            {project.servicesRequired && (
+              <FormFieldSwitch
+                name="servicesRequired"
+                label="servicesRequired"
+                setToggleValue={setServicesRequired}
+                defaultValue={servicesRequired}
+              />
+            )}
           </div>
           <div
             className={`${styles.requirement} ${
-              fundingRequired && styles.requirementChecked
+              fundingRequired &&
+              project.fundingRequired &&
+              styles.requirementChecked
             }`}
             onClick={() => {
-              setFundingRequired(!fundingRequired);
+              {
+                project.servicesRequired &&
+                  setFundingRequired(!fundingRequired);
+              }
             }}
           >
             <div className={`${styles.circle} ${styles.money}`} />
             <span className={styles.subtitle}>Donaties maken</span>
-            <FormFieldSwitch
-              name="fundingRequired"
-              label="fundingRequired"
-              setToggleValue={setFundingRequired}
-              defaultValue={fundingRequired}
-            />
+            {project.servicesRequired && (
+              <FormFieldSwitch
+                name="fundingRequired"
+                label="fundingRequired"
+                setToggleValue={setFundingRequired}
+                defaultValue={fundingRequired}
+              />
+            )}
           </div>
         </div>
       </>

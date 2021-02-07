@@ -1,0 +1,80 @@
+@import '../../../styles/styles.scss';
+$border-radius: 0.5rem;
+
+.platform {
+  grid-column: span 12;
+  margin-top: 14rem;
+
+  .title {
+    @include title-one;
+    width: 20%;
+    font-weight: 500;
+    line-height: 1.2;
+
+    span {
+      font-weight: 700;
+    }
+  }
+}
+
+.content {
+  grid-column: span 6;
+  margin-top: 4rem;
+
+  .wrapper {
+    display: flex;
+    margin-bottom: -2rem;
+    padding: 0 2rem;
+  }
+
+  .subtitle {
+    @include title-two;
+    font-weight: 700;
+    margin-left: 2rem;
+  }
+
+  .content__color {
+    padding: 5rem;
+    padding-top: 7rem;
+
+    div {
+      display: grid;
+      grid-template-columns: 1fr 8fr;
+      grid-row-gap: 3rem;
+      margin-bottom: 5rem;
+    }
+
+    span {
+      width: 2.5rem;
+      height: 2.5rem;
+      color: white;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    button {
+      grid-column: span 2;
+    }
+  }
+
+  .green {
+    background-color: $green-light;
+
+    span {
+      background-color: $green;
+    }
+  }
+
+  .yellow {
+    background-color: #fcfad6;
+
+    span {
+      background-color: #ffe456;
+    }
+
+    button {
+      background-color: #ffe456;
+      color: $blue-dark;
+    }
+  }
+}
