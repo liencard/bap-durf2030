@@ -22,7 +22,8 @@ const FormFieldFileUpload = (props) => {
       70,
       0,
       (uri) => {
-        setPreview(uri);
+        const imageURL = URL.createObjectURL(targetFile);
+        setPreview(imageURL);
         setValue({ file: targetFile, path: uri, name: targetFile.name });
       },
       'blob'

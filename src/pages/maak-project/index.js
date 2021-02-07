@@ -1,7 +1,8 @@
 import { useRouter } from 'next/router';
 import { ROUTES, THEMES, CATEGORIES } from '../../consts/index';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Container } from '../../components/Layout';
+import { Button } from '../../components/UI';
 import { observer } from 'mobx-react-lite';
 import styles from './CreateProject.module.scss';
 import {
@@ -12,12 +13,15 @@ import {
   FormPartFive,
   FormPartSix,
   FormPartSeven,
+  FormPartConfirm,
 } from '../../components/Create';
 import { Formiz, useForm, FormizStep } from '@formiz/core';
 import { useStores } from '../../hooks/useStores';
 import Project from '../../models/Project';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 const CreateProject = observer(() => {
+  const [submitted, setSubmitted] = useState(false);
   const projectForm = useForm();
   const { projectStore, uiStore } = useStores();
   const router = useRouter();
@@ -27,6 +31,15 @@ const CreateProject = observer(() => {
       router.push(ROUTES.login);
     }
   }, [uiStore.currentUser]);
+
+  useEffect(() => {
+    const name = projectForm.currentStep?.name;
+    if (name === 'confirm' && !submitted) {
+      console.log('submit');
+      projectForm.submit();
+      setSubmitted(true);
+    }
+  }, [projectForm.currentStep]);
 
   if (uiStore.currentUser === undefined) {
     return <div>User inladen</div>;
@@ -75,7 +88,6 @@ const CreateProject = observer(() => {
       street: values.street ?? '',
       themes: themesWithValues,
       title: values.title,
-      //  timpestamp: projectStore.rootStore.getCurrenTimeStamp(),
 
       userId: uiStore.currentUser.id,
       store: projectStore,
@@ -99,18 +111,37 @@ const CreateProject = observer(() => {
       },
       projectId: projectId,
     });
+  };
 
-    //  router.push(ROUTES.home);
+  const getButtonVariant = () => {
+    if (projectForm.currentStep) {
+      if (projectForm.currentStep.index + 1 < 7) {
+        return 'secondary';
+      } else {
+        return '';
+      }
+    } else {
+      return '';
+    }
   };
 
   return (
     <>
       <div className={styles.create}>
         <Container>
-          <div className={styles.image}>
-            <div className={styles.background}></div>
+          <div className={`${styles.image} ${projectForm.currentStep && 'step' + (projectForm.currentStep.index + 1)}`}>
+            <div className={styles.progress__wrapper}>
+              <LinearProgress
+                className={styles.progress}
+                variant="determinate"
+                value={((projectForm.currentStep && projectForm.currentStep.index + 1) / 8) * 100}
+              />
+            </div>
           </div>
           <div className={styles.content}>
+            {!projectForm.isLastStep && (
+              <p className={styles.step}>Stap {projectForm.currentStep && projectForm.currentStep.index + 1} / 7</p>
+            )}
             <Formiz connect={projectForm} onValidSubmit={handleSubmit}>
               <form noValidate onSubmit={projectForm.submitStep}>
                 <FormizStep name="step1">
@@ -134,28 +165,32 @@ const CreateProject = observer(() => {
                 <FormizStep name="step7">
                   <FormPartSeven />
                 </FormizStep>
+                <FormizStep name="confirm">
+                  <FormPartConfirm />
+                </FormizStep>
 
-                {/* Update the submit button to allow navigation between steps. */}
-                <div className={styles.buttons}>
-                  {!projectForm.isFirstStep && (
-                    <button className={styles.button} type="button" onClick={projectForm.prevStep}>
-                      Vorige
-                    </button>
-                  )}
-                  {projectForm.isLastStep ? (
-                    <button className={styles.button} type="submit" disabled={!projectForm.isValid}>
-                      Project indienen
-                    </button>
-                  ) : (
-                    <button
-                      className={`${styles.button} ${styles.buttonSubmit}`}
-                      type="submit"
-                      disabled={!projectForm.isStepValid}
-                    >
-                      Volgende
-                    </button>
-                  )}
-                </div>
+                {!projectForm.isLastStep && (
+                  <div className={styles.buttons}>
+                    {!projectForm.isFirstStep && (
+                      <Button text="Vorige" type="button" variant="secondary" onClick={projectForm.prevStep} />
+                    )}
+                    {projectForm.currentStep && projectForm.currentStep.index + 1 === 7 ? (
+                      <Button
+                        text="Project indienen"
+                        type="submit"
+                        variant={getButtonVariant()}
+                        disabled={!projectForm.isStepValid}
+                      />
+                    ) : (
+                      <Button
+                        text="Volgende"
+                        type="submit"
+                        variant={getButtonVariant()}
+                        disabled={!projectForm.isStepValid}
+                      />
+                    )}
+                  </div>
+                )}
               </form>
             </Formiz>
           </div>
