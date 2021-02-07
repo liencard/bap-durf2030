@@ -12,6 +12,12 @@ const OwnProjectCard = observer(({ project }) => {
         return 'In afwachting';
       case 1:
         return 'Lopend';
+      case 2:
+        return 'Lopend';
+      case 3:
+        return 'Project klaar';
+      case 4:
+        return 'Afgerond';
       default:
         return 'Onbekende status';
     }

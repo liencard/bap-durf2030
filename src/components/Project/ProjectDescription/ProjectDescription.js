@@ -1,6 +1,6 @@
 import styles from './ProjectDescription.module.scss';
 import { observer } from 'mobx-react-lite';
-import { ProjectLikes, ProjectShare } from '../../Project';
+import { ProjectLikes, ProjectShare, ProjectHelp } from '../../Project';
 import { Button } from '../../UI';
 import { useStores } from '../../../hooks/useStores';
 import ReactHtmlParser from 'react-html-parser';
@@ -31,15 +31,7 @@ const ProjectDescription = observer(({ project, users }) => {
           {ReactHtmlParser(project.description)}
         </div>
         <div className={styles.buttons}>
-          {!uiStore.currentUser ? (
-            <Button text="Ik durf mee te helpen" href="/login" />
-          ) : (
-            <Button
-              className={styles.button}
-              onClick={handleOpen}
-              text={'Ik durf mee te helpen'}
-            />
-          )}
+          <ProjectHelp project={project} />
           <div>
             <ProjectShare />
             <ProjectLikes project={project} />

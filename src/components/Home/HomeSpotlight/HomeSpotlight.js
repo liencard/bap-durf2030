@@ -109,26 +109,34 @@ const HomeSpotlight = () => {
                 worden.
               </p>
               <div className={styles.pagination}>
-                <button onClick={() => handleChangeStep(step - 1)}>
-                  <img
-                    src="/icons/arrow-dark.svg"
-                    width="6"
-                    height="10"
-                    alt="dark arrow icon left"
-                  />
-                </button>
+                {step > 0 ? (
+                  <button onClick={() => handleChangeStep(step - 1)}>
+                    <img
+                      src="/icons/arrow-dark.svg"
+                      width="6"
+                      height="10"
+                      alt="dark arrow icon left"
+                    />
+                  </button>
+                ) : (
+                  <p></p>
+                )}
                 <p>
                   <span>0{step + 1}</span> / 03
                 </p>
-                <button onClick={() => handleChangeStep(step + 1)}>
-                  <img
-                    className={styles.arrow__flipped}
-                    src="/icons/arrow-dark.svg"
-                    width="6"
-                    height="10"
-                    alt="dark arrow icon right"
-                  />
-                </button>
+                {step < 2 ? (
+                  <button onClick={() => handleChangeStep(step + 1)}>
+                    <img
+                      className={styles.arrow__flipped}
+                      src="/icons/arrow-dark.svg"
+                      width="6"
+                      height="10"
+                      alt="dark arrow icon right"
+                    />
+                  </button>
+                ) : (
+                  <p></p>
+                )}
               </div>
             </div>
             <div className={styles.spotlight__item}>
