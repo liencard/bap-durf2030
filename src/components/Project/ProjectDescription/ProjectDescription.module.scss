@@ -1,17 +1,23 @@
 @import '../../../styles/styles.scss';
-
 $spacing-top: 3rem;
 
 .text__wrapper {
   grid-column: span 7;
 
   .text {
-    width: 100%;
-    overflow: hidden;
-    .text__img {
+    h1 {
+      @include title-one;
+      margin: 2rem 0 1rem 0;
+    }
+
+    h2 {
+      @include title-two;
+      margin: 2rem 0 0 0;
+    }
+
+    img {
       width: 100%;
-      overflow: hidden;
-      margin: 1rem 0rem 3rem;
+      margin: 1rem 0;
     }
 
     & > p {
@@ -37,27 +43,53 @@ $spacing-top: 3rem;
 }
 
 .details {
-  margin-top: $spacing-top;
   grid-column: 9 / span 4;
 
   .creator__wrapper {
     margin-bottom: 2rem;
 
+    .creator__title {
+      @include title-two;
+    }
+
     .creator {
       display: flex;
       align-items: center;
+      font-size: 1.6rem;
       font-weight: 600;
       margin-bottom: 2rem;
 
-      .creator__title {
-        @include title-three;
+      .name__wrapper {
+        display: flex;
+        align-items: center;
+      }
+
+      .creator__name {
+        line-height: 1.2;
+        font-weight: 600;
+        margin-right: 1rem;
+      }
+
+      .creator__organisation {
+        font-weight: 300;
+      }
+
+      .people__image {
+        @include pfp-large;
+        margin-right: 2rem;
       }
     }
   }
 
   .helpers {
+    margin-top: 5rem;
+
     .helpers__title {
-      @include title-three;
+      @include title-two;
+    }
+
+    .helpers__subtitle {
+      margin-bottom: 3rem;
     }
 
     .helper {
@@ -65,9 +97,21 @@ $spacing-top: 3rem;
       align-items: center;
       margin-bottom: 2rem;
 
-      .helper__name {
-        font-weight: 600;
+      .name__wrapper {
+        display: flex;
+        align-items: center;
+
+        .helper__name {
+          font-weight: 600;
+          line-height: 1.2;
+          margin-right: 1rem;
+        }
       }
     }
   }
+}
+
+.image {
+  @include pfp-large;
+  margin-right: 2rem;
 }

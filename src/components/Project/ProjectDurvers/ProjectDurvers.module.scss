@@ -1,0 +1,52 @@
+@import '../../../styles/styles.scss';
+$spacing-top: 3rem;
+
+.header {
+  grid-column: span 12;
+  display: flex;
+  justify-content: space-between;
+
+  .title {
+    @include title-one;
+  }
+}
+
+.durver {
+  grid-column: span 6;
+  border: 0.1rem solid $grey-border;
+  padding: 3rem 2rem;
+
+  .user {
+    display: flex;
+    margin-bottom: 2rem;
+
+    .image {
+      @include pfp-large;
+      margin-right: 2rem;
+    }
+
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+
+      span {
+        display: flex;
+        align-items: center;
+
+        p {
+          margin-right: 0.5rem;
+        }
+
+        .icon {
+          margin-left: 0.5rem;
+        }
+      }
+
+      .offer {
+        @include text-detail;
+        line-height: 1;
+        display: flex;
+      }
+    }
+  }
+}

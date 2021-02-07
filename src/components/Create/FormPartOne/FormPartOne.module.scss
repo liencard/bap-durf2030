@@ -8,6 +8,10 @@
   @include title-three;
 }
 
+.info {
+  margin-bottom: 2rem;
+}
+
 .textfield__street {
   grid-column: span 8;
 }

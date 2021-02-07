@@ -1,137 +1,136 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import { useStores } from '../../../hooks/useStores';
-import Project from '../../../models/Project';
+import { useState } from 'react';
 import styles from './EditBasis.module.scss';
-import { Button } from '../../UI';
+import { EditPart, EditLabel, EditField } from '../';
+import {
+  FormFieldRichTextEditor,
+  FormFieldInput,
+  FormFieldCheckbox,
+  FormFieldSwitch,
+  FormFieldSelect,
+  FormFieldFileUpload,
+} from '../../Create';
+import { THEMES, CATEGORIES } from '../../../consts';
 
 const EditBasis = ({ project }) => {
-  const { projectStore } = useStores();
-  const [editGeneral, setEditGeneral] = useState(false);
-  const [editPicture, setEditPicture] = useState(false);
+  const [isKnownPlace, setIsKnownPlace] = useState(project.isKnownPlace);
 
-  const [title, setTitle] = useState(project.title);
-  const [intro, setIntro] = useState(project.intro);
-
-  const handleEditGeneral = () => {
-    if (editGeneral === false) {
-      setEditGeneral(true);
-    } else {
-      setEditGeneral(false);
+  const handleSaveProject = (values) => {
+    if (values.categories && values.themes) {
+      let categoriesWithValues = {};
+      let themesWithValues = {};
+      CATEGORIES.forEach((category, i) => {
+        const key = category.toLowerCase();
+        categoriesWithValues[key] = values.categories[i];
+      });
+      THEMES.forEach((theme, i) => {
+        const key = theme.toLowerCase();
+        themesWithValues[key] = values.themes[i];
+      });
+      values['categories'] = categoriesWithValues;
+      values['themes'] = themesWithValues;
     }
+
+    project.updateProject(values);
   };
 
-  console.log(projectStore.projects);
-
-  const handleSaveGeneral = async (e) => {
-    e.preventDefault();
-    const projectUpdate = new Project({
-      id: 'EvDOFkxAcUN6BRCrB7X4',
-      title: title,
-      intro: intro,
-      tags: project.tags,
-      state: project.state,
-    });
-    const result = await projectStore.updateProject(projectUpdate);
+  const handleSaveImage = (values) => {
+    values.image = {
+      enabled: values.image ? true : false,
+      name: values.image ? values.image.name : '',
+      file: values.image ? values.image.file : '',
+      url: '',
+    };
+    project.updateImage(values.image);
   };
 
-  const handleEditPicture = () => {
-    if (editPicture === false) {
-      setEditPicture(true);
-    } else {
-      setEditPicture(false);
-    }
-  };
   return (
     <>
-      <section className={styles.status}>
-        <h2 className={styles.title}>Status</h2>
-        <p>Lorum ipsum</p>
-      </section>
+      <EditPart title="Algemene Info" handleSaveProject={handleSaveProject}>
+        <EditField>
+          <EditLabel text="Title" htmlFor="title" />
+          <FormFieldInput defaultValue={project.title} name="title" required />
+        </EditField>
+        <EditField>
+          <EditLabel text="Korte samenvatting" htmlFor="intro" />
+          <FormFieldInput defaultValue={project.intro} name="intro" multiline required />
+        </EditField>
+        <EditField>
+          <EditLabel text="Beschrijving" htmlFor="description" />
+          <FormFieldRichTextEditor defaultValue={project.description} name="description" />
+        </EditField>
+      </EditPart>
 
-      <section className={styles.section}>
-        <div className={styles.header}>
-          <h2 className={styles.subtitle}>Algemene Info</h2>
-          <div>
-            <button className={styles.edit__btn} onClick={handleEditGeneral}>
-              {editGeneral ? 'Annuleer' : 'Bewerken'}
-            </button>
-            {editGeneral ? (
-              <Button
-                className={styles.save__btn}
-                onClick={handleSaveGeneral}
-                text={'Bewerking opslaan'}
-              />
-            ) : (
-              ''
-            )}
-          </div>
-        </div>
-        <div className={styles.form__wrapper}>
-          <div className={styles.form}>
-            <div className={styles.input__wrapper}>
-              <label className={styles.form__label} htmlFor="title">
-                Title
-              </label>
-              <input
-                className={styles.form__input}
-                type="text"
-                name="title"
-                placeholder="Geef je project een titel"
-                value={title}
-                onChange={(e) => setTitle(e.currentTarget.value)}
-              />
-            </div>
-            <div className={styles.input__wrapper}>
-              <label className={styles.form__label} htmlFor="intro">
-                Korte samenvatting
-              </label>
-              <textarea
-                className={styles.form__input}
-                type="text"
-                name="intro"
-                placeholder="Geef een korte beschrijving"
-                value={intro}
-                onChange={(e) => setIntro(e.currentTarget.value)}
-              />
-            </div>
-            <div className={styles.input__wrapper}>
-              <label className={styles.form__label} htmlFor="description">
-                Beschrijving
-              </label>
-              <input
-                className={styles.form__input}
-                type="text"
-                name="description"
-                placeholder="Beschrijving project"
-              />
-            </div>
-          </div>
-          {editGeneral ? '' : <div className={styles.form__locked}></div>}
-        </div>
-      </section>
+      <EditPart title="Foto" handleSaveProject={handleSaveImage}>
+        <FormFieldFileUpload name="image" defaultValue={project.image.url} />
+      </EditPart>
 
-      <section className={styles.section}>
-        <div className={styles.header}>
-          <h2 className={styles.subtitle}>Foto's</h2>
-          <div>
-            <button className={styles.edit__btn} onClick={handleEditPicture}>
-              {editPicture ? 'Annuleer' : 'Bewerken'}
-            </button>
-            {editPicture ? (
-              <Button className={styles.save__btn} text={'Bewerking opslaan'} />
-            ) : (
-              ''
-            )}
+      <EditPart title="Tags" handleSaveProject={handleSaveProject}>
+        <EditField>
+          <EditLabel text="Thema's" htmlFor="themes[]" />
+          <fieldset className={styles.themes}>
+            {THEMES.map((theme, i) => {
+              return (
+                <FormFieldCheckbox
+                  key={i}
+                  name={`themes[${i}]`}
+                  option={theme}
+                  defaultValue={project.themes[theme.toLowerCase()]}
+                />
+              );
+            })}
+          </fieldset>
+        </EditField>
+        <EditField>
+          <EditLabel text="Categorieën" htmlFor="categories[]" />
+          <fieldset className={styles.categories}>
+            {CATEGORIES.map((category, i) => {
+              return (
+                <FormFieldCheckbox
+                  key={i}
+                  name={`categories[${i}]`}
+                  option={category}
+                  defaultValue={project.categories[category.toLowerCase()]}
+                />
+              );
+            })}
+          </fieldset>
+        </EditField>
+      </EditPart>
+
+      <EditPart title="Locatie" handleSaveProject={handleSaveProject}>
+        <EditField row>
+          <EditLabel text="Weet je in welke stad je project doorgaat?" htmlFor="isKnownPlace" />
+          <div className={styles.form__switch}>
+            <span className={styles.place__label}>Nee</span>
+            <FormFieldSwitch
+              name="isKnownPlace"
+              label="isKnownPlace"
+              setToggleValue={setIsKnownPlace}
+              defaultValue={project.isKnownPlace}
+            />
+            <span className={styles.place__label}>Ja</span>
           </div>
-        </div>
-        <div className={styles.form__wrapper}>
-          <div className={styles.form}>
-            <p>fotos</p>
-          </div>
-          {editPicture ? '' : <div className={styles.form__locked}></div>}
-        </div>
-      </section>
+        </EditField>
+
+        {isKnownPlace && (
+          <>
+            <div className={styles.location}>
+              <EditField>
+                <EditLabel text="Stad" htmlFor="city" />
+                <FormFieldSelect name="city" options={['Kortrijk', 'Izegem']} defaultValue="Kortrijk" />
+              </EditField>
+              <EditField>
+                <EditLabel text="Straat" htmlFor="street" />
+                <FormFieldInput defaultValue={project.street} name="street" />
+              </EditField>
+              <EditField>
+                <EditLabel text="Nr" htmlFor="number" />
+                <FormFieldInput defaultValue={project.number} name="number" />
+              </EditField>
+            </div>
+          </>
+        )}
+      </EditPart>
     </>
   );
 };

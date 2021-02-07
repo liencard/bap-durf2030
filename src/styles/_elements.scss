@@ -13,6 +13,7 @@
   width: 2.5rem;
   object-fit: cover;
   border-radius: 50%;
+  background-color: white;
 }
 
 @mixin form__label {
@@ -32,10 +33,11 @@
 }
 
 @mixin pfp-large {
-  height: 4rem;
-  width: 4rem;
+  height: 4.3rem;
+  width: 4.3rem;
   object-fit: cover;
   border-radius: 50%;
+  background-color: white;
 }
 
 @mixin button {
@@ -66,35 +68,30 @@
 
 @mixin appbar {
   grid-column: span 12;
-  margin: 5rem 0;
+  margin: 0;
 
   div {
     height: 8rem;
     position: relative;
 
-    &::before {
-      position: absolute;
-      top: 0;
-      content: '';
-      height: 0.1rem;
-      width: 100%;
-      background-color: $blue-light;
-    }
-
-    &::after {
-      position: absolute;
-      content: '';
-      height: 0.1rem;
-      width: 100%;
-      background-color: $blue-light;
-      left: 0;
-      bottom: 0;
-    }
-
     span {
       padding: 0.15rem;
     }
   }
+}
+
+@mixin tab-line {
+  background-color: $grey;
+  height: 0.1rem;
+  width: 100vw;
+}
+
+@mixin tab-lineTop {
+  margin-top: 5rem;
+}
+
+@mixin tab-lineBottom {
+  margin-bottom: 5rem;
 }
 
 // @mixin textfield {

@@ -1,0 +1,10 @@
+@import '../../../styles/styles.scss';
+
+.title {
+  @include title-two;
+  margin-bottom: 2rem;
+}
+
+.funding {
+  margin-top: 3.5rem;
+}

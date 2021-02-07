@@ -1,0 +1,43 @@
+@import '../../../styles/styles.scss';
+
+.section {
+  margin-bottom: 5rem;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    .subtitle {
+      @include title-two;
+    }
+
+    .buttons {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+
+      button:last-of-type {
+        margin-left: 3rem;
+      }
+    }
+  }
+
+  .form__wrapper {
+    display: grid;
+    z-index: 3;
+
+    .form {
+      border: $border;
+      border-radius: 0.3rem;
+      padding: 3rem;
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    &.form__locked {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+}

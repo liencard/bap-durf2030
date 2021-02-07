@@ -1,0 +1,17 @@
+@import '../../../styles/styles.scss';
+$border-radius: 0.5rem;
+
+.icons {
+  position: absolute;
+  background: $red;
+  right: 1.5rem;
+  top: 1.5rem;
+  border-radius: $border-radius;
+  display: flex;
+  padding: 0.3rem 0.5rem;
+
+  img {
+    display: block;
+    padding: 0.3rem;
+  }
+}

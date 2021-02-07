@@ -1,74 +1,135 @@
 import styles from './ProjectDescription.module.scss';
-import { ProjectLikes, ProjectCreatorImage, ProjectShare } from '../../Project';
+import { observer } from 'mobx-react-lite';
+import { ProjectLikes, ProjectShare } from '../../Project';
 import { Button } from '../../UI';
+import { useStores } from '../../../hooks/useStores';
+import ReactHtmlParser from 'react-html-parser';
 
-const ProjectDescription = () => {
+const ProjectDescription = observer(({ project, users }) => {
+  let durversInfo = [];
+  let ownersInfo = [];
+
+  project.durvers.forEach((durver) => {
+    const newDurver = users.find(
+      (existingUser) => durver.user.id === existingUser.id
+    );
+    durversInfo.push(newDurver);
+  });
+
+  console.log(project.owners);
+
+  project.owners.forEach((owner) => {
+    const newOwner = users.find((existingUser) => owner.id === existingUser.id);
+    ownersInfo.push(newOwner);
+  });
+
   return (
     <>
       <div className={styles.text__wrapper}>
         <div className={styles.text}>
-          <p>
-            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
-            aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni
-            dolores eos qui ratione voluptatem sequi nesciunt.
-          </p>
-          <p>
-            Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non
-            numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima
-            veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
-            consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae
-            consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-          </p>
-          <img className={styles.text__img} src="/pfp-temp.jpg" alt="profielfoto van organisator" />
-          <p>
-            Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non
-            numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima
-            veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
-            consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae
-            consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-          </p>
+          {ReactHtmlParser(project.description)}
         </div>
         <div className={styles.buttons}>
           <Button text="Ik durf mee te helpen" />
           <div>
             <ProjectShare />
-            <ProjectLikes />
+            <ProjectLikes project={project} />
           </div>
         </div>
       </div>
       <aside className={styles.details}>
         <div className={styles.creator__wrapper}>
-          <div className={styles.creator}>
-            <ProjectCreatorImage />
-            <div>
-              <h3 className={styles.creator__title}>Organisator</h3>
-              <p>Naam Voornaam</p>
+          <h3 className={styles.creator__title}>Organisator(en)</h3>
+          {ownersInfo.map((owner) => (
+            <div key={owner.id} className={styles.creator}>
+              <img
+                className={styles.people__image}
+                src={owner.avatar}
+                alt="profielfoto van organisator"
+              />
+              <div>
+                <span className={styles.name__wrapper}>
+                  <p className={styles.creator__name}>{owner.name}</p>
+                  {owner.awards.map((award) => (
+                    <img
+                      key={award.name}
+                      width="20"
+                      height="20"
+                      src={award.img}
+                    />
+                  ))}
+                </span>
+                <p className={styles.creator__organisation}>Individu</p>
+              </div>
             </div>
-          </div>
-          <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis.</p>
+          ))}
+
+          <p>{project.about}</p>
         </div>
+
         <div className={styles.helpers}>
           <h3 className={styles.helpers__title}>Durvers</h3>
-          <p>Deze mensen durfden mee op de boot te springen voor dit project.</p>
-          <div className={styles.helper}>
-            <ProjectCreatorImage />
-            <div>
-              <p className={styles.helper__name}>John Doe</p>
-              <p>Extra info</p>
-            </div>
-          </div>
-          <div className={styles.helper}>
-            <ProjectCreatorImage />
-            <div>
-              <p className={styles.helper__name}>John Doe</p>
-              <p>Extra info</p>
-            </div>
-          </div>
+          <p className={styles.helpers__subtitle}>
+            Deze mensen durfden mee op de boot te springen voor dit project.
+          </p>
+          {project.durvers.length > 3 ? (
+            <>
+              {durversInfo.slice(0, 3).map((durver) => (
+                <div key={durver.id} className={styles.helper}>
+                  <img
+                    className={styles.image}
+                    src={durver.avatar}
+                    alt="profielfoto van organisator"
+                  />
+                  <div>
+                    <span className={styles.name__wrapper}>
+                      <p className={styles.helper__name}>{durver.name}</p>
+                      {durver.awards.map((award) => (
+                        <img
+                          key={award.name}
+                          width="20"
+                          height="20"
+                          src={award.img}
+                        />
+                      ))}
+                    </span>
+                    <p>Extra info</p>
+                  </div>
+                </div>
+              ))}
+            </>
+          ) : (
+            <>
+              {durversInfo.map((durver) => (
+                <div key={durver.id} className={styles.helper}>
+                  <img
+                    className={styles.image}
+                    src={durver.avatar}
+                    alt="profielfoto van organisator"
+                  />
+                  <div>
+                    <span className={styles.name__wrapper}>
+                      <p className={styles.helper__name}>{durver.name}</p>
+                      {durver.awards.map((award) => (
+                        <img
+                          key={award.name}
+                          width="20"
+                          height="20"
+                          src={award.img}
+                        />
+                      ))}
+                    </span>
+                    <p>Extra info</p>
+                  </div>
+                </div>
+              ))}
+            </>
+          )}
+          <a>Bekijk alle durvers</a>
         </div>
       </aside>
     </>
   );
-};
+});
 
 export default ProjectDescription;

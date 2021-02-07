@@ -1,5 +1,4 @@
 import firebase from 'firebase/app';
-// import * as firebase from 'firebase/app';
 import UiStore from './UiStore';
 import UserStore from './UserStore';
 import ProjectStore from './ProjectStore';
@@ -22,16 +21,22 @@ class RootStore {
       appId: process.env.NEXT_PUBLIC_DB_APP_ID,
     };
 
-    // prevent multiple app inits
-    return !firebase.apps.length
-      ? firebase.initializeApp(config)
-      : firebase.app();
+    return !firebase.apps.length ? firebase.initializeApp(config) : firebase.app();
   };
 }
 
 const getCurrenTimeStamp = () => {
   return firebase.firestore.Timestamp.now();
 };
-export { getCurrenTimeStamp };
+
+const getArrayUnion = (newElement) => {
+  return firebase.firestore.FieldValue.arrayUnion(newElement);
+};
+
+const removeFromArray = (element) => {
+  return firebase.firestore.FieldValue.arrayRemove(element);
+};
+
+export { getCurrenTimeStamp, getArrayUnion, removeFromArray };
 
 export default RootStore;

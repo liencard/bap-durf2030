@@ -1,0 +1,13 @@
+@import '../../../styles/styles.scss';
+
+.title {
+  @include title-two;
+  margin-bottom: 2rem;
+}
+
+.services {
+  margin-top: 3.5rem;
+  text-transform: capitalize;
+  display: flex;
+  flex-direction: column;
+}

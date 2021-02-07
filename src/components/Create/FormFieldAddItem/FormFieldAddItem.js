@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { observer } from 'mobx-react-lite';
+import { useState, useEffect } from 'react';
 import { useField } from '@formiz/core';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -9,19 +10,24 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import styles from './FormFieldAddItem.module.scss';
 
 const FormFieldAddItem = (props) => {
-  const { errorMessage, id, isValid, isSubmitted, setValue, value } = useField(props);
-  const { label, required, options, defaultValue } = props;
-  const [isTouched, setIsTouched] = useState(false);
-  const showError = !isValid && (isTouched || isSubmitted);
+  const { isValid, isSubmitted, setValue, value } = useField(props);
+  const { label, required, options, defaultValue = [], textRow, completeOption, setComplete } = props;
 
   const [activeItem, setActiveItem] = useState('');
   const [activeItemCategory, setActiveItemCategory] = useState(options[0]);
   const [items, setItems] = useState([]);
 
+  useEffect(() => {
+    setItems(defaultValue);
+  }, []);
+
+  useEffect(() => {
+    setValue(items);
+  }, [items]);
+
   const addItem = () => {
     setItems([...items, { name: activeItem, amount: 1, category: activeItemCategory }]);
     setActiveItem('');
-    setValue(items);
   };
 
   const removeItem = (item) => {
@@ -30,7 +36,6 @@ const FormFieldAddItem = (props) => {
       return currentItem !== item;
     });
     setItems(newItems);
-    setValue(items);
   };
 
   const changeItemAmount = (item, type) => {
@@ -49,14 +54,13 @@ const FormFieldAddItem = (props) => {
     });
 
     setItems(newItems);
-    setValue(items);
   };
 
   return (
     <>
       {items.map((item, i) => {
         return (
-          <div key={i} className={styles.item}>
+          <div key={i} className={`${styles.item} ${item.completed && styles.itemCompleted}`}>
             <div className={styles.amount}>
               <div
                 className={`${styles.sign}`}
@@ -76,22 +80,35 @@ const FormFieldAddItem = (props) => {
                 +
               </div>
             </div>
-            <div className={styles.text}>
+            <div className={`${styles.text} ${textRow && styles.textRow} `}>
               <p className={styles.category}>{item.category}</p>
               <p className={styles.name}>{item.name}</p>
             </div>
-            <p
-              onClick={() => {
-                removeItem(item);
-              }}
-              className={styles.delete}
-            >
-              verwijder
-            </p>
+            <div className={styles.buttons}>
+              {completeOption && (
+                <div
+                  className={styles.complete}
+                  onClick={() => {
+                    setComplete(item);
+                  }}
+                >
+                  <img src="../icons/check-green.svg" />
+                  <span className="hidden">Voltooien</span>
+                </div>
+              )}
+              <div
+                onClick={() => {
+                  removeItem(item);
+                }}
+                className={styles.delete}
+              >
+                <img src="../icons/delete-red.svg" />
+                <span className="hidden">Verwijder</span>
+              </div>
+            </div>
           </div>
         );
       })}
-
       <div className={styles.wrapper}>
         <FormControl variant="outlined" fullWidth>
           <InputLabel>Categorie</InputLabel>
@@ -115,7 +132,7 @@ const FormFieldAddItem = (props) => {
             }}
             fullWidth
             type="text"
-            label="Materiaal"
+            label={label ?? ''}
             variant="outlined"
             value={activeItem ?? ''}
             onChange={(e) => setActiveItem(e.target.value)}

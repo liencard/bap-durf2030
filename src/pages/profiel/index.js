@@ -1,82 +1,88 @@
 import { observer } from 'mobx-react-lite';
 import { useStores } from '../../hooks/useStores';
-import { useState, useEffect } from 'react';
-import { ROUTES } from '../../consts/index';
-import { Container } from '../../components/Layout';
-import { Button } from '../../components/UI';
+import { useState } from 'react';
+import { Container, Grid } from '../../components/Layout';
+import { TabPanel, AppBar, TabSideElement } from '../../components/UI';
 import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 import styles from './Profile.module.scss';
-import { ProjectCard } from '../../components/Project';
+import {
+  LikedProjects,
+  OwnProjects,
+  OwnAwards,
+  BadgesAwards,
+} from '../../components/Profile';
+
+import Tab from '@material-ui/core/Tab';
 
 const Profile = observer(() => {
   const { uiStore } = useStores();
-
-  const STATE_LOADING = 'loading';
-  const STATE_DOES_NOT_EXIST = 'doesNotExist';
-  const STATE_LOADING_MORE_DETAILS = 'loadingMoreDetails';
-  const STATE_FULLY_LOADED = 'fullyLoaded';
-
-  const [currentUser, setCurrentUser] = useState(uiStore.currentUser);
-  const [state, setState] = useState(currentUser ? STATE_LOADING_MORE_DETAILS : STATE_LOADING);
-
-  useEffect(() => {
-    const loadUser = async () => {
-      try {
-        const setUser = await uiStore.currentUser;
-        if (!setUser) {
-          setState(STATE_DOES_NOT_EXIST);
-          return;
-        }
-        setState(STATE_FULLY_LOADED);
-        setCurrentUser(setUser);
-        uiStore.getProjectsForUser();
-        console.log('project array');
-        console.log(uiStore.userProjects);
-      } catch (error) {
-        console.log('User failed loading');
-      }
-    };
-    loadUser();
-  }, [uiStore, setCurrentUser, uiStore.currentUser]);
+  const [value, setValue] = useState(0);
 
   return (
     <>
       <Header />
-      {currentUser ? (
-        <>
-          <div className={styles.profile}>
-            <Container>
-              <div className={styles.profile__wrapper}>
-                <img className={styles.avatar} width="80" height="80" src={currentUser.avatar} />
-                <div>
-                  <p className={styles.name}>{currentUser.name}</p>
-                  <p className={styles.email}>{currentUser.email}</p>
-                </div>
+
+      <div className={styles.profile}>
+        <Container>
+          {uiStore.currentUser && (
+            <div className={styles.profile__wrapper}>
+              <img
+                className={styles.avatar}
+                width="80"
+                height="80"
+                src={uiStore.currentUser.avatar}
+              />
+              <div>
+                <span className={styles.name__wrapper}>
+                  <p className={styles.name}>{uiStore.currentUser.name}</p>
+                  {uiStore.currentUser.awards.map((award, i) => (
+                    <img width="35" height="35" key={i} src={award.img} />
+                  ))}
+                </span>
+                <p className={styles.email}>{uiStore.currentUser.email}</p>
               </div>
-              <div className={styles.projects}>
-                <h1 className={styles.title}>Projecten</h1>
-                {uiStore.userProjects.length != 0 ? (
-                  <>
-                    {uiStore.userProjects.map((project) => (
-                      <div key={project.id}>
-                        <ProjectCard key={project.id} title={project.title} intro={project.intro} id={project.id} />
-                        <Button href={ROUTES.edit.to + project.id} text={'Bewerk project'} />
-                      </div>
-                    ))}
-                  </>
-                ) : (
-                  <p>Geen eigen projecten</p>
-                )}
-              </div>
-              <div className={styles.badges}>
-                <h1 className={styles.title}>Badges &amp; Awards</h1>
-              </div>
-            </Container>
-          </div>
-        </>
-      ) : (
-        ' '
-      )}
+            </div>
+          )}
+        </Container>
+
+        <div className={`${styles.line} ${styles.lineTop}`}></div>
+        <Container>
+          <AppBar value={value} setValue={setValue}>
+            <Tab label="Overview" />
+            <Tab label="Gewaardeerde projecten" />
+            <Tab label="Badges & Awards" />
+            <TabSideElement>
+              <Tab label="Instellingen" />
+            </TabSideElement>
+          </AppBar>
+        </Container>
+        <div className={`${styles.line} ${styles.lineBottom}`}></div>
+
+        <TabPanel className={styles.panel} value={value} index={0}>
+          <Container>
+            <OwnProjects />
+            <OwnAwards />
+          </Container>
+        </TabPanel>
+
+        <TabPanel className={styles.panel} value={value} index={1}>
+          <Container>
+            <LikedProjects />
+          </Container>
+        </TabPanel>
+
+        <TabPanel className={styles.panel} value={value} index={2}>
+          <Container>
+            <BadgesAwards />
+          </Container>
+        </TabPanel>
+
+        <TabPanel className={styles.panel} value={value} index={3}>
+          <h1 className={styles.title}>Instellingen</h1>
+        </TabPanel>
+      </div>
+      <Footer />
     </>
   );
 });

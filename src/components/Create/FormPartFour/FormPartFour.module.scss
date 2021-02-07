@@ -8,6 +8,10 @@
   @include title-three;
 }
 
+.info {
+  margin-bottom: 2rem;
+}
+
 .requirements {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -31,6 +35,68 @@
 
     &.requirementChecked {
       border: 0.2rem solid $green;
+    }
+  }
+}
+
+.circle {
+  height: 6.5rem;
+  width: 6.5rem;
+  border-radius: 50%;
+  margin-bottom: 2rem;
+  position: relative;
+
+  &::before {
+    position: absolute;
+    content: '';
+    background-repeat: no-repeat;
+    background-size: 2rem;
+    height: 2rem;
+    width: 2rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &.service {
+    background-color: $green-light;
+
+    &::before {
+      background: url('/icons/service-green.svg');
+    }
+  }
+
+  &.material {
+    background-color: $red-light;
+
+    &::before {
+      background: url('/icons/material-red.svg');
+    }
+  }
+
+  &.money {
+    background-color: $yellow-light;
+
+    &::before {
+      background: url('/icons/money-yellow.svg');
+    }
+  }
+}
+
+.formRequirement {
+  margin-top: 5rem;
+  position: relative;
+
+  &:not(:last-of-type) {
+    margin-bottom: 10rem;
+
+    &::after {
+      bottom: -5rem;
+      position: absolute;
+      content: '';
+      height: 0.1rem;
+      background: $green-light;
+      width: 100%;
     }
   }
 }

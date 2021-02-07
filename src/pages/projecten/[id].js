@@ -1,19 +1,63 @@
+import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Container } from '../../components/Layout';
-import { ProjectHeader, ProjectContent, ProjectFooter, ProjectComments } from '../../components/Project';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import {
+  ProjectHeader,
+  ProjectContent,
+  ProjectFooter,
+  ProjectComments,
+} from '../../components/Project';
 import RootStore from '../../stores';
+import { convertData } from '../../models/Project';
+import { convertDataUser } from '../../models/User';
+import { useStores } from '../../hooks/useStores';
 
-const Project = observer(({ project }) => {
-  console.log('pagina');
-  console.log(project);
+const Project = observer(({ projectJSON, usersJSON }) => {
+  const { projectStore, uiStore, userStore } = useStores();
+  const [project, setProject] = useState();
+  const [users, setUsers] = useState();
+
+  useEffect(() => {
+    const data = convertData.fromJSON(projectJSON, projectStore);
+    data.getComments();
+    data.getLikes();
+    data.getRequirementsList();
+    data.getRequirementsInfo();
+    data.getDurvers();
+    setProject(data);
+
+    const usersArr = [];
+    usersJSON.forEach((userJSON) => {
+      const user = convertDataUser.fromJSON(userJSON, userStore);
+      usersArr.push(user);
+    });
+    setUsers(usersArr);
+
+    if (project && uiStore.currentUser) {
+      const projectIsLiked = project.likes.find(
+        (like) => like.userId === uiStore.currentUser.id
+      );
+      if (projectIsLiked) {
+        project.setLiked(true);
+      } else {
+        project.setLiked(false);
+      }
+    }
+  }, [setProject]);
+
+  if (!project) {
+    return <p>Project laden...</p>;
+  }
   return (
     <>
-      <Container>
-        <ProjectHeader project={project} />
-        <ProjectContent />
-        <ProjectFooter />
-        <ProjectComments project={project} />
-      </Container>
+      <Header />
+      <ProjectHeader project={project} />
+      <ProjectContent project={project} users={users} />
+      <ProjectFooter project={project} />
+      <ProjectComments project={project} />
+      <Footer />
     </>
   );
 });
@@ -21,7 +65,6 @@ const Project = observer(({ project }) => {
 export const getStaticPaths = async () => {
   const store = new RootStore();
   const { projectStore } = store;
-  // const projectIds = projectStore.projectService.getAllIds();
   const projects = await projectStore.projectService.getAll();
   const ids = projects.map((project) => project.id);
   const paths = ids.map((id) => ({ params: { id } }));
@@ -34,21 +77,29 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }) => {
   const store = new RootStore();
-  const { projectStore } = store;
+  const { projectStore, userStore } = store;
+  // PROJECT
   const data = await projectStore.projectService.getById(params.id);
-  const project = {
-    id: data.id,
-    title: data.title,
-    intro: data.intro,
-  };
+  const projectJSON = convertData.toJSON(data);
+  // OWNERS
+  const ownersArr = await projectStore.loadProjectOwnersById(params.id);
+  const owners = ownersArr.map((owner) => ({
+    name: owner.name,
+    avatar: owner.avatar,
+    id: owner.id,
+  }));
+  projectJSON['owners'] = owners;
+
+  // USERS
+  await userStore.loadAllUsers();
+  const usersJSON = userStore.users.map((data) => {
+    let user = convertDataUser.toJSON(data);
+    return user;
+  });
 
   return {
-    props: { project },
-
-    // Next.js will attempt to re-generate the page:
-    // - When a request comes in
-    // - At most once every second
-    // revalidate: 1, // In seconds
+    props: { projectJSON, usersJSON },
+    revalidate: 5,
   };
 };
 

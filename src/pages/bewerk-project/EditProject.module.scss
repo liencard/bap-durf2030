@@ -4,6 +4,10 @@
   padding-top: 14rem;
   grid-column: span 12;
 
+  .header {
+    grid-column: span 12;
+  }
+
   .title {
     @include title-one;
     margin-bottom: 0.8rem;
@@ -15,10 +19,15 @@
   }
 }
 
-.appbar {
-  @include appbar;
+.line {
+  @include tab-line;
 }
 
-.panel {
-  grid-column: span 12;
+.lineTop {
+  @include tab-lineTop;
+  margin-top: 3rem;
+}
+
+.lineBottom {
+  @include tab-lineBottom;
 }

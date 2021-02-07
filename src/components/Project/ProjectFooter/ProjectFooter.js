@@ -1,20 +1,21 @@
 import styles from './ProjectFooter.module.scss';
+import { Container } from '../../Layout';
 import { Button } from '../../UI';
-import { ProjectCreatorImage } from '../';
 
-const ProjectFooter = () => {
+const ProjectFooter = ({ project }) => {
   return (
     <>
       <div className={styles.footer}>
-        <div className={styles.creator}>
-          <ProjectCreatorImage />
-          <div>
-            <h3>Organisator</h3>
-            <p>Naam Voornaam</p>
+        <Container>
+          <div className={styles.contact}>
+            <a href={`mailto:${project.contact}`}>
+              <Button text="Mail contactpersoon" />
+            </a>
+            <p>Stuur een mail naar het contactpersoon van dit project</p>
           </div>
-        </div>
-        <Button text="Contacteer" />
-        <p className={styles.date}>17 dagen geleden gepost</p>
+
+          <p className={styles.date}>17 dagen geleden gepost</p>
+        </Container>
       </div>
     </>
   );

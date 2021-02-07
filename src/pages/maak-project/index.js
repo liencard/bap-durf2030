@@ -1,10 +1,9 @@
 import { useRouter } from 'next/router';
-import { ROUTES } from '../../consts/index';
+import { ROUTES, THEMES, CATEGORIES } from '../../consts/index';
 import { useEffect } from 'react';
 import { Container } from '../../components/Layout';
 import { observer } from 'mobx-react-lite';
 import styles from './CreateProject.module.scss';
-import { Button } from '../../components/UI';
 import {
   FormPartOne,
   FormPartTwo,
@@ -33,38 +32,23 @@ const CreateProject = observer(() => {
     return <div>User inladen</div>;
   }
 
-  // Uit database halen
-  const themes = ['Eeenzaamheid rond corona', 'Ondernemingschap', 'Klimaat', 'Andere'];
-  const categories = [
-    'Muziek',
-    'Sociaal',
-    'Kinderen',
-    'Kunst',
-    'Theater',
-    'Technologie',
-    'Dans',
-    'Audiovisueel',
-    'Natuur',
-    'Divers',
-  ];
-
   const handleSubmit = async (values) => {
     console.log(values);
     let categoriesWithValues = {};
     let themesWithValues = {};
 
-    categories.forEach((category, i) => {
+    CATEGORIES.forEach((category, i) => {
       const key = category.toLowerCase();
       categoriesWithValues[key] = values.categories[i];
     });
 
-    themes.forEach((theme, i) => {
+    THEMES.forEach((theme, i) => {
       const key = theme.toLowerCase();
       themesWithValues[key] = values.themes[i];
     });
 
     const project = new Project({
-      about: values.about,
+      about: values.about ?? '',
       fundingAmount: values.fundingAmount ?? '',
       fundingDescription: values.fundingDescription ?? '',
       fundingRequired: values.fundingRequired,
@@ -72,7 +56,12 @@ const CreateProject = observer(() => {
       city: values.city ?? '',
       contact: values.contact,
       description: values.description,
-      image: values.image,
+      image: {
+        enabled: values.image ? true : false,
+        name: values.image ? values.image.name : '',
+        file: values.image ? values.image.file : '',
+        url: '',
+      },
       intro: values.intro,
       isKnownPlace: values.isKnownPlace,
       materials: values.materials ?? [],
@@ -86,7 +75,7 @@ const CreateProject = observer(() => {
       street: values.street ?? '',
       themes: themesWithValues,
       title: values.title,
-      timpestamp: projectStore.rootStore.getCurrenTimeStamp,
+      //  timpestamp: projectStore.rootStore.getCurrenTimeStamp(),
 
       userId: uiStore.currentUser.id,
       store: projectStore,
@@ -111,14 +100,16 @@ const CreateProject = observer(() => {
       projectId: projectId,
     });
 
-    router.push(ROUTES.login);
+    //  router.push(ROUTES.home);
   };
 
   return (
     <>
       <div className={styles.create}>
         <Container>
-          <div className={styles.image}>Image</div>
+          <div className={styles.image}>
+            <div className={styles.background}></div>
+          </div>
           <div className={styles.content}>
             <Formiz connect={projectForm} onValidSubmit={handleSubmit}>
               <form noValidate onSubmit={projectForm.submitStep}>

@@ -1,9 +1,28 @@
 @import '../../../styles/styles.scss';
 
-.title {
-  @include title-one;
+.image {
+  margin-top: 3rem;
+  height: 30rem;
+  width: 50rem;
+  object-fit: cover;
+  border: $border;
 }
 
-.subtitle {
-  @include title-three;
+.upload {
+  .buttons {
+    display: flex;
+    align-items: center;
+  }
+
+  input[type='file'] {
+    display: none;
+  }
+
+  label {
+    margin-right: 2rem;
+  }
+
+  .button {
+    @include button;
+  }
 }

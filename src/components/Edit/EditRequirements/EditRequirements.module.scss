@@ -1,0 +1,66 @@
+@import '../../../styles/styles.scss';
+
+.label__wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.form__switch {
+  margin-left: 3rem;
+
+  .place__label {
+    @include text-detail;
+    text-transform: uppercase;
+  }
+}
+
+.offers {
+  margin-top: 7rem;
+  position: relative;
+  border: $border;
+  padding: 3rem;
+  border-radius: 0.5rem;
+
+  .offer {
+    display: grid;
+    margin: 5rem 0;
+    grid-template-columns: 30rem 1fr 8rem;
+    position: relative;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+
+    &:not(:last-of-type)::after {
+      position: absolute;
+      content: '';
+      height: 0.1rem;
+      width: 100%;
+      background: $green-light;
+      bottom: -2.5rem;
+    }
+
+    .user {
+      align-self: flex-start;
+      display: flex;
+      align-items: center;
+
+      .text {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+    img {
+      width: 4rem;
+      border-radius: 50%;
+      margin-right: 2rem;
+    }
+  }
+
+  .offers__titles {
+    display: grid;
+    grid-template-columns: 30rem 1fr;
+    font-weight: 600;
+  }
+}

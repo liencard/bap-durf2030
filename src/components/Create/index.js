@@ -13,3 +13,5 @@ export { default as FormFieldCheckbox } from './FormFieldCheckbox/FormFieldCheck
 export { default as FormFieldAddItem } from './FormFieldAddItem/FormFieldAddItem';
 export { default as FormFieldAddUser } from './FormFieldAddUser/FormFieldAddUser';
 export { default as FormFieldFileUpload } from './FormFieldFileUpload/FormFieldFileUpload';
+export { default as FormFieldRichTextEditor } from './FormFieldRichTextEditor/FormFieldRichTextEditor';
+export { default as FormFieldWrapper } from './FormFieldWrapper/FormFieldWrapper';
