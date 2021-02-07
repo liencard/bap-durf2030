@@ -1,0 +1,40 @@
+@import '../../../styles/styles.scss';
+$border-radius: 0.5rem;
+
+.about {
+  grid-column: span 12;
+  margin-top: 14rem;
+
+  .title {
+    @include title-one;
+    width: 20%;
+    font-weight: 500;
+    line-height: 1.2;
+
+    span {
+      font-weight: 700;
+    }
+  }
+
+  .content {
+    grid-column: span 5;
+  }
+
+  .organisations {
+    grid-column: 8 / span 5;
+
+    .subtitle {
+      @include title-three;
+      font-weight: 700;
+    }
+
+    img {
+      padding-bottom: 0.5rem;
+      margin-right: 1.5rem;
+    }
+  }
+
+  p {
+    margin-bottom: 2.5rem;
+  }
+}

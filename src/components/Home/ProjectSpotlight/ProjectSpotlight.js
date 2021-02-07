@@ -1,6 +1,6 @@
 import styles from './ProjectSpotlight.module.scss';
 import Link from 'next/link';
-import { Container } from '../../Layout';
+import { Grid } from '../../Layout';
 import { ProjectCard } from '../../Project';
 import { Button } from '../../UI';
 import { useStores } from '../../../hooks/useStores';
@@ -16,7 +16,7 @@ const ProjectSpotlight = () => {
             <span>Bekijk alle projecten</span>
           </Link>
         </div>
-        <Container>
+        <Grid>
           {/* Data komt van db nu, dus als prop doorgegeven */}
           {/* <ProjectCard />
           <ProjectCard />
@@ -37,7 +37,7 @@ const ProjectSpotlight = () => {
               </div>
             </a>
           </Link>
-        </Container>
+        </Grid>
       </section>
     </>
   );
