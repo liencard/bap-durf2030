@@ -16,6 +16,17 @@
         margin-bottom: 2rem;
       }
 
+      .progress {
+        margin-bottom: 3rem;
+
+        .text {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 1rem;
+          @include text-detail;
+        }
+      }
+
       .wrapper {
         display: grid;
         grid-template-columns: 50% 40%;

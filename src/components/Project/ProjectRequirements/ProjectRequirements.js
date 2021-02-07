@@ -41,7 +41,11 @@ const ProjectRequirements = ({ project }) => {
       <div className={styles.requirements}>
         {/* CROWDFUNDING */}
         {project.fundingRequired ? (
-          <ProjectRequirementsFunding project={project} progress={(fundingCount / project.fundingAmount) * 100} />
+          <ProjectRequirementsFunding
+            project={project}
+            funding={fundingCount}
+            progress={(fundingCount / project.fundingAmount) * 100}
+          />
         ) : (
           ''
         )}
