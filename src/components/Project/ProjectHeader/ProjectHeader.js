@@ -10,8 +10,6 @@ const ProjectHeader = observer(({ project }) => {
   const [fundingCount, setFundingCount] = useState(0);
   const [image, setImage] = useState('../thumbnail-temp.jpg');
 
-  console.log(project);
-
   let tags = [];
   Object.keys(project.themes).forEach((key) => {
     if (project.themes[key] === true) {

@@ -2,10 +2,10 @@
 
 .progress {
   position: relative;
-  margin-bottom: 2rem;
   height: 6.5rem;
   width: 6.5rem;
   border-radius: 50%;
+  align-self: center;
 
   & div {
     position: absolute;
@@ -30,7 +30,7 @@
     width: 11rem;
 
     &::before {
-      transform: scale(1.5) translate(-50%, -50%);
+      transform: scale(1.5) translate(-35%, -35%);
     }
   }
 
