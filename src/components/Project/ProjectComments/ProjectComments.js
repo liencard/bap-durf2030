@@ -42,23 +42,31 @@ const ProjectComments = observer(({ project }) => {
       </div>
 
       <div className={styles.create}>
-        <p className={styles.title}>Laat een bericht achter</p>
-        <form onSubmit={handleSubmit}>
-          <label className={styles.label}>
-            <span className={'hidden'}>Bericht</span>
-            <textarea
-              className={styles.textinput}
-              placeholder="Type een bericht..."
-              name="comment"
-              cols="50"
-              rows="5"
-              required
-              value={content}
-              onChange={(e) => setContent(e.currentTarget.value)}
-            />
-          </label>
-          <input className={styles.submit} type="submit" value="Verzenden" />
-        </form>
+        {uiStore.currentUser && (
+          <>
+            <p className={styles.title}>Laat een bericht achter</p>
+            <form onSubmit={handleSubmit}>
+              <label className={styles.label}>
+                <span className={'hidden'}>Bericht</span>
+                <textarea
+                  className={styles.textinput}
+                  placeholder="Type een bericht..."
+                  name="comment"
+                  cols="50"
+                  rows="5"
+                  required
+                  value={content}
+                  onChange={(e) => setContent(e.currentTarget.value)}
+                />
+              </label>
+              <input
+                className={styles.submit}
+                type="submit"
+                value="Verzenden"
+              />
+            </form>
+          </>
+        )}
       </div>
     </Container>
   );

@@ -1,5 +1,4 @@
 import styles from './HomeSpotlight.module.scss';
-import HomeSpotlightItem from '../HomeSpotlightItem/HomeSpotlightItem';
 import { useState, useEffect } from 'react';
 import { Container } from '../../Layout';
 

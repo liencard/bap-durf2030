@@ -73,8 +73,6 @@ const ProjectHelp = observer(({ project }) => {
       servicesOffered: values.servicesRequired,
     });
 
-    console.log(newDurver);
-
     projectStore.createDurver(newDurver, project.id);
     setOpen(false);
   };
@@ -157,11 +155,15 @@ const ProjectHelp = observer(({ project }) => {
           </div>
         </Grid>
       </Modal>
-      <Button
-        className={styles.button}
-        onClick={handleOpen}
-        text={'Ik durf mee te helpen'}
-      />
+      {!uiStore.currentUser ? (
+        <Button text="Ik durf mee te helpen" href="/login" />
+      ) : (
+        <Button
+          className={styles.button}
+          onClick={handleOpen}
+          text={'Ik durf mee te helpen'}
+        />
+      )}
     </>
   );
 });

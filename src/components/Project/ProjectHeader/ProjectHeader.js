@@ -63,7 +63,6 @@ const ProjectHeader = observer(({ project }) => {
   return (
     <Container>
       <img className={styles.images} src={image} />
-      {/* <div className={styles.images}>Images</div> */}
       <div className={styles.content}>
         <ul className={styles.tags}>
           {tags.map((tag) => (

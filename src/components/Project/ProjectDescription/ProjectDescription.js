@@ -6,6 +6,7 @@ import { useStores } from '../../../hooks/useStores';
 import ReactHtmlParser from 'react-html-parser';
 
 const ProjectDescription = observer(({ project, users }) => {
+  const { uiStore } = useStores();
   let durversInfo = [];
   let ownersInfo = [];
 
@@ -30,7 +31,15 @@ const ProjectDescription = observer(({ project, users }) => {
           {ReactHtmlParser(project.description)}
         </div>
         <div className={styles.buttons}>
-          <Button text="Ik durf mee te helpen" />
+          {!uiStore.currentUser ? (
+            <Button text="Ik durf mee te helpen" href="/login" />
+          ) : (
+            <Button
+              className={styles.button}
+              onClick={handleOpen}
+              text={'Ik durf mee te helpen'}
+            />
+          )}
           <div>
             <ProjectShare />
             <ProjectLikes project={project} />
