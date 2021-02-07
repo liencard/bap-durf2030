@@ -35,8 +35,10 @@ const ProjectHelpOne = observer(
       <>
         <h2 className={styles.title}>Ik help mee!</h2>
         <p>
-          Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-          accusantium doloremque laudantium, totam rem aperiam.
+          Help mee met realiseren van{' '}
+          <span className={styles.bold}>{project.title}</span>, het uitlenen van
+          je materiaal, een handje helpen of een centje doneren, alle kleine
+          beetjes helpen!
         </p>
         <div className={styles.hidden}>
           <FormFieldSwitch
