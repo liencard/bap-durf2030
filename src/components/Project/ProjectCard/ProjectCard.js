@@ -41,10 +41,17 @@ const ProjectCard = observer(({ project }) => {
       <a className={styles.card}>
         <div className={styles.thumbnail}>
           <ProjectIcons project={project} />
-          <img className={styles.image} src={image} alt="service" />
+          <img
+            className={styles.image}
+            src={image}
+            alt="project header image"
+          />
           {project.fundingRequired && project.state != 1 && (
             <div className={styles.progress}>
-              <LinearProgress variant="determinate" value={fundingCount / 100} />
+              <LinearProgress
+                variant="determinate"
+                value={fundingCount / 100}
+              />
             </div>
           )}
         </div>
@@ -54,7 +61,13 @@ const ProjectCard = observer(({ project }) => {
             <p className={styles.date}>{project.timestamp}</p>
             <h3 className={styles.title}>{project.title}</h3>
             <p className={styles.intro}>
-              <LinesEllipsis text={project.intro} maxLine="3" ellipsis="..." trimRight basedOn="letters" />
+              <LinesEllipsis
+                text={project.intro}
+                maxLine="3"
+                ellipsis="..."
+                trimRight
+                basedOn="letters"
+              />
             </p>
 
             <ul className={styles.tags}>
@@ -68,7 +81,9 @@ const ProjectCard = observer(({ project }) => {
 
           <div className={styles.stats}>
             <ProjectLikes project={project} small />
-            {project.durvers.length != 0 && <ProjectHelpers small project={project} />}
+            {project.durvers.length != 0 && (
+              <ProjectHelpers small project={project} />
+            )}
           </div>
         </div>
       </a>

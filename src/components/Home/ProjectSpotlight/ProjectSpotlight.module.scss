@@ -36,6 +36,13 @@ $border-radius: 0.5rem;
     height: 22rem;
     width: 100%;
     background-color: $grey;
+
+    .image {
+      border-radius: $border-radius $border-radius 0 0;
+      height: 22rem;
+      width: 100%;
+      object-fit: cover;
+    }
   }
 
   .content {
@@ -48,10 +55,11 @@ $border-radius: 0.5rem;
       display: flex;
       align-items: center;
       flex-direction: column;
+      padding: 4rem 0;
 
       .title {
         @include title-small;
-        margin-bottom: 0.5rem;
+        margin-bottom: 1.5rem;
       }
     }
   }
