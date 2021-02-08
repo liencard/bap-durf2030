@@ -12,7 +12,7 @@ const FormPartSix = () => {
       <FormFieldWrapper>
         <h3 className={styles.subtitle}>Contact</h3>
         <p className={styles.info}>Via welk e-mail adres kunnen mensen contact opnemen in verband met dit project?</p>
-        <FormFieldInput name="contact" label="Email" required />
+        <FormFieldInput name="contact" label="Email" type="email" required />
       </FormFieldWrapper>
     </>
   );

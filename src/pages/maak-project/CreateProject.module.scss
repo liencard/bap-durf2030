@@ -18,6 +18,7 @@
   }
 
   &::after {
+    // Images
     position: fixed;
     z-index: 0;
     content: '';
@@ -42,6 +43,54 @@
 
     & div {
       background: $yellow;
+    }
+  }
+}
+
+.image__wrapper {
+  .image {
+    position: fixed;
+    background: $green;
+    left: 0;
+    max-width: 45vw; // Indien in commentaar is progress ok
+    width: 80rem;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  // Zonder wrapper
+  // .progress {
+  //   transform: rotate(90deg) translateX(50vh);
+  //   height: 1rem;
+  //   width: 100vh;
+  //   position: fixed;
+  //   background: $yellow-light;
+  //   left: 0;
+  //   top: 0;
+
+  //   & div {
+  //     background: $yellow;
+  //   }
+  // }
+
+  // Met wrapper
+  .progress__wrapper {
+    transform: rotate(90deg);
+    position: fixed;
+    left: 80rem; // idem image width
+    // To do: oplossing vinden voor max-width bij image
+
+    .progress {
+      height: 1rem;
+      width: 100vh;
+      position: fixed;
+      background: $yellow-light;
+      left: 0;
+      top: 0;
+
+      & div {
+        background: $yellow;
+      }
     }
   }
 }
