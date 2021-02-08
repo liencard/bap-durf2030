@@ -4,14 +4,25 @@
   @include appbar;
 }
 
-.line {
-  @include tab-line;
-}
+.appbar__wrapper {
+  margin: 8rem 0 8rem;
+  position: relative;
 
-.lineTop {
-  @include tab-lineTop;
-}
+  &::before {
+    position: absolute;
+    content: '';
+    height: 0.1rem;
+    width: 100vw;
+    background: $blue-light;
+    top: 0;
+  }
 
-.lineBottom {
-  @include tab-lineBottom;
+  &::after {
+    position: absolute;
+    content: '';
+    height: 0.1rem;
+    width: 100vw;
+    background: $blue-light;
+    bottom: 0;
+  }
 }

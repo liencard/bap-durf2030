@@ -10,20 +10,20 @@ const AppBarComponent = ({ children, value, setValue, reverse }) => {
 
   return (
     <>
-      <div className={`${styles.line} ${styles.lineTop}`} />
-      <Container>
-        <AppBar
-          elevation={0}
-          color="transparent"
-          className={`${styles.appbar} ${reverse && 'appbarReverse'}`}
-          position="static"
-        >
-          <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-            {children}
-          </Tabs>
-        </AppBar>
-      </Container>
-      <div className={`${styles.line} ${styles.lineBottom}`} />
+      <div className={styles.appbar__wrapper}>
+        <Container>
+          <AppBar
+            elevation={0}
+            color="transparent"
+            className={`${styles.appbar} ${reverse && 'appbarReverse'}`}
+            position="static"
+          >
+            <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+              {children}
+            </Tabs>
+          </AppBar>
+        </Container>
+      </div>
     </>
   );
 };
