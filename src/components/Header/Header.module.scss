@@ -41,6 +41,12 @@ $border-radius: 0.5rem;
   }
 }
 
+.active {
+  color: $red;
+  //border-right: 0.3rem solid $green-dark;
+  font-weight: 700;
+}
+
 .header__dark .menu__item {
   color: white;
 }
