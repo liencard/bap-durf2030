@@ -6,6 +6,7 @@ import { Formiz, useForm } from '@formiz/core';
 const EditPart = ({ children, title, handleSaveProject, alwaysEnabled }) => {
   const projectForm = useForm();
   const [allowEdit, setAllowEdit] = useState(false);
+  //const [closeEdit, setCloseEdit] = useState(false);
 
   useEffect(() => {
     if (alwaysEnabled) {
