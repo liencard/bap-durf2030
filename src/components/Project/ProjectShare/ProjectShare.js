@@ -79,7 +79,7 @@ const ProjectShare = () => {
 
               <a
                 aria-label="Mail project"
-                href={`mailto:?subject=Bekijk dit gekke project &body=Bekijk deze website ${window.location.href}`}
+                href={`mailto:?subject=Bekijk dit gekke project &body=Bekijk het op de website ${window.location.href}`}
               >
                 <li>
                   <img

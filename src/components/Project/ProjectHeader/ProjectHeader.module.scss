@@ -2,6 +2,21 @@
 $points-distance: 3rem;
 $point-size: 1rem;
 
+.back__btn {
+  grid-column: span 12;
+  cursor: pointer;
+
+  a {
+    text-decoration: none;
+    font-size: 1.4rem;
+    margin-left: 1rem;
+
+    &::before {
+      content: '';
+    }
+  }
+}
+
 .sidebar {
   grid-column: span 6;
   margin-right: 5rem;

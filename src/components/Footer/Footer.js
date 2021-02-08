@@ -49,6 +49,15 @@ const Footer = () => {
 
               <div className={styles.newsletter}>
                 <p>Schrijf je in op onze nieuwsbrief</p>
+                <input
+                  className={styles.input}
+                  type="email"
+                  name="email"
+                  placeholder="E-mailadres"
+                  required="required"
+                  autoComplete="off"
+                />
+                <button className={styles.button}>Inschrijven</button>
               </div>
             </div>
           </Container>
@@ -58,24 +67,33 @@ const Footer = () => {
       <Container>
         <div className={styles.subfooter}>
           <div className={styles.socials}>
-            <img
-              src="instagram-footer.svg"
-              alt="social instagram logo"
-              width="30"
-              height="30"
-            />
-            <img
-              src="facebook-footer.svg"
-              alt="social facebook logo"
-              width="30"
-              height="30"
-            />
-            <img
-              src="linkedin-footer.svg"
-              alt="social linkedin logo"
-              width="30"
-              height="30"
-            />
+            <a target="_blank" href="https://www.instagram.com/durf2030/">
+              <img
+                src="/instagram-footer.svg"
+                alt="social instagram logo"
+                width="30"
+                height="30"
+              />
+            </a>
+            <a target="_blank" href="https://www.facebook.com/Durf2030/">
+              <img
+                src="/facebook-footer.svg"
+                alt="social facebook logo"
+                width="30"
+                height="30"
+              />
+            </a>
+            <a
+              target="_blank"
+              href="https://www.linkedin.com/company/durf2030/"
+            >
+              <img
+                src="/linkedin-footer.svg"
+                alt="social linkedin logo"
+                width="30"
+                height="30"
+              />
+            </a>
           </div>
           <div className={styles.info}>
             <p>&copy; 2020 - Alle rechten voorbehouden</p>
