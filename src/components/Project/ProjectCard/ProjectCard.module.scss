@@ -33,11 +33,8 @@ $border-radius: 0.5rem;
 
   .content {
     padding: 2rem;
-    // display: flex;
-    // flex-flow: column nowrap;
-
     display: grid;
-    grid-template-rows: 20rem 5rem;
+    grid-template-rows: 20rem 3rem;
 
     .content__wrapper {
       flex: 1;
@@ -76,6 +73,7 @@ $border-radius: 0.5rem;
       font-size: 1.2rem;
       display: flex;
       justify-content: space-between;
+      align-self: flex-end;
     }
   }
 }
