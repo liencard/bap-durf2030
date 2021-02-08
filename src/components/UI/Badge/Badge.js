@@ -1,5 +1,5 @@
 import styles from './Badge.module.scss';
 
-const Badge = ({ text }) => <span className={styles.badge}>{text}</span>;
+const Badge = ({ text }) => <p className={styles.badge}>{text}</p>;
 
 export default Badge;
