@@ -32,6 +32,7 @@ class UiStore {
   };
 
   addLikedProject = (project) => {
+    project.timestamp = '';
     this.userLikedProjects.push(project);
   };
 
