@@ -70,9 +70,9 @@ class ProjectStore {
     this.projectService.createOwner(owner, projectId);
   };
 
-  createUpdate = (newUpdate, timestamp, projectId) => {
+  createUpdate = (newUpdate, projectId) => {
     const updates = {
-      updates: getArrayUnion({ text: newUpdate, timestamp: timestamp }),
+      updates: getArrayUnion(newUpdate),
     };
     this.projectService.updateProjectUpdates(updates, projectId);
   };

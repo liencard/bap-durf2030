@@ -194,11 +194,10 @@ class Project {
 
   createUpdate = (update) => {
     const timestamp = getCurrenTimeStamp();
-    this.store.createUpdate(update, timestamp, this.id);
-    this.updates.push({
-      text: update,
-      timestamp: timestamp,
-    });
+    update.timestamp = timestamp;
+    console.log(update);
+    this.store.createUpdate(update, this.id);
+    this.updates.push(update);
   };
 
   removeUpdate = (update) => {
@@ -367,6 +366,7 @@ const convertData = {
       categories: project.categories,
       image: project.image,
       timestamp: project.timestamp,
+      impact: project.impact,
     };
   },
 
