@@ -38,9 +38,7 @@ const Project = observer(({ projectJSON, usersJSON }) => {
     setUsers(usersArr);
 
     if (project && uiStore.currentUser) {
-      const projectIsLiked = project.likes.find(
-        (like) => like.userId === uiStore.currentUser.id
-      );
+      const projectIsLiked = project.likes.find((like) => like.userId === uiStore.currentUser.id);
       if (projectIsLiked) {
         project.setLiked(true);
       } else {
@@ -98,8 +96,12 @@ export const getStaticProps = async ({ params }) => {
   const store = new RootStore();
   const { projectStore, userStore } = store;
   // PROJECT
-  const data = await projectStore.projectService.getById(params.id);
-  const projectJSON = convertData.toJSON(data);
+  const data = await projectStore.loadProject(params.id);
+  //  const data = await projectStore.projectService.getById(params.id);
+  let projectJSON = convertData.toJSON(data);
+  const timestamp = data.getReadableDate(data.timestamp);
+  projectJSON.timestamp = timestamp;
+
   // OWNERS
   const ownersArr = await projectStore.loadProjectOwnersById(params.id);
   const owners = ownersArr.map((owner) => ({

@@ -1,9 +1,8 @@
 import styles from './ProjectDescription.module.scss';
 import { observer } from 'mobx-react-lite';
 import { ProjectLikes, ProjectShare, ProjectHelp } from '../../Project';
-import { Button } from '../../UI';
+import { Button, ParsedRichText } from '../../UI';
 import { useStores } from '../../../hooks/useStores';
-import ReactHtmlParser from 'react-html-parser';
 
 const ProjectDescription = observer(({ project, users }) => {
   const { uiStore } = useStores();
@@ -11,9 +10,7 @@ const ProjectDescription = observer(({ project, users }) => {
   let ownersInfo = [];
 
   project.durvers.forEach((durver) => {
-    const newDurver = users.find(
-      (existingUser) => durver.user.id === existingUser.id
-    );
+    const newDurver = users.find((existingUser) => durver.user.id === existingUser.id);
     durversInfo.push(newDurver);
   });
 
@@ -25,9 +22,12 @@ const ProjectDescription = observer(({ project, users }) => {
   return (
     <>
       <div className={styles.text__wrapper}>
-        <div className={styles.text}>
-          {ReactHtmlParser(project.description)}
-        </div>
+        {project.state > 3 && project.impact && (
+          <div className={styles.impact}>
+            <ParsedRichText html={project.impact} />
+          </div>
+        )}
+        <ParsedRichText html={project.description} />
         <div className={styles.buttons}>
           <ProjectHelp project={project} />
           <div>
@@ -41,21 +41,12 @@ const ProjectDescription = observer(({ project, users }) => {
           <h3 className={styles.creator__title}>Organisator(en)</h3>
           {ownersInfo.map((owner) => (
             <div key={owner.id} className={styles.creator}>
-              <img
-                className={styles.people__image}
-                src={owner.avatar}
-                alt="profielfoto van organisator"
-              />
+              <img className={styles.people__image} src={owner.avatar} alt="profielfoto van organisator" />
               <div>
                 <span className={styles.name__wrapper}>
                   <p className={styles.creator__name}>{owner.name}</p>
                   {owner.awards.map((award) => (
-                    <img
-                      key={award.name}
-                      width="20"
-                      height="20"
-                      src={award.img}
-                    />
+                    <img key={award.name} width="20" height="20" src={award.img} />
                   ))}
                 </span>
                 <p className={styles.creator__organisation}>Individu</p>
@@ -68,28 +59,17 @@ const ProjectDescription = observer(({ project, users }) => {
 
         <div className={styles.helpers}>
           <h3 className={styles.helpers__title}>Durvers</h3>
-          <p className={styles.helpers__subtitle}>
-            Deze mensen durfden mee op de boot te springen voor dit project.
-          </p>
+          <p className={styles.helpers__subtitle}>Deze mensen durfden mee op de boot te springen voor dit project.</p>
           {project.durvers.length > 3 ? (
             <>
               {durversInfo.slice(0, 3).map((durver) => (
                 <div key={durver.id} className={styles.helper}>
-                  <img
-                    className={styles.image}
-                    src={durver.avatar}
-                    alt="profielfoto van organisator"
-                  />
+                  <img className={styles.image} src={durver.avatar} alt="profielfoto van organisator" />
                   <div>
                     <span className={styles.name__wrapper}>
                       <p className={styles.helper__name}>{durver.name}</p>
                       {durver.awards.map((award) => (
-                        <img
-                          key={award.name}
-                          width="20"
-                          height="20"
-                          src={award.img}
-                        />
+                        <img key={award.name} width="20" height="20" src={award.img} />
                       ))}
                     </span>
                     <p>Extra info</p>
@@ -101,21 +81,12 @@ const ProjectDescription = observer(({ project, users }) => {
             <>
               {durversInfo.map((durver) => (
                 <div key={durver.id} className={styles.helper}>
-                  <img
-                    className={styles.image}
-                    src={durver.avatar}
-                    alt="profielfoto van organisator"
-                  />
+                  <img className={styles.image} src={durver.avatar} alt="profielfoto van organisator" />
                   <div>
                     <span className={styles.name__wrapper}>
                       <p className={styles.helper__name}>{durver.name}</p>
                       {durver.awards.map((award) => (
-                        <img
-                          key={award.name}
-                          width="20"
-                          height="20"
-                          src={award.img}
-                        />
+                        <img key={award.name} width="20" height="20" src={award.img} />
                       ))}
                     </span>
                     <p>Extra info</p>

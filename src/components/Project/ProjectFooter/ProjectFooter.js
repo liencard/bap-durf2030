@@ -9,7 +9,7 @@ const ProjectFooter = observer(({ project }) => {
   return (
     <>
       <div className={styles.footer}>
-        <Container>
+        <Container className={styles.container}>
           <div className={styles.contact}>
             {!uiStore.currentUser ? (
               <Button text="Mail contactpersoon" />
@@ -20,8 +20,7 @@ const ProjectFooter = observer(({ project }) => {
             )}
             <p>Stuur een mail naar het contactpersoon van dit project</p>
           </div>
-
-          <p className={styles.date}>17 dagen geleden gepost</p>
+          <p className={styles.date}>{project.timestamp}</p>
         </Container>
       </div>
     </>

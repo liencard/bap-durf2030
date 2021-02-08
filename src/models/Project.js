@@ -25,6 +25,7 @@ class Project {
     servicesRequired,
     street,
     themes,
+    timestamp = '',
     title,
     state = 0,
     impact = '',
@@ -61,6 +62,7 @@ class Project {
     this.street = street;
     this.themes = themes;
     this.title = title;
+    this.timestamp = timestamp;
     this.state = state;
 
     this.updates = updates;
@@ -192,11 +194,10 @@ class Project {
 
   createUpdate = (update) => {
     const timestamp = getCurrenTimeStamp();
-    this.store.createUpdate(update, timestamp, this.id);
-    this.updates.push({
-      text: update,
-      timestamp: timestamp,
-    });
+    update.timestamp = timestamp;
+    console.log(update);
+    this.store.createUpdate(update, this.id);
+    this.updates.push(update);
   };
 
   removeUpdate = (update) => {
@@ -233,9 +234,7 @@ class Project {
     const days = Math.floor(seconds / 86400);
 
     if (days < 1) {
-      return `${date.getHours()}:${
-        date.getMinutes() < 10 ? 0 : ''
-      }${date.getMinutes()}`;
+      return `${date.getHours()}:${date.getMinutes() < 10 ? 0 : ''}${date.getMinutes()}`;
     } else if (days < 7) {
       return `${days} dag${days > 1 ? 'en' : ''} geleden`;
     } else {
@@ -300,12 +299,7 @@ class Project {
     Object.keys(newValues).forEach((key) => {
       this[key] = newValues[key];
 
-      if (
-        key !== 'isKnownPlace' &&
-        key !== 'number' &&
-        key !== 'city' &&
-        key !== 'street'
-      ) {
+      if (key !== 'isKnownPlace' && key !== 'number' && key !== 'city' && key !== 'street') {
         updatedValues[key] = newValues[key];
       }
     });
@@ -371,6 +365,8 @@ const convertData = {
       themes: project.themes,
       categories: project.categories,
       image: project.image,
+      timestamp: project.timestamp,
+      impact: project.impact,
     };
   },
 
@@ -434,6 +430,7 @@ const projectConverter = {
       updates: data.updates,
       impact: data.impact,
       date: data.date,
+      timestamp: data.timestamp,
     };
   },
 };
