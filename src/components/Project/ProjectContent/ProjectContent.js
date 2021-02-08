@@ -14,9 +14,9 @@ const ProjectContent = ({ project, users }) => {
         <Tab label="Overview" />
         <Tab
           label={
-            <p>
+            <div className={styles.updates}>
               <span>Updates</span> <Badge text={project.updates.length} />
-            </p>
+            </div>
           }
         />
         <Tab label="Nodige Hulp" />
