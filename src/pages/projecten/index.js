@@ -13,6 +13,7 @@ import Masonry from 'react-masonry-css';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 const Projects = ({ projectsJSON }) => {
+  // console.log(projectsJSON);
   const { projectStore } = useStores();
   const [projects, setProjects] = useState([]);
   const [milestones, setMilestones] = useState(0);
@@ -118,7 +119,6 @@ export const getStaticProps = async (context) => {
   await projectStore.loadAllProjects();
 
   const projectsJSON = projectStore.projects.map((data) => {
-    // console.log(data);
     let project = convertData.toJSON(data);
     const timestamp = data.getReadableDate(data.timestamp);
     project.timestamp = timestamp;

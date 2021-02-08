@@ -1,9 +1,8 @@
 import styles from './ProjectDescription.module.scss';
 import { observer } from 'mobx-react-lite';
 import { ProjectLikes, ProjectShare, ProjectHelp } from '../../Project';
-import { Button } from '../../UI';
+import { Button, ParsedRichText } from '../../UI';
 import { useStores } from '../../../hooks/useStores';
-import ReactHtmlParser from 'react-html-parser';
 
 const ProjectDescription = observer(({ project, users }) => {
   const { uiStore } = useStores();
@@ -25,14 +24,10 @@ const ProjectDescription = observer(({ project, users }) => {
       <div className={styles.text__wrapper}>
         {project.state > 3 && project.impact && (
           <div className={styles.impact}>
-            Lorem ipsum dolor sit amet consectetur adipiscing elit interdum mus, vel malesuada sed erat rutrum
-            parturient magna ultrices, molestie viverra netus quisque curae nascetur diam risus. Turpis justo posuere
-            nascetur libero enim tellus, purus elementum ligula rhoncus urna, donec malesuada scelerisque mi per. Lectus
-            nibh suspendisse dictumst ornare nullam fringilla sed habitasse platea, arcu eu malesuada bibendum volutpat
-            at suscipit ut, sagittis ullamcorper parturient euismod aenean massa placerat luctus.
+            <ParsedRichText html={project.impact} />
           </div>
         )}
-        <div className={styles.text}>{ReactHtmlParser(project.description)}</div>
+        <ParsedRichText html={project.description} />
         <div className={styles.buttons}>
           <ProjectHelp project={project} />
           <div>
