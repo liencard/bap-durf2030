@@ -70,9 +70,9 @@ class ProjectStore {
     this.projectService.createOwner(owner, projectId);
   };
 
-  createUpdate = (newUpdate, timestamp, projectId) => {
+  createUpdate = (newUpdate, projectId) => {
     const updates = {
-      updates: getArrayUnion({ text: newUpdate, timestamp: timestamp }),
+      updates: getArrayUnion(newUpdate),
     };
     this.projectService.updateProjectUpdates(updates, projectId);
   };
@@ -120,7 +120,6 @@ class ProjectStore {
 
   updateProjectFromServer = (json) => {
     let project = this.projects.find((project) => project.id === json.id);
-    console.log(json);
     if (!project) {
       project = new Project({
         id: json.id,
@@ -141,6 +140,7 @@ class ProjectStore {
         image: json.image,
         impact: json.impact,
         date: json.date,
+        timestamp: json.timestamp,
         store: this.rootStore.projectStore,
       });
     }
