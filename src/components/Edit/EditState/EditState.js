@@ -140,7 +140,7 @@ const EditState = observer(({ project }) => {
               <li>Project is opgezet</li>
               <li>Crowdfunding is mogelijk</li>
               <li>Klaar om te starten</li>
-              {/* <li>Vlagje</li> */}
+              <li>&#127937;</li>
             </ul>
           </div>
         </div>

@@ -17,8 +17,6 @@ const ProjectDescription = observer(({ project, users }) => {
     durversInfo.push(newDurver);
   });
 
-  console.log(project.owners);
-
   project.owners.forEach((owner) => {
     const newOwner = users.find((existingUser) => owner.id === existingUser.id);
     ownersInfo.push(newOwner);
