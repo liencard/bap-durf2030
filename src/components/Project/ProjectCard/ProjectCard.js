@@ -8,6 +8,7 @@ import LinesEllipsis from 'react-lines-ellipsis';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 const ProjectCard = observer(({ project }) => {
+  console.log(project);
   const [image, setImage] = useState('thumbnail-temp.jpg');
   const [fundingCount, setFundingCount] = useState(0);
   let tags = [];
@@ -44,26 +45,17 @@ const ProjectCard = observer(({ project }) => {
           <img className={styles.image} src={image} alt="service" />
           {project.fundingRequired && project.state != 1 && (
             <div className={styles.progress}>
-              <LinearProgress
-                variant="determinate"
-                value={fundingCount / 100}
-              />
+              <LinearProgress variant="determinate" value={fundingCount / 100} />
             </div>
           )}
         </div>
 
         <div className={styles.content}>
           <div className={styles.content__wrapper}>
-            <p className={styles.date}>6 dagen geleden</p>
+            <p className={styles.date}>xx</p>
             <h3 className={styles.title}>{project.title}</h3>
             <p className={styles.intro}>
-              <LinesEllipsis
-                text={project.intro}
-                maxLine="3"
-                ellipsis="..."
-                trimRight
-                basedOn="letters"
-              />
+              <LinesEllipsis text={project.intro} maxLine="3" ellipsis="..." trimRight basedOn="letters" />
             </p>
 
             <ul className={styles.tags}>
@@ -74,11 +66,10 @@ const ProjectCard = observer(({ project }) => {
               ))}
             </ul>
           </div>
+
           <div className={styles.stats}>
             <ProjectLikes project={project} small />
-            {project.durvers.length != 0 && (
-              <ProjectHelpers small project={project} />
-            )}
+            {project.durvers.length != 0 && <ProjectHelpers small project={project} />}
           </div>
         </div>
       </a>
