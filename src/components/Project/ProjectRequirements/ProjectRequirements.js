@@ -1,6 +1,10 @@
 import styles from './ProjectRequirements.module.scss';
 import { useState, useEffect } from 'react';
-import { ProjectRequirementsServices, ProjectRequirementsMaterials, ProjectRequirementsFunding } from '../../Project';
+import {
+  ProjectRequirementsServices,
+  ProjectRequirementsMaterials,
+  ProjectRequirementsFunding,
+} from '../../Project';
 
 const ProjectRequirements = ({ project }) => {
   const [servicesCount, setServicesCount] = useState(0);
@@ -49,9 +53,12 @@ const ProjectRequirements = ({ project }) => {
         ) : (
           ''
         )}
-        {/* DIENSTEN */}
+        {/* VRIJWILLIGERS */}
         {project.services.length != 0 ? (
-          <ProjectRequirementsServices project={project} progress={(servicesCount / project.services.length) * 100} />
+          <ProjectRequirementsServices
+            project={project}
+            progress={(servicesCount / project.services.length) * 100}
+          />
         ) : (
           ''
         )}

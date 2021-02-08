@@ -11,7 +11,7 @@ const ProjectSpotlight = () => {
     <>
       <section className={styles.projecten}>
         <div className={styles.projecten__header}>
-          <h2 className={styles.title}>Projecten</h2>
+          <h2 className={styles.title}>Projecten in de kijker</h2>
           <Link href="/projecten/">
             <span>Bekijk alle projecten</span>
           </Link>
@@ -24,7 +24,13 @@ const ProjectSpotlight = () => {
           <ProjectCard /> */}
           <Link href="/">
             <a className={styles.card}>
-              <div className={styles.thumbnail}></div>
+              <div className={styles.thumbnail}>
+                <img
+                  className={styles.image}
+                  src="/placeholder.png"
+                  alt="project header image"
+                />
+              </div>
               <div className={styles.content}>
                 <div className={styles.content__wrapper}>
                   <h3 className={styles.title}>Jouw project</h3>

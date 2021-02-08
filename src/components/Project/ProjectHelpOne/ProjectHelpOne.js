@@ -88,7 +88,7 @@ const ProjectHelpOne = observer(
             }}
           >
             <div className={`${styles.circle} ${styles.service}`} />
-            <span className={styles.subtitle}>Diensten aanbieden</span>
+            <span className={styles.subtitle}>Als vrijwilliger aanbieden</span>
             {project.servicesRequired && (
               <FormFieldSwitch
                 name="servicesRequired"

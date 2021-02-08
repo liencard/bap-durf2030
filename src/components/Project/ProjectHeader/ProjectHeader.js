@@ -10,6 +10,8 @@ import {
   ProjectHelp,
   ProjectCircle,
 } from '../../Project';
+import Link from 'next/link';
+import { ROUTES } from '../../../consts';
 
 const ProjectHeader = observer(({ project }) => {
   const { uiStore } = useStores();
@@ -36,6 +38,8 @@ const ProjectHeader = observer(({ project }) => {
       setImage(project.image.url);
     }
   }, []);
+
+  console.log(tags);
 
   useEffect(() => {
     let materialsCountNew = 0;
@@ -68,6 +72,15 @@ const ProjectHeader = observer(({ project }) => {
 
   return (
     <Container>
+      <div className={styles.back__btn}>
+        <img
+          src="/icons/arrow-dark.svg"
+          width="6"
+          height="10"
+          alt="dark arrow icon left"
+        />
+        <Link href={ROUTES.projects}>Terug naar overview</Link>
+      </div>
       <div className={styles.sidebar}>
         <img className={styles.images} src={image} />
         <div className={styles.timeline}>
@@ -113,7 +126,7 @@ const ProjectHeader = observer(({ project }) => {
                 progress={(servicesCount / project.services.length) * 100}
               />
               <p className={styles.info}>
-                {servicesCount}/{project.services.length} diensten
+                {servicesCount}/{project.services.length} vrijwilligers
               </p>
               <p className={styles.item__btn}>Bekijk info</p>
             </div>

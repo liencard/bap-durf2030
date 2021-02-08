@@ -27,7 +27,7 @@ const ProjectHelpTwoService = ({ project, services }) => {
 
   return (
     <>
-      <h2 className={styles.title}>Dienst aanbieden</h2>
+      <h2 className={styles.title}>Als vrijwilliger aanbieden</h2>
       <p>{project.servicesDescription}</p>
 
       <fieldset className={styles.services}>

@@ -18,12 +18,26 @@ $border-radius: 0.5rem;
   &::before {
     content: '';
     position: absolute;
-    background-image: url('/login.png');
-    background-size: cover;
+    background: $green;
+    background-image: url('/auth.png');
+    background-size: contain;
+    background-position: center;
     background-repeat: no-repeat;
     right: 0;
     height: 100%;
     width: calc(100% + ((100vw - #{$container})) / 2);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    background-image: url('/auth-kegel.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    right: -4rem;
+    bottom: 15vh;
+    height: 8rem;
+    width: 10rem;
   }
 }
 

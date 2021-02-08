@@ -7,8 +7,8 @@ const ProjectHelpThree = observer(() => {
     <>
       <h2 className={styles.title}>Dank je wel!</h2>
       <p>
-        Indien je materiaal of een dienst hebt aangeboden zal een organisator
-        van het project verder contact opnemen met u.
+        Indien je materiaal of je als vrijwilliger hebt aangeboden zal een
+        organisator van het project verder contact opnemen met u.
       </p>
 
       <div className={styles.contact}>

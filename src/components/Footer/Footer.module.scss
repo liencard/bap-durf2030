@@ -75,3 +75,21 @@
   margin-bottom: 2rem;
   color: white;
 }
+
+.input {
+  padding: 1rem 1.5rem;
+  border: 0.1rem solid white;
+  margin-top: 1rem;
+  width: 70%;
+  color: white;
+  background: transparent;
+  z-index: 2;
+}
+
+.button {
+  background-color: white;
+  color: $green;
+  border: none;
+  padding: 1rem 1.5rem;
+  margin-left: 1rem;
+}

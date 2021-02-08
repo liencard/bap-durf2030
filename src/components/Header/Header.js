@@ -68,7 +68,16 @@ const Header = observer(() => {
           </Link>
           <nav className={styles.menu}>
             <Link href={ROUTES.projects}>
-              <span className={styles.menu__item}>Alle projecten</span>
+              <span
+                className={`${styles.menu__item} ${
+                  router.pathname === '/projecten' ||
+                  router.pathname === '/projecten/[id]'
+                    ? styles.active
+                    : ''
+                }`}
+              >
+                Alle projecten
+              </span>
             </Link>
             <Link href="/">
               <span className={styles.menu__item}>Kalender</span>

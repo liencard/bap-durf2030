@@ -41,7 +41,7 @@ const ProjectRequirementsServices = ({ project, progress }) => {
         <Container>
           <ProjectCircle type="service" progress={progress} large />
           <div className={styles.content}>
-            <h2 className={styles.title}>Diensten</h2>
+            <h2 className={styles.title}>Vrijwilligers</h2>
             <div className={styles.wrapper}>
               <p>{project.servicesDescription}</p>
               <div className={styles.list}>
@@ -49,7 +49,10 @@ const ProjectRequirementsServices = ({ project, progress }) => {
                   <article className={styles.list__item}>
                     <h3>Fysieke hulp</h3>
                     {physical.map((item) => (
-                      <span className={item.completed ? `${styles.completed}` : ``} key={item.id}>
+                      <span
+                        className={item.completed ? `${styles.completed}` : ``}
+                        key={item.id}
+                      >
                         <span>
                           {item.amount} {item.name}
                         </span>
@@ -62,7 +65,10 @@ const ProjectRequirementsServices = ({ project, progress }) => {
                   <article className={styles.list__item}>
                     <h3>Creatieve hulp</h3>
                     {creative.map((item) => (
-                      <span className={item.completed ? `${styles.completed}` : ``} key={item.id}>
+                      <span
+                        className={item.completed ? `${styles.completed}` : ``}
+                        key={item.id}
+                      >
                         <span>
                           {item.amount} {item.name}
                         </span>
@@ -75,7 +81,10 @@ const ProjectRequirementsServices = ({ project, progress }) => {
                   <article className={styles.list__item}>
                     <h3>Andere hulp</h3>
                     {divers.map((item) => (
-                      <span className={item.completed ? `${styles.completed}` : ``} key={item.id}>
+                      <span
+                        className={item.completed ? `${styles.completed}` : ``}
+                        key={item.id}
+                      >
                         <span>
                           {item.amount} {item.name}
                         </span>

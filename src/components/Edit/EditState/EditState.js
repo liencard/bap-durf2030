@@ -63,8 +63,8 @@ const EditState = observer(({ project }) => {
             <>
               <p>
                 Heb je alles om je project van start te laten gaan? Eenmaal je
-                klikt op op ‘Klaar om te starten’, wordt het aanbieden van
-                diensten, materiaal en geld vergrendeld.
+                klikt op op ‘Klaar om te starten’, wordt het aanbieden als
+                vrijwilligers en van materiaal en geld vergrendeld.
               </p>
               <div className={styles.buttons}>
                 <Button
