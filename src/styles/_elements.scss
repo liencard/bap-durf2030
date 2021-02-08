@@ -127,20 +127,6 @@
   }
 }
 
-@mixin tab-line {
-  background-color: $blue-light;
-  height: 0.1rem;
-  width: 100vw;
-}
-
-@mixin tab-lineTop {
-  margin-top: 5rem;
-}
-
-@mixin tab-lineBottom {
-  margin-bottom: 5rem;
-}
-
 // @mixin textfield {
 //   color: $blue-dark;
 //   font-size: 1.6rem;

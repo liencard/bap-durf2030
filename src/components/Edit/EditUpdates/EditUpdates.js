@@ -35,24 +35,26 @@ const EditUpdates = observer(({ project }) => {
       <article>
         <h2 className={styles.subtitle}>Alle updates</h2>
         <div className={styles.updates}>
-          {project.updates.map((update, i) => {
-            return (
-              <section key={i} className={styles.update}>
-                <div className={styles.header}>
-                  <div className={styles.info}>
-                    <p className={styles.date}>{project.getReadableDate(update.timestamp)}</p>
-                    <p className={styles.name}>Geplaatst door {update.user.name}</p>
-                  </div>
+          {project.updates.length > 0
+            ? project.updates.map((update, i) => {
+                return (
+                  <section key={i} className={styles.update}>
+                    <div className={styles.header}>
+                      <div className={styles.info}>
+                        <p className={styles.date}>{project.getReadableDate(update.timestamp)}</p>
+                        <p className={styles.name}>Geplaatst door {update.user.name}</p>
+                      </div>
 
-                  <button className={styles.delete} onClick={() => handleDeleteUpdate(update)}>
-                    <img src="/icons/delete-red.svg" />
-                    <span className="hidden">Verwijder</span>
-                  </button>
-                </div>
-                <ParsedRichText html={update.text} />
-              </section>
-            );
-          })}
+                      <button className={styles.delete} onClick={() => handleDeleteUpdate(update)}>
+                        <img src="/icons/delete-red.svg" />
+                        <span className="hidden">Verwijder</span>
+                      </button>
+                    </div>
+                    <ParsedRichText html={update.text} />
+                  </section>
+                );
+              })
+            : 'Dit project heeft nog geen updates.'}
         </div>
       </article>
     </>

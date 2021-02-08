@@ -53,13 +53,18 @@ const FormPartOne = () => {
       {/* Steden */}
       {isKnownPlace && (
         <>
-          <FormFieldSelect name="city" label="Stad" options={['Kortrijk', 'Izegem']} defaultValue="Kortrijk" />
+          <FormFieldSelect
+            name="city"
+            label="Stad"
+            options={['Aalbeke', 'Bellegem', 'Bissegem', 'Heule', 'Kooigem', 'Kortrijk', 'Marke', 'Rollegem']}
+            defaultValue="Kortrijk"
+          />
           <Grid>
             <div className={styles.textfield__street}>
               <FormFieldInput name="street" label="Straat (optioneel)" />
             </div>
             <div className={styles.textfield__number}>
-              <FormFieldInput name="number" label="Nr (optioneel)" />
+              <FormFieldInput name="number" label="Nr (optioneel)" type="number" />
             </div>
           </Grid>
         </>

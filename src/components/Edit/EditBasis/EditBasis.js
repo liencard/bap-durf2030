@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './EditBasis.module.scss';
 import { EditPart, EditLabel, EditField } from '../';
 import {
@@ -42,6 +42,8 @@ const EditBasis = ({ project }) => {
     };
     project.updateImage(values.image);
   };
+
+  useEffect(() => {}, []);
 
   return (
     <>

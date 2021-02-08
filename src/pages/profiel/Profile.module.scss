@@ -32,15 +32,3 @@
     @include title-one;
   }
 }
-
-.line {
-  @include tab-line;
-}
-
-.lineTop {
-  @include tab-lineTop;
-}
-
-.lineBottom {
-  @include tab-lineBottom;
-}

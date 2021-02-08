@@ -8,14 +8,7 @@
   grid-column: span 12;
 }
 
-.line {
-  @include tab-line;
-}
-
-.lineTop {
-  @include tab-lineTop;
-}
-
-.lineBottom {
-  @include tab-lineBottom;
+.updates {
+  display: flex;
+  align-items: center;
 }

@@ -7,7 +7,7 @@ import RootStore from '../../stores';
 import styles from './Projects.module.scss';
 import { convertData } from '../../models/Project';
 import { useStores } from '../../hooks/useStores';
-import { Button, TabPanel, AppBar, TabSideElement } from '../../components/UI';
+import { Button, TabPanel, AppBar, TabSideElement, Badge } from '../../components/UI';
 import Tab from '@material-ui/core/Tab';
 import Masonry from 'react-masonry-css';
 import LinearProgress from '@material-ui/core/LinearProgress';
@@ -17,6 +17,7 @@ const Projects = ({ projectsJSON }) => {
   const { projectStore } = useStores();
   const [projects, setProjects] = useState([]);
   const [milestones, setMilestones] = useState(0);
+  const [projectCount, setProjectCount] = useState(0);
   const [value, setValue] = useState(0);
 
   useEffect(() => {
@@ -34,12 +35,18 @@ const Projects = ({ projectsJSON }) => {
   let milestonesArr = [];
 
   useEffect(() => {
+    let projectsFound = 0;
     projects.forEach((project) => {
       if (project.themes['eenzaamheid rond corona'] === true) {
         milestonesArr.push(project);
         setMilestones(milestonesArr);
       }
+
+      if (project.state != 0 && project.state < 4) {
+        projectsFound++;
+      }
     });
+    setProjectCount(projectsFound);
   }, [projects]);
 
   return (
@@ -66,18 +73,17 @@ const Projects = ({ projectsJSON }) => {
           </div>
         </Container>
       </section>
-      <div className={`${styles.line} ${styles.lineTop}`}></div>
-      <Container>
-        <AppBar reverse value={value} setValue={setValue}>
-          <Tab label="Lopende projecten" />
-          <Tab label="Afgelopen projecten" />
-          <Tab label="Ondersteuningen" />
-          <TabSideElement>
-            <h1 className={styles.title}>Projecten</h1>
-          </TabSideElement>
-        </AppBar>
-      </Container>
-      <div className={`${styles.line} ${styles.lineBottom}`}></div>
+
+      <AppBar reverse value={value} setValue={setValue}>
+        <Tab label="Lopende projecten" />
+        <Tab label="Afgelopen projecten" />
+        <Tab label="Ondersteuningen" />
+        <TabSideElement>
+          <h1 className={styles.title}>Projecten</h1>
+          <Badge text={`${projectCount} resultaten`} />
+        </TabSideElement>
+      </AppBar>
+
       <Container>
         <TabPanel value={value} index={0}>
           <Grid>

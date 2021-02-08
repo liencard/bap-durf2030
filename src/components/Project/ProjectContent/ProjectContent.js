@@ -1,13 +1,8 @@
 import styles from './ProjectContent.module.scss';
-import {
-  ProjectDescription,
-  ProjectRequirements,
-  ProjectDurvers,
-  ProjectShare,
-} from '../../Project';
+import { ProjectDescription, ProjectRequirements, ProjectDurvers, ProjectShare, ProjectUpdates } from '../../Project';
 import { Container } from '../../Layout';
 import { useState } from 'react';
-import { TabPanel, AppBar, TabSideElement } from '../../UI';
+import { TabPanel, AppBar, TabSideElement, Badge } from '../../UI';
 import Tab from '@material-ui/core/Tab';
 
 const ProjectContent = ({ project, users }) => {
@@ -15,19 +10,21 @@ const ProjectContent = ({ project, users }) => {
 
   return (
     <>
-      <div className={`${styles.line} ${styles.lineTop}`}></div>
-      <Container>
-        <AppBar value={value} setValue={setValue}>
-          <Tab label="Overview" />
-          <Tab label="Updates" />
-          <Tab label="Nodige Hulp" />
-          <Tab label="Durvers" />
-          <TabSideElement>
-            <ProjectShare />
-          </TabSideElement>
-        </AppBar>
-      </Container>
-      <div className={`${styles.line} ${styles.lineBottom}`}></div>
+      <AppBar value={value} setValue={setValue}>
+        <Tab label="Overview" />
+        <Tab
+          label={
+            <div className={styles.updates}>
+              <span>Updates</span> <Badge text={project.updates.length} />
+            </div>
+          }
+        />
+        <Tab label="Nodige Hulp" />
+        <Tab label="Durvers" />
+        <TabSideElement>
+          <ProjectShare />
+        </TabSideElement>
+      </AppBar>
 
       <TabPanel className={styles.panel} value={value} index={0}>
         <Container>
@@ -36,7 +33,7 @@ const ProjectContent = ({ project, users }) => {
       </TabPanel>
       <TabPanel className={styles.panel} value={value} index={1}>
         <Container>
-          <p>Updates</p>
+          <ProjectUpdates updates={project.updates} />
         </Container>
       </TabPanel>
       <TabPanel className={styles.panel} value={value} index={2}>

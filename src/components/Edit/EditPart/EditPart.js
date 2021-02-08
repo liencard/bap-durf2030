@@ -6,7 +6,7 @@ import { Formiz, useForm } from '@formiz/core';
 const EditPart = ({ children, title, handleSaveProject, alwaysEnabled }) => {
   const projectForm = useForm();
   const [allowEdit, setAllowEdit] = useState(false);
-  //const [closeEdit, setCloseEdit] = useState(false);
+  const [disable, setDisable] = useState(true);
 
   useEffect(() => {
     if (alwaysEnabled) {
@@ -14,19 +14,28 @@ const EditPart = ({ children, title, handleSaveProject, alwaysEnabled }) => {
     }
   }, []);
 
+  const toggleDisable = (bool) => {
+    if (allowEdit) {
+      setDisable(bool);
+    }
+  };
+
   return (
-    <Formiz connect={projectForm} onValidSubmit={handleSaveProject}>
+    <Formiz
+      connect={projectForm}
+      onValidSubmit={() => {
+        toggleDisable(true);
+        handleSaveProject;
+      }}
+      onChange={(values) => toggleDisable(false)}
+    >
       <form noValidate onSubmit={projectForm.submit}>
         <section className={styles.section}>
           <div className={styles.header}>
             <h2 className={styles.subtitle}>{title}</h2>
             {alwaysEnabled ? (
               <div>
-                <Button
-                  type="submit"
-                  className={styles.save__btn}
-                  text="Post opslaan"
-                />
+                <Button type="submit" className={styles.save__btn} text="Post opslaan" />
               </div>
             ) : (
               <div className={styles.buttons}>
@@ -40,20 +49,12 @@ const EditPart = ({ children, title, handleSaveProject, alwaysEnabled }) => {
                   text={allowEdit ? 'Annuleer' : 'Bewerken'}
                 />
                 {allowEdit && (
-                  <Button
-                    type="submit"
-                    className={styles.save__btn}
-                    text="Bewerking opslaan"
-                  />
+                  <Button type="submit" className={styles.save__btn} text="Bewerking opslaan" disabled={disable} />
                 )}
               </div>
             )}
           </div>
-          <div
-            className={`${styles.form__wrapper} ${
-              !allowEdit && styles.form__locked
-            }`}
-          >
+          <div className={`${styles.form__wrapper} ${!allowEdit && styles.form__locked}`}>
             <div className={styles.form}>{children}</div>
           </div>
         </section>
