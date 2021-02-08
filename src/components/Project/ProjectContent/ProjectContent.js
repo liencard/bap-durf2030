@@ -2,7 +2,7 @@ import styles from './ProjectContent.module.scss';
 import { ProjectDescription, ProjectRequirements, ProjectDurvers, ProjectShare, ProjectUpdates } from '../../Project';
 import { Container } from '../../Layout';
 import { useState } from 'react';
-import { TabPanel, AppBar, TabSideElement } from '../../UI';
+import { TabPanel, AppBar, TabSideElement, Badge } from '../../UI';
 import Tab from '@material-ui/core/Tab';
 
 const ProjectContent = ({ project, users }) => {
@@ -12,7 +12,13 @@ const ProjectContent = ({ project, users }) => {
     <>
       <AppBar value={value} setValue={setValue}>
         <Tab label="Overview" />
-        <Tab label="Updates" />
+        <Tab
+          label={
+            <p>
+              <span>Updates</span> <Badge text={project.updates.length} />
+            </p>
+          }
+        />
         <Tab label="Nodige Hulp" />
         <Tab label="Durvers" />
         <TabSideElement>
