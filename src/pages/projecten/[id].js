@@ -3,7 +3,13 @@ import { observer } from 'mobx-react-lite';
 import { Container } from '../../components/Layout';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
-import { ProjectHeader, ProjectContent, ProjectFooter, ProjectComments } from '../../components/Project';
+import {
+  ProjectHeader,
+  ProjectContent,
+  ProjectFooter,
+  ProjectComments,
+  ProjectEditBanner,
+} from '../../components/Project';
 import RootStore from '../../stores';
 import { convertData } from '../../models/Project';
 import { convertDataUser } from '../../models/User';
@@ -12,6 +18,7 @@ import { useStores } from '../../hooks/useStores';
 const Project = observer(({ projectJSON, usersJSON }) => {
   const { projectStore, uiStore, userStore } = useStores();
   const [project, setProject] = useState();
+  const [projectOwner, setProjectOwner] = useState(false);
   const [users, setUsers] = useState();
 
   useEffect(() => {
@@ -38,7 +45,22 @@ const Project = observer(({ projectJSON, usersJSON }) => {
         project.setLiked(false);
       }
     }
-  }, [setProject]);
+    // const loadOwner = async () => {
+    //   const currentUser = await uiStore.currentUser;
+    //   if (project && currentUser) {
+    //     const projectOwner = project.owners.find(
+    //       (owner) => owner.id === currentUser.id
+    //     );
+    //     if (projectOwner) {
+    //       console.log(projectOwner);
+    //       setProjectOwner(true);
+    //     } else {
+    //       setProjectOwner(false);
+    //     }
+    //   }
+    // };
+    // loadOwner();
+  }, [setProject, uiStore.currentUser]);
 
   if (!project) {
     return <p>Project laden...</p>;
@@ -46,6 +68,8 @@ const Project = observer(({ projectJSON, usersJSON }) => {
   return (
     <>
       <Header />
+      {/* {projectOwner && <ProjectEditBanner project={project} />} */}
+      <ProjectEditBanner project={project} />
       <ProjectHeader project={project} />
       <ProjectContent project={project} users={users} />
       <ProjectFooter project={project} />

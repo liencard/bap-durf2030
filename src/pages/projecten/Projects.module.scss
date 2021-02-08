@@ -28,6 +28,7 @@
 
   .content {
     grid-column: span 6;
+    z-index: 5;
 
     .title {
       @include title-one;
