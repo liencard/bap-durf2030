@@ -8,7 +8,6 @@ import LinesEllipsis from 'react-lines-ellipsis';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 const ProjectCard = observer(({ project }) => {
-  console.log(project);
   const [image, setImage] = useState('thumbnail-temp.jpg');
   const [fundingCount, setFundingCount] = useState(0);
   let tags = [];
@@ -52,7 +51,7 @@ const ProjectCard = observer(({ project }) => {
 
         <div className={styles.content}>
           <div className={styles.content__wrapper}>
-            <p className={styles.date}>xx</p>
+            <p className={styles.date}>{project.timestamp}</p>
             <h3 className={styles.title}>{project.title}</h3>
             <p className={styles.intro}>
               <LinesEllipsis text={project.intro} maxLine="3" ellipsis="..." trimRight basedOn="letters" />

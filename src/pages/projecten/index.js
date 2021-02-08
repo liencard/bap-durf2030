@@ -118,7 +118,10 @@ export const getStaticProps = async (context) => {
   await projectStore.loadAllProjects();
 
   const projectsJSON = projectStore.projects.map((data) => {
+    // console.log(data);
     let project = convertData.toJSON(data);
+    const timestamp = data.getReadableDate(data.timestamp);
+    project.timestamp = timestamp;
     return project;
   });
 
