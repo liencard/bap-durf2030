@@ -21,12 +21,16 @@
   position: relative;
 
   & div {
-    background: blue;
+    background: $green;
     position: absolute;
     height: calc(100% + (#{$modal-spacing-large} * 2));
     width: calc(100% + #{$modal-spacing-large});
     top: -$modal-spacing-large;
     left: -$modal-spacing-large;
+    background-image: url('/share.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom;
   }
 }
 
