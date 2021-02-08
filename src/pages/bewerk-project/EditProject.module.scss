@@ -18,16 +18,3 @@
     color: $green;
   }
 }
-
-.line {
-  @include tab-line;
-}
-
-.lineTop {
-  @include tab-lineTop;
-  margin-top: 3rem;
-}
-
-.lineBottom {
-  @include tab-lineBottom;
-}

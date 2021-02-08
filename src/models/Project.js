@@ -365,7 +365,6 @@ const convertData = {
       themes: project.themes,
       categories: project.categories,
       image: project.image,
-      timestamp: project.timestamp,
       impact: project.impact,
     };
   },

@@ -6,12 +6,7 @@ import { TabPanel, AppBar, TabSideElement } from '../../components/UI';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import styles from './Profile.module.scss';
-import {
-  LikedProjects,
-  OwnProjects,
-  OwnAwards,
-  BadgesAwards,
-} from '../../components/Profile';
+import { LikedProjects, OwnProjects, OwnAwards, BadgesAwards } from '../../components/Profile';
 
 import Tab from '@material-ui/core/Tab';
 
@@ -27,12 +22,7 @@ const Profile = observer(() => {
         <Container>
           {uiStore.currentUser && (
             <div className={styles.profile__wrapper}>
-              <img
-                className={styles.avatar}
-                width="80"
-                height="80"
-                src={uiStore.currentUser.avatar}
-              />
+              <img className={styles.avatar} width="80" height="80" src={uiStore.currentUser.avatar} />
               <div>
                 <span className={styles.name__wrapper}>
                   <p className={styles.name}>{uiStore.currentUser.name}</p>
@@ -46,18 +36,14 @@ const Profile = observer(() => {
           )}
         </Container>
 
-        <div className={`${styles.line} ${styles.lineTop}`}></div>
-        <Container>
-          <AppBar value={value} setValue={setValue}>
-            <Tab label="Overview" />
-            <Tab label="Gewaardeerde projecten" />
-            <Tab label="Badges & Awards" />
-            <TabSideElement>
-              <Tab label="Instellingen" />
-            </TabSideElement>
-          </AppBar>
-        </Container>
-        <div className={`${styles.line} ${styles.lineBottom}`}></div>
+        <AppBar value={value} setValue={setValue}>
+          <Tab label="Overview" />
+          <Tab label="Gewaardeerde projecten" />
+          <Tab label="Badges & Awards" />
+          <TabSideElement>
+            <Tab label="Instellingen" />
+          </TabSideElement>
+        </AppBar>
 
         <TabPanel className={styles.panel} value={value} index={0}>
           <Container>

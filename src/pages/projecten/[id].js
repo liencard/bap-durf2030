@@ -95,12 +95,21 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async ({ params }) => {
   const store = new RootStore();
   const { projectStore, userStore } = store;
+
   // PROJECT
   const data = await projectStore.loadProject(params.id);
-  //  const data = await projectStore.projectService.getById(params.id);
   let projectJSON = convertData.toJSON(data);
+  const updates = data.updates.map((update) => {
+    return {
+      user: update.user,
+      text: update.text,
+      timestamp: data.getReadableDate(update.timestamp),
+    };
+  });
   const timestamp = data.getReadableDate(data.timestamp);
+
   projectJSON.timestamp = timestamp;
+  projectJSON.updates = updates;
 
   // OWNERS
   const ownersArr = await projectStore.loadProjectOwnersById(params.id);

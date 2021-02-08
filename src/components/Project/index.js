@@ -23,3 +23,4 @@ export { default as ProjectRequirementsCard } from './ProjectRequirementsCard/Pr
 export { default as ProjectIcons } from './ProjectIcons/ProjectIcons';
 export { default as ProjectCircle } from './ProjectCircle/ProjectCircle';
 export { default as ProjectEditBanner } from './ProjectEditBanner/ProjectEditBanner';
+export { default as ProjectUpdates } from './ProjectUpdates/ProjectUpdates';

@@ -3,3 +3,15 @@
 .appbar {
   @include appbar;
 }
+
+.line {
+  @include tab-line;
+}
+
+.lineTop {
+  @include tab-lineTop;
+}
+
+.lineBottom {
+  @include tab-lineBottom;
+}

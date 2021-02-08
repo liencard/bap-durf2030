@@ -4,13 +4,7 @@ import { useStores } from '../../hooks/useStores';
 import { ROUTES } from '../../consts';
 import { Container } from '../../components/Layout';
 import { Button, TabPanel, AppBar, TabSideElement } from '../../components/UI';
-import {
-  EditBasis,
-  EditRequirements,
-  EditOwners,
-  EditUpdates,
-  EditState,
-} from '../../components/Edit';
+import { EditBasis, EditRequirements, EditOwners, EditUpdates, EditState } from '../../components/Edit';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import styles from './EditProject.module.scss';
@@ -27,9 +21,7 @@ const EditProject = observer(({ query }) => {
   const STATE_FULLY_LOADED = 'fullyLoaded';
 
   const [project, setProject] = useState(projectStore.getProjectById(id));
-  const [state, setState] = useState(
-    project ? STATE_LOADING_MORE_DETAILS : STATE_LOADING
-  );
+  const [state, setState] = useState(project ? STATE_LOADING_MORE_DETAILS : STATE_LOADING);
 
   useEffect(() => {
     const loadProject = async (id) => {
@@ -64,20 +56,16 @@ const EditProject = observer(({ query }) => {
             </div>
           </Container>
 
-          <div className={`${styles.line} ${styles.lineTop}`}></div>
-          <Container>
-            <AppBar value={value} setValue={setValue}>
-              <Tab label="Basis Informatie" />
-              <Tab label="Ondersteuningen" />
-              <Tab label="Organisatoren" />
-              <Tab label="Updates" />
-              <Tab label="Status" />
-              <TabSideElement>
-                <Button href={ROUTES.home} text={'Update posten'} />
-              </TabSideElement>
-            </AppBar>
-          </Container>
-          <div className={`${styles.line} ${styles.lineBottom}`}></div>
+          <AppBar value={value} setValue={setValue}>
+            <Tab label="Basis Informatie" />
+            <Tab label="Ondersteuningen" />
+            <Tab label="Organisatoren" />
+            <Tab label="Updates" />
+            <Tab label="Status" />
+            <TabSideElement>
+              <Button href={ROUTES.home} text={'Update posten'} />
+            </TabSideElement>
+          </AppBar>
 
           <Container>
             <TabPanel value={value} index={0}>

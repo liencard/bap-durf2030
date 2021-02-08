@@ -66,18 +66,16 @@ const Projects = ({ projectsJSON }) => {
           </div>
         </Container>
       </section>
-      <div className={`${styles.line} ${styles.lineTop}`}></div>
-      <Container>
-        <AppBar reverse value={value} setValue={setValue}>
-          <Tab label="Lopende projecten" />
-          <Tab label="Afgelopen projecten" />
-          <Tab label="Ondersteuningen" />
-          <TabSideElement>
-            <h1 className={styles.title}>Projecten</h1>
-          </TabSideElement>
-        </AppBar>
-      </Container>
-      <div className={`${styles.line} ${styles.lineBottom}`}></div>
+
+      <AppBar reverse value={value} setValue={setValue}>
+        <Tab label="Lopende projecten" />
+        <Tab label="Afgelopen projecten" />
+        <Tab label="Ondersteuningen" />
+        <TabSideElement>
+          <h1 className={styles.title}>Projecten</h1>
+        </TabSideElement>
+      </AppBar>
+
       <Container>
         <TabPanel value={value} index={0}>
           <Grid>
