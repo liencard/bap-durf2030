@@ -85,27 +85,31 @@ class UiStore {
   };
 
   getProjectsForUser = async () => {
-    const projectArr = await this.rootStore.projectStore.projectService.getProjectsForUser(this.currentUser.id);
-    projectArr.forEach(async (projectId) => {
-      const json = await this.rootStore.projectStore.projectService.getById(projectId);
-      const project = await this.rootStore.projectStore.updateProjectFromServer(json);
-      // project.getLikes();
-      // project.getDurvers();
-      // project.getRequirementsInfo();
-      this.addProject(project);
-    });
+    if (this.userProjects.length === 0) {
+      const projectArr = await this.rootStore.projectStore.projectService.getProjectsForUser(this.currentUser.id);
+      projectArr.forEach(async (projectId) => {
+        const json = await this.rootStore.projectStore.projectService.getById(projectId);
+        const project = await this.rootStore.projectStore.updateProjectFromServer(json);
+        // project.getLikes();
+        // project.getDurvers();
+        // project.getRequirementsInfo();
+        this.addProject(project);
+      });
+    }
   };
 
   getLikedProjectsByUser = async () => {
-    const projectArr = await this.rootStore.projectStore.projectService.getLikedProjectsByUser(this.currentUser.id);
-    projectArr.forEach(async (projectId) => {
-      const json = await this.rootStore.projectStore.projectService.getById(projectId);
-      const project = await this.rootStore.projectStore.updateProjectFromServer(json);
-      project.getLikes();
-      project.getDurvers();
-      project.getRequirementsInfo();
-      await this.addLikedProject(project);
-    });
+    if (this.userLikedProjects.length === 0) {
+      const projectArr = await this.rootStore.projectStore.projectService.getLikedProjectsByUser(this.currentUser.id);
+      projectArr.forEach(async (projectId) => {
+        const json = await this.rootStore.projectStore.projectService.getById(projectId);
+        const project = await this.rootStore.projectStore.updateProjectFromServer(json);
+        project.getLikes();
+        project.getDurvers();
+        project.getRequirementsInfo();
+        await this.addLikedProject(project);
+      });
+    }
   };
 }
 

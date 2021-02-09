@@ -1,17 +1,48 @@
 import { observer } from 'mobx-react-lite';
 import { useStores } from '../../hooks/useStores';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Container, Grid } from '../../components/Layout';
 import { TabPanel, AppBar, TabSideElement } from '../../components/UI';
 import { Header, Footer } from '../../components/Layout';
 import styles from './Profile.module.scss';
+
 import { LikedProjects, OwnProjects, OwnAwards, BadgesAwards } from '../../components/Profile';
 
 import Tab from '@material-ui/core/Tab';
 
 const Profile = observer(() => {
   const { uiStore } = useStores();
+  const [userProjects, setUserProjects] = useState([]);
+  const [likedProjects, setLikedProjects] = useState([]);
   const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    const userLikedProjects = uiStore.userLikedProjects;
+
+    setLikedProjects(userLikedProjects);
+  }, [uiStore.userLikedProjects]);
+
+  const setProjectsForUser = (userProjects) => {
+    setUserProjects(userProjects);
+  };
+
+  useEffect(() => {
+    if (uiStore.currentUser && userProjects.length === 0) {
+      const loadOwnProjects = async () => {
+        await uiStore.getProjectsForUser();
+        const userProjectsArr = uiStore.userProjects;
+        setProjectsForUser(userProjectsArr);
+      };
+      loadOwnProjects();
+    }
+
+    if (uiStore.currentUser && likedProjects.length === 0) {
+      const loadLikedProjects = async () => {
+        await uiStore.getLikedProjectsByUser();
+      };
+      loadLikedProjects();
+    }
+  }, [uiStore.currentUser]);
 
   return (
     <>
@@ -45,14 +76,14 @@ const Profile = observer(() => {
 
         <TabPanel className={styles.panel} value={value} index={0}>
           <Container>
-            <OwnProjects />
+            <OwnProjects projects={userProjects} />
             <OwnAwards />
           </Container>
         </TabPanel>
 
         <TabPanel className={styles.panel} value={value} index={1}>
           <Container>
-            <LikedProjects />
+            <LikedProjects projects={likedProjects} />
           </Container>
         </TabPanel>
 

@@ -1,33 +1,13 @@
 import { observer } from 'mobx-react-lite';
 import { useStores } from '../../../hooks/useStores';
-import { useState, useEffect } from 'react';
-import { Grid } from '../../Layout';
+import { useState } from 'react';
 import { OwnProjectCard } from '../';
 import { ROUTES } from '../../../consts/index';
 import { Button } from '../../../components/UI';
 import styles from './OwnProjects.module.scss';
 
-const OwnProjects = observer(() => {
-  const { uiStore } = useStores();
-  const [projects, setProjects] = useState([]);
+const OwnProjects = observer(({ projects }) => {
   const [step, setStep] = useState(0);
-
-  const setProjectsForUser = (userProjects) => {
-    setProjects(userProjects);
-  };
-
-  useEffect(() => {
-    console.log(projects.length);
-    if (uiStore.currentUser && projects.length === 0) {
-      const loadOwnProjects = async () => {
-        console.log('model');
-        await uiStore.getProjectsForUser();
-        const userProjects = uiStore.userProjects;
-        setProjectsForUser(userProjects);
-      };
-      loadOwnProjects();
-    }
-  }, [uiStore.currentUser]);
 
   const handleChangeStep = (step) => {
     setStep(step);
