@@ -36,13 +36,15 @@ const Project = observer(({ projectJSON, usersJSON }) => {
 
   useEffect(() => {
     const data = convertData.fromJSON(projectJSON, projectStore);
-    data.getComments();
     data.getLikes();
     data.getRequirementsList();
     data.getRequirementsInfo();
     data.getDurvers();
+    data.getComments();
     setProject(data);
+  }, []);
 
+  useEffect(() => {
     const usersArr = [];
     usersJSON.forEach((userJSON) => {
       const user = convertDataUser.fromJSON(userJSON, userStore);
@@ -58,7 +60,7 @@ const Project = observer(({ projectJSON, usersJSON }) => {
         project.setLiked(false);
       }
     }
-  }, [setProject, uiStore.currentUser]);
+  }, [uiStore.currentUser]);
 
   if (!project) {
     return <p>Project laden...</p>;

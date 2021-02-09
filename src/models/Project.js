@@ -295,6 +295,7 @@ class Project {
   };
 
   linkComment(comment) {
+    //  this.comments.push(comment);
     !this.comments.includes(comment) && this.comments.push(comment);
   }
 

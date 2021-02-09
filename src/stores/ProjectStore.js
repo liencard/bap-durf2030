@@ -176,8 +176,8 @@ class ProjectStore {
     return await this.projectService.createComment(comment);
   };
 
-  onCommentChanged = (comment) => {
-    const project = this.getProjectById(comment.project.id);
+  onCommentChanged = (id, comment) => {
+    const project = this.getProjectById(id);
     project.linkComment(comment);
   };
 

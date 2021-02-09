@@ -28,10 +28,10 @@ const ProjectComments = observer(({ project }) => {
       <div className={styles.comments}>
         <h2 className={styles.title}>Comments</h2>
 
-        {project.comments.length != 0 ? (
+        {project.comments.length !== 0 ? (
           <div className={styles.comments__wrapper}>
             {project.comments.map((comment) => (
-              <ProjectComment key={comment.id} comment={comment} />
+              <ProjectComment key={comment.id} comment={comment} date={project.getReadableDate(comment.timestamp)} />
             ))}
           </div>
         ) : (
@@ -59,11 +59,7 @@ const ProjectComments = observer(({ project }) => {
                   onChange={(e) => setContent(e.currentTarget.value)}
                 />
               </label>
-              <input
-                className={styles.submit}
-                type="submit"
-                value="Verzenden"
-              />
+              <input className={styles.submit} type="submit" value="Verzenden" />
             </form>
           </>
         )}
