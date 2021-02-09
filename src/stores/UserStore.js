@@ -22,6 +22,17 @@ class UserStore {
     return await this.userService.create(user);
   };
 
+  validateUser = (user) => {
+    this.loadAllUsers();
+    let checkUser = this.users.find(
+      (existingUser) => existingUser.email === user.email
+    );
+    if (!checkUser) {
+      console.log('user bestaat niet');
+    }
+    console.log(user);
+  };
+
   loadAllUsers = async () => {
     const jsonUsers = await this.userService.getAllUsers();
     jsonUsers.forEach((json) => this.updateUserFromServer(json));

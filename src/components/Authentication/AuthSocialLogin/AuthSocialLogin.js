@@ -11,10 +11,9 @@ const AuthSocialLogin = () => {
 
   const googleSignIn = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithRedirect(provider);
     firebase
       .auth()
-      .getRedirectResult()
+      .signInWithPopup(provider)
       .then((result) => {
         const credential = result.credential;
         const token = credential.accessToken;
@@ -29,16 +28,16 @@ const AuthSocialLogin = () => {
 
   const facebookSignIn = () => {
     const provider = new firebase.auth.FacebookAuthProvider();
-    firebase.auth().signInWithRedirect(provider);
     firebase
       .auth()
-      .getRedirectResult()
+      .signInWithPopup(provider)
       .then((result) => {
         const credential = result.credential;
         const accessToken = credential.accessToken;
         const user = result.user;
-        //const test = user.isNewUser();
-        //console.log(test);
+
+        //console.log(user);
+        //const validate = await userStore.validateUser(user);
         registerSocial(user);
       })
       .catch((error) => {
@@ -48,6 +47,8 @@ const AuthSocialLogin = () => {
   };
 
   const registerSocial = async (user) => {
+    //const validate = await userStore.validateUser(user);
+
     const newUser = new User({
       id: user.uid,
       name: user.displayName,
@@ -55,7 +56,7 @@ const AuthSocialLogin = () => {
       email: user.email,
       password: '',
       avatar: user.photoURL,
-      organisation: '',
+      organisation: 'individu',
       admin: false,
     });
     const result = userStore.createUser(newUser);
