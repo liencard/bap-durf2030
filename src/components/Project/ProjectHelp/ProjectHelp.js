@@ -73,7 +73,7 @@ const ProjectHelp = observer(({ project }) => {
       servicesOffered: values.servicesRequired ?? false,
     });
 
-    projectStore.createDurver(newDurver, project.id);
+    project.createDurver(newDurver);
     setOpen(false);
   };
 
@@ -101,18 +101,11 @@ const ProjectHelp = observer(({ project }) => {
                 </FormizStep>
 
                 <FormizStep name="step2" isEnabled={materialsRequired}>
-                  <ProjectHelpTwoMaterial
-                    name="materials"
-                    project={project}
-                    materials={project.materials}
-                  />
+                  <ProjectHelpTwoMaterial name="materials" project={project} materials={project.materials} />
                 </FormizStep>
 
                 <FormizStep name="step3" isEnabled={servicesRequired}>
-                  <ProjectHelpTwoService
-                    project={project}
-                    services={project.services}
-                  />
+                  <ProjectHelpTwoService project={project} services={project.services} />
                 </FormizStep>
 
                 <FormizStep name="step4" isEnabled={fundingRequired}>
@@ -125,20 +118,12 @@ const ProjectHelp = observer(({ project }) => {
 
                 <div className={styles.buttons}>
                   {!durverForm.isFirstStep && (
-                    <button
-                      className={styles.button}
-                      type="button"
-                      onClick={durverForm.prevStep}
-                    >
+                    <button className={styles.button} type="button" onClick={durverForm.prevStep}>
                       Vorige
                     </button>
                   )}
                   {durverForm.isLastStep ? (
-                    <button
-                      className={styles.button}
-                      type="submit"
-                      disabled={!durverForm.isValid}
-                    >
+                    <button className={styles.button} type="submit" disabled={!durverForm.isValid}>
                       Versturen
                     </button>
                   ) : (
@@ -159,11 +144,7 @@ const ProjectHelp = observer(({ project }) => {
       {!uiStore.currentUser ? (
         <Button text="Ik durf mee te helpen" href="/login" />
       ) : (
-        <Button
-          className={styles.button}
-          onClick={handleOpen}
-          text={'Ik durf mee te helpen'}
-        />
+        <Button className={styles.button} onClick={handleOpen} text={'Ik durf mee te helpen'} />
       )}
     </>
   );

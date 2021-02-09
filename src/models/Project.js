@@ -155,6 +155,11 @@ class Project {
     );
   }
 
+  createDurver(durver) {
+    this.store.createDurver(durver, this.id);
+    this.durvers.push(durver);
+  }
+
   getRequirementsInfo() {
     this.store.loadRequirementListInfoById(this.id).then(
       action('fetchSuccess', (info) => {

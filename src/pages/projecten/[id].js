@@ -35,9 +35,7 @@ const Project = observer(({ projectJSON, usersJSON }) => {
     setUsers(usersArr);
 
     if (project && uiStore.currentUser) {
-      const projectIsLiked = project.likes.find(
-        (like) => like.userId === uiStore.currentUser.id
-      );
+      const projectIsLiked = project.likes.find((like) => like.userId === uiStore.currentUser.id);
       if (projectIsLiked) {
         project.setLiked(true);
       } else {
@@ -104,7 +102,6 @@ export const getStaticProps = async ({ params }) => {
   projectJSON['owners'] = owners;
 
   // USERS
-
   await userStore.loadAllUsers();
   const usersJSON = userStore.users.map((data) => {
     let user = convertDataUser.toJSON(data);

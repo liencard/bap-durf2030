@@ -42,7 +42,7 @@ $spacing-top: 3rem;
       align-items: center;
       font-size: 1.6rem;
       font-weight: 600;
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
 
       .name__wrapper {
         display: flex;
@@ -56,7 +56,7 @@ $spacing-top: 3rem;
       }
 
       .creator__organisation {
-        font-weight: 300;
+        @include text-detail;
       }
 
       .people__image {
@@ -80,7 +80,7 @@ $spacing-top: 3rem;
     .helper {
       display: flex;
       align-items: center;
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
 
       .name__wrapper {
         display: flex;
@@ -92,6 +92,10 @@ $spacing-top: 3rem;
           margin-right: 1rem;
         }
       }
+    }
+
+    .date {
+      @include text-detail;
     }
   }
 }
