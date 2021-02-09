@@ -12,7 +12,7 @@ class Project {
     contact,
     description,
     durvers = [],
-    image,
+    image = {},
     intro,
     isKnownPlace,
     materials = [],
@@ -48,7 +48,7 @@ class Project {
     this.contact = contact;
     this.description = description;
     this.durvers = durvers;
-    this.image = image;
+    this.image = image.enabled ? image : { enabled: false, url: 'placeholder.png' };
     this.intro = intro;
     this.isKnownPlace = isKnownPlace;
     this.materials = materials;
