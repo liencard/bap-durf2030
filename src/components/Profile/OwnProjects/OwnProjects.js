@@ -45,7 +45,6 @@ const OwnProjects = observer(({ projects }) => {
             <OwnProjectCard project={projects[step]} />
             <section className={styles.activities}>
               <h3 className={styles.subtitle}>Recente activeiten</h3>
-
               {projects[step].durvers.slice(0, 3).map((durver, i) => (
                 <article key={i} className={styles.activity}>
                   <span className={styles.name}>
