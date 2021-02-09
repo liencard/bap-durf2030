@@ -17,6 +17,22 @@ const Project = observer(({ projectJSON, usersJSON }) => {
   const { projectStore, uiStore, userStore } = useStores();
   const [project, setProject] = useState();
   const [users, setUsers] = useState();
+  const [projectOwner, setProjectOwner] = useState(false);
+
+  useEffect(() => {
+    const loadOwner = async () => {
+      const currentUser = await uiStore.currentUser;
+      if (project && currentUser) {
+        const projectOwner = project.owners.find((owner) => owner.id === currentUser.id);
+        if (projectOwner) {
+          setProjectOwner(true);
+        } else {
+          setProjectOwner(false);
+        }
+      }
+    };
+    loadOwner();
+  }, [uiStore.currentUser]);
 
   useEffect(() => {
     const data = convertData.fromJSON(projectJSON, projectStore);
@@ -50,7 +66,7 @@ const Project = observer(({ projectJSON, usersJSON }) => {
   return (
     <>
       <Header />
-      <ProjectEditBanner project={project} />
+      {projectOwner && <ProjectEditBanner project={project} />}
       <ProjectHeader project={project} />
       <ProjectContent project={project} users={users} />
       <ProjectFooter project={project} />

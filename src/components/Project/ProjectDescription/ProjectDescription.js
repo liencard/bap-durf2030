@@ -10,10 +10,15 @@ const ProjectDescription = observer(({ project, users }) => {
   const [ownersInfo, setOwnersInfo] = useState([]);
 
   useEffect(() => {
-    const durversArr = project.durvers.map((durver) => {
+    let durversArr = [];
+    project.durvers.forEach((durver) => {
       let newDurver = users.find((existingUser) => durver.user.id === existingUser.id);
       newDurver.timestamp = durver.timestamp;
-      return newDurver;
+
+      const durverExists = durversArr.find((durverInArr) => durverInArr.id === newDurver.id);
+      if (!durverExists) {
+        durversArr.push(newDurver);
+      }
     });
     setDurversInfo(durversArr);
 
@@ -80,7 +85,7 @@ const ProjectDescription = observer(({ project, users }) => {
             </div>
           ))}
 
-          {project.durvers.length > 3 && <a>Bekijk alle durvers</a>}
+          {durversInfo.length > 3 && <a>Bekijk alle durvers</a>}
         </div>
       </aside>
     </>
