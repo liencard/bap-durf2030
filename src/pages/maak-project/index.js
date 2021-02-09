@@ -130,7 +130,10 @@ const CreateProject = observer(() => {
       <div className={styles.create}>
         <Container>
           <div className={styles.image__wrapper}>
-            <img className={styles.image} src={`./create/create-${projectForm.currentStep.index + 1}.png`} />
+            <img
+              className={styles.image}
+              src={`./create/create-${projectForm.currentStep ? projectForm.currentStep.index + 1 : 1}.png`}
+            />
             <div className={styles.progress__wrapper}>
               <LinearProgress
                 className={styles.progress}
