@@ -2,12 +2,12 @@ import React, { useRef } from 'react';
 import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
-import { useStores } from '../../hooks/useStores';
+import { useStores } from '../../../hooks/useStores';
 import { useRouter } from 'next/router';
-import { ROUTES } from '../../consts/index';
+import { ROUTES } from '../../../consts/index';
 import styles from './Header.module.scss';
 import Link from 'next/link';
-import { Button } from '../UI';
+import { Button } from '../../UI';
 
 import ButtonUI from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
