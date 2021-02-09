@@ -51,6 +51,8 @@ const AuthSocial = () => {
       email: user.email,
       password: '',
       avatar: user.photoURL,
+      organisation: '',
+      admin: false,
     });
     const result = userStore.createUser(newUser);
     router.push(ROUTES.home);

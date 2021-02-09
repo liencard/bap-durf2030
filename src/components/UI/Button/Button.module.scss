@@ -3,3 +3,11 @@
 .button {
   @include button;
 }
+
+.buttonOutline {
+  @include buttonOutline;
+}
+
+.buttonSecondary {
+  @include buttonSecondary;
+}

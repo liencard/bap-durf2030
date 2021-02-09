@@ -1,0 +1,28 @@
+@import '../../../styles/styles.scss';
+
+.image {
+  margin-top: 3rem;
+  height: 30rem;
+  width: 50rem;
+  object-fit: cover;
+  border: $border;
+}
+
+.upload {
+  .buttons {
+    display: flex;
+    align-items: center;
+  }
+
+  input[type='file'] {
+    display: none;
+  }
+
+  label {
+    margin-right: 2rem;
+  }
+
+  .button {
+    @include button;
+  }
+}

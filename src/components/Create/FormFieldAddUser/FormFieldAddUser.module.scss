@@ -1,0 +1,34 @@
+@import '../../../styles/styles.scss';
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: $grid-gap;
+}
+
+.item {
+  background: $green-light;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+
+  .text {
+    margin-left: 0.5rem;
+    font-size: 1.4rem;
+  }
+
+  .delete {
+    display: flex;
+    margin-left: auto;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    img {
+      height: 2rem;
+      width: 2rem;
+    }
+  }
+}

@@ -1,11 +1,9 @@
 @import '../../../styles/styles.scss';
 
 .footer {
-  display: flex;
-  grid-column: span 12;
   position: relative;
   padding: 3rem 0;
-  align-items: center;
+  margin: 12rem 0 4rem;
 
   &::before {
     position: absolute;
@@ -26,19 +24,26 @@
     bottom: 0;
   }
 
-  .creator {
+  .contact {
     display: flex;
     align-items: center;
-    margin-right: 5rem;
-    font-weight: bold;
+    grid-column: span 8;
 
-    & h3 {
-      @include title-three;
+    p {
+      @include text-small;
+      width: 25rem;
+      margin-left: 2rem;
     }
   }
 
   .date {
-    margin-left: auto;
+    // margin-left: auto;
     @include text-detail;
+    grid-column: span 4;
+    text-align: right;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
   }
 }

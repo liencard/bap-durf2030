@@ -2,6 +2,35 @@
 
 .likes {
   @include text-detail;
+  border: none;
+  background-color: transparent;
+  border-radius: 4rem;
+  padding: 1rem 2rem 1rem 4.8rem;
+  transition: 0.4s;
+  position: relative;
+
+  &::before {
+    height: 1.7rem;
+    width: 1.7rem;
+    position: absolute;
+    background: url('/icons/like-default.svg');
+    left: 1.8rem;
+    content: '';
+  }
+
+  &.liked {
+    background-color: $green-extra-light;
+
+    &::before {
+      background: url('/icons/like-liked.svg');
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: $green-extra-light;
+    color: $blue-dark;
+  }
 
   &.small {
     font-size: 1.2rem;

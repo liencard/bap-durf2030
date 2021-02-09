@@ -1,39 +1,14 @@
 @import '../../../styles/styles.scss';
 
 .appbar {
-  grid-column: span 12;
-
-  margin: 5rem 0;
-
-  div {
-    height: 10rem;
-    position: relative;
-
-    &::before {
-      position: absolute;
-      top: 0;
-      content: '';
-      height: 0.1rem;
-      width: 100%;
-      background-color: $blue-light;
-    }
-
-    &::after {
-      position: absolute;
-      content: '';
-      height: 0.1rem;
-      width: 100%;
-      background-color: $blue-light;
-      left: 0;
-      bottom: 0;
-    }
-
-    span {
-      padding: 0.15rem;
-    }
-  }
+  @include appbar;
 }
 
 .panel {
   grid-column: span 12;
+}
+
+.updates {
+  display: flex;
+  align-items: center;
 }

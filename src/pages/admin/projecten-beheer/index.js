@@ -5,11 +5,12 @@ import styles from './ProjectManagement.module.scss';
 import { Button } from '../../../components/UI';
 import Sidebar from '../../../components/Admin/Sidebar/Sidebar';
 import { DataGrid } from '@material-ui/data-grid';
-//import Button from '@material-ui/core/Button';
 
 const ProjectManagement = observer(() => {
   const { projectStore } = useStores();
   const projectAmount = projectStore.projects.length;
+
+  projectStore.loadAllProjects();
 
   const getState = (state) => {
     switch (state) {
@@ -25,7 +26,7 @@ const ProjectManagement = observer(() => {
   let projectList = [];
   let id = 1;
   projectStore.projects.map((project) => {
-    console.log(project);
+    //console.log(project);
     const projectState = getState(project.state);
     projectList.push({
       id: id,
@@ -37,12 +38,11 @@ const ProjectManagement = observer(() => {
     id++;
   });
 
-  console.log(projectList);
+  //console.log(projectList);
 
   const handleChangeState = async (data) => {
     const project = await projectStore.getProjectById(data.id);
-    project.setState(1);
-    const result = await projectStore.updateState(project);
+    project.updateState(1);
   };
 
   const columns = [

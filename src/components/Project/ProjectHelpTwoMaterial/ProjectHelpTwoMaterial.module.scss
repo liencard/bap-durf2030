@@ -1,0 +1,61 @@
+@import '../../../styles/styles.scss';
+
+.title {
+  @include title-two;
+  margin-bottom: 2rem;
+}
+
+.materials {
+  margin-top: 3.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 4rem;
+}
+
+.item {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+
+  .name {
+    margin-left: 0.5rem;
+    text-transform: capitalize;
+    font-weight: 600;
+  }
+
+  .amount {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-right: 2rem;
+
+    .number {
+      font-weight: 400;
+      width: 3.5rem;
+      text-align: center;
+    }
+
+    .sign {
+      font-weight: 400;
+      font-size: 2rem;
+      padding: 0 0.5rem;
+      background-color: $grey;
+      line-height: 1;
+      color: white;
+      border-radius: 0.3rem;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .sign__add {
+      background-color: $green;
+    }
+  }
+}
+
+.itemLight {
+  .name {
+    font-weight: 400;
+  }
+}
