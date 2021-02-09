@@ -5,8 +5,7 @@ import { ROUTES } from '../../consts';
 import { Container } from '../../components/Layout';
 import { Button, TabPanel, AppBar, TabSideElement } from '../../components/UI';
 import { EditBasis, EditRequirements, EditOwners, EditUpdates, EditState } from '../../components/Edit';
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
+import { Header, Footer } from '../../components/Layout';
 import styles from './EditProject.module.scss';
 import Tab from '@material-ui/core/Tab';
 

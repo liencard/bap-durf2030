@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Container, Grid } from '../../components/Layout';
+import { Container, Grid, Header, Footer } from '../../components/Layout';
 import { ProjectCard, ProjectRequirementsCard } from '../../components/Project';
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
 import RootStore from '../../stores';
 import styles from './Projects.module.scss';
 import { convertData } from '../../models/Project';
