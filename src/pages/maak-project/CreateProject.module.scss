@@ -52,33 +52,21 @@
     position: fixed;
     background: $green;
     left: 0;
-    max-width: 45vw; // Indien in commentaar is progress ok
+    max-width: 45vw;
     width: 80rem;
     height: 100%;
     object-fit: cover;
   }
 
-  // Zonder wrapper
-  // .progress {
-  //   transform: rotate(90deg) translateX(50vh);
-  //   height: 1rem;
-  //   width: 100vh;
-  //   position: fixed;
-  //   background: $yellow-light;
-  //   left: 0;
-  //   top: 0;
-
-  //   & div {
-  //     background: $yellow;
-  //   }
-  // }
-
-  // Met wrapper
   .progress__wrapper {
     transform: rotate(90deg);
     position: fixed;
-    left: 80rem; // idem image width
-    // To do: oplossing vinden voor max-width bij image
+    left: 80rem;
+
+    // 1777px breakpoint when 80rem = 45vw
+    @media (max-width: 1777px) {
+      left: 45vw;
+    }
 
     .progress {
       height: 1rem;

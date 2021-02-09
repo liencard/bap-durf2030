@@ -142,15 +142,6 @@ const CreateProject = observer(() => {
               />
             </div>
           </div>
-          {/* <div className={`${styles.image} ${projectForm.currentStep && 'step' + (projectForm.currentStep.index + 1)}`}>
-            <div className={styles.progress__wrapper}>
-              <LinearProgress
-                className={styles.progress}
-                variant="determinate"
-                value={((projectForm.currentStep && projectForm.currentStep.index + 1) / 8) * 100}
-              />
-            </div>
-          </div> */}
           <div className={styles.content}>
             {!projectForm.isLastStep && (
               <p className={styles.step}>Stap {projectForm.currentStep && projectForm.currentStep.index + 1} / 7</p>
