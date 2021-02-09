@@ -13,9 +13,9 @@ const FormFieldAddUser = (props) => {
 
   const filter = createFilterOptions();
   const { userStore, uiStore } = useStores();
-  const users = userStore.users;
-
   const [owners, setOwners] = useState([]);
+  const [users, setUsers] = useState([]);
+  // const [filteredUsers, setFilteredUsers] = useState([]);
 
   useEffect(() => {
     setValue(owners);
@@ -25,7 +25,13 @@ const FormFieldAddUser = (props) => {
     if (defaultValue) {
       setOwners(defaultValue);
     }
+
+    userStore.loadAllUsers();
   }, []);
+
+  useEffect(() => {
+    setUsers(userStore.users);
+  }, [userStore.users]);
 
   useEffect(() => {
     if (uiStore.currentUser && showCurrentUser) {
@@ -43,8 +49,17 @@ const FormFieldAddUser = (props) => {
       // setOwners([...owners, { name: newValue.inputValue }]);
     } else if (input === 'data') {
       // newValue = User object
-      console.log(newValue);
       setOwners([...owners, { name: newValue.name, id: newValue.id, avatar: newValue.avatar }]);
+
+      // Remove from users array
+      // const usersArr = users.map((user) => {
+      //   if (user.id === newValue.id) {
+      //     return;
+      //   } else {
+      //     return user;
+      //   }
+      // });
+      // setUsers(usersArr);
     }
   };
 
@@ -64,14 +79,16 @@ const FormFieldAddUser = (props) => {
             <div className={styles.text}>
               <p className={styles.name}>{owner.name}</p>
             </div>
-            <p
-              onClick={() => {
-                removeOwner(owner);
-              }}
-              className={styles.delete}
-            >
-              verwijder
-            </p>
+            {owner.id !== uiStore.currentUser.id && (
+              <button
+                onClick={() => {
+                  removeOwner(owner);
+                }}
+                className={styles.delete}
+              >
+                <img src="./icons/close-green.svg" />
+              </button>
+            )}
           </div>
         );
       })}
@@ -84,7 +101,6 @@ const FormFieldAddUser = (props) => {
             addOwner(newValue, 'custom');
           } else {
             if (newValue) {
-              console.log(newValue);
               addOwner(newValue, 'data');
             }
           }
@@ -113,8 +129,10 @@ const FormFieldAddUser = (props) => {
           }
           return option.name;
         }}
-        renderOption={(option) => option.name}
-        freeSolo
+        // renderOption={(option) => option.name}
+        // freeSolo
+        clearOnBlur
+        clearOnEscape
         renderInput={(params) => <TextField {...params} fullWidth label="Zoek een gebruiker" variant="outlined" />}
       />
     </>

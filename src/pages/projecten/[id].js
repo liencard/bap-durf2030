@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Container } from '../../components/Layout';
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
+import { Header, Footer } from '../../components/Layout';
 import {
   ProjectHeader,
   ProjectContent,

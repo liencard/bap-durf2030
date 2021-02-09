@@ -1,6 +1,6 @@
 import styles from './Footer.module.scss';
-import { Container } from '../../components/Layout';
-import { ROUTES } from '../../consts/index';
+import { Container } from '..';
+import { ROUTES } from '../../../consts/index';
 import Link from 'next/link';
 
 const Footer = () => {
@@ -10,12 +10,7 @@ const Footer = () => {
         <div className={styles.footer__wrapper}>
           <Container>
             <Link href={ROUTES.home}>
-              <img
-                src="/logo.svg"
-                alt="logo DURF2030"
-                width="120"
-                height="120"
-              />
+              <img src="/logo.svg" alt="logo DURF2030" width="120" height="120" />
             </Link>
             <div className={styles.sitemap}>
               <h2 className={styles.title}>Sitemap</h2>
@@ -68,31 +63,13 @@ const Footer = () => {
         <div className={styles.subfooter}>
           <div className={styles.socials}>
             <a target="_blank" href="https://www.instagram.com/durf2030/">
-              <img
-                src="/instagram-footer.svg"
-                alt="social instagram logo"
-                width="30"
-                height="30"
-              />
+              <img src="/instagram-footer.svg" alt="social instagram logo" width="30" height="30" />
             </a>
             <a target="_blank" href="https://www.facebook.com/Durf2030/">
-              <img
-                src="/facebook-footer.svg"
-                alt="social facebook logo"
-                width="30"
-                height="30"
-              />
+              <img src="/facebook-footer.svg" alt="social facebook logo" width="30" height="30" />
             </a>
-            <a
-              target="_blank"
-              href="https://www.linkedin.com/company/durf2030/"
-            >
-              <img
-                src="/linkedin-footer.svg"
-                alt="social linkedin logo"
-                width="30"
-                height="30"
-              />
+            <a target="_blank" href="https://www.linkedin.com/company/durf2030/">
+              <img src="/linkedin-footer.svg" alt="social linkedin logo" width="30" height="30" />
             </a>
           </div>
           <div className={styles.info}>

@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { useStores } from '../../../hooks/useStores';
 import { ROUTES } from '../../../consts/index';
-import { Container } from '../../Layout';
+import { Container, HeaderForm } from '../../Layout';
 import User from '../../../models/User';
 import Link from 'next/link';
 import styles from '../Authentication.module.scss';
@@ -93,15 +93,7 @@ const LoginForm = () => {
 
   return (
     <>
-      <Link href="/">
-        <img
-          className={styles.logo}
-          src="/logo.svg"
-          alt="logo DURF2030"
-          width="45"
-          height="60"
-        />
-      </Link>
+      <HeaderForm />
       <Container>
         <div className={styles.auth__img}></div>
         <section className={styles.auth}>
@@ -152,12 +144,14 @@ const LoginForm = () => {
 
                 <AuthPasswordReset />
               </div>
+
               <AuthSocialLogin />
               <input
                 className={styles.form__btn}
                 type="submit"
                 value="Inloggen"
               />
+
             </form>
             <p className={styles.redirect}>
               Nog geen account?{' '}
