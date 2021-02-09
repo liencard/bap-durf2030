@@ -5,7 +5,7 @@ const ROUTES = {
   projects: '/projecten',
   detail: { path: '/projecten/:id', to: '/projecten/' },
   edit: { path: '/bewerk-project/:id', to: '/bewerk-project/' },
-  create: '/maak-project',
+  create: { start: '/maak-project', onboarding: 'maak-project/info' },
   profile: '/profiel',
   admin: '/admin',
   adminProjects: '/admin/projecten-beheer',
@@ -25,21 +25,9 @@ const CATEGORIES = [
   'Divers',
 ];
 
-const THEMES = [
-  'Eenzaamheid rond corona',
-  'Ondernemingschap',
-  'Klimaat',
-  'Andere',
-];
+const THEMES = ['Eenzaamheid rond corona', 'Ondernemingschap', 'Klimaat', 'Andere'];
 
-const MATERIALTYPES = [
-  'Bouwmateriaal',
-  'Eten & Drinken',
-  'Infrastructuur',
-  'Knutselmateriaal',
-  'Speelgoed',
-  'Andere',
-];
+const MATERIALTYPES = ['Bouwmateriaal', 'Eten & Drinken', 'Infrastructuur', 'Knutselmateriaal', 'Speelgoed', 'Andere'];
 
 const SERVICETYPES = ['Creatieve hulp', 'Fysieke hulp', 'Andere'];
 
