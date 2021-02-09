@@ -16,7 +16,6 @@ const Profile = observer(() => {
   return (
     <>
       <Header />
-
       <div className={styles.profile}>
         <Container>
           {uiStore.currentUser && (
