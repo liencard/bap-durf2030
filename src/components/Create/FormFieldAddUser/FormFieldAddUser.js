@@ -79,14 +79,16 @@ const FormFieldAddUser = (props) => {
             <div className={styles.text}>
               <p className={styles.name}>{owner.name}</p>
             </div>
-            <button
-              onClick={() => {
-                removeOwner(owner);
-              }}
-              className={styles.delete}
-            >
-              <img src="./icons/close-green.svg" />
-            </button>
+            {owner.id !== uiStore.currentUser.id && (
+              <button
+                onClick={() => {
+                  removeOwner(owner);
+                }}
+                className={styles.delete}
+              >
+                <img src="./icons/close-green.svg" />
+              </button>
+            )}
           </div>
         );
       })}
