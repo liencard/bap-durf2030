@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Container, Grid, Header, Footer } from '../../components/Layout';
-import { ProjectCard, ProjectRequirementsCard } from '../../components/Project';
+import { ProjectCard, ProjectRequirementsCard, ProjectFilter } from '../../components/Project';
 import RootStore from '../../stores';
 import styles from './Projects.module.scss';
 import { convertData } from '../../models/Project';
@@ -84,6 +84,7 @@ const Projects = ({ projectsJSON }) => {
 
       <Container>
         <TabPanel value={value} index={0}>
+          <ProjectFilter />
           <Grid>
             {projects.map((project) => {
               if (project.state != 0 && project.state < 4) {
