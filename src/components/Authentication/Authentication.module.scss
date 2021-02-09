@@ -56,7 +56,7 @@
   .input__wrapper {
     display: flex;
     flex-direction: column;
-    margin-bottom: 2.5rem;
+    margin-bottom: 0;
   }
 
   .form__label {
@@ -95,6 +95,15 @@
   }
 }
 
-// .textfield {
-//   @include textfield;
-// }
+.subtitle {
+  @include title-three;
+  margin-top: 2rem;
+}
+
+.register__team {
+  margin-bottom: 2rem;
+}
+
+.organisation__wrapper {
+  margin-bottom: 2rem;
+}

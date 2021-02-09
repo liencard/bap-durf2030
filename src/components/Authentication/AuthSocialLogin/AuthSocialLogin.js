@@ -5,7 +5,7 @@ import User from '../../../models/User';
 import firebase from 'firebase/app';
 import styles from './AuthSocial.module.scss';
 
-const AuthSocial = () => {
+const AuthSocialLogin = () => {
   const router = useRouter();
   const { userStore } = useStores();
 
@@ -35,6 +35,9 @@ const AuthSocial = () => {
         const credential = result.credential;
         const accessToken = credential.accessToken;
         const user = result.user;
+
+        //console.log(user);
+        //const validate = await userStore.validateUser(user);
         registerSocial(user);
       })
       .catch((error) => {
@@ -44,6 +47,8 @@ const AuthSocial = () => {
   };
 
   const registerSocial = async (user) => {
+    //const validate = await userStore.validateUser(user);
+
     const newUser = new User({
       id: user.uid,
       name: user.displayName,
@@ -51,7 +56,7 @@ const AuthSocial = () => {
       email: user.email,
       password: '',
       avatar: user.photoURL,
-      organisation: '',
+      organisation: 'individu',
       admin: false,
     });
     const result = userStore.createUser(newUser);
@@ -75,4 +80,4 @@ const AuthSocial = () => {
     </div>
   );
 };
-export default AuthSocial;
+export default AuthSocialLogin;

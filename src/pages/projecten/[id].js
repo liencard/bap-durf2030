@@ -16,7 +16,6 @@ import { useStores } from '../../hooks/useStores';
 const Project = observer(({ projectJSON, usersJSON }) => {
   const { projectStore, uiStore, userStore } = useStores();
   const [project, setProject] = useState();
-  const [projectOwner, setProjectOwner] = useState(false);
   const [users, setUsers] = useState();
 
   useEffect(() => {
@@ -36,28 +35,15 @@ const Project = observer(({ projectJSON, usersJSON }) => {
     setUsers(usersArr);
 
     if (project && uiStore.currentUser) {
-      const projectIsLiked = project.likes.find((like) => like.userId === uiStore.currentUser.id);
+      const projectIsLiked = project.likes.find(
+        (like) => like.userId === uiStore.currentUser.id
+      );
       if (projectIsLiked) {
         project.setLiked(true);
       } else {
         project.setLiked(false);
       }
     }
-    // const loadOwner = async () => {
-    //   const currentUser = await uiStore.currentUser;
-    //   if (project && currentUser) {
-    //     const projectOwner = project.owners.find(
-    //       (owner) => owner.id === currentUser.id
-    //     );
-    //     if (projectOwner) {
-    //       console.log(projectOwner);
-    //       setProjectOwner(true);
-    //     } else {
-    //       setProjectOwner(false);
-    //     }
-    //   }
-    // };
-    // loadOwner();
   }, [setProject, uiStore.currentUser]);
 
   if (!project) {
@@ -66,7 +52,6 @@ const Project = observer(({ projectJSON, usersJSON }) => {
   return (
     <>
       <Header />
-      {/* {projectOwner && <ProjectEditBanner project={project} />} */}
       <ProjectEditBanner project={project} />
       <ProjectHeader project={project} />
       <ProjectContent project={project} users={users} />
@@ -119,6 +104,7 @@ export const getStaticProps = async ({ params }) => {
   projectJSON['owners'] = owners;
 
   // USERS
+
   await userStore.loadAllUsers();
   const usersJSON = userStore.users.map((data) => {
     let user = convertDataUser.toJSON(data);
