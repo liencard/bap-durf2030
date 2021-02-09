@@ -9,6 +9,10 @@ const ROUTES = {
   profile: '/profiel',
   admin: '/admin',
   adminProjects: '/admin/projecten-beheer',
+  adminProject: {
+    path: '/admin/projecten-beheer:id',
+    to: '/admin/projecten-beheer/',
+  },
   adminSettings: '/admin/settings',
 };
 
@@ -25,9 +29,21 @@ const CATEGORIES = [
   'Divers',
 ];
 
-const THEMES = ['Eenzaamheid rond corona', 'Ondernemingschap', 'Klimaat', 'Andere'];
+const THEMES = [
+  'Eenzaamheid rond corona',
+  'Ondernemingschap',
+  'Klimaat',
+  'Andere',
+];
 
-const MATERIALTYPES = ['Bouwmateriaal', 'Eten & Drinken', 'Infrastructuur', 'Knutselmateriaal', 'Speelgoed', 'Andere'];
+const MATERIALTYPES = [
+  'Bouwmateriaal',
+  'Eten & Drinken',
+  'Infrastructuur',
+  'Knutselmateriaal',
+  'Speelgoed',
+  'Andere',
+];
 
 const SERVICETYPES = ['Creatieve hulp', 'Fysieke hulp', 'Andere'];
 

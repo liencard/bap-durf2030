@@ -1,0 +1,12 @@
+@import '../../../../styles/styles.scss';
+
+.title {
+  @include title-two;
+  margin-bottom: 0rem;
+}
+
+.section {
+  border-bottom: 0.1rem solid $grey;
+  padding-bottom: 4rem;
+  margin-bottom: 4rem;
+}
