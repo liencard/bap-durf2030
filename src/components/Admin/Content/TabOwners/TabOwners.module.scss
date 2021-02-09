@@ -1,0 +1,54 @@
+@import '../../../../styles/styles.scss';
+
+.overview {
+  border: 0.1rem solid $grey-border;
+  border-radius: 0.4rem;
+  padding: 5rem;
+  font-size: 1.4rem;
+  margin-bottom: 5rem;
+}
+
+.subtitle {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+.frame {
+  padding: 1.5rem;
+  border: 0.1rem solid $grey-border;
+  background-color: rgb(250, 250, 250);
+}
+
+.section__wrapper {
+  display: flex;
+
+  section {
+    padding-right: 4rem;
+  }
+}
+
+.owners {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 3rem;
+}
+
+.owner {
+  border: 0.1rem solid $grey-border;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+
+  .image {
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    margin-right: 2rem;
+  }
+
+  .owner__name {
+    text-transform: capitalize;
+  }
+}

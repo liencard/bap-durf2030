@@ -1,0 +1,39 @@
+@import '../../../../styles/styles.scss';
+
+.overview {
+  border: 0.1rem solid $grey-border;
+  border-radius: 0.4rem;
+  padding: 5rem;
+  font-size: 1.4rem;
+  margin-bottom: 5rem;
+}
+
+.subtitle {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+.frame {
+  padding: 1.5rem;
+  border: 0.1rem solid $grey-border;
+  background-color: rgb(250, 250, 250);
+}
+
+.section__wrapper {
+  display: flex;
+
+  section {
+    padding-right: 4rem;
+  }
+}
+
+.tag {
+  background-color: $green-light;
+  text-transform: capitalize;
+  padding: 0.5rem 1rem;
+  margin-right: 1rem;
+  color: $green;
+  font-weight: 400;
+}
