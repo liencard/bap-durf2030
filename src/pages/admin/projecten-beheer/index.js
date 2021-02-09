@@ -14,23 +14,6 @@ const ProjectManagement = observer(() => {
 
   projectStore.loadAllProjects();
 
-  const getState = (state) => {
-    switch (state) {
-      case 0:
-        return 'In afwachting';
-      case 1:
-        return 'Lopend';
-      case 2:
-        return 'Crowdfunding';
-      case 3:
-        return 'Klaar';
-      case 4:
-        return 'Afgerond';
-      default:
-        return 'Onbekende status';
-    }
-  };
-
   let lopendList = [];
   let doneList = [];
   let newList = [];
@@ -77,11 +60,6 @@ const ProjectManagement = observer(() => {
       id++;
     }
   });
-
-  const handleChangeState = async (data) => {
-    const project = await projectStore.getProjectById(data.id);
-    project.updateState(1);
-  };
 
   const columns = [
     { field: 'id', headerName: 'id', width: 50 },

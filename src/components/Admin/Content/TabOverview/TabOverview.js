@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import styles from './TabOverview.module.scss';
 import { SectionPart } from '../index';
-import { ParsedRichText } from '../../../UI';
+import { ParsedRichText, Button } from '../../../UI';
 
 const TabOverview = observer(({ project }) => {
   let themes = [];
@@ -17,9 +17,43 @@ const TabOverview = observer(({ project }) => {
       categories.push(key);
     }
   });
+
+  const handleChangeState = (state) => {
+    project.updateState(state);
+  };
   return (
     <>
       <div className={styles.overview}>
+        {project.state === 0 && (
+          <SectionPart title="Status">
+            <h3 className={styles.subtitle}>Keur het project goed</h3>
+            <div className={styles.section__status}>
+              <p className={styles.descriptionn}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Vestibulum mi sapien, tempus et rhoncus vel, vehicula id arcu.
+              </p>
+              <Button
+                text="Zet project live"
+                onClick={() => handleChangeState(1)}
+              />
+            </div>
+          </SectionPart>
+        )}
+        {project.state === 1 && (
+          <SectionPart title="Status">
+            <h3 className={styles.subtitle}>Keur het project goed</h3>
+            <div className={styles.section__status}>
+              <p className={styles.descriptionn}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Vestibulum mi sapien, tempus et rhoncus vel, vehicula id arcu.
+              </p>
+              <Button
+                text="Zet crowdfunding aan"
+                onClick={() => handleChangeState(2)}
+              />
+            </div>
+          </SectionPart>
+        )}
         <SectionPart title="Algemene Info">
           <h3 className={styles.subtitle}>Title</h3>
           <p className={styles.frame}>{project.title}</p>
