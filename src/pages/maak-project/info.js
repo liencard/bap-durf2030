@@ -3,6 +3,7 @@ import { ROUTES } from '../../consts/index';
 import { Container } from '../../components/Layout';
 import styles from './CreateProject.module.scss';
 import { Button } from '../../components/UI';
+import { HeaderForm } from '../../components/Layout';
 import { OnboardingOne, OnboardingTwo, OnboardingThree } from '../../components/Create';
 import { useState } from 'react';
 
@@ -39,6 +40,7 @@ const CreateProjectInfo = () => {
 
   return (
     <>
+      <HeaderForm />
       <div className={styles.info}>
         <Container>
           <div className={styles.image__wrapper}>

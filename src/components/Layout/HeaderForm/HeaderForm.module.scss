@@ -1,0 +1,26 @@
+@import '../../../styles/styles.scss';
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  position: absolute;
+  z-index: 20;
+  padding: 3rem 5rem 0 4rem;
+
+  .logo {
+    left: 3vw;
+    top: 3vh;
+    z-index: 20;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .close {
+    margin-top: 1rem;
+    font-weight: 600;
+    font-size: 1.4rem;
+  }
+}
