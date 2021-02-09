@@ -35,7 +35,6 @@ const CreateProject = observer(() => {
   useEffect(() => {
     const name = projectForm.currentStep?.name;
     if (name === 'confirm' && !submitted) {
-      console.log('submit');
       projectForm.submit();
       setSubmitted(true);
     }
@@ -132,6 +131,7 @@ const CreateProject = observer(() => {
           <div className={styles.image__wrapper}>
             <img
               className={styles.image}
+              alt="maak project"
               src={`./create/create-${projectForm.currentStep ? projectForm.currentStep.index + 1 : 1}.png`}
             />
             <div className={styles.progress__wrapper}>

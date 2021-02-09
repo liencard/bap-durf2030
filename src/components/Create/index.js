@@ -1,4 +1,6 @@
 export { default as OnboardingOne } from './OnboardingOne/OnboardingOne';
+export { default as OnboardingTwo } from './OnboardingTwo/OnboardingTwo';
+export { default as OnboardingThree } from './OnboardingThree/OnboardingThree';
 export { default as FormPartOne } from './FormPartOne/FormPartOne';
 export { default as FormPartTwo } from './FormPartTwo/FormPartTwo';
 export { default as FormPartThree } from './FormPartThree/FormPartThree';
