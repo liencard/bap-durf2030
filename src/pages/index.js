@@ -1,13 +1,6 @@
-import Header from '../components/Header/Header';
-import Footer from '../components/Footer/Footer';
+import { Header, Footer } from '../components/Layout';
 import { Container } from '../components/Layout';
-import {
-  HomeDurf,
-  HomePlatform,
-  HomeHero,
-  HomeSpotlight,
-  ProjectSpotlight,
-} from '../components/Home';
+import { HomeDurf, HomePlatform, HomeHero, HomeSpotlight, ProjectSpotlight } from '../components/Home';
 
 const Home = () => {
   return (

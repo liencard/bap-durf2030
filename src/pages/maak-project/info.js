@@ -3,7 +3,8 @@ import { ROUTES } from '../../consts/index';
 import { Container } from '../../components/Layout';
 import styles from './CreateProject.module.scss';
 import { Button } from '../../components/UI';
-import { OnboardingOne, FormOne } from '../../components/Create';
+import { HeaderForm } from '../../components/Layout';
+import { OnboardingOne, OnboardingTwo, OnboardingThree } from '../../components/Create';
 import { useState } from 'react';
 
 const CreateProjectInfo = () => {
@@ -21,7 +22,7 @@ const CreateProjectInfo = () => {
   };
 
   const handleStart = () => {
-    router.push(ROUTES.create);
+    router.push(ROUTES.create.start);
   };
 
   const getStepContent = (step) => {
@@ -29,9 +30,9 @@ const CreateProjectInfo = () => {
       case 0:
         return <OnboardingOne />;
       case 1:
-        return 'Volgende onboarding';
+        return <OnboardingTwo />;
       case 2:
-        return 'Laatste onboarding';
+        return <OnboardingThree />;
       default:
         return 'Unknown step';
     }
@@ -39,9 +40,16 @@ const CreateProjectInfo = () => {
 
   return (
     <>
-      <div className={styles.create}>
+      <HeaderForm close onCloseClick={() => router.push(ROUTES.home)} />
+      <div className={styles.info}>
         <Container>
-          <div className={styles.image}>Image</div>
+          <div className={styles.image__wrapper}>
+            <img
+              className={styles.image}
+              src={`../create/onboarding-${activeStep ? activeStep + 1 : 1}.png`}
+              alt="onboarding"
+            />
+          </div>
           <div className={styles.content}>
             <div className={styles.text}>
               <h1 className={styles.title}>Dien jouw projectidee in, hoe zot het ook is</h1>
@@ -53,17 +61,21 @@ const CreateProjectInfo = () => {
               {getStepContent(activeStep)}
             </div>
             <div className={styles.navigate}>
-              <Button onClick={handleBack} text={'Terug'} />
+              <div className={styles.back}>
+                {activeStep !== 0 && <Button variant="secondary" onClick={handleBack} text={'Terug'} />}
+              </div>
               <ul className={styles.steps}>
                 <li className={`${styles.step} ${activeStep == 0 && styles.active}`} />
                 <li className={`${styles.step} ${activeStep == 1 && styles.active}`} />
                 <li className={`${styles.step} ${activeStep == 2 && styles.active}`} />
               </ul>
-              {activeStep < 2 ? (
-                <Button onClick={handleNext} text={'Volgende'} />
-              ) : (
-                <Button onClick={handleStart} text={'Maak project'} />
-              )}
+              <div className={styles.next}>
+                {activeStep < 2 ? (
+                  <Button variant="secondary" onClick={handleNext} text={'Volgende'} />
+                ) : (
+                  <Button onClick={handleStart} text={'Maak project'} />
+                )}
+              </div>
             </div>
           </div>
         </Container>

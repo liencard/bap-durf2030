@@ -3,8 +3,7 @@ import { useStores } from '../../hooks/useStores';
 import { useState } from 'react';
 import { Container, Grid } from '../../components/Layout';
 import { TabPanel, AppBar, TabSideElement } from '../../components/UI';
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
+import { Header, Footer } from '../../components/Layout';
 import styles from './Profile.module.scss';
 import { LikedProjects, OwnProjects, OwnAwards, BadgesAwards } from '../../components/Profile';
 

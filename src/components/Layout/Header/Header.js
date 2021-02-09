@@ -2,12 +2,12 @@ import React, { useRef } from 'react';
 import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
-import { useStores } from '../../hooks/useStores';
+import { useStores } from '../../../hooks/useStores';
 import { useRouter } from 'next/router';
-import { ROUTES } from '../../consts/index';
+import { ROUTES } from '../../../consts/index';
 import styles from './Header.module.scss';
 import Link from 'next/link';
-import { Button } from '../UI';
+import { Button } from '../../UI';
 
 import ButtonUI from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
@@ -70,10 +70,7 @@ const Header = observer(() => {
             <Link href={ROUTES.projects}>
               <span
                 className={`${styles.menu__item} ${
-                  router.pathname === '/projecten' ||
-                  router.pathname === '/projecten/[id]'
-                    ? styles.active
-                    : ''
+                  router.pathname === '/projecten' || router.pathname === '/projecten/[id]' ? styles.active : ''
                 }`}
               >
                 Alle projecten
@@ -86,15 +83,15 @@ const Header = observer(() => {
               <span className={styles.menu__item}>Nieuws</span>
             </Link>
             {!uiStore.currentUser ? (
-              <Button text="Maak project aan" href="/login" />
+              <Button text="Maak project aan" href={ROUTES.login} />
             ) : (
-              <Button text="Maak project aan" href="/maak-project" />
+              <Button text="Maak project aan" href={ROUTES.create.onboarding} />
             )}
           </nav>
         </div>
         <div className={styles.header__right}>
           {!uiStore.currentUser ? (
-            <Link href="/login">
+            <Link href={ROUTES.login}>
               <span className={styles.menu__item}>Inloggen</span>
             </Link>
           ) : (
@@ -146,11 +143,7 @@ const Header = observer(() => {
                 ''
               )}
               <div>
-                <ButtonUI
-                  aria-controls="simple-menu"
-                  aria-haspopup="true"
-                  onClick={handleClick}
-                >
+                <ButtonUI aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                   <img
                     className={styles.menu__pfp}
                     src={uiStore.currentUser.avatar}

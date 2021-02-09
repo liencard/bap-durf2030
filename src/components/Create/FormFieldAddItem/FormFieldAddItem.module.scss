@@ -9,7 +9,7 @@
 .item {
   background: $green-extra-light;
   padding: 1.2rem 1.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
   display: grid;
@@ -50,6 +50,8 @@
 
   .text {
     margin-left: 2rem;
+    font-size: 1.4rem;
+
     .category {
       @include text-detail;
       color: $green;

@@ -4,7 +4,7 @@ import { useStores } from '../../../hooks/useStores';
 import { ROUTES } from '../../../consts/index';
 import Link from 'next/link';
 import styles from '../Authentication.module.scss';
-import { Container } from '../../Layout';
+import { Container, HeaderForm } from '../../Layout';
 import User from '../../../models/User';
 import { AuthSocial } from '../../Authentication';
 
@@ -36,15 +36,7 @@ const RegisterForm = () => {
 
   return (
     <>
-      <Link href="/">
-        <img
-          className={styles.logo}
-          src="/logo.svg"
-          alt="logo DURF2030"
-          width="45"
-          height="60"
-        />
-      </Link>
+      <HeaderForm />
       <Container>
         <div className={styles.auth__img}></div>
         <section className={styles.auth}>
@@ -99,11 +91,7 @@ const RegisterForm = () => {
                 />
               </div>
 
-              <input
-                className={styles.form__btn}
-                type="submit"
-                value="Maak account"
-              />
+              <input className={styles.form__btn} type="submit" value="Maak account" />
             </form>
 
             <p className={styles.redirect}>
