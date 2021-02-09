@@ -45,6 +45,7 @@ class UserStore {
         avatar: json.avatar,
         admin: json.admin,
         awards: json.awards,
+        organisation: json.organisation,
         store: this.rootStore.userStore,
       });
     }

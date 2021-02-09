@@ -103,3 +103,16 @@ $border-radius: 0.5rem;
     }
   }
 }
+
+.subtitle {
+  @include title-three;
+  margin-top: 2rem;
+}
+
+.register__team {
+  margin-bottom: 2rem;
+}
+
+.organisation__wrapper {
+  margin-bottom: 2rem;
+}

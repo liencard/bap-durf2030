@@ -4,19 +4,17 @@ class User {
   constructor({
     id = v4(),
     name,
-    lastname,
     avatar = '',
     email,
     password,
     admin,
+    organisation,
     awards = [],
   }) {
     this.id = id;
     this.name = name;
-    //this.lastname = lastname;
     this.avatar = avatar;
     if (!avatar) {
-      //this.avatar = `https://avatars.dicebear.com/v2/avataaars/${this.id}.svg`;
       this.avatar = `https://avatars.dicebear.com/api/identicon/${this.id}.svg`;
     }
 
@@ -24,6 +22,7 @@ class User {
     this.password = password;
     this.admin = admin;
     this.awards = awards;
+    this.organisation = organisation;
     this.comments = [];
   }
 
@@ -40,6 +39,7 @@ const convertDataUser = {
       avatar: user.avatar,
       email: user.email,
       admin: user.admin,
+      organisation: user.organisation,
       awards: user.awards,
     };
   },
@@ -51,6 +51,7 @@ const convertDataUser = {
       avatar: user.avatar,
       email: user.email,
       admin: user.admin,
+      organisation: user.organisation,
       awards: user.awards,
       store: store,
     });
@@ -65,19 +66,19 @@ const userConverter = {
       avatar: user.avatar,
       email: user.email,
       admin: user.admin,
+      organisation: user.organisation,
       awards: user.awards,
-      //lastname: user.lastname,
     };
   },
   fromFirestore: function (snapshot, options) {
     const data = snapshot.data(options);
     return new User({
       name: data.name,
-      //lastname: data.lastname,
       email: data.email,
       avatar: data.avatar,
       id: data.userId,
       admin: data.admin,
+      organisation: data.organisation,
       awards: data.awards,
     });
   },

@@ -39,8 +39,6 @@ const ProjectHeader = observer(({ project }) => {
     }
   }, []);
 
-  console.log(tags);
-
   useEffect(() => {
     let materialsCountNew = 0;
     let servicesCountNew = 0;

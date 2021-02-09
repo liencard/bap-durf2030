@@ -23,16 +23,12 @@ class UserService {
       .withConverter(userConverter)
       .get();
     user = await user.data();
-    console.log(user);
     return user;
   };
 
   getAllUsers = async () => {
     let snapshot = await this.db.collection('users').get();
     return snapshot.docs.map((user) => user.data());
-    // return snapshot.docs.map((userFromDB) => {
-    //   return { id: userFromDB.id, data: userFromDB.data() };
-    // });
   };
 
   getAllAdmins = async () => {

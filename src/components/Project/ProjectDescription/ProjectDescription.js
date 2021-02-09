@@ -8,6 +8,8 @@ const ProjectDescription = observer(({ project, users }) => {
   let durversInfo = [];
   let ownersInfo = [];
 
+  console.log(users);
+
   project.durvers.forEach((durver) => {
     const newDurver = users.find(
       (existingUser) => durver.user.id === existingUser.id
@@ -60,7 +62,9 @@ const ProjectDescription = observer(({ project, users }) => {
                     />
                   ))}
                 </span>
-                <p className={styles.creator__organisation}>Individu</p>
+                <p className={styles.creator__organisation}>
+                  {owner.organisation}
+                </p>
               </div>
             </div>
           ))}
