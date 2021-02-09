@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { ROUTES, THEMES, CATEGORIES } from '../../consts/index';
 import { useEffect, useState } from 'react';
-import { Container } from '../../components/Layout';
+import { Container, HeaderForm } from '../../components/Layout';
 import { Button } from '../../components/UI';
 import { observer } from 'mobx-react-lite';
 import styles from './CreateProject.module.scss';
@@ -40,12 +40,7 @@ const CreateProject = observer(() => {
     }
   }, [projectForm.currentStep]);
 
-  if (uiStore.currentUser === undefined) {
-    return <div>User inladen</div>;
-  }
-
   const handleSubmit = async (values) => {
-    console.log(values);
     let categoriesWithValues = {};
     let themesWithValues = {};
 
@@ -126,6 +121,7 @@ const CreateProject = observer(() => {
 
   return (
     <>
+      <HeaderForm close onCloseClick={() => router.push(ROUTES.home)} />
       <div className={styles.create}>
         <Container>
           <div className={styles.image__wrapper}>

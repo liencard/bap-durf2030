@@ -19,8 +19,28 @@
   }
 
   .close {
-    margin-top: 1rem;
     font-weight: 600;
     font-size: 1.4rem;
+    display: flex;
+    color: $blue-dark;
+    transition: 0.2s;
+    position: relative;
+    display: flex;
+    margin-top: 1rem;
+
+    &::before {
+      position: absolute;
+      content: '';
+      height: 2rem;
+      width: 2rem;
+      left: -3rem;
+      background-repeat: no-repeat;
+      background-image: url('/icons/close-blue.svg');
+      background-position: center;
+    }
+
+    &:hover {
+      color: $green;
+    }
   }
 }

@@ -40,7 +40,7 @@ const CreateProjectInfo = () => {
 
   return (
     <>
-      <HeaderForm />
+      <HeaderForm close onCloseClick={() => router.push(ROUTES.home)} />
       <div className={styles.info}>
         <Container>
           <div className={styles.image__wrapper}>
