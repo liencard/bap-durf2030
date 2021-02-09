@@ -7,7 +7,7 @@ import User from '../../../models/User';
 import Link from 'next/link';
 import styles from '../Authentication.module.scss';
 import TextField from '@material-ui/core/TextField';
-import { AuthSocial } from '../../Authentication';
+import { AuthSocialLogin } from '../../Authentication';
 import { AuthPasswordReset } from '../../Authentication';
 
 import FormControl from '@material-ui/core/FormControl';
@@ -152,7 +152,7 @@ const LoginForm = () => {
 
                 <AuthPasswordReset />
               </div>
-              <AuthSocial />
+              <AuthSocialLogin />
               <input
                 className={styles.form__btn}
                 type="submit"

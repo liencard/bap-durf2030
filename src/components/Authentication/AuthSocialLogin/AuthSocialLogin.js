@@ -5,15 +5,16 @@ import User from '../../../models/User';
 import firebase from 'firebase/app';
 import styles from './AuthSocial.module.scss';
 
-const AuthSocial = () => {
+const AuthSocialLogin = () => {
   const router = useRouter();
   const { userStore } = useStores();
 
   const googleSignIn = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithRedirect(provider);
     firebase
       .auth()
-      .signInWithPopup(provider)
+      .getRedirectResult()
       .then((result) => {
         const credential = result.credential;
         const token = credential.accessToken;
@@ -28,13 +29,16 @@ const AuthSocial = () => {
 
   const facebookSignIn = () => {
     const provider = new firebase.auth.FacebookAuthProvider();
+    firebase.auth().signInWithRedirect(provider);
     firebase
       .auth()
-      .signInWithPopup(provider)
+      .getRedirectResult()
       .then((result) => {
         const credential = result.credential;
         const accessToken = credential.accessToken;
         const user = result.user;
+        //const test = user.isNewUser();
+        //console.log(test);
         registerSocial(user);
       })
       .catch((error) => {
@@ -75,4 +79,4 @@ const AuthSocial = () => {
     </div>
   );
 };
-export default AuthSocial;
+export default AuthSocialLogin;
