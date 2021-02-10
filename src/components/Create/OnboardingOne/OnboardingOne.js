@@ -3,19 +3,26 @@ import styles from './OnboardingOne.module.scss';
 const OnboardingOne = () => {
   return (
     <>
-      <h2 className={styles.subtitle}>Klaar om te starten?</h2>
+      <h2 className={styles.subtitle}>
+        Aan welke criteria moet jouw project voldoen?
+      </h2>
       <div className={styles.items}>
         <div className={styles.item}>
-          <img src="/icons/like-default.svg" />
+          <img src="/onboarding/onboarding-1.svg" />
           <p>
-            Start met het aanmaken van je project, geen nood, alles wat je schrijft ga je nadien nog kunnen aanpassen.
+            Bij jouw project bertrek je zoveel mogelijk actieve burgers en/of
+            creatieve ondernemers.
           </p>
         </div>
         <div className={styles.item}>
-          <img src="/icons/like-default.svg" />
+          <img src="/onboarding/onboarding-2.svg" />
+          <p>Je zet kunst of creativiteit in als tool</p>
+        </div>
+        <div className={styles.item}>
+          <img src="/onboarding/onboarding-3.svg" />
           <p>
-            Na het delen van je project zal je idee gereviewed worden, na goedkeuring wordt deze zichtbaar gezet op het
-            plaform.
+            Jouw project zorgt voor een positieve verandering op het leven in
+            onze buurt, stad en regio
           </p>
         </div>
       </div>
