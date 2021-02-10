@@ -32,11 +32,11 @@ $border-radius: 0.5rem;
     }
 
     @media (max-width: 1600px) {
-      left: -10rem;
+      background-position: center left -10rem;
     }
 
     @media (max-width: 1350px) {
-      left: -20rem;
+      background-position: center left -20rem;
     }
 
     @media (max-width: 1080px) {
@@ -66,11 +66,11 @@ $border-radius: 0.5rem;
     }
 
     @media (max-width: 1600px) {
-      right: -10rem;
+      background-position: center right -10rem;
     }
 
     @media (max-width: 1350px) {
-      right: -20rem;
+      background-position: center right -20rem;
     }
 
     @media (max-width: 1080px) {
