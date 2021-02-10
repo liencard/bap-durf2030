@@ -4,32 +4,27 @@ import { Grid } from '../../Layout';
 import { ProjectCard } from '../../Project';
 import { Button } from '../../UI';
 import { useStores } from '../../../hooks/useStores';
+import { ROUTES } from '../../../consts';
 
-const ProjectSpotlight = () => {
+const ProjectSpotlight = ({ projects }) => {
   const { uiStore } = useStores();
   return (
     <>
       <section className={styles.projecten}>
         <div className={styles.projecten__header}>
           <h2 className={styles.title}>Projecten in de kijker</h2>
-          <Link href="/projecten/">
-            <span>Bekijk alle projecten</span>
-          </Link>
+          <Button text="Bekijk alle projecten" variant="secondary" href={ROUTES.projects} />
         </div>
         <Grid>
-          {/* Data komt van db nu, dus als prop doorgegeven */}
-          {/* <ProjectCard />
-          <ProjectCard />
-          <ProjectCard />
-          <ProjectCard /> */}
+          {projects.map((project) => {
+            if (project.highlight === true) {
+              return <ProjectCard key={project.id} project={project} />;
+            }
+          })}
           <Link href="/">
             <a className={styles.card}>
               <div className={styles.thumbnail}>
-                <img
-                  className={styles.image}
-                  src="/placeholder.png"
-                  alt="project header image"
-                />
+                <img className={styles.image} src="/placeholder.png" alt="project header image" />
               </div>
               <div className={styles.content}>
                 <div className={styles.content__wrapper}>

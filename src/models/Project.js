@@ -30,6 +30,7 @@ class Project {
     state = 0,
     impact = '',
     date = {},
+    highlight = false,
 
     updates = [],
     id,
@@ -73,6 +74,7 @@ class Project {
     this.comments = [];
     this.impact = impact;
     this.date = date;
+    this.highlight = highlight;
 
     if (store) {
       this.store = store;
@@ -375,6 +377,7 @@ const convertData = {
       categories: project.categories,
       image: project.image,
       impact: project.impact,
+      highlight: project.highlight,
     };
   },
 
@@ -439,6 +442,7 @@ const projectConverter = {
       impact: data.impact,
       date: data.date,
       timestamp: data.timestamp,
+      highlight: data.highlight,
     };
   },
 };
