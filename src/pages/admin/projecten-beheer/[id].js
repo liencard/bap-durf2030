@@ -72,7 +72,7 @@ const ProjectAdmin = observer(({ query }) => {
             <Tabs
               className={styles.container}
               selectedTabClassName={styles.selected}
-              selectedTabPanelClassName={styles.table}
+              selectedTabPanelClassName={styles.list}
             >
               <TabList className={styles.tabs}>
                 <Tab className={styles.tab}>

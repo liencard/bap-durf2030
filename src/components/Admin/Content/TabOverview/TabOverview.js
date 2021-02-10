@@ -26,11 +26,12 @@ const TabOverview = observer(({ project }) => {
       <div className={styles.overview}>
         {project.state === 0 && (
           <SectionPart title="Status">
-            <h3 className={styles.subtitle}>Keur het project goed</h3>
+            <h3 className={styles.subtitle}>Controleer het project</h3>
             <div className={styles.section__status}>
               <p className={styles.descriptionn}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Vestibulum mi sapien, tempus et rhoncus vel, vehicula id arcu.
+                Kijk het project na en check of er geen ongepast taalgebruik
+                gebruikt is, alvoorens het project live op het platform te
+                zetten.
               </p>
               <Button
                 text="Zet project live"
@@ -44,8 +45,9 @@ const TabOverview = observer(({ project }) => {
             <h3 className={styles.subtitle}>Keur het project goed</h3>
             <div className={styles.section__status}>
               <p className={styles.descriptionn}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Vestibulum mi sapien, tempus et rhoncus vel, vehicula id arcu.
+                Voldoet het project aan de vooropgestelde critearia van
+                DURF2030? Geef het project de goedkeuring om naar de
+                crowdfunding fase over te gaan.
               </p>
               <Button
                 text="Zet crowdfunding aan"
