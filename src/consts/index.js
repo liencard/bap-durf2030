@@ -13,7 +13,8 @@ const ROUTES = {
     path: '/admin/projecten-beheer:id',
     to: '/admin/projecten-beheer/',
   },
-  adminSettings: '/admin/settings',
+  adminSettings: '/admin/instellingen',
+  adminAwards: '/admin/awards',
 };
 
 const CATEGORIES = [
