@@ -1,12 +1,15 @@
 import { useStores } from '../../../hooks/useStores';
-import { useEffect } from 'react';
+import { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Button } from '../../../components/UI';
 import styles from './Settings.module.scss';
 import Sidebar from '../../../components/Admin/Sidebar/Sidebar';
+import TextField from '@material-ui/core/TextField';
 
 const Settings = observer(() => {
   const { userStore } = useStores();
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState(' ');
 
   userStore.loadAllUsers();
   let adminsArr = [];
@@ -19,6 +22,22 @@ const Settings = observer(() => {
 
   const handleDeleteAdmin = (user) => {
     userStore.updateAdmin(false, user);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(email);
+    const user = userStore.users.find((user) => user.email === email);
+    console.log(user);
+    if (user) {
+      userStore.updateAdmin(true, user);
+      const err = '';
+      setError(err);
+      // adminsArr.push(user);
+    } else {
+      const err = 'Admin niet gevonden';
+      setError(err);
+    }
   };
 
   return (
@@ -37,7 +56,7 @@ const Settings = observer(() => {
             <h2 className={styles.subtitle}>Alle admins</h2>
             <div className={styles.users}>
               {adminsArr.map((user) => (
-                <div className={styles.user}>
+                <div key={user.id} className={styles.user}>
                   <div className={styles.user__info}>
                     <img
                       className={styles.image}
@@ -56,6 +75,26 @@ const Settings = observer(() => {
                 </div>
               ))}
             </div>
+          </section>
+          <section className={styles.admins__add}>
+            <h2 className={styles.subtitle}>Voeg admin toe</h2>
+            <p className={styles.error}>{error}</p>
+            <form className={styles.form} onSubmit={handleSubmit}>
+              <TextField
+                className={styles.textfield}
+                fullWidth
+                id="outlined-basic"
+                label="Voeg admin toe"
+                variant="outlined"
+                value={email}
+                onChange={(e) => setEmail(e.currentTarget.value)}
+              />
+              <input
+                className={styles.form__btn}
+                type="submit"
+                value="Toevoegen"
+              />
+            </form>
           </section>
         </section>
       </div>

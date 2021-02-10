@@ -55,3 +55,24 @@ $border-radius: 0.5rem;
     }
   }
 }
+
+.admins__add {
+  margin-top: 8rem;
+
+  .subtitle {
+    @include title-three;
+    margin-bottom: 3rem;
+  }
+}
+
+.form__btn {
+  background-color: $green;
+  color: white;
+  padding: 2rem;
+}
+
+.error {
+  color: $red;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
