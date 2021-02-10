@@ -71,3 +71,8 @@
   grid-template-columns: repeat(3, 1fr);
   grid-gap: $grid-gap;
 }
+
+.default {
+  opacity: 0.4;
+  font-style: italic;
+}
