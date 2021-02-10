@@ -48,8 +48,8 @@ const theme = createMuiTheme({
       textTransform: 'capitalize',
       fontSize: '1.6rem',
     },
-    body1: { lineHeight: 1.7, fontSize: '1.6rem' },
-    body2: { lineHeight: 1.7, fontSize: '1.6rem' },
+    body1: { lineHeight: 1.7, fontSize: '1.5rem' },
+    body2: { lineHeight: 1.7, fontSize: '1.5rem' },
   },
   overrides: {
     // Tab elementen

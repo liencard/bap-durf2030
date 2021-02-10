@@ -14,7 +14,7 @@ import {
   ProjectHelpThree,
 } from '../../Project';
 
-const ProjectHelp = observer(({ project }) => {
+const ProjectHelp = observer(({ project, text }) => {
   const durverForm = useForm();
   const { projectStore, uiStore } = useStores();
   const [open, setOpen] = useState(false);
@@ -101,11 +101,18 @@ const ProjectHelp = observer(({ project }) => {
                 </FormizStep>
 
                 <FormizStep name="step2" isEnabled={materialsRequired}>
-                  <ProjectHelpTwoMaterial name="materials" project={project} materials={project.materials} />
+                  <ProjectHelpTwoMaterial
+                    name="materials"
+                    project={project}
+                    materials={project.materials}
+                  />
                 </FormizStep>
 
                 <FormizStep name="step3" isEnabled={servicesRequired}>
-                  <ProjectHelpTwoService project={project} services={project.services} />
+                  <ProjectHelpTwoService
+                    project={project}
+                    services={project.services}
+                  />
                 </FormizStep>
 
                 <FormizStep name="step4" isEnabled={fundingRequired}>
@@ -118,12 +125,20 @@ const ProjectHelp = observer(({ project }) => {
 
                 <div className={styles.buttons}>
                   {!durverForm.isFirstStep && (
-                    <button className={styles.button} type="button" onClick={durverForm.prevStep}>
+                    <button
+                      className={styles.button}
+                      type="button"
+                      onClick={durverForm.prevStep}
+                    >
                       Vorige
                     </button>
                   )}
                   {durverForm.isLastStep ? (
-                    <button className={styles.button} type="submit" disabled={!durverForm.isValid}>
+                    <button
+                      className={styles.button}
+                      type="submit"
+                      disabled={!durverForm.isValid}
+                    >
                       Versturen
                     </button>
                   ) : (
@@ -142,9 +157,9 @@ const ProjectHelp = observer(({ project }) => {
         </Grid>
       </Modal>
       {!uiStore.currentUser ? (
-        <Button text="Ik durf mee te helpen" href="/login" />
+        <Button text={text} href="/login" />
       ) : (
-        <Button className={styles.button} onClick={handleOpen} text={'Ik durf mee te helpen'} />
+        <Button className={styles.button} onClick={handleOpen} text={text} />
       )}
     </>
   );

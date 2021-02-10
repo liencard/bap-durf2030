@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useStores } from '../../../hooks/useStores';
 import { Container } from '../../Layout';
 import { Button } from '../../UI';
-import { ProjectCircle } from '../';
+import { ProjectCircle, ProjectHelp } from '../';
 
 const ProjectRequirementsMaterials = ({ project, progress }) => {
   const { projectStore } = useStores();
@@ -64,7 +64,10 @@ const ProjectRequirementsMaterials = ({ project, progress }) => {
                   <article className={styles.list__item}>
                     <h3>Bouwmateriaal</h3>
                     {bouw.map((item) => (
-                      <span className={item.completed ? `${styles.completed}` : ``} key={item.id}>
+                      <span
+                        className={item.completed ? `${styles.completed}` : ``}
+                        key={item.id}
+                      >
                         <span>
                           {item.amount} {item.name}
                         </span>
@@ -77,7 +80,10 @@ const ProjectRequirementsMaterials = ({ project, progress }) => {
                   <article className={styles.list__item}>
                     <h3>Eten &amp; Drinken</h3>
                     {food.map((item) => (
-                      <span className={item.completed ? `${styles.completed}` : ``} key={item.id}>
+                      <span
+                        className={item.completed ? `${styles.completed}` : ``}
+                        key={item.id}
+                      >
                         <span>
                           {item.amount} {item.name}
                         </span>
@@ -90,7 +96,10 @@ const ProjectRequirementsMaterials = ({ project, progress }) => {
                   <article className={styles.list__item}>
                     <h3>Infrastructuur</h3>
                     {infra.map((item) => (
-                      <span className={item.completed ? `${styles.completed}` : ``} key={item.id}>
+                      <span
+                        className={item.completed ? `${styles.completed}` : ``}
+                        key={item.id}
+                      >
                         <span>
                           {item.amount} {item.name}
                         </span>
@@ -103,7 +112,10 @@ const ProjectRequirementsMaterials = ({ project, progress }) => {
                   <article className={styles.list__item}>
                     <h3>Knutselmateriaal</h3>
                     {art.map((item) => (
-                      <span className={item.completed ? `${styles.completed}` : ``} key={item.id}>
+                      <span
+                        className={item.completed ? `${styles.completed}` : ``}
+                        key={item.id}
+                      >
                         <span>
                           {item.amount} {item.name}
                         </span>
@@ -116,7 +128,10 @@ const ProjectRequirementsMaterials = ({ project, progress }) => {
                   <article className={styles.list__item}>
                     <h3>Speelgoed</h3>
                     {toys.map((item) => (
-                      <span className={item.completed ? `${styles.completed}` : ``} key={item.id}>
+                      <span
+                        className={item.completed ? `${styles.completed}` : ``}
+                        key={item.id}
+                      >
                         <span>
                           {item.amount} {item.name}
                         </span>
@@ -129,7 +144,10 @@ const ProjectRequirementsMaterials = ({ project, progress }) => {
                   <article className={styles.list__item}>
                     <h3>Andere hulp</h3>
                     {divers.map((item) => (
-                      <span className={item.completed ? `${styles.completed}` : ``} key={item.id}>
+                      <span
+                        className={item.completed ? `${styles.completed}` : ``}
+                        key={item.id}
+                      >
                         <span>
                           {item.amount} {item.name}
                         </span>
@@ -142,7 +160,7 @@ const ProjectRequirementsMaterials = ({ project, progress }) => {
             </div>
             <div className={styles.footer}>
               <p></p>
-              <Button text={'Hulp aanbieden'} />
+              <ProjectHelp text={'Hulp aanbieden'} project={project} />
             </div>
           </div>
         </Container>

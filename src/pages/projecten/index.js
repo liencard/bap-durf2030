@@ -1,11 +1,21 @@
 import { useEffect, useState } from 'react';
 import { Container, Grid, Header, Footer } from '../../components/Layout';
-import { ProjectCard, ProjectRequirementsCard, ProjectFilter } from '../../components/Project';
+import {
+  ProjectCard,
+  ProjectRequirementsCard,
+  ProjectFilter,
+} from '../../components/Project';
 import RootStore from '../../stores';
 import styles from './Projects.module.scss';
 import { convertData } from '../../models/Project';
 import { useStores } from '../../hooks/useStores';
-import { Button, TabPanel, AppBar, TabSideElement, Badge } from '../../components/UI';
+import {
+  Button,
+  TabPanel,
+  AppBar,
+  TabSideElement,
+  Badge,
+} from '../../components/UI';
 import Tab from '@material-ui/core/Tab';
 import Masonry from 'react-masonry-css';
 import LinearProgress from '@material-ui/core/LinearProgress';
@@ -18,6 +28,12 @@ const Projects = ({ projectsJSON }) => {
   const [projectCount, setProjectCount] = useState(0);
   const [value, setValue] = useState(0);
 
+  const [tags, setTags] = useState([]);
+  const [theme, setTheme] = useState([]);
+  const [cat, setCat] = useState([]);
+
+  let filterArr = [];
+
   useEffect(() => {
     const projectsArr = projectsJSON.map((projectJSON) => {
       const project = convertData.fromJSON(projectJSON, projectStore);
@@ -27,10 +43,28 @@ const Projects = ({ projectsJSON }) => {
       project.getDurvers();
       return project;
     });
-    setProjects(projectsArr);
-  }, [setProjects]);
+
+    console.log(cat);
+    console.log(theme);
+
+    projectsArr.forEach((project) => {
+      if (project.categories[`${cat}`] === true) {
+        filterArr.push(project);
+        console.log(filterArr);
+      }
+
+      if (project.themes[`${theme}`] === true) {
+        filterArr.push(project);
+      }
+    });
+    setProjects(filterArr);
+    console.log(filterArr);
+
+    //setProjects(projectsArr);
+  }, [setProjects, tags, cat, theme]);
 
   let milestonesArr = [];
+  console.log(tags);
 
   useEffect(() => {
     let projectsFound = 0;
@@ -55,12 +89,16 @@ const Projects = ({ projectsJSON }) => {
           <div className={styles.content}>
             <h1 className={styles.title}>Samen pakken we eenzaamheid aan</h1>
             <p>
-              De coronastorm woedt: we zitten in dezelfde storm maar niet in hetzelfde schuitje. Hoe kunnen we met een
-              creatieve mindset hier via kunst en creativiteit een antwoord op bieden? DURF 2030 zoekt naar 40 projecten
-              die eenzaamheid rond corona aanpakken.
+              De coronastorm woedt: we zitten in dezelfde storm maar niet in
+              hetzelfde schuitje. Hoe kunnen we met een creatieve mindset hier
+              via kunst en creativiteit een antwoord op bieden? DURF 2030 zoekt
+              naar 40 projecten die eenzaamheid rond corona aanpakken.
             </p>
             <div className={styles.milestone__bar}>
-              <LinearProgress variant="determinate" value={(milestones.length / 40) * 100} />
+              <LinearProgress
+                variant="determinate"
+                value={(milestones.length / 40) * 100}
+              />
               <span>{milestones.length}</span>
             </div>
 
@@ -84,7 +122,14 @@ const Projects = ({ projectsJSON }) => {
 
       <Container>
         <TabPanel value={value} index={0}>
-          <ProjectFilter />
+          <ProjectFilter
+            tags={tags}
+            setTags={setTags}
+            theme={theme}
+            setTheme={setTheme}
+            cat={cat}
+            setCat={setCat}
+          />
           <Grid>
             {projects.map((project) => {
               if (project.state != 0 && project.state < 4) {
@@ -103,10 +148,16 @@ const Projects = ({ projectsJSON }) => {
           </Grid>
         </TabPanel>
         <TabPanel value={value} index={2}>
-          <Masonry breakpointCols={2} className={styles.masonry} columnClassName={styles.column}>
+          <Masonry
+            breakpointCols={2}
+            className={styles.masonry}
+            columnClassName={styles.column}
+          >
             {projects.map((project) => {
               if (project.materialsRequired || project.servicesRequired) {
-                return <ProjectRequirementsCard key={project.id} project={project} />;
+                return (
+                  <ProjectRequirementsCard key={project.id} project={project} />
+                );
               }
             })}
           </Masonry>
