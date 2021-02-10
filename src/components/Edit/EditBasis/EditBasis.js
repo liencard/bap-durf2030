@@ -15,6 +15,7 @@ const EditBasis = ({ project }) => {
   const [isKnownPlace, setIsKnownPlace] = useState(project.isKnownPlace);
 
   const handleSaveProject = (values) => {
+    console.log(values);
     if (values.categories && values.themes) {
       let categoriesWithValues = {};
       let themesWithValues = {};

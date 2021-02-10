@@ -1,0 +1,13 @@
+@import '../../../styles/styles.scss';
+
+.button {
+  @include button;
+
+  &.buttonRed {
+    background-color: $red;
+
+    &:hover {
+      background-color: $red;
+    }
+  }
+}

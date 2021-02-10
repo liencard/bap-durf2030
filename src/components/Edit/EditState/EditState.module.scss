@@ -111,3 +111,24 @@ $point-size: 1rem;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: $grid-gap;
 }
+
+.deactivate {
+  display: flex;
+  justify-content: space-between;
+
+  .info {
+    max-width: 50rem;
+  }
+
+  .button {
+    @include button;
+
+    &.buttonRed {
+      background-color: $red;
+
+      &:hover {
+        background-color: $red;
+      }
+    }
+  }
+}

@@ -33,22 +33,12 @@ const OwnProjectCard = observer(({ project }) => {
             project.materialsRequired === true ||
             project.servicesRequired === true) && (
             <div className={styles.icons}>
-              {project.servicesRequired && (
-                <img src="/icons/service-white.svg" alt="service" />
-              )}
-              {project.materialsRequired && (
-                <img src="/icons/material-white.svg" alt="materiaal" />
-              )}
-              {project.fundingRequired && (
-                <img src="/icons/money-white.svg" alt="geld" />
-              )}
+              {project.servicesRequired && <img src="/icons/service-white.svg" alt="service" />}
+              {project.materialsRequired && <img src="/icons/material-white.svg" alt="materiaal" />}
+              {project.fundingRequired && <img src="/icons/money-white.svg" alt="geld" />}
             </div>
           )}
-          <img
-            className={styles.image}
-            src="thumbnail-temp.jpg"
-            alt="service"
-          />
+          <img className={styles.image} src={project.image.url} alt="service" />
         </div>
 
         <div className={styles.content}>
@@ -58,20 +48,12 @@ const OwnProjectCard = observer(({ project }) => {
           <h3 className={styles.title}>{project.title}</h3>
 
           <div className={styles.intro}>
-            <LinesEllipsis
-              text={project.intro}
-              maxLine="3"
-              ellipsis="..."
-              trimRight
-              basedOn="letters"
-            />
+            <LinesEllipsis text={project.intro} maxLine="3" ellipsis="..." trimRight basedOn="letters" />
           </div>
 
           <div className={styles.stats}>
             <ProjectLikes project={project} small />
-            {project.durvers.length != 0 && (
-              <ProjectHelpers small project={project} />
-            )}
+            {project.durvers.length != 0 && <ProjectHelpers small project={project} />}
           </div>
         </div>
       </a>
