@@ -18,23 +18,23 @@ const ROUTES = {
 };
 
 const CATEGORIES = [
-  'Muziek',
-  'Sociaal',
-  'Kinderen',
-  'Kunst',
-  'Theater',
-  'Technologie',
-  'Dans',
-  'Audiovisueel',
-  'Natuur',
-  'Divers',
+  'muziek',
+  'sociaal',
+  'kinderen',
+  'kunst',
+  'theater',
+  'technologie',
+  'dans',
+  'audiovisueel',
+  'natuur',
+  'divers',
 ];
 
 const THEMES = [
-  'Eenzaamheid rond corona',
-  'Ondernemingschap',
-  'Klimaat',
-  'Andere',
+  'eenzaamheid rond corona',
+  'ondernemingschap',
+  'klimaat',
+  'andere',
 ];
 
 const MATERIALTYPES = [
