@@ -27,6 +27,48 @@ class ProjectService {
     return snapshot.docs.map((like) => like.data());
   };
 
+  deleteProject = async (id) => {
+    await this.db
+      .collection('projects')
+      .doc(id)
+      .collection('owners')
+      .get()
+      .then((subcoll) => {
+        if (subcoll.docs.length > 0) {
+          subcoll.forEach((doc) => {
+            doc.ref.delete();
+          });
+        }
+      });
+    await this.db
+      .collection('projects')
+      .doc(id)
+      .collection('likes')
+      .get()
+      .then((subcoll) => {
+        if (subcoll.docs.length > 0) {
+          subcoll.forEach((doc) => {
+            doc.ref.delete();
+          });
+        }
+      });
+    await this.db
+      .collection('projects')
+      .doc(id)
+      .collection('comments')
+      .get()
+      .then((subcoll) => {
+        if (subcoll.docs.length > 0) {
+          subcoll.forEach((doc) => {
+            doc.ref.delete();
+          });
+        }
+      });
+
+    await this.db.collection('projects').doc(id).delete();
+    return;
+  };
+
   addLike = async (projectId, userId) => {
     this.db.collection('projects').doc(projectId).collection('likes').doc(userId).set({ userId: userId });
   };

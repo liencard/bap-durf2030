@@ -158,6 +158,10 @@ class Project {
     );
   }
 
+  deleteProject() {
+    this.store.deleteProject(this.id);
+  }
+
   createDurver(durver) {
     this.store.createDurver(durver, this.id);
     this.durvers.push(durver);

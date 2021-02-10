@@ -54,7 +54,8 @@ const Header = observer(() => {
       }
     };
 
-    if (window.location.pathname === '/') {
+    if (router.pathname === '/') {
+      headerBanner.current.classList.add(styles.header__dark);
       window.addEventListener('scroll', handleScroll);
     }
   }, [headerBanner]);

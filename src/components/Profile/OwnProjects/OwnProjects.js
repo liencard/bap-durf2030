@@ -54,13 +54,7 @@ const OwnProjects = observer(({ projects }) => {
                         <img className={styles.icon} src="/icons/money-yellow.svg" alt="icon" width="18" height="18" />
                       )}
                       {durver.materialsOffered && (
-                        <img
-                          className={styles.icon}
-                          src="/icons/mmmaterial-red.svg"
-                          alt="icon"
-                          width="15"
-                          height="15"
-                        />
+                        <img className={styles.icon} src="/icons/material-red.svg" alt="icon" width="15" height="15" />
                       )}
                       {durver.servicesOffered && (
                         <img className={styles.icon} src="/icons/service-green.svg" alt="icon" width="18" height="18" />

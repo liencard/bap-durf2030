@@ -24,10 +24,15 @@ const HomeSpotlight = () => {
                 </p>
               </div>
               <div className={styles.item__person}>
-                <img src="/pfp-temp.jpg" width="50" height="50" alt="Profiel foto van projectbeheerder" />
+                <img
+                  src="/placeholder/group-howest.jpg"
+                  width="50"
+                  height="50"
+                  alt="Profiel foto van projectbeheerder"
+                />
                 <div>
-                  <p>John Doe</p>
-                  <p>Organisator</p>
+                  <p>Howest Team</p>
+                  <p>Organisators Vraagstraat</p>
                 </div>
               </div>
             </>
@@ -46,10 +51,15 @@ const HomeSpotlight = () => {
                 </p>
               </div>
               <div className={styles.item__person}>
-                <img src="/pfp-temp.jpg" width="50" height="50" alt="Profiel foto van projectbeheerder" />
+                <img
+                  src="/placeholder/group-jan-en-marie.jpg"
+                  width="50"
+                  height="50"
+                  alt="Profiel foto van projectbeheerder"
+                />
                 <div>
-                  <p>Jane Doe</p>
-                  <p>Organisator</p>
+                  <p>Jan en Marie</p>
+                  <p>Organisator en deelnemer</p>
                 </div>
               </div>
             </>
@@ -68,10 +78,15 @@ const HomeSpotlight = () => {
                 </p>
               </div>
               <div className={styles.item__person}>
-                <img src="/pfp-temp.jpg" width="50" height="50" alt="Profiel foto van projectbeheerder" />
+                <img
+                  src="/placeholder/individual-adam.jpg"
+                  width="50"
+                  height="50"
+                  alt="Profiel foto van projectbeheerder"
+                />
                 <div>
-                  <p>Lorem Ipsum</p>
-                  <p>Lorum ipsum</p>
+                  <p>Adam</p>
+                  <p>Organisator & kunstenaar</p>
                 </div>
               </div>
             </>
