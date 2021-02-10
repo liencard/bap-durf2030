@@ -22,11 +22,11 @@ const ProjectManagement = observer(() => {
   // LOPEND
   projectStore.projects.map((project) => {
     if (project.state != 0 && project.state != 4) {
-      const timestamp = project.getReadableDate(project.timestamp);
+      //const timestamp = project.getReadableDate(project.timestamp);
       lopendList.push({
         id: id,
         projectName: [project.title, project.id],
-        creationDate: timestamp,
+        creationDate: 'll',
         projectContact: project.contact,
       });
       id++;
@@ -36,11 +36,11 @@ const ProjectManagement = observer(() => {
   // AFGEROND
   projectStore.projects.map((project) => {
     if (project.state === 4) {
-      const timestamp = project.getReadableDate(project.timestamp);
+      //const timestamp = project.getReadableDate(project.timestamp);
       doneList.push({
         id: id,
         projectName: [project.title, project.id],
-        creationDate: timestamp,
+        creationDate: 'rrr',
         projectContact: project.contact,
       });
       id++;
@@ -50,11 +50,11 @@ const ProjectManagement = observer(() => {
   // NIEUW
   projectStore.projects.map((project) => {
     if (project.state === 0) {
-      const timestamp = project.getReadableDate(project.timestamp);
+      //const timestamp = project.getReadableDate(project.timestamp);
       newList.push({
         id: id,
         projectName: [project.title, project.id],
-        creationDate: timestamp,
+        creationDate: 'ff',
         projectContact: project.contact,
       });
       id++;
