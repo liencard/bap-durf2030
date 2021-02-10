@@ -4,10 +4,79 @@ $border-radius: 0.5rem;
 .header {
   background-color: $blue-dark;
   height: 95vh;
+  max-height: 100rem;
   color: white;
-  background-image: url('/hero.png');
-  background-repeat: no-repeat;
-  background-position: center 10vh;
+
+  display: flex;
+  position: relative;
+
+  &::before {
+    position: absolute;
+    content: '';
+    background-image: url('/header-left.png');
+    height: 100%;
+    width: 50vw;
+    background-repeat: no-repeat;
+    top: 0;
+    left: calc(((100vw - 90rem) / 2) / 5);
+    background-position: center left;
+
+    @media (max-width: 2100px) {
+      left: 5rem;
+    }
+
+    @media (max-width: 1850px) {
+      width: 65rem;
+      left: 0;
+      background-size: 100%;
+    }
+
+    @media (max-width: 1600px) {
+      left: -10rem;
+    }
+
+    @media (max-width: 1350px) {
+      left: -20rem;
+    }
+
+    @media (max-width: 1080px) {
+      display: none;
+    }
+  }
+
+  &::after {
+    position: absolute;
+    content: '';
+    background-image: url('/header-right.png');
+    height: 100%;
+    width: 50vw;
+    background-repeat: no-repeat;
+    top: 0;
+    right: calc(((100vw - 90rem) / 2) / 5);
+    background-position: center right;
+
+    @media (max-width: 2100px) {
+      right: 5rem;
+    }
+
+    @media (max-width: 1850px) {
+      width: 80rem;
+      right: 0;
+      background-size: 100%;
+    }
+
+    @media (max-width: 1600px) {
+      right: -10rem;
+    }
+
+    @media (max-width: 1350px) {
+      right: -20rem;
+    }
+
+    @media (max-width: 1080px) {
+      display: none;
+    }
+  }
 }
 
 .text {
