@@ -22,8 +22,11 @@ const ProjectRequirementsFunding = ({ project, progress, funding }) => {
             </div>
             <p>{project.fundingDescription}</p>
             <div className={styles.footer}>
-              <p></p>
-              <Button text={'Doneren'} />
+              {project.state > 1 ? (
+                <Button text="Doneren" />
+              ) : (
+                <p className={styles.info}>Het is nog niet mogelijk om geld te doneren</p>
+              )}
             </div>
           </div>
         </Container>
