@@ -36,6 +36,11 @@ const Project = observer(({ projectJSON, usersJSON }) => {
 
   useEffect(() => {
     const data = convertData.fromJSON(projectJSON, projectStore);
+    // const oldData = projectStore.projects.find((project) => project.id === data.id);
+    // if (oldData) {
+    //   const indexOldData = projectStore.projects.indexOf(oldData);
+    //   indexOldData > -1 ? projectStore.removeProject(indexOldData) : false;
+    // }
     data.getLikes();
     data.getRequirementsList();
     data.getRequirementsInfo();
@@ -72,7 +77,7 @@ const Project = observer(({ projectJSON, usersJSON }) => {
       <ProjectHeader project={project} />
       <ProjectContent project={project} users={users} />
       <ProjectFooter project={project} />
-      <ProjectComments project={project} />
+      <ProjectComments project={project} comments={project.comments} />
       <Footer />
     </>
   );

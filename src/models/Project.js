@@ -104,6 +104,7 @@ class Project {
 
       comments: observable,
       linkComment: action,
+      getComments: action,
 
       impact: observable,
       date: observable,
@@ -296,7 +297,9 @@ class Project {
 
   linkComment(comment) {
     //  this.comments.push(comment);
+    console.log('comment gevonden');
     !this.comments.includes(comment) && this.comments.push(comment);
+    console.log(this.comments.length);
   }
 
   updateProject(newValues) {
