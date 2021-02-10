@@ -14,16 +14,16 @@
     position: absolute;
     content: '';
     height: 100%;
-    width: 100rem;
+    width: 50vw;
 
-    right: 0;
+    left: 45vw;
     top: 15rem;
     z-index: 1;
 
     background-image: url('/milestone.png');
-    background-size: 115%;
+    background-size: 100%;
     background-repeat: no-repeat;
-    // background-position: top 0 left;
+    // background-position: left top;
   }
 
   .content {
