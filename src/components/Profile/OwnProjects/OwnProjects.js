@@ -45,36 +45,46 @@ const OwnProjects = observer(({ projects }) => {
             <OwnProjectCard project={projects[step]} />
             <section className={styles.activities}>
               <h3 className={styles.subtitle}>Recente activeiten</h3>
-              {projects[step].durvers.slice(0, 3).map((durver, i) => (
-                <article key={i} className={styles.activity}>
-                  <span className={styles.name}>
-                    <p>{durver.user.name}</p>
-                    {durver.fundingOffered && (
-                      <img className={styles.icon} src="/icons/money-yellow.svg" alt="icon" width="18" height="18" />
-                    )}
-                    {durver.materialsOffered && (
-                      <img className={styles.icon} src="/icons/mmmaterial-red.svg" alt="icon" width="15" height="15" />
-                    )}
-                    {durver.servicesOffered && (
-                      <img className={styles.icon} src="/icons/service-green.svg" alt="icon" width="18" height="18" />
-                    )}
-                  </span>
-                  <p className={styles.offer}>
-                    {durver.fundingOffered && (
-                      <span>
-                        {durver.fundingAmount} EUR
-                        {durver.offers.length != 0 && ', '}
-                      </span>
-                    )}
-                    {durver.offers.map((offer, i) => (
-                      <span>
-                        {offer.name}
-                        {durver.offers.length !== i && ', '}
-                      </span>
-                    ))}
-                  </p>
-                </article>
-              ))}
+              {projects[step].durvers.length > 0 ? (
+                projects[step].durvers.slice(0, 3).map((durver, i) => (
+                  <article key={i} className={styles.activity}>
+                    <span className={styles.name}>
+                      <p>{durver.user.name}</p>
+                      {durver.fundingOffered && (
+                        <img className={styles.icon} src="/icons/money-yellow.svg" alt="icon" width="18" height="18" />
+                      )}
+                      {durver.materialsOffered && (
+                        <img
+                          className={styles.icon}
+                          src="/icons/mmmaterial-red.svg"
+                          alt="icon"
+                          width="15"
+                          height="15"
+                        />
+                      )}
+                      {durver.servicesOffered && (
+                        <img className={styles.icon} src="/icons/service-green.svg" alt="icon" width="18" height="18" />
+                      )}
+                    </span>
+                    <p className={styles.offer}>
+                      {durver.fundingOffered && (
+                        <span>
+                          {durver.fundingAmount} EUR
+                          {durver.offers.length != 0 && ', '}
+                        </span>
+                      )}
+                      {durver.offers.map((offer, i) => (
+                        <span>
+                          {offer.name}
+                          {durver.offers.length !== i && ', '}
+                        </span>
+                      ))}
+                    </p>
+                  </article>
+                ))
+              ) : (
+                <p>Geen activiteiten.</p>
+              )}
             </section>
             <div className={styles.buttons}>
               <Button href={ROUTES.detail.to + projects[step].id} text={'Bekijk project'} />

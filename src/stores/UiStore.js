@@ -90,9 +90,9 @@ class UiStore {
       projectArr.forEach(async (projectId) => {
         const json = await this.rootStore.projectStore.projectService.getById(projectId);
         const project = await this.rootStore.projectStore.updateProjectFromServer(json);
-        // project.getLikes();
-        // project.getDurvers();
-        // project.getRequirementsInfo();
+        project.getLikes();
+        project.getDurvers();
+        project.getRequirementsInfo();
         this.addProject(project);
       });
     }

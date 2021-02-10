@@ -23,11 +23,11 @@ $border-radius: 0.5rem;
 
   .subtitle {
     font-weight: 600;
-    padding-bottom: 1.5rem;
     margin-top: 2rem;
   }
 
   .activity {
+    margin-top: 1.5rem;
     .name {
       @include text-detail;
       font-weight: 600;
