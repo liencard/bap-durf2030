@@ -15,6 +15,7 @@ const Home = ({ projectsJSON }) => {
     const projectsArr = projectsJSON.map((projectJSON) => {
       const project = convertData.fromJSON(projectJSON, projectStore);
       project.getLikes();
+      project.getRequirementsInfo();
       project.getDurvers();
       return project;
     });
