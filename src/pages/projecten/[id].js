@@ -32,7 +32,7 @@ const Project = observer(({ projectJSON, usersJSON }) => {
       }
     };
     loadOwner();
-  }, [uiStore.currentUser]);
+  }, [uiStore.currentUser, project]);
 
   useEffect(() => {
     const data = convertData.fromJSON(projectJSON, projectStore);
@@ -73,8 +73,7 @@ const Project = observer(({ projectJSON, usersJSON }) => {
   return (
     <>
       <Header />
-      {projectOwner && <ProjectEditBanner project={project} />}
-      <ProjectHeader project={project} />
+      <ProjectHeader projectOwner={projectOwner} project={project} />
       <ProjectContent project={project} users={users} />
       <ProjectFooter project={project} />
       <ProjectComments project={project} comments={project.comments} />

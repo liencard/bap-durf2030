@@ -2,17 +2,27 @@
 $points-distance: 3rem;
 $point-size: 1rem;
 
+.header {
+  padding-top: 15rem;
+}
 .back__btn {
   grid-column: span 12;
+  font-weight: 600;
+  margin-bottom: -1.5rem;
   cursor: pointer;
 
   a {
     text-decoration: none;
     font-size: 1.4rem;
     margin-left: 1rem;
+    transition: 0.2s;
 
     &::before {
       content: '';
+    }
+
+    &:hover {
+      color: $green;
     }
   }
 }
