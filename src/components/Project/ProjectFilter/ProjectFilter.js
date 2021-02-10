@@ -7,7 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Input from '@material-ui/core/Input';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -17,7 +17,6 @@ import { THEMES, CATEGORIES, CITIES } from '../../../consts/index';
 // Zie https://codesandbox.io/s/cwvg4?file=/demo.js:1577-1656
 
 const ProjectFilter = ({ tags, setTags, theme, setTheme, cat, setCat }) => {
-  //const [tags, setTags] = useState([]);
   const [showTagOptions, setShowTagOptions] = useState(false);
 
   const handleChange = (event) => {
@@ -32,20 +31,18 @@ const ProjectFilter = ({ tags, setTags, theme, setTheme, cat, setCat }) => {
     setCat(event.target.value);
   };
 
-  console.log(cat);
-
-  //console.log(tags);
+  useEffect(() => {
+    if (!showTagOptions) {
+      setTheme('none');
+      setCat('none');
+    }
+  }, [showTagOptions]);
 
   return (
     <>
       <div className={styles.filter}>
         <div className={styles.search}>
-          <TextField
-            fullWidth
-            id="outlined-basic"
-            label="Zoeken"
-            variant="outlined"
-          />
+          <TextField fullWidth id="outlined-basic" label="Zoeken" variant="outlined" />
         </div>
         <div>
           <p className={styles.label}>Kaartweergave</p>
@@ -58,10 +55,7 @@ const ProjectFilter = ({ tags, setTags, theme, setTheme, cat, setCat }) => {
             </Select>
           </FormControl>
 
-          <button
-            onClick={() => setShowTagOptions(!showTagOptions)}
-            className={styles.button}
-          >
+          <button onClick={() => setShowTagOptions(!showTagOptions)} className={styles.button}>
             Filter
           </button>
 
@@ -95,30 +89,35 @@ const ProjectFilter = ({ tags, setTags, theme, setTheme, cat, setCat }) => {
         </div>
       </div>
       {showTagOptions && (
-        <div className={styles.tags}>
-          <FormControl fullWidth variant="outlined">
-            <Select onChange={handleChangeTheme} defaultValue="klimaat">
-              <MenuItem value="-- Geen thema --">-- Geen thema --</MenuItem>
-              {THEMES.map((theme) => (
-                <MenuItem key={theme} value={theme}>
-                  {theme}
+        <>
+          <div className={styles.tags}>
+            <FormControl fullWidth variant="outlined">
+              <Select value={theme} onChange={handleChangeTheme}>
+                <MenuItem value="none">
+                  <em className={styles.default}>Geen thema</em>
                 </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl fullWidth variant="outlined">
-            <Select onChange={handleChangeCat} defaultValue="kinderen">
-              <MenuItem value="-- Geen categorie --">
-                -- Geen categorie --
-              </MenuItem>
-              {CATEGORIES.map((category) => (
-                <MenuItem key={category} value={category}>
-                  {category}
+                {THEMES.map((theme) => (
+                  <MenuItem key={theme} value={theme}>
+                    {theme}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
+            <FormControl fullWidth variant="outlined">
+              <Select value={cat} onChange={handleChangeCat}>
+                <MenuItem value="none">
+                  <em className={styles.default}>Geen categorie</em>
                 </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          {/* <FormControl fullWidth variant="outlined">
+                {CATEGORIES.map((category) => (
+                  <MenuItem key={category} value={category}>
+                    {category}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
+            {/* <FormControl fullWidth variant="outlined">
             <Select defaultValue="Nieuwste">
               {CITIES.map((category) => (
                 <MenuItem key={category} value={category}>
@@ -127,7 +126,16 @@ const ProjectFilter = ({ tags, setTags, theme, setTheme, cat, setCat }) => {
               ))}
             </Select>
           </FormControl> */}
-        </div>
+            <button
+              onClick={() => {
+                setCat('none');
+                setTheme('none');
+              }}
+            >
+              Verwijder tags
+            </button>
+          </div>
+        </>
       )}
     </>
   );
