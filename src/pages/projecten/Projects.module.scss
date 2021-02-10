@@ -13,15 +13,15 @@
   &::after {
     position: absolute;
     content: '';
-    height: 100%;
-    width: 50vw;
+    height: 71rem;
+    width: 52vw;
 
-    left: 50vw;
-    top: 15rem;
+    left: 48vw;
+    top: 10rem;
     z-index: 1;
 
     background-image: url('/milestone.png');
-    background-size: 115rem;
+    background-size: 120rem;
     background-repeat: no-repeat;
   }
 
