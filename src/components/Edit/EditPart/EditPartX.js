@@ -6,7 +6,6 @@ import { Formiz, useForm } from '@formiz/core';
 const EditPart = ({ children, title, handleSaveProject, alwaysEnabled }) => {
   const projectForm = useForm();
   const [allowEdit, setAllowEdit] = useState(false);
-  const [disable, setDisable] = useState(true);
 
   useEffect(() => {
     if (alwaysEnabled) {
@@ -14,19 +13,8 @@ const EditPart = ({ children, title, handleSaveProject, alwaysEnabled }) => {
     }
   }, []);
 
-  const toggleDisable = (bool) => {
-    if (allowEdit) {
-      setDisable(bool);
-    }
-  };
-
-  const submitForm = () => {
-    toggleDisable(true);
-    handleSaveProject;
-  };
-
   return (
-    <Formiz connect={projectForm} onValidSubmit={submitForm} onChange={(values) => toggleDisable(false)}>
+    <Formiz connect={projectForm} onValidSubmit={handleSaveProject}>
       <form noValidate onSubmit={projectForm.submit}>
         <section className={styles.section}>
           <div className={styles.header}>
@@ -46,9 +34,7 @@ const EditPart = ({ children, title, handleSaveProject, alwaysEnabled }) => {
                   variant="secondary"
                   text={allowEdit ? 'Annuleer' : 'Bewerken'}
                 />
-                {allowEdit && (
-                  <Button type="submit" className={styles.save__btn} text="Bewerking opslaan" disabled={disable} />
-                )}
+                {allowEdit && <Button type="submit" className={styles.save__btn} text="Bewerking opslaan" />}
               </div>
             )}
           </div>
