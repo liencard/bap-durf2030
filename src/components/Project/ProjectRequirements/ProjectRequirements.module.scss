@@ -50,8 +50,12 @@
 
     .footer {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       margin-top: 4rem;
+
+      .info {
+        @include text-detail;
+      }
     }
   }
 }

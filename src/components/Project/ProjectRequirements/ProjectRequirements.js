@@ -1,10 +1,6 @@
 import styles from './ProjectRequirements.module.scss';
 import { useState, useEffect } from 'react';
-import {
-  ProjectRequirementsServices,
-  ProjectRequirementsMaterials,
-  ProjectRequirementsFunding,
-} from '../../Project';
+import { ProjectRequirementsServices, ProjectRequirementsMaterials, ProjectRequirementsFunding } from '../../Project';
 
 const ProjectRequirements = ({ project }) => {
   const [servicesCount, setServicesCount] = useState(0);
@@ -44,32 +40,25 @@ const ProjectRequirements = ({ project }) => {
     <>
       <div className={styles.requirements}>
         {/* CROWDFUNDING */}
-        {project.fundingRequired ? (
+        {project.fundingRequired && (
           <ProjectRequirementsFunding
             project={project}
             funding={fundingCount}
             progress={(fundingCount / project.fundingAmount) * 100}
           />
-        ) : (
-          ''
         )}
+
         {/* VRIJWILLIGERS */}
-        {project.services.length != 0 ? (
-          <ProjectRequirementsServices
-            project={project}
-            progress={(servicesCount / project.services.length) * 100}
-          />
-        ) : (
-          ''
+        {project.servicesRequired && (
+          <ProjectRequirementsServices project={project} progress={(servicesCount / project.services.length) * 100} />
         )}
+
         {/* MATERIAAL */}
-        {project.materials.length != 0 ? (
+        {project.materialsRequired && (
           <ProjectRequirementsMaterials
             project={project}
             progress={(materialsCount / project.materials.length) * 100}
           />
-        ) : (
-          ''
         )}
       </div>
     </>

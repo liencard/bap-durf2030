@@ -13,17 +13,16 @@
   &::after {
     position: absolute;
     content: '';
-    height: 100%;
-    width: 100rem;
+    height: 71rem;
+    width: 52vw;
 
-    right: 0;
-    top: 15rem;
+    left: 48vw;
+    top: 10rem;
     z-index: 1;
 
     background-image: url('/milestone.png');
-    background-size: 115%;
+    background-size: 120rem;
     background-repeat: no-repeat;
-    // background-position: top 0 left;
   }
 
   .content {

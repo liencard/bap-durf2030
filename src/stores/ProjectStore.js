@@ -21,11 +21,17 @@ class ProjectStore {
       projects: observable,
       updateProject: action,
       loadProjectLikesById: action,
+      removeProject: action,
+      addProject: action,
     });
   }
 
   addProject = (project) => {
     this.projects.push(project);
+  };
+
+  removeProject = (index) => {
+    this.projects.splice(index, 1);
   };
 
   loadProject = async (id) => {

@@ -6,7 +6,7 @@ import styles from './ProjectComments.module.scss';
 import ProjectComment from './ProjectComment';
 import Comment from '../../../models/Comment';
 
-const ProjectComments = observer(({ project }) => {
+const ProjectComments = observer(({ project, comments }) => {
   const { uiStore, projectStore } = useStores();
   const [content, setContent] = useState('');
 
@@ -22,6 +22,10 @@ const ProjectComments = observer(({ project }) => {
       setContent('');
     }
   };
+
+  useEffect(() => {
+    console.log(project.comments.length);
+  }, [project.comments]);
 
   return (
     <Container>
