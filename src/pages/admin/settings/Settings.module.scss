@@ -2,14 +2,14 @@
 $border-radius: 0.5rem;
 
 .admin {
-  display: grid;
-  grid-template-columns: 1fr 4fr;
   height: 100vh;
 }
 
 .content {
   padding: 5rem;
   padding-bottom: 4rem;
+  margin-left: 28rem;
+  width: calc(100% - 28rem);
 }
 
 .header {
@@ -23,6 +23,35 @@ $border-radius: 0.5rem;
     .title {
       @include title-two;
       margin-right: 2.5rem;
+      margin-bottom: 0.75rem;
+    }
+  }
+}
+
+.admins__list {
+  .subtitle {
+    @include title-three;
+    margin-bottom: 3rem;
+  }
+
+  .user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 0.1rem solid $grey-border;
+    padding: 1rem 2rem;
+    margin-bottom: 2rem;
+
+    .user__info {
+      display: flex;
+      align-items: center;
+
+      .image {
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        margin-right: 2rem;
+      }
     }
   }
 }

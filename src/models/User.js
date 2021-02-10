@@ -1,4 +1,5 @@
 import { v4 } from 'uuid';
+import { makeObservable, observable, action } from 'mobx';
 
 class User {
   constructor({
@@ -10,6 +11,7 @@ class User {
     admin,
     organisation,
     awards = [],
+    store,
   }) {
     this.id = id;
     this.name = name;
@@ -24,6 +26,21 @@ class User {
     this.awards = awards;
     this.organisation = organisation;
     this.comments = [];
+
+    if (store) {
+      this.store = store;
+      this.store.addUser(this);
+    }
+
+    makeObservable(this, {
+      name: observable,
+      avatar: observable,
+      email: observable,
+      password: observable,
+      admin: observable,
+      awards: observable,
+      organisation: observable,
+    });
   }
 
   linkComment(comment) {
