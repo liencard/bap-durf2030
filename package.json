@@ -28,6 +28,7 @@
     "react-masonry-css": "^1.0.14",
     "react-material-ui-carousel": "^2.1.2",
     "react-quill": "^2.0.0-beta1",
+    "react-tabs": "^3.2.0",
     "sass": "^1.32.4",
     "slate": "^0.59.0",
     "slate-react": "^0.59.0",
