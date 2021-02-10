@@ -162,6 +162,7 @@ class ProjectStore {
         impact: json.impact,
         date: json.date,
         timestamp: json.timestamp,
+        highlight: json.highlight,
         store: this.rootStore.projectStore,
       });
     }

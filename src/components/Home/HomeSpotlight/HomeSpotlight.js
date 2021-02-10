@@ -17,20 +17,14 @@ const HomeSpotlight = () => {
           img: '/spotlight/vraagstraat.png',
           change: (
             <>
-              <h3 className={styles.item__title}>
-                Zeg jij je buren vaak goeiendag?{' '}
-              </h3>
-              <p className={styles.item__description}>
-                Deze en nog veel andere vragen stelden wij twee weken lang aan
-                vijf Kortrijkse straten.
-              </p>
+              <div>
+                <h3 className={styles.item__title}>Zeg jij je buren vaak goeiendag? </h3>
+                <p className={styles.item__description}>
+                  Deze en nog veel andere vragen stelden wij twee weken lang aan vijf Kortrijkse straten.
+                </p>
+              </div>
               <div className={styles.item__person}>
-                <img
-                  src="/pfp-temp.jpg"
-                  width="66"
-                  height="66"
-                  alt="Profiel foto van projectbeheerder"
-                />
+                <img src="/pfp-temp.jpg" width="50" height="50" alt="Profiel foto van projectbeheerder" />
                 <div>
                   <p>John Doe</p>
                   <p>Organisator</p>
@@ -45,20 +39,16 @@ const HomeSpotlight = () => {
           img: '/spotlight/doortodoor.png',
           change: (
             <>
-              <h3 className={styles.item__title}>Door to door</h3>
-              <p className={styles.item__description}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras
-                rutrum maximus ante.
-              </p>
+              <div>
+                <h3 className={styles.item__title}>Door to door</h3>
+                <p className={styles.item__description}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras rutrum maximus ante.
+                </p>
+              </div>
               <div className={styles.item__person}>
-                <img
-                  src="/pfp-temp.jpg"
-                  width="66"
-                  height="66"
-                  alt="Profiel foto van projectbeheerder"
-                />
+                <img src="/pfp-temp.jpg" width="50" height="50" alt="Profiel foto van projectbeheerder" />
                 <div>
-                  <p>John Doe</p>
+                  <p>Jane Doe</p>
                   <p>Organisator</p>
                 </div>
               </div>
@@ -71,20 +61,16 @@ const HomeSpotlight = () => {
           img: '/spotlight/rope.png',
           change: (
             <>
-              <h3 className={styles.item__title}>The Rope</h3>
-              <p className={styles.item__description}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras
-                rutrum maximus ante.
-              </p>
+              <div>
+                <h3 className={styles.item__title}>The Rope</h3>
+                <p className={styles.item__description}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras rutrum maximus ante.
+                </p>
+              </div>
               <div className={styles.item__person}>
-                <img
-                  src="/pfp-temp.jpg"
-                  width="66"
-                  height="66"
-                  alt="Profiel foto van projectbeheerder"
-                />
+                <img src="/pfp-temp.jpg" width="50" height="50" alt="Profiel foto van projectbeheerder" />
                 <div>
-                  <p>Lien Cardoen</p>
+                  <p>Lorem Ipsum</p>
                   <p>Lorum ipsum</p>
                 </div>
               </div>
@@ -105,26 +91,18 @@ const HomeSpotlight = () => {
                 In de <span>spotlight</span>
               </h2>
               <p className={styles.description}>
-                Durvers vertellen hun verhaal over hoe hun ideeën werkelijkheid
-                worden.
+                Durvers vertellen hun verhaal over hoe hun ideeën werkelijkheid worden.
               </p>
               <div className={styles.pagination}>
-                {step > 0 ? (
+                {step > 0 && (
                   <button onClick={() => handleChangeStep(step - 1)}>
-                    <img
-                      src="/icons/arrow-dark.svg"
-                      width="6"
-                      height="10"
-                      alt="dark arrow icon left"
-                    />
+                    <img src="/icons/arrow-dark.svg" width="6" height="10" alt="dark arrow icon left" />
                   </button>
-                ) : (
-                  <p></p>
                 )}
                 <p>
                   <span>0{step + 1}</span> / 03
                 </p>
-                {step < 2 ? (
+                {step < 2 && (
                   <button onClick={() => handleChangeStep(step + 1)}>
                     <img
                       className={styles.arrow__flipped}
@@ -134,8 +112,6 @@ const HomeSpotlight = () => {
                       alt="dark arrow icon right"
                     />
                   </button>
-                ) : (
-                  <p></p>
                 )}
               </div>
             </div>
