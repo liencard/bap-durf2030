@@ -87,18 +87,18 @@ const ProjectHeader = observer(({ project, projectOwner }) => {
             </div>
           </div>
           <div className={styles.content}>
-               <ul className={styles.tags}>
-          {categories.map((tag) => (
-            <li key={tag} className={styles.tag}>
-              {tag}
-            </li>
-          ))}
-          {themes.map((tag) => (
-            <li key={tag} className={`${styles.tag} ${styles.theme}`}>
-              {tag}
-            </li>
-          ))}
-        </ul>
+            <ul className={styles.tags}>
+              {categories.map((tag) => (
+                <li key={tag} className={styles.tag}>
+                  {tag}
+                </li>
+              ))}
+              {themes.map((tag) => (
+                <li key={tag} className={`${styles.tag} ${styles.theme}`}>
+                  {tag}
+                </li>
+              ))}
+            </ul>
             <div className={styles.text}>
               <h1 className={styles.title}>{project.title}</h1>
               {project.isKnownPlace && (
@@ -145,21 +145,12 @@ const ProjectHeader = observer(({ project, projectOwner }) => {
               )}
             </div>
             <div className={styles.buttons}>
-              <ProjectHelp project={project} />
+              <ProjectHelp text={'Ik durf mee te helpen'} project={project} />
               <div className={styles.interact}>
                 <ProjectLikes project={project} />
                 {project.durvers.length != 0 && <ProjectHelpers project={project} />}
               </div>
             </div>
-          )}
-        </div>
-        <div className={styles.buttons}>
-          <ProjectHelp text={'Ik durf mee te helpen'} project={project} />
-          <div className={styles.interact}>
-            <ProjectLikes project={project} />
-            {project.durvers.length != 0 && (
-              <ProjectHelpers project={project} />
-            )}
           </div>
         </Container>
       </div>
