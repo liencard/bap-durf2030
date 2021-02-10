@@ -103,6 +103,7 @@ class Project {
       addLike: action,
       removeLike: action,
       setLiked: action,
+      createDurver: action,
 
       comments: observable,
       linkComment: action,

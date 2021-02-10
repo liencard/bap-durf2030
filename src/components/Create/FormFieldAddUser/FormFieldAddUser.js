@@ -86,7 +86,7 @@ const FormFieldAddUser = (props) => {
                 }}
                 className={styles.delete}
               >
-                <img src="./icons/close-green.svg" />
+                <img src="/icons/close-green.svg" />
               </button>
             )}
           </div>
