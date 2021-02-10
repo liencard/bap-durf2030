@@ -66,8 +66,13 @@
     margin-right: 2rem;
   }
 
+  .admin__notif {
+    width: 2.1rem;
+    height: 2.1rem;
+  }
+
   .admin__notif:hover path {
-    fill: $green;
+    stroke: $green;
   }
 
   .admin__icon:hover path {
@@ -82,7 +87,7 @@
 }
 
 .header__dark .header__right .admin__notif path {
-  fill: white;
+  stroke: white;
 }
 
 .header__dark .header__right .admin__icon path {
@@ -90,7 +95,7 @@
 }
 
 .header__dark .header__right .admin__notif:hover path {
-  fill: $green;
+  stroke: $green;
 }
 
 .header__dark .header__right .admin__icon:hover path {

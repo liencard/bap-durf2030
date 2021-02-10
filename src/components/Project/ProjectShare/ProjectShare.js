@@ -38,8 +38,8 @@ const ProjectShare = () => {
               Deel dit project
             </h2>
             <p id="transition-modal-description">
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium, totam rem aperiam.
+              Je kan dit project verder helpen door het project te delen en meer
+              hulp te sprokkelen.
             </p>
             <ul className={styles.options}>
               <a

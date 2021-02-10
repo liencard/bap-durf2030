@@ -31,10 +31,9 @@
 
 @mixin text-body {
   font-family: $font-body;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 300;
   line-height: 1.5;
-  color: red;
 }
 
 @mixin text-small {

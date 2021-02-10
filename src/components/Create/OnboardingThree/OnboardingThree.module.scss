@@ -3,21 +3,22 @@
 .subtitle {
   @include title-two;
   margin-bottom: 2rem;
+  font-size: 2rem;
 }
 
 .items {
-  margin-left: 6rem;
+  margin-left: 3rem;
 
   .item {
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+    display: flex;
     img {
-      width: 5rem;
+      width: rem;
       margin-right: 5rem;
     }
 
     p {
-      max-width: 25rem;
+      max-width: 35rem;
     }
-    display: flex;
   }
 }

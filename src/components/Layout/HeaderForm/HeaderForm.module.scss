@@ -1,8 +1,6 @@
 @import '../../../styles/styles.scss';
 
 .header {
-  display: flex;
-  justify-content: space-between;
   width: 100%;
   position: absolute;
   z-index: 20;
@@ -12,6 +10,7 @@
     left: 3vw;
     top: 3vh;
     z-index: 20;
+    position: fixed;
 
     &:hover {
       cursor: pointer;
@@ -24,9 +23,10 @@
     display: flex;
     color: $blue-dark;
     transition: 0.2s;
-    position: relative;
+    position: absolute;
     display: flex;
     margin-top: 1rem;
+    right: 3vw;
 
     &::before {
       position: absolute;

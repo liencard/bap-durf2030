@@ -1,7 +1,7 @@
 import styles from '../ProjectRequirements/ProjectRequirements.module.scss';
 import { Container } from '../../Layout';
 import { Button } from '../../UI';
-import { ProjectCircle } from '../';
+import { ProjectCircle, ProjectHelp } from '../';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 const ProjectRequirementsFunding = ({ project, progress, funding }) => {
@@ -23,9 +23,11 @@ const ProjectRequirementsFunding = ({ project, progress, funding }) => {
             <p>{project.fundingDescription}</p>
             <div className={styles.footer}>
               {project.state > 1 ? (
-                <Button text="Doneren" />
+                <ProjectHelp text={'Doneren'} project={project} />
               ) : (
-                <p className={styles.info}>Het is nog niet mogelijk om geld te doneren</p>
+                <p className={styles.info}>
+                  Het is nog niet mogelijk om geld te doneren
+                </p>
               )}
             </div>
           </div>

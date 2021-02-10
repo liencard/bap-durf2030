@@ -11,6 +11,7 @@ class User {
     admin,
     organisation,
     awards = [],
+    badges = [],
     store,
   }) {
     this.id = id;
@@ -24,6 +25,7 @@ class User {
     this.password = password;
     this.admin = admin;
     this.awards = awards;
+    this.badges = badges;
     this.organisation = organisation;
     this.comments = [];
 
@@ -39,6 +41,7 @@ class User {
       password: observable,
       admin: observable,
       awards: observable,
+      badges: observable,
       organisation: observable,
     });
   }
@@ -58,6 +61,7 @@ const convertDataUser = {
       admin: user.admin,
       organisation: user.organisation,
       awards: user.awards,
+      badges: user.badges,
     };
   },
 
@@ -70,6 +74,7 @@ const convertDataUser = {
       admin: user.admin,
       organisation: user.organisation,
       awards: user.awards,
+      badges: user.badges,
       store: store,
     });
   },
@@ -85,6 +90,7 @@ const userConverter = {
       admin: user.admin,
       organisation: user.organisation,
       awards: user.awards,
+      badges: user.badges,
     };
   },
   fromFirestore: function (snapshot, options) {
@@ -97,6 +103,7 @@ const userConverter = {
       admin: data.admin,
       organisation: data.organisation,
       awards: data.awards,
+      badges: data.badges,
     });
   },
 };

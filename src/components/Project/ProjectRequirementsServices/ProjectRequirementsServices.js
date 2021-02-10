@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useStores } from '../../../hooks/useStores';
 import { Container } from '../../Layout';
 import { Button } from '../../UI';
-import { ProjectCircle } from '../';
+import { ProjectCircle, ProjectHelp } from '../';
 
 const ProjectRequirementsServices = ({ project, progress }) => {
   const { projectStore } = useStores();
@@ -97,7 +97,7 @@ const ProjectRequirementsServices = ({ project, progress }) => {
             </div>
             <div className={styles.footer}>
               <p></p>
-              <Button text={'Hulp aanbieden'} />
+              <ProjectHelp text={'Hulp aanbieden'} project={project} />
             </div>
           </div>
         </Container>

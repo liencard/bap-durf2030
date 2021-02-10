@@ -41,6 +41,12 @@ $point-size: 1rem;
       margin-right: 0.7rem;
       margin-bottom: 0.7rem;
     }
+
+    .theme {
+      @include tag;
+      background-color: $green;
+      color: $green-extra-light;
+    }
   }
 
   .text {

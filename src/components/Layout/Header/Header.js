@@ -70,7 +70,10 @@ const Header = observer(() => {
             <Link href={ROUTES.projects}>
               <span
                 className={`${styles.menu__item} ${
-                  router.pathname === '/projecten' || router.pathname === '/projecten/[id]' ? styles.active : ''
+                  router.pathname === '/projecten' ||
+                  router.pathname === '/projecten/[id]'
+                    ? styles.active
+                    : ''
                 }`}
               >
                 Alle projecten
@@ -97,20 +100,26 @@ const Header = observer(() => {
           ) : (
             <>
               <svg
+                width="28"
+                height="30"
                 className={styles.admin__notif}
-                width="20"
-                height="23"
-                viewBox="0 0 20 23"
+                viewBox="0 0 28 30"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M18.4825 15.9408C17.1132 14.7834 16.3289 13.0962 16.3289 11.3072V8.78475C16.3289 5.601 13.9633 2.96837 10.9025 2.52748V1.55243C10.9025 1.05218 10.4956 0.649447 9.99955 0.649447C9.50355 0.645208 9.09657 1.04795 9.09657 1.54819V2.52324C6.03152 2.96837 3.67021 5.601 3.67021 8.78475V11.3072C3.67021 13.0962 2.88593 14.7877 1.51239 15.9492C1.16052 16.2502 0.957031 16.6869 0.957031 17.149C0.957031 18.0223 1.665 18.7302 2.53831 18.7302H17.4608C18.3341 18.7302 19.0421 18.0223 19.0421 17.149C19.0463 16.6869 18.8428 16.2502 18.4825 15.9408Z"
-                  fill="#0C1424"
+                  d="M11 4.5C11 3.70435 11.3161 2.94129 11.8787 2.37868C12.4413 1.81607 13.2044 1.5 14 1.5C14.7956 1.5 15.5587 1.81607 16.1213 2.37868C16.6839 2.94129 17 3.70435 17 4.5C18.7226 5.31454 20.1911 6.58249 21.2481 8.16795C22.305 9.75341 22.9107 11.5966 23 13.5V18C23.1129 18.9326 23.4432 19.8256 23.9642 20.6072C24.4853 21.3888 25.1826 22.0371 26 22.5H2C2.81741 22.0371 3.51471 21.3888 4.03578 20.6072C4.55685 19.8256 4.88712 18.9326 5 18V13.5C5.08934 11.5966 5.69495 9.75341 6.75192 8.16795C7.8089 6.58249 9.27739 5.31454 11 4.5"
+                  stroke="#0C1424"
+                  stroke-width="2.25"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
                 />
                 <path
-                  d="M9.99714 22.3506C11.6335 22.3506 13.0071 21.1848 13.3208 19.6375H6.67773C6.99145 21.1848 8.36075 22.3506 9.99714 22.3506Z"
-                  fill="#0C1424"
+                  d="M9.5 22.5V24C9.5 25.1935 9.97411 26.3381 10.818 27.182C11.6619 28.0259 12.8065 28.5 14 28.5C15.1935 28.5 16.3381 28.0259 17.182 27.182C18.0259 26.3381 18.5 25.1935 18.5 24V22.5"
+                  stroke="#0C1424"
+                  stroke-width="2.25"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
                 />
               </svg>
               {uiStore.currentUser.admin === true ? (
@@ -143,7 +152,11 @@ const Header = observer(() => {
                 ''
               )}
               <div>
-                <ButtonUI aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                <ButtonUI
+                  aria-controls="simple-menu"
+                  aria-haspopup="true"
+                  onClick={handleClick}
+                >
                   <img
                     className={styles.menu__pfp}
                     src={uiStore.currentUser.avatar}
