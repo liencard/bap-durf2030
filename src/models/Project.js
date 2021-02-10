@@ -73,7 +73,7 @@ class Project {
     this.comments = [];
     this.impact = impact;
     this.date = date;
-
+ 
     if (store) {
       this.store = store;
       this.store.addProject(this);

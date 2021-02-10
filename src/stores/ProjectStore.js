@@ -44,7 +44,10 @@ class ProjectStore {
     project.timestamp = getCurrenTimeStamp();
     project.state = 0;
     if (project.image.enabled) {
-      const imageURL = await this.createImageForProject(project.image, projectId);
+      const imageURL = await this.createImageForProject(
+        project.image,
+        projectId
+      );
       project.image.url = imageURL;
     }
     const projectId = await this.projectService.create(project);
@@ -60,10 +63,18 @@ class ProjectStore {
 
   createRequirementsForProject = async ({ requirements, info, projectId }) => {
     if (info.materialsRequired) {
-      this.requirementService.createItems(requirements.materials, projectId, 'material');
+      this.requirementService.createItems(
+        requirements.materials,
+        projectId,
+        'material'
+      );
     }
     if (info.servicesRequired) {
-      this.requirementService.createItems(requirements.services, projectId, 'service');
+      this.requirementService.createItems(
+        requirements.services,
+        projectId,
+        'service'
+      );
     }
     this.requirementService.createInfo(info, projectId);
   };
@@ -114,7 +125,11 @@ class ProjectStore {
   };
 
   createImageForProject = (image, projectId) => {
-    return this.projectService.uploadImage(image.file, image.file.name, projectId);
+    return this.projectService.uploadImage(
+      image.file,
+      image.file.name,
+      projectId
+    );
   };
 
   getProjectById = (id) => this.projects.find((project) => project.id === id);

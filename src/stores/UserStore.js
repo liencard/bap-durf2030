@@ -22,6 +22,10 @@ class UserStore {
     return await this.userService.create(user);
   };
 
+  updateAdmin = (adminState, user) => {
+    this.userService.updateAdmin(adminState, user);
+  };
+
   validateUser = (user) => {
     this.loadAllUsers();
     let checkUser = this.users.find(
@@ -38,14 +42,6 @@ class UserStore {
     jsonUsers.forEach((json) => this.updateUserFromServer(json));
   };
 
-  loadAdmins = async () => {
-    const jsonUsers = await this.userService.getAllUsers();
-    this.updateUserFromServer(jsonUsers);
-    return this.findAdmins(jsonUsers);
-  };
-
-  findAdmins = (users) => this.users.find((user) => user.admin === false);
-
   updateUserFromServer(json) {
     let user = this.users.find((user) => user.email === json.email);
     if (!user) {
@@ -60,7 +56,7 @@ class UserStore {
         store: this.rootStore.userStore,
       });
     }
-    this.addUser(user);
+    return user;
   }
 }
 

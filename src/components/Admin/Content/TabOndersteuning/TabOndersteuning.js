@@ -26,7 +26,11 @@ const TabOndersteuning = observer(({ project }) => {
                 'Geen soorten vrijwilligers opgegeven'
               )}
               <h3 className={styles.subtitle}>Verantwoording</h3>
-              <p className={styles.frame}>{project.servicesDescription}</p>
+              {project.servicesDescription != '' ? (
+                <p className={styles.frame}>{project.servicesDescription}</p>
+              ) : (
+                'Er is geen verantwoording gegeven.'
+              )}
             </>
           ) : (
             'Dit project vraagt geen extra vrijwillers aan.'
@@ -51,7 +55,11 @@ const TabOndersteuning = observer(({ project }) => {
                 'Geen materialen opgegeven'
               )}
               <h3 className={styles.subtitle}>Verantwoording</h3>
-              <p className={styles.frame}>{project.materialsDescription}</p>
+              {project.materialsDescription != '' ? (
+                <p className={styles.frame}>{project.materialsDescription}</p>
+              ) : (
+                'Er is geen verantwoording gegeven.'
+              )}
             </>
           ) : (
             'Dit project vraagt geen extra materiaal aan.'
@@ -62,9 +70,17 @@ const TabOndersteuning = observer(({ project }) => {
           {project.fundingRequired ? (
             <>
               <h3 className={styles.subtitle}>Budget</h3>
-              <p className={styles.frame}>€{project.fundingAmount}</p>
+              {project.fundingAmount != '' ? (
+                <p className={styles.frame}>€{project.fundingAmount}</p>
+              ) : (
+                'Er is geen bedrag opgegeven'
+              )}
               <h3 className={styles.subtitle}>Verantwoording</h3>
-              <p className={styles.frame}>{project.fundingDescription}</p>
+              {project.fundingDescription != '' ? (
+                <p className={styles.frame}>{project.fundingDescription}</p>
+              ) : (
+                'Er is geen verantwoording gegeven.'
+              )}
             </>
           ) : (
             'Dit project heeft geen nood aan crowdfunding.'
