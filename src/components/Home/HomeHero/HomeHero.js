@@ -11,16 +11,14 @@ const HomeHero = () => {
         <Container>
           <div className={styles.text}>
             <div className={styles.text__wrapper}>
-              <p className={styles.subtitle}>
-                Voor een cultureel West-Vlaanderen
-              </p>
+              <p className={styles.subtitle}>Voor een cultureel West-Vlaanderen</p>
               <h1 className={styles.title}>
-                Ben jij een <span className={styles.green}>echte</span>{' '}
+                Ben jij een <span className={styles.green}>echte</span>
                 <span className={styles.red}>durver?</span>
               </h1>
               <p className={styles.description}>
-                Heb je een gek idee? Help ons 2.030 projecten te realiseren en
-                van Kortrijk een culturele wereldstad te maken.
+                Heb je een gek idee? Help ons 2.030 projecten te realiseren en van Kortrijk een culturele wereldstad te
+                maken.
               </p>
               <div className="btn__wrapper">
                 {!uiStore.currentUser ? (
