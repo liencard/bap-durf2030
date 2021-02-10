@@ -173,8 +173,12 @@ const Sidebar = () => {
                 <span>Events</span>
               </a>
             </Link>
-            <Link href={ROUTES.admin}>
-              <a className={styles.menu__item}>
+            <Link href={ROUTES.adminAwards}>
+              <a
+                className={`${styles.menu__item} ${
+                  router.pathname === '/admin/awards' ? styles.active : ''
+                }`}
+              >
                 <svg
                   width="21"
                   height="23"

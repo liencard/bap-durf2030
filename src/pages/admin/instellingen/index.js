@@ -1,7 +1,6 @@
 import { useStores } from '../../../hooks/useStores';
 import { useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Button } from '../../../components/UI';
 import styles from './Settings.module.scss';
 import Sidebar from '../../../components/Admin/Sidebar/Sidebar';
 import TextField from '@material-ui/core/TextField';
@@ -49,7 +48,6 @@ const Settings = observer(() => {
             <div className={styles.header__left}>
               <h1 className={styles.title}>Instellingen</h1>
             </div>
-            <Button text={'Voeg admin toe'} />
           </div>
 
           <section className={styles.admins__list}>
