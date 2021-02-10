@@ -6,79 +6,65 @@ $border-radius: 0.5rem;
   border: 0.1rem solid $blue-light;
   border-radius: $border-radius;
   text-decoration: none;
+  color: $blue-dark;
 
   .thumbnail {
     border-radius: $border-radius $border-radius 0 0;
     position: relative;
+    height: 22rem;
+    z-index: 0;
 
     .image {
+      border-radius: $border-radius $border-radius 0 0;
       height: 22rem;
       width: 100%;
       object-fit: cover;
     }
 
-    .icons {
+    .progress {
       position: absolute;
-      background: $red;
-      right: 1.5rem;
-      top: 1.5rem;
-      border-radius: $border-radius;
-      display: flex;
-      padding: 0.3rem 0.5rem;
-
-      img {
-        display: block;
-        padding: 0.3rem;
-        transform: scale(1.1);
-      }
+      //margin-top: -2rem;
+      bottom: 0;
+      z-index: 2;
+      width: 100%;
+      height: 0.4rem;
     }
   }
 
   .content {
     padding: 2rem;
+    display: grid;
+    grid-template-rows: 20rem 3rem;
+
+    .content__wrapper {
+      flex: 1;
+    }
 
     .title {
       @include title-small;
       margin-bottom: 0.5rem;
     }
 
-    .author__wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 2rem;
-
-      .author {
-        display: flex;
-        align-items: center;
-
-        .author__name {
-          font-size: 1.4rem;
-        }
-
-        .author__image {
-          @include pfp-small;
-          margin-right: 1rem;
-        }
-      }
-
-      .date {
-        @include text-detail;
-        font-size: 1.2rem;
-      }
+    .date {
+      @include text-detail;
+      font-size: 1.2rem;
     }
 
     .intro {
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
+      font-size: 1.4rem;
     }
 
     .tags {
       display: flex;
-      margin-bottom: 3.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.2rem;
+      text-transform: capitalize;
 
       .tag {
         @include tag;
         margin-right: 0.7rem;
+        margin-bottom: 0.7rem;
       }
     }
 
@@ -87,6 +73,7 @@ $border-radius: 0.5rem;
       font-size: 1.2rem;
       display: flex;
       justify-content: space-between;
+      align-self: flex-end;
     }
   }
 }

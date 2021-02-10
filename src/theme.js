@@ -22,7 +22,7 @@ const theme = createMuiTheme({
     action: {
       active: `#d8d8d8`, // rood
       hover: `#d8eded`, // geel
-      selected: `#ffed00`,
+      selected: `#d8eded`,
     },
     background: {
       default: '#fff',
@@ -48,10 +48,23 @@ const theme = createMuiTheme({
       textTransform: 'capitalize',
       fontSize: '1.6rem',
     },
-    body1: { lineHeight: 1.7 },
-    body2: { lineHeight: 1.7 },
+    body1: { lineHeight: 1.7, fontSize: '1.6rem' },
+    body2: { lineHeight: 1.7, fontSize: '1.6rem' },
   },
   overrides: {
+    // Tab elementen
+    MuiTab: {
+      root: {
+        padding: '0.6rem 0.4rem',
+        marginRight: '3rem',
+        '&:last-of-type': {
+          marginRight: '0',
+        },
+        '@media (min-width: 0px)': {
+          minWidth: 0,
+        },
+      },
+    },
     // FORM - Inputs & labels
     MuiOutlinedInput: {
       root: {
@@ -80,7 +93,6 @@ const theme = createMuiTheme({
         color: '#0c1424',
       },
     },
-
     // FORM - Switch
     MuiIconButton: {
       root: {
@@ -98,6 +110,62 @@ const theme = createMuiTheme({
         '&:focus': {
           backgroundColor: 'white',
         },
+      },
+    },
+    // FORM - Slider
+    MuiSlider: {
+      rail: {
+        height: '0.5rem',
+      },
+      track: {
+        height: '0.5rem',
+      },
+      thumb: {
+        height: '1.8rem',
+        width: '1.8rem',
+        marginTop: '-0.2rem',
+        marginLeft: '-0.9rem',
+      },
+      valueLabel: {
+        left: 'auto',
+        fontWeight: 500,
+        circle: {
+          width: '40px',
+        },
+      },
+      MuiTooltip: {
+        toolip: {
+          backgroundColor: 'red !important',
+        },
+      },
+    },
+
+    // FORM - Checkbox
+    MuiSvgIcon: {
+      root: {
+        width: '2rem',
+        height: '2rem',
+      },
+    },
+
+    // PROGRESS BAR
+    MuiLinearProgress: {
+      root: {
+        height: '.6rem',
+      },
+    },
+
+    // APPBAR
+    MuiAppBar: {
+      root: {
+        zIndex: 10,
+      },
+    },
+
+    MuiFormHelperText: {
+      root: {
+        marginTop: '-1.7rem',
+        marginLeft: 0,
       },
     },
   },

@@ -1,0 +1,7 @@
+@import '../../../styles/styles.scss';
+
+.label {
+  @include form__label;
+  font-size: 1.6rem;
+  padding-bottom: 1rem;
+}

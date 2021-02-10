@@ -1,0 +1,32 @@
+@import '../../../styles/styles.scss';
+$border-radius: 0.5rem;
+
+.card__wrapper {
+  text-decoration: none;
+  color: $blue-dark;
+
+  .card {
+    .text {
+      position: relative;
+      padding: 2rem;
+
+      .title {
+        @include title-three;
+      }
+    }
+
+    border: $border;
+    border-radius: $border-radius;
+    text-decoration: none;
+
+    display: grid;
+    grid-template-columns: 20rem 1fr;
+    margin-bottom: $grid-gap;
+
+    .image {
+      width: 20rem;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}

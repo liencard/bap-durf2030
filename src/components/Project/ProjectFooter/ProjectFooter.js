@@ -1,23 +1,30 @@
+import { observer } from 'mobx-react-lite';
 import styles from './ProjectFooter.module.scss';
+import { Container } from '../../Layout';
 import { Button } from '../../UI';
-import { ProjectCreatorImage } from '../';
+import { useStores } from '../../../hooks/useStores';
 
-const ProjectFooter = () => {
+const ProjectFooter = observer(({ project }) => {
+  const { uiStore } = useStores();
   return (
     <>
       <div className={styles.footer}>
-        <div className={styles.creator}>
-          <ProjectCreatorImage />
-          <div>
-            <h3>Organisator</h3>
-            <p>Naam Voornaam</p>
+        <Container className={styles.container}>
+          <div className={styles.contact}>
+            {!uiStore.currentUser ? (
+              <Button text="Mail contactpersoon" />
+            ) : (
+              <a href={`mailto:${project.contact}`}>
+                <Button text="Mail contactpersoon" />
+              </a>
+            )}
+            <p>Stuur een mail naar het contactpersoon van dit project</p>
           </div>
-        </div>
-        <Button text="Contacteer" />
-        <p className={styles.date}>17 dagen geleden gepost</p>
+          <p className={styles.date}>{project.timestamp}</p>
+        </Container>
       </div>
     </>
   );
-};
+});
 
 export default ProjectFooter;

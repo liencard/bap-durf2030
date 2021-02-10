@@ -1,0 +1,12 @@
+@import '../../../styles/styles.scss';
+
+.badge {
+  display: block;
+  background: $green-light;
+  color: $green;
+  padding: 0 1rem;
+  font-weight: 500;
+  margin-left: 0.5rem;
+  border-radius: $border-radius;
+  font-size: 1.4rem;
+}

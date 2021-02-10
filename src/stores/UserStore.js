@@ -8,8 +8,6 @@ class UserStore {
     this.users = [];
     this.userService = new UserService(this.rootStore.firebase);
 
-    this.loadAllUsers();
-
     makeObservable(this, {
       loadAllUsers: action,
       users: observable,
@@ -22,6 +20,17 @@ class UserStore {
 
   createUser = async (user) => {
     return await this.userService.create(user);
+  };
+
+  validateUser = (user) => {
+    this.loadAllUsers();
+    let checkUser = this.users.find(
+      (existingUser) => existingUser.email === user.email
+    );
+    if (!checkUser) {
+      console.log('user bestaat niet');
+    }
+    console.log(user);
   };
 
   loadAllUsers = async () => {
@@ -38,7 +47,6 @@ class UserStore {
   findAdmins = (users) => this.users.find((user) => user.admin === false);
 
   updateUserFromServer(json) {
-    console.log(json);
     let user = this.users.find((user) => user.email === json.email);
     if (!user) {
       user = new User({
@@ -47,11 +55,11 @@ class UserStore {
         email: json.email,
         avatar: json.avatar,
         admin: json.admin,
+        awards: json.awards,
+        organisation: json.organisation,
         store: this.rootStore.userStore,
       });
     }
-    console.log('user');
-    console.log(user);
     this.addUser(user);
   }
 }

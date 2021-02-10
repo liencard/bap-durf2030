@@ -1,0 +1,28 @@
+@import '../../../styles/styles.scss';
+
+.appbar {
+  @include appbar;
+}
+
+.appbar__wrapper {
+  margin: 8rem 0 8rem;
+  position: relative;
+
+  &::before {
+    position: absolute;
+    content: '';
+    height: 0.1rem;
+    width: 100vw;
+    background: $blue-light;
+    top: 0;
+  }
+
+  &::after {
+    position: absolute;
+    content: '';
+    height: 0.1rem;
+    width: 100vw;
+    background: $blue-light;
+    bottom: 0;
+  }
+}

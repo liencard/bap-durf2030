@@ -1,74 +1,97 @@
 import { useStores } from '../../../hooks/useStores';
 import { observer } from 'mobx-react-lite';
-import { Grid } from '../../../components/Layout';
 import styles from './ProjectManagement.module.scss';
 import { Button } from '../../../components/UI';
+import { ROUTES } from '../../../consts/index';
 import Sidebar from '../../../components/Admin/Sidebar/Sidebar';
 import { DataGrid } from '@material-ui/data-grid';
+import Link from 'next/link';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 const ProjectManagement = observer(() => {
   const { projectStore } = useStores();
   const projectAmount = projectStore.projects.length;
 
-  const getState = (state) => {
-    switch (state) {
-      case 0:
-        return 'In afwachting';
-      case 1:
-        return 'Lopend';
-      default:
-        return 'Onbekende status';
-    }
-  };
+  projectStore.loadAllProjects();
 
-  let projectList = [];
+  let lopendList = [];
+  let doneList = [];
+  let newList = [];
   let id = 1;
+
+  // LOPEND
   projectStore.projects.map((project) => {
-    console.log(project);
-    const projectState = getState(project.state);
-    projectList.push({
-      id: id,
-      projectName: project.title,
-      creationDate: '14 JAN',
-      projectStatus: projectState,
-      projectContact: project.contact,
-    });
-    id++;
+    if (project.state != 0 && project.state != 4) {
+      const timestamp = project.getReadableDate(project.timestamp);
+      lopendList.push({
+        id: id,
+        projectName: [project.title, project.id],
+        creationDate: timestamp,
+        projectContact: project.contact,
+      });
+      id++;
+    }
   });
 
-  console.log(projectList);
+  // AFGEROND
+  projectStore.projects.map((project) => {
+    if (project.state === 4) {
+      const timestamp = project.getReadableDate(project.timestamp);
+      doneList.push({
+        id: id,
+        projectName: [project.title, project.id],
+        creationDate: timestamp,
+        projectContact: project.contact,
+      });
+      id++;
+    }
+  });
 
-  const handleChangeState = async (data) => {
-    const project = await projectStore.getProjectById(data.id);
-    project.setState(1);
-    const result = await projectStore.updateState(project);
-  };
+  // NIEUW
+  projectStore.projects.map((project) => {
+    if (project.state === 0) {
+      const timestamp = project.getReadableDate(project.timestamp);
+      newList.push({
+        id: id,
+        projectName: [project.title, project.id],
+        creationDate: timestamp,
+        projectContact: project.contact,
+      });
+      id++;
+    }
+  });
 
   const columns = [
     { field: 'id', headerName: 'id', width: 50 },
-    { field: 'projectName', headerName: 'Project', width: 300 },
-    { field: 'creationDate', headerName: 'Indienmoment', width: 150 },
-    { field: 'projectStatus', headerName: 'Status', width: 150 },
+    {
+      field: 'projectName',
+      headerName: 'Project',
+      width: 450,
+      renderCell: (params) => (
+        <a>
+          <Link href={`${ROUTES.adminProject.to}${params.value[1]}`}>
+            <p>{params.value[0]}</p>
+          </Link>
+        </a>
+      ),
+    },
+    { field: 'creationDate', headerName: 'Indienmoment', width: 200 },
     {
       field: 'projectContact',
       headerName: 'Contacteer',
       width: 150,
       sortable: false,
       renderCell: (params) => (
-        <strong>
-          <Button>{params.value}</Button>
-        </strong>
+        <a href={`mailto:${params.value}`}>
+          <img
+            className={styles.icon}
+            src="/icons/email.svg"
+            alt="email icon"
+            width="25"
+            height="25"
+          />
+        </a>
       ),
-    },
-  ];
-
-  const rows = [
-    {
-      id: 1,
-      projectName: 'Garage ombouwen tot cinema',
-      creationDate: '14 JAN 18:30',
-      projectStatus: 'Lopend',
-      contact: 'contacteer',
     },
   ];
 
@@ -84,28 +107,41 @@ const ProjectManagement = observer(() => {
             </div>
             <Button text={'Filteren'} />
           </div>
-          <div className={styles.projects}>
-            <div className={styles.tabs}>
-              <p>Lopend</p>
-              <p>Afgerond</p>
-              <p>Nieuw</p>
-            </div>
-            <div className={styles.table}>
-              <DataGrid rows={projectList} columns={columns} pageSize={5} />
-            </div>
 
-            {/* <div>
-              {projectStore.projects.map((project) => (
-                <div key={project.id} className={styles.project}>
-                  <h2>{project.title}</h2>
-                  <p>{getState(project.state)}</p>
-                  <button onClick={() => handleChangeState(project)}>
-                    aanvaard project
-                  </button>
-                </div>
-              ))}
-            </div> */}
-          </div>
+          <Tabs
+            className={styles.container}
+            selectedTabClassName={styles.selected}
+            selectedTabPanelClassName={styles.table}
+          >
+            <TabList className={styles.tabs}>
+              <Tab className={styles.tab}>
+                <p>Lopend</p>
+                <p className={styles.number}>{lopendList.length}</p>
+              </Tab>
+              <Tab className={styles.tab}>
+                <p>Afgerond</p>
+                <p className={styles.number}>{doneList.length}</p>
+              </Tab>
+              <Tab className={styles.tab}>
+                <p>Nieuw</p>
+                <p className={styles.number}>{newList.length}</p>
+              </Tab>
+            </TabList>
+
+            <div>
+              <TabPanel>
+                <DataGrid rows={lopendList} columns={columns} pageSize={10} />
+              </TabPanel>
+
+              <TabPanel>
+                <DataGrid rows={doneList} columns={columns} pageSize={10} />
+              </TabPanel>
+
+              <TabPanel>
+                <DataGrid rows={newList} columns={columns} pageSize={10} />
+              </TabPanel>
+            </div>
+          </Tabs>
         </section>
       </div>
     </>

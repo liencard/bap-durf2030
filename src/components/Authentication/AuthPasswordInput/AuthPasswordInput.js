@@ -9,7 +9,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 
-const PasswordField = () => {
+const AuthPasswordInput = () => {
   const [values, setValues] = useState({
     amount: '',
     password: '',
@@ -56,4 +56,4 @@ const PasswordField = () => {
   );
 };
 
-export default PasswordField;
+export default AuthPasswordInput;

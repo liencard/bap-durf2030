@@ -1,0 +1,34 @@
+@import '../../../styles/styles.scss';
+
+.legende {
+  display: flex;
+  @include text-detail;
+  align-items: center;
+
+  p {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-left: 5rem;
+
+    &::before {
+      position: absolute;
+      content: '';
+      height: 1.5rem;
+      width: 1.5rem;
+      left: -2.5rem;
+    }
+  }
+
+  .delete {
+    &::before {
+      background: url('/icons/delete-red.svg');
+    }
+  }
+
+  .check {
+    &::before {
+      background: url('/icons/check-green.svg');
+    }
+  }
+}
