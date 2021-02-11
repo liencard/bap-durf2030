@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import styles from './EditState.module.scss';
 import { EditPart, EditLabel, EditField, EditDelete } from '..';
+import { ProjectTimeline } from '../../Project';
 import { Button } from '../../UI';
 import { useEffect, useState } from 'react';
 import LinearProgress from '@material-ui/core/LinearProgress';
@@ -112,15 +113,7 @@ const EditState = observer(({ project }) => {
         <div>
           <h2 className={styles.subtitle}>Huidige status</h2>
           <p>{content.info}</p>
-          <div className={styles.timeline}>
-            <LinearProgress variant="determinate" value={project.state * 33.33} />
-            <ul className={styles.points}>
-              <li>Project is opgezet</li>
-              <li>Crowdfunding is mogelijk</li>
-              <li>Klaar om te starten</li>
-              <li>&#127937;</li>
-            </ul>
-          </div>
+          <ProjectTimeline state={project.state} />
         </div>
         <div>
           <h2 className={styles.subtitle}>Status veranderen</h2>

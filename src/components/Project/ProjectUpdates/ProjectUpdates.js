@@ -11,6 +11,7 @@ const ProjectUpdates = ({ updates }) => {
               <p className={styles.date}>{update.timestamp}</p>
               <div className={styles.text}>
                 <ParsedRichText html={update.text} />
+                <p className={styles.author}>Geschreven door {update.user.name}</p>
               </div>
             </div>
           ))

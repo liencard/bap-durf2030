@@ -36,7 +36,6 @@ const ProjectHelp = observer(({ project, text }) => {
   };
 
   const handleSubmit = async (values) => {
-    console.log(values);
     const offers = [];
     if (values.materials) {
       values.materials.forEach((material) => {
@@ -101,18 +100,11 @@ const ProjectHelp = observer(({ project, text }) => {
                 </FormizStep>
 
                 <FormizStep name="step2" isEnabled={materialsRequired}>
-                  <ProjectHelpTwoMaterial
-                    name="materials"
-                    project={project}
-                    materials={project.materials}
-                  />
+                  <ProjectHelpTwoMaterial name="materials" project={project} materials={project.materials} />
                 </FormizStep>
 
                 <FormizStep name="step3" isEnabled={servicesRequired}>
-                  <ProjectHelpTwoService
-                    project={project}
-                    services={project.services}
-                  />
+                  <ProjectHelpTwoService project={project} services={project.services} />
                 </FormizStep>
 
                 <FormizStep name="step4" isEnabled={fundingRequired}>
@@ -125,20 +117,12 @@ const ProjectHelp = observer(({ project, text }) => {
 
                 <div className={styles.buttons}>
                   {!durverForm.isFirstStep && (
-                    <button
-                      className={styles.button}
-                      type="button"
-                      onClick={durverForm.prevStep}
-                    >
+                    <button className={styles.button} type="button" onClick={durverForm.prevStep}>
                       Vorige
                     </button>
                   )}
                   {durverForm.isLastStep ? (
-                    <button
-                      className={styles.button}
-                      type="submit"
-                      disabled={!durverForm.isValid}
-                    >
+                    <button className={styles.button} type="submit" disabled={!durverForm.isValid}>
                       Versturen
                     </button>
                   ) : (

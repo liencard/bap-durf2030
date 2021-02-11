@@ -33,12 +33,18 @@
 
     .date {
       @include text-detail;
+      margin-right: 2rem;
     }
 
     .text {
       border: $border;
       border-radius: $border-radius;
       padding: 3rem;
+
+      .author {
+        @include text-detail;
+        margin-top: 3rem;
+      }
     }
   }
 }

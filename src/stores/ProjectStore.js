@@ -76,13 +76,6 @@ class ProjectStore {
     this.projectService.createOwner(owner, projectId);
   };
 
-  createUpdate = (newUpdate, projectId) => {
-    const updates = {
-      updates: getArrayUnion(newUpdate),
-    };
-    this.projectService.updateProjectUpdates(updates, projectId);
-  };
-
   deleteUpdate = (deletedUpdate, projectId) => {
     const updates = { updates: removeFromArray(deletedUpdate) };
     this.projectService.updateProjectUpdates(updates, projectId);
@@ -113,9 +106,34 @@ class ProjectStore {
     this.requirementService.updateDetails(project);
   };
 
-  createDurver = (durver, projectId) => {
+  createDurver = (durver, projectId, owners) => {
     durver.timestamp = getCurrenTimeStamp();
     this.requirementService.createDurver(durver, projectId);
+
+    owners.forEach((owner) => {
+      if (owner.email) {
+        let offerTypes = [];
+        durver.materialsOffered && push.offerTypes('material');
+        durver.servicesOffered && push.offerTypes('service');
+        durver.fundingOffered && push.offerTypes('funding');
+
+        let notification = {
+          type: 'offer',
+          timestamp: getCurrenTimeStamp(),
+          info: {
+            project: { id: projectId, title: 'Title' },
+            user: { name: durver.user.name, avatar: durver.user.avatar },
+            offers: offerTypes,
+          },
+        };
+
+        this.rootStore.userStore.createNotificationForUser(notification, owner.email);
+      }
+      //   this.rootStore.userStore.createNotificationForUser;
+      // materialsOffered / fundingOffered / services Offered bool in Durver
+      // user zit er ook in
+      // owner bevat geen email!!!
+    });
   };
 
   createImageForProject = (image, projectId) => {

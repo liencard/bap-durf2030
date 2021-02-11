@@ -26,3 +26,5 @@ export { default as ProjectEditBanner } from './ProjectEditBanner/ProjectEditBan
 export { default as ProjectUpdates } from './ProjectUpdates/ProjectUpdates';
 export { default as ProjectFilter } from './ProjectFilter/ProjectFilter';
 export { default as RequirementFilter } from './RequirementFilter/RequirementFilter';
+export { default as ProjectTimeline } from './ProjectTimeline/ProjectTimeline';
+

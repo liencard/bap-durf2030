@@ -24,14 +24,7 @@ const ProjectHelpTwoService = ({ project, services }) => {
 
       <fieldset className={styles.services}>
         {items.map((item) => {
-          return (
-            <FormFieldCheckbox
-              key={item.id}
-              name={`items.${item.id}`}
-              option={item.name}
-              defaultValue={false}
-            />
-          );
+          return <FormFieldCheckbox key={item.id} name={`items.${item.id}`} option={item.name} defaultValue={false} />;
         })}
       </fieldset>
     </>
