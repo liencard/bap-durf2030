@@ -18,24 +18,47 @@ const Header = observer(() => {
   const { uiStore } = useStores();
   const router = useRouter();
 
+  const [anchorProfileMenuEl, setAnchorProfileMenuEl] = useState(null);
+  const [anchorNotifMenuEl, setAnchorNotifMenuEl] = useState(null);
+  const [unreadNotif, setUnreadNotif] = useState(false);
+
   const notifications = [
     {
-      text: 'Proficiat, je hebt een badge verdiend!',
-      img: '',
+      type: 'badge',
+      timestamp: '09:11',
+      read: false,
+      info: {
+        badge: 'liker',
+        image: '/badges-awards/l1.png',
+        level: 2,
+        tag: 'Dank je wel om actief andere projecten te steunen.',
+      },
     },
     {
-      text: 'John Doe heeft zich aangemeld als vrijwillger.',
+      type: 'service',
+      timestamp: '1 dag geleden',
+      read: true,
+      info: {
+        project: { id: 'projectId', title: 'Vraagstraat' },
+        user: { name: 'John Doe', avatar: '/pfp-temp.jpg' },
+        offer: 'hamer',
+      },
     },
     {
-      text: 'John Doe heeft zich aangemeld als vrijwillger.',
-    },
-    {
-      text: 'John Doe heeft zich aangemeld als vrijwillger.',
+      type: 'material',
+      timestamp: '2 dagen geleden',
+      read: true,
+      info: {
+        project: { id: 'projectId', title: 'Lang Touw' },
+        user: { name: 'John Doe', avatar: '/pfp-temp.jpg' },
+      },
     },
   ];
 
-  const [anchorProfileMenuEl, setAnchorProfileMenuEl] = useState(null);
-  const [anchorNotifMenuEl, setAnchorNotifMenuEl] = useState(null);
+  useEffect(() => {
+    const unreadMsgExits = notifications.find((notification) => notification.read === false);
+    setUnreadNotif(unreadMsgExits);
+  }, [notifications]);
 
   const handleClickProfileMenu = (event) => {
     setAnchorProfileMenuEl(event.currentTarget);
@@ -122,8 +145,8 @@ const Header = observer(() => {
             </Link>
           ) : (
             <>
-              <div>
-                <ButtonUI aria-controls="simple-menu" aria-haspopup="true" onClick={handleClickNotifMenu}>
+              <ButtonUI aria-controls="simple-menu" aria-haspopup="true" onClick={handleClickNotifMenu}>
+                <div className={`${styles.notif} ${unreadNotif && styles.unread}`}>
                   <svg
                     width="28"
                     height="30"
@@ -147,25 +170,28 @@ const Header = observer(() => {
                       stroke-linejoin="round"
                     />
                   </svg>
-                </ButtonUI>
-                <div className={styles.notifications__wrapper}>
-                  <Menu
-                    className={styles.notifications}
-                    id="simple-menu"
-                    anchorEl={anchorNotifMenuEl}
-                    keepMounted
-                    open={Boolean(anchorNotifMenuEl)}
-                    onClose={handleCloseNotifMenu}
-                  >
-                    <div>
-                      <p className={styles.title}>Meldingen</p>
-                      {notifications.map((notification) => (
-                        <Notification notification={notification} />
-                      ))}
-                    </div>
-                  </Menu>
                 </div>
+              </ButtonUI>
+              <div className={styles.notifications__wrapper}>
+                <Menu
+                  className={styles.notifications}
+                  id="simple-menu"
+                  anchorEl={anchorNotifMenuEl}
+                  keepMounted
+                  open={Boolean(anchorNotifMenuEl)}
+                  onClose={handleCloseNotifMenu}
+                >
+                  <div>
+                    <p className={styles.title}>Meldingen</p>
+                    {notifications.length > 0 ? (
+                      notifications.map((notification) => <Notification notification={notification} />)
+                    ) : (
+                      <p className={styles.empty}>Je hebt nog geen meldingen</p>
+                    )}
+                  </div>
+                </Menu>
               </div>
+
               {uiStore.currentUser.admin === true && (
                 <Link href="/admin">
                   <svg
