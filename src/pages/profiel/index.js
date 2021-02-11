@@ -5,7 +5,12 @@ import { Container } from '../../components/Layout';
 import { TabPanel, AppBar, TabSideElement } from '../../components/UI';
 import { Header, Footer } from '../../components/Layout';
 import styles from './Profile.module.scss';
-import { LikedProjects, OwnProjects, OwnAwards, BadgesAwards } from '../../components/Profile';
+import {
+  LikedProjects,
+  OwnProjects,
+  OwnAwards,
+  BadgesAwards,
+} from '../../components/Profile';
 import Tab from '@material-ui/core/Tab';
 
 const Profile = observer(() => {
@@ -49,7 +54,12 @@ const Profile = observer(() => {
         <Container>
           {uiStore.currentUser && (
             <div className={styles.profile__wrapper}>
-              <img className={styles.avatar} width="80" height="80" src={uiStore.currentUser.avatar} />
+              <img
+                className={styles.avatar}
+                width="80"
+                height="80"
+                src={uiStore.currentUser.avatar}
+              />
               <div>
                 <span className={styles.name__wrapper}>
                   <p className={styles.name}>{uiStore.currentUser.name}</p>
@@ -76,7 +86,7 @@ const Profile = observer(() => {
           <div className={styles.letters}>
             <Container>
               <OwnProjects projects={userProjects} />
-              <OwnAwards />
+              <OwnAwards projects={likedProjects} />
             </Container>
           </div>
         </TabPanel>
@@ -92,7 +102,7 @@ const Profile = observer(() => {
         <TabPanel className={styles.panel} value={value} index={2}>
           <div className={styles.letters__awards}>
             <Container>
-              <BadgesAwards />
+              <BadgesAwards projects={likedProjects} />
             </Container>
           </div>
         </TabPanel>

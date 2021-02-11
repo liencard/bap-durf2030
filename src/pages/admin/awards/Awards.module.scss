@@ -27,3 +27,37 @@ $border-radius: 0.5rem;
     }
   }
 }
+
+.subtitle {
+  @include title-three;
+  margin-bottom: 1.5rem;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 6rem;
+}
+
+.award {
+  .icon {
+    width: 6rem;
+    height: 6rem;
+  }
+}
+
+.badge {
+  .icon {
+    object-fit: cover;
+  }
+}
+
+.list__item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  span {
+    margin-left: 2rem;
+  }
+}

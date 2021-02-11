@@ -1,14 +1,14 @@
 @import '../../../styles/styles.scss';
 $border-radius: 0.5rem;
 
-.awards {
+.awards__badges {
   grid-column: 9 / span 4;
 }
 
 .title {
   @include title-two;
   margin-top: 2rem;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
 }
 
 .list {
@@ -30,4 +30,14 @@ $border-radius: 0.5rem;
     text-transform: capitalize;
     margin-top: 1rem;
   }
+}
+
+.icon {
+  width: 8rem;
+  height: 8rem;
+  object-fit: cover;
+}
+
+.badges {
+  margin-top: 5rem;
 }
