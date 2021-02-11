@@ -1,0 +1,50 @@
+@import '../../../styles/styles.scss';
+
+.updates {
+  grid-column: 2 / 13;
+
+  .update {
+    display: grid;
+    grid-template-columns: 10rem 1fr;
+    margin-bottom: 5rem;
+    position: relative;
+
+    &::before {
+      position: absolute;
+      content: '';
+      height: 1rem;
+      width: 1rem;
+      background: $green;
+      border-radius: 50%;
+      left: -5rem;
+      top: 0.8rem;
+      z-index: 2;
+    }
+
+    &:not(:last-of-type):after {
+      position: absolute;
+      content: '';
+      height: 110%;
+      width: 0.1rem;
+      background: $green-light;
+      left: -4.6rem;
+      top: 1rem;
+    }
+
+    .date {
+      @include text-detail;
+      margin-right: 2rem;
+    }
+
+    .text {
+      border: $border;
+      border-radius: $border-radius;
+      padding: 3rem;
+
+      .author {
+        @include text-detail;
+        margin-top: 3rem;
+      }
+    }
+  }
+}

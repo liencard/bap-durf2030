@@ -1,11 +1,27 @@
-import Header from '../components/Header/Header';
-import Footer from '../components/Footer/Footer';
-import HomeHero from '../components/Home/HomeHero/HomeHero';
-import HomeSpotlight from '../components/Home/HomeSpotlight/HomeSpotlight';
-import ProjectSpotlight from '../components/Home/ProjectSpotlight/ProjectSpotlight';
+import { Header, Footer } from '../components/Layout';
 import { Container } from '../components/Layout';
+import { HomeDurf, HomePlatform, HomeHero, HomeSpotlight, ProjectSpotlight } from '../components/Home';
 
-const Home = () => {
+import { convertData } from '../models/Project';
+import { useEffect, useState } from 'react';
+import RootStore from '../stores';
+import { useStores } from '../hooks/useStores';
+
+const Home = ({ projectsJSON }) => {
+  const { projectStore } = useStores();
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    const projectsArr = projectsJSON.map((projectJSON) => {
+      const project = convertData.fromJSON(projectJSON, projectStore);
+      project.getLikes();
+      project.getRequirementsInfo();
+      project.getDurvers();
+      return project;
+    });
+    setProjects(projectsArr);
+  }, [setProjects]);
+
   return (
     <>
       <Header />
@@ -13,11 +29,32 @@ const Home = () => {
       <HomeSpotlight />
 
       <Container>
-        <ProjectSpotlight />
+        <ProjectSpotlight projects={projects} />
+        <HomeDurf />
+        <HomePlatform />
       </Container>
       <Footer />
     </>
   );
+};
+
+export const getStaticProps = async (context) => {
+  const store = new RootStore();
+  const { projectStore } = store;
+
+  await projectStore.loadAllProjects();
+
+  const projectsJSON = projectStore.projects.map((data) => {
+    let project = convertData.toJSON(data);
+    const timestamp = data.getReadableDate(data.timestamp);
+    project.timestamp = timestamp;
+    return project;
+  });
+
+  return {
+    props: { projectsJSON },
+    revalidate: 5,
+  };
 };
 
 export default Home;

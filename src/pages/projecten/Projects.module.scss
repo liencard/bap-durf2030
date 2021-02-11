@@ -1,14 +1,33 @@
 @import '../../styles/styles.scss';
 
 .milestones {
-  padding-top: 15rem;
-  background-image: url('/milestone.png');
-  background-size: 60%;
-  background-repeat: no-repeat;
-  background-position: top 100px right;
+  padding-top: 22rem;
+  margin-bottom: 15rem;
+  // background-image: url('/milestone.png');
+  // background-size: 60%;
+  // background-repeat: no-repeat;
+  // background-position: top 100px right;
+
+  position: relative;
+
+  &::after {
+    position: absolute;
+    content: '';
+    height: 71rem;
+    width: 52vw;
+
+    left: 48vw;
+    top: 10rem;
+    z-index: 1;
+
+    background-image: url('/milestone.png');
+    background-size: 120rem;
+    background-repeat: no-repeat;
+  }
 
   .content {
     grid-column: span 6;
+    z-index: 5;
 
     .title {
       @include title-one;
@@ -56,18 +75,6 @@
 
 .title {
   @include title-one;
-  margin: 0;
+  margin: 0 2rem 0 0;
   padding: 0;
-}
-
-.line {
-  @include tab-line;
-}
-
-.lineTop {
-  @include tab-lineTop;
-}
-
-.lineBottom {
-  @include tab-lineBottom;
 }

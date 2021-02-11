@@ -1,13 +1,4 @@
 @import '../../styles/styles.scss';
-$border-radius: 0.5rem;
-
-.logo {
-  position: absolute;
-  cursor: pointer;
-  left: 3vw;
-  top: 3vh;
-  z-index: 4;
-}
 
 .auth__img {
   grid-column: 1 / span 6;
@@ -18,12 +9,26 @@ $border-radius: 0.5rem;
   &::before {
     content: '';
     position: absolute;
-    background-image: url('/login.png');
-    background-size: cover;
+    background: $green;
+    background-image: url('/auth.png');
+    background-size: contain;
+    background-position: center;
     background-repeat: no-repeat;
     right: 0;
     height: 100%;
     width: calc(100% + ((100vw - #{$container})) / 2);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    background-image: url('/auth-kegel.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    right: -4rem;
+    bottom: 15vh;
+    height: 8rem;
+    width: 10rem;
   }
 }
 
@@ -51,7 +56,7 @@ $border-radius: 0.5rem;
   .input__wrapper {
     display: flex;
     flex-direction: column;
-    margin-bottom: 2.5rem;
+    margin-bottom: 0;
   }
 
   .form__label {
@@ -90,6 +95,15 @@ $border-radius: 0.5rem;
   }
 }
 
-// .textfield {
-//   @include textfield;
-// }
+.subtitle {
+  @include title-three;
+  margin-top: 2rem;
+}
+
+.register__team {
+  margin-bottom: 2rem;
+}
+
+.organisation__wrapper {
+  margin-bottom: 2rem;
+}

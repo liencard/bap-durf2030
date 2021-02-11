@@ -1,10 +1,9 @@
 @import '../../../styles/styles.scss';
 
 .footer {
-  display: flex;
   position: relative;
   padding: 3rem 0;
-  align-items: center;
+  margin: 12rem 0 4rem;
 
   &::before {
     position: absolute;
@@ -28,8 +27,7 @@
   .contact {
     display: flex;
     align-items: center;
-    margin-right: 5rem;
-    grid-column: span 10;
+    grid-column: span 8;
 
     p {
       @include text-small;
@@ -39,9 +37,13 @@
   }
 
   .date {
-    margin-left: auto;
+    // margin-left: auto;
     @include text-detail;
-    grid-column: span 2;
+    grid-column: span 4;
     text-align: right;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
   }
 }

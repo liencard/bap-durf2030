@@ -1,0 +1,24 @@
+@import '../../../styles/styles.scss';
+
+.subtitle {
+  @include title-two;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+.items {
+  margin-left: 3rem;
+
+  .item {
+    margin-bottom: 3rem;
+    img {
+      width: rem;
+      margin-right: 5rem;
+    }
+
+    p {
+      max-width: 35rem;
+    }
+    display: flex;
+  }
+}

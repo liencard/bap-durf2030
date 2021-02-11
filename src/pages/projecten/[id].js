@@ -1,14 +1,7 @@
 import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Container } from '../../components/Layout';
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
-import {
-  ProjectHeader,
-  ProjectContent,
-  ProjectFooter,
-  ProjectComments,
-} from '../../components/Project';
+import { Header, Footer } from '../../components/Layout';
+import { ProjectHeader, ProjectContent, ProjectFooter, ProjectComments } from '../../components/Project';
 import RootStore from '../../stores';
 import { convertData } from '../../models/Project';
 import { convertDataUser } from '../../models/User';
@@ -18,16 +11,41 @@ const Project = observer(({ projectJSON, usersJSON }) => {
   const { projectStore, uiStore, userStore } = useStores();
   const [project, setProject] = useState();
   const [users, setUsers] = useState();
+  const [projectOwner, setProjectOwner] = useState(false);
+  const [tab, setTab] = useState(0);
+
+  // Checks if current user is powner of this project
+  useEffect(() => {
+    const loadOwner = async () => {
+      const currentUser = await uiStore.currentUser;
+      if (project && currentUser) {
+        const projectOwner = project.owners.find((owner) => owner.id === currentUser.id);
+        if (projectOwner) {
+          setProjectOwner(true);
+        } else {
+          setProjectOwner(false);
+        }
+      }
+    };
+    loadOwner();
+  }, [uiStore.currentUser, project]);
 
   useEffect(() => {
+    // Conver data received from SSR static props to a Project model
     const data = convertData.fromJSON(projectJSON, projectStore);
-    data.getComments();
+
+    // Set dyanmic content
     data.getLikes();
     data.getRequirementsList();
     data.getRequirementsInfo();
     data.getDurvers();
-    setProject(data);
+    data.getComments();
 
+    // Set project for this page
+    setProject(data);
+  }, []);
+
+  useEffect(() => {
     const usersArr = [];
     usersJSON.forEach((userJSON) => {
       const user = convertDataUser.fromJSON(userJSON, userStore);
@@ -36,16 +54,14 @@ const Project = observer(({ projectJSON, usersJSON }) => {
     setUsers(usersArr);
 
     if (project && uiStore.currentUser) {
-      const projectIsLiked = project.likes.find(
-        (like) => like.userId === uiStore.currentUser.id
-      );
+      const projectIsLiked = project.likes.find((like) => like.userId === uiStore.currentUser.id);
       if (projectIsLiked) {
         project.setLiked(true);
       } else {
         project.setLiked(false);
       }
     }
-  }, [setProject]);
+  }, [uiStore.currentUser]);
 
   if (!project) {
     return <p>Project laden...</p>;
@@ -53,15 +69,16 @@ const Project = observer(({ projectJSON, usersJSON }) => {
   return (
     <>
       <Header />
-      <ProjectHeader project={project} />
-      <ProjectContent project={project} users={users} />
+      <ProjectHeader setTab={setTab} projectOwner={projectOwner} project={project} />
+      <ProjectContent tab={tab} setTab={setTab} project={project} users={users} />
       <ProjectFooter project={project} />
-      <ProjectComments project={project} />
+      <ProjectComments project={project} comments={project.comments} />
       <Footer />
     </>
   );
 });
 
+// All possible paths will be find to create a SSR page
 export const getStaticPaths = async () => {
   const store = new RootStore();
   const { projectStore } = store;
@@ -75,13 +92,27 @@ export const getStaticPaths = async () => {
   };
 };
 
+// Data for each possible path
 export const getStaticProps = async ({ params }) => {
   const store = new RootStore();
   const { projectStore, userStore } = store;
-  // PROJECT
-  const data = await projectStore.projectService.getById(params.id);
-  const projectJSON = convertData.toJSON(data);
-  // OWNERS
+
+  // Project
+  const data = await projectStore.loadProject(params.id);
+  let projectJSON = convertData.toJSON(data);
+  const updates = data.updates.map((update) => {
+    return {
+      user: update.user,
+      text: update.text,
+      timestamp: data.getReadableDate(update.timestamp),
+    };
+  });
+  const timestamp = data.getReadableDate(data.timestamp);
+
+  projectJSON.timestamp = timestamp;
+  projectJSON.updates = updates;
+
+  // Owners
   const ownersArr = await projectStore.loadProjectOwnersById(params.id);
   const owners = ownersArr.map((owner) => ({
     name: owner.name,
@@ -90,7 +121,7 @@ export const getStaticProps = async ({ params }) => {
   }));
   projectJSON['owners'] = owners;
 
-  // USERS
+  // Users
   await userStore.loadAllUsers();
   const usersJSON = userStore.users.map((data) => {
     let user = convertDataUser.toJSON(data);

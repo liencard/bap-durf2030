@@ -14,7 +14,7 @@ import {
   ProjectHelpThree,
 } from '../../Project';
 
-const ProjectHelp = observer(({ project }) => {
+const ProjectHelp = observer(({ project, text }) => {
   const durverForm = useForm();
   const { projectStore, uiStore } = useStores();
   const [open, setOpen] = useState(false);
@@ -36,7 +36,6 @@ const ProjectHelp = observer(({ project }) => {
   };
 
   const handleSubmit = async (values) => {
-    console.log(values);
     const offers = [];
     if (values.materials) {
       values.materials.forEach((material) => {
@@ -68,14 +67,12 @@ const ProjectHelp = observer(({ project }) => {
       user: uiStore.currentUser,
       offers: offers,
       fundingAmount: values.fundingAmount ?? '',
-      fundingOffered: values.fundingRequired,
-      materialsOffered: values.materialsRequired,
-      servicesOffered: values.servicesRequired,
+      fundingOffered: values.fundingRequired ?? false,
+      materialsOffered: values.materialsRequired ?? false,
+      servicesOffered: values.servicesRequired ?? false,
     });
 
-    console.log(newDurver);
-
-    projectStore.createDurver(newDurver, project.id);
+    project.createDurver(newDurver);
     setOpen(false);
   };
 
@@ -98,22 +95,16 @@ const ProjectHelp = observer(({ project }) => {
                     materialsRequired={materialsRequired}
                     setServicesRequired={setServicesRequired}
                     servicesRequired={servicesRequired}
+                    project={project}
                   />
                 </FormizStep>
 
                 <FormizStep name="step2" isEnabled={materialsRequired}>
-                  <ProjectHelpTwoMaterial
-                    name="materials"
-                    project={project}
-                    materials={project.materials}
-                  />
+                  <ProjectHelpTwoMaterial name="materials" project={project} materials={project.materials} />
                 </FormizStep>
 
                 <FormizStep name="step3" isEnabled={servicesRequired}>
-                  <ProjectHelpTwoService
-                    project={project}
-                    services={project.services}
-                  />
+                  <ProjectHelpTwoService project={project} services={project.services} />
                 </FormizStep>
 
                 <FormizStep name="step4" isEnabled={fundingRequired}>
@@ -126,20 +117,12 @@ const ProjectHelp = observer(({ project }) => {
 
                 <div className={styles.buttons}>
                   {!durverForm.isFirstStep && (
-                    <button
-                      className={styles.button}
-                      type="button"
-                      onClick={durverForm.prevStep}
-                    >
+                    <button className={styles.button} type="button" onClick={durverForm.prevStep}>
                       Vorige
                     </button>
                   )}
                   {durverForm.isLastStep ? (
-                    <button
-                      className={styles.button}
-                      type="submit"
-                      disabled={!durverForm.isValid}
-                    >
+                    <button className={styles.button} type="submit" disabled={!durverForm.isValid}>
                       Versturen
                     </button>
                   ) : (
@@ -157,11 +140,11 @@ const ProjectHelp = observer(({ project }) => {
           </div>
         </Grid>
       </Modal>
-      <Button
-        className={styles.button}
-        onClick={handleOpen}
-        text={'Ik durf mee te helpen'}
-      />
+      {!uiStore.currentUser ? (
+        <Button text={text} href="/login" />
+      ) : (
+        <Button className={styles.button} onClick={handleOpen} text={text} />
+      )}
     </>
   );
 });

@@ -4,10 +4,6 @@
   @include title-two;
 }
 
-.date {
-  @include text-detail;
-}
-
 .updates {
   display: flex;
   flex-direction: column-reverse;
@@ -23,6 +19,21 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    .info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+
+      .date {
+        @include text-detail;
+        margin-right: 2rem;
+      }
+
+      .name {
+        @include text-detail;
+      }
+    }
 
     .delete {
       transform: scale(1.3);

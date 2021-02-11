@@ -1,4 +1,6 @@
 export { default as OnboardingOne } from './OnboardingOne/OnboardingOne';
+export { default as OnboardingTwo } from './OnboardingTwo/OnboardingTwo';
+export { default as OnboardingThree } from './OnboardingThree/OnboardingThree';
 export { default as FormPartOne } from './FormPartOne/FormPartOne';
 export { default as FormPartTwo } from './FormPartTwo/FormPartTwo';
 export { default as FormPartThree } from './FormPartThree/FormPartThree';
@@ -6,6 +8,7 @@ export { default as FormPartFour } from './FormPartFour/FormPartFour';
 export { default as FormPartFive } from './FormPartFive/FormPartFive';
 export { default as FormPartSix } from './FormPartSix/FormPartSix';
 export { default as FormPartSeven } from './FormPartSeven/FormPartSeven';
+export { default as FormPartConfirm } from './FormPartConfirm/FormPartConfirm';
 export { default as FormFieldInput } from './FormFieldInput/FormFieldInput';
 export { default as FormFieldSelect } from './FormFieldSelect/FormFieldSelect';
 export { default as FormFieldSwitch } from './FormFieldSwitch/FormFieldSwitch';

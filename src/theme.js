@@ -1,4 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles';
+import { MicNone } from '@material-ui/icons';
 
 // https://material-ui.com/customization/palette/
 // https://material-ui.com/customization/default-theme/
@@ -48,10 +49,26 @@ const theme = createMuiTheme({
       textTransform: 'capitalize',
       fontSize: '1.6rem',
     },
-    body1: { lineHeight: 1.7, fontSize: '1.6rem' },
-    body2: { lineHeight: 1.7, fontSize: '1.6rem' },
+    body1: { lineHeight: 1.8, fontSize: '1.5rem', color: `#0c1424` },
+    body2: { lineHeight: 1.8, fontSize: '1.5rem', color: `#0c1424` },
   },
   overrides: {
+    MuiButton: {
+      root: {
+        '&:hover': {
+          backgroundColor: 'none',
+        },
+      },
+    },
+    MuiPaper: {
+      elevation8: {
+        boxShadow: '0 0px 80px rgba(0, 0, 0, 0.07)',
+        marginTop: '7rem',
+        borderRadius: '0.3rem',
+        marginLeft: '-2rem',
+        // border: '0.1rem solid black',
+      },
+    },
     // Tab elementen
     MuiTab: {
       root: {
@@ -145,6 +162,20 @@ const theme = createMuiTheme({
       root: {
         width: '2rem',
         height: '2rem',
+      },
+    },
+
+    // PROGRESS BAR
+    MuiLinearProgress: {
+      root: {
+        height: '.6rem',
+      },
+    },
+
+    // APPBAR
+    MuiAppBar: {
+      root: {
+        zIndex: 10,
       },
     },
 

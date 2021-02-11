@@ -5,12 +5,28 @@
   position: relative;
 
   & div {
-    background: blue;
+    background: $green;
     position: absolute;
     height: calc(100% + (#{$modal-spacing-large} * 2));
     width: calc(100% + #{$modal-spacing-large});
     top: -$modal-spacing-large;
     left: -$modal-spacing-large;
+    background-image: url('/ondersteuningen.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    &::after {
+      content: '';
+      position: absolute;
+      background-image: url('/ondersteuningen-kegel.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      right: -4.5rem;
+      bottom: 50%;
+      height: 6rem;
+      width: 8rem;
+    }
   }
 }
 

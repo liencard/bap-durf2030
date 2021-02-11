@@ -5,3 +5,5 @@ export { default as TabPanel } from './TabPanel/TabPanel';
 export { default as AppBar } from './AppBar/AppBar';
 export { default as TabSideElement } from './TabSideElement/TabSideElement';
 export { default as ParsedRichText } from './ParsedRichText/ParsedRichText';
+export { default as Badge } from './Badge/Badge';
+export { default as Notification } from './Notification/Notification';

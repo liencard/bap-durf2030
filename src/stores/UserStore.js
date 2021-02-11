@@ -22,18 +22,23 @@ class UserStore {
     return await this.userService.create(user);
   };
 
+  updateAdmin = (adminState, user) => {
+    this.userService.updateAdmin(adminState, user);
+  };
+
+  validateUser = (user) => {
+    this.loadAllUsers();
+    let checkUser = this.users.find((existingUser) => existingUser.email === user.email);
+    if (!checkUser) {
+      console.log('user bestaat niet');
+    }
+    console.log(user);
+  };
+
   loadAllUsers = async () => {
     const jsonUsers = await this.userService.getAllUsers();
     jsonUsers.forEach((json) => this.updateUserFromServer(json));
   };
-
-  loadAdmins = async () => {
-    const jsonUsers = await this.userService.getAllUsers();
-    this.updateUserFromServer(jsonUsers);
-    return this.findAdmins(jsonUsers);
-  };
-
-  findAdmins = (users) => this.users.find((user) => user.admin === false);
 
   updateUserFromServer(json) {
     let user = this.users.find((user) => user.email === json.email);
@@ -45,11 +50,20 @@ class UserStore {
         avatar: json.avatar,
         admin: json.admin,
         awards: json.awards,
+        badges: json.badges,
+        organisation: json.organisation,
         store: this.rootStore.userStore,
       });
     }
-    this.addUser(user);
+    return user;
   }
+
+  createNotificationForUser = (newNotification, ownerEmail) => {
+    const notifications = {
+      notifications: getArrayUnion(newNotification),
+    };
+    this.projectService.sendNotification(notifications, ownerEmail);
+  };
 }
 
 export default UserStore;

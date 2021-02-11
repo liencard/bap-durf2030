@@ -1,0 +1,50 @@
+@import '../../../../styles/styles.scss';
+
+.overview {
+  border: 0.1rem solid $grey-border;
+  border-radius: 0.4rem;
+  padding: 5rem;
+  font-size: 1.4rem;
+  margin-bottom: 5rem;
+}
+
+.subtitle {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+.frame {
+  padding: 1.5rem;
+  border: 0.1rem solid $grey-border;
+  background-color: rgb(250, 250, 250);
+}
+
+.item {
+  background-color: $green-extra-light;
+  padding: 1rem 2rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+
+  .item__amount {
+    font-weight: 500;
+    position: relative;
+    padding-right: 1.5rem;
+
+    &::after {
+      height: 100%;
+      width: 0.2rem;
+      background: $green;
+      position: absolute;
+      right: 0;
+      content: '';
+    }
+  }
+
+  .item__name {
+    text-transform: capitalize;
+    padding-left: 1.5rem;
+  }
+}

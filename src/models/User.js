@@ -1,22 +1,23 @@
 import { v4 } from 'uuid';
+import { makeObservable, observable, action } from 'mobx';
 
 class User {
   constructor({
     id = v4(),
     name,
-    lastname,
     avatar = '',
     email,
     password,
     admin,
+    organisation,
     awards = [],
+    badges = [],
+    store,
   }) {
     this.id = id;
     this.name = name;
-    //this.lastname = lastname;
     this.avatar = avatar;
     if (!avatar) {
-      //this.avatar = `https://avatars.dicebear.com/v2/avataaars/${this.id}.svg`;
       this.avatar = `https://avatars.dicebear.com/api/identicon/${this.id}.svg`;
     }
 
@@ -24,7 +25,25 @@ class User {
     this.password = password;
     this.admin = admin;
     this.awards = awards;
+    this.badges = badges;
+    this.organisation = organisation;
     this.comments = [];
+
+    if (store) {
+      this.store = store;
+      this.store.addUser(this);
+    }
+
+    makeObservable(this, {
+      name: observable,
+      avatar: observable,
+      email: observable,
+      password: observable,
+      admin: observable,
+      awards: observable,
+      badges: observable,
+      organisation: observable,
+    });
   }
 
   linkComment(comment) {
@@ -40,7 +59,9 @@ const convertDataUser = {
       avatar: user.avatar,
       email: user.email,
       admin: user.admin,
+      organisation: user.organisation,
       awards: user.awards,
+      badges: user.badges,
     };
   },
 
@@ -51,7 +72,9 @@ const convertDataUser = {
       avatar: user.avatar,
       email: user.email,
       admin: user.admin,
+      organisation: user.organisation,
       awards: user.awards,
+      badges: user.badges,
       store: store,
     });
   },
@@ -65,20 +88,22 @@ const userConverter = {
       avatar: user.avatar,
       email: user.email,
       admin: user.admin,
+      organisation: user.organisation,
       awards: user.awards,
-      //lastname: user.lastname,
+      badges: user.badges,
     };
   },
   fromFirestore: function (snapshot, options) {
     const data = snapshot.data(options);
     return new User({
       name: data.name,
-      //lastname: data.lastname,
       email: data.email,
       avatar: data.avatar,
       id: data.userId,
       admin: data.admin,
+      organisation: data.organisation,
       awards: data.awards,
+      badges: data.badges,
     });
   },
 };

@@ -23,18 +23,15 @@ class UserService {
       .withConverter(userConverter)
       .get();
     user = await user.data();
-    console.log(user);
     return user;
   };
 
   getAllUsers = async () => {
     let snapshot = await this.db.collection('users').get();
     return snapshot.docs.map((user) => user.data());
-    // return snapshot.docs.map((userFromDB) => {
-    //   return { id: userFromDB.id, data: userFromDB.data() };
-    // });
   };
 
+  // WEG
   getAllAdmins = async () => {
     return await this.db
       .collectionGroup('users')
@@ -54,12 +51,20 @@ class UserService {
     return projects.docs.map((project) => project.data());
   };
 
+  // WEG
   addAdminState = async (data) => {
     const result = await this.db
       .collection('users')
       .doc(`${data.email}`)
       .update({ admin: true });
     return result;
+  };
+
+  updateAdmin = (adminState, user) => {
+    this.db
+      .collection('users')
+      .doc(`${user.email}`)
+      .update({ admin: adminState });
   };
 }
 export default UserService;

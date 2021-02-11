@@ -8,3 +8,4 @@ export { default as EditUpdates } from './EditUpdates/EditUpdates';
 export { default as EditState } from './EditState/EditState';
 export { default as EditField } from './EditField/EditField';
 export { default as EditOfferList } from './EditOfferList/EditOfferList';
+export { default as EditDelete } from './EditDelete/EditDelete';

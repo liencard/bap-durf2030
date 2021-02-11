@@ -4,8 +4,9 @@ import { useState } from 'react';
 import { useStores } from '../../../hooks/useStores';
 import { Container } from '../../Layout';
 import { Button } from '../../UI';
+import { ProjectCircle, ProjectHelp } from '../';
 
-const ProjectRequirementsServices = ({ project }) => {
+const ProjectRequirementsServices = ({ project, progress }) => {
   const { projectStore } = useStores();
 
   const [physical, setPhysical] = useState([]);
@@ -38,9 +39,9 @@ const ProjectRequirementsServices = ({ project }) => {
     <>
       <section className={styles.requirement}>
         <Container>
-          <div className={`${styles.circle} ${styles.service}`} />
+          <ProjectCircle type="service" progress={progress} large />
           <div className={styles.content}>
-            <h2 className={styles.title}>Diensten</h2>
+            <h2 className={styles.title}>Vrijwilligers</h2>
             <div className={styles.wrapper}>
               <p>{project.servicesDescription}</p>
               <div className={styles.list}>
@@ -96,7 +97,7 @@ const ProjectRequirementsServices = ({ project }) => {
             </div>
             <div className={styles.footer}>
               <p></p>
-              <Button text={'Hulp aanbieden'} />
+              <ProjectHelp text={'Hulp aanbieden'} project={project} />
             </div>
           </div>
         </Container>

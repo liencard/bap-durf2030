@@ -12,48 +12,69 @@ class ProjectService {
   }
 
   getAll = async () => {
-    const snapshot = await this.db
-      .collection('projects')
-      .withConverter(projectConverter)
-      .get();
+    const snapshot = await this.db.collection('projects').withConverter(projectConverter).get();
     return snapshot.docs.map((project) => project.data());
   };
 
   getById = async (id) => {
-    const project = await this.db
-      .collection('projects')
-      .doc(id)
-      .withConverter(projectConverter)
-      .get();
+    const project = await this.db.collection('projects').doc(id).withConverter(projectConverter).get();
     // project = await user.project();
     return project.data();
   };
 
   getLikesById = async (id) => {
-    const snapshot = await this.db
-      .collection('projects')
-      .doc(id)
-      .collection('likes')
-      .get();
+    const snapshot = await this.db.collection('projects').doc(id).collection('likes').get();
     return snapshot.docs.map((like) => like.data());
   };
 
-  addLike = async (projectId, userId) => {
-    this.db
+  deleteProject = async (id) => {
+    await this.db
       .collection('projects')
-      .doc(projectId)
+      .doc(id)
+      .collection('owners')
+      .get()
+      .then((subcoll) => {
+        if (subcoll.docs.length > 0) {
+          subcoll.forEach((doc) => {
+            doc.ref.delete();
+          });
+        }
+      });
+    await this.db
+      .collection('projects')
+      .doc(id)
       .collection('likes')
-      .doc(userId)
-      .set({ userId: userId });
+      .get()
+      .then((subcoll) => {
+        if (subcoll.docs.length > 0) {
+          subcoll.forEach((doc) => {
+            doc.ref.delete();
+          });
+        }
+      });
+    await this.db
+      .collection('projects')
+      .doc(id)
+      .collection('comments')
+      .get()
+      .then((subcoll) => {
+        if (subcoll.docs.length > 0) {
+          subcoll.forEach((doc) => {
+            doc.ref.delete();
+          });
+        }
+      });
+
+    await this.db.collection('projects').doc(id).delete();
+    return;
+  };
+
+  addLike = async (projectId, userId) => {
+    this.db.collection('projects').doc(projectId).collection('likes').doc(userId).set({ userId: userId });
   };
 
   removeLike = async (projectId, userId) => {
-    this.db
-      .collection('projects')
-      .doc(projectId)
-      .collection('likes')
-      .doc(userId)
-      .delete();
+    this.db.collection('projects').doc(projectId).collection('likes').doc(userId).delete();
   };
 
   getProjectsForUser = async (userId) => {
@@ -77,11 +98,13 @@ class ProjectService {
   };
 
   create = async (project) => {
-    const ref = await this.db.collection('projects').doc('dummy');
+    const ref = await this.db.collection('projects').doc();
     ref.withConverter(projectConverter).set(project);
     project.owners.forEach((owner) => {
       ref.collection('owners').doc(owner.id).set({
         userId: owner.id,
+        name: owner.name,
+        avatar: owner.avatar,
       });
     });
 
@@ -112,12 +135,7 @@ class ProjectService {
   };
 
   removeOwner = (ownerId, projectId) => {
-    this.db
-      .collection('projects')
-      .doc(projectId)
-      .collection('owners')
-      .doc(ownerId)
-      .delete();
+    this.db.collection('projects').doc(projectId).collection('owners').doc(ownerId).delete();
   };
 
   getOwners = async (projectId) => {
@@ -145,7 +163,7 @@ class ProjectService {
         snapshot.docChanges().forEach(async (change) => {
           if (change.type === 'added') {
             const commentObj = change.doc.data();
-            onChange(commentObj);
+            onChange(projectId, commentObj);
           }
         });
       });

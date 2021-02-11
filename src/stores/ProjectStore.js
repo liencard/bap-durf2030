@@ -21,11 +21,17 @@ class ProjectStore {
       projects: observable,
       updateProject: action,
       loadProjectLikesById: action,
+      removeProject: action,
+      addProject: action,
     });
   }
 
   addProject = (project) => {
     this.projects.push(project);
+  };
+
+  removeProject = (index) => {
+    this.projects.splice(index, 1);
   };
 
   loadProject = async (id) => {
@@ -37,11 +43,8 @@ class ProjectStore {
   createProject = async (project) => {
     project.timestamp = getCurrenTimeStamp();
     project.state = 0;
-    if (project.image) {
-      const imageURL = await this.createImageForProject(
-        project.image,
-        projectId
-      );
+    if (project.image.enabled) {
+      const imageURL = await this.createImageForProject(project.image, projectId);
       project.image.url = imageURL;
     }
     const projectId = await this.projectService.create(project);
@@ -57,18 +60,10 @@ class ProjectStore {
 
   createRequirementsForProject = async ({ requirements, info, projectId }) => {
     if (info.materialsRequired) {
-      this.requirementService.createItems(
-        requirements.materials,
-        projectId,
-        'material'
-      );
+      this.requirementService.createItems(requirements.materials, projectId, 'material');
     }
     if (info.servicesRequired) {
-      this.requirementService.createItems(
-        requirements.services,
-        projectId,
-        'service'
-      );
+      this.requirementService.createItems(requirements.services, projectId, 'service');
     }
     this.requirementService.createInfo(info, projectId);
   };
@@ -79,13 +74,6 @@ class ProjectStore {
 
   createProjectOwner = (owner, projectId) => {
     this.projectService.createOwner(owner, projectId);
-  };
-
-  createUpdate = (newUpdate, timestamp, projectId) => {
-    const updates = {
-      updates: getArrayUnion({ text: newUpdate, timestamp: timestamp }),
-    };
-    this.projectService.updateProjectUpdates(updates, projectId);
   };
 
   deleteUpdate = (deletedUpdate, projectId) => {
@@ -101,6 +89,11 @@ class ProjectStore {
     this.requirementService.deleteItem(itemId, projectId);
   };
 
+  deleteProject = (projectId) => {
+    this.projectService.deleteProject(projectId);
+    this.requirementService.deleteProjectRequirements(projectId);
+  };
+
   updateRequirementItem = (item, itemId, projectId) => {
     this.requirementService.updateItem(item, itemId, projectId);
   };
@@ -113,17 +106,38 @@ class ProjectStore {
     this.requirementService.updateDetails(project);
   };
 
-  createDurver = (durver, projectId) => {
+  createDurver = (durver, projectId, owners) => {
     durver.timestamp = getCurrenTimeStamp();
     this.requirementService.createDurver(durver, projectId);
+
+    owners.forEach((owner) => {
+      if (owner.email) {
+        let offerTypes = [];
+        durver.materialsOffered && push.offerTypes('material');
+        durver.servicesOffered && push.offerTypes('service');
+        durver.fundingOffered && push.offerTypes('funding');
+
+        let notification = {
+          type: 'offer',
+          timestamp: getCurrenTimeStamp(),
+          info: {
+            project: { id: projectId, title: 'Title' },
+            user: { name: durver.user.name, avatar: durver.user.avatar },
+            offers: offerTypes,
+          },
+        };
+
+        this.rootStore.userStore.createNotificationForUser(notification, owner.email);
+      }
+      //   this.rootStore.userStore.createNotificationForUser;
+      // materialsOffered / fundingOffered / services Offered bool in Durver
+      // user zit er ook in
+      // owner bevat geen email!!!
+    });
   };
 
   createImageForProject = (image, projectId) => {
-    return this.projectService.uploadImage(
-      image.file,
-      image.file.name,
-      projectId
-    );
+    return this.projectService.uploadImage(image.file, image.file.name, projectId);
   };
 
   getProjectById = (id) => this.projects.find((project) => project.id === id);
@@ -135,7 +149,6 @@ class ProjectStore {
 
   updateProjectFromServer = (json) => {
     let project = this.projects.find((project) => project.id === json.id);
-    console.log(json);
     if (!project) {
       project = new Project({
         id: json.id,
@@ -156,6 +169,8 @@ class ProjectStore {
         image: json.image,
         impact: json.impact,
         date: json.date,
+        timestamp: json.timestamp,
+        highlight: json.highlight,
         store: this.rootStore.projectStore,
       });
     }
@@ -191,8 +206,8 @@ class ProjectStore {
     return await this.projectService.createComment(comment);
   };
 
-  onCommentChanged = (comment) => {
-    const project = this.getProjectById(comment.project.id);
+  onCommentChanged = (id, comment) => {
+    const project = this.getProjectById(id);
     project.linkComment(comment);
   };
 

@@ -1,16 +1,44 @@
 @import '../../../styles/styles.scss';
+$points-distance: 3rem;
+$point-size: 1rem;
 
-.images {
+.header {
+  padding-top: 15rem;
+}
+.back__btn {
+  grid-column: span 12;
+  font-weight: 600;
+  margin-bottom: -1.5rem;
+  cursor: pointer;
+
+  a {
+    text-decoration: none;
+    font-size: 1.4rem;
+    margin-left: 1rem;
+    transition: 0.2s;
+
+    &::before {
+      content: '';
+    }
+
+    &:hover {
+      color: $green;
+    }
+  }
+}
+
+.sidebar {
   grid-column: span 6;
   margin-right: 5rem;
-  margin-top: 14rem;
-  width: 100%;
-  background-size: cover;
+
+  .images {
+    width: 100%;
+    background-size: cover;
+  }
 }
 
 .content {
   grid-column: span 6;
-  padding-top: 14rem;
 
   .tags {
     display: flex;
@@ -22,6 +50,12 @@
       @include tag;
       margin-right: 0.7rem;
       margin-bottom: 0.7rem;
+    }
+
+    .theme {
+      @include tag;
+      background-color: $green;
+      color: $green-extra-light;
     }
   }
 
@@ -73,12 +107,44 @@
         font-size: 1.2rem;
         text-transform: uppercase;
         letter-spacing: 0.1rem;
-        margin-bottom: 1.8rem;
+        margin: 2rem 0 1.8rem 0;
       }
 
       .item__btn {
         font-size: 1.2rem;
         font-weight: 500;
+      }
+
+      .progress {
+        position: relative;
+        margin-bottom: 2rem;
+        height: 6.5rem;
+        width: 6.5rem;
+        border-radius: 50%;
+        background-color: $green-extra-light;
+
+        & div {
+          position: absolute;
+          left: 0;
+          top: 0;
+        }
+
+        & div:last-of-type {
+          opacity: 0.5;
+        }
+
+        &::before {
+          position: absolute;
+          content: '';
+          background-repeat: no-repeat;
+          background-size: 2rem;
+          height: 2rem;
+          width: 2rem;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background: url('/icons/service-green.svg');
+        }
       }
 
       .circle {
@@ -124,6 +190,21 @@
 
           &::before {
             background: url('/icons/money-yellow.svg');
+          }
+        }
+      }
+    }
+
+    .item__locked {
+      opacity: 0.4;
+
+      .circle {
+        &.money {
+          background-color: #f9f9f9;
+          border: 0.3rem solid $grey;
+
+          &::before {
+            background: url('/icons/money-grey.svg');
           }
         }
       }

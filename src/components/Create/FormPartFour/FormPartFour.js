@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import styles from './FormPartFour.module.scss';
-import { FormFieldSwitch, FormFieldInput, FormFieldAddItem, FormFieldWrapper } from '../index';
+import {
+  FormFieldSwitch,
+  FormFieldInput,
+  FormFieldAddItem,
+  FormFieldWrapper,
+} from '../index';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -15,23 +20,28 @@ const FormPartFour = () => {
     <>
       <FormFieldWrapper>
         <h2 className={styles.title}>Ondersteuning</h2>
-        <h3 className={styles.subtitle}>Naar welke soort ondersteuning ben je op zoek?</h3>
+        <h3 className={styles.subtitle}>
+          Naar welke soort ondersteuning ben je op zoek?
+        </h3>
         <p className={styles.info}>
-          DURF2030 kan helpen met het zoeken naar de juiste partners voor je project, we kunnen communicatief
-          ondersteunen en je helpen zoeken naar middelen om je project te realiseren.
+          DURF2030 kan helpen met het zoeken naar de juiste partners voor je
+          project, we kunnen communicatief ondersteunen en je helpen zoeken naar
+          middelen om je project te realiseren.
         </p>
       </FormFieldWrapper>
 
       <FormFieldWrapper>
         <div className={styles.requirements}>
           <div
-            className={`${styles.requirement} ${servicesRequired && styles.requirementChecked}`}
+            className={`${styles.requirement} ${
+              servicesRequired && styles.requirementChecked
+            }`}
             onClick={() => {
               setServicesRequired(!servicesRequired);
             }}
           >
             <div className={`${styles.circle} ${styles.service}`} />
-            <span>Diensten</span>
+            <span>Vrijwilligers</span>
             <FormFieldSwitch
               name="servicesRequired"
               label="servicesRequired"
@@ -40,7 +50,9 @@ const FormPartFour = () => {
             />
           </div>
           <div
-            className={`${styles.requirement} ${materialsRequired && styles.requirementChecked}`}
+            className={`${styles.requirement} ${
+              materialsRequired && styles.requirementChecked
+            }`}
             onClick={() => {
               setMaterialsRequired(!materialsRequired);
             }}
@@ -55,7 +67,9 @@ const FormPartFour = () => {
             />
           </div>
           <div
-            className={`${styles.requirement} ${fundingRequired && styles.requirementChecked}`}
+            className={`${styles.requirement} ${
+              fundingRequired && styles.requirementChecked
+            }`}
             onClick={() => {
               setFundingRequired(!fundingRequired);
             }}
@@ -72,17 +86,27 @@ const FormPartFour = () => {
         </div>
       </FormFieldWrapper>
 
-      {/* Diensten */}
+      {/* Vrijwilligers */}
       {servicesRequired && (
         <div className={styles.formRequirement}>
           <FormFieldWrapper>
-            <h2 className={styles.title}>Diensten</h2>
-            <h3 className={styles.subtitle}>Noteer welk soort diensten je nodig hebt</h3>
+            <h2 className={styles.title}>Vrijwilligers</h2>
+            <h3 className={styles.subtitle}>
+              Noteer welk soort vrijwilligers je nodig hebt
+            </h3>
             <FormFieldAddItem name="services" options={SERVICETYPES} />
           </FormFieldWrapper>
           <FormFieldWrapper>
-            <h3 className={styles.subtitle}>Waarvoor heb je deze diensten nodig?</h3>
-            <FormFieldInput multiline name="servicesDescription" label="Beschrijving" rows={8} required />
+            <h3 className={styles.subtitle}>
+              Waarvoor heb je deze vrijwilligers nodig?
+            </h3>
+            <FormFieldInput
+              multiline
+              name="servicesDescription"
+              label="Beschrijving"
+              rows={8}
+              required
+            />
           </FormFieldWrapper>
         </div>
       )}
@@ -92,12 +116,22 @@ const FormPartFour = () => {
         <div className={styles.formRequirement}>
           <FormFieldWrapper>
             <h2 className={styles.title}>Materiaal</h2>
-            <h3 className={styles.subtitle}>Noteer welk soort materiaal je nodig hebt</h3>
+            <h3 className={styles.subtitle}>
+              Noteer welk soort materiaal je nodig hebt
+            </h3>
             <FormFieldAddItem name="materials" options={MATERIALTYPES} />
           </FormFieldWrapper>
           <FormFieldWrapper>
-            <h3 className={styles.subtitle}>Waarvoor wordt het materiaal gebruikt?</h3>
-            <FormFieldInput multiline name="materialsDescription" label="Beschrijving" rows={8} required />
+            <h3 className={styles.subtitle}>
+              Waarvoor wordt het materiaal gebruikt?
+            </h3>
+            <FormFieldInput
+              multiline
+              name="materialsDescription"
+              label="Beschrijving"
+              rows={8}
+              required
+            />
           </FormFieldWrapper>
         </div>
       )}
@@ -136,16 +170,28 @@ const FormPartFour = () => {
                 label="Funding"
                 InputProps={{
                   inputProps: { min: 1, max: 3000 },
-                  startAdornment: <InputAdornment position="start">€</InputAdornment>,
+                  startAdornment: (
+                    <InputAdornment position="start">€</InputAdornment>
+                  ),
                 }}
                 required
               />
-              <FormHelperText id="outlined-weight-helper-text">Max 3000 euro</FormHelperText>
+              <FormHelperText id="outlined-weight-helper-text">
+                Max 3000 euro
+              </FormHelperText>
             </FormControl>
           </FormFieldWrapper>
           <FormFieldWrapper>
-            <h3 className={styles.subtitle}>Beschrijf waar het geld voor gebruikt zal worden</h3>
-            <FormFieldInput multiline name="fundingDescription" label="Beschrijving" rows={8} required />
+            <h3 className={styles.subtitle}>
+              Beschrijf waar het geld voor gebruikt zal worden
+            </h3>
+            <FormFieldInput
+              multiline
+              name="fundingDescription"
+              label="Beschrijving"
+              rows={8}
+              required
+            />
           </FormFieldWrapper>
         </div>
       )}

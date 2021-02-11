@@ -4,6 +4,11 @@
   display: none !important;
 }
 
+.bold {
+  font-weight: 600;
+  color: $green;
+}
+
 .title {
   @include title-two;
   margin-bottom: 2rem;
@@ -23,7 +28,7 @@
     align-items: center;
     padding: 2rem 0;
     font-weight: 500;
-    font-size: 1.4rem;
+    font-size: 1.28rem;
     transition: 0.2s;
     text-align: center;
 

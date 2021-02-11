@@ -1,10 +1,12 @@
 import styles from './BadgesAwards.module.scss';
 import { useStores } from '../../../hooks/useStores';
 import { Grid } from '../../../components/Layout';
-import { AWARDS } from '../../../consts';
+import { AWARDS, BADGES } from '../../../consts';
 
 const BadgesAwards = () => {
   const { uiStore } = useStores();
+
+  console.log(uiStore.currentUser);
 
   const awards = AWARDS.map((award) => {
     const earnedAward = uiStore.currentUser.awards.find(
@@ -18,6 +20,20 @@ const BadgesAwards = () => {
     return award;
   });
 
+  const badges = BADGES.map((badge) => {
+    const earnedBadge = uiStore.currentUser.badges.find(
+      (userBadge) => badge.name === userBadge.name
+    );
+    if (earnedBadge) {
+      badge.earned = true;
+    } else {
+      badge.earned = false;
+    }
+    return badge;
+  });
+
+  console.log(badges);
+
   return (
     <>
       <section className={styles.badges__awards}>
@@ -26,6 +42,25 @@ const BadgesAwards = () => {
           <Grid>
             <section className={styles.badges}>
               <h2 className={styles.subtitle}>Badges</h2>
+              <div className={styles.list}>
+                {badges.map((badge, i) => (
+                  <div
+                    key={i}
+                    className={`${styles.list__item} ${
+                      badge.earned && styles.earned
+                    }`}
+                  >
+                    <img
+                      className={styles.icon}
+                      src={badge.levelOne}
+                      alt="badge"
+                      width="80"
+                      height="80"
+                    />
+                    <span>{badge.name} - level 1</span>
+                  </div>
+                ))}
+              </div>
             </section>
             <section className={styles.awards}>
               <h2 className={styles.subtitle}>Awards</h2>
@@ -40,7 +75,7 @@ const BadgesAwards = () => {
                     <img
                       className={styles.icon}
                       src={award.img}
-                      alt="icon"
+                      alt="award"
                       width="80"
                       height="80"
                     />

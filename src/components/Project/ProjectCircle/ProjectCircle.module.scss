@@ -1,0 +1,101 @@
+@import '../../../styles/styles.scss';
+
+.progress {
+  position: relative;
+  height: 6.5rem;
+  width: 6.5rem;
+  border-radius: 50%;
+  align-self: center;
+
+  grid-column: span 2;
+
+  & div {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  &::before {
+    position: absolute;
+    content: '';
+    background-repeat: no-repeat;
+    background-size: 2rem;
+    height: 2rem;
+    width: 2rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &.progressLarge {
+    height: 11rem;
+    width: 11rem;
+
+    &::before {
+      transform: scale(1.5) translate(-35%, -35%);
+    }
+  }
+
+  &.progressServices {
+    background-color: $green-extra-light;
+
+    & div:first-of-type {
+      svg circle {
+        stroke: $green;
+      }
+    }
+
+    & div:last-of-type {
+      svg circle {
+        stroke: $green;
+        opacity: 0.3;
+      }
+    }
+
+    &::before {
+      background: url('/icons/service-green.svg');
+    }
+  }
+
+  &.progressMaterials {
+    background-color: $red-light;
+
+    & div:first-of-type {
+      svg circle {
+        stroke: $red;
+      }
+    }
+
+    & div:last-of-type {
+      svg circle {
+        stroke: $red;
+        opacity: 0.3;
+      }
+    }
+
+    &::before {
+      background: url('/icons/material-red.svg');
+    }
+  }
+
+  &.progressFundings {
+    background-color: $yellow-light;
+
+    & div:first-of-type {
+      svg circle {
+        stroke: $yellow;
+      }
+    }
+
+    & div:last-of-type {
+      svg circle {
+        stroke: $yellow;
+        opacity: 0.3;
+      }
+    }
+
+    &::before {
+      background: url('/icons/money-yellow.svg');
+    }
+  }
+}

@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { ROUTES } from '../../../consts/index';
 import { useRouter } from 'next/router';
 import styles from './Sidebar.module.scss';
-import { NavLink } from '../../UI';
 
 const Sidebar = () => {
   const router = useRouter();
@@ -141,8 +140,8 @@ const Sidebar = () => {
                 <span>Events</span>
               </a>
             </Link>
-            <Link href={ROUTES.admin}>
-              <a className={styles.menu__item}>
+            <Link href={ROUTES.adminAwards}>
+              <a className={`${styles.menu__item} ${router.pathname === '/admin/awards' ? styles.active : ''}`}>
                 <svg width="21" height="23" viewBox="0 0 21 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M10.5 14.875C14.2279 14.875 17.25 11.8529 17.25 8.125C17.25 4.39708 14.2279 1.375 10.5 1.375C6.77208 1.375 3.75 4.39708 3.75 8.125C3.75 11.8529 6.77208 14.875 10.5 14.875Z"

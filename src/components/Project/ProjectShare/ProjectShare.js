@@ -2,11 +2,13 @@ import styles from './ProjectShare.module.scss';
 import { Modal } from '../../UI';
 import { Grid } from '../../Layout';
 import { useState, useRef } from 'react';
+import { useRouter, asPath } from 'next/router';
 
 const ProjectShare = () => {
   const [open, setOpen] = useState(false);
   const [copyStatus, setCopyStatus] = useState('Kopieer');
   const textAreaRef = useRef(null);
+  const router = useRouter();
 
   const handleOpen = () => {
     setOpen(true);
@@ -36,21 +38,83 @@ const ProjectShare = () => {
               Deel dit project
             </h2>
             <p id="transition-modal-description">
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam
-              rem aperiam.
+              Je kan dit project verder helpen door het project te delen en meer
+              hulp te sprokkelen.
             </p>
             <ul className={styles.options}>
-              <li>Facebook</li>
-              <li>Twitter</li>
-              <li>E-mail</li>
-              <li>Print Flyer</li>
+              <a
+                aria-label="Deel op Facebook"
+                href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
+                target="_blank"
+                rel="noopener"
+              >
+                <li>
+                  <img
+                    className={styles.icon}
+                    src="/icons/facebook.svg"
+                    alt="facebook icon"
+                    width="33"
+                    height="33"
+                  />
+                  <span>Facebook</span>
+                </li>
+              </a>
+              <a
+                aria-label="Deel op Twitter"
+                href={`http://twitter.com/share?text=Bekijk dit project!&url=${window.location.href}`}
+                target="_blank"
+                rel="noopener"
+              >
+                <li>
+                  <img
+                    className={styles.icon}
+                    src="/icons/twitter.svg"
+                    alt="twitter icon"
+                    width="33"
+                    height="33"
+                  />
+                  <span>Twitter</span>
+                </li>
+              </a>
+
+              <a
+                aria-label="Mail project"
+                href={`mailto:?subject=Bekijk dit gekke project &body=Bekijk het op de website ${window.location.href}`}
+              >
+                <li>
+                  <img
+                    className={styles.icon}
+                    src="/icons/email.svg"
+                    alt="email icon"
+                    width="33"
+                    height="33"
+                  />
+                  <span>Email</span>
+                </li>
+              </a>
+              <li>
+                <img
+                  className={styles.icon}
+                  src="/icons/print.svg"
+                  alt="print icon"
+                  width="33"
+                  height="33"
+                />
+                <span>Print flyer</span>
+              </li>
             </ul>
             <div className={styles.copy}>
               <p>Kopieer link</p>
               <div>
                 <form>
-                  {/* ${window.location.href} */}
-                  <input type="text" ref={textAreaRef} value={`undefined`} />
+                  <input
+                    type="text"
+                    ref={textAreaRef}
+                    value={window.location.href}
+                    onChange={(e) => {
+                      setValue(e.target.checked);
+                    }}
+                  />
                 </form>
                 <button onClick={handleClickCopy}>{copyStatus}</button>
               </div>

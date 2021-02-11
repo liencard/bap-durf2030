@@ -21,3 +21,8 @@ export { default as ProjectHelpTwoService } from './ProjectHelpTwoService/Projec
 export { default as ProjectHelpThree } from './ProjectHelpThree/ProjectHelpThree';
 export { default as ProjectRequirementsCard } from './ProjectRequirementsCard/ProjectRequirementsCard';
 export { default as ProjectIcons } from './ProjectIcons/ProjectIcons';
+export { default as ProjectCircle } from './ProjectCircle/ProjectCircle';
+export { default as ProjectEditBanner } from './ProjectEditBanner/ProjectEditBanner';
+export { default as ProjectUpdates } from './ProjectUpdates/ProjectUpdates';
+export { default as ProjectFilter } from './ProjectFilter/ProjectFilter';
+export { default as ProjectTimeline } from './ProjectTimeline/ProjectTimeline';

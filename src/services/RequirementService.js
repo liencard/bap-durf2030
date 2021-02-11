@@ -67,6 +67,37 @@ class RequirementService {
     this.db.collection('requirements').doc(projectId).collection('list').doc(itemId).delete();
   };
 
+  deleteProjectRequirements = async (id) => {
+    await this.db
+      .collection('requirements')
+      .doc(id)
+      .collection('list')
+      .get()
+      .then((subcoll) => {
+        if (subcoll.docs.length > 0) {
+          subcoll.forEach((doc) => {
+            doc.ref.delete();
+          });
+        }
+      });
+
+    await this.db
+      .collection('requirements')
+      .doc(id)
+      .collection('durvers')
+      .get()
+      .then((subcoll) => {
+        if (subcoll.docs.length > 0) {
+          subcoll.forEach((doc) => {
+            doc.ref.delete();
+          });
+        }
+      });
+
+    await this.db.collection('requirements').doc(id).delete();
+    return;
+  };
+
   createInfo = async (info, projectId) => {
     this.db
       .collection('requirements')

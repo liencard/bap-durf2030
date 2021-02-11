@@ -1,36 +1,48 @@
 import styles from './ProjectDescription.module.scss';
 import { observer } from 'mobx-react-lite';
-import { ProjectLikes, ProjectShare } from '../../Project';
-import { Button } from '../../UI';
+import { ProjectLikes, ProjectShare, ProjectHelp } from '../../Project';
+import { ParsedRichText } from '../../UI';
 import { useStores } from '../../../hooks/useStores';
-import ReactHtmlParser from 'react-html-parser';
+import { useEffect, useState } from 'react';
 
 const ProjectDescription = observer(({ project, users }) => {
-  let durversInfo = [];
-  let ownersInfo = [];
+  const [durversInfo, setDurversInfo] = useState([]);
+  const [ownersInfo, setOwnersInfo] = useState([]);
 
-  project.durvers.forEach((durver) => {
-    const newDurver = users.find(
-      (existingUser) => durver.user.id === existingUser.id
-    );
-    durversInfo.push(newDurver);
-  });
+  useEffect(() => {
+    let durversArr = [];
+    project.durvers.forEach((durver) => {
+      let newDurver = users.find(
+        (existingUser) => durver.user.id === existingUser.id
+      );
+      newDurver.timestamp = durver.timestamp;
 
-  console.log(project.owners);
+      const durverExists = durversArr.find(
+        (durverInArr) => durverInArr.id === newDurver.id
+      );
+      if (!durverExists) {
+        durversArr.push(newDurver);
+      }
+    });
+    setDurversInfo(durversArr);
 
-  project.owners.forEach((owner) => {
-    const newOwner = users.find((existingUser) => owner.id === existingUser.id);
-    ownersInfo.push(newOwner);
-  });
+    const ownersArr = project.owners.map((owner) => {
+      return users.find((existingUser) => owner.id === existingUser.id);
+    });
+    setOwnersInfo(ownersArr);
+  }, [project.durvers, project.owners, users]);
 
   return (
     <>
       <div className={styles.text__wrapper}>
-        <div className={styles.text}>
-          {ReactHtmlParser(project.description)}
-        </div>
+        {project.state > 3 && project.impact && (
+          <div className={styles.impact}>
+            <ParsedRichText html={project.impact} />
+          </div>
+        )}
+        <ParsedRichText html={project.description} />
         <div className={styles.buttons}>
-          <Button text="Ik durf mee te helpen" />
+          <ProjectHelp text={'Ik durf mee te helpen'} project={project} />
           <div>
             <ProjectShare />
             <ProjectLikes project={project} />
@@ -59,7 +71,9 @@ const ProjectDescription = observer(({ project, users }) => {
                     />
                   ))}
                 </span>
-                <p className={styles.creator__organisation}>Individu</p>
+                <p className={styles.creator__organisation}>
+                  {owner.organisation}
+                </p>
               </div>
             </div>
           ))}
@@ -72,60 +86,34 @@ const ProjectDescription = observer(({ project, users }) => {
           <p className={styles.helpers__subtitle}>
             Deze mensen durfden mee op de boot te springen voor dit project.
           </p>
-          {project.durvers.length > 3 ? (
-            <>
-              {durversInfo.slice(0, 3).map((durver) => (
-                <div key={durver.id} className={styles.helper}>
-                  <img
-                    className={styles.image}
-                    src={durver.avatar}
-                    alt="profielfoto van organisator"
-                  />
-                  <div>
-                    <span className={styles.name__wrapper}>
-                      <p className={styles.helper__name}>{durver.name}</p>
-                      {durver.awards.map((award) => (
-                        <img
-                          key={award.name}
-                          width="20"
-                          height="20"
-                          src={award.img}
-                        />
-                      ))}
-                    </span>
-                    <p>Extra info</p>
-                  </div>
-                </div>
-              ))}
-            </>
-          ) : (
-            <>
-              {durversInfo.map((durver) => (
-                <div key={durver.id} className={styles.helper}>
-                  <img
-                    className={styles.image}
-                    src={durver.avatar}
-                    alt="profielfoto van organisator"
-                  />
-                  <div>
-                    <span className={styles.name__wrapper}>
-                      <p className={styles.helper__name}>{durver.name}</p>
-                      {durver.awards.map((award) => (
-                        <img
-                          key={award.name}
-                          width="20"
-                          height="20"
-                          src={award.img}
-                        />
-                      ))}
-                    </span>
-                    <p>Extra info</p>
-                  </div>
-                </div>
-              ))}
-            </>
-          )}
-          <a>Bekijk alle durvers</a>
+
+          {durversInfo.slice(0, 3).map((durver) => (
+            <div key={durver.id} className={styles.helper}>
+              <img
+                className={styles.image}
+                src={durver.avatar}
+                alt="profielfoto van organisator"
+              />
+              <div>
+                <span className={styles.name__wrapper}>
+                  <p className={styles.helper__name}>{durver.name}</p>
+                  {durver.awards.map((award) => (
+                    <img
+                      key={award.name}
+                      width="20"
+                      height="20"
+                      src={award.img}
+                    />
+                  ))}
+                </span>
+                <p className={styles.date}>
+                  {project.getReadableDate(durver.timestamp)}
+                </p>
+              </div>
+            </div>
+          ))}
+
+          {durversInfo.length > 3 && <a>Bekijk alle durvers</a>}
         </div>
       </aside>
     </>

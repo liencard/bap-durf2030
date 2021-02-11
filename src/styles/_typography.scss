@@ -1,22 +1,22 @@
 @mixin title-one {
   font-family: $font-body;
   font-size: 3.2rem;
-  line-height: 1.5;
+  line-height: 1.3;
   font-weight: 700;
   margin-bottom: 3rem;
 }
 
 @mixin title-two {
   font-family: $font-body;
-  font-size: 2.4rem;
-  line-height: 3.6rem;
+  font-size: 2.2rem;
+  line-height: 3.2rem;
   font-weight: 600;
   margin-bottom: 2rem;
 }
 
 @mixin title-three {
   font-family: $font-body;
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-size: 1.5;
   font-weight: 500;
   margin-bottom: 1rem;
@@ -31,9 +31,9 @@
 
 @mixin text-body {
   font-family: $font-body;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 300;
-  line-height: 1.7;
+  line-height: 1.5;
 }
 
 @mixin text-small {

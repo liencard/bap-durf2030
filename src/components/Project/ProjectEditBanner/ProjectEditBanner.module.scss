@@ -1,0 +1,17 @@
+@import '../../../styles/styles.scss';
+
+.banner {
+  background-color: $green-extra-light;
+  grid-column: span 12;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+
+  p {
+    width: 50%;
+  }
+
+  button {
+    margin-left: 2rem;
+  }
+}

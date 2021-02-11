@@ -43,14 +43,21 @@
   }
 
   .pagination {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
     width: 60%;
+
+    display: grid;
+    grid-template-columns: 3rem 1fr 3rem;
+
+    button {
+      padding: 1.5rem;
+    }
 
     p {
       font-size: 1.8rem;
       font-weight: 600;
+      grid-column: 2 / 3;
+      text-align: center;
 
       span {
         font-size: 2.4rem;
@@ -65,4 +72,44 @@
 
 .spotlight__item {
   grid-column: span 7;
+  display: flex;
+  z-index: 1;
+
+  .item__banner {
+    margin-top: -7rem;
+    margin-right: 3rem;
+  }
+
+  .item__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .item__title {
+    @include title-two;
+  }
+
+  .item__person {
+    display: flex;
+    align-items: center;
+
+    img {
+      border-radius: 50%;
+      margin-right: 2.5rem;
+    }
+
+    p {
+      font-weight: 600;
+    }
+
+    p:last-of-type {
+      @include text-detail;
+      color: $blue-dark;
+    }
+  }
+}
+
+.test {
+  display: flex;
 }

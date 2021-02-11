@@ -3,8 +3,9 @@ import { useEffect, useState } from 'react';
 import { useStores } from '../../../hooks/useStores';
 import { Container } from '../../Layout';
 import { Button } from '../../UI';
+import { ProjectCircle, ProjectHelp } from '../';
 
-const ProjectRequirementsMaterials = ({ project }) => {
+const ProjectRequirementsMaterials = ({ project, progress }) => {
   const { projectStore } = useStores();
 
   const [bouw, setBouw] = useState([]);
@@ -52,7 +53,7 @@ const ProjectRequirementsMaterials = ({ project }) => {
     <>
       <section className={styles.requirement}>
         <Container>
-          <div className={`${styles.circle} ${styles.material}`} />
+          <ProjectCircle type="material" progress={progress} large />
           <div className={styles.content}>
             <h2 className={styles.title}>Materiaal</h2>
             <div className={styles.wrapper}>
@@ -159,7 +160,7 @@ const ProjectRequirementsMaterials = ({ project }) => {
             </div>
             <div className={styles.footer}>
               <p></p>
-              <Button text={'Hulp aanbieden'} />
+              <ProjectHelp text={'Hulp aanbieden'} project={project} />
             </div>
           </div>
         </Container>

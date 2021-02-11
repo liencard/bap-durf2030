@@ -1,38 +1,57 @@
 import { observer } from 'mobx-react-lite';
 import { useStores } from '../../hooks/useStores';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Container, Grid } from '../../components/Layout';
 import { TabPanel, AppBar, TabSideElement } from '../../components/UI';
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
+import { Header, Footer } from '../../components/Layout';
 import styles from './Profile.module.scss';
-import {
-  LikedProjects,
-  OwnProjects,
-  OwnAwards,
-  BadgesAwards,
-} from '../../components/Profile';
+
+import { LikedProjects, OwnProjects, OwnAwards, BadgesAwards } from '../../components/Profile';
 
 import Tab from '@material-ui/core/Tab';
 
 const Profile = observer(() => {
   const { uiStore } = useStores();
+  const [userProjects, setUserProjects] = useState([]);
+  const [likedProjects, setLikedProjects] = useState([]);
   const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    const userLikedProjects = uiStore.userLikedProjects;
+
+    setLikedProjects(userLikedProjects);
+  }, [uiStore.userLikedProjects]);
+
+  const setProjectsForUser = (userProjects) => {
+    setUserProjects(userProjects);
+  };
+
+  useEffect(() => {
+    if (uiStore.currentUser && userProjects.length === 0) {
+      const loadOwnProjects = async () => {
+        await uiStore.getProjectsForUser();
+        const userProjectsArr = uiStore.userProjects;
+        setProjectsForUser(userProjectsArr);
+      };
+      loadOwnProjects();
+    }
+
+    if (uiStore.currentUser && likedProjects.length === 0) {
+      const loadLikedProjects = async () => {
+        await uiStore.getLikedProjectsByUser();
+      };
+      loadLikedProjects();
+    }
+  }, [uiStore.currentUser]);
 
   return (
     <>
       <Header />
-
       <div className={styles.profile}>
         <Container>
           {uiStore.currentUser && (
             <div className={styles.profile__wrapper}>
-              <img
-                className={styles.avatar}
-                width="80"
-                height="80"
-                src={uiStore.currentUser.avatar}
-              />
+              <img className={styles.avatar} width="80" height="80" src={uiStore.currentUser.avatar} />
               <div>
                 <span className={styles.name__wrapper}>
                   <p className={styles.name}>{uiStore.currentUser.name}</p>
@@ -46,29 +65,25 @@ const Profile = observer(() => {
           )}
         </Container>
 
-        <div className={`${styles.line} ${styles.lineTop}`}></div>
-        <Container>
-          <AppBar value={value} setValue={setValue}>
-            <Tab label="Overview" />
-            <Tab label="Gewaardeerde projecten" />
-            <Tab label="Badges & Awards" />
-            <TabSideElement>
-              <Tab label="Instellingen" />
-            </TabSideElement>
-          </AppBar>
-        </Container>
-        <div className={`${styles.line} ${styles.lineBottom}`}></div>
+        <AppBar value={value} setValue={setValue}>
+          <Tab label="Overview" />
+          <Tab label="Gewaardeerde projecten" />
+          <Tab label="Badges & Awards" />
+          <TabSideElement>
+            <Tab label="Instellingen" />
+          </TabSideElement>
+        </AppBar>
 
         <TabPanel className={styles.panel} value={value} index={0}>
           <Container>
-            <OwnProjects />
+            <OwnProjects projects={userProjects} />
             <OwnAwards />
           </Container>
         </TabPanel>
 
         <TabPanel className={styles.panel} value={value} index={1}>
           <Container>
-            <LikedProjects />
+            <LikedProjects projects={likedProjects} />
           </Container>
         </TabPanel>
 

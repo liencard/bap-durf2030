@@ -12,7 +12,7 @@ class Project {
     contact,
     description,
     durvers = [],
-    image,
+    image = {},
     intro,
     isKnownPlace,
     materials = [],
@@ -25,10 +25,12 @@ class Project {
     servicesRequired,
     street,
     themes,
+    timestamp = '',
     title,
     state = 0,
     impact = '',
     date = {},
+    highlight = false,
 
     updates = [],
     id,
@@ -47,7 +49,7 @@ class Project {
     this.contact = contact;
     this.description = description;
     this.durvers = durvers;
-    this.image = image;
+    this.image = image.enabled ? image : { enabled: false, url: 'placeholder.png' };
     this.intro = intro;
     this.isKnownPlace = isKnownPlace;
     this.materials = materials;
@@ -61,6 +63,7 @@ class Project {
     this.street = street;
     this.themes = themes;
     this.title = title;
+    this.timestamp = timestamp;
     this.state = state;
 
     this.updates = updates;
@@ -71,6 +74,7 @@ class Project {
     this.comments = [];
     this.impact = impact;
     this.date = date;
+    this.highlight = highlight;
 
     if (store) {
       this.store = store;
@@ -99,9 +103,11 @@ class Project {
       addLike: action,
       removeLike: action,
       setLiked: action,
+      createDurver: action,
 
       comments: observable,
       linkComment: action,
+      getComments: action,
 
       impact: observable,
       date: observable,
@@ -153,6 +159,15 @@ class Project {
     );
   }
 
+  deleteProject() {
+    this.store.deleteProject(this.id);
+  }
+
+  createDurver(durver) {
+    this.store.createDurver(durver, this.id, this.owners);
+    this.durvers.push(durver);
+  }
+
   getRequirementsInfo() {
     this.store.loadRequirementListInfoById(this.id).then(
       action('fetchSuccess', (info) => {
@@ -192,11 +207,10 @@ class Project {
 
   createUpdate = (update) => {
     const timestamp = getCurrenTimeStamp();
-    this.store.createUpdate(update, timestamp, this.id);
-    this.updates.push({
-      text: update,
-      timestamp: timestamp,
-    });
+    update.timestamp = timestamp;
+    console.log(update);
+    this.store.createUpdate(update, this.id);
+    this.updates.push(update);
   };
 
   removeUpdate = (update) => {
@@ -233,9 +247,7 @@ class Project {
     const days = Math.floor(seconds / 86400);
 
     if (days < 1) {
-      return `${date.getHours()}:${
-        date.getMinutes() < 10 ? 0 : ''
-      }${date.getMinutes()}`;
+      return `${date.getHours()}:${date.getMinutes() < 10 ? 0 : ''}${date.getMinutes()}`;
     } else if (days < 7) {
       return `${days} dag${days > 1 ? 'en' : ''} geleden`;
     } else {
@@ -291,7 +303,10 @@ class Project {
   };
 
   linkComment(comment) {
+    //  this.comments.push(comment);
+    console.log('comment gevonden');
     !this.comments.includes(comment) && this.comments.push(comment);
+    console.log(this.comments.length);
   }
 
   updateProject(newValues) {
@@ -300,12 +315,7 @@ class Project {
     Object.keys(newValues).forEach((key) => {
       this[key] = newValues[key];
 
-      if (
-        key !== 'isKnownPlace' &&
-        key !== 'number' &&
-        key !== 'city' &&
-        key !== 'street'
-      ) {
+      if (key !== 'isKnownPlace' && key !== 'number' && key !== 'city' && key !== 'street') {
         updatedValues[key] = newValues[key];
       }
     });
@@ -371,6 +381,8 @@ const convertData = {
       themes: project.themes,
       categories: project.categories,
       image: project.image,
+      impact: project.impact,
+      highlight: project.highlight,
     };
   },
 
@@ -434,6 +446,8 @@ const projectConverter = {
       updates: data.updates,
       impact: data.impact,
       date: data.date,
+      timestamp: data.timestamp,
+      highlight: data.highlight,
     };
   },
 };

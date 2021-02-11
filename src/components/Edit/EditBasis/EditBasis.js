@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './EditBasis.module.scss';
 import { EditPart, EditLabel, EditField } from '../';
 import {
@@ -15,6 +15,7 @@ const EditBasis = ({ project }) => {
   const [isKnownPlace, setIsKnownPlace] = useState(project.isKnownPlace);
 
   const handleSaveProject = (values) => {
+    console.log(values);
     if (values.categories && values.themes) {
       let categoriesWithValues = {};
       let themesWithValues = {};
@@ -42,6 +43,8 @@ const EditBasis = ({ project }) => {
     };
     project.updateImage(values.image);
   };
+
+  useEffect(() => {}, []);
 
   return (
     <>

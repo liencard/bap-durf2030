@@ -4,17 +4,90 @@ $border-radius: 0.5rem;
 .header {
   background-color: $blue-dark;
   height: 95vh;
+  max-height: 100rem;
   color: white;
-  background-image: url('/hero.png');
-  background-repeat: no-repeat;
-  background-position: center 10vh;
+
+  display: flex;
+  position: relative;
+
+  &::before {
+    position: absolute;
+    content: '';
+    background-image: url('/header-left.png');
+    height: 100%;
+    width: 50vw;
+    background-repeat: no-repeat;
+    top: 0;
+    left: calc(((100vw - 90rem) / 2) / 5);
+    background-position: center left;
+
+    @media (max-width: 2100px) {
+      left: 5rem;
+    }
+
+    @media (max-width: 1850px) {
+      width: 65rem;
+      left: 0;
+      background-size: 100%;
+    }
+
+    @media (max-width: 1600px) {
+      background-position: center left -10rem;
+    }
+
+    @media (max-width: 1350px) {
+      background-position: center left -20rem;
+    }
+
+    @media (max-width: 1080px) {
+      display: none;
+    }
+  }
+
+  &::after {
+    position: absolute;
+    content: '';
+    background-image: url('/header-right.png');
+    height: 100%;
+    width: 50vw;
+    background-repeat: no-repeat;
+    top: 0;
+    right: calc(((100vw - 90rem) / 2) / 5);
+    background-position: center right;
+
+    @media (max-width: 2100px) {
+      right: 5rem;
+    }
+
+    @media (max-width: 1850px) {
+      width: 80rem;
+      right: 0;
+      background-size: 100%;
+    }
+
+    @media (max-width: 1600px) {
+      background-position: center right -10rem;
+    }
+
+    @media (max-width: 1350px) {
+      background-position: center right -20rem;
+    }
+
+    @media (max-width: 1080px) {
+      display: none;
+    }
+  }
 }
 
 .text {
-  grid-column: 4 / span 6;
+  grid-column: 3 / span 7;
   align-items: center;
   display: flex;
   justify-content: center;
+
+  @media (max-width: 1500px) {
+    grid-column: 4 / span 6;
+  }
 }
 
 .text__wrapper {
@@ -42,14 +115,25 @@ $border-radius: 0.5rem;
 
 .subtitle {
   text-transform: uppercase;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: 300;
+  font-family: $font-accent;
+  margin-bottom: 2rem;
+
+  @media (max-width: 1400px) {
+    font-size: 1.2rem;
+  }
 }
 
 .title {
-  font-size: 6.4rem;
-  line-height: 6.8rem;
+  font-size: 7rem;
+  line-height: 8rem;
   font-weight: 700;
+
+  @media (max-width: 1500px) {
+    font-size: 6rem;
+    line-height: 6.5rem;
+  }
 
   .green {
     color: $green;
@@ -62,6 +146,11 @@ $border-radius: 0.5rem;
 
 .description {
   margin: 4rem 0;
+  font-size: 1.8rem;
+
+  @media (max-width: 1500px) {
+    font-size: 1.6rem;
+  }
 }
 
 .btn__wrapper {
