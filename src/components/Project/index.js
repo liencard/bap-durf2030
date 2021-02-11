@@ -25,4 +25,6 @@ export { default as ProjectCircle } from './ProjectCircle/ProjectCircle';
 export { default as ProjectEditBanner } from './ProjectEditBanner/ProjectEditBanner';
 export { default as ProjectUpdates } from './ProjectUpdates/ProjectUpdates';
 export { default as ProjectFilter } from './ProjectFilter/ProjectFilter';
+export { default as RequirementFilter } from './RequirementFilter/RequirementFilter';
 export { default as ProjectTimeline } from './ProjectTimeline/ProjectTimeline';
+

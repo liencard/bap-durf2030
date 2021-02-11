@@ -1,40 +1,31 @@
-import styles from './ProjectFilter.module.scss';
+import styles from './RequirementFilter.module.scss';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { useEffect, useState } from 'react';
-import { THEMES, CATEGORIES, CITIES } from '../../../consts/index';
+import { SERVICETYPES, MATERIALTYPES } from '../../../consts/index';
 
-// Zie https://codesandbox.io/s/cwvg4?file=/demo.js:1577-1656
-
-const ProjectFilter = ({
-  location,
-  setLocation,
-  theme,
-  setTheme,
-  cat,
-  setCat,
+const RequirementFilter = ({
+  catService,
+  setCatService,
+  catMaterial,
+  setCatMaterial,
 }) => {
   const [showTagOptions, setShowTagOptions] = useState(false);
 
-  const handleChangeTheme = (event) => {
-    setTheme(event.target.value);
+  const handleChangeCatService = (event) => {
+    setCatService(event.target.value);
   };
 
-  const handleChangeCat = (event) => {
-    setCat(event.target.value);
-  };
-
-  const handleChangeLocation = (event) => {
-    setLocation(event.target.value);
+  const handleChangeCatMaterial = (event) => {
+    setCatMaterial(event.target.value);
   };
 
   useEffect(() => {
     if (!showTagOptions) {
-      setTheme('none');
-      setCat('none');
-      setLocation('none');
+      setCatService('none');
+      setCatMaterial('none');
     }
   }, [showTagOptions]);
 
@@ -50,9 +41,7 @@ const ProjectFilter = ({
           />
         </div>
         <div>
-          <p className={styles.label}>Kaartweergave</p>
           <p className={styles.label}>Sorteren op</p>
-
           <FormControl variant="outlined">
             <Select defaultValue="Nieuwste">
               <MenuItem value="Nieuwste">Nieuwste</MenuItem>
@@ -74,47 +63,32 @@ const ProjectFilter = ({
             <button
               className={styles.delete}
               onClick={() => {
-                setCat('none');
-                setTheme('none');
-                setLocation('none');
+                setCatService('none');
+                setCatMaterial('none');
               }}
             >
               Verwijder tags
             </button>
             <FormControl fullWidth variant="outlined">
-              <Select value={theme} onChange={handleChangeTheme}>
+              <Select value={catService} onChange={handleChangeCatService}>
                 <MenuItem value="none">
-                  <em className={styles.default}>Geen thema</em>
+                  <em className={styles.default}>Geen vrijlligers type</em>
                 </MenuItem>
-                {THEMES.map((theme) => (
-                  <MenuItem key={theme} value={theme}>
-                    {theme}
+                {SERVICETYPES.map((service) => (
+                  <MenuItem key={service} value={service}>
+                    {service}
                   </MenuItem>
                 ))}
               </Select>
             </FormControl>
-
             <FormControl fullWidth variant="outlined">
-              <Select value={cat} onChange={handleChangeCat}>
+              <Select value={catMaterial} onChange={handleChangeCatMaterial}>
                 <MenuItem value="none">
-                  <em className={styles.default}>Geen categorie</em>
+                  <em className={styles.default}>Geen materiaal</em>
                 </MenuItem>
-                {CATEGORIES.map((category) => (
-                  <MenuItem key={category} value={category}>
-                    {category}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-
-            <FormControl fullWidth variant="outlined">
-              <Select value={location} onChange={handleChangeLocation}>
-                <MenuItem value="none">
-                  <em className={styles.default}>Geen locatie</em>
-                </MenuItem>
-                {CITIES.map((city) => (
-                  <MenuItem key={city} value={city}>
-                    {city}
+                {MATERIALTYPES.map((material) => (
+                  <MenuItem key={material} value={material}>
+                    {material}
                   </MenuItem>
                 ))}
               </Select>
@@ -126,4 +100,4 @@ const ProjectFilter = ({
   );
 };
 
-export default ProjectFilter;
+export default RequirementFilter;

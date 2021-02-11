@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import styles from './ProjectHelpTwoService.module.scss';
-import { useField } from '@formiz/core';
 import { FormFieldCheckbox } from '../../Create';
 
 const ProjectHelpTwoService = ({ project, services }) => {
