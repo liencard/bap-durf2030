@@ -29,7 +29,7 @@ const ProjectComments = observer(({ project, comments }) => {
 
   return (
     <Container>
-      <div className={styles.comments}>
+      <article className={styles.comments}>
         <h2 className={styles.title}>Comments</h2>
 
         {project.comments.length !== 0 ? (
@@ -43,7 +43,7 @@ const ProjectComments = observer(({ project, comments }) => {
             <p>Geen commments</p>
           </div>
         )}
-      </div>
+      </article>
 
       <div className={styles.create}>
         {uiStore.currentUser && (

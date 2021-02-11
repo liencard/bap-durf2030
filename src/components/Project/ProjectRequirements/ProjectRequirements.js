@@ -38,7 +38,8 @@ const ProjectRequirements = ({ project }) => {
 
   return (
     <>
-      <div className={styles.requirements}>
+      <article className={styles.requirements}>
+        <h2 className="hidden">Nodige hulp</h2>
         {/* CROWDFUNDING */}
         {project.fundingRequired && (
           <ProjectRequirementsFunding
@@ -60,7 +61,7 @@ const ProjectRequirements = ({ project }) => {
             progress={(materialsCount / project.materials.length) * 100}
           />
         )}
-      </div>
+      </article>
     </>
   );
 };

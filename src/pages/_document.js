@@ -1,10 +1,7 @@
-/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import Document, { Html, Main, Head, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/core/styles';
 
-// Code source & info:
-// https://itnext.io/next-js-with-material-ui-7a7f6485f671
 export default class MyDocument extends Document {
   render() {
     return (

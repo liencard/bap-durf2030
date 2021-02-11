@@ -73,16 +73,11 @@ const ProjectHeader = observer(({ project, projectOwner, setTab }) => {
 
   return (
     <>
-      <div className={styles.header}>
+      <article className={styles.header}>
         <Container>
           {projectOwner && <ProjectEditBanner project={project} />}
           <div className={styles.back__btn}>
-            <img
-              src="/icons/arrow-dark.svg"
-              width="6"
-              height="10"
-              alt="dark arrow icon left"
-            />
+            <img src="/icons/arrow-dark.svg" width="6" height="10" alt="dark arrow icon left" />
             <Link href={ROUTES.projects}>Terug naar overview</Link>
           </div>
           <div className={styles.sidebar}>
@@ -106,12 +101,7 @@ const ProjectHeader = observer(({ project, projectOwner, setTab }) => {
               <h1 className={styles.title}>{project.title}</h1>
               {project.isKnownPlace && (
                 <div className={styles.location}>
-                  <img
-                    src="/icons/location-green.svg"
-                    alt="logo DURF2030"
-                    width="13.75"
-                    height="15.9"
-                  />
+                  <img src="/icons/location-green.svg" alt="logo DURF2030" width="13.75" height="15.9" />
                   <p>
                     {project.street} {project.number}, {project.city}
                   </p>
@@ -122,10 +112,7 @@ const ProjectHeader = observer(({ project, projectOwner, setTab }) => {
             <div className={styles.help}>
               {project.servicesRequired && (
                 <div className={styles.item}>
-                  <ProjectCircle
-                    type="service"
-                    progress={(servicesCount / project.services.length) * 100}
-                  />
+                  <ProjectCircle type="service" progress={(servicesCount / project.services.length) * 100} />
                   <p className={styles.info}>
                     {servicesCount}/{project.services.length} vrijwilligers
                   </p>
@@ -136,10 +123,7 @@ const ProjectHeader = observer(({ project, projectOwner, setTab }) => {
               )}
               {project.materialsRequired && (
                 <div className={styles.item}>
-                  <ProjectCircle
-                    type="material"
-                    progress={(materialsCount / project.materials.length) * 100}
-                  />
+                  <ProjectCircle type="material" progress={(materialsCount / project.materials.length) * 100} />
                   <p className={styles.info}>
                     {materialsCount}/{project.materials.length} materialen
                   </p>
@@ -149,15 +133,8 @@ const ProjectHeader = observer(({ project, projectOwner, setTab }) => {
                 </div>
               )}
               {project.fundingRequired && (
-                <div
-                  className={`${styles.item} ${
-                    project.state === 1 && styles.item__locked
-                  }`}
-                >
-                  <ProjectCircle
-                    type="funding"
-                    progress={(fundingCount / project.fundingAmount) * 100}
-                  />
+                <div className={`${styles.item} ${project.state === 1 && styles.item__locked}`}>
+                  <ProjectCircle type="funding" progress={(fundingCount / project.fundingAmount) * 100} />
                   {project.state === 1 ? (
                     <p className={styles.info}>vergrendeld</p>
                   ) : (
@@ -175,14 +152,12 @@ const ProjectHeader = observer(({ project, projectOwner, setTab }) => {
               <ProjectHelp text={'Ik durf mee te helpen'} project={project} />
               <div className={styles.interact}>
                 <ProjectLikes project={project} />
-                {project.durvers.length != 0 && (
-                  <ProjectHelpers project={project} />
-                )}
+                {project.durvers.length != 0 && <ProjectHelpers project={project} />}
               </div>
             </div>
           </div>
         </Container>
-      </div>
+      </article>
     </>
   );
 });

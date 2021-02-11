@@ -29,8 +29,9 @@ const Projects = ({ projectsJSON }) => {
   useEffect(() => {
     const projectsArr = projectsJSON.map((projectJSON) => {
       const project = convertData.fromJSON(projectJSON, projectStore);
+
+      // Adding dynamic content to pre-rendered SSR data
       project.getLikes();
-      project.getRequirementsList();
       project.getRequirementsInfo();
       project.getDurvers();
       return project;
@@ -39,7 +40,7 @@ const Projects = ({ projectsJSON }) => {
     setProjects(projectsArr);
   }, []);
 
-  // FILTER PROJECTS
+  // Filter projects
   useEffect(() => {
     let filterArr = [];
 
@@ -63,7 +64,7 @@ const Projects = ({ projectsJSON }) => {
     setFilteredProjects(filterArr);
   }, [cat, theme, location, setFilteredProjects]);
 
-  // FILTER REQUIREMENTS
+  // Filter requirements
   useEffect(() => {
     let requirArr = [];
 
@@ -86,12 +87,13 @@ const Projects = ({ projectsJSON }) => {
     setRequirFilteredProjects(requirArr);
   }, [catService, catMaterial, setRequirFilteredProjects]);
 
-  // FILTER MILESTONES
+  // Filter milestones
   useEffect(() => {
     let milestonesArr = [];
     let projectsFound = 0;
 
     projects.forEach((project) => {
+      // Current milestone theme
       if (project.themes['eenzaamheid rond corona'] === true) {
         milestonesArr.push(project);
       }
@@ -236,6 +238,7 @@ export const getStaticProps = async (context) => {
   const store = new RootStore();
   const { projectStore } = store;
 
+  // Data to SSR
   await projectStore.loadAllProjects();
 
   const projectsJSON = projectStore.projects.map((data) => {

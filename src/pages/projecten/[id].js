@@ -80,7 +80,7 @@ const Project = observer(({ projectJSON, usersJSON }) => {
   );
 });
 
-// All possible paths will be find to create a SSR page
+// All possible paths will be looped over to create a SSR page
 export const getStaticPaths = async () => {
   const store = new RootStore();
   const { projectStore } = store;

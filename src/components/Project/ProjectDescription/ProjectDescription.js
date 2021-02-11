@@ -30,7 +30,7 @@ const ProjectDescription = observer(({ project, users }) => {
 
   return (
     <>
-      <div className={styles.text__wrapper}>
+      <article className={styles.text__wrapper}>
         {project.state > 3 && project.impact && (
           <div className={styles.impact}>
             <ParsedRichText html={project.impact} />
@@ -44,7 +44,7 @@ const ProjectDescription = observer(({ project, users }) => {
             <ProjectLikes project={project} />
           </div>
         </div>
-      </div>
+      </article>
       <aside className={styles.details}>
         <div className={styles.creator__wrapper}>
           <h3 className={styles.creator__title}>Organisator(en)</h3>
