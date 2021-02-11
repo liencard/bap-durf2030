@@ -1,6 +1,12 @@
 import { Header, Footer } from '../components/Layout';
 import { Container } from '../components/Layout';
-import { HomeDurf, HomePlatform, HomeHero, HomeSpotlight, ProjectSpotlight } from '../components/Home';
+import {
+  HomeDurf,
+  HomePlatform,
+  HomeHero,
+  HomeSpotlight,
+  ProjectSpotlight,
+} from '../components/Home';
 
 import { convertData } from '../models/Project';
 import { useEffect, useState } from 'react';
@@ -30,9 +36,10 @@ const Home = ({ projectsJSON }) => {
 
       <Container>
         <ProjectSpotlight projects={projects} />
-        <HomeDurf />
-        <HomePlatform />
       </Container>
+      <HomeDurf />
+      <HomePlatform />
+
       <Footer />
     </>
   );

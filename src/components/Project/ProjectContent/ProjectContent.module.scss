@@ -12,3 +12,54 @@
   display: flex;
   align-items: center;
 }
+
+.letters__description {
+  position: relative;
+  width: 100%;
+
+  &::after {
+    position: absolute;
+    content: '';
+    background-image: url('/letters/bg-projectenRight.png');
+    height: 100%;
+    width: 100%;
+    background-repeat: repeat-y;
+    background-size: contain;
+    background-position: right;
+    top: 0;
+    z-index: 0;
+  }
+}
+
+.letters {
+  position: relative;
+  width: 100%;
+
+  &::before {
+    position: absolute;
+    content: '';
+    background-image: url('/letters/Udetail.png');
+    height: 12.5rem;
+    width: 13.5rem;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top left;
+    left: 0;
+    top: 10vhvh;
+    z-index: 0;
+  }
+
+  &::after {
+    position: absolute;
+    content: '';
+    background-image: url('/letters/Rdetail.png');
+    height: 38rem;
+    width: 12.5rem;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: bottom right;
+    bottom: 0;
+    right: 0;
+    z-index: 0;
+  }
+}

@@ -9,7 +9,7 @@ import {
   FormFieldSelect,
   FormFieldFileUpload,
 } from '../../Create';
-import { THEMES, CATEGORIES } from '../../../consts';
+import { THEMES, CATEGORIES, CITIES } from '../../../consts';
 
 const EditBasis = ({ project }) => {
   const [isKnownPlace, setIsKnownPlace] = useState(project.isKnownPlace);
@@ -55,11 +55,19 @@ const EditBasis = ({ project }) => {
         </EditField>
         <EditField>
           <EditLabel text="Korte samenvatting" htmlFor="intro" />
-          <FormFieldInput defaultValue={project.intro} name="intro" multiline required />
+          <FormFieldInput
+            defaultValue={project.intro}
+            name="intro"
+            multiline
+            required
+          />
         </EditField>
         <EditField>
           <EditLabel text="Beschrijving" htmlFor="description" />
-          <FormFieldRichTextEditor defaultValue={project.description} name="description" />
+          <FormFieldRichTextEditor
+            defaultValue={project.description}
+            name="description"
+          />
         </EditField>
       </EditPart>
 
@@ -102,7 +110,10 @@ const EditBasis = ({ project }) => {
 
       <EditPart title="Locatie" handleSaveProject={handleSaveProject}>
         <EditField row>
-          <EditLabel text="Weet je in welke stad je project doorgaat?" htmlFor="isKnownPlace" />
+          <EditLabel
+            text="Weet je in welke stad je project doorgaat?"
+            htmlFor="isKnownPlace"
+          />
           <div className={styles.form__switch}>
             <span className={styles.place__label}>Nee</span>
             <FormFieldSwitch
@@ -120,7 +131,11 @@ const EditBasis = ({ project }) => {
             <div className={styles.location}>
               <EditField>
                 <EditLabel text="Stad" htmlFor="city" />
-                <FormFieldSelect name="city" options={['Kortrijk', 'Izegem']} defaultValue="Kortrijk" />
+                <FormFieldSelect
+                  name="city"
+                  options={CITIES}
+                  defaultValue="Kortrijk"
+                />
               </EditField>
               <EditField>
                 <EditLabel text="Straat" htmlFor="street" />

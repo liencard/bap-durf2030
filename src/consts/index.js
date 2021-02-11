@@ -48,6 +48,17 @@ const MATERIALTYPES = [
 
 const SERVICETYPES = ['Creatieve hulp', 'Fysieke hulp', 'Andere'];
 
+const CITIES = [
+  'Aalbeke',
+  'Bellegem',
+  'Bissegem',
+  'Heule',
+  'Kooigem',
+  'Kortrijk',
+  'Marke',
+  'Rollegem',
+];
+
 const AWARDS = [
   {
     name: 'Creatieveling',
@@ -86,6 +97,7 @@ export {
   CATEGORIES,
   MATERIALTYPES,
   SERVICETYPES,
+  CITIES,
   AWARDS,
   BADGES,
 };
