@@ -49,5 +49,9 @@ class UserService {
   updateUserNotifications = (notifications, userEmail) => {
     this.db.collection('users').doc(userEmail).update(notifications);
   };
+
+  updateUserBadges = (badges, userEmail) => {
+    this.db.collection('users').doc(userEmail).update(badges);
+  };
 }
 export default UserService;

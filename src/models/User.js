@@ -64,7 +64,6 @@ const convertDataUser = {
       organisation: user.organisation,
       awards: user.awards,
       badges: user.badges,
-      notifications: data.notifications,
     };
   },
 
@@ -79,7 +78,6 @@ const convertDataUser = {
       awards: user.awards,
       badges: user.badges,
       store: store,
-      notifications: data.notifications,
     });
   },
 };

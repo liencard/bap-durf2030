@@ -70,6 +70,10 @@ class UserStore {
   updateNotifications = (notifications, userEmail) => {
     this.userService.updateUserNotifications({ notifications: notifications }, userEmail);
   };
+
+  updateBadges = (badges, userEmail) => {
+    this.userService.updateUserBadges({ badges: badges }, userEmail);
+  };
 }
 
 export default UserStore;

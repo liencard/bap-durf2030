@@ -22,30 +22,11 @@ class UiStore {
     //     tag: 'Dank je wel om actief andere projecten te steunen.',
     //   },
     // },
-    // {
-    //   type: 'offer',
-    //   timestamp: '1 dag geleden',
-    //   read: true,
-    //   info: {
-    //     project: { id: 'projectId', title: 'Vraagstraat' },
-    //     user: { name: 'John Doe', avatar: '/pfp-temp.jpg' },
-    //     offers: ['service'],
-    //   },
-    // },
-    // {
-    //   type: 'offer',
-    //   timestamp: '2 dagen geleden',
-    //   read: true,
-    //   info: {
-    //     project: { id: 'projectId', title: 'Lang Touw' },
-    //     user: { name: 'John Doe', avatar: '/pfp-temp.jpg' },
-    //     offers: ['material'],
-    //   },
-    // },
 
     this.userLikedProjects = [];
     this.authService = new AuthService(this.rootStore.firebase, this.onAuthStateChanged);
     this.userService = new UserService(this.rootStore.firebase);
+    console.log(this.userLikedProjects);
 
     makeObservable(this, {
       currentUser: observable,
@@ -69,6 +50,17 @@ class UiStore {
   addLikedProject = (project) => {
     project.timestamp = '';
     this.userLikedProjects.push(project);
+
+    // Create liker badges
+    // if (this.userLikedProjects.length > 4) {
+    //   let badges = [...this.currentUser.badges];
+    //   badges.push({ img: 'img url hier', name: 'Liker', level: 2 });
+    //   this.rootStore.userStore.updateBadges(badges, this.currentUser.email);
+    // } else if (this.userLikedProjects.length > 0) {
+    //   let badges = [...this.currentUser.badges];
+    //   badges.push({ img: 'img url hier', name: 'Liker', level: 1 });
+    //   this.rootStore.userStore.updateBadges(badges, this.currentUser.email);
+    // }
   };
 
   onAuthStateChanged = (user) => {
@@ -86,6 +78,7 @@ class UiStore {
   setCurrentUser = async (email) => {
     this.currentUser = await this.userService.getUserByEmail(email);
     this.notifications = [...this.currentUser.notifications];
+    this.getLikedProjectsByUser();
   };
 
   setNotificationsAsRead = () => {
