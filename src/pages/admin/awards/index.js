@@ -1,15 +1,9 @@
-import { useStores } from '../../../hooks/useStores';
-import { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import styles from './Awards.module.scss';
 import Sidebar from '../../../components/Admin/Sidebar/Sidebar';
-import { AWARDS } from '../../../consts';
+import { AWARDS, BADGES } from '../../../consts';
 
 const Awards = observer(() => {
-  const { userStore } = useStores();
-  const [email, setEmail] = useState('');
-  const [error, setError] = useState(' ');
-
   return (
     <>
       <div className={styles.admin}>
@@ -21,18 +15,36 @@ const Awards = observer(() => {
             </div>
           </div>
           <div className={styles.list}>
-            {AWARDS.map((award, i) => (
-              <div key={i} className={styles.list__item}>
-                <img
-                  className={styles.icon}
-                  src={award.img}
-                  alt="icon"
-                  width="80"
-                  height="80"
-                />
-                <span>{award.name}</span>
-              </div>
-            ))}
+            <div className={styles.award}>
+              <h2 className={styles.subtitle}>Awards</h2>
+              {AWARDS.map((award, i) => (
+                <div key={i} className={styles.list__item}>
+                  <img
+                    className={styles.icon}
+                    src={award.img}
+                    alt="icon"
+                    width="80"
+                    height="80"
+                  />
+                  <span>{award.name}</span>
+                </div>
+              ))}
+            </div>
+            <div className={styles.badge}>
+              <h2 className={styles.subtitle}>Badges</h2>
+              {BADGES.map((badge, i) => (
+                <div key={i} className={styles.list__item}>
+                  <img
+                    className={styles.icon}
+                    src={badge.levelOne}
+                    alt="icon"
+                    width="80"
+                    height="80"
+                  />
+                  <span>{badge.name}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
       </div>
