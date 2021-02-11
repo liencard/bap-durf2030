@@ -27,8 +27,10 @@ const ProjectHelpTwoMaterial = (props) => {
 
   const changeItemAmount = (item, type) => {
     const itemsArr = items.filter((currentItem) => {
+      const number = parseInt(currentItem.amount);
+      console.log(number);
       if (currentItem == item) {
-        if (type == 'increase' && currentItem.amount !== currentItem.count) {
+        if (type == 'increase' && number !== currentItem.count) {
           item.count++;
         } else if (type == 'decrease' && currentItem.count !== 0) {
           item.count--;

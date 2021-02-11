@@ -2,10 +2,13 @@ import { observer } from 'mobx-react-lite';
 import styles from './TabOverview.module.scss';
 import { SectionPart } from '../index';
 import { ParsedRichText, Button } from '../../../UI';
+import { useEffect, useState } from 'react';
 
 const TabOverview = observer(({ project }) => {
+  const [image, setImage] = useState(undefined);
   let themes = [];
   let categories = [];
+
   Object.keys(project.themes).forEach((key) => {
     if (project.themes[key] === true) {
       themes.push(key);
@@ -21,6 +24,15 @@ const TabOverview = observer(({ project }) => {
   const handleChangeState = (state) => {
     project.updateState(state);
   };
+
+  useEffect(() => {
+    if (project.image.enabled && project.image.url) {
+      setImage(project.image.url);
+    } else {
+      setImage(`/${project.image.url}`);
+    }
+  }, []);
+
   return (
     <>
       <div className={styles.overview}>
@@ -71,7 +83,7 @@ const TabOverview = observer(({ project }) => {
           {project.image.url ? (
             <img
               className={styles.image}
-              src={project.image.url}
+              src={image}
               alt="project header image"
             />
           ) : (

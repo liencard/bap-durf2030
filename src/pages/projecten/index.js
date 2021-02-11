@@ -137,6 +137,10 @@ const Projects = ({ projectsJSON }) => {
     setProjectCount(projectsFound);
   }, [projects]);
 
+  const handleShowMilestones = () => {
+    setTheme('eenzaamheid rond corona');
+  };
+
   return (
     <>
       <Header />
@@ -159,7 +163,10 @@ const Projects = ({ projectsJSON }) => {
             </div>
 
             <div className={styles.buttons}>
-              <Button text={'Bekijk deze projecten'} />
+              <Button
+                onClick={handleShowMilestones}
+                text={'Bekijk deze projecten'}
+              />
               <Button text={'Kom meer te weten'} variant="outline" />
             </div>
           </div>
