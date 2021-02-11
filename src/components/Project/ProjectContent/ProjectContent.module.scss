@@ -20,13 +20,14 @@
   &::after {
     position: absolute;
     content: '';
-    background-image: url('/letters/bg-projectenRight.png');
-    height: 100%;
-    width: 100%;
-    background-repeat: repeat-y;
+    background-image: url('/letters/Rdetail.png');
+    height: 38rem;
+    width: 12.5rem;
+    background-repeat: no-repeat;
     background-size: contain;
-    background-position: right;
-    top: 0;
+    background-position: bottom right;
+    bottom: 0;
+    right: 0;
     z-index: 0;
   }
 }
@@ -45,7 +46,7 @@
     background-size: contain;
     background-position: top left;
     left: 0;
-    top: 10vhvh;
+    top: 10vh;
     z-index: 0;
   }
 

@@ -1,4 +1,5 @@
 import { useStores } from '../../../hooks/useStores';
+import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import styles from './ProjectManagement.module.scss';
 import { Button } from '../../../components/UI';
@@ -10,9 +11,26 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 const ProjectManagement = observer(() => {
   const { projectStore } = useStores();
+  const [projects, setProjects] = useState([]);
   const projectAmount = projectStore.projects.length;
 
-  projectStore.loadAllProjects();
+  useEffect(() => {
+    //console.log('test admin');
+    ////console.log(projectStore.projects);
+
+    const loadProjects = async () => {
+      ///projectStore.projects = [];
+      await projectStore.loadAllProjects();
+
+      setProjects(projectStore.projects);
+    };
+    loadProjects();
+
+    console.log(projects);
+
+    //console.log('test after load');
+    //console.log(projectStore.projects);
+  }, [projectStore, setProjects]);
 
   let lopendList = [];
   let doneList = [];
@@ -20,7 +38,7 @@ const ProjectManagement = observer(() => {
   let id = 1;
 
   // LOPEND
-  projectStore.projects.map((project) => {
+  projects.map((project) => {
     if (project.state != 0 && project.state != 4) {
       //const timestamp = project.getReadableDate(project.timestamp);
       lopendList.push({

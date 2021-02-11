@@ -6,7 +6,13 @@ const HeaderForm = ({ close, onCloseClick }) => {
   return (
     <div className={styles.header}>
       <Link href={ROUTES.home}>
-        <img className={styles.logo} src="/logo.svg" alt="logo DURF2030" width="60" height="80" />
+        <img
+          className={styles.logo}
+          src="/logo-wit.svg"
+          alt="logo DURF2030"
+          width="60"
+          height="80"
+        />
       </Link>
       {close && (
         <button onClick={onCloseClick} className={styles.close}>

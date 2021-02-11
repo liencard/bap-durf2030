@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite';
 import { useState, useEffect } from 'react';
 import styles from './ProjectDurvers.module.scss';
 import { Button } from '../../UI';
+import { ProjectHelp } from '../index';
 
 const ProjectDurvers = observer(({ project }) => {
   return (
@@ -24,13 +25,13 @@ const ProjectDurvers = observer(({ project }) => {
                       <img className={styles.icon} src="/icons/money-yellow.svg" alt="icon" width="18" height="18" />
                     )}
                     {durver.materialsOffered && (
-                      <img className={styles.icon} src="/icons/mmmaterial-red.svg" alt="icon" width="15" height="15" />
+                      <img className={styles.icon} src="/icons/material-red.svg" alt="icon" width="15" height="15" />
                     )}
                     {durver.servicesOffered && (
                       <img className={styles.icon} src="/icons/service-green.svg" alt="icon" width="18" height="18" />
                     )}
                   </span>
-                  <p className={styles.offer}>
+                  <div className={styles.offer}>
                     {durver.fundingOffered && (
                       <span>
                         {durver.fundingAmount} EUR
@@ -43,7 +44,7 @@ const ProjectDurvers = observer(({ project }) => {
                         {durver.offers.length !== i && ', '}
                       </span>
                     ))}
-                  </p>
+                  </div>
                 </div>
               </div>
               <p>{durver.message}</p>

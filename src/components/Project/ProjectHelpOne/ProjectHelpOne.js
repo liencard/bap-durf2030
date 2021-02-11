@@ -23,14 +23,22 @@ const ProjectHelpOne = observer(
       if (!servicesRequired && !materialsRequired && !fundingRequired) {
         setInvisibleToggle(false);
       }
-    }, [setInvisibleToggle, invisibleToggle, servicesRequired, materialsRequired, fundingRequired]);
+    }, [
+      setInvisibleToggle,
+      invisibleToggle,
+      servicesRequired,
+      materialsRequired,
+      fundingRequired,
+    ]);
 
     return (
       <>
         <h2 className={styles.title}>Ik help mee!</h2>
         <p>
-          Help mee met realiseren van <span className={styles.bold}>{project.title}</span>, het uitlenen van je
-          materiaal, een handje helpen of een centje doneren, alle kleine beetjes helpen!
+          Help mee met realiseren van{' '}
+          <span className={styles.bold}>{project.title}</span>, het uitlenen van
+          je materiaal, een handje helpen of een centje doneren, alle kleine
+          beetjes helpen!
         </p>
         <div className={styles.hidden}>
           <FormFieldSwitch
@@ -45,11 +53,14 @@ const ProjectHelpOne = observer(
         <div className={styles.requirements}>
           <div
             className={`${styles.requirement} ${
-              materialsRequired && project.materialsRequired && styles.requirementChecked
+              materialsRequired &&
+              project.materialsRequired &&
+              styles.requirementChecked
             }`}
             onClick={() => {
               {
-                project.materialsRequired && setMaterialsRequired(!materialsRequired);
+                project.materialsRequired &&
+                  setMaterialsRequired(!materialsRequired);
               }
             }}
           >
@@ -67,11 +78,14 @@ const ProjectHelpOne = observer(
 
           <div
             className={`${styles.requirement} ${
-              servicesRequired && project.servicesRequired && styles.requirementChecked
+              servicesRequired &&
+              project.servicesRequired &&
+              styles.requirementChecked
             }`}
             onClick={() => {
               {
-                project.servicesRequired && setServicesRequired(!servicesRequired);
+                project.servicesRequired &&
+                  setServicesRequired(!servicesRequired);
               }
             }}
           >
@@ -89,7 +103,9 @@ const ProjectHelpOne = observer(
 
           <div
             className={`${styles.requirement} ${
-              fundingRequired && project.fundingRequired && styles.requirementChecked
+              fundingRequired &&
+              project.fundingRequired &&
+              styles.requirementChecked
             }`}
             onClick={() => {
               {
@@ -99,7 +115,7 @@ const ProjectHelpOne = observer(
           >
             <div className={`${styles.circle} ${styles.money}`} />
             <span className={styles.subtitle}>Donaties maken</span>
-            {project.fundingRequired && (
+            {project.fundingRequired && project.state != 1 && (
               <FormFieldSwitch
                 name="fundingRequired"
                 label="fundingRequired"

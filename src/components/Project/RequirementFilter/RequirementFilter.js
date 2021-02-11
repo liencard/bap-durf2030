@@ -42,13 +42,14 @@ const RequirementFilter = ({
         </div>
         <div>
           <p className={styles.label}>Sorteren op</p>
-          <FormControl variant="outlined">
-            <Select defaultValue="Nieuwste">
-              <MenuItem value="Nieuwste">Nieuwste</MenuItem>
-              <MenuItem value="Populairste">Populairste</MenuItem>
-            </Select>
-          </FormControl>
-
+          <div className={styles.select}>
+            <FormControl variant="outlined">
+              <Select defaultValue="Nieuwste">
+                <MenuItem value="Nieuwste">Nieuwste</MenuItem>
+                <MenuItem value="Populairste">Populairste</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
           <button
             onClick={() => setShowTagOptions(!showTagOptions)}
             className={styles.button}
@@ -69,30 +70,34 @@ const RequirementFilter = ({
             >
               Verwijder tags
             </button>
-            <FormControl fullWidth variant="outlined">
-              <Select value={catService} onChange={handleChangeCatService}>
-                <MenuItem value="none">
-                  <em className={styles.default}>Geen vrijlligers type</em>
-                </MenuItem>
-                {SERVICETYPES.map((service) => (
-                  <MenuItem key={service} value={service}>
-                    {service}
+            <div className={styles.select}>
+              <FormControl fullWidth variant="outlined">
+                <Select value={catService} onChange={handleChangeCatService}>
+                  <MenuItem value="none">
+                    <em className={styles.default}>Geen vrijlligers type</em>
                   </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            <FormControl fullWidth variant="outlined">
-              <Select value={catMaterial} onChange={handleChangeCatMaterial}>
-                <MenuItem value="none">
-                  <em className={styles.default}>Geen materiaal</em>
-                </MenuItem>
-                {MATERIALTYPES.map((material) => (
-                  <MenuItem key={material} value={material}>
-                    {material}
+                  {SERVICETYPES.map((service) => (
+                    <MenuItem key={service} value={service}>
+                      {service}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
+            <div className={styles.select}>
+              <FormControl fullWidth variant="outlined">
+                <Select value={catMaterial} onChange={handleChangeCatMaterial}>
+                  <MenuItem value="none">
+                    <em className={styles.default}>Geen materiaal</em>
                   </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+                  {MATERIALTYPES.map((material) => (
+                    <MenuItem key={material} value={material}>
+                      {material}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
           </div>
         </>
       )}
