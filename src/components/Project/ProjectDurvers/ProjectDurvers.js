@@ -13,8 +13,8 @@ const ProjectDurvers = observer(({ project }) => {
         </div>
 
         <div>
-          {project.durvers.map((durver) => (
-            <div className={styles.durver}>
+          {project.durvers.map((durver, i) => (
+            <div key={i} className={styles.durver}>
               <div className={styles.user}>
                 <img className={styles.image} src={durver.user.avatar} alt="profielfoto van organisator" />
                 <div className={styles.wrapper}>
@@ -38,7 +38,7 @@ const ProjectDurvers = observer(({ project }) => {
                       </span>
                     )}
                     {durver.offers.map((offer, i) => (
-                      <span>
+                      <span key={i}>
                         {offer.name}
                         {durver.offers.length !== i && ', '}
                       </span>

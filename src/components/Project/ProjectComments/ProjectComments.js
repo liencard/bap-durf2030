@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useStores } from '../../../hooks/useStores';
 import { Container } from '../../Layout';
 import styles from './ProjectComments.module.scss';
@@ -22,10 +22,6 @@ const ProjectComments = observer(({ project, comments }) => {
       setContent('');
     }
   };
-
-  useEffect(() => {
-    console.log(project.comments.length);
-  }, [project.comments]);
 
   return (
     <Container>

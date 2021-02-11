@@ -1,12 +1,6 @@
 import { Header, Footer } from '../components/Layout';
 import { Container } from '../components/Layout';
-import {
-  HomeDurf,
-  HomePlatform,
-  HomeHero,
-  HomeSpotlight,
-  ProjectSpotlight,
-} from '../components/Home';
+import { HomeDurf, HomePlatform, HomeHero, HomeSpotlight, ProjectSpotlight } from '../components/Home';
 
 import { convertData } from '../models/Project';
 import { useEffect, useState } from 'react';
@@ -20,6 +14,7 @@ const Home = ({ projectsJSON }) => {
   useEffect(() => {
     const projectsArr = projectsJSON.map((projectJSON) => {
       const project = convertData.fromJSON(projectJSON, projectStore);
+      // Add dynamic content which was not SSR to project model
       project.getLikes();
       project.getRequirementsInfo();
       project.getDurvers();
@@ -45,6 +40,7 @@ const Home = ({ projectsJSON }) => {
   );
 };
 
+// Server side rendering of data on homepage
 export const getStaticProps = async (context) => {
   const store = new RootStore();
   const { projectStore } = store;

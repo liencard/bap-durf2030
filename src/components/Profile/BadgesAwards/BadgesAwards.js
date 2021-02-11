@@ -9,9 +9,7 @@ const BadgesAwards = () => {
   console.log(uiStore.currentUser);
 
   const awards = AWARDS.map((award) => {
-    const earnedAward = uiStore.currentUser.awards.find(
-      (userAward) => award.name === userAward.name
-    );
+    const earnedAward = uiStore.currentUser.awards.find((userAward) => award.name === userAward.name);
     if (earnedAward) {
       award.earned = true;
     } else {
@@ -21,9 +19,7 @@ const BadgesAwards = () => {
   });
 
   const badges = BADGES.map((badge) => {
-    const earnedBadge = uiStore.currentUser.badges.find(
-      (userBadge) => badge.name === userBadge.name
-    );
+    const earnedBadge = uiStore.currentUser.badges.find((userBadge) => badge.name === userBadge.name);
     if (earnedBadge) {
       badge.earned = true;
     } else {
@@ -31,8 +27,6 @@ const BadgesAwards = () => {
     }
     return badge;
   });
-
-  console.log(badges);
 
   return (
     <>
@@ -44,19 +38,8 @@ const BadgesAwards = () => {
               <h2 className={styles.subtitle}>Badges</h2>
               <div className={styles.list}>
                 {badges.map((badge, i) => (
-                  <div
-                    key={i}
-                    className={`${styles.list__item} ${
-                      badge.earned && styles.earned
-                    }`}
-                  >
-                    <img
-                      className={styles.icon}
-                      src={badge.levelOne}
-                      alt="badge"
-                      width="80"
-                      height="80"
-                    />
+                  <div key={i} className={`${styles.list__item} ${badge.earned && styles.earned}`}>
+                    <img className={styles.icon} src={badge.levelOne} alt="badge" width="80" height="80" />
                     <span>{badge.name} - level 1</span>
                   </div>
                 ))}
@@ -66,19 +49,8 @@ const BadgesAwards = () => {
               <h2 className={styles.subtitle}>Awards</h2>
               <div className={styles.list}>
                 {awards.map((award, i) => (
-                  <div
-                    key={i}
-                    className={`${styles.list__item} ${
-                      award.earned && styles.earned
-                    }`}
-                  >
-                    <img
-                      className={styles.icon}
-                      src={award.img}
-                      alt="award"
-                      width="80"
-                      height="80"
-                    />
+                  <div key={i} className={`${styles.list__item} ${award.earned && styles.earned}`}>
+                    <img className={styles.icon} src={award.img} alt="award" width="80" height="80" />
                     <span>{award.name}</span>
                   </div>
                 ))}

@@ -7,8 +7,8 @@ const ProjectUpdates = ({ updates }) => {
       <article className={styles.updates}>
         <h2 className="hidden">Updates</h2>
         {updates.length > 0 ? (
-          updates.map((update) => (
-            <section className={styles.update}>
+          updates.map((update, i) => (
+            <section key={i} className={styles.update}>
               <p className={styles.date}>{update.timestamp}</p>
               <div className={styles.text}>
                 <ParsedRichText html={update.text} />

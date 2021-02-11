@@ -68,6 +68,7 @@ const Project = observer(({ projectJSON, usersJSON }) => {
   if (!project) {
     return <p>Project laden...</p>;
   }
+
   return (
     <>
       <Header />

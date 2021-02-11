@@ -40,8 +40,8 @@ const ProjectRequirementsMaterials = ({ project, progress }) => {
         } else if (material.category === 'Speelgoed') {
           toyArr.push(material);
           setToy(toyArr);
-        } else if (service.category === 'Andere') {
-          diversArr.push(service);
+        } else if (material.category === 'Andere') {
+          diversArr.push(material);
           setDivers(diversArr);
         }
       });
