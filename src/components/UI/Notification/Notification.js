@@ -18,17 +18,10 @@ const Notification = ({ notification }) => {
             badge verdiend! {notification.info.tag}
           </p>
         );
-      case 'service':
+      case 'offer':
         return (
           <p>
             {notification.info.user.name} wilt vrijwilliger worden voor{' '}
-            <strong>{notification.info.project.title}</strong>
-          </p>
-        );
-      case 'material':
-        return (
-          <p>
-            {notification.info.user.name} wilt materiaal uitlenen voor project{' '}
             <strong>{notification.info.project.title}</strong>
           </p>
         );
@@ -41,9 +34,7 @@ const Notification = ({ notification }) => {
     switch (notification.type) {
       case 'badge':
         return ROUTES.profile;
-      case 'service':
-        return ROUTES.edit.to + notification.info.project.id;
-      case 'material':
+      case 'offer':
         return ROUTES.edit.to + notification.info.project.id;
       default:
         return 'Unknown step';
@@ -54,9 +45,7 @@ const Notification = ({ notification }) => {
     switch (notification.type) {
       case 'badge':
         return notification.info.image;
-      case 'service':
-        return notification.info.user.avatar;
-      case 'material':
+      case 'offer':
         return notification.info.user.avatar;
       default:
         return 'Unknown step';

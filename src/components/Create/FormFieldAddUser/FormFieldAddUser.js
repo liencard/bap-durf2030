@@ -19,6 +19,7 @@ const FormFieldAddUser = (props) => {
 
   useEffect(() => {
     setValue(owners);
+    console.log(owners);
   }, [owners]);
 
   useEffect(() => {
@@ -37,7 +38,12 @@ const FormFieldAddUser = (props) => {
     if (uiStore.currentUser && showCurrentUser) {
       setOwners([
         ...owners,
-        { name: uiStore.currentUser.name, id: uiStore.currentUser.id, avatar: uiStore.currentUser.avatar },
+        {
+          name: uiStore.currentUser.name,
+          id: uiStore.currentUser.id,
+          avatar: uiStore.currentUser.avatar,
+          email: uiStore.currentUser.email,
+        },
       ]);
     }
   }, [uiStore.currentUser]);
@@ -49,7 +55,7 @@ const FormFieldAddUser = (props) => {
       // setOwners([...owners, { name: newValue.inputValue }]);
     } else if (input === 'data') {
       // newValue = User object
-      setOwners([...owners, { name: newValue.name, id: newValue.id, avatar: newValue.avatar }]);
+      setOwners([...owners, { name: newValue.name, id: newValue.id, avatar: newValue.avatar, email: newValue.email }]);
 
       // Remove from users array
       // const usersArr = users.map((user) => {

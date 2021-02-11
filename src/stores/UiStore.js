@@ -21,22 +21,23 @@ class UiStore {
         },
       },
       {
-        type: 'service',
+        type: 'offer',
         timestamp: '1 dag geleden',
         read: true,
         info: {
           project: { id: 'projectId', title: 'Vraagstraat' },
           user: { name: 'John Doe', avatar: '/pfp-temp.jpg' },
-          offer: 'hamer',
+          offers: ['service'],
         },
       },
       {
-        type: 'material',
+        type: 'offer',
         timestamp: '2 dagen geleden',
         read: true,
         info: {
           project: { id: 'projectId', title: 'Lang Touw' },
           user: { name: 'John Doe', avatar: '/pfp-temp.jpg' },
+          offers: ['material'],
         },
       },
     ];
