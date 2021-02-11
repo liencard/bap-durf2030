@@ -84,7 +84,7 @@ const BADGES = [
     levelThree: '/badges-awards/h3.png',
   },
   {
-    name: '???',
+    name: 'Uitvinder',
     levelOne: '/badges-awards/l1.png',
     levelTwo: '/badges-awards/l2.png',
     levelThree: '/badges-awards/l3.png',

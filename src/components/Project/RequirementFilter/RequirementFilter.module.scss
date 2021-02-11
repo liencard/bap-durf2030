@@ -6,9 +6,11 @@
   font-size: 1.4rem;
   margin-bottom: 3rem;
   justify-content: space-between;
+  z-index: 5;
 
   .search {
     width: 35rem;
+    z-index: 5;
   }
 
   .label {
@@ -16,6 +18,7 @@
     position: relative;
     display: flex;
     align-items: center;
+    z-index: 5;
 
     &::before {
       position: absolute;
@@ -55,6 +58,7 @@
     padding: 1.75rem;
     transform: translateY(-0.5rem);
     margin-left: 2rem;
+    z-index: 5;
 
     &:hover {
       border: 0.1rem solid $green;
@@ -70,11 +74,13 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-column-gap: $grid-gap;
+  z-index: 5;
 }
 
 .default {
   opacity: 0.4;
   font-style: italic;
+  z-index: 5;
 }
 
 .delete {
@@ -86,6 +92,7 @@
   top: 0;
   margin-left: auto;
   grid-column: span 3;
+  z-index: 5;
 
   &::before {
     position: absolute;
@@ -97,4 +104,8 @@
     background-image: url('/icons/close-blue.svg');
     background-position: center;
   }
+}
+
+.select {
+  z-index: 5;
 }

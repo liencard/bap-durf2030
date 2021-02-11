@@ -3,7 +3,7 @@ import styles from './ProjectIcons.module.scss';
 const ProjectIcons = ({ project }) => {
   return (
     <>
-      {(project.fundingRequired === true ||
+      {((project.fundingRequired === true && project.state != 1) ||
         project.materialsRequired === true ||
         project.servicesRequired === true) && (
         <div className={styles.icons}>

@@ -285,7 +285,7 @@ const Projects = ({ projectsJSON }) => {
                       <img
                         src="/vergrootglas.png"
                         alt="empty state"
-                        width="600"
+                        width="1000"
                         height="300"
                       />
                       <p>Sorry, er zijn geen project gevonden</p>
