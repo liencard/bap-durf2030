@@ -48,6 +48,17 @@ const EditState = observer(({ project }) => {
     switch (project.state) {
       case 0:
         setContent({
+          info: 'Je project wacht nog op goedkeuring door DURF2030.',
+          change: (
+            <p>
+              Je project wordt overlopen door DURF2030, zodra deze goedgekeurd wordt komt je project live op de website
+              te staan.
+            </p>
+          ),
+        });
+        break;
+      case 1:
+        setContent({
           info: 'Je project staat live op de website maar is nog niet goedgekeurd door DURF2030.',
           change: (
             <p>
@@ -57,7 +68,7 @@ const EditState = observer(({ project }) => {
           ),
         });
         break;
-      case 1:
+      case 2:
         setContent({
           info: 'Je project staat live op de website maar is nog niet goedgekeurd door DURF2030.',
           change: (
@@ -67,13 +78,13 @@ const EditState = observer(({ project }) => {
                 het aanbieden als vrijwilligers en van materiaal en geld vergrendeld.
               </p>
               <div className={styles.buttons}>
-                <Button text="Mijn project gaat van start" onClick={() => handleChangeState(2)} />
+                <Button text="Mijn project gaat van start" onClick={() => handleChangeState(3)} />
               </div>
             </>
           ),
         });
         break;
-      case 2:
+      case 3:
         setContent({
           info:
             'Je project is klaar om te starten! Laat gebruikers weten waar en wanneer ze je project live kunnen bezichtigen.',
@@ -84,21 +95,21 @@ const EditState = observer(({ project }) => {
                 Je project blijft zichtbaar op de website.
               </p>
               <div className={styles.buttons}>
-                <Button text="Project afronden" onClick={() => handleChangeState(3)} />
-                <Button text="Naar vorige fase" variant="secondary" onClick={() => handleChangeState(1)} />
+                <Button text="Project afronden" onClick={() => handleChangeState(4)} />
+                <Button text="Naar vorige fase" variant="secondary" onClick={() => handleChangeState(2)} />
               </div>
             </>
           ),
         });
         break;
-      case 3:
+      case 4:
         setContent({
           info: 'Je project is volledig afgerond!',
           change: (
             <>
               <p>Je project is afgerond. Laat gebruikers en DURF2030 weten hoe je project is verlopen.</p>
               <div className={styles.buttons}>
-                <Button text="Project terug open zetten" variant="secondary" onClick={() => handleChangeState(2)} />
+                <Button text="Project terug open zetten" variant="secondary" onClick={() => handleChangeState(3)} />
               </div>
             </>
           ),
@@ -113,7 +124,7 @@ const EditState = observer(({ project }) => {
         <div>
           <h2 className={styles.subtitle}>Huidige status</h2>
           <p>{content.info}</p>
-          <ProjectTimeline state={project.state} />
+          {project.state > 0 && <ProjectTimeline state={project.state} />}
         </div>
         <div>
           <h2 className={styles.subtitle}>Status veranderen</h2>
@@ -121,7 +132,7 @@ const EditState = observer(({ project }) => {
         </div>
       </div>
 
-      {project.state == 3 && (
+      {project.state > 3 && (
         <EditPart alwaysEnabled title="Deel je ervaring" handleSaveProject={handleSaveProject}>
           <EditField>
             <EditLabel text="Beschrijf" htmlFor="impact" />
@@ -134,7 +145,7 @@ const EditState = observer(({ project }) => {
         </EditPart>
       )}
 
-      {project.state > 1 && (
+      {project.state > 2 && (
         <EditPart title="Datum en locatie" handleSaveProject={handleSaveProject}>
           <div className={styles.dates}>
             <EditField>

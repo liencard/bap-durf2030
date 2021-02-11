@@ -52,15 +52,6 @@ const Project = observer(({ projectJSON, usersJSON }) => {
       usersArr.push(user);
     });
     setUsers(usersArr);
-
-    if (project && uiStore.currentUser) {
-      const projectIsLiked = project.likes.find((like) => like.userId === uiStore.currentUser.id);
-      if (projectIsLiked) {
-        project.setLiked(true);
-      } else {
-        project.setLiked(false);
-      }
-    }
   }, [uiStore.currentUser]);
 
   if (!project) {
@@ -118,6 +109,7 @@ export const getStaticProps = async ({ params }) => {
     name: owner.name,
     avatar: owner.avatar,
     id: owner.id,
+    email: owner.email ?? '',
   }));
   projectJSON['owners'] = owners;
 

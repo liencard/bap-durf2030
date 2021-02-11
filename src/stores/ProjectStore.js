@@ -76,6 +76,13 @@ class ProjectStore {
     this.projectService.createOwner(owner, projectId);
   };
 
+  createUpdate = (newUpdate, projectId) => {
+    const updates = {
+      updates: getArrayUnion(newUpdate),
+    };
+    this.projectService.updateProjectUpdates(updates, projectId);
+  };
+
   deleteUpdate = (deletedUpdate, projectId) => {
     const updates = { updates: removeFromArray(deletedUpdate) };
     this.projectService.updateProjectUpdates(updates, projectId);
@@ -106,22 +113,23 @@ class ProjectStore {
     this.requirementService.updateDetails(project);
   };
 
-  createDurver = (durver, projectId, owners) => {
+  createDurver = (durver, project) => {
     durver.timestamp = getCurrenTimeStamp();
-    this.requirementService.createDurver(durver, projectId);
+    this.requirementService.createDurver(durver, project.id);
 
-    owners.forEach((owner) => {
+    project.owners.forEach((owner) => {
       if (owner.email) {
         let offerTypes = [];
-        durver.materialsOffered && push.offerTypes('material');
-        durver.servicesOffered && push.offerTypes('service');
-        durver.fundingOffered && push.offerTypes('funding');
+        durver.materialsOffered && offerTypes.push('material');
+        durver.servicesOffered && offerTypes.push('service');
+        durver.fundingOffered && offerTypes.push('funding');
 
         let notification = {
           type: 'offer',
           timestamp: getCurrenTimeStamp(),
+          read: false,
           info: {
-            project: { id: projectId, title: 'Title' },
+            project: { id: projectId, title: project.title },
             user: { name: durver.user.name, avatar: durver.user.avatar },
             offers: offerTypes,
           },
@@ -129,10 +137,6 @@ class ProjectStore {
 
         this.rootStore.userStore.createNotificationForUser(notification, owner.email);
       }
-      //   this.rootStore.userStore.createNotificationForUser;
-      // materialsOffered / fundingOffered / services Offered bool in Durver
-      // user zit er ook in
-      // owner bevat geen email!!!
     });
   };
 

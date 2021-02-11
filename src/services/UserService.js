@@ -9,19 +9,11 @@ class UserService {
   }
 
   create = async (user) => {
-    return await this.db
-      .collection('users')
-      .doc(user.email)
-      .withConverter(userConverter)
-      .set(user);
+    return await this.db.collection('users').doc(user.email).withConverter(userConverter).set(user);
   };
 
   getUserByEmail = async (email) => {
-    let user = await this.db
-      .collection('users')
-      .doc(email)
-      .withConverter(userConverter)
-      .get();
+    let user = await this.db.collection('users').doc(email).withConverter(userConverter).get();
     user = await user.data();
     return user;
   };
@@ -32,10 +24,15 @@ class UserService {
   };
 
   updateAdmin = (adminState, user) => {
-    this.db
-      .collection('users')
-      .doc(`${user.email}`)
-      .update({ admin: adminState });
+    this.db.collection('users').doc(`${user.email}`).update({ admin: adminState });
+  };
+
+  updateUserNotifications = (notifications, userEmail) => {
+    this.db.collection('users').doc(userEmail).update(notifications);
+  };
+
+  updateUserBadges = (badges, userEmail) => {
+    this.db.collection('users').doc(userEmail).update(badges);
   };
 }
 export default UserService;
