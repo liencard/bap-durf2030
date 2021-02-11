@@ -31,6 +31,7 @@ const EditProject = observer(({ query }) => {
           return;
         }
         resolvedProject.getAllDynamicContent();
+        resolvedProject.getOwners();
         setState(STATE_FULLY_LOADED);
         setProject(resolvedProject);
       } catch (error) {

@@ -1,31 +1,15 @@
 import { observer } from 'mobx-react-lite';
 import { useState, useEffect } from 'react';
 import styles from './EditRequirements.module.scss';
-import {
-  EditPart,
-  EditLabel,
-  EditItemIcons,
-  EditField,
-  EditOfferList,
-} from '..';
-import {
-  FormFieldInput,
-  FormFieldSwitch,
-  FormFieldAddItem,
-} from '../../Create';
+import { EditPart, EditLabel, EditItemIcons, EditField, EditOfferList } from '..';
+import { FormFieldInput, FormFieldSwitch, FormFieldAddItem } from '../../Create';
 import { SERVICETYPES, MATERIALTYPES } from '../../../consts';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
 const EditRequirements = observer(({ project }) => {
-  const [servicesRequired, setServicesRequired] = useState(
-    project.servicesRequired
-  );
-  const [materialsRequired, setMaterialsRequired] = useState(
-    project.materialsRequired
-  );
-  const [fundingRequired, setFundingRequired] = useState(
-    project.fundingRequired
-  );
+  const [servicesRequired, setServicesRequired] = useState(project.servicesRequired);
+  const [materialsRequired, setMaterialsRequired] = useState(project.materialsRequired);
+  const [fundingRequired, setFundingRequired] = useState(project.fundingRequired);
 
   const [servicesOffers, setServicesOffers] = useState([]);
   const [materialsOffers, setMaterialsOffers] = useState([]);
@@ -63,7 +47,6 @@ const EditRequirements = observer(({ project }) => {
       }
     });
 
-    console.log(servicesOffersArr[0]);
     setServicesOffers(servicesOffersArr);
     setMaterialsOffers(materialsOffersArr);
   }, []);
@@ -72,10 +55,7 @@ const EditRequirements = observer(({ project }) => {
     updatedItems.forEach((updatedItem) => {
       if (updatedItem.id) {
         originalItems.forEach((dbItem) => {
-          if (
-            updatedItem.id == dbItem.id &&
-            updatedItem.amount !== dbItem.amount
-          ) {
+          if (updatedItem.id == dbItem.id && updatedItem.amount !== dbItem.amount) {
             // UPDATE
             project.updateRequirementItem(updatedItem, dbItem.id);
           }
@@ -86,9 +66,7 @@ const EditRequirements = observer(({ project }) => {
       }
     });
     originalItems.forEach((dbItem) => {
-      const item = updatedItems.find(
-        (updatedItem) => updatedItem.id === dbItem.id
-      );
+      const item = updatedItems.find((updatedItem) => updatedItem.id === dbItem.id);
       if (!item) {
         // DELETE
         project.removeRequirementItem(dbItem);
@@ -122,10 +100,7 @@ const EditRequirements = observer(({ project }) => {
     <>
       <EditPart title="Vrijwilligers" handleSaveProject={handleSaveServices}>
         <EditField row>
-          <EditLabel
-            text="Heeft je project nood aan extra hulp?"
-            htmlFor="servicesRequired"
-          />
+          <EditLabel text="Heeft je project nood aan extra hulp?" htmlFor="servicesRequired" />
           <div className={styles.form__switch}>
             <span className={styles.place__label}>Nee</span>
             <FormFieldSwitch
@@ -141,10 +116,7 @@ const EditRequirements = observer(({ project }) => {
         {servicesRequired && (
           <>
             <EditField>
-              <EditLabel
-                text="Leg het doel uit"
-                htmlFor="servicesDescription"
-              />
+              <EditLabel text="Leg het doel uit" htmlFor="servicesDescription" />
               <FormFieldInput
                 defaultValue={project.servicesDescription}
                 multiline
@@ -173,10 +145,7 @@ const EditRequirements = observer(({ project }) => {
 
       <EditPart title="Materialen" handleSaveProject={handleSaveMaterials}>
         <EditField row>
-          <EditLabel
-            text="Heeft je project nood aan extra materialen?"
-            htmlFor="materialsRequired"
-          />
+          <EditLabel text="Heeft je project nood aan extra materialen?" htmlFor="materialsRequired" />
           <div className={styles.form__switch}>
             <span className={styles.place__label}>Nee</span>
             <FormFieldSwitch
@@ -192,10 +161,7 @@ const EditRequirements = observer(({ project }) => {
         {materialsRequired && (
           <>
             <EditField>
-              <EditLabel
-                text="Leg het doel uit"
-                htmlFor="materialsDescription"
-              />
+              <EditLabel text="Leg het doel uit" htmlFor="materialsDescription" />
               <FormFieldInput
                 defaultValue={project.materialsDescription}
                 multiline
@@ -227,10 +193,7 @@ const EditRequirements = observer(({ project }) => {
 
       <EditPart title="Donatie" handleSaveProject={handleSaveFunding}>
         <EditField row>
-          <EditLabel
-            text="Heeft je project nood aan extra geld?"
-            htmlFor="fundingRequired"
-          />
+          <EditLabel text="Heeft je project nood aan extra geld?" htmlFor="fundingRequired" />
           <div className={styles.form__switch}>
             <span className={styles.place__label}>Nee</span>
             <FormFieldSwitch
@@ -263,9 +226,7 @@ const EditRequirements = observer(({ project }) => {
                 name="fundingAmount"
                 InputProps={{
                   inputProps: { min: 1, max: 3000 },
-                  startAdornment: (
-                    <InputAdornment position="start">€</InputAdornment>
-                  ),
+                  startAdornment: <InputAdornment position="start">€</InputAdornment>,
                 }}
                 required
               />

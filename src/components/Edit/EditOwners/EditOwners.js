@@ -1,5 +1,4 @@
 import { observer } from 'mobx-react-lite';
-import styles from './EditOwners.module.scss';
 import { EditPart, EditLabel, EditField } from '..';
 import { FormFieldAddUser, FormFieldInput } from '../../Create';
 
@@ -10,6 +9,7 @@ const EditOwners = observer(({ project }) => {
         avatar: owner.avatar,
         id: owner.id,
         name: owner.name,
+        email: owner.email,
       };
     });
   };

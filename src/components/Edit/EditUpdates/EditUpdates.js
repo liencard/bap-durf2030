@@ -8,8 +8,6 @@ import { useStores } from '../../../hooks/useStores';
 const EditUpdates = observer(({ project }) => {
   const { uiStore } = useStores();
 
-  console.log(project.updates);
-
   const handleSaveUpdate = (values) => {
     const update = {
       text: values.update,

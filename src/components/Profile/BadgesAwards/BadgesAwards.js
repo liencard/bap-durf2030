@@ -6,8 +6,6 @@ import { AWARDS, BADGES } from '../../../consts';
 const BadgesAwards = () => {
   const { uiStore } = useStores();
 
-  console.log(uiStore.currentUser);
-
   const awards = AWARDS.map((award) => {
     const earnedAward = uiStore.currentUser.awards.find((userAward) => award.name === userAward.name);
     if (earnedAward) {

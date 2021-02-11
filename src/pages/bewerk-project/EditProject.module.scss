@@ -16,5 +16,6 @@
   .title__project {
     @include title-two;
     color: $green;
+    margin-bottom: 0;
   }
 }
