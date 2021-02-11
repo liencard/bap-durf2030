@@ -78,3 +78,22 @@ $border-radius: 0.5rem;
     }
   }
 }
+
+.letters {
+  position: relative;
+  width: 100%;
+
+  &::before {
+    position: absolute;
+    content: '';
+    background-image: url('/letters/Dhome.png');
+    height: 46rem;
+    width: 15rem;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top left;
+    top: 5vh;
+    left: 0;
+    z-index: 0;
+  }
+}

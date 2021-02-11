@@ -3,7 +3,8 @@ $border-radius: 0.5rem;
 
 .about {
   grid-column: span 12;
-  margin-top: 14rem;
+  margin-top: 18rem;
+  position: relative;
 
   .title {
     @include title-one;
@@ -36,5 +37,24 @@ $border-radius: 0.5rem;
 
   p {
     margin-bottom: 2.5rem;
+  }
+}
+
+.letters {
+  position: relative;
+  width: 100%;
+
+  &::before {
+    position: absolute;
+    content: '';
+    background-image: url('/letters/Uhome.png');
+    height: 14rem;
+    width: 70rem;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top right;
+    top: 10vh;
+    right: 0;
+    z-index: 0;
   }
 }

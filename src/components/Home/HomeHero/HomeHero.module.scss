@@ -84,6 +84,7 @@ $border-radius: 0.5rem;
   align-items: center;
   display: flex;
   justify-content: center;
+  z-index: 5;
 
   @media (max-width: 1500px) {
     grid-column: 4 / span 6;

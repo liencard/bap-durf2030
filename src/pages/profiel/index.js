@@ -6,7 +6,12 @@ import { TabPanel, AppBar, TabSideElement } from '../../components/UI';
 import { Header, Footer } from '../../components/Layout';
 import styles from './Profile.module.scss';
 
-import { LikedProjects, OwnProjects, OwnAwards, BadgesAwards } from '../../components/Profile';
+import {
+  LikedProjects,
+  OwnProjects,
+  OwnAwards,
+  BadgesAwards,
+} from '../../components/Profile';
 
 import Tab from '@material-ui/core/Tab';
 
@@ -51,7 +56,12 @@ const Profile = observer(() => {
         <Container>
           {uiStore.currentUser && (
             <div className={styles.profile__wrapper}>
-              <img className={styles.avatar} width="80" height="80" src={uiStore.currentUser.avatar} />
+              <img
+                className={styles.avatar}
+                width="80"
+                height="80"
+                src={uiStore.currentUser.avatar}
+              />
               <div>
                 <span className={styles.name__wrapper}>
                   <p className={styles.name}>{uiStore.currentUser.name}</p>
@@ -75,22 +85,28 @@ const Profile = observer(() => {
         </AppBar>
 
         <TabPanel className={styles.panel} value={value} index={0}>
-          <Container>
-            <OwnProjects projects={userProjects} />
-            <OwnAwards />
-          </Container>
+          <div className={styles.letters}>
+            <Container>
+              <OwnProjects projects={userProjects} />
+              <OwnAwards />
+            </Container>
+          </div>
         </TabPanel>
 
         <TabPanel className={styles.panel} value={value} index={1}>
-          <Container>
-            <LikedProjects projects={likedProjects} />
-          </Container>
+          <div className={styles.letters}>
+            <Container>
+              <LikedProjects projects={likedProjects} />
+            </Container>
+          </div>
         </TabPanel>
 
         <TabPanel className={styles.panel} value={value} index={2}>
-          <Container>
-            <BadgesAwards />
-          </Container>
+          <div className={styles.letters__awards}>
+            <Container>
+              <BadgesAwards />
+            </Container>
+          </div>
         </TabPanel>
 
         <TabPanel className={styles.panel} value={value} index={3}>

@@ -189,107 +189,114 @@ const Projects = ({ projectsJSON }) => {
         </TabSideElement>
       </AppBar>
 
-      <Container>
-        <TabPanel value={value} index={0}>
-          <ProjectFilter
-            location={location}
-            setLocation={setLocation}
-            theme={theme}
-            setTheme={setTheme}
-            cat={cat}
-            setCat={setCat}
-          />
-          <Grid>
-            {cat == 'none' && theme == 'none' && location == 'none' ? (
-              projects.map((project) => {
-                if (project.state != 0 && project.state < 4) {
+      <div className={styles.letters}>
+        <Container>
+          <TabPanel value={value} index={0}>
+            <ProjectFilter
+              location={location}
+              setLocation={setLocation}
+              theme={theme}
+              setTheme={setTheme}
+              cat={cat}
+              setCat={setCat}
+            />
+            <Grid>
+              {cat == 'none' && theme == 'none' && location == 'none' ? (
+                projects.map((project) => {
+                  if (project.state != 0 && project.state < 4) {
+                    return <ProjectCard key={project.id} project={project} />;
+                  }
+                })
+              ) : (
+                <>
+                  {filteredProjects.length != 0 ? (
+                    filteredProjects.map((project) => {
+                      if (project.state != 0 && project.state < 4) {
+                        return (
+                          <ProjectCard key={project.id} project={project} />
+                        );
+                      }
+                    })
+                  ) : (
+                    <div className={styles.empty__state}>
+                      <img
+                        src="/vergrootglas.png"
+                        alt="empty state"
+                        width="600"
+                        height="300"
+                      />
+                      <p>Sorry, er zijn geen project gevonden</p>
+                    </div>
+                  )}
+                </>
+              )}
+            </Grid>
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            <Grid>
+              {projects.map((project) => {
+                if (project.state === 4) {
                   return <ProjectCard key={project.id} project={project} />;
                 }
-              })
-            ) : (
-              <>
-                {filteredProjects.length != 0 ? (
-                  filteredProjects.map((project) => {
-                    if (project.state != 0 && project.state < 4) {
-                      return <ProjectCard key={project.id} project={project} />;
-                    }
-                  })
-                ) : (
-                  <div className={styles.empty__state}>
-                    <img
-                      src="/vergrootglas.png"
-                      alt="empty state"
-                      width="600"
-                      height="300"
-                    />
-                    <p>Sorry, er zijn geen project gevonden</p>
-                  </div>
-                )}
-              </>
-            )}
-          </Grid>
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <Grid>
-            {projects.map((project) => {
-              if (project.state === 4) {
-                return <ProjectCard key={project.id} project={project} />;
-              }
-            })}
-          </Grid>
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          <RequirementFilter
-            catService={catService}
-            setCatService={setCatService}
-            catMaterial={catMaterial}
-            setCatMaterial={setCatMaterial}
-          />
-          <Masonry
-            breakpointCols={2}
-            className={styles.masonry}
-            columnClassName={styles.column}
-          >
-            {catService == 'none' && catMaterial == 'none' ? (
-              projects.map((project) => {
-                if (project.materialsRequired || project.servicesRequired) {
-                  return (
-                    <ProjectRequirementsCard
-                      key={project.id}
-                      project={project}
-                    />
-                  );
-                }
-              })
-            ) : (
-              <>
-                {requirFilteredProjects.length != 0 ? (
-                  requirFilteredProjects.map((project) => {
-                    if (project.materialsRequired || project.servicesRequired) {
-                      return (
-                        <ProjectRequirementsCard
-                          key={project.id}
-                          project={project}
-                        />
-                      );
-                    }
-                  })
-                ) : (
-                  <div className={styles.empty__state}>
-                    <img
-                      src="/vergrootglas.png"
-                      alt="empty state"
-                      width="600"
-                      height="300"
-                    />
-                    <p>Sorry, er zijn geen project gevonden</p>
-                  </div>
-                )}
-              </>
-            )}
-          </Masonry>
-        </TabPanel>
-      </Container>
+              })}
+            </Grid>
+          </TabPanel>
+          <TabPanel value={value} index={2}>
+            <RequirementFilter
+              catService={catService}
+              setCatService={setCatService}
+              catMaterial={catMaterial}
+              setCatMaterial={setCatMaterial}
+            />
+            <Masonry
+              breakpointCols={2}
+              className={styles.masonry}
+              columnClassName={styles.column}
+            >
+              {catService == 'none' && catMaterial == 'none' ? (
+                projects.map((project) => {
+                  if (project.materialsRequired || project.servicesRequired) {
+                    return (
+                      <ProjectRequirementsCard
+                        key={project.id}
+                        project={project}
+                      />
+                    );
+                  }
+                })
+              ) : (
+                <>
+                  {requirFilteredProjects.length != 0 ? (
+                    requirFilteredProjects.map((project) => {
+                      if (
+                        project.materialsRequired ||
+                        project.servicesRequired
+                      ) {
+                        return (
+                          <ProjectRequirementsCard
+                            key={project.id}
+                            project={project}
+                          />
+                        );
+                      }
+                    })
+                  ) : (
+                    <div className={styles.empty__state}>
+                      <img
+                        src="/vergrootglas.png"
+                        alt="empty state"
+                        width="600"
+                        height="300"
+                      />
+                      <p>Sorry, er zijn geen project gevonden</p>
+                    </div>
+                  )}
+                </>
+              )}
+            </Masonry>
+          </TabPanel>
+        </Container>
+      </div>
       <Footer />
     </>
   );
