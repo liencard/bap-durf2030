@@ -72,6 +72,7 @@ class Project {
     this.impact = impact;
     this.date = date;
     this.highlight = highlight;
+    this.containsAllData = false;
 
     if (store) {
       this.store = store;
@@ -92,6 +93,8 @@ class Project {
       servicesRequired: observable,
       servicesDescription: observable,
       updateProject: action,
+      containsAllData: observable,
+      setAllDataLoaded: action,
 
       owners: observable,
       durvers: observable,
@@ -101,6 +104,7 @@ class Project {
       removeLike: action,
       setLiked: action,
       createDurver: action,
+      setOwners: action,
 
       comments: observable,
       linkComment: action,
@@ -117,6 +121,7 @@ class Project {
       updateProjectContact: action,
 
       updates: observable,
+      setUpdates: action,
       createUpdate: action,
       removeUpdate: action,
 
@@ -206,7 +211,6 @@ class Project {
   createUpdate = (update) => {
     const timestamp = getCurrenTimeStamp();
     update.timestamp = timestamp;
-    console.log(update);
     this.store.createUpdate(update, this.id);
     this.updates.push(update);
   };
@@ -304,6 +308,14 @@ class Project {
     !this.comments.includes(comment) && this.comments.push(comment);
   }
 
+  getAllDynamicContent() {
+    this.getLikes();
+    this.getRequirementsList();
+    this.getRequirementsInfo();
+    this.getDurvers();
+    this.getComments();
+  }
+
   updateProject(newValues) {
     let updatedValues = {};
 
@@ -355,6 +367,18 @@ class Project {
       this.services = newServices;
     }
     this.store.updateItemStatus(itemId, status, this.id);
+  };
+
+  setOwners = (owners) => {
+    this.owners = owners;
+  };
+
+  setUpdates = (updates) => {
+    this.updates = updates;
+  };
+
+  setAllDataLoaded = (bool) => {
+    this.containsAllData = bool;
   };
 }
 

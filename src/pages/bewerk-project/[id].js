@@ -30,10 +30,7 @@ const EditProject = observer(({ query }) => {
           setState(STATE_DOES_NOT_EXIST);
           return;
         }
-        resolvedProject.getRequirementsInfo();
-        resolvedProject.getRequirementsList();
-        resolvedProject.getOwners();
-        resolvedProject.getDurvers();
+        resolvedProject.getAllDynamicContent();
         setState(STATE_FULLY_LOADED);
         setProject(resolvedProject);
       } catch (error) {
@@ -41,7 +38,7 @@ const EditProject = observer(({ query }) => {
       }
     };
     loadProject(id);
-  }, [id, projectStore, setProject]);
+  }, [id, projectStore]);
 
   return (
     <>

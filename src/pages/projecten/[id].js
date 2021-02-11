@@ -14,7 +14,7 @@ const Project = observer(({ projectJSON, usersJSON }) => {
   const [projectOwner, setProjectOwner] = useState(false);
   const [tab, setTab] = useState(0);
 
-  // Checks if current user is powner of this project
+  // Checks if current user is owner of this project
   useEffect(() => {
     const loadOwner = async () => {
       const currentUser = await uiStore.currentUser;
@@ -31,18 +31,29 @@ const Project = observer(({ projectJSON, usersJSON }) => {
   }, [uiStore.currentUser, project]);
 
   useEffect(() => {
-    // Conver data received from SSR static props to a Project model
-    const data = convertData.fromJSON(projectJSON, projectStore);
+    const projectInStore = projectStore.getProjectById(projectJSON.id);
+    projectInStore && setProject(projectInStore);
 
-    // Set dyanmic content
-    data.getLikes();
-    data.getRequirementsList();
-    data.getRequirementsInfo();
-    data.getDurvers();
-    data.getComments();
+    if (projectInStore && !projectInStore.containsAllData) {
+      // Get dyanmic content
+      projectInStore.getAllDynamicContent();
 
-    // Set project for this page
-    setProject(data);
+      // Push extra data that was SSR on detail in existing model
+      projectInStore.setUpdates(projectJSON.updates);
+      projectInStore.setOwners(projectJSON.owners);
+      projectInStore.setAllDataLoaded(true);
+    } else if (!projectInStore) {
+      // Create a complete new Project model
+      // Convert data received from SSR static props to a Project model
+      const data = convertData.fromJSON(projectJSON, projectStore);
+
+      // Set dyanmic content
+      data.getAllDynamicContent();
+      data.setAllDataLoaded(true);
+
+      // Set project for this page
+      setProject(data);
+    }
   }, []);
 
   useEffect(() => {
@@ -88,9 +99,11 @@ export const getStaticProps = async ({ params }) => {
   const store = new RootStore();
   const { projectStore, userStore } = store;
 
-  // Project
+  // Project data for SSR
   const data = await projectStore.loadProject(params.id);
   let projectJSON = convertData.toJSON(data);
+
+  // Updates
   const updates = data.updates.map((update) => {
     return {
       user: update.user,
@@ -99,7 +112,6 @@ export const getStaticProps = async ({ params }) => {
     };
   });
   const timestamp = data.getReadableDate(data.timestamp);
-
   projectJSON.timestamp = timestamp;
   projectJSON.updates = updates;
 
