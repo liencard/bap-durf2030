@@ -7,6 +7,7 @@ $border-radius: 0.5rem;
   border-radius: $border-radius;
   text-decoration: none;
   color: $blue-dark;
+  z-index: 2;
 
   .thumbnail {
     border-radius: $border-radius $border-radius 0 0;
@@ -39,6 +40,7 @@ $border-radius: 0.5rem;
     padding: 2rem;
     display: grid;
     grid-template-rows: 20rem 3rem;
+    background-color: white;
 
     .content__wrapper {
       flex: 1;

@@ -32,3 +32,55 @@
     @include title-one;
   }
 }
+
+.letters {
+  position: relative;
+  width: 100%;
+
+  &::before {
+    position: absolute;
+    content: '';
+    background-image: url('/letters/Dprofile.png');
+    height: 38rem;
+    width: 12.5rem;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top left;
+    left: 0;
+    top: 10vhvh;
+    z-index: 0;
+  }
+
+  &::after {
+    position: absolute;
+    content: '';
+    background-image: url('/letters/Rdetail.png');
+    height: 38rem;
+    width: 12.5rem;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: bottom right;
+    bottom: 0;
+    right: 0;
+    z-index: 0;
+  }
+}
+
+.letters__awards {
+  position: relative;
+  width: 100%;
+
+  &::after {
+    position: absolute;
+    content: '';
+    background-image: url('/letters/Dprofile-yellow.png');
+    height: 34rem;
+    width: 10rem;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: bottom right;
+    bottom: 0;
+    right: 0;
+    z-index: 0;
+  }
+}

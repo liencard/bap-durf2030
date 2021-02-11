@@ -90,3 +90,33 @@
     @include title-three;
   }
 }
+
+.letters {
+  position: relative;
+  width: 100%;
+
+  &::before {
+    position: absolute;
+    content: '';
+    background-image: url('/letters/bg-projectenLeft.png');
+    height: 100%;
+    width: 100%;
+    background-repeat: repeat-y;
+    background-size: contain;
+    background-position: left;
+    z-index: 0;
+  }
+
+  &::after {
+    position: absolute;
+    content: '';
+    background-image: url('/letters/bg-projectenRight.png');
+    height: 100%;
+    width: 100%;
+    background-repeat: repeat-y;
+    background-size: contain;
+    background-position: right;
+    top: 0;
+    z-index: 0;
+  }
+}

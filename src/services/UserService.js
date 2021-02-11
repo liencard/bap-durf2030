@@ -31,35 +31,6 @@ class UserService {
     return snapshot.docs.map((user) => user.data());
   };
 
-  // WEG
-  getAllAdmins = async () => {
-    return await this.db
-      .collectionGroup('users')
-      .where('admin', '==', false)
-      .withConverter(userConverter)
-      .get();
-  };
-
-  // WEG
-  getProjectsByUser = async (user) => {
-    const projectsRef = this.db
-      .collection('users')
-      .doc(user.email)
-      .collection('projects');
-
-    const projects = await projectsRef.withConverter(projectConverter).get();
-    return projects.docs.map((project) => project.data());
-  };
-
-  // WEG
-  addAdminState = async (data) => {
-    const result = await this.db
-      .collection('users')
-      .doc(`${data.email}`)
-      .update({ admin: true });
-    return result;
-  };
-
   updateAdmin = (adminState, user) => {
     this.db
       .collection('users')
