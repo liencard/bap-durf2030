@@ -2,7 +2,6 @@ import styles from './ProjectRequirementsCard.module.scss';
 import { ProjectIcons } from '../';
 import Link from 'next/link';
 import { ROUTES } from '../../../consts/index';
-import { useState, useEffect } from 'react';
 
 const ProjectRequirementsCard = ({ project }) => {
   return (
