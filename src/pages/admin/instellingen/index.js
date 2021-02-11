@@ -25,14 +25,11 @@ const Settings = observer(() => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(email);
     const user = userStore.users.find((user) => user.email === email);
-    console.log(user);
     if (user) {
       userStore.updateAdmin(true, user);
       const err = '';
       setError(err);
-      // adminsArr.push(user);
     } else {
       const err = 'Admin niet gevonden';
       setError(err);
@@ -56,17 +53,10 @@ const Settings = observer(() => {
               {adminsArr.map((user) => (
                 <div key={user.id} className={styles.user}>
                   <div className={styles.user__info}>
-                    <img
-                      className={styles.image}
-                      src={user.avatar}
-                      alt="profile picture of user"
-                    />
+                    <img className={styles.image} src={user.avatar} alt="profile picture of user" />
                     <p>{user.name}</p>
                   </div>
-                  <button
-                    className={styles.delete}
-                    onClick={() => handleDeleteAdmin(user)}
-                  >
+                  <button className={styles.delete} onClick={() => handleDeleteAdmin(user)}>
                     <img src="/icons/delete-red.svg" />
                     <span className="hidden">Verwijder</span>
                   </button>
@@ -87,11 +77,7 @@ const Settings = observer(() => {
                 value={email}
                 onChange={(e) => setEmail(e.currentTarget.value)}
               />
-              <input
-                className={styles.form__btn}
-                type="submit"
-                value="Toevoegen"
-              />
+              <input className={styles.form__btn} type="submit" value="Toevoegen" />
             </form>
           </section>
         </section>

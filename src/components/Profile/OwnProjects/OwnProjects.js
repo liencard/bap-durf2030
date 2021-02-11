@@ -68,7 +68,7 @@ const OwnProjects = observer(({ projects }) => {
                         </span>
                       )}
                       {durver.offers.map((offer, i) => (
-                        <span>
+                        <span key={i}>
                           {offer.name}
                           {durver.offers.length !== i && ', '}
                         </span>

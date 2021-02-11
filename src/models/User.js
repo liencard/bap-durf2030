@@ -53,6 +53,7 @@ class User {
   }
 }
 
+//  Server side rendering data does not accept Objects, converting to JSON instead
 const convertDataUser = {
   toJSON(user) {
     return {
@@ -67,6 +68,7 @@ const convertDataUser = {
     };
   },
 
+  // Turn SSR data back to User model (Object)
   fromJSON(user, store) {
     return new User({
       id: user.userId,

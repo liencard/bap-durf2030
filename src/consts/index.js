@@ -30,34 +30,13 @@ const CATEGORIES = [
   'divers',
 ];
 
-const THEMES = [
-  'eenzaamheid rond corona',
-  'ondernemingschap',
-  'klimaat',
-  'andere',
-];
+const THEMES = ['eenzaamheid rond corona', 'ondernemingschap', 'klimaat', 'andere'];
 
-const MATERIALTYPES = [
-  'Bouwmateriaal',
-  'Eten & Drinken',
-  'Infrastructuur',
-  'Knutselmateriaal',
-  'Speelgoed',
-  'Andere',
-];
+const MATERIALTYPES = ['Bouwmateriaal', 'Eten & Drinken', 'Infrastructuur', 'Knutselmateriaal', 'Speelgoed', 'Andere'];
 
 const SERVICETYPES = ['Creatieve hulp', 'Fysieke hulp', 'Andere'];
 
-const CITIES = [
-  'Aalbeke',
-  'Bellegem',
-  'Bissegem',
-  'Heule',
-  'Kooigem',
-  'Kortrijk',
-  'Marke',
-  'Rollegem',
-];
+const CITIES = ['Aalbeke', 'Bellegem', 'Bissegem', 'Heule', 'Kooigem', 'Kortrijk', 'Marke', 'Rollegem'];
 
 const AWARDS = [
   {
@@ -91,13 +70,4 @@ const BADGES = [
   },
 ];
 
-export {
-  ROUTES,
-  THEMES,
-  CATEGORIES,
-  MATERIALTYPES,
-  SERVICETYPES,
-  CITIES,
-  AWARDS,
-  BADGES,
-};
+export { ROUTES, THEMES, CATEGORIES, MATERIALTYPES, SERVICETYPES, CITIES, AWARDS, BADGES };

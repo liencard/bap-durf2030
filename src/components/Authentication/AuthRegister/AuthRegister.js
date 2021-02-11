@@ -6,10 +6,7 @@ import Link from 'next/link';
 import styles from '../Authentication.module.scss';
 import { Container, HeaderForm } from '../../Layout';
 import User from '../../../models/User';
-import {
-  AuthRegisterUser,
-  AuthRegisterOrganisation,
-} from '../../Authentication';
+import { AuthRegisterUser, AuthRegisterOrganisation } from '../../Authentication';
 import { Formiz, useForm, FormizStep } from '@formiz/core';
 
 const RegisterForm = () => {
@@ -28,14 +25,10 @@ const RegisterForm = () => {
       admin: false,
       organisation: values.organisation ?? 'individu',
     });
-    console.log(user);
 
-    console.log(values);
     const result = await uiStore.registerUser(user);
     if (result.uid) {
       router.push(ROUTES.home);
-    } else {
-      console.log(result);
     }
   };
 
@@ -49,16 +42,9 @@ const RegisterForm = () => {
             <h1 className={styles.title}>Registreer</h1>
 
             <Formiz connect={registerForm} onValidSubmit={handleSubmit}>
-              <form
-                className={styles.form}
-                noValidate
-                onSubmit={registerForm.submitStep}
-              >
+              <form className={styles.form} noValidate onSubmit={registerForm.submitStep}>
                 <FormizStep name="step1">
-                  <AuthRegisterUser
-                    password={password}
-                    setPassword={setPassword}
-                  />
+                  <AuthRegisterUser password={password} setPassword={setPassword} />
                 </FormizStep>
                 <FormizStep name="step2">
                   <AuthRegisterOrganisation />
@@ -66,11 +52,7 @@ const RegisterForm = () => {
 
                 <div className={styles.buttons}>
                   {registerForm.isLastStep ? (
-                    <button
-                      className={styles.form__btn}
-                      type="submit"
-                      disabled={!registerForm.isValid}
-                    >
+                    <button className={styles.form__btn} type="submit" disabled={!registerForm.isValid}>
                       Maak account
                     </button>
                   ) : (
