@@ -1,5 +1,11 @@
 import styles from './ProjectContent.module.scss';
-import { ProjectDescription, ProjectRequirements, ProjectDurvers, ProjectShare, ProjectUpdates } from '../../Project';
+import {
+  ProjectDescription,
+  ProjectRequirements,
+  ProjectDurvers,
+  ProjectShare,
+  ProjectUpdates,
+} from '../../Project';
 import { Container } from '../../Layout';
 import { useState } from 'react';
 import { TabPanel, AppBar, TabSideElement, Badge } from '../../UI';
@@ -25,24 +31,32 @@ const ProjectContent = ({ project, users, tab, setTab }) => {
       </AppBar>
 
       <TabPanel className={styles.panel} value={tab} index={0}>
-        <Container>
-          <ProjectDescription project={project} users={users} />
-        </Container>
+        <div className={styles.letters__description}>
+          <Container>
+            <ProjectDescription project={project} users={users} />
+          </Container>
+        </div>
       </TabPanel>
       <TabPanel className={styles.panel} value={tab} index={1}>
-        <Container>
-          <ProjectUpdates updates={project.updates} />
-        </Container>
+        <div className={project.updates.length > 0 && styles.letters}>
+          <Container>
+            <ProjectUpdates updates={project.updates} />
+          </Container>
+        </div>
       </TabPanel>
       <TabPanel className={styles.panel} value={tab} index={2}>
-        <Container>
-          <ProjectRequirements project={project} />
-        </Container>
+        <div className={styles.letters}>
+          <Container>
+            <ProjectRequirements project={project} />
+          </Container>
+        </div>
       </TabPanel>
       <TabPanel className={styles.panel} value={tab} index={3}>
-        <Container>
-          <ProjectDurvers project={project} />
-        </Container>
+        <div className={project.durvers.length > 0 && styles.letters}>
+          <Container>
+            <ProjectDurvers project={project} />
+          </Container>
+        </div>
       </TabPanel>
     </>
   );

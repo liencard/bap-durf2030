@@ -3,7 +3,6 @@ import styles from './TabOndersteuning.module.scss';
 import { SectionPart } from '../index';
 
 const TabOndersteuning = observer(({ project }) => {
-  console.log(project);
   return (
     <>
       <div className={styles.overview}>
@@ -15,9 +14,7 @@ const TabOndersteuning = observer(({ project }) => {
                 <>
                   {project.services.map((service) => (
                     <div className={styles.item}>
-                      <span className={styles.item__amount}>
-                        {service.amount}
-                      </span>
+                      <span className={styles.item__amount}>{service.amount}</span>
                       <span className={styles.item__name}>{service.name}</span>
                     </div>
                   ))}
@@ -44,9 +41,7 @@ const TabOndersteuning = observer(({ project }) => {
                 <>
                   {project.materials.map((material) => (
                     <div className={styles.item}>
-                      <span className={styles.item__amount}>
-                        {material.amount}
-                      </span>
+                      <span className={styles.item__amount}>{material.amount}</span>
                       <span className={styles.item__name}>{material.name}</span>
                     </div>
                   ))}

@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useStores } from '../../../hooks/useStores';
 import { Container } from '../../Layout';
 import styles from './ProjectComments.module.scss';
@@ -23,13 +23,9 @@ const ProjectComments = observer(({ project, comments }) => {
     }
   };
 
-  useEffect(() => {
-    console.log(project.comments.length);
-  }, [project.comments]);
-
   return (
     <Container>
-      <div className={styles.comments}>
+      <article className={styles.comments}>
         <h2 className={styles.title}>Comments</h2>
 
         {project.comments.length !== 0 ? (
@@ -43,7 +39,7 @@ const ProjectComments = observer(({ project, comments }) => {
             <p>Geen commments</p>
           </div>
         )}
-      </div>
+      </article>
 
       <div className={styles.create}>
         {uiStore.currentUser && (

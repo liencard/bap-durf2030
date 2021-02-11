@@ -13,6 +13,7 @@ class User {
     awards = [],
     badges = [],
     store,
+    notifications = [],
   }) {
     this.id = id;
     this.name = name;
@@ -28,6 +29,7 @@ class User {
     this.badges = badges;
     this.organisation = organisation;
     this.comments = [];
+    this.notifications = notifications;
 
     if (store) {
       this.store = store;
@@ -51,6 +53,7 @@ class User {
   }
 }
 
+//  Server side rendering data does not accept Objects, converting to JSON instead
 const convertDataUser = {
   toJSON(user) {
     return {
@@ -65,6 +68,7 @@ const convertDataUser = {
     };
   },
 
+  // Turn SSR data back to User model (Object)
   fromJSON(user, store) {
     return new User({
       id: user.userId,
@@ -104,6 +108,7 @@ const userConverter = {
       organisation: data.organisation,
       awards: data.awards,
       badges: data.badges,
+      notifications: data.notifications,
     });
   },
 };

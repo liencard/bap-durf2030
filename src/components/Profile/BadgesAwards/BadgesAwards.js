@@ -1,12 +1,10 @@
 import styles from './BadgesAwards.module.scss';
 import { useStores } from '../../../hooks/useStores';
 import { Grid } from '../../../components/Layout';
-import { AWARDS, BADGES } from '../../../consts';
+import { AWARDS } from '../../../consts';
 
-const BadgesAwards = () => {
+const BadgesAwards = ({ projects }) => {
   const { uiStore } = useStores();
-
-  console.log(uiStore.currentUser);
 
   const awards = AWARDS.map((award) => {
     const earnedAward = uiStore.currentUser.awards.find(
@@ -20,20 +18,6 @@ const BadgesAwards = () => {
     return award;
   });
 
-  const badges = BADGES.map((badge) => {
-    const earnedBadge = uiStore.currentUser.badges.find(
-      (userBadge) => badge.name === userBadge.name
-    );
-    if (earnedBadge) {
-      badge.earned = true;
-    } else {
-      badge.earned = false;
-    }
-    return badge;
-  });
-
-  console.log(badges);
-
   return (
     <>
       <section className={styles.badges__awards}>
@@ -43,23 +27,60 @@ const BadgesAwards = () => {
             <section className={styles.badges}>
               <h2 className={styles.subtitle}>Badges</h2>
               <div className={styles.list}>
-                {badges.map((badge, i) => (
-                  <div
-                    key={i}
-                    className={`${styles.list__item} ${
-                      badge.earned && styles.earned
-                    }`}
-                  >
+                <div className={styles.list__item}>
+                  <img
+                    className={styles.icon}
+                    src="/badges-awards/c2.png"
+                    alt="badge"
+                    width="80"
+                    height="80"
+                  />
+                  <span>Chatter - level 1</span>
+                </div>
+                {projects.length > 5 ? (
+                  <div className={`${styles.list__item} ${styles.earned}`}>
                     <img
                       className={styles.icon}
-                      src={badge.levelOne}
-                      alt="badge"
+                      src="/badges-awards/h2.png"
+                      alt="icon"
                       width="80"
                       height="80"
                     />
-                    <span>{badge.name} - level 1</span>
+                    <span>Liker - level 2</span>
                   </div>
-                ))}
+                ) : projects.length > 1 ? (
+                  <div className={`${styles.list__item} ${styles.earned}`}>
+                    <img
+                      className={styles.icon}
+                      src="/badges-awards/h1.png"
+                      alt="icon"
+                      width="80"
+                      height="80"
+                    />
+                    <span>Liker - level 1</span>
+                  </div>
+                ) : (
+                  <div className={styles.list__item}>
+                    <img
+                      className={styles.icon}
+                      src="/badges-awards/h1.png"
+                      alt="icon"
+                      width="80"
+                      height="80"
+                    />
+                    <span>Liker - level 1</span>
+                  </div>
+                )}
+                <div className={styles.list__item}>
+                  <img
+                    className={styles.icon}
+                    src="/badges-awards/l1.png"
+                    alt="badge"
+                    width="80"
+                    height="80"
+                  />
+                  <span>Uitvinder - level 1</span>
+                </div>
               </div>
             </section>
             <section className={styles.awards}>

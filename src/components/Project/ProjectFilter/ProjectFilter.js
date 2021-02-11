@@ -52,13 +52,14 @@ const ProjectFilter = ({
         <div>
           <p className={styles.label}>Kaartweergave</p>
           <p className={styles.label}>Sorteren op</p>
-
-          <FormControl variant="outlined">
-            <Select defaultValue="Nieuwste">
-              <MenuItem value="Nieuwste">Nieuwste</MenuItem>
-              <MenuItem value="Populairste">Populairste</MenuItem>
-            </Select>
-          </FormControl>
+          <div className={styles.select}>
+            <FormControl variant="outlined">
+              <Select defaultValue="Nieuwste">
+                <MenuItem value="Nieuwste">Nieuwste</MenuItem>
+                <MenuItem value="Populairste">Populairste</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
 
           <button
             onClick={() => setShowTagOptions(!showTagOptions)}
@@ -81,44 +82,50 @@ const ProjectFilter = ({
             >
               Verwijder tags
             </button>
-            <FormControl fullWidth variant="outlined">
-              <Select value={theme} onChange={handleChangeTheme}>
-                <MenuItem value="none">
-                  <em className={styles.default}>Geen thema</em>
-                </MenuItem>
-                {THEMES.map((theme) => (
-                  <MenuItem key={theme} value={theme}>
-                    {theme}
+            <div className={styles.select}>
+              <FormControl fullWidth variant="outlined">
+                <Select value={theme} onChange={handleChangeTheme}>
+                  <MenuItem value="none">
+                    <em className={styles.default}>Geen thema</em>
                   </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+                  {THEMES.map((theme) => (
+                    <MenuItem key={theme} value={theme}>
+                      {theme}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
 
-            <FormControl fullWidth variant="outlined">
-              <Select value={cat} onChange={handleChangeCat}>
-                <MenuItem value="none">
-                  <em className={styles.default}>Geen categorie</em>
-                </MenuItem>
-                {CATEGORIES.map((category) => (
-                  <MenuItem key={category} value={category}>
-                    {category}
+            <div className={styles.select}>
+              <FormControl fullWidth variant="outlined">
+                <Select value={cat} onChange={handleChangeCat}>
+                  <MenuItem value="none">
+                    <em className={styles.default}>Geen categorie</em>
                   </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+                  {CATEGORIES.map((category) => (
+                    <MenuItem key={category} value={category}>
+                      {category}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
 
-            <FormControl fullWidth variant="outlined">
-              <Select value={location} onChange={handleChangeLocation}>
-                <MenuItem value="none">
-                  <em className={styles.default}>Geen locatie</em>
-                </MenuItem>
-                {CITIES.map((city) => (
-                  <MenuItem key={city} value={city}>
-                    {city}
+            <div className={styles.select}>
+              <FormControl fullWidth variant="outlined">
+                <Select value={location} onChange={handleChangeLocation}>
+                  <MenuItem value="none">
+                    <em className={styles.default}>Geen locatie</em>
                   </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+                  {CITIES.map((city) => (
+                    <MenuItem key={city} value={city}>
+                      {city}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
           </div>
         </>
       )}

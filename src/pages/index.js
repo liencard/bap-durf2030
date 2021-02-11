@@ -14,6 +14,7 @@ const Home = ({ projectsJSON }) => {
   useEffect(() => {
     const projectsArr = projectsJSON.map((projectJSON) => {
       const project = convertData.fromJSON(projectJSON, projectStore);
+      // Add dynamic content which was not SSR to project model
       project.getLikes();
       project.getRequirementsInfo();
       project.getDurvers();
@@ -30,14 +31,16 @@ const Home = ({ projectsJSON }) => {
 
       <Container>
         <ProjectSpotlight projects={projects} />
-        <HomeDurf />
-        <HomePlatform />
       </Container>
+      <HomeDurf />
+      <HomePlatform />
+
       <Footer />
     </>
   );
 };
 
+// Server side rendering of data on homepage
 export const getStaticProps = async (context) => {
   const store = new RootStore();
   const { projectStore } = store;

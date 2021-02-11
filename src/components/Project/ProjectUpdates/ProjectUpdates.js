@@ -4,21 +4,22 @@ import { ParsedRichText } from '../../UI';
 const ProjectUpdates = ({ updates }) => {
   return (
     <>
-      <div className={styles.updates}>
+      <article className={styles.updates}>
+        <h2 className="hidden">Updates</h2>
         {updates.length > 0 ? (
-          updates.map((update) => (
-            <div className={styles.update}>
+          updates.map((update, i) => (
+            <section key={i} className={styles.update}>
               <p className={styles.date}>{update.timestamp}</p>
               <div className={styles.text}>
                 <ParsedRichText html={update.text} />
                 <p className={styles.author}>Geschreven door {update.user.name}</p>
               </div>
-            </div>
+            </section>
           ))
         ) : (
           <p>Er werden nog geen updates geplaatst.</p>
         )}
-      </div>
+      </article>
     </>
   );
 };

@@ -6,20 +6,16 @@ import { useStores } from '../../../hooks/useStores';
 import styles from './FormFieldAddUser.module.scss';
 
 const FormFieldAddUser = (props) => {
-  const { errorMessage, id, isValid, isSubmitted, setValue, value } = useField(props);
-  const { label, required, defaultValue, showCurrentUser } = props;
-  const [isTouched, setIsTouched] = useState(false);
-  const showError = !isValid && (isTouched || isSubmitted);
+  const { setValue } = useField(props);
+  const { defaultValue, showCurrentUser } = props;
 
   const filter = createFilterOptions();
   const { userStore, uiStore } = useStores();
   const [owners, setOwners] = useState([]);
   const [users, setUsers] = useState([]);
-  // const [filteredUsers, setFilteredUsers] = useState([]);
 
   useEffect(() => {
     setValue(owners);
-    console.log(owners);
   }, [owners]);
 
   useEffect(() => {
@@ -49,23 +45,9 @@ const FormFieldAddUser = (props) => {
   }, [uiStore.currentUser]);
 
   const addOwner = (newValue, input) => {
-    // newValue = {inputValue: "Test", name: "Voeg "Test" toe"}
     if (input === 'custom') {
-      // On hold
-      // setOwners([...owners, { name: newValue.inputValue }]);
     } else if (input === 'data') {
-      // newValue = User object
       setOwners([...owners, { name: newValue.name, id: newValue.id, avatar: newValue.avatar, email: newValue.email }]);
-
-      // Remove from users array
-      // const usersArr = users.map((user) => {
-      //   if (user.id === newValue.id) {
-      //     return;
-      //   } else {
-      //     return user;
-      //   }
-      // });
-      // setUsers(usersArr);
     }
   };
 
@@ -135,8 +117,6 @@ const FormFieldAddUser = (props) => {
           }
           return option.name;
         }}
-        // renderOption={(option) => option.name}
-        // freeSolo
         clearOnBlur
         clearOnEscape
         renderInput={(params) => <TextField {...params} fullWidth label="Zoek een gebruiker" variant="outlined" />}

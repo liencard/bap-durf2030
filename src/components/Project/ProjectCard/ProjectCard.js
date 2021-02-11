@@ -46,9 +46,9 @@ const ProjectCard = observer(({ project }) => {
           <div className={styles.content__wrapper}>
             <p className={styles.date}>{project.timestamp}</p>
             <h3 className={styles.title}>{project.title}</h3>
-            <p className={styles.intro}>
+            <div className={styles.intro}>
               <LinesEllipsis text={project.intro} maxLine="3" ellipsis="..." trimRight basedOn="letters" />
-            </p>
+            </div>
 
             <ul className={styles.tags}>
               {tags.map((tag) => (

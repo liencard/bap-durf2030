@@ -38,13 +38,14 @@ const ProjectRequirements = ({ project }) => {
 
   return (
     <>
-      <div className={styles.requirements}>
+      <article className={styles.requirements}>
+        <h2 className="hidden">Nodige hulp</h2>
         {/* CROWDFUNDING */}
         {project.fundingRequired && (
           <ProjectRequirementsFunding
             project={project}
             funding={fundingCount}
-            progress={(fundingCount / project.fundingAmount) * 100}
+            progress={fundingCount < project.FundingAmount ? (fundingCount / project.fundingAmount) * 100 : 100}
           />
         )}
 
@@ -60,7 +61,7 @@ const ProjectRequirements = ({ project }) => {
             progress={(materialsCount / project.materials.length) * 100}
           />
         )}
-      </div>
+      </article>
     </>
   );
 };

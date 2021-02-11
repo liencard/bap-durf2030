@@ -11,7 +11,7 @@ const ProjectRequirementsFunding = ({ project, progress, funding }) => {
         <Container>
           <ProjectCircle type="funding" progress={progress} large />
           <div className={styles.content}>
-            <h2 className={styles.title}>Ingezameld geld</h2>
+            <h3 className={styles.title}>Ingezameld geld</h3>
             <div className={styles.progress}>
               <div className={styles.text}>
                 <p>&euro; {funding} ingezameld</p>
@@ -25,9 +25,7 @@ const ProjectRequirementsFunding = ({ project, progress, funding }) => {
               {project.state > 1 ? (
                 <ProjectHelp text={'Doneren'} project={project} />
               ) : (
-                <p className={styles.info}>
-                  Het is nog niet mogelijk om geld te doneren
-                </p>
+                <p className={styles.info}>Het is nog niet mogelijk om geld te doneren</p>
               )}
             </div>
           </div>

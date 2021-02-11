@@ -1,13 +1,24 @@
 @import '../../../styles/styles.scss';
 $spacing-top: 3rem;
 
-.header {
+.durvers {
   grid-column: span 12;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
 
-  .title {
-    @include title-one;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .title {
+      @include title-one;
+    }
+  }
+
+  > div:last-of-type {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: $grid-gap;
   }
 }
 

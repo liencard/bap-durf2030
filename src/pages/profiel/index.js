@@ -1,13 +1,16 @@
 import { observer } from 'mobx-react-lite';
 import { useStores } from '../../hooks/useStores';
 import { useState, useEffect } from 'react';
-import { Container, Grid } from '../../components/Layout';
+import { Container } from '../../components/Layout';
 import { TabPanel, AppBar, TabSideElement } from '../../components/UI';
 import { Header, Footer } from '../../components/Layout';
 import styles from './Profile.module.scss';
-
-import { LikedProjects, OwnProjects, OwnAwards, BadgesAwards } from '../../components/Profile';
-
+import {
+  LikedProjects,
+  OwnProjects,
+  OwnAwards,
+  BadgesAwards,
+} from '../../components/Profile';
 import Tab from '@material-ui/core/Tab';
 
 const Profile = observer(() => {
@@ -18,7 +21,6 @@ const Profile = observer(() => {
 
   useEffect(() => {
     const userLikedProjects = uiStore.userLikedProjects;
-
     setLikedProjects(userLikedProjects);
   }, [uiStore.userLikedProjects]);
 
@@ -27,6 +29,7 @@ const Profile = observer(() => {
   };
 
   useEffect(() => {
+    // Look for projects from user, and liked projects from user
     if (uiStore.currentUser && userProjects.length === 0) {
       const loadOwnProjects = async () => {
         await uiStore.getProjectsForUser();
@@ -51,7 +54,12 @@ const Profile = observer(() => {
         <Container>
           {uiStore.currentUser && (
             <div className={styles.profile__wrapper}>
-              <img className={styles.avatar} width="80" height="80" src={uiStore.currentUser.avatar} />
+              <img
+                className={styles.avatar}
+                width="80"
+                height="80"
+                src={uiStore.currentUser.avatar}
+              />
               <div>
                 <span className={styles.name__wrapper}>
                   <p className={styles.name}>{uiStore.currentUser.name}</p>
@@ -75,22 +83,28 @@ const Profile = observer(() => {
         </AppBar>
 
         <TabPanel className={styles.panel} value={value} index={0}>
-          <Container>
-            <OwnProjects projects={userProjects} />
-            <OwnAwards />
-          </Container>
+          <div className={styles.letters}>
+            <Container>
+              <OwnProjects projects={userProjects} />
+              <OwnAwards projects={likedProjects} />
+            </Container>
+          </div>
         </TabPanel>
 
         <TabPanel className={styles.panel} value={value} index={1}>
-          <Container>
-            <LikedProjects projects={likedProjects} />
-          </Container>
+          <div className={styles.letters}>
+            <Container>
+              <LikedProjects projects={likedProjects} />
+            </Container>
+          </div>
         </TabPanel>
 
         <TabPanel className={styles.panel} value={value} index={2}>
-          <Container>
-            <BadgesAwards />
-          </Container>
+          <div className={styles.letters__awards}>
+            <Container>
+              <BadgesAwards projects={likedProjects} />
+            </Container>
+          </div>
         </TabPanel>
 
         <TabPanel className={styles.panel} value={value} index={3}>

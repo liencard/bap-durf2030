@@ -56,22 +56,8 @@ const LoginForm = () => {
     const result = await uiStore.loginUser(user);
 
     if (result.operationType === 'signIn') {
-      console.log('user gevonden');
       router.push(ROUTES.home);
-    } else {
-      console.log('geen correcte user');
     }
-
-    // const redirectUser = async () => {
-    //   const currentUser = await uiStore.currentUser;
-    //   if (currentUser) {
-    //     console.log('user gevonden');
-    //     router.push(ROUTES.home);
-    //   } else {
-    //     console.log('geen correcte user');
-    //   }
-    // };
-    // await redirectUser();
   };
 
   useEffect(() => {
@@ -84,7 +70,6 @@ const LoginForm = () => {
         setCurrentUser(setUser);
         router.push(ROUTES.home);
       } catch (error) {
-        console.log('User failed loading');
         router.push(ROUTES.login);
       }
     };
@@ -112,11 +97,7 @@ const LoginForm = () => {
                 />
               </div>
               <div className={styles.input__wrapper}>
-                <FormControl
-                  className={styles.textfield}
-                  variant="outlined"
-                  fullWidth
-                >
+                <FormControl className={styles.textfield} variant="outlined" fullWidth>
                   <InputLabel htmlFor="password">Wachtwoord</InputLabel>
                   <OutlinedInput
                     id="password"
@@ -131,11 +112,7 @@ const LoginForm = () => {
                           onMouseDown={handleMouseDownPassword}
                           edge="end"
                         >
-                          {values.showPassword ? (
-                            <Visibility />
-                          ) : (
-                            <VisibilityOff />
-                          )}
+                          {values.showPassword ? <Visibility /> : <VisibilityOff />}
                         </IconButton>
                       </InputAdornment>
                     }
@@ -146,12 +123,7 @@ const LoginForm = () => {
               </div>
 
               <AuthSocialLogin />
-              <input
-                className={styles.form__btn}
-                type="submit"
-                value="Inloggen"
-              />
-
+              <input className={styles.form__btn} type="submit" value="Inloggen" />
             </form>
             <p className={styles.redirect}>
               Nog geen account?{' '}

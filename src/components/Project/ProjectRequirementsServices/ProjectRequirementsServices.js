@@ -41,57 +41,48 @@ const ProjectRequirementsServices = ({ project, progress }) => {
         <Container>
           <ProjectCircle type="service" progress={progress} large />
           <div className={styles.content}>
-            <h2 className={styles.title}>Vrijwilligers</h2>
+            <h3 className={styles.title}>Vrijwilligers</h3>
             <div className={styles.wrapper}>
               <p>{project.servicesDescription}</p>
               <div className={styles.list}>
                 {physical.length != 0 && (
-                  <article className={styles.list__item}>
-                    <h3>Fysieke hulp</h3>
+                  <section className={styles.list__item}>
+                    <h4>Fysieke hulp</h4>
                     {physical.map((item) => (
-                      <span
-                        className={item.completed ? `${styles.completed}` : ``}
-                        key={item.id}
-                      >
+                      <span className={item.completed ? `${styles.completed}` : ``} key={item.id}>
                         <span>
                           {item.amount} {item.name}
                         </span>
                         ,{' '}
                       </span>
                     ))}
-                  </article>
+                  </section>
                 )}
                 {creative.length != 0 && (
-                  <article className={styles.list__item}>
-                    <h3>Creatieve hulp</h3>
+                  <section className={styles.list__item}>
+                    <h4>Creatieve hulp</h4>
                     {creative.map((item) => (
-                      <span
-                        className={item.completed ? `${styles.completed}` : ``}
-                        key={item.id}
-                      >
+                      <span className={item.completed ? `${styles.completed}` : ``} key={item.id}>
                         <span>
                           {item.amount} {item.name}
                         </span>
                         ,{' '}
                       </span>
                     ))}
-                  </article>
+                  </section>
                 )}
                 {divers.length != 0 && (
-                  <article className={styles.list__item}>
-                    <h3>Andere hulp</h3>
+                  <section className={styles.list__item}>
+                    <h4>Andere hulp</h4>
                     {divers.map((item) => (
-                      <span
-                        className={item.completed ? `${styles.completed}` : ``}
-                        key={item.id}
-                      >
+                      <span className={item.completed && `${styles.completed}`} key={item.id}>
                         <span>
                           {item.amount} {item.name}
                         </span>
                         ,{' '}
                       </span>
                     ))}
-                  </article>
+                  </section>
                 )}
               </div>
             </div>

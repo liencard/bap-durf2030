@@ -5,13 +5,13 @@ const ProjectTimeline = ({ state }) => {
   return (
     <div className={styles.timeline}>
       <div className={styles.progressbar}>
-        <LinearProgress variant="determinate" value={state * 33.33} />
+        <LinearProgress variant="determinate" value={state * 33.33 - 33.33} />
       </div>
       <ul className={styles.text}>
         <li className={styles.done}>Project is opgezet</li>
-        <li className={state > 0 && styles.done}>Crowdfunding is mogelijk</li>
-        <li className={state > 1 && styles.done}>Klaar om te starten</li>
-        <li className={state > 2 && styles.done}>&#127937;</li>
+        <li className={state > 1 ? styles.done : ''}>Crowdfunding is mogelijk</li>
+        <li className={state > 2 ? styles.done : ''}>Klaar om te starten</li>
+        <li className={state > 3 ? styles.done : ''}>&#127937;</li>
       </ul>
     </div>
   );

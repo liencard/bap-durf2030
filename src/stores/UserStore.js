@@ -1,6 +1,7 @@
 import { makeObservable, observable, action } from 'mobx';
 import UserService from '../services/UserService';
 import User from '../models/User';
+import { getCurrenTimeStamp, getArrayUnion, removeFromArray } from './';
 
 class UserStore {
   constructor(rootStore) {
@@ -29,10 +30,6 @@ class UserStore {
   validateUser = (user) => {
     this.loadAllUsers();
     let checkUser = this.users.find((existingUser) => existingUser.email === user.email);
-    if (!checkUser) {
-      console.log('user bestaat niet');
-    }
-    console.log(user);
   };
 
   loadAllUsers = async () => {
@@ -52,6 +49,7 @@ class UserStore {
         awards: json.awards,
         badges: json.badges,
         organisation: json.organisation,
+        notifications: json.notifications,
         store: this.rootStore.userStore,
       });
     }
@@ -62,7 +60,15 @@ class UserStore {
     const notifications = {
       notifications: getArrayUnion(newNotification),
     };
-    this.projectService.sendNotification(notifications, ownerEmail);
+    this.userService.updateUserNotifications(notifications, ownerEmail);
+  };
+
+  updateNotifications = (notifications, userEmail) => {
+    this.userService.updateUserNotifications({ notifications: notifications }, userEmail);
+  };
+
+  updateBadges = (badges, userEmail) => {
+    this.userService.updateUserBadges({ badges: badges }, userEmail);
   };
 }
 

@@ -37,9 +37,6 @@ class Project {
     userId,
     store,
   }) {
-    // if (!store) {
-    //   throw new Error('voorzie een store');
-    // }
     this.about = about;
     this.fundingAmount = fundingAmount;
     this.fundingDescription = fundingDescription;
@@ -75,6 +72,7 @@ class Project {
     this.impact = impact;
     this.date = date;
     this.highlight = highlight;
+    this.containsAllData = false;
 
     if (store) {
       this.store = store;
@@ -95,6 +93,8 @@ class Project {
       servicesRequired: observable,
       servicesDescription: observable,
       updateProject: action,
+      containsAllData: observable,
+      setAllDataLoaded: action,
 
       owners: observable,
       durvers: observable,
@@ -104,6 +104,7 @@ class Project {
       removeLike: action,
       setLiked: action,
       createDurver: action,
+      setOwners: action,
 
       comments: observable,
       linkComment: action,
@@ -120,6 +121,7 @@ class Project {
       updateProjectContact: action,
 
       updates: observable,
+      setUpdates: action,
       createUpdate: action,
       removeUpdate: action,
 
@@ -164,7 +166,7 @@ class Project {
   }
 
   createDurver(durver) {
-    this.store.createDurver(durver, this.id, this.owners);
+    this.store.createDurver(durver, this);
     this.durvers.push(durver);
   }
 
@@ -182,19 +184,22 @@ class Project {
     );
   }
 
-  getRequirementsList = async () => {
-    const list = await this.store.loadRequirementListById(this.id);
-    let listMaterials = [];
-    let listServices = [];
-    list.forEach((item) => {
-      if (item.type === 'material') {
-        listMaterials.push(item);
-      } else if (item.type === 'service') {
-        listServices.push(item);
-      }
-    });
-    this.materials = listMaterials;
-    this.services = listServices;
+  getRequirementsList = () => {
+    this.store.loadRequirementListById(this.id).then(
+      action('fetchSuccess', (list) => {
+        let listMaterials = [];
+        let listServices = [];
+        list.forEach((item) => {
+          if (item.type === 'material') {
+            listMaterials.push(item);
+          } else if (item.type === 'service') {
+            listServices.push(item);
+          }
+        });
+        this.materials = listMaterials;
+        this.services = listServices;
+      })
+    );
   };
 
   createRequirementItem = (item, type) => {
@@ -208,7 +213,6 @@ class Project {
   createUpdate = (update) => {
     const timestamp = getCurrenTimeStamp();
     update.timestamp = timestamp;
-    console.log(update);
     this.store.createUpdate(update, this.id);
     this.updates.push(update);
   };
@@ -303,10 +307,15 @@ class Project {
   };
 
   linkComment(comment) {
-    //  this.comments.push(comment);
-    console.log('comment gevonden');
     !this.comments.includes(comment) && this.comments.push(comment);
-    console.log(this.comments.length);
+  }
+
+  getAllDynamicContent() {
+    this.getLikes();
+    this.getRequirementsList();
+    this.getRequirementsInfo();
+    this.getDurvers();
+    this.getComments();
   }
 
   updateProject(newValues) {
@@ -361,9 +370,21 @@ class Project {
     }
     this.store.updateItemStatus(itemId, status, this.id);
   };
+
+  setOwners = (owners) => {
+    this.owners = owners;
+  };
+
+  setUpdates = (updates) => {
+    this.updates = updates;
+  };
+
+  setAllDataLoaded = (bool) => {
+    this.containsAllData = bool;
+  };
 }
 
-// Server side rendering of detail page, convert data
+//  Server side rendering data does not accept Objects, converting to JSON instead
 const convertData = {
   toJSON(project) {
     return {
@@ -387,8 +408,7 @@ const convertData = {
   },
 
   fromJSON(project, store) {
-    // Over alle project keys lopen en gelijkstellen
-    // Minder kans om iets te vergeten
+    // Turn SSR data back to a Project model (object), loop over each possible key
     let projectData = {};
     Object.keys(project).forEach((key) => {
       projectData[key] = project[key];

@@ -40,8 +40,8 @@ const ProjectRequirementsMaterials = ({ project, progress }) => {
         } else if (material.category === 'Speelgoed') {
           toyArr.push(material);
           setToy(toyArr);
-        } else if (service.category === 'Andere') {
-          diversArr.push(service);
+        } else if (material.category === 'Andere') {
+          diversArr.push(material);
           setDivers(diversArr);
         }
       });
@@ -55,111 +55,92 @@ const ProjectRequirementsMaterials = ({ project, progress }) => {
         <Container>
           <ProjectCircle type="material" progress={progress} large />
           <div className={styles.content}>
-            <h2 className={styles.title}>Materiaal</h2>
+            <h3 className={styles.title}>Materiaal</h3>
             <div className={styles.wrapper}>
               <p>{project.materialsDescription}</p>
 
               <div className={styles.list}>
                 {bouw.length != 0 && (
-                  <article className={styles.list__item}>
-                    <h3>Bouwmateriaal</h3>
+                  <section className={styles.list__item}>
+                    <h4>Bouwmateriaal</h4>
                     {bouw.map((item) => (
-                      <span
-                        className={item.completed ? `${styles.completed}` : ``}
-                        key={item.id}
-                      >
+                      <span className={item.completed ? `${styles.completed}` : ``} key={item.id}>
                         <span>
                           {item.amount} {item.name}
                         </span>
                         ,{' '}
                       </span>
                     ))}
-                  </article>
+                  </section>
                 )}
                 {food.length != 0 && (
-                  <article className={styles.list__item}>
-                    <h3>Eten &amp; Drinken</h3>
+                  <section className={styles.list__item}>
+                    <h4>Eten &amp; Drinken</h4>
                     {food.map((item) => (
-                      <span
-                        className={item.completed ? `${styles.completed}` : ``}
-                        key={item.id}
-                      >
+                      <span className={item.completed ? `${styles.completed}` : ``} key={item.id}>
                         <span>
                           {item.amount} {item.name}
                         </span>
                         ,{' '}
                       </span>
                     ))}
-                  </article>
+                  </section>
                 )}
                 {infra.length != 0 && (
-                  <article className={styles.list__item}>
-                    <h3>Infrastructuur</h3>
+                  <section className={styles.list__item}>
+                    <h4>Infrastructuur</h4>
                     {infra.map((item) => (
-                      <span
-                        className={item.completed ? `${styles.completed}` : ``}
-                        key={item.id}
-                      >
+                      <span className={item.completed ? `${styles.completed}` : ``} key={item.id}>
                         <span>
                           {item.amount} {item.name}
                         </span>
                         ,{' '}
                       </span>
                     ))}
-                  </article>
+                  </section>
                 )}
                 {art.length != 0 && (
-                  <article className={styles.list__item}>
-                    <h3>Knutselmateriaal</h3>
+                  <section className={styles.list__item}>
+                    <h4>Knutselmateriaal</h4>
                     {art.map((item) => (
-                      <span
-                        className={item.completed ? `${styles.completed}` : ``}
-                        key={item.id}
-                      >
+                      <span className={item.completed ? `${styles.completed}` : ``} key={item.id}>
                         <span>
                           {item.amount} {item.name}
                         </span>
                         ,{' '}
                       </span>
                     ))}
-                  </article>
+                  </section>
                 )}
                 {toys.length != 0 && (
-                  <article className={styles.list__item}>
-                    <h3>Speelgoed</h3>
+                  <section className={styles.list__item}>
+                    <h4>Speelgoed</h4>
                     {toys.map((item) => (
-                      <span
-                        className={item.completed ? `${styles.completed}` : ``}
-                        key={item.id}
-                      >
+                      <span className={item.completed ? `${styles.completed}` : ``} key={item.id}>
                         <span>
                           {item.amount} {item.name}
                         </span>
                         ,{' '}
                       </span>
                     ))}
-                  </article>
+                  </section>
                 )}
                 {divers.length != 0 && (
-                  <article className={styles.list__item}>
-                    <h3>Andere hulp</h3>
+                  <section className={styles.list__item}>
+                    <h4>Andere hulp</h4>
                     {divers.map((item) => (
-                      <span
-                        className={item.completed ? `${styles.completed}` : ``}
-                        key={item.id}
-                      >
+                      <span className={item.completed ? `${styles.completed}` : ``} key={item.id}>
                         <span>
                           {item.amount} {item.name}
                         </span>
                         ,{' '}
                       </span>
                     ))}
-                  </article>
+                  </section>
                 )}
               </div>
             </div>
             <div className={styles.footer}>
-              <p></p>
               <ProjectHelp text={'Hulp aanbieden'} project={project} />
             </div>
           </div>
