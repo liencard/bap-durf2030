@@ -21,6 +21,10 @@
   background-color: $blue-dark;
 }
 
+.logo:hover {
+  cursor: pointer;
+}
+
 .menu {
   display: flex;
   align-items: center;
