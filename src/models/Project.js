@@ -103,6 +103,7 @@ class Project {
       addLike: action,
       removeLike: action,
       setLiked: action,
+      createDurver: action,
 
       comments: observable,
       linkComment: action,
@@ -163,7 +164,7 @@ class Project {
   }
 
   createDurver(durver) {
-    this.store.createDurver(durver, this.id);
+    this.store.createDurver(durver, this.id, this.owners);
     this.durvers.push(durver);
   }
 

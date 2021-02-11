@@ -1,13 +1,7 @@
 import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Header, Footer } from '../../components/Layout';
-import {
-  ProjectHeader,
-  ProjectContent,
-  ProjectFooter,
-  ProjectComments,
-  ProjectEditBanner,
-} from '../../components/Project';
+import { ProjectHeader, ProjectContent, ProjectFooter, ProjectComments } from '../../components/Project';
 import RootStore from '../../stores';
 import { convertData } from '../../models/Project';
 import { convertDataUser } from '../../models/User';
@@ -18,7 +12,9 @@ const Project = observer(({ projectJSON, usersJSON }) => {
   const [project, setProject] = useState();
   const [users, setUsers] = useState();
   const [projectOwner, setProjectOwner] = useState(false);
+  const [tab, setTab] = useState(0);
 
+  // Checks if current user is powner of this project
   useEffect(() => {
     const loadOwner = async () => {
       const currentUser = await uiStore.currentUser;
@@ -35,17 +31,17 @@ const Project = observer(({ projectJSON, usersJSON }) => {
   }, [uiStore.currentUser, project]);
 
   useEffect(() => {
+    // Conver data received from SSR static props to a Project model
     const data = convertData.fromJSON(projectJSON, projectStore);
-    // const oldData = projectStore.projects.find((project) => project.id === data.id);
-    // if (oldData) {
-    //   const indexOldData = projectStore.projects.indexOf(oldData);
-    //   indexOldData > -1 ? projectStore.removeProject(indexOldData) : false;
-    // }
+
+    // Set dyanmic content
     data.getLikes();
     data.getRequirementsList();
     data.getRequirementsInfo();
     data.getDurvers();
     data.getComments();
+
+    // Set project for this page
     setProject(data);
   }, []);
 
@@ -73,8 +69,8 @@ const Project = observer(({ projectJSON, usersJSON }) => {
   return (
     <>
       <Header />
-      <ProjectHeader projectOwner={projectOwner} project={project} />
-      <ProjectContent project={project} users={users} />
+      <ProjectHeader setTab={setTab} projectOwner={projectOwner} project={project} />
+      <ProjectContent tab={tab} setTab={setTab} project={project} users={users} />
       <ProjectFooter project={project} />
       <ProjectComments project={project} comments={project.comments} />
       <Footer />
@@ -82,6 +78,7 @@ const Project = observer(({ projectJSON, usersJSON }) => {
   );
 });
 
+// All possible paths will be find to create a SSR page
 export const getStaticPaths = async () => {
   const store = new RootStore();
   const { projectStore } = store;
@@ -95,11 +92,12 @@ export const getStaticPaths = async () => {
   };
 };
 
+// Data for each possible path
 export const getStaticProps = async ({ params }) => {
   const store = new RootStore();
   const { projectStore, userStore } = store;
 
-  // PROJECT
+  // Project
   const data = await projectStore.loadProject(params.id);
   let projectJSON = convertData.toJSON(data);
   const updates = data.updates.map((update) => {
@@ -114,7 +112,7 @@ export const getStaticProps = async ({ params }) => {
   projectJSON.timestamp = timestamp;
   projectJSON.updates = updates;
 
-  // OWNERS
+  // Owners
   const ownersArr = await projectStore.loadProjectOwnersById(params.id);
   const owners = ownersArr.map((owner) => ({
     name: owner.name,
@@ -123,7 +121,7 @@ export const getStaticProps = async ({ params }) => {
   }));
   projectJSON['owners'] = owners;
 
-  // USERS
+  // Users
   await userStore.loadAllUsers();
   const usersJSON = userStore.users.map((data) => {
     let user = convertDataUser.toJSON(data);

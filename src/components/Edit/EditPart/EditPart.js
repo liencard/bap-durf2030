@@ -20,9 +20,9 @@ const EditPart = ({ children, title, handleSaveProject, alwaysEnabled }) => {
     }
   };
 
-  const submitForm = () => {
+  const submitForm = (values) => {
     toggleDisable(true);
-    handleSaveProject;
+    handleSaveProject(values);
   };
 
   return (

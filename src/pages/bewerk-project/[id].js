@@ -62,7 +62,7 @@ const EditProject = observer(({ query }) => {
             <Tab label="Updates" />
             <Tab label="Status" />
             <TabSideElement>
-              <Button href={ROUTES.home} text={'Update posten'} />
+              <Button href={ROUTES.detail.to + project.id} text={'Bekijk project'} />
             </TabSideElement>
           </AppBar>
 

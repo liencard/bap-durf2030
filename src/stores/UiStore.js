@@ -2,13 +2,45 @@ import { makeObservable, observable, action } from 'mobx';
 import AuthService from '../services/AuthService';
 import UserService from '../services/UserService';
 import User from '../models/User';
-import Project from '../models/Project';
 
 class UiStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.currentUser = undefined;
     this.userProjects = [];
+    this.notifications = [
+      {
+        type: 'badge',
+        timestamp: '09:11',
+        read: false,
+        info: {
+          badge: 'liker',
+          image: '/badges-awards/l1.png',
+          level: 2,
+          tag: 'Dank je wel om actief andere projecten te steunen.',
+        },
+      },
+      {
+        type: 'offer',
+        timestamp: '1 dag geleden',
+        read: true,
+        info: {
+          project: { id: 'projectId', title: 'Vraagstraat' },
+          user: { name: 'John Doe', avatar: '/pfp-temp.jpg' },
+          offers: ['service'],
+        },
+      },
+      {
+        type: 'offer',
+        timestamp: '2 dagen geleden',
+        read: true,
+        info: {
+          project: { id: 'projectId', title: 'Lang Touw' },
+          user: { name: 'John Doe', avatar: '/pfp-temp.jpg' },
+          offers: ['material'],
+        },
+      },
+    ];
 
     this.userLikedProjects = [];
     this.authService = new AuthService(this.rootStore.firebase, this.onAuthStateChanged);
@@ -43,8 +75,6 @@ class UiStore {
       if (!this.currentUser) {
         this.setCurrentUser(user.email);
       }
-
-      //inlezen van de projecten van de currentuser
     } else {
       this.currentUser = null;
     }
@@ -78,7 +108,6 @@ class UiStore {
       organisation: user.organisation,
     });
     if (result) {
-      //user toevoegen aan onze users collection
       this.rootStore.userStore.createUser(newRegisteredUser);
     }
     return result;

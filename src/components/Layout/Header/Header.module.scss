@@ -66,9 +66,28 @@
     margin-right: 2rem;
   }
 
+  .notif {
+    margin-top: 1rem;
+
+    &.unread {
+      &::before {
+        height: 1rem;
+        width: 1rem;
+        content: '';
+        position: absolute;
+        background-color: $red;
+        top: 1.6rem;
+        z-index: 100;
+        left: 2.3rem;
+        border-radius: 50%;
+      }
+    }
+  }
+
   .admin__notif {
     width: 2.1rem;
     height: 2.1rem;
+    position: relative;
   }
 
   .admin__notif:hover path {
@@ -104,4 +123,23 @@
 
 .submenu li {
   font-size: 1.4rem;
+}
+
+.notifications > div {
+  font-size: 1.4rem;
+  padding: 0.75rem;
+
+  .title {
+    @include text-detail;
+    font-weight: 500;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    margin: 0 0 1rem 1rem;
+  }
+
+  .empty {
+    padding: 2rem;
+    opacity: 0.5;
+  }
 }

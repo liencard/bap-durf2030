@@ -4,14 +4,7 @@ import { useField } from '@formiz/core';
 import { FormFieldCheckbox } from '../../Create';
 
 const ProjectHelpTwoService = ({ project, services }) => {
-  //const { setValue, value } = useField(props);
-  //const { project, services } = props;
-
   const [items, setItems] = useState([]);
-
-  // useEffect(() => {
-  //   setValue(items);
-  // }, [items]);
 
   useEffect(() => {
     const itemsArr = services.map((service) => {
@@ -32,14 +25,7 @@ const ProjectHelpTwoService = ({ project, services }) => {
 
       <fieldset className={styles.services}>
         {items.map((item) => {
-          return (
-            <FormFieldCheckbox
-              key={item.id}
-              name={`items.${item.id}`}
-              option={item.name}
-              defaultValue={false}
-            />
-          );
+          return <FormFieldCheckbox key={item.id} name={`items.${item.id}`} option={item.name} defaultValue={false} />;
         })}
       </fieldset>
     </>

@@ -28,9 +28,7 @@ class UserStore {
 
   validateUser = (user) => {
     this.loadAllUsers();
-    let checkUser = this.users.find(
-      (existingUser) => existingUser.email === user.email
-    );
+    let checkUser = this.users.find((existingUser) => existingUser.email === user.email);
     if (!checkUser) {
       console.log('user bestaat niet');
     }
@@ -59,6 +57,13 @@ class UserStore {
     }
     return user;
   }
+
+  createNotificationForUser = (newNotification, ownerEmail) => {
+    const notifications = {
+      notifications: getArrayUnion(newNotification),
+    };
+    this.projectService.sendNotification(notifications, ownerEmail);
+  };
 }
 
 export default UserStore;

@@ -4,11 +4,18 @@ import styles from './ProjectHeader.module.scss';
 import { useStores } from '../../../hooks/useStores';
 import { Container } from '../../Layout';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import { ProjectLikes, ProjectHelpers, ProjectHelp, ProjectCircle, ProjectEditBanner } from '../../Project';
+import {
+  ProjectLikes,
+  ProjectHelpers,
+  ProjectHelp,
+  ProjectCircle,
+  ProjectEditBanner,
+  ProjectTimeline,
+} from '../../Project';
 import Link from 'next/link';
 import { ROUTES } from '../../../consts';
 
-const ProjectHeader = observer(({ project, projectOwner }) => {
+const ProjectHeader = observer(({ project, projectOwner, setTab }) => {
   const [servicesCount, setServicesCount] = useState(0);
   const [materialsCount, setMaterialsCount] = useState(0);
   const [fundingCount, setFundingCount] = useState(0);
@@ -32,7 +39,7 @@ const ProjectHeader = observer(({ project, projectOwner }) => {
     if (project.image.enabled && project.image.url) {
       setImage(project.image.url);
     } else {
-      setImage(`../${project.image.url}`);
+      setImage(`/${project.image.url}`);
     }
   }, []);
 
@@ -63,7 +70,7 @@ const ProjectHeader = observer(({ project, projectOwner }) => {
     setMaterialsCount(materialsCountNew);
     setServicesCount(servicesCountNew);
     setFundingCount(fundingCountNew);
-  }, [project.materials, project.services, project.durvers]);
+  }, [project.materials, project.services, project.durvers, project]);
 
   return (
     <>
@@ -76,15 +83,7 @@ const ProjectHeader = observer(({ project, projectOwner }) => {
           </div>
           <div className={styles.sidebar}>
             <img className={styles.images} src={image} />
-            <div className={styles.timeline}>
-              <LinearProgress variant="determinate" value={project.state * 33.33} />
-              <ul className={styles.points}>
-                <li>Project is opgezet</li>
-                <li>Crowdfunding is mogelijk</li>
-                <li>Klaar om te starten</li>
-                <li>&#127937;</li>
-              </ul>
-            </div>
+            <ProjectTimeline state={project.state} />
           </div>
           <div className={styles.content}>
             <ul className={styles.tags}>
@@ -118,7 +117,9 @@ const ProjectHeader = observer(({ project, projectOwner }) => {
                   <p className={styles.info}>
                     {servicesCount}/{project.services.length} vrijwilligers
                   </p>
-                  <p className={styles.item__btn}>Bekijk info</p>
+                  <button className={styles.item__btn} onClick={() => setTab(2)}>
+                    Bekijk info
+                  </button>
                 </div>
               )}
               {project.materialsRequired && (
@@ -127,7 +128,9 @@ const ProjectHeader = observer(({ project, projectOwner }) => {
                   <p className={styles.info}>
                     {materialsCount}/{project.materials.length} materialen
                   </p>
-                  <p className={styles.item__btn}>Bekijk info</p>
+                  <button className={styles.item__btn} onClick={() => setTab(2)}>
+                    Bekijk info
+                  </button>
                 </div>
               )}
               {project.fundingRequired && (
@@ -137,10 +140,12 @@ const ProjectHeader = observer(({ project, projectOwner }) => {
                     <p className={styles.info}>vergrendeld</p>
                   ) : (
                     <p className={styles.info}>
-                      {fundingCount}/{project.fundingAmount} geld
+                      {fundingCount}/{project.fundingAmount} euro
                     </p>
                   )}
-                  <p className={styles.item__btn}>Bekijk info</p>
+                  <button className={styles.item__btn} onClick={() => setTab(2)}>
+                    Bekijk info
+                  </button>
                 </div>
               )}
             </div>

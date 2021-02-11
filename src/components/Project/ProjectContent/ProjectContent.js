@@ -5,12 +5,10 @@ import { useState } from 'react';
 import { TabPanel, AppBar, TabSideElement, Badge } from '../../UI';
 import Tab from '@material-ui/core/Tab';
 
-const ProjectContent = ({ project, users }) => {
-  const [value, setValue] = useState(0);
-
+const ProjectContent = ({ project, users, tab, setTab }) => {
   return (
     <>
-      <AppBar value={value} setValue={setValue}>
+      <AppBar value={tab} setValue={setTab}>
         <Tab label="Overview" />
         <Tab
           label={
@@ -26,22 +24,22 @@ const ProjectContent = ({ project, users }) => {
         </TabSideElement>
       </AppBar>
 
-      <TabPanel className={styles.panel} value={value} index={0}>
+      <TabPanel className={styles.panel} value={tab} index={0}>
         <Container>
           <ProjectDescription project={project} users={users} />
         </Container>
       </TabPanel>
-      <TabPanel className={styles.panel} value={value} index={1}>
+      <TabPanel className={styles.panel} value={tab} index={1}>
         <Container>
           <ProjectUpdates updates={project.updates} />
         </Container>
       </TabPanel>
-      <TabPanel className={styles.panel} value={value} index={2}>
+      <TabPanel className={styles.panel} value={tab} index={2}>
         <Container>
           <ProjectRequirements project={project} />
         </Container>
       </TabPanel>
-      <TabPanel className={styles.panel} value={value} index={3}>
+      <TabPanel className={styles.panel} value={tab} index={3}>
         <Container>
           <ProjectDurvers project={project} />
         </Container>
