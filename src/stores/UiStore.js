@@ -2,49 +2,31 @@ import { makeObservable, observable, action } from 'mobx';
 import AuthService from '../services/AuthService';
 import UserService from '../services/UserService';
 import User from '../models/User';
+import { getReadableDate } from './';
 
 class UiStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.currentUser = undefined;
     this.userProjects = [];
-    this.notifications = [
-      {
-        type: 'badge',
-        timestamp: '09:11',
-        read: false,
-        info: {
-          badge: 'liker',
-          image: '/badges-awards/l1.png',
-          level: 2,
-          tag: 'Dank je wel om actief andere projecten te steunen.',
-        },
-      },
-      {
-        type: 'offer',
-        timestamp: '1 dag geleden',
-        read: true,
-        info: {
-          project: { id: 'projectId', title: 'Vraagstraat' },
-          user: { name: 'John Doe', avatar: '/pfp-temp.jpg' },
-          offers: ['service'],
-        },
-      },
-      {
-        type: 'offer',
-        timestamp: '2 dagen geleden',
-        read: true,
-        info: {
-          project: { id: 'projectId', title: 'Lang Touw' },
-          user: { name: 'John Doe', avatar: '/pfp-temp.jpg' },
-          offers: ['material'],
-        },
-      },
-    ];
+    this.notifications = [];
+
+    // {
+    //   type: 'badge',
+    //   timestamp: '09:11',
+    //   read: false,
+    //   info: {
+    //     badge: 'liker',
+    //     image: '/badges-awards/l1.png',
+    //     level: 2,
+    //     tag: 'Dank je wel om actief andere projecten te steunen.',
+    //   },
+    // },
 
     this.userLikedProjects = [];
     this.authService = new AuthService(this.rootStore.firebase, this.onAuthStateChanged);
     this.userService = new UserService(this.rootStore.firebase);
+    console.log(this.userLikedProjects);
 
     makeObservable(this, {
       currentUser: observable,
@@ -56,6 +38,8 @@ class UiStore {
       getLikedProjectsByUser: action,
       addProject: action,
       addLikedProject: action,
+      notifications: observable,
+      setNotificationsAsRead: action,
     });
   }
 
@@ -66,6 +50,17 @@ class UiStore {
   addLikedProject = (project) => {
     project.timestamp = '';
     this.userLikedProjects.push(project);
+
+    // Create liker badges
+    // if (this.userLikedProjects.length > 4) {
+    //   let badges = [...this.currentUser.badges];
+    //   badges.push({ img: 'img url hier', name: 'Liker', level: 2 });
+    //   this.rootStore.userStore.updateBadges(badges, this.currentUser.email);
+    // } else if (this.userLikedProjects.length > 0) {
+    //   let badges = [...this.currentUser.badges];
+    //   badges.push({ img: 'img url hier', name: 'Liker', level: 1 });
+    //   this.rootStore.userStore.updateBadges(badges, this.currentUser.email);
+    // }
   };
 
   onAuthStateChanged = (user) => {
@@ -82,6 +77,23 @@ class UiStore {
 
   setCurrentUser = async (email) => {
     this.currentUser = await this.userService.getUserByEmail(email);
+    this.notifications = [...this.currentUser.notifications];
+    this.getLikedProjectsByUser();
+  };
+
+  setNotificationsAsRead = () => {
+    let updateIsRequired = false;
+
+    // Mark all notifications as read, check if update is required (avoid unnecessary call)
+    this.notifications = this.notifications.map((notification) => {
+      if (notification.read === false) {
+        notification.read = true;
+        updateIsRequired = true;
+      }
+      return notification;
+    });
+
+    updateIsRequired && this.rootStore.userStore.updateNotifications(this.notifications, this.currentUser.email);
   };
 
   loginUser = async (user) => {

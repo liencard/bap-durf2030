@@ -41,12 +41,12 @@ const Profile = observer(() => {
       loadOwnProjects();
     }
 
-    if (uiStore.currentUser && likedProjects.length === 0) {
-      const loadLikedProjects = async () => {
-        await uiStore.getLikedProjectsByUser();
-      };
-      loadLikedProjects();
-    }
+    // if (uiStore.currentUser && likedProjects.length === 0) {
+    //   const loadLikedProjects = async () => {
+    //     await uiStore.getLikedProjectsByUser();
+    //   };
+    //   loadLikedProjects();
+    // }
   }, [uiStore.currentUser]);
 
   return (
