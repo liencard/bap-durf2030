@@ -44,7 +44,7 @@ const HomePlatform = () => {
                     </p>
                   </div>
                   {!uiStore.currentUser ? (
-                    <Button text="Maak project aan" href="/login" />
+                    <Button text="Maak project aan" href="/projecten" />
                   ) : (
                     <Button text="Maak project aan" href="/maak-project" />
                   )}
