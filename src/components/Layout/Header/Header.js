@@ -37,6 +37,7 @@ const Header = observer(() => {
 
   const handleClickNotifMenu = (event) => {
     setAnchorNotifMenuEl(event.currentTarget);
+    uiStore.setNotificationsAsRead();
   };
 
   const handleCloseNotifMenu = () => {

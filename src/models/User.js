@@ -13,6 +13,7 @@ class User {
     awards = [],
     badges = [],
     store,
+    notifications = [],
   }) {
     this.id = id;
     this.name = name;
@@ -28,6 +29,7 @@ class User {
     this.badges = badges;
     this.organisation = organisation;
     this.comments = [];
+    this.notifications = notifications;
 
     if (store) {
       this.store = store;
@@ -62,6 +64,7 @@ const convertDataUser = {
       organisation: user.organisation,
       awards: user.awards,
       badges: user.badges,
+      notifications: data.notifications,
     };
   },
 
@@ -76,6 +79,7 @@ const convertDataUser = {
       awards: user.awards,
       badges: user.badges,
       store: store,
+      notifications: data.notifications,
     });
   },
 };
@@ -104,6 +108,7 @@ const userConverter = {
       organisation: data.organisation,
       awards: data.awards,
       badges: data.badges,
+      notifications: data.notifications,
     });
   },
 };

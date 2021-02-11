@@ -118,6 +118,7 @@ export const getStaticProps = async ({ params }) => {
     name: owner.name,
     avatar: owner.avatar,
     id: owner.id,
+    email: owner.email,
   }));
   projectJSON['owners'] = owners;
 

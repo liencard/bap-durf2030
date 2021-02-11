@@ -37,9 +37,6 @@ class Project {
     userId,
     store,
   }) {
-    // if (!store) {
-    //   throw new Error('voorzie een store');
-    // }
     this.about = about;
     this.fundingAmount = fundingAmount;
     this.fundingDescription = fundingDescription;
@@ -147,6 +144,7 @@ class Project {
     this.store.loadProjectOwnersById(this.id).then(
       action('fetchSuccess', (owners) => {
         this.owners = owners;
+        console.log(this.owners[0]);
       })
     );
   }
@@ -164,7 +162,7 @@ class Project {
   }
 
   createDurver(durver) {
-    this.store.createDurver(durver, this.id, this.owners);
+    this.store.createDurver(durver, this);
     this.durvers.push(durver);
   }
 

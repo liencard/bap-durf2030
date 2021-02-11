@@ -9,19 +9,11 @@ class UserService {
   }
 
   create = async (user) => {
-    return await this.db
-      .collection('users')
-      .doc(user.email)
-      .withConverter(userConverter)
-      .set(user);
+    return await this.db.collection('users').doc(user.email).withConverter(userConverter).set(user);
   };
 
   getUserByEmail = async (email) => {
-    let user = await this.db
-      .collection('users')
-      .doc(email)
-      .withConverter(userConverter)
-      .get();
+    let user = await this.db.collection('users').doc(email).withConverter(userConverter).get();
     user = await user.data();
     return user;
   };
@@ -33,19 +25,12 @@ class UserService {
 
   // WEG
   getAllAdmins = async () => {
-    return await this.db
-      .collectionGroup('users')
-      .where('admin', '==', false)
-      .withConverter(userConverter)
-      .get();
+    return await this.db.collectionGroup('users').where('admin', '==', false).withConverter(userConverter).get();
   };
 
   // WEG
   getProjectsByUser = async (user) => {
-    const projectsRef = this.db
-      .collection('users')
-      .doc(user.email)
-      .collection('projects');
+    const projectsRef = this.db.collection('users').doc(user.email).collection('projects');
 
     const projects = await projectsRef.withConverter(projectConverter).get();
     return projects.docs.map((project) => project.data());
@@ -53,18 +38,16 @@ class UserService {
 
   // WEG
   addAdminState = async (data) => {
-    const result = await this.db
-      .collection('users')
-      .doc(`${data.email}`)
-      .update({ admin: true });
+    const result = await this.db.collection('users').doc(`${data.email}`).update({ admin: true });
     return result;
   };
 
   updateAdmin = (adminState, user) => {
-    this.db
-      .collection('users')
-      .doc(`${user.email}`)
-      .update({ admin: adminState });
+    this.db.collection('users').doc(`${user.email}`).update({ admin: adminState });
+  };
+
+  updateUserNotifications = (notifications, userEmail) => {
+    this.db.collection('users').doc(userEmail).update(notifications);
   };
 }
 export default UserService;

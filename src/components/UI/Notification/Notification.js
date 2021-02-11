@@ -1,12 +1,16 @@
 import styles from './Notification.module.scss';
 import { ROUTES } from '../../../consts';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { getReadableDate } from '../../../stores';
 
 const Notification = ({ notification }) => {
-  const router = useRouter();
+  const offerTexts = {
+    service: 'wilt vrijwilliger worden voor',
+    material: 'wilt materiaal uitlenen voor',
+    funding: 'heeft geld gedoneerd voor',
+  };
 
-  const getText = (notification) => {
+  const getText = () => {
     switch (notification.type) {
       case 'badge':
         return (
@@ -21,27 +25,24 @@ const Notification = ({ notification }) => {
       case 'offer':
         return (
           <p>
-            {notification.info.user.name} wilt vrijwilliger worden voor{' '}
+            {notification.info.user.name}{' '}
+            {notification.info.offers.length === 1 ? offerTexts[notification.info.offers[0]] : 'wilt meehelpen aan'}{' '}
             <strong>{notification.info.project.title}</strong>
           </p>
         );
-      default:
-        return 'Unknown step';
     }
   };
 
-  const getLink = (notification) => {
+  const getLink = () => {
     switch (notification.type) {
       case 'badge':
         return ROUTES.profile;
       case 'offer':
         return ROUTES.edit.to + notification.info.project.id;
-      default:
-        return 'Unknown step';
     }
   };
 
-  const getImage = (notification) => {
+  const getImage = () => {
     switch (notification.type) {
       case 'badge':
         return notification.info.image;
@@ -53,12 +54,12 @@ const Notification = ({ notification }) => {
   };
 
   return (
-    <Link href={getLink(notification)}>
+    <Link href={getLink()}>
       <a className={`${styles.notification} ${!notification.read && styles.unread}`}>
-        <img height="35px" width="35px" src={getImage(notification)} />
+        <img height="35px" width="35px" src={getImage()} />
         <div className={styles.text}>
-          {getText(notification)}
-          <p className={styles.date}>{notification.timestamp}</p>
+          {getText()}
+          <p className={styles.date}>{getReadableDate(notification.timestamp)}</p>
         </div>
       </a>
     </Link>
