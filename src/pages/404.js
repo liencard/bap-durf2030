@@ -25,7 +25,7 @@ export default function FourOhFour() {
       <div style={divContainer}>
         <div style={divStyle}>
           <img src="/logo.svg" alt="logo DURF2030" width="300" height="340" />
-          <h1 style={title}>404 - Pagina niet gevonden</h1>
+          <h1 style={title}>Pagina niet gevonden</h1>
           <Button text="Terug naar home" variant="outline" href="/" />
         </div>
       </div>

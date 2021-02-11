@@ -8,7 +8,8 @@ const ProjectFooter = observer(({ project }) => {
   const { uiStore } = useStores();
   return (
     <>
-      <div className={styles.footer}>
+      <article className={styles.footer}>
+        <h2 className="hidden">Contacteer contactpersoon</h2>
         <Container className={styles.container}>
           <div className={styles.contact}>
             {!uiStore.currentUser ? (
@@ -22,7 +23,7 @@ const ProjectFooter = observer(({ project }) => {
           </div>
           <p className={styles.date}>{project.timestamp}</p>
         </Container>
-      </div>
+      </article>
     </>
   );
 });

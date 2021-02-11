@@ -26,7 +26,6 @@ class UiStore {
     this.userLikedProjects = [];
     this.authService = new AuthService(this.rootStore.firebase, this.onAuthStateChanged);
     this.userService = new UserService(this.rootStore.firebase);
-    console.log(this.userLikedProjects);
 
     makeObservable(this, {
       currentUser: observable,
@@ -65,8 +64,6 @@ class UiStore {
 
   onAuthStateChanged = (user) => {
     if (user) {
-      console.log(`de user is ingelogd ${user.email}`);
-
       if (!this.currentUser) {
         this.setCurrentUser(user.email);
       }
@@ -76,9 +73,12 @@ class UiStore {
   };
 
   setCurrentUser = async (email) => {
-    this.currentUser = await this.userService.getUserByEmail(email);
-    this.notifications = [...this.currentUser.notifications];
-    this.getLikedProjectsByUser();
+    this.userService.getUserByEmail(email).then(
+      action('fetchSuccess', (user) => {
+        this.currentUser = user;
+        this.notifications = [...user.notifications];
+      })
+    );
   };
 
   setNotificationsAsRead = () => {
@@ -108,7 +108,6 @@ class UiStore {
   };
 
   registerUser = async (user) => {
-    console.log(user);
     const result = await this.authService.register(user.name, user.email, user.password, user.avatar);
     const newRegisteredUser = new User({
       id: result.uid,

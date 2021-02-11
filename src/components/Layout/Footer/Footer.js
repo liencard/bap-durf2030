@@ -23,7 +23,7 @@ const Footer = () => {
               <Link href={ROUTES.projects}>
                 <span className={styles.menu__item}>Projecten</span>
               </Link>
-              <Link href={ROUTES.create}>
+              <Link href={ROUTES.create.onboarding}>
                 <span className={styles.menu__item}>Project aanmaken</span>
               </Link>
               <Link href="/">

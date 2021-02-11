@@ -35,9 +35,6 @@ const AuthSocialLogin = () => {
         const credential = result.credential;
         const accessToken = credential.accessToken;
         const user = result.user;
-
-        //console.log(user);
-        //const validate = await userStore.validateUser(user);
         registerSocial(user);
       })
       .catch((error) => {
@@ -65,16 +62,10 @@ const AuthSocialLogin = () => {
 
   return (
     <div className={styles.form__socials}>
-      <button
-        className={`${styles.form__btn} ${styles.btn__social} ${styles.btn__google}`}
-        onClick={googleSignIn}
-      >
+      <button className={`${styles.form__btn} ${styles.btn__social} ${styles.btn__google}`} onClick={googleSignIn}>
         Verdergaan met Google
       </button>
-      <button
-        className={`${styles.form__btn} ${styles.btn__social} ${styles.btn__facebook}`}
-        onClick={facebookSignIn}
-      >
+      <button className={`${styles.form__btn} ${styles.btn__social} ${styles.btn__facebook}`} onClick={facebookSignIn}>
         Verdergaan met Facebook
       </button>
     </div>

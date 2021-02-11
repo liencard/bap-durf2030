@@ -1,18 +1,11 @@
 import { observer } from 'mobx-react-lite';
 import { useStores } from '../../hooks/useStores';
 import { useState, useEffect } from 'react';
-import { Container, Grid } from '../../components/Layout';
+import { Container } from '../../components/Layout';
 import { TabPanel, AppBar, TabSideElement } from '../../components/UI';
 import { Header, Footer } from '../../components/Layout';
 import styles from './Profile.module.scss';
-
-import {
-  LikedProjects,
-  OwnProjects,
-  OwnAwards,
-  BadgesAwards,
-} from '../../components/Profile';
-
+import { LikedProjects, OwnProjects, OwnAwards, BadgesAwards } from '../../components/Profile';
 import Tab from '@material-ui/core/Tab';
 
 const Profile = observer(() => {
@@ -23,7 +16,6 @@ const Profile = observer(() => {
 
   useEffect(() => {
     const userLikedProjects = uiStore.userLikedProjects;
-
     setLikedProjects(userLikedProjects);
   }, [uiStore.userLikedProjects]);
 
@@ -32,6 +24,7 @@ const Profile = observer(() => {
   };
 
   useEffect(() => {
+    // Look for projects from user, and liked projects from user
     if (uiStore.currentUser && userProjects.length === 0) {
       const loadOwnProjects = async () => {
         await uiStore.getProjectsForUser();
@@ -41,12 +34,12 @@ const Profile = observer(() => {
       loadOwnProjects();
     }
 
-    // if (uiStore.currentUser && likedProjects.length === 0) {
-    //   const loadLikedProjects = async () => {
-    //     await uiStore.getLikedProjectsByUser();
-    //   };
-    //   loadLikedProjects();
-    // }
+    if (uiStore.currentUser && likedProjects.length === 0) {
+      const loadLikedProjects = async () => {
+        await uiStore.getLikedProjectsByUser();
+      };
+      loadLikedProjects();
+    }
   }, [uiStore.currentUser]);
 
   return (
@@ -56,12 +49,7 @@ const Profile = observer(() => {
         <Container>
           {uiStore.currentUser && (
             <div className={styles.profile__wrapper}>
-              <img
-                className={styles.avatar}
-                width="80"
-                height="80"
-                src={uiStore.currentUser.avatar}
-              />
+              <img className={styles.avatar} width="80" height="80" src={uiStore.currentUser.avatar} />
               <div>
                 <span className={styles.name__wrapper}>
                   <p className={styles.name}>{uiStore.currentUser.name}</p>

@@ -22,11 +22,13 @@ const Header = observer(() => {
   const [anchorNotifMenuEl, setAnchorNotifMenuEl] = useState(null);
   const [unreadNotif, setUnreadNotif] = useState(false);
 
+  // Check if there are unread notifications
   useEffect(() => {
     const unreadMsgExits = uiStore.notifications.find((notification) => notification.read === false);
     setUnreadNotif(unreadMsgExits);
   }, [uiStore.notifications]);
 
+  // Toggle profile menu
   const handleClickProfileMenu = (event) => {
     setAnchorProfileMenuEl(event.currentTarget);
   };
@@ -35,6 +37,7 @@ const Header = observer(() => {
     setAnchorProfileMenuEl(null);
   };
 
+  // Toggle notifications
   const handleClickNotifMenu = (event) => {
     setAnchorNotifMenuEl(event.currentTarget);
     uiStore.setNotificationsAsRead();
@@ -55,12 +58,6 @@ const Header = observer(() => {
   };
 
   useEffect(() => {
-    if (uiStore.currentUser) {
-      console.log(uiStore.currentUser);
-    } else {
-      console.log('no current user');
-    }
-
     const handleScroll = () => {
       const currentScrollPos = window.pageYOffset;
       if (currentScrollPos < 300 && headerBanner.current) {
@@ -81,13 +78,7 @@ const Header = observer(() => {
       <div className={styles.header} ref={headerBanner}>
         <div className={styles.header__left}>
           <Link href={ROUTES.home}>
-            <img
-              src="/logo.svg"
-              className={styles.logo}
-              alt="logo DURF2030"
-              width="45"
-              height="60"
-            />
+            <img src="/logo.svg" className={styles.logo} alt="logo DURF2030" width="45" height="60" />
           </Link>
           <nav className={styles.menu}>
             <Link href={ROUTES.projects}>
@@ -119,9 +110,8 @@ const Header = observer(() => {
             </Link>
           ) : (
             <>
-
               <ButtonUI aria-controls="simple-menu" aria-haspopup="true" onClick={handleClickNotifMenu}>
-                <div className={`${styles.notif} ${unreadNotif && styles.unread}`}>
+                <div className={`${styles.notif} ${unreadNotif ? styles.unread : ''}`}>
                   <svg
                     width="28"
                     height="30"
@@ -133,16 +123,16 @@ const Header = observer(() => {
                     <path
                       d="M11 4.5C11 3.70435 11.3161 2.94129 11.8787 2.37868C12.4413 1.81607 13.2044 1.5 14 1.5C14.7956 1.5 15.5587 1.81607 16.1213 2.37868C16.6839 2.94129 17 3.70435 17 4.5C18.7226 5.31454 20.1911 6.58249 21.2481 8.16795C22.305 9.75341 22.9107 11.5966 23 13.5V18C23.1129 18.9326 23.4432 19.8256 23.9642 20.6072C24.4853 21.3888 25.1826 22.0371 26 22.5H2C2.81741 22.0371 3.51471 21.3888 4.03578 20.6072C4.55685 19.8256 4.88712 18.9326 5 18V13.5C5.08934 11.5966 5.69495 9.75341 6.75192 8.16795C7.8089 6.58249 9.27739 5.31454 11 4.5"
                       stroke="#0C1424"
-                      stroke-width="2.25"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="2.25"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                     <path
                       d="M9.5 22.5V24C9.5 25.1935 9.97411 26.3381 10.818 27.182C11.6619 28.0259 12.8065 28.5 14 28.5C15.1935 28.5 16.3381 28.0259 17.182 27.182C18.0259 26.3381 18.5 25.1935 18.5 24V22.5"
                       stroke="#0C1424"
-                      stroke-width="2.25"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="2.25"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
                 </div>
@@ -159,7 +149,9 @@ const Header = observer(() => {
                   <div>
                     <p className={styles.title}>Meldingen</p>
                     {uiStore.notifications.length > 0 ? (
-                      uiStore.notifications.map((notification) => <Notification notification={notification} />)
+                      uiStore.notifications.map((notification, i) => (
+                        <Notification key={i} notification={notification} />
+                      ))
                     ) : (
                       <p className={styles.empty}>Je hebt nog geen meldingen</p>
                     )}
@@ -168,7 +160,6 @@ const Header = observer(() => {
               </div>
 
               {uiStore.currentUser.admin === true && (
-
                 <Link href="/admin">
                   <svg
                     className={styles.admin__icon}

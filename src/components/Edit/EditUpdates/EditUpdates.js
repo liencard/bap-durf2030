@@ -26,11 +26,7 @@ const EditUpdates = observer(({ project }) => {
 
   return (
     <>
-      <EditPart
-        title="Update plaatsen"
-        alwaysEnabled
-        handleSaveProject={handleSaveUpdate}
-      >
+      <EditPart title="Update plaatsen" alwaysEnabled handleSaveProject={handleSaveUpdate}>
         <EditField>
           <EditLabel text="Nieuwe update" htmlFor="description" />
           <FormFieldRichTextEditor name="update" />
@@ -46,17 +42,14 @@ const EditUpdates = observer(({ project }) => {
                     <div className={styles.header}>
                       <div className={styles.info}>
                         <p className={styles.date}>
-                          {project.getReadableDate(update.timestamp)}
+                          {typeof update.timestamp === 'string'
+                            ? update.timestamp
+                            : project.getReadableDate(update.timestamp)}
                         </p>
-                        <p className={styles.name}>
-                          Geplaatst door {update.user.name}
-                        </p>
+                        <p className={styles.name}>Geplaatst door {update.user.name}</p>
                       </div>
 
-                      <button
-                        className={styles.delete}
-                        onClick={() => handleDeleteUpdate(update)}
-                      >
+                      <button className={styles.delete} onClick={() => handleDeleteUpdate(update)}>
                         <img src="/icons/delete-red.svg" />
                         <span className="hidden">Verwijder</span>
                       </button>
