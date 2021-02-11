@@ -76,13 +76,6 @@ class ProjectStore {
     this.projectService.createOwner(owner, projectId);
   };
 
-  createUpdate = (newUpdate, projectId) => {
-    const updates = {
-      updates: getArrayUnion(newUpdate),
-    };
-    this.projectService.updateProjectUpdates(updates, projectId);
-  };
-
   deleteUpdate = (deletedUpdate, projectId) => {
     const updates = { updates: removeFromArray(deletedUpdate) };
     this.projectService.updateProjectUpdates(updates, projectId);
@@ -113,9 +106,20 @@ class ProjectStore {
     this.requirementService.updateDetails(project);
   };
 
-  createDurver = (durver, projectId) => {
+  createDurver = (durver, projectId, owners) => {
     durver.timestamp = getCurrenTimeStamp();
     this.requirementService.createDurver(durver, projectId);
+
+    // for each owner van dit project
+
+    console.log(durver);
+    console.log(owners);
+    owners.forEach((owner) => {
+      //   this.rootStore.userStore.createNotificationForUser;
+      // materialsOffered / fundingOffered / services Offered bool in Durver
+      // user zit er ook in
+      // owner bevat geen email!!!
+    });
   };
 
   createImageForProject = (image, projectId) => {

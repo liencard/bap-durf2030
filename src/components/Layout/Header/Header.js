@@ -22,43 +22,10 @@ const Header = observer(() => {
   const [anchorNotifMenuEl, setAnchorNotifMenuEl] = useState(null);
   const [unreadNotif, setUnreadNotif] = useState(false);
 
-  const notifications = [
-    {
-      type: 'badge',
-      timestamp: '09:11',
-      read: false,
-      info: {
-        badge: 'liker',
-        image: '/badges-awards/l1.png',
-        level: 2,
-        tag: 'Dank je wel om actief andere projecten te steunen.',
-      },
-    },
-    {
-      type: 'service',
-      timestamp: '1 dag geleden',
-      read: true,
-      info: {
-        project: { id: 'projectId', title: 'Vraagstraat' },
-        user: { name: 'John Doe', avatar: '/pfp-temp.jpg' },
-        offer: 'hamer',
-      },
-    },
-    {
-      type: 'material',
-      timestamp: '2 dagen geleden',
-      read: true,
-      info: {
-        project: { id: 'projectId', title: 'Lang Touw' },
-        user: { name: 'John Doe', avatar: '/pfp-temp.jpg' },
-      },
-    },
-  ];
-
   useEffect(() => {
-    const unreadMsgExits = notifications.find((notification) => notification.read === false);
+    const unreadMsgExits = uiStore.notifications.find((notification) => notification.read === false);
     setUnreadNotif(unreadMsgExits);
-  }, [notifications]);
+  }, [uiStore.notifications]);
 
   const handleClickProfileMenu = (event) => {
     setAnchorProfileMenuEl(event.currentTarget);
@@ -183,8 +150,8 @@ const Header = observer(() => {
                 >
                   <div>
                     <p className={styles.title}>Meldingen</p>
-                    {notifications.length > 0 ? (
-                      notifications.map((notification) => <Notification notification={notification} />)
+                    {uiStore.notifications.length > 0 ? (
+                      uiStore.notifications.map((notification) => <Notification notification={notification} />)
                     ) : (
                       <p className={styles.empty}>Je hebt nog geen meldingen</p>
                     )}
